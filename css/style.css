@@ -48,7 +48,7 @@ body {
 .title img { height: clamp(56px, 10vw, 104px); width: auto; display: block; filter: drop-shadow(0 6px 8px rgba(0,0,0,.6)); }
 .shop-logo { height: 1.4em; vertical-align: middle; }
 .wallet {
-  grid-area: wallet; justify-self: center; text-align: center; min-width: 200px;
+  grid-area: wallet; justify-self: end; text-align: center; min-width: 200px;
   padding: 4px 22px 6px; border-radius: 12px;
   background: linear-gradient(180deg, #24160a, #3a2412); border: 2px solid var(--brass-dark);
   box-shadow: inset 0 3px 8px rgba(0,0,0,.6), 0 1px 0 rgba(255,224,138,.2);
@@ -59,7 +59,9 @@ body {
 @media (max-width: 720px) {
   .topbar { grid-template-columns: 1fr; grid-template-areas: "title" "wallet"; padding: 8px 10px; }
   .title { justify-self: center; }
-  .wallet { justify-self: stretch; }
+  .wallet { justify-self: center; min-width: 0; padding: 3px 16px 4px; }
+  .wallet-main { font-size: 1.35rem; }
+  .wallet-sub { font-size: .72rem; }
 }
 
 /* ---------- buttons: oak with brass trim, lit brass when active ---------- */

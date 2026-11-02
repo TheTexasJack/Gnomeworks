@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.24 (2026-11-02)
+
+- The cog counter sits at the right end of the banner on desktop, leaving room for a banner picture.  On phones it is a compact centered plate instead of a full-width bar.
+
 ## v0.2.0-draft.23 (2026-11-02)
 
 - The pause and sound buttons are now small icon buttons in the right-hand panel, just under the Shop, Stats, and Info tabs, on the same line as the "Gnomes" heading.  They stay put on every tab.  The banner now holds only the title and the cog counter.  On phones the buttons move down with the panel.
