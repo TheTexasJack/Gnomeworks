@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.6';
+GW.VERSION = '0.2.0-draft.7';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -55,6 +55,7 @@ GW.CONFIG = {
   groups: [
     { id: "treasures", name: "Legendary Treasures" },
     { id: "monsters", name: "Tiny Monsters", layout: 'families', variants: ['normal', 'glowing', 'goopy', 'evil'] },
+    { id: 'plops', name: 'Number Twos', layout: 'families', variants: ['normal', 'steam', 'prize', 'golden'] },
     { id: "laundry", name: "Laundry & Clothing" },
     { id: "bathroom", name: "Bathroom Disasters" },
     { id: "office", name: "Office Nonsense" },
@@ -196,6 +197,11 @@ GW.CONFIG = {
     { id: 'slime_glowing', name: 'Glowjelly', group: 'monsters', family: 'slime', variant: 'glowing', tier: 'superrare', img: 'assets/monsters/slime_glowing.webp' },
     { id: 'slime_goopy', name: 'Gloob', group: 'monsters', family: 'slime', variant: 'goopy', tier: 'superrare', img: 'assets/monsters/slime_goopy.webp' },
     { id: 'slime_evil', name: 'Shadooze', group: 'monsters', family: 'slime', variant: 'evil', tier: 'legendary', img: 'assets/monsters/slime_evil.webp' },
+    // Number Twos.  Made when Mara's image generator was being a real turd.
+    { id: 'plop_normal', name: 'Ploppy',    group: 'plops', family: 'plop', variant: 'normal', tier: 'rare',      img: 'assets/plops/plop_normal.webp' },
+    { id: 'plop_steam',  name: 'Cogplop',   group: 'plops', family: 'plop', variant: 'steam',  tier: 'superrare', img: 'assets/plops/plop_steam.webp' },
+    { id: 'plop_prize',  name: 'Prizeplop', group: 'plops', family: 'plop', variant: 'prize',  tier: 'superrare', img: 'assets/plops/plop_prize.webp' },
+    { id: 'plop_golden', name: 'Goldplop',  group: 'plops', family: 'plop', variant: 'golden', tier: 'legendary', img: 'assets/plops/plop_golden.webp' },
     // Legendary Treasures (popups only)
     { id: 'purple_underpants', name: 'Purple Underpants', group: 'treasures', tier: 'legendary', emoji: '🩲', tint: 'purple' },
     { id: 'diamond_pick', name: 'Diamond Pickaxe', group: 'treasures', tier: 'legendary', emoji: '⛏️' },

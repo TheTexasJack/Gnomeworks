@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.7 (2026-11-01)
+
+* New shelf group, Number Twos: Ploppy (Rare, from the machine), Cogplop and Prizeplop (Super Rare, from shinies), and Goldplop (Legendary, gold shinies only).
+
 ## v0.2.0-draft.6 (2026-11-01)
 
 * Shinies now appear every 45 to 120 seconds whether or not you are tapping, and stay for 20 seconds.
