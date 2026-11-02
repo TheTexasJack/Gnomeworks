@@ -2,6 +2,20 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.10 (2026-11-01)
+
+Layer 2, step 1: the Shop Floor.
+
+* New view toggle above the machine: The Machine or the Shop Floor.  The choice is remembered.
+* The Shop Floor uses Mara's three-level workshop.  Each gnome type gets its own station with its count on the brass plate, and empty stations show a HELP WANTED sign.
+* Tapping anywhere on the Shop Floor cranks the machine, shinies still appear, and items ride the conveyor belt instead of popping out of the hatch.
+* Tiny Gnome station swaps to the two-handed gnome after Double-Handed Cranking.  The Matryoshka station grows into a set of 3 at 10 owned and a set of 5 at 25.
+* Tinier Gnomes are now the Gnome Necromancer, raising a skeleton crew.  Same cost, same speed, same save data.
+* Two new gnome types: Gnome Cloner (12K cogs, 40 clicks/sec) and Matryoshka Gnome (140K cogs, 260 clicks/sec).  Draft numbers.
+* The strip under the machine shows Mara's gnome art instead of the placeholder gnomes.
+* Hats are parked for now.  They need to be redrawn to fit the new gnome art.
+* Weapons, the training dummy action frame, the slash effect, and all action frames are sliced and in the repo, ready for step 2 (animation).
+
 ## v0.2.0-draft.9 (2026-11-01)
 
 * Rarer items are 50% more common, from tester feedback.  Rare machine drops went from 8 to 12 weight (about 7.8% to 11.3% of drops).  Shinies: Super Rare 30% to 45%, Legendary 6% to 9% (gold shinies only).  Lucky Sprockets drop from 64% to 46% of shinies.

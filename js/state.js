@@ -3,7 +3,7 @@ window.GW = window.GW || {};
 
 GW.state = (function () {
   var C = GW.CONFIG;
-  var SOURCES = ['tap', 'tiny', 'tinier', 'warrior', 'stick'];
+  var SOURCES = ['tap', 'tiny', 'tinier', 'warrior', 'stick', 'cloner', 'matryoshka'];
 
   function fresh() {
     var s = {
@@ -12,6 +12,7 @@ GW.state = (function () {
       createdAt: Date.now(),
       savedAt: Date.now(),
       paused: false,
+      view: 'machine',      // 'machine' or 'floor'
       cogs: 0,
       cogsSeen: 0,          // lifetime cogs earned, drives unlocks
       bigAngle: 0,          // 0..360, logical position of the big gear

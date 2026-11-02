@@ -25,8 +25,13 @@
       </aside>
 
       <section class="machine-col">
+        <div class="view-toggle" role="group" aria-label="View">
+          <button type="button" data-view="machine" class="active">&#9881;&#65039; The Machine</button>
+          <button type="button" data-view="floor">&#128296; Shop Floor</button>
+        </div>
         <div class="machine" id="machine" tabindex="0" role="button" aria-label="The machine.  Tap to turn the little gear.">
           <svg id="gearSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+          <div id="floor" aria-hidden="true"></div>
           <div id="fx" aria-hidden="true"></div>
           <div id="edgeFlash" aria-hidden="true"></div>
           <div id="rareSlot"></div>
@@ -60,10 +65,10 @@
           <div class="info">
             <h3>How to play</h3>
             <p>Tap the little gear.  The little gear turns the big gear, and every full turn of the big gear pops something out of the hatch.  Spend cogs on gnomes and upgrades so the machine runs without you.</p>
+            <p>Flip to the Shop Floor to watch your whole crew at work.  Tapping works there too, and shinies still show up.</p>
             <p>Need a break?  Hit Pause (or press P) and everything freezes: gnomes, popups, and the clock.  Paused games stay paused, even if you close the page, and no offline progress builds up while paused.</p>
             <p>Keep an eye on the sides of the machine.  Something shiny shows up every minute or two, and only a real tap can grab it.  Shinies hold Super Rare monsters, treasures, and Lucky Sprockets.</p>
             <p>Tap the gear and the shiny turns gold.  Only a gold shiny can hold a Legendary.</p>
-            <p id="hatNote"></p>
             <h3>Playing as a guest</h3>
             <p>Your progress saves in this browser only.  Clearing your browser data or switching devices starts you fresh.  Accounts and a leaderboard are on the way.</p>
             <h3>Start over</h3>

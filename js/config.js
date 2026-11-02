@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.9';
+GW.VERSION = '0.2.0-draft.10';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -230,11 +230,33 @@ GW.CONFIG = {
   producers: [
     { id: 'tiny',    name: 'Tiny Gnome',    desc: 'Cranks the little gear with one hand.',
       baseCost: 15,   growth: 1.15, rate: 0.5, unlock: { cogsSeen: 10 } },
-    { id: 'tinier',  name: 'Tinier Gnome',  desc: 'Summoned by your tiny gnomes.  Smaller.  Faster.  Louder.',
+    { id: 'tinier',  name: 'Gnome Necromancer', desc: 'Raises skeleton gnomes to crank for him.  No lunch breaks.  No lungs.',
       baseCost: 250,  growth: 1.15, rate: 4,   unlock: { producer: 'tiny', count: 10 } },
     { id: 'warrior', name: 'Warrior Gnome', desc: 'Swipes the gear with a weapon twice a second.',
-      baseCost: 1100, growth: 1.15, swipesPerSec: 2, unlock: { cogsSeen: 800 } }
+      baseCost: 1100, growth: 1.15, swipesPerSec: 2, unlock: { cogsSeen: 800 } },
+    { id: 'cloner',  name: 'Gnome Cloner',  desc: 'Bubbling vat, questionable ethics, endless coworkers.',
+      baseCost: 12000, growth: 1.15, rate: 40, unlock: { cogsSeen: 8000 } },
+    { id: 'matryoshka', name: 'Matryoshka Gnome', desc: 'Open him up.  There is another gnome inside.  And another.',
+      baseCost: 140000, growth: 1.15, rate: 260, unlock: { cogsSeen: 90000 } }
   ],
+
+  // The Shop Floor: where each gnome type works.  slot = station number (0 to 11, bottom row first).
+  // parts are drawn left to right, h = height as a percent of the floor.
+  floor: {
+    slots: [
+      [22.9, 80.0], [41.0, 80.0], [59.5, 80.0], [78.1, 80.0],
+      [22.9, 54.0], [41.0, 54.0], [59.5, 54.0], [78.1, 54.0],
+      [22.9, 28.0], [41.0, 28.0], [59.5, 28.0], [78.1, 28.0]
+    ],
+    plateDrop: 2.1,     // plate sits this far below the feet line
+    stations: {
+      tiny:       { label: 'Tiny', slot: 0, parts: [{ img: 'tiny_static', h: 17, upgrade: { two_hands: 'twohand_static' } }] },
+      tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16 }] },
+      warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17 }, { img: 'dummy_static', h: 12 }] },
+      cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17 }] },
+      matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] }
+    }
+  },
 
   // Leveled upgrades (buy many times).
   leveled: [

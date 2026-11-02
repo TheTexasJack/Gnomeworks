@@ -240,9 +240,11 @@ GW.ui = (function () {
       ['Clicks by who clicked it', null],
       ['You (' + fmt(s.stats.taps) + ' taps)', s.clicks.tap],
       ['Tiny Gnomes', s.clicks.tiny],
-      ['Tinier Gnomes', s.clicks.tinier],
+      ['Skeleton Crew (Necromancers)', s.clicks.tinier],
       ['Warrior Gnomes', s.clicks.warrior],
       ['Gnome on a Stick', s.clicks.stick],
+      ['Gnome Cloners', s.clicks.cloner || 0],
+      ['Matryoshka Gnomes', s.clicks.matryoshka || 0],
       ['Total clicks', totalClicks],
       ['The machine', null],
       ['Items made', s.itemsMade],
@@ -268,31 +270,102 @@ GW.ui = (function () {
     box.innerHTML = html + '</table>';
   }
 
-  // ---------- crew (gnomes shown under the machine) ----------
-  var crewSig = '';
+  // ---------- crew strip under the machine + the Shop Floor ----------
+  var F = C.floor;
+  function crewImg(name) { return 'assets/crew/' + name + '.webp'; }
+
+  // Which picture a station part shows right now (upgrades and count stages can swap it).
+  function partImg(s, pid, part) {
+    var img = part.img, h = part.h;
+    if (part.upgrade) Object.keys(part.upgrade).forEach(function (u) { if (s.oneTime[u]) img = part.upgrade[u]; });
+    if (part.stages) {
+      for (var i = 0; i < part.stages.length; i++) {
+        if ((s.producers[pid] || 0) >= part.stages[i][0]) { img = part.stages[i][1]; h = part.stages[i][2] || h; break; }
+      }
+    }
+    return { img: img, h: h };
+  }
+
+  function stationSig(s) {
+    return Object.keys(F.stations).map(function (pid) {
+      return pid + ':' + (s.producers[pid] || 0) + ':' + F.stations[pid].parts.map(function (p) { return partImg(s, pid, p).img; }).join(',');
+    }).join('|');
+  }
+
+  var crewSig = '', floorSig = '', floorBuilt = false, slotEls = [];
   function updateCrew(s) {
-    var hat = currentHat();
-    var w = E.weapon(s).value;
-    var sig = [s.producers.tiny, s.producers.tinier, s.producers.warrior, w, hat.id].join('|');
+    var sig = stationSig(s);
     if (sig === crewSig) return;
     crewSig = sig;
     var box = $('#crew');
     box.innerHTML = '';
-    [['tiny', 'Tiny', 10], ['tinier', 'Tinier', 10], ['warrior', 'Warrior', 6]].forEach(function (k) {
-      var n = s.producers[k[0]];
-      if (!n) return;
-      var group = el('div', 'crew-group crew-' + k[0]);
-      var shown = Math.min(n, k[2]);
-      for (var i = 0; i < shown; i++) {
-        var g = el('span', 'crew-gnome');
-        g.innerHTML = gnomeSVG(k[0], hat);
-        g.style.animationDelay = (-Math.random() * 1.2).toFixed(2) + 's';
-        group.appendChild(g);
-      }
-      group.appendChild(el('span', 'crew-count', k[1] + ' ×' + fmt(n)));
+    C.producers.forEach(function (p) {
+      var n = s.producers[p.id], st = F.stations[p.id];
+      if (!n || !st) return;
+      var group = el('div', 'crew-group crew-' + p.id);
+      var im = el('img', 'crew-thumb'); im.src = crewImg(partImg(s, p.id, st.parts[st.parts.length > 1 && p.id !== 'warrior' ? 1 : 0]).img); im.alt = p.name;
+      group.appendChild(im);
+      group.appendChild(el('span', 'crew-count', p.name + ' \u00D7' + fmt(n)));
       box.appendChild(group);
     });
     if (!box.children.length) box.appendChild(el('div', 'crew-empty', 'No gnomes yet.  Tap the little gear!'));
+    updateFloor(s);
+  }
+
+  function buildFloor() {
+    var floor = $('#floor');
+    floor.appendChild(el('div', 'belt'));
+    F.slots.forEach(function (xy, i) {
+      var st = el('div', 'station'); st.style.left = xy[0] + '%'; st.style.bottom = (100 - xy[1]) + '%';
+      var plate = el('div', 'plate', '???'); plate.style.left = xy[0] + '%'; plate.style.top = (xy[1] + F.plateDrop) + '%';
+      floor.appendChild(st); floor.appendChild(plate);
+      slotEls.push({ st: st, plate: plate });
+    });
+    floor.appendChild(el('div', 'belt-items'));
+    floorBuilt = true;
+  }
+
+  function updateFloor(s) {
+    if (!floorBuilt) buildFloor();
+    var sig = stationSig(s);
+    if (sig === floorSig) return;
+    floorSig = sig;
+    var used = {};
+    Object.keys(F.stations).forEach(function (pid) {
+      var cfg = F.stations[pid], slot = slotEls[cfg.slot], n = s.producers[pid] || 0;
+      used[cfg.slot] = true;
+      slot.st.innerHTML = '';
+      if (!n) { helpWanted(slot); return; }
+      slot.st.className = 'station';
+      cfg.parts.forEach(function (part) {
+        var pi = partImg(s, pid, part);
+        var im = el('img'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
+        im.style.height = pi.h + 'cqh';
+        if (part.overlap) im.style.marginRight = -part.overlap + 'cqw';
+        slot.st.appendChild(im);
+      });
+      slot.plate.textContent = cfg.label + ' \u00D7' + fmt(n);
+      slot.plate.classList.remove('locked');
+    });
+    slotEls.forEach(function (slot, i) { if (!used[i]) helpWanted(slot); });
+  }
+
+  function helpWanted(slot) {
+    slot.st.className = 'station hiring';
+    slot.st.innerHTML = '';
+    var im = el('img'); im.src = crewImg('help_wanted'); im.alt = 'Help wanted'; im.draggable = false; im.style.height = '15cqh';
+    slot.st.appendChild(im);
+    slot.plate.textContent = '???';
+    slot.plate.classList.add('locked');
+  }
+
+  function beltItem(item) {
+    var box = $('#floor .belt-items');
+    if (!box) return;
+    var p = el('div', 'belt-item tier-' + item.tier);
+    p.appendChild(itemIcon(item));
+    box.appendChild(p);
+    setTimeout(function () { p.remove(); }, 6200);
   }
 
   // ---------- effects ----------
@@ -306,6 +379,8 @@ GW.ui = (function () {
   }
 
   function popItem(item) {
+    flashShelf(item.id);
+    if (GW.game.s.view === 'floor') { beltItem(item); return; }
     var m = GW.gears.hatchMouth();
     var p = el('div', 'pop-item tier-' + item.tier);
     p.appendChild(itemIcon(item, true));
@@ -315,7 +390,6 @@ GW.ui = (function () {
     fx.appendChild(p);
     GW.gears.openFlap();
     setTimeout(function () { p.remove(); }, 1300);
-    flashShelf(item.id);
   }
 
   var toastTimer;
@@ -360,12 +434,11 @@ GW.ui = (function () {
     buildShelf(s);
     initTabs();
     updateShop(s); updateCrew(s); updateHeader(s);
-    var hat = currentHat();
-    $('#hatNote').textContent = 'This month the gnomes are wearing: ' + hat.name + '.';
+    // Hats are parked until they are redrawn for the new gnome art.
   }
 
   return {
-    init: init, updateShop: updateShop, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
+    init: init, updateShop: updateShop, updateFloor: updateFloor, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
     buildShelf: buildShelf, flashItem: flashShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
   };
 })();

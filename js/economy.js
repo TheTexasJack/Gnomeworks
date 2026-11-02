@@ -38,11 +38,15 @@ GW.econ = (function () {
     var swipes = s.producers.warrior * producerDef('warrior').swipesPerSec;
     var r = {
       tiny: s.producers.tiny * tinyEach(s) * g,
-      tinier: s.producers.tinier * producerDef('tinier').rate * g,
       warrior: swipes * w.value * g,
       stick: w.stick ? swipes * 1 * g : 0
     };
-    r.total = r.tiny + r.tinier + r.warrior + r.stick;
+    C.producers.forEach(function (p) {
+      if (p.rate && p.id !== 'tiny') r[p.id] = (s.producers[p.id] || 0) * p.rate * g;
+    });
+    var total = 0;
+    Object.keys(r).forEach(function (k) { total += r[k]; });
+    r.total = total;
     return r;
   }
 
@@ -121,7 +125,7 @@ GW.econ = (function () {
 
   function tick(s, dt, events) {
     var r = rates(s);
-    ['tiny', 'tinier', 'warrior', 'stick'].forEach(function (k) { if (r[k] > 0) addClicks(s, k, r[k] * dt, events, 1); });
+    Object.keys(r).forEach(function (k) { if (k !== 'total' && r[k] > 0) addClicks(s, k, r[k] * dt, events, 1); });
     s.stats.playSeconds += dt;
     var cps = r.total;
     if (cps > s.stats.bestCps) s.stats.bestCps = cps;
@@ -205,7 +209,7 @@ GW.econ = (function () {
     if (capped < 5) return null;
     var before = s.cogs, itemsBefore = s.itemsMade, r = rates(s);
     if (r.total <= 0) return null;
-    ['tiny', 'tinier', 'warrior', 'stick'].forEach(function (k) { if (r[k] > 0) addClicks(s, k, r[k] * capped, null, 0); });
+    Object.keys(r).forEach(function (k) { if (k !== 'total' && r[k] > 0) addClicks(s, k, r[k] * capped, null, 0); });
     return { seconds: capped, cogs: s.cogs - before, items: s.itemsMade - itemsBefore };
   }
 

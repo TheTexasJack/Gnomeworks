@@ -177,7 +177,7 @@ window.GW = window.GW || {};
 
     drainPops(Math.min(dt, 1));
     if (extraItems >= 1 && Math.random() < dt * 2) {
-      var m = G.hatchMouth();
+      var m = s.view === 'floor' ? { x: 86, y: 92 } : G.hatchMouth();
       UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
       extraItems = 0;
     }
@@ -195,6 +195,21 @@ window.GW = window.GW || {};
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // ---------- view toggle: The Machine / Shop Floor ----------
+  function applyView() {
+    var floor = s.view === 'floor';
+    machine.classList.toggle('floor-mode', floor);
+    U.$all('.view-toggle button').forEach(function (b) {
+      var on = b.dataset.view === s.view;
+      b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    machine.setAttribute('aria-label', floor ? 'The Shop Floor.  Tap anywhere to crank the machine.' : 'The machine.  Tap to turn the little gear.');
+  }
+  U.$all('.view-toggle button').forEach(function (b) {
+    b.addEventListener('click', function () { s.view = b.dataset.view; applyView(); UI.updateFloor(s); });
+  });
+  applyView();
 
   // ---------- pause ----------
   var pauseBtn = document.getElementById('pauseBtn');
