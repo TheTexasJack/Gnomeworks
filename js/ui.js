@@ -360,6 +360,7 @@ GW.ui = (function () {
         var pi = partImg(s, pid, part);
         var wrap = el('span', 'part');
         wrap.style.height = (pi.h * layout().scale) + 'cqh';
+        if (part.z) wrap.style.zIndex = part.z;
         if (part.overlap) wrap.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
         var im = el('img', 'f-static'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
         wrap.appendChild(im);

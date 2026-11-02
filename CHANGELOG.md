@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.14 (2026-11-02)
+
+* The training dummy now stands behind the warrior, so his weapon hits in front of it instead of disappearing behind it.
+
 ## v0.2.0-draft.13 (2026-11-01)
 
 Layer 2, step 2: squish and boing.
