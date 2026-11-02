@@ -31,13 +31,13 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-#app { max-width: 1400px; margin: 0 auto; padding: 10px; }
+#app { max-width: 1800px; margin: 0 auto; padding: 10px; }
 
 /* ---------- header ---------- */
 .topbar {
   display: grid; grid-template-columns: auto 1fr; grid-template-areas: "title wallet";
   align-items: center; gap: 10px 16px; padding: 8px 16px; margin-bottom: 10px;
-  aspect-ratio: 1920 / 220; min-height: 96px;
+  width: 100%; box-sizing: border-box; aspect-ratio: 1920 / 220; min-height: 96px; max-height: 165px;
   /* Mara's gnome industry banner: a soft shade on the left for the logo and the right for the counter */
   background:
     var(--rivets),
@@ -174,7 +174,7 @@ body.paused .belt, body.paused .belt-item { animation-play-state: paused; }
 body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animation-play-state: paused; }
 
 /* ---------- layout ---------- */
-.layout { display: grid; gap: 10px; grid-template-columns: 290px minmax(0, 1fr) 360px; align-items: start; }
+.layout { display: grid; gap: 10px; grid-template-columns: clamp(290px, 22vw, 420px) minmax(0, 1fr) clamp(360px, 24vw, 440px); align-items: start; }
 .tab-shelf { display: none; }
 
 @media (max-width: 1100px) {
@@ -203,7 +203,7 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 
 /* ---------- machine ---------- */
 .machine {
-  position: relative; width: 100%; max-width: calc(100vh - 200px); min-width: min(100%, 420px); margin: 0 auto; aspect-ratio: 1 / 1;
+  position: relative; width: 100%; max-width: calc(100vh - 245px); min-width: min(100%, 420px); margin: 0 auto; aspect-ratio: 1 / 1;
   border: 4px solid var(--brass); border-radius: var(--radius); overflow: hidden;
   box-shadow: inset 0 0 0 2px var(--brass-dark), inset 0 0 40px rgba(0,0,0,.6), 0 6px 16px rgba(0,0,0,.6);
   cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation;
@@ -272,7 +272,7 @@ body.tap-hint-done .tap-label { opacity: 0; }
 @keyframes claimed { to { transform: scale(2); opacity: 0; } }
 .rare-popup.fade { transition: opacity .5s; opacity: 0; }
 
-.progress-row { max-width: calc(100vh - 200px); min-width: min(100%, 420px); margin-left: auto !important; margin-right: auto !important; display: flex; align-items: center; gap: 10px; margin: 8px 2px; font-size: .9rem; }
+.progress-row { max-width: calc(100vh - 245px); min-width: min(100%, 420px); margin-left: auto !important; margin-right: auto !important; display: flex; align-items: center; gap: 10px; margin: 8px 2px; font-size: .9rem; }
 .progress { flex: 1; height: 14px; background: #1c1007; border: 2px solid var(--brass); border-radius: 9px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,.7), 0 0 0 1px var(--brass-dark); }
 #nextBar { height: 100%; width: 0; background: linear-gradient(180deg, #fff1b8, #e0b04a 45%, #a8741a); box-shadow: 0 0 8px rgba(255,200,80,.6); }
 

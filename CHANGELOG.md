@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.30 (2026-11-02)
+
+- Wide screens use more of the screen.  The page grows to 1800 px wide, the Collection Shelf column grows to about 420 px (5 items per row), and the Shop column to about 440 px.  Screens 1400 px and narrower look the same as before.
+- The desktop banner tops out at 165 px tall on wide screens, trimming a little sky and rooftop so the machine stays in view.
+
 ## v0.2.0-draft.29 (2026-11-02)
 
 - The word TAP under the little gear fades out about a minute after the page opens.  The pulsing ring stays as the hint.  Tunable as `tap.labelFadeSeconds` in config.
