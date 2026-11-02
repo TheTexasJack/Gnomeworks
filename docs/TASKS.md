@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-02, at v0.2.0-draft.19.
+Last updated 2026-11-02, at v0.2.0-draft.20.
 
 ## Where we are
 
@@ -29,11 +29,10 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 ## Nathan
 
 - [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.
-- [ ] Check the Android battery saver theory: squish animations stop when Android's "Remove animations" (or Battery Saver) is on.
+- [ ] Optional: on the Android phone, Settings, Accessibility, "Remove animations" is likely on.  Turning it off brings back the full bounce.
 
 ## Claudia (ready to build when asked)
 
-- [ ] Reduced-motion players still get the static/action frame swap, just without the squash and stretch.
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [ ] Phone header polish: the cog count wraps under the title sign.
 - [ ] Themed buttons, when Mara's button art exists.
@@ -52,7 +51,7 @@ Open question in the proposal: should packed items come out of the shelf counts,
 | Issue | Status |
 | --- | --- |
 | Hats show the inside of the brim | Fix in progress (GIMP) |
-| Squish animations off on Android with battery saver | Expected behavior today; fix listed above |
+| Shop Floor gnomes stood still on devices set to reduce motion (Nathan's Android) | Fixed in draft.20: gentle pose swaps |
 | Tall phone floor has an empty bottom level with no plates | Accepted; Mara could add a 4th plate row for 16 stations |
 | Matryoshka sets (10 and 25 owned) only wiggle, no open/close | Accepted, Nathan likes it |
 | Highlights painted on gears rotate with them | Accepted |

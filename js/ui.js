@@ -424,22 +424,32 @@ GW.ui = (function () {
   var anims = {};
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   function animateFloor(now, s) {
-    if (reduceMotion.matches || s.view !== 'floor' || s.paused) return;
+    if (s.view !== 'floor' || s.paused) return;
+    var calm = reduceMotion.matches;   // device asks for less motion: frame swaps only, slower, no squash
     var r = E.rates(s), A = F.anim;
     Object.keys(anims).forEach(function (pid) {
       var a = anims[pid];
       if (!a.parts.length || now < a.next) return;
       var rate = pid === 'warrior' ? (s.producers.warrior || 0) * E.producerDef('warrior').swipesPerSec : (r[pid] || 0);
       var period = Math.max(A.fastest, Math.min(A.slowest, A.slowest / (1 + Math.log10(1 + rate))));
+      if (calm) period = Math.max(period, 1.4);
       a.next = now + period * 1000 * (0.85 + Math.random() * 0.3);
       var d = Math.min(A.boing, period * 0.85) * 1000;
-      a.parts.forEach(function (p) { playPart(p, d); });
+      a.parts.forEach(function (p) { playPart(p, d, calm); });
       setTimeout(function () { GW.sfx.chatter(pid); }, d * 0.36);
     });
   }
 
-  function playPart(p, d) {
+  function playPart(p, d, calm) {
     var e = p.el;
+    if (calm) {
+      // Gentle version: swap to the action pose and back, nothing moves or shakes.
+      if (p.hasAction || p.anim === 'hit' || e.querySelector('.f-weapon')) {
+        setTimeout(function () { e.classList.add('act'); }, d * 0.36);
+        setTimeout(function () { e.classList.remove('act'); }, d * 1.6);
+      }
+      return;
+    }
     if (p.anim === 'hit') {
       setTimeout(function () {
         e.classList.add('act');
@@ -547,6 +557,11 @@ GW.ui = (function () {
     buildShelf(s);
     initTabs();
     updateShop(s); updateCrew(s); updateHeader(s);
+    var mn = $('#motionNote');
+    if (mn) {
+      var sync = function () { mn.textContent = reduceMotion.matches ? 'Your device is set to reduce motion, so the Shop Floor gnomes switch poses gently instead of bouncing.' : ''; };
+      sync(); if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', sync);
+    }
     var hn = $('#hatNote');
     if (hn) hn.textContent = 'This month the gnomes are wearing: ' + currentHat().name + '.';
   }

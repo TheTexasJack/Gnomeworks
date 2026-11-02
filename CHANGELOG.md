@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.20 (2026-11-02)
+
+* Devices set to reduce motion now see the Shop Floor gnomes switch between their static and action poses (slower, with no squash, stretch, or shake).  Before, they stood completely still.
+* The Info tab says when a device is set to reduce motion, which makes "the gnomes don't move" easy to diagnose.
+
 ## v0.2.0-draft.19 (2026-11-02)
 
 Documentation and tools.  No gameplay changes.
