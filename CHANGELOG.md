@@ -2,6 +2,18 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.15 (2026-11-02)
+
+Sound effects, all synthesized in code (no sound files, no licenses).
+
+* Tap: a wooden ratchet tick with a brass ping that climbs in pitch while you tap fast.
+* Items: hatch clunk and pop, with a sparkle for Uncommon and a chime for Rare.  Quieter on the Shop Floor.
+* Shop: a ka-ching when you buy, a dull thunk when you cannot afford it.
+* Shinies: a twinkle when one appears (brighter when gold), coins for a Lucky Sprocket, a magic chime for Super Rare, and a fanfare for Legendary.
+* Gnome chatter on the Shop Floor: crank squeaks, skeleton clatter, warrior thuds, cloner bloops, and matryoshka pops, capped at about 2 a second.
+* Speaker button in the header mutes all game sound.  Effects volume and a gnome chatter switch are in the Info tab.  Settings are saved.
+* Sound starts after the first tap, as browsers require.  On iPhones the sounds are marked as ambient so they mix with the player's own music.
+
 ## v0.2.0-draft.14 (2026-11-02)
 
 * The training dummy now stands behind the warrior, so his weapon hits in front of it instead of disappearing behind it.

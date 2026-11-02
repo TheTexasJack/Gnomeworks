@@ -9,8 +9,15 @@ window.GW = window.GW || {};
 
   // ---------- startup ----------
   G.build(document.getElementById('gearSvg'));
+  var SFX = GW.sfx;
+  SFX.load(s.audio);
   UI.init(s, function (kind, id) {
-    if (E.buy(s, kind, id)) { UI.updateShop(s); UI.updateCrew(s); UI.updateHeader(s); }
+    if (E.buy(s, kind, id)) { SFX.buy(); UI.updateShop(s); UI.updateCrew(s); UI.updateHeader(s); }
+    else SFX.nope();
+  });
+  // Browsers only allow sound after a real tap or key press.
+  ['pointerdown', 'keydown'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { if (e.isTrusted) SFX.unlock(); }, true);
   });
 
   if (loaded.note === 'newseason') UI.toast('A new season has begun!  Fresh gears, fresh gnomes.');
@@ -43,6 +50,7 @@ window.GW = window.GW || {};
     var v = E.tap(s, ev);
     lastHumanTap = performance.now();
     G.bumpDrive();
+    SFX.tap();
     UI.floatText(xPct, yPct, '+' + U.fmt(v));
     handleEvents(ev);
   }
@@ -78,7 +86,7 @@ window.GW = window.GW || {};
 
   function drainPops(dt) {
     popBudget = Math.min(C.machine.maxVisualItemsPerSecond, popBudget + dt * C.machine.maxVisualItemsPerSecond);
-    while (popQueue.length && popBudget >= 1) { UI.popItem(popQueue.shift()); popBudget -= 1; }
+    while (popQueue.length && popBudget >= 1) { var it = popQueue.shift(); UI.popItem(it); SFX.drop(it.tier, s.view === 'floor'); popBudget -= 1; }
     if (popQueue.length > 6) { extraItems += popQueue.length - 6; popQueue.length = 6; }
   }
 
@@ -107,6 +115,7 @@ window.GW = window.GW || {};
     });
     slot.appendChild(b);
     s.stats.popupsSeen += 1;
+    SFX.shiny(isHot(performance.now()));
     popup = { el: b, expires: performance.now() + C.popup.lifetimeSeconds * 1000 };
     var flash = document.getElementById('edgeFlash');
     flash.classList.remove('on'); void flash.offsetWidth; flash.classList.add('on');
@@ -118,6 +127,7 @@ window.GW = window.GW || {};
     b.classList.add('claimed');
     setTimeout(function () { b.remove(); }, 400);
     popup = null;
+    if (res.type === 'legendary') SFX.legendary(); else if (res.type === 'superrare') SFX.superRare(); else SFX.sprocket();
     if (res.type === 'superrare' || res.type === 'legendary') {
       var label = res.type === 'legendary' ? 'LEGENDARY!  ' : 'SUPER RARE!  ';
       UI.toast((res.isNew ? label : 'Another one!  ') + res.item.name + ' goes on the shelf!', res.type === 'legendary' ? 'legendary' : 'super');
@@ -208,9 +218,27 @@ window.GW = window.GW || {};
     machine.setAttribute('aria-label', floor ? 'The Shop Floor.  Tap anywhere to crank the machine.' : 'The machine.  Tap to turn the little gear.');
   }
   U.$all('.view-toggle button').forEach(function (b) {
-    b.addEventListener('click', function () { s.view = b.dataset.view; applyView(); UI.updateFloor(s); });
+    b.addEventListener('click', function () { s.view = b.dataset.view; SFX.click(); applyView(); UI.updateFloor(s); });
   });
   applyView();
+
+  // ---------- sound settings ----------
+  var muteBtn = document.getElementById('muteBtn');
+  var fxSlider = document.getElementById('fxVol'), chatterBox = document.getElementById('chatterOn');
+  function applyAudioUI() {
+    var a = SFX.settings();
+    muteBtn.textContent = a.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+    muteBtn.setAttribute('aria-label', a.muted ? 'Sound is off.  Turn sound on.' : 'Sound is on.  Turn sound off.');
+    muteBtn.setAttribute('aria-pressed', a.muted ? 'true' : 'false');
+    fxSlider.value = Math.round(a.fx * 100);
+    chatterBox.checked = a.chatter;
+    s.audio = { fx: a.fx, chatter: a.chatter, muted: a.muted };
+  }
+  muteBtn.addEventListener('click', function () { SFX.set('muted', !SFX.settings().muted); applyAudioUI(); SFX.click(); });
+  fxSlider.addEventListener('input', function () { SFX.set('fx', fxSlider.value / 100); applyAudioUI(); });
+  fxSlider.addEventListener('change', function () { SFX.buy(); });
+  chatterBox.addEventListener('change', function () { SFX.set('chatter', chatterBox.checked); applyAudioUI(); });
+  applyAudioUI();
 
   // ---------- pause ----------
   var pauseBtn = document.getElementById('pauseBtn');
@@ -223,6 +251,7 @@ window.GW = window.GW || {};
   function togglePause() {
     s.paused = !s.paused;
     applyPause();
+    SFX.pause(s.paused);
     GW.state.save(s);
   }
   pauseBtn.addEventListener('click', togglePause);

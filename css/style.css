@@ -101,6 +101,12 @@ body.paused .belt, body.paused .belt-item { animation-play-state: paused; }
   color: var(--ink); background: linear-gradient(180deg, var(--brass-light), var(--brass)); border: 2px solid var(--brass-dark);
   margin-left: auto;
 }
+.mute-btn { margin-left: auto; padding: 8px 12px; }
+.mute-btn + .pause-btn { margin-left: 0; }
+.pause-btn.mute-btn[aria-pressed="true"] { background: linear-gradient(180deg, #d9c9a8, #9c8a6a); }
+.setting { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: .9rem; }
+.setting input[type="range"] { flex: 1; accent-color: var(--brass); }
+.setting input[type="checkbox"] { accent-color: var(--brass); width: 18px; height: 18px; }
 .pause-btn[aria-pressed="true"] { background: linear-gradient(180deg, #b9f3b9, #5fa35f); }
 #pauseOverlay {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;

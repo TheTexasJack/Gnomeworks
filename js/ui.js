@@ -417,6 +417,7 @@ GW.ui = (function () {
       a.next = now + period * 1000 * (0.85 + Math.random() * 0.3);
       var d = Math.min(A.boing, period * 0.85) * 1000;
       a.parts.forEach(function (p) { playPart(p, d); });
+      setTimeout(function () { GW.sfx.chatter(pid); }, d * 0.36);
     });
   }
 
@@ -510,6 +511,7 @@ GW.ui = (function () {
         $all('.tabs button').forEach(function (x) { x.classList.toggle('active', x === b); });
         $all('[data-tabpanel]').forEach(function (p) { p.hidden = p.dataset.tabpanel !== b.dataset.tab; });
         if (b.dataset.tab === 'stats') updateStats(GW.game.s);
+        GW.sfx.click();
       });
     });
   }

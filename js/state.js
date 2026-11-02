@@ -12,6 +12,7 @@ GW.state = (function () {
       createdAt: Date.now(),
       savedAt: Date.now(),
       paused: false,
+      audio: { fx: 0.6, chatter: true, muted: false },
       view: 'machine',      // 'machine' or 'floor'
       cogs: 0,
       cogsSeen: 0,          // lifetime cogs earned, drives unlocks

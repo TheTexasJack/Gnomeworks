@@ -2,7 +2,7 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.2.0-draft.14** (Layer 2 in progress: real art)
+Current version: **v0.2.0-draft.15** (Layer 2 in progress: real art)
 
 ## Play it
 
@@ -20,6 +20,7 @@ Plain HTML, CSS, and JavaScript.  No frameworks and no build tools, so it can be
 | `css/style.css` | The oak and brass tavern look |
 | `js/config.js` | **The tuning file.**  Items, upgrades, costs, drop rates, hats, season |
 | `js/util.js` | Number formatting and small helpers |
+| `js/sfx.js` | Sound effects, synthesized in code (no sound files) |
 | `js/state.js` | Saving and loading (this browser only) |
 | `js/economy.js` | All the math: rates, taps, item drops, shop, popups, offline progress |
 | `js/gears.js` | Draws the wall, the meshing gears, and the hatch |

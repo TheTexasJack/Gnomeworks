@@ -11,6 +11,7 @@
   <div id="app">
     <header class="topbar">
       <h1 class="title"><img src="assets/ui/title.webp" alt="Gnomeworks" width="1200" height="385"></h1>
+      <button type="button" id="muteBtn" class="pause-btn mute-btn" aria-pressed="false" aria-label="Sound is on.  Turn sound off.">&#128266;</button>
       <button type="button" id="pauseBtn" class="pause-btn" aria-pressed="false">&#9208; Pause</button>
       <div class="wallet" aria-live="off">
         <span class="wallet-main"><span class="cog-icon" aria-hidden="true">&#9881;&#65039;</span><span id="cogs">0</span></span>
@@ -71,6 +72,10 @@
             <p>Tap the gear and the shiny turns gold.  Only a gold shiny can hold a Legendary.</p>
             <h3>Playing as a guest</h3>
             <p>Your progress saves in this browser only.  Clearing your browser data or switching devices starts you fresh.  Accounts and a leaderboard are on the way.</p>
+            <h3>Sound</h3>
+            <label class="setting">Effects volume <input type="range" id="fxVol" min="0" max="100" step="5"></label>
+            <label class="setting"><input type="checkbox" id="chatterOn"> Gnome chatter on the Shop Floor</label>
+            <p class="fine">Playing your own music?  Game sounds mix in on top of it on most phones.  The speaker button up top turns all game sound off.</p>
             <h3>Start over</h3>
             <button type="button" id="resetBtn" class="danger">Reset my progress</button>
             <p class="fine">Junk item art: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a>, licensed CC-BY 4.0.</p>
@@ -86,6 +91,7 @@
 
   <script src="js/config.js"></script>
   <script src="js/util.js"></script>
+  <script src="js/sfx.js"></script>
   <script src="js/state.js"></script>
   <script src="js/economy.js"></script>
   <script src="js/gears.js"></script>
