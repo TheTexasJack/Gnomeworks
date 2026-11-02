@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.16 (2026-11-02)
+
+* Mara's gear-framed badges for all five gnome types, shown on their shop rows and in the crew strip under the machine.
+
 ## v0.2.0-draft.15 (2026-11-02)
 
 Sound effects, all synthesized in code (no sound files, no licenses).

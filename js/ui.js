@@ -73,6 +73,10 @@ GW.ui = (function () {
       sec.list.forEach(function (def) {
         var row = el('button', 'shop-row');
         row.type = 'button';
+        if (def.icon) {
+          var ic = el('img', 'shop-icon'); ic.src = 'assets/icons/' + def.icon + '.webp'; ic.alt = ''; ic.draggable = false;
+          row.appendChild(ic);
+        }
         var left = el('div', 'shop-left');
         left.appendChild(el('div', 'shop-name', def.name));
         left.appendChild(el('div', 'shop-desc', def.desc));
@@ -303,7 +307,8 @@ GW.ui = (function () {
       var n = s.producers[p.id], st = F.stations[p.id];
       if (!n || !st) return;
       var group = el('div', 'crew-group crew-' + p.id);
-      var im = el('img', 'crew-thumb'); im.src = crewImg(partImg(s, p.id, st.parts[st.parts.length > 1 && p.id !== 'warrior' ? 1 : 0]).img); im.alt = p.name;
+      var im = el('img', 'crew-thumb'); im.alt = p.name;
+      im.src = p.icon ? 'assets/icons/' + p.icon + '.webp' : crewImg(partImg(s, p.id, st.parts[0]).img);
       group.appendChild(im);
       group.appendChild(el('span', 'crew-count', p.name + ' \u00D7' + fmt(n)));
       box.appendChild(group);

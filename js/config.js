@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.15';
+GW.VERSION = '0.2.0-draft.16';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -228,15 +228,15 @@ GW.CONFIG = {
 
   // Gnomes that click for you.  rate = clicks per second each.
   producers: [
-    { id: 'tiny',    name: 'Tiny Gnome',    desc: 'Cranks the little gear with one hand.',
+    { id: 'tiny',    icon: 'icon_tiny', name: 'Tiny Gnome',    desc: 'Cranks the little gear with one hand.',
       baseCost: 15,   growth: 1.15, rate: 0.5, unlock: { cogsSeen: 10 } },
-    { id: 'tinier',  name: 'Gnome Necromancer', desc: 'Raises skeleton gnomes to crank for him.  No lunch breaks.  No lungs.',
+    { id: 'tinier',  icon: 'icon_necro', name: 'Gnome Necromancer', desc: 'Raises skeleton gnomes to crank for him.  No lunch breaks.  No lungs.',
       baseCost: 250,  growth: 1.15, rate: 4,   unlock: { producer: 'tiny', count: 10 } },
-    { id: 'warrior', name: 'Warrior Gnome', desc: 'Swipes the gear with a weapon twice a second.',
+    { id: 'warrior', icon: 'icon_warrior', name: 'Warrior Gnome', desc: 'Swipes the gear with a weapon twice a second.',
       baseCost: 1100, growth: 1.15, swipesPerSec: 2, unlock: { cogsSeen: 800 } },
-    { id: 'cloner',  name: 'Gnome Cloner',  desc: 'Bubbling vat, questionable ethics, endless coworkers.',
+    { id: 'cloner',  icon: 'icon_cloner', name: 'Gnome Cloner',  desc: 'Bubbling vat, questionable ethics, endless coworkers.',
       baseCost: 12000, growth: 1.15, rate: 40, unlock: { cogsSeen: 8000 } },
-    { id: 'matryoshka', name: 'Matryoshka Gnome', desc: 'Open him up.  There is another gnome inside.  And another.',
+    { id: 'matryoshka', icon: 'icon_matryoshka', name: 'Matryoshka Gnome', desc: 'Open him up.  There is another gnome inside.  And another.',
       baseCost: 140000, growth: 1.15, rate: 260, unlock: { cogsSeen: 90000 } }
   ],
 

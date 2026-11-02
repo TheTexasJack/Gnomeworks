@@ -92,7 +92,9 @@ body {
 .belt-item.tier-rare .item-icon { filter: drop-shadow(0 0 6px #6fa8ff); }
 @keyframes ride { 0% { left: var(--ride-from); opacity: 0; } 6% { opacity: 1; } 90% { opacity: 1; } 100% { left: var(--ride-to); opacity: 0; } }
 body.paused .belt, body.paused .belt-item { animation-play-state: paused; }
-.crew-thumb { height: 46px; width: auto; display: block; filter: drop-shadow(0 3px 3px rgba(0,0,0,.5)); }
+.crew-thumb { height: 52px; width: auto; display: block; filter: drop-shadow(0 3px 3px rgba(0,0,0,.5)); }
+.crew-group { gap: 6px; }
+.shop-icon { width: 46px; height: 46px; flex: none; align-self: center; filter: drop-shadow(0 2px 3px rgba(0,0,0,.5)); }
 .crew-group { align-items: center; }
 
 /* ---------- pause ---------- */
