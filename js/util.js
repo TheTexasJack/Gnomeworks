@@ -49,5 +49,13 @@ GW.util = (function () {
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
 
-  return { fmt: fmt, fmtTime: fmtTime, rand: rand, pickWeighted: pickWeighted, el: el, $: $, $all: $all };
+  // Small inline icons (fonts on some systems are missing the media symbols).
+  var ICONS = {
+    pause: '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1.5"/><rect x="14" y="4" width="5" height="16" rx="1.5"/></svg>',
+    play: '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>',
+    sound: '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    mute: '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
+  };
+
+  return { ICONS: ICONS, fmt: fmt, fmtTime: fmtTime, rand: rand, pickWeighted: pickWeighted, el: el, $: $, $all: $all };
 })();

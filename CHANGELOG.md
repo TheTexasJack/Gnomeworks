@@ -2,6 +2,18 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.21 (2026-11-02)
+
+Interface cleanup, step 1.
+
+* One button style everywhere: oak buttons with brass trim and rivets that press down when tapped, lit brass when active.  Covers the view toggle, the tabs, pause, sound, resume, and reset.
+* Pause and sound use drawn icons, since some systems showed a blank box for the old pause symbol.
+* Header: the cog count sits in its own brass-framed plaque.  On phones it gets a full row under the title instead of wrapping awkwardly.
+* Shop rows stay readable when you cannot afford them.  A thin brass meter shows how close you are, and rows you can buy glow.
+* The gnome strip under the machine is a row of badge chips.
+* The "next item" bar looks like a lit brass gauge.
+* Fixed an empty message box peeking up from the bottom of the screen.
+
 ## v0.2.0-draft.20 (2026-11-02)
 
 * Devices set to reduce motion now see the Shop Floor gnomes switch between their static and action poses (slower, with no squash, stretch, or shake).  Before, they stood completely still.

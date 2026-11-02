@@ -83,11 +83,12 @@ GW.ui = (function () {
         var right = el('div', 'shop-right');
         var costEl = el('div', 'shop-cost');
         var ownedEl = el('div', 'shop-owned');
-        right.appendChild(costEl); right.appendChild(ownedEl);
+        var meter = el('div', 'shop-meter'); var fill = el('i'); meter.appendChild(fill);
+        right.appendChild(costEl); right.appendChild(ownedEl); right.appendChild(meter);
         row.appendChild(left); row.appendChild(right);
         row.addEventListener('click', function () { if (onBuy) onBuy(sec.kind, def.id); });
         container.appendChild(row);
-        shopRows.push({ kind: sec.kind, def: def, row: row, costEl: costEl, ownedEl: ownedEl, head: h });
+        shopRows.push({ kind: sec.kind, def: def, row: row, costEl: costEl, ownedEl: ownedEl, head: h, fill: fill });
       });
     });
   }
@@ -107,7 +108,10 @@ GW.ui = (function () {
       r.costEl.textContent = done ? '✔' : C.currency.icon + ' ' + fmt(cost);
       r.ownedEl.textContent = owned;
       r.row.classList.toggle('done', done);
-      r.row.classList.toggle('cant', !done && s.cogs < cost);
+      var cant = !done && s.cogs < cost;
+      r.row.classList.toggle('cant', cant);
+      r.row.classList.toggle('ready', !done && !cant);
+      r.fill.style.width = (done ? 100 : Math.min(100, s.cogs / cost * 100)).toFixed(1) + '%';
       r.row.disabled = done;
     });
     $all('.shop-head').forEach(function (h) { h.hidden = !headsVisible[h.textContent]; });

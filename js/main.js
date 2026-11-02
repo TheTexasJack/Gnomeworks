@@ -227,7 +227,7 @@ window.GW = window.GW || {};
   var fxSlider = document.getElementById('fxVol'), chatterBox = document.getElementById('chatterOn');
   function applyAudioUI() {
     var a = SFX.settings();
-    muteBtn.textContent = a.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+    muteBtn.innerHTML = a.muted ? U.ICONS.mute : U.ICONS.sound;
     muteBtn.setAttribute('aria-label', a.muted ? 'Sound is off.  Turn sound on.' : 'Sound is on.  Turn sound off.');
     muteBtn.setAttribute('aria-pressed', a.muted ? 'true' : 'false');
     fxSlider.value = Math.round(a.fx * 100);
@@ -244,7 +244,8 @@ window.GW = window.GW || {};
   var pauseBtn = document.getElementById('pauseBtn');
   function applyPause() {
     document.body.classList.toggle('paused', !!s.paused);
-    pauseBtn.textContent = s.paused ? '\u25B6 Resume' : '\u23F8 Pause';
+    pauseBtn.innerHTML = (s.paused ? U.ICONS.play : U.ICONS.pause) + '<span>' + (s.paused ? 'Resume' : 'Pause') + '</span>';
+    pauseBtn.classList.toggle('go', !!s.paused);
     pauseBtn.setAttribute('aria-pressed', s.paused ? 'true' : 'false');
     document.getElementById('pauseOverlay').hidden = !s.paused;
   }
