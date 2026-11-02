@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.10';
+GW.VERSION = '0.2.0-draft.11';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -81,7 +81,7 @@ GW.CONFIG = {
     { id: "cap", name: "Ball Cap", group: "laundry", tier: "common", emoji: "🧢" },
     // Bathroom Disasters
     { id: "toilet", name: "Toilet", group: "bathroom", tier: "common", emoji: "🚽" },
-    { id: "poop", name: "Suspicious Pile", group: "bathroom", tier: "uncommon", emoji: "💩" },
+    { id: "poop_knife", name: "Poop Knife", group: "bathroom", tier: "uncommon", emoji: "🔪" },
     { id: "plunger", name: "Plunger", group: "bathroom", tier: "common", emoji: "🪠" },
     { id: "tp", name: "Toilet Paper", group: "bathroom", tier: "common", emoji: "🧻" },
     { id: "soap", name: "Soap", group: "bathroom", tier: "common", emoji: "🧼" },

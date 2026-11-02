@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.11 (2026-11-01)
+
+* Bathroom Disasters: Suspicious Pile is out (the Number Twos have that covered), and the Poop Knife is in.  Still Uncommon.
+
 ## v0.2.0-draft.10 (2026-11-01)
 
 Layer 2, step 1: the Shop Floor.
