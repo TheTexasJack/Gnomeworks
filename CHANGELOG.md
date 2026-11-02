@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.32 (2026-11-02)
+
+- New junk item: Control Knobs, in Questionable Inventions.  Every junk group now has 10 items, and the collection totals 130.
+
 ## v0.2.0-draft.31 (2026-11-02)
 
 - Wide screens: when there is room beside the machine, the next-item gauge stands on its left as a tall brass tube that fills from the bottom, and the gnome crew stacks down its right side as badges with counts.  Both used to sit below the machine, out of view on most monitors.  Narrower screens and the Shop Floor view keep the old layout.  Tunable as `layout.railMinWidth`.

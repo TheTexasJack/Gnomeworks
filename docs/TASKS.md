@@ -13,7 +13,7 @@ Last updated 2026-11-02, at v0.2.0-draft.20.
 | Security pass and Jarrett's guide | v0.5 | Planned |
 | Live on the Wix site | v1.0 | Planned |
 
-Game content right now: 5 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka), 7 empty stations, 129 collectibles (79 junk items in 8 groups, 43 Tiny Monsters, 4 Number Twos, 3 Legendary Treasures), 6 hats.
+Game content right now: 5 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka), 7 empty stations, 130 collectibles (80 junk items in 8 groups of 10, 43 Tiny Monsters, 4 Number Twos, 3 Legendary Treasures), 6 hats.
 
 ## Waiting on Jarrett
 
