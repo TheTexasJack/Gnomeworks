@@ -44,6 +44,10 @@ Producers for the 7 empty stations: Golem Pilot (1.6M), Boiler Stoker (20M), Gno
 
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
+Packing Line notes (Nathan, 2026-11-02, still open):
+- The player drags one item tile from the shelf into a box.  That one drag ships a big batch, since shipping one sock out of 13.7M means nothing.
+- Open question: a fixed batch per box (something like a million), or a "drop how many?" choice.  Leaning toward a fixed big number, since a gnome factory runs on nonsense, not logic.  To be tuned in play.
+
 Open question in the proposal: should packed items come out of the shelf counts, or should shipping be free?
 
 ## Known issues and accepted quirks
