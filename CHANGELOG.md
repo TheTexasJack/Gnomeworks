@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.1.1 (2026-11-01)
+
+* Game is live on GitHub Pages at https://thetexasjack.github.io/Gnomeworks/
+* README updated with the live link.
+
 ## v0.1.0 (2026-11-01)
 
 First playable build.  Layer 1: core game with placeholder art.

@@ -2,11 +2,11 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.1.0** (Layer 1: core game with placeholder art)
+Current version: **v0.1.1** (Layer 1: core game with placeholder art)
 
 ## Play it
 
-* **Online:** once GitHub Pages is on, the game lives at `https://thetexasjack.github.io/gnomeworks/`
+* **Online:** once GitHub Pages is on, the game lives at https://thetexasjack.github.io/Gnomeworks/ (capital G matters)
 * **On your own computer:** download the repo and open `index.html` in a browser.  No install or build step needed.
 * **Testing helpers:** add `?debug=1` to the address for buttons that add cogs, spawn a rare popup, or skip ahead an hour.  Add `?hat=witch` (or any hat id from the config) to preview a month's hat.
 
