@@ -1,0 +1,219 @@
+/* Wires it all together: input, the game loop, popups, saving. */
+window.GW = window.GW || {};
+
+(function () {
+  var C = GW.CONFIG, U = GW.util, E = GW.econ, UI = GW.ui, G = GW.gears;
+  var loaded = GW.state.load();
+  var s = loaded.state;
+  GW.game = { s: s };
+
+  // ---------- startup ----------
+  G.build(document.getElementById('gearSvg'));
+  UI.init(s, function (kind, id) {
+    if (E.buy(s, kind, id)) { UI.updateShop(s); UI.updateCrew(s); UI.updateHeader(s); }
+  });
+
+  if (loaded.note === 'newseason') UI.toast('A new season has begun!  Fresh gears, fresh gnomes.');
+  if (loaded.note === 'nostorage') UI.toast('Your browser is blocking saves, so progress will not be kept.', 'warn');
+  if (loaded.note === 'loaded') {
+    var away = (Date.now() - s.savedAt) / 1000;
+    var off = E.offline(s, away);
+    if (off) {
+      UI.toast('Welcome back!  Your gnomes made ' + C.currency.icon + ' ' + U.fmt(off.cogs) + ' and ' + U.fmt(off.items) + ' items while you were away.');
+      UI.buildShelf(s);
+    }
+  }
+
+  // ---------- tapping ----------
+  var machine = document.getElementById('machine');
+  var bucket = C.tap.maxTapsPerSecond, lastRefill = performance.now(), lastHumanTap = 0;
+
+  function allowTap() {
+    var now = performance.now();
+    bucket = Math.min(C.tap.maxTapsPerSecond, bucket + (now - lastRefill) / 1000 * C.tap.maxTapsPerSecond);
+    lastRefill = now;
+    if (bucket < 1) return false;
+    bucket -= 1;
+    return true;
+  }
+
+  function doTap(xPct, yPct) {
+    var ev = E.newEvents();
+    var v = E.tap(s, ev);
+    lastHumanTap = performance.now();
+    G.bumpDrive();
+    UI.floatText(xPct, yPct, '+' + U.fmt(v));
+    handleEvents(ev);
+  }
+
+  machine.addEventListener('pointerdown', function (e) {
+    if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
+    if (e.target.closest('.rare-popup')) return;
+    e.preventDefault();
+    if (!allowTap()) return;
+    var box = machine.getBoundingClientRect();
+    doTap((e.clientX - box.left) / box.width * 100, (e.clientY - box.top) / box.height * 100 - 6);
+  });
+  machine.addEventListener('keydown', function (e) {
+    if (!e.isTrusted || e.repeat) return;
+    if (e.key !== ' ' && e.key !== 'Enter') return;
+    e.preventDefault();
+    if (!allowTap()) return;
+    var c = G.driveCenter();
+    doTap(c.x, c.y - 10);
+  });
+  machine.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+  // ---------- item events ----------
+  var popQueue = [], popBudget = C.machine.maxVisualItemsPerSecond, extraItems = 0, shelfDirty = false;
+
+  function handleEvents(ev) {
+    if (!ev.itemsMade) return;
+    shelfDirty = true;
+    ev.visualItems.forEach(function (it) { popQueue.push(it); });
+    extraItems += Math.max(0, ev.itemsMade - ev.visualItems.length);
+    ev.newItems.forEach(function (it) { UI.toast('New item for the shelf: ' + it.name + '!', 'new'); });
+  }
+
+  function drainPops(dt) {
+    popBudget = Math.min(C.machine.maxVisualItemsPerSecond, popBudget + dt * C.machine.maxVisualItemsPerSecond);
+    while (popQueue.length && popBudget >= 1) { UI.popItem(popQueue.shift()); popBudget -= 1; }
+    if (popQueue.length > 6) { extraItems += popQueue.length - 6; popQueue.length = 6; }
+  }
+
+  // ---------- rare popups ----------
+  var popup = null, nextPopupAt = performance.now() + U.rand(C.popup.minSeconds, C.popup.maxSeconds) * 1000;
+
+  function spawnPopup() {
+    var slot = document.getElementById('rareSlot');
+    var b = U.el('button', 'rare-popup');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Something shiny!  Tap to grab it.');
+    b.textContent = '✨';
+    var left = Math.random() < 0.5;
+    b.style.left = left ? '3%' : '';
+    b.style.right = left ? '' : '3%';
+    b.style.top = U.rand(12, 60).toFixed(0) + '%';
+    b.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted) return;               // only a real person can claim it
+      e.preventDefault();
+      claim(b);
+    });
+    b.addEventListener('keydown', function (e) {
+      if (!e.isTrusted || (e.key !== ' ' && e.key !== 'Enter')) return;
+      e.preventDefault(); claim(b);
+    });
+    slot.appendChild(b);
+    s.stats.popupsSeen += 1;
+    popup = { el: b, expires: performance.now() + C.popup.lifetimeSeconds * 1000 };
+  }
+
+  function claim(b) {
+    if (!popup || popup.el !== b) return;
+    var res = E.claimPopup(s);
+    b.classList.add('claimed');
+    setTimeout(function () { b.remove(); }, 400);
+    popup = null;
+    if (res.type === 'super') {
+      UI.toast((res.isNew ? 'SUPER RARE!  ' : 'Another one!  ') + res.item.name + ' goes on the shelf!', 'super');
+      UI.buildShelf(s);
+    } else {
+      UI.toast('Lucky Sprocket!  +' + C.currency.icon + ' ' + U.fmt(res.cogs), 'lucky');
+    }
+    UI.updateHeader(s);
+  }
+
+  function updatePopups(now) {
+    if (popup && now > popup.expires) {
+      var gone = popup.el; gone.classList.add('fade'); setTimeout(function () { gone.remove(); }, 500);
+      popup = null;
+    }
+    if (!popup && now >= nextPopupAt) {
+      var active = now - lastHumanTap < C.tap.activeWindowSeconds * 1000;
+      if (active && !document.hidden) {
+        spawnPopup();
+        nextPopupAt = now + U.rand(C.popup.minSeconds, C.popup.maxSeconds) * 1000;
+      } else {
+        nextPopupAt = now + 5000; // wait for a human
+      }
+    }
+  }
+
+  // ---------- main loop ----------
+  var last = performance.now(), slowTimer = 0, saveTimer = 0;
+  var lastItems = s.itemsMade, lastAngle = s.bigAngle, pending = 0, display = s.bigAngle;
+
+  function frame(now) {
+    var dt = (now - last) / 1000;
+    last = now;
+    if (dt > 5) {
+      // Tab was asleep.  Catch up quietly instead of dumping thousands of pops.
+      var off = E.offline(s, dt);
+      if (off && off.items) shelfDirty = true;
+    } else if (dt > 0) {
+      var ev = E.newEvents();
+      E.tick(s, dt, ev);
+      handleEvents(ev);
+    }
+
+    // Big gear display chases the logical angle, capped so it never blurs into nothing.
+    pending += (s.itemsMade - lastItems) * 360 + (s.bigAngle - lastAngle);
+    lastItems = s.itemsMade; lastAngle = s.bigAngle;
+    if (pending > 720) pending = 360 + (pending % 360);
+    var step = Math.min(pending, Math.max(pending * Math.min(1, dt * 14), 0), C.machine.maxVisualDegPerSec * Math.min(dt, 0.1));
+    pending -= step; display = (display + step) % 360;
+    G.update(display);
+
+    drainPops(Math.min(dt, 1));
+    if (extraItems >= 1 && Math.random() < dt * 2) {
+      var m = G.hatchMouth();
+      UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
+      extraItems = 0;
+    }
+    updatePopups(now);
+    UI.updateHeader(s);
+
+    slowTimer += dt;
+    if (slowTimer > 0.25) {
+      slowTimer = 0;
+      UI.updateShop(s); UI.updateCrew(s); UI.updateStats(s);
+      if (shelfDirty) { UI.buildShelf(s); shelfDirty = false; }
+    }
+    saveTimer += dt;
+    if (saveTimer > C.autosaveSeconds) { saveTimer = 0; GW.state.save(s); }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // ---------- saving ----------
+  document.addEventListener('visibilitychange', function () { if (document.hidden) GW.state.save(s); });
+  window.addEventListener('pagehide', function () { GW.state.save(s); });
+
+  // ---------- player reset (their own browser save only) ----------
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    if (!window.confirm('Reset YOUR Gnomeworks progress in this browser?')) return;
+    if (!window.confirm('Really?  Every gnome, cog, and sock will be gone.')) return;
+    GW.state.wipe();
+    GW.state.save = function () { return false; }; // stop the autosave from writing the old game back
+    window.location.reload();
+  });
+
+  // ---------- testing helpers: add ?debug=1 to the address ----------
+  if (/[?&]debug=1/.test(window.location.search)) {
+    var bar = U.el('div', 'debug-bar');
+    [['+1K', 1e3], ['+1M', 1e6], ['+1B', 1e9]].forEach(function (b) {
+      var btn = U.el('button', '', b[0]);
+      btn.addEventListener('click', function () { s.cogs += b[1]; s.cogsSeen += b[1]; });
+      bar.appendChild(btn);
+    });
+    var pop = U.el('button', '', 'Popup');
+    pop.addEventListener('click', function () { lastHumanTap = performance.now(); nextPopupAt = 0; });
+    bar.appendChild(pop);
+    var hour = U.el('button', '', '+1 hour');
+    hour.addEventListener('click', function () { E.offline(s, 3600); shelfDirty = true; });
+    bar.appendChild(hour);
+    bar.appendChild(U.el('span', '', 'DEBUG'));
+    document.body.appendChild(bar);
+  }
+})();

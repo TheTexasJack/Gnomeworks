@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Gnomeworks: a gnome-powered clicker from The Stoned Gnome.">
+  <title>Gnomeworks</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1 class="title">Gnomeworks</h1>
+      <div class="wallet" aria-live="off">
+        <span class="wallet-main"><span class="cog-icon" aria-hidden="true">&#9881;&#65039;</span><span id="cogs">0</span></span>
+        <span class="wallet-sub"><span id="cps">0</span> clicks/sec from gnomes</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel shelf-col" aria-label="Collection shelf">
+        <h2 class="panel-title">Collection Shelf</h2>
+        <div class="shelf" data-shelf></div>
+      </aside>
+
+      <section class="machine-col">
+        <div class="machine" id="machine" tabindex="0" role="button" aria-label="The machine.  Tap to turn the little gear.">
+          <svg id="gearSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
+          <div id="fx" aria-hidden="true"></div>
+          <div id="rareSlot"></div>
+        </div>
+        <div class="progress-row">
+          <span>Next item</span>
+          <div class="progress"><div id="nextBar"></div></div>
+          <span>Made: <b id="itemsMade">0</b></span>
+        </div>
+        <div class="crew" id="crew"></div>
+      </section>
+
+      <aside class="panel side-col">
+        <nav class="tabs" aria-label="Panels">
+          <button type="button" data-tab="shop" class="active">Shop</button>
+          <button type="button" data-tab="shelf" class="tab-shelf">Shelf</button>
+          <button type="button" data-tab="stats">Stats</button>
+          <button type="button" data-tab="info">Info</button>
+        </nav>
+        <div data-tabpanel="shop"><div id="shop"></div></div>
+        <div data-tabpanel="shelf" hidden><div class="shelf" data-shelf></div></div>
+        <div data-tabpanel="stats" hidden><div id="stats"></div></div>
+        <div data-tabpanel="info" hidden>
+          <div class="info">
+            <h3>How to play</h3>
+            <p>Tap the little gear.  The little gear turns the big gear, and every full turn of the big gear pops something out of the hatch.  Spend cogs on gnomes and upgrades so the machine runs without you.</p>
+            <p>Keep an eye on the sides of the machine.  Something shiny shows up now and then, and only a real tap can grab it.</p>
+            <p id="hatNote"></p>
+            <h3>Playing as a guest</h3>
+            <p>Your progress saves in this browser only.  Clearing your browser data or switching devices starts you fresh.  Accounts and a leaderboard are on the way.</p>
+            <h3>Start over</h3>
+            <button type="button" id="resetBtn" class="danger">Reset my progress</button>
+            <p class="fine">Gnomeworks <span data-version></span></p>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer">Gnomeworks <span data-version></span> &middot; made for The Stoned Gnome</footer>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/economy.js"></script>
+  <script src="js/gears.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
