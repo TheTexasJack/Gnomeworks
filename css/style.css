@@ -35,7 +35,7 @@ body {
 
 /* ---------- header ---------- */
 .topbar {
-  display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "title wallet buttons";
+  display: grid; grid-template-columns: auto 1fr; grid-template-areas: "title wallet";
   align-items: center; gap: 10px 16px; padding: 8px 16px; margin-bottom: 10px;
   background:
     var(--rivets),
@@ -56,9 +56,9 @@ body {
 .wallet-main { font-size: clamp(1.5rem, 4.2vw, 2.2rem); font-weight: bold; color: var(--brass-light); text-shadow: 0 0 10px rgba(255,200,80,.35); white-space: nowrap; }
 .cog-icon { margin-right: 6px; }
 .wallet-sub { display: block; font-size: .8rem; opacity: .8; }
-.top-buttons { grid-area: buttons; display: flex; gap: 8px; }
 @media (max-width: 720px) {
-  .topbar { grid-template-columns: 1fr auto; grid-template-areas: "title buttons" "wallet wallet"; padding: 8px 10px; }
+  .topbar { grid-template-columns: 1fr; grid-template-areas: "title" "wallet"; padding: 8px 10px; }
+  .title { justify-self: center; }
   .wallet { justify-self: stretch; }
 }
 
@@ -91,8 +91,14 @@ body {
 .btn.active::before, .btn.active::after { background: radial-gradient(circle at 35% 35%, #fffbe8, #a8741a 70%); }
 .btn.go { color: #0f2a0f; text-shadow: none; border-color: #c9f7c9; background: linear-gradient(180deg, #d8fbd8, #79c579 50%, #3f8a3f); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 3px 0 #23521f, 0 0 12px rgba(120,220,120,.35); }
 .btn.danger { color: #fff; border-color: #c0392b; background: linear-gradient(180deg, #9c2a1d, #6a160d); }
-.icon-btn { padding: 8px 16px; }
-.btn[aria-pressed="true"].icon-btn { filter: saturate(.4) brightness(.85); }
+/* small pause and sound buttons, tucked on the first shop line next to "Gnomes" */
+.side-col { position: relative; }
+.panel-tools { display: flex; justify-content: flex-end; gap: 6px; height: 0; position: relative; z-index: 2; }
+.mini-btn { padding: 3px 7px; border-radius: 7px; height: 28px; }
+.mini-btn svg { width: 16px; height: 16px; }
+.mini-btn::before, .mini-btn::after { display: none; }
+.panel-tools ~ [data-tabpanel] > div > :first-child { padding-right: 76px; min-height: 30px; margin-bottom: 6px; }
+.btn[aria-pressed="true"]#muteBtn { filter: saturate(.4) brightness(.85); }
 .ico { width: 1.15em; height: 1.15em; fill: currentColor; flex: none; }
 
 /* ---------- view toggle + shop floor ---------- */
@@ -291,7 +297,7 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 
 /* ---------- shop ---------- */
 .shop-head { margin: 12px 2px 6px; font-size: .95rem; color: var(--brass-light); text-shadow: 0 1px 2px #000, 0 0 6px rgba(0,0,0,.8); border-bottom: 1px solid rgba(255,224,138,.35); padding-bottom: 3px; }
-.shop-head:first-child { margin-top: 0; }
+.shop-head:first-child { margin-top: 0; min-height: 26px; display: flex; align-items: flex-end; }
 .shop-row {
   display: flex; width: 100%; gap: 8px; text-align: left; margin-bottom: 6px; padding: 8px 10px;
   font: inherit; color: var(--cream); cursor: pointer;

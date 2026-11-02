@@ -15,10 +15,6 @@
         <span class="wallet-main"><span class="cog-icon" aria-hidden="true">&#9881;&#65039;</span><span id="cogs">0</span></span>
         <span class="wallet-sub"><span id="cps">0</span> clicks/sec from gnomes</span>
       </div>
-      <div class="top-buttons">
-        <button type="button" id="muteBtn" class="btn icon-btn" aria-pressed="false" aria-label="Sound is on.  Turn sound off."></button>
-        <button type="button" id="pauseBtn" class="btn" aria-pressed="false"></button>
-      </div>
     </header>
 
     <main class="layout">
@@ -61,6 +57,10 @@
           <button type="button" data-tab="stats" class="btn">Stats</button>
           <button type="button" data-tab="info" class="btn">Info</button>
         </nav>
+        <div class="panel-tools">
+          <button type="button" id="muteBtn" class="btn mini-btn" aria-pressed="false" aria-label="Sound is on.  Turn sound off."></button>
+          <button type="button" id="pauseBtn" class="btn mini-btn" aria-pressed="false" aria-label="Pause"></button>
+        </div>
         <div data-tabpanel="shop"><div id="shop"></div></div>
         <div data-tabpanel="shelf" hidden><div class="shelf" data-shelf></div></div>
         <div data-tabpanel="stats" hidden><div id="stats"></div></div>

@@ -244,7 +244,9 @@ window.GW = window.GW || {};
   var pauseBtn = document.getElementById('pauseBtn');
   function applyPause() {
     document.body.classList.toggle('paused', !!s.paused);
-    pauseBtn.innerHTML = (s.paused ? U.ICONS.play : U.ICONS.pause) + '<span>' + (s.paused ? 'Resume' : 'Pause') + '</span>';
+    pauseBtn.innerHTML = s.paused ? U.ICONS.play : U.ICONS.pause;
+    pauseBtn.setAttribute('aria-label', s.paused ? 'Resume' : 'Pause');
+    pauseBtn.title = s.paused ? 'Resume (P)' : 'Pause (P)';
     pauseBtn.classList.toggle('go', !!s.paused);
     pauseBtn.setAttribute('aria-pressed', s.paused ? 'true' : 'false');
     document.getElementById('pauseOverlay').hidden = !s.paused;

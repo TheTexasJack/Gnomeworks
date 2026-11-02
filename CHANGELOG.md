@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.23 (2026-11-02)
+
+- The pause and sound buttons are now small icon buttons in the right-hand panel, just under the Shop, Stats, and Info tabs, on the same line as the "Gnomes" heading.  They stay put on every tab.  The banner now holds only the title and the cog counter.  On phones the buttons move down with the panel.
+- The pause button shows its label as a tooltip ("Pause (P)") and to screen readers.
+
 ## v0.2.0-draft.22 (2026-11-02)
 
 * The side panels, the header banner, and the gnome strip use Mara's painted wood planks (darkened for readable text) with brass corner rivets, in place of the old flat gradients.
