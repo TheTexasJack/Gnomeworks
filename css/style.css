@@ -42,7 +42,7 @@ body {
   background:
     var(--rivets),
     linear-gradient(90deg, rgba(10,5,1,.45), rgba(10,5,1,0) 22%, rgba(10,5,1,0) 80%, rgba(10,5,1,.35)),
-    url('../assets/bg/banner_wide.webp') center / cover no-repeat, #3a2412;
+    url('../assets/bg/banner_scenic.webp') center / cover no-repeat, #3a2412;
   border: 3px solid var(--brass); border-radius: var(--radius);
   box-shadow: inset 0 0 0 2px var(--brass-dark), 0 4px 10px rgba(0,0,0,.5);
 }

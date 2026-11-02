@@ -6,7 +6,7 @@ All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation
 
 | Folder | Contents | Size in game files | Made with |
 | --- | --- | --- | --- |
-| `assets/bg/` | `machine_wall` (1000x1000), `floor` (1600x900), `floor_tall` (900x1599), `planks` (page background and side panels), `planks_h` (planks turned sideways, gnome strip), `banner_wide` (1920x220, desktop header, gnomes and conveyor), `banner_scenic` (1920x220, spare: factory and sky), `banner_phone` (1200x400, phone header), `wall` (old plain wall, unused) | as listed | resize only |
+| `assets/bg/` | `machine_wall` (1000x1000), `floor` (1600x900), `floor_tall` (900x1599), `planks` (page background and side panels), `planks_h` (planks turned sideways, gnome strip), `banner_scenic` (1920x220, desktop header: factory, sky, blimp; the base for holiday versions), `banner_wide` (1920x220, spare: gnomes and conveyor), `banner_phone` (1200x400, phone header), `wall` (old plain wall, unused) | as listed | resize only |
 | `assets/gears/` | `gear_brass_01` to `08`, 512x512 | 512 | resize only |
 | `assets/crew/` | Station art: `<type>_static` / `<type>_action` pairs, `matry_closed/open/set3/set5`, `dummy_static/action`, `slash`, `weapon_*`, `help_wanted` | max 560 | `art.py pair`, `art.py sheet --keep-shape` |
 | `assets/icons/` | Gear-framed badges: `icon_tiny`, `icon_necro`, `icon_warrior`, `icon_cloner`, `icon_matryoshka` | 192 | `art.py cutout` then `art.py sheet` |

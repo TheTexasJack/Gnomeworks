@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.28 (2026-11-02)
+
+- The desktop banner is now the factory-and-sky scene: brighter, calmer, and roomy enough for holiday versions later (Santa in the sky, a dragon on the mountain).  The gnome-and-conveyor strip is kept as a spare.
+
 ## v0.2.0-draft.27 (2026-11-02)
 
 - Nathan's reworked banners.  Desktop shows the full gnome-and-conveyor strip, and the header keeps the strip's shape so no heads get cut off.  Phones get a new wide scene with the gnomes peeking out around the logo and the counter.  A factory-and-sky strip is saved as a spare.
