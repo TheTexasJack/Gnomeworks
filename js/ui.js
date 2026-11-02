@@ -287,7 +287,7 @@ GW.ui = (function () {
   }
 
   function stationSig(s) {
-    return Object.keys(F.stations).map(function (pid) {
+    return E.weapon(s).value + '#' + Object.keys(F.stations).map(function (pid) {
       return pid + ':' + (s.producers[pid] || 0) + ':' + F.stations[pid].parts.map(function (p) { return partImg(s, pid, p).img; }).join(',');
     }).join('|');
   }
@@ -352,19 +352,95 @@ GW.ui = (function () {
       var cfg = F.stations[pid], slot = slotEls[cfg.slot], n = s.producers[pid] || 0;
       used[cfg.slot] = true;
       slot.st.innerHTML = '';
+      delete anims[pid];
       if (!n) { helpWanted(slot); return; }
       slot.st.className = 'station';
+      var parts = [];
       cfg.parts.forEach(function (part) {
         var pi = partImg(s, pid, part);
-        var im = el('img'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
-        im.style.height = (pi.h * layout().scale) + 'cqh';
-        if (part.overlap) im.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
-        slot.st.appendChild(im);
+        var wrap = el('span', 'part');
+        wrap.style.height = (pi.h * layout().scale) + 'cqh';
+        if (part.overlap) wrap.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
+        var im = el('img', 'f-static'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
+        wrap.appendChild(im);
+        var act = actionFor(pi.img);
+        if (act) {
+          var ai = el('img', 'f-action'); ai.src = crewImg(act); ai.alt = ''; ai.draggable = false;
+          if (part.actionDx) ai.style.transform = 'translateX(' + part.actionDx + '%)';
+          wrap.appendChild(ai);
+        }
+        if (part.weapon) addWeapon(wrap, s);
+        if (part.anim === 'hit') {
+          var sl = el('img', 'f-slash'); sl.src = crewImg('slash'); sl.alt = ''; sl.draggable = false;
+          wrap.appendChild(sl);
+        }
+        slot.st.appendChild(wrap);
+        parts.push({ el: wrap, anim: part.anim || 'boing', hasAction: !!act });
       });
+      anims[pid] = { parts: parts, next: performance.now() + Math.random() * 800 };
       slot.plate.textContent = cfg.label + ' \u00D7' + fmt(n);
       slot.plate.classList.remove('locked');
     });
     slotEls.forEach(function (slot, i) { if (!used[i]) helpWanted(slot); });
+  }
+
+  function actionFor(img) {
+    if (/_static$/.test(img)) return img.replace(/_static$/, '_action');
+    return { matry_closed: 'matry_open' }[img] || null;
+  }
+
+  function addWeapon(wrap, s) {
+    var W = F.weapons, w = W.byValue[E.weapon(s).value];
+    if (!w) return;
+    var im = el('img', 'f-weapon'); im.src = crewImg(w.img); im.alt = ''; im.draggable = false;
+    // Width as a share of the warrior picture's width (picture is 486 x 560).
+    im.style.width = (w.len * 560 / 486 * 100) + '%';
+    im.style.setProperty('--grip', W.grip + '%');
+    im.style.setProperty('--fx', W.fist[0] + '%'); im.style.setProperty('--fy', W.fist[1] + '%');
+    im.style.setProperty('--fxa', W.fistAct[0] + '%'); im.style.setProperty('--fya', W.fistAct[1] + '%');
+    im.style.setProperty('--rot', W.rot + 'deg'); im.style.setProperty('--rota', W.rotAct + 'deg');
+    wrap.appendChild(im);
+  }
+
+  // ---------- squish and boing ----------
+  var anims = {};
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function animateFloor(now, s) {
+    if (reduceMotion.matches || s.view !== 'floor' || s.paused) return;
+    var r = E.rates(s), A = F.anim;
+    Object.keys(anims).forEach(function (pid) {
+      var a = anims[pid];
+      if (!a.parts.length || now < a.next) return;
+      var rate = pid === 'warrior' ? (s.producers.warrior || 0) * E.producerDef('warrior').swipesPerSec : (r[pid] || 0);
+      var period = Math.max(A.fastest, Math.min(A.slowest, A.slowest / (1 + Math.log10(1 + rate))));
+      a.next = now + period * 1000 * (0.85 + Math.random() * 0.3);
+      var d = Math.min(A.boing, period * 0.85) * 1000;
+      a.parts.forEach(function (p) { playPart(p, d); });
+    });
+  }
+
+  function playPart(p, d) {
+    var e = p.el;
+    if (p.anim === 'hit') {
+      setTimeout(function () {
+        e.classList.add('act');
+        e.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(7deg)' }, { transform: 'rotate(-4deg)' }, { transform: 'rotate(0)' }],
+          { duration: d * 0.9, easing: 'ease-out' });
+        setTimeout(function () { e.classList.remove('act'); }, d * 0.6);
+      }, d * 0.38);
+      return;
+    }
+    e.animate([
+      { transform: 'scale(1, 1)' },
+      { transform: 'scale(1.12, 0.86)', offset: 0.3 },
+      { transform: 'scale(0.92, 1.12)', offset: 0.45 },
+      { transform: 'scale(1.04, 0.97)', offset: 0.7 },
+      { transform: 'scale(1, 1)' }
+    ], { duration: d, easing: 'ease-in-out' });
+    if (p.hasAction || e.querySelector('.f-weapon')) {
+      setTimeout(function () { e.classList.add('act'); }, d * 0.36);
+      setTimeout(function () { e.classList.remove('act'); }, d * 1.05);
+    }
   }
 
   function helpWanted(slot) {
@@ -455,7 +531,7 @@ GW.ui = (function () {
   }
 
   return {
-    init: init, updateShop: updateShop, updateFloor: updateFloor, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
+    init: init, updateShop: updateShop, updateFloor: updateFloor, animateFloor: animateFloor, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
     buildShelf: buildShelf, flashItem: flashShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
   };
 })();

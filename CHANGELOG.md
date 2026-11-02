@@ -2,6 +2,16 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.13 (2026-11-01)
+
+Layer 2, step 2: squish and boing.
+
+* Every gnome on the Shop Floor squishes down, swaps to Mara's action frame, and boings back up.  Faster gnome types bounce faster (between every 2.2 and every 0.45 seconds).
+* The Necromancer's action frame is shifted so he stays put while the summoning cloud rises beside him.
+* Warriors carry their current weapon (dagger, sword, hammer, wand, staff, or gnome on a stick), raised in the wind-up and swung forward on the strike.  The training dummy wobbles and a slash flashes on every hit.
+* Matryoshka pops open on each bounce (the 3 and 5 doll sets just bounce).
+* Animations stop while paused, when the floor is not showing, and for players who turn on reduced motion.
+
 ## v0.2.0-draft.12 (2026-11-01)
 
 * New machine wall from Mara with the gearbox, gauges, pipes, and chute painted in.  The gears now sit on its mounts, and the hatch flap opens over its built-in opening.

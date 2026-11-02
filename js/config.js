@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.12';
+GW.VERSION = '0.2.0-draft.13';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -266,10 +266,24 @@ GW.CONFIG = {
     },
     stations: {
       tiny:       { label: 'Tiny', slot: 0, parts: [{ img: 'tiny_static', h: 17, upgrade: { two_hands: 'twohand_static' } }] },
-      tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16 }] },
-      warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17 }, { img: 'dummy_static', h: 12 }] },
+      tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16, actionDx: -21 }] },
+      warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17, weapon: true }, { img: 'dummy_static', h: 12, anim: 'hit' }] },
       cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17 }] },
       matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] }
+    },
+
+    // Squish and boing.  Faster gnome types bounce faster, within these limits (seconds per bounce).
+    anim: { slowest: 2.2, fastest: 0.45, boing: 0.55 },
+
+    // Warrior weapons, pinned to his fists.  len = length as a share of his height.
+    // fist / fistAct = [x %, y %] of the warrior picture.  rot = weapon angle in each pose.
+    weapons: {
+      grip: 80, fist: [76, 57], fistAct: [91, 52], rot: 115, rotAct: 188,
+      byValue: {
+        3: { img: 'weapon_dagger', len: 0.5 }, 4: { img: 'weapon_sword', len: 0.7 },
+        5: { img: 'weapon_hammer', len: 0.66 },  6: { img: 'weapon_wand', len: 0.58 },
+        7: { img: 'weapon_staff', len: 0.8 },   8: { img: 'weapon_stick', len: 0.8 }
+      }
     }
   },
 
