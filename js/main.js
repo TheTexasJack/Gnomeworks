@@ -15,7 +15,7 @@ window.GW = window.GW || {};
 
   if (loaded.note === 'newseason') UI.toast('A new season has begun!  Fresh gears, fresh gnomes.');
   if (loaded.note === 'nostorage') UI.toast('Your browser is blocking saves, so progress will not be kept.', 'warn');
-  if (loaded.note === 'loaded') {
+  if (loaded.note === 'loaded' && !s.paused) {
     var away = (Date.now() - s.savedAt) / 1000;
     var off = E.offline(s, away);
     if (off) {
@@ -38,6 +38,7 @@ window.GW = window.GW || {};
   }
 
   function doTap(xPct, yPct) {
+    if (s.paused) return;
     var ev = E.newEvents();
     var v = E.tap(s, ev);
     lastHumanTap = performance.now();
@@ -147,7 +148,11 @@ window.GW = window.GW || {};
   function frame(now) {
     var dt = (now - last) / 1000;
     last = now;
-    if (dt > 5) {
+    if (s.paused) {
+      // Frozen: push timers forward so nothing expires or spawns while paused.
+      if (popup) popup.expires += dt * 1000;
+      nextPopupAt += dt * 1000;
+    } else if (dt > 5) {
       // Tab was asleep.  Catch up quietly instead of dumping thousands of pops.
       var off = E.offline(s, dt);
       if (off && off.items) shelfDirty = true;
@@ -185,6 +190,27 @@ window.GW = window.GW || {};
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // ---------- pause ----------
+  var pauseBtn = document.getElementById('pauseBtn');
+  function applyPause() {
+    document.body.classList.toggle('paused', !!s.paused);
+    pauseBtn.textContent = s.paused ? '\u25B6 Resume' : '\u23F8 Pause';
+    pauseBtn.setAttribute('aria-pressed', s.paused ? 'true' : 'false');
+    document.getElementById('pauseOverlay').hidden = !s.paused;
+  }
+  function togglePause() {
+    s.paused = !s.paused;
+    applyPause();
+    GW.state.save(s);
+  }
+  pauseBtn.addEventListener('click', togglePause);
+  document.getElementById('resumeBtn').addEventListener('click', function (e) { e.stopPropagation(); togglePause(); });
+  document.getElementById('pauseOverlay').addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'p' || e.key === 'P') && !e.repeat && !e.ctrlKey && !e.metaKey && !e.altKey) togglePause();
+  });
+  applyPause();
 
   // ---------- saving ----------
   document.addEventListener('visibilitychange', function () { if (document.hidden) GW.state.save(s); });

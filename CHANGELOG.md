@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.1.2 (2026-11-01)
+
+* Pause button in the header (or press P).  Freezes gnomes, popups, the play clock, and tapping.
+* A paused game stays paused through reloads, and offline progress does not build up while paused.
+
 ## v0.1.1 (2026-11-01)
 
 * Game is live on GitHub Pages at https://thetexasjack.github.io/Gnomeworks/

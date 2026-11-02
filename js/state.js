@@ -11,6 +11,7 @@ GW.state = (function () {
       season: C.season,
       createdAt: Date.now(),
       savedAt: Date.now(),
+      paused: false,
       cogs: 0,
       cogsSeen: 0,          // lifetime cogs earned, drives unlocks
       bigAngle: 0,          // 0..360, logical position of the big gear

@@ -11,6 +11,7 @@
   <div id="app">
     <header class="topbar">
       <h1 class="title">Gnomeworks</h1>
+      <button type="button" id="pauseBtn" class="pause-btn" aria-pressed="false">&#9208; Pause</button>
       <div class="wallet" aria-live="off">
         <span class="wallet-main"><span class="cog-icon" aria-hidden="true">&#9881;&#65039;</span><span id="cogs">0</span></span>
         <span class="wallet-sub"><span id="cps">0</span> clicks/sec from gnomes</span>
@@ -28,6 +29,13 @@
           <svg id="gearSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
           <div id="fx" aria-hidden="true"></div>
           <div id="rareSlot"></div>
+          <div id="pauseOverlay" hidden>
+            <div class="pause-card">
+              <div class="pause-title">Paused</div>
+              <div class="pause-sub">The gnomes are on break.</div>
+              <button type="button" id="resumeBtn">&#9654; Resume</button>
+            </div>
+          </div>
         </div>
         <div class="progress-row">
           <span>Next item</span>
@@ -51,6 +59,7 @@
           <div class="info">
             <h3>How to play</h3>
             <p>Tap the little gear.  The little gear turns the big gear, and every full turn of the big gear pops something out of the hatch.  Spend cogs on gnomes and upgrades so the machine runs without you.</p>
+            <p>Need a break?  Hit Pause (or press P) and everything freezes: gnomes, popups, and the clock.  Paused games stay paused, even if you close the page, and no offline progress builds up while paused.</p>
             <p>Keep an eye on the sides of the machine.  Something shiny shows up now and then, and only a real tap can grab it.</p>
             <p id="hatNote"></p>
             <h3>Playing as a guest</h3>

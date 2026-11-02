@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.1.1';
+GW.VERSION = '0.1.2';
 
 GW.CONFIG = {
   // Bumping the season wipes every player's local save on their next visit.
