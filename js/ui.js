@@ -314,7 +314,11 @@ GW.ui = (function () {
       var im = el('img', 'crew-thumb'); im.alt = p.name;
       im.src = p.icon ? 'assets/icons/' + p.icon + '.webp' : crewImg(partImg(s, p.id, st.parts[0]).img);
       group.appendChild(im);
-      group.appendChild(el('span', 'crew-count', p.name + ' \u00D7' + fmt(n)));
+      group.title = p.name + ' \u00D7' + fmt(n);
+      var cnt = el('span', 'crew-count');
+      cnt.appendChild(el('span', 'crew-name', p.name + ' '));
+      cnt.appendChild(document.createTextNode('\u00D7' + fmt(n)));
+      group.appendChild(cnt);
       box.appendChild(group);
     });
     if (!box.children.length) box.appendChild(el('div', 'crew-empty', 'No gnomes yet.  Tap the little gear!'));
@@ -531,7 +535,7 @@ GW.ui = (function () {
   function updateHeader(s) {
     $('#cogs').textContent = fmt(s.cogs);
     $('#cps').textContent = fmt(E.rates(s).total);
-    $('#nextBar').style.width = (s.bigAngle / 360 * 100).toFixed(1) + '%';
+    $('#nextBar').style.setProperty('--p', (s.bigAngle / 360 * 100).toFixed(1) + '%');
     $('#itemsMade').textContent = fmt(s.itemsMade);
   }
 

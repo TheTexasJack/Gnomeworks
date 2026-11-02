@@ -274,7 +274,37 @@ body.tap-hint-done .tap-label { opacity: 0; }
 
 .progress-row { max-width: calc(100vh - 245px); min-width: min(100%, 420px); margin-left: auto !important; margin-right: auto !important; display: flex; align-items: center; gap: 10px; margin: 8px 2px; font-size: .9rem; }
 .progress { flex: 1; height: 14px; background: #1c1007; border: 2px solid var(--brass); border-radius: 9px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,.7), 0 0 0 1px var(--brass-dark); }
-#nextBar { height: 100%; width: 0; background: linear-gradient(180deg, #fff1b8, #e0b04a 45%, #a8741a); box-shadow: 0 0 8px rgba(255,200,80,.6); }
+#nextBar { height: 100%; width: var(--p, 0%); background: linear-gradient(180deg, #fff1b8, #e0b04a 45%, #a8741a); box-shadow: 0 0 8px rgba(255,200,80,.6); }
+
+/* ---------- side rails (wide screens; main.js turns on .rails) ---------- */
+.machine-col.rails {
+  display: grid; column-gap: 12px; align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) min(calc(100vh - 245px), 100%) minmax(0, 1fr);
+}
+.machine-col.rails > .view-toggle { grid-column: 2; grid-row: 1; max-width: none; width: 100%; }
+.machine-col.rails > .machine { grid-column: 2; grid-row: 2; max-width: none; min-width: 0; }
+.machine-col.rails > .progress-row {
+  grid-column: 1; grid-row: 2; justify-self: end; width: 100%; max-width: 120px; min-width: 0; margin: 0 !important;
+  flex-direction: column; justify-content: flex-start; gap: 8px; text-align: center; padding: 12px 6px;
+}
+.machine-col.rails > .crew {
+  grid-column: 3; grid-row: 2; justify-self: start; width: 100%; max-width: 120px; margin: 0;
+  flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: stretch; padding: 12px 6px; overflow-y: auto;
+}
+.rails .progress-row, .rails .crew {
+  border-radius: var(--radius);
+  background: var(--rivets), linear-gradient(180deg, rgba(20,10,3,.55), rgba(10,5,1,.75)), url('../assets/bg/planks.webp') center / 400px auto repeat;
+  border: 2px solid var(--brass); box-shadow: inset 0 0 0 1px var(--brass-dark), inset 0 0 18px rgba(0,0,0,.5);
+}
+.rails .progress-label, .rails .progress-made { color: var(--brass-light); font-weight: bold; line-height: 1.2; }
+.rails .progress-made b { display: block; font-size: 1.1rem; }
+.rails .progress { flex: 1; width: 22px; height: auto; display: flex; flex-direction: column; justify-content: flex-end; }
+.rails #nextBar { width: 100%; height: var(--p, 0%); background: linear-gradient(90deg, #fff1b8, #e0b04a 45%, #a8741a); }
+.rails .crew-group { flex-direction: column; align-items: center; padding: 6px 4px; border-radius: 12px; gap: 2px; }
+.rails .crew-thumb { width: 52px; height: 52px; }
+.rails .crew-name { display: none; }
+.rails .crew-count { margin: 0; font-weight: bold; }
+.rails .crew-empty { font-size: .85rem; text-align: center; }
 
 /* ---------- crew ---------- */
 .crew {

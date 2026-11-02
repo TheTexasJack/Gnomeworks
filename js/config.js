@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.30';
+GW.VERSION = '0.2.0-draft.31';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -24,6 +24,10 @@ GW.CONFIG = {
     maxVisualItemsPerSecond: 3, // extra items still count, they just skip the pop animation
     maxVisualDegPerSec: 540     // keeps the big gear readable at huge speeds
   },
+
+  // Wide screens: when the space beside the machine is at least this wide (px), the
+  // next-item gauge and the crew move into side rails next to it.
+  layout: { railMinWidth: 100 },
 
   tap: {
     maxTapsPerSecond: 20,       // human cap; extra taps are ignored

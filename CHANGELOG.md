@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.31 (2026-11-02)
+
+- Wide screens: when there is room beside the machine, the next-item gauge stands on its left as a tall brass tube that fills from the bottom, and the gnome crew stacks down its right side as badges with counts.  Both used to sit below the machine, out of view on most monitors.  Narrower screens and the Shop Floor view keep the old layout.  Tunable as `layout.railMinWidth`.
+
 ## v0.2.0-draft.30 (2026-11-02)
 
 - Wide screens use more of the screen.  The page grows to 1800 px wide, the Collection Shelf column grows to about 420 px (5 items per row), and the Shop column to about 440 px.  Screens 1400 px and narrower look the same as before.

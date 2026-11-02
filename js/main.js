@@ -207,6 +207,15 @@ window.GW = window.GW || {};
   }
   requestAnimationFrame(frame);
 
+  // ---------- side rails: on wide screens the progress gauge and crew stand beside the machine ----------
+  var machineCol = document.querySelector('.machine-col');
+  function fitRails() {
+    var colW = machineCol.clientWidth;
+    var machW = s.view === 'floor' ? colW : Math.min(colW, window.innerHeight - 245);
+    machineCol.classList.toggle('rails', (colW - machW) / 2 >= C.layout.railMinWidth);
+  }
+  window.addEventListener('resize', fitRails);
+
   // ---------- view toggle: The Machine / Shop Floor ----------
   function applyView() {
     var floor = s.view === 'floor';
@@ -215,6 +224,7 @@ window.GW = window.GW || {};
       var on = b.dataset.view === s.view;
       b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
+    fitRails();
     machine.setAttribute('aria-label', floor ? 'The Shop Floor.  Tap anywhere to crank the machine.' : 'The machine.  Tap to turn the little gear.');
   }
   U.$all('.view-toggle button').forEach(function (b) {
