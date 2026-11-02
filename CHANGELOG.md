@@ -2,6 +2,14 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.4 (2026-11-01)
+
+* 40 Tiny Monsters from Mara's critter art, in 11 families (Windup Hare, Goggle Owl, Magma Salamander, Shroomshell Tortoise, Volt Fox, Potion Mouse, Fluffbat, Pebble Golem, Bloom Sprout, Cogsnake, and the Slime family).
+* Each family is one row on the shelf: normal, glowing, goopy, evil.  Missing forms leave an empty slot.
+* New Legendary tier (gold).  Normal monsters are Rare and come out of the machine.  Glowing and Goopy are Super Rare, and Evil monsters plus the three treasures are Legendary.  Super Rare and Legendary only come from popups, claimed by a real tap.
+* Popups: 6% Legendary, 30% Super Rare, otherwise a Lucky Sprocket.  A Super Rare or better is guaranteed by the 6th popup, and a Legendary by the 25th.  Popups favor monsters you do not have yet.
+* Removed the placeholder Tiny Monster emoji item.
+
 ## v0.2.0-draft.3 (2026-11-01)
 
 * 79 junk items from Nathan's curated emoji list, in 8 groups: Laundry and Clothing, Bathroom Disasters, Office Nonsense, Workshop Junk, Kitchen Experiments, Toys and Curiosities, Questionable Inventions, and Absolutely Random.  Two per group are Uncommon.

@@ -53,7 +53,7 @@ GW.econ = (function () {
   }
 
   // ---- item drops ----
-  function machinePool() { return C.items.filter(function (i) { return i.tier !== 'superrare'; }); }
+  function machinePool() { return C.items.filter(function (i) { return C.tiers[i.tier].weight > 0; }); }
 
   function rollOne() {
     var tiers = Object.keys(C.tiers).filter(function (t) { return C.tiers[t].weight > 0; });
@@ -179,14 +179,18 @@ GW.econ = (function () {
   // ---- rare popups (claimed only by a real tap) ----
   function claimPopup(s) {
     s.stats.popupsClaimed += 1;
-    var force = s.stats.pity >= C.popup.pityCount - 1;
-    if (force || Math.random() < C.popup.superRareChance) {
+    s.stats.legPity = (s.stats.legPity || 0) + 1;
+    var roll = Math.random(), tier = null;
+    if (s.stats.legPity >= C.popup.legendaryPity || roll < C.popup.legendaryChance) tier = 'legendary';
+    else if (s.stats.pity >= C.popup.pityCount - 1 || roll < C.popup.legendaryChance + C.popup.superRareChance) tier = 'superrare';
+    if (tier) {
       s.stats.pity = 0;
-      var supers = C.items.filter(function (i) { return i.tier === 'superrare'; });
-      var item = U.pickWeighted(supers, function (i) { return s.items[i.id] ? 1 : 3; });
+      if (tier === 'legendary') s.stats.legPity = 0;
+      var pool = C.items.filter(function (i) { return i.tier === tier; });
+      var item = U.pickWeighted(pool, function (i) { return s.items[i.id] ? 1 : 3; }); // favors ones you lack
       var isNew = !s.items[item.id];
       s.items[item.id] = (s.items[item.id] || 0) + 1;
-      return { type: 'super', item: item, isNew: isNew };
+      return { type: tier, item: item, isNew: isNew };
     }
     s.stats.pity += 1;
     var amount = Math.max(rates(s).total * C.popup.luckySprocketSeconds, tapValue(s) * 50);

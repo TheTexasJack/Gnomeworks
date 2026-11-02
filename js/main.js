@@ -116,9 +116,10 @@ window.GW = window.GW || {};
     b.classList.add('claimed');
     setTimeout(function () { b.remove(); }, 400);
     popup = null;
-    if (res.type === 'super') {
-      UI.toast((res.isNew ? 'SUPER RARE!  ' : 'Another one!  ') + res.item.name + ' goes on the shelf!', 'super');
-      UI.buildShelf(s);
+    if (res.type === 'superrare' || res.type === 'legendary') {
+      var label = res.type === 'legendary' ? 'LEGENDARY!  ' : 'SUPER RARE!  ';
+      UI.toast((res.isNew ? label : 'Another one!  ') + res.item.name + ' goes on the shelf!', res.type === 'legendary' ? 'legendary' : 'super');
+      UI.buildShelf(s); UI.flashItem(res.item.id);
     } else {
       UI.toast('Lucky Sprocket!  +' + C.currency.icon + ' ' + U.fmt(res.cogs), 'lucky');
     }

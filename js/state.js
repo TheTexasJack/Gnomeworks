@@ -25,7 +25,7 @@ GW.state = (function () {
           // id -> count
       clicks: {},           // source -> lifetime clicks
       bonusCogs: { items: 0, sprockets: 0 },
-      stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, bestCps: 0, sprockets: 0 }
+      stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }
     };
     C.producers.forEach(function (p) { s.producers[p.id] = 0; });
     C.leveled.forEach(function (u) { s.leveled[u.id] = 0; });

@@ -113,11 +113,13 @@ GW.ui = (function () {
   // Built once, then updated in place so open groups stay open while items roll in.
   var shelves = [];          // one per [data-shelf] container
   var openGroups = {};       // group id -> true, shared by both shelves
-  var tierOrder = ['superrare', 'rare', 'uncommon', 'common'];
+  var tierOrder = ['legendary', 'superrare', 'rare', 'uncommon', 'common'];
 
   function groupItems(gid) {
-    return C.items.filter(function (i) { return i.group === gid; })
-      .sort(function (a, b) { return tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier); });
+    var list = C.items.filter(function (i) { return i.group === gid; });
+    var g = C.groups.filter(function (x) { return x.id === gid; })[0];
+    if (g && g.layout === 'families') return list; // config order
+    return list.sort(function (a, b) { return tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier); });
   }
 
   function makeShelf(box) {
@@ -134,8 +136,21 @@ GW.ui = (function () {
       var count = el('span', 'shelf-gcount');
       sum.appendChild(name); sum.appendChild(newPill); sum.appendChild(count);
       det.appendChild(sum);
-      var grid = el('div', 'shelf-grid');
-      items.forEach(function (item) {
+      var grid = el('div', 'shelf-grid' + (g.layout === 'families' ? ' families' : ''));
+      var slots = items;
+      if (g.layout === 'families') {
+        // One row per family, one column per variant.  Missing variants leave a gap.
+        slots = [];
+        var famOrder = [];
+        items.forEach(function (i) { if (famOrder.indexOf(i.family) < 0) famOrder.push(i.family); });
+        famOrder.forEach(function (f) {
+          g.variants.forEach(function (v) {
+            slots.push(items.filter(function (i) { return i.family === f && i.variant === v; })[0] || null);
+          });
+        });
+      }
+      slots.forEach(function (item) {
+        if (!item) { grid.appendChild(el('div', 'shelf-gap')); return; }
         var tile = el('div', 'shelf-tile unknown');
         tile.dataset.item = item.id;
         tile.style.borderColor = C.tiers[item.tier].color;
@@ -219,7 +234,7 @@ GW.ui = (function () {
     var r = E.rates(s), w = E.weapon(s);
     var totalClicks = 0;
     GW.state.SOURCES.forEach(function (k) { totalClicks += s.clicks[k] || 0; });
-    var supers = C.items.filter(function (i) { return i.tier === 'superrare'; })
+    var supers = C.items.filter(function (i) { return i.tier === 'superrare' || i.tier === 'legendary'; })
       .reduce(function (a, i) { return a + (s.items[i.id] || 0); }, 0);
     var rows = [
       ['Clicks by who clicked it', null],
@@ -232,7 +247,7 @@ GW.ui = (function () {
       ['The machine', null],
       ['Items made', s.itemsMade],
       ['Clicks per item', E.clicksPerItem(s)],
-      ['Super rares claimed', supers],
+      ['Super rares and legendaries', supers],
       ['Lucky Sprockets', s.stats.sprockets],
       ['Cogs', null],
       ['Lifetime cogs', s.cogsSeen],
@@ -351,6 +366,6 @@ GW.ui = (function () {
 
   return {
     init: init, updateShop: updateShop, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
-    buildShelf: buildShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
+    buildShelf: buildShelf, flashItem: flashShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
   };
 })();
