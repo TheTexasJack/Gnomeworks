@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.5 (2026-11-01)
+
+* Shorter, punnier monster names (9 letters or less).  Families: Tickhop, Hootgear, Magmander, Shroomtle, Zapfox, Potamice, Fluffbat, Pebblem, Bloomlet, Cogsnake, and the slimes.  Every glowing, goopy, and evil form has its own name, like Scowl, Gooconda, and Vampuff.
+
 ## v0.2.0-draft.4 (2026-11-01)
 
 * 40 Tiny Monsters from Mara's critter art, in 11 families (Windup Hare, Goggle Owl, Magma Salamander, Shroomshell Tortoise, Volt Fox, Potion Mouse, Fluffbat, Pebble Golem, Bloom Sprout, Cogsnake, and the Slime family).
