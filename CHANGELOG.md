@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.27 (2026-11-02)
+
+- Nathan's reworked banners.  Desktop shows the full gnome-and-conveyor strip, and the header keeps the strip's shape so no heads get cut off.  Phones get a new wide scene with the gnomes peeking out around the logo and the counter.  A factory-and-sky strip is saved as a spare.
+
 ## v0.2.0-draft.26 (2026-11-02)
 
 - On phones the logo and the cog counter are centered again, like before.  The phone banner is placeholder art until a version with the gnome off to one side arrives.
