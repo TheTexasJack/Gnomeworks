@@ -2,6 +2,15 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.1 (2026-11-01)
+
+First art pass, for review.
+
+* Mara's brass gears replace the code-drawn ones.  The gear train is now drive (8 teeth) to a compound gear (12 teeth with a 7 tooth pinion in front) to the big gear (15 teeth), so speeds follow the real tooth counts.
+* Mara's tavern wall is the machine backdrop, and her plank texture is the page background.
+* The machine is now square to fit the wall art.
+* Art is stored as compressed WebP in `assets/gears` and `assets/bg`.
+
 ## v0.1.2 (2026-11-01)
 
 * Pause button in the header (or press P).  Freezes gnomes, popups, the play clock, and tapping.

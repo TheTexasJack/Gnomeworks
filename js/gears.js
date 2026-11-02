@@ -4,10 +4,10 @@ window.GW = window.GW || {};
 
 GW.gears = (function () {
   var NS = 'http://www.w3.org/2000/svg';
-  var VIEW = { w: 600, h: 440 };
-  var MODULE = 6; // tooth size; pitch radius = MODULE * teeth / 2
-  var HATCH = { x: 478, y: 236, size: 84 };
-  var gears = [];  // { id, teeth, cx, cy, rotG, driver, theta }
+  var VIEW = { w: 1000, h: 1000 };
+  var HATCH = { x: 712, y: 752, size: 116 };
+  var PITCH = 0.355;   // pitch radius as a fraction of the gear image width (measured from Mara's art)
+  var gears = {};
 
   function rad(d) { return d * Math.PI / 180; }
   function deg(r) { return r * 180 / Math.PI; }
@@ -19,19 +19,6 @@ GW.gears = (function () {
     return e;
   }
 
-  function gearPath(teeth) {
-    var rp = MODULE * teeth / 2, ro = rp + MODULE, rr = rp - 1.25 * MODULE;
-    var step = 2 * Math.PI / teeth, d = '';
-    function pt(r, a) { return (r * Math.cos(a)).toFixed(2) + ' ' + (r * Math.sin(a)).toFixed(2); }
-    for (var k = 0; k < teeth; k++) {
-      var a = k * step;
-      d += (k === 0 ? 'M' : 'L') + pt(rr, a - 0.5 * step);
-      d += 'L' + pt(rr, a - 0.27 * step) + 'L' + pt(ro, a - 0.13 * step);
-      d += 'L' + pt(ro, a + 0.13 * step) + 'L' + pt(rr, a + 0.27 * step);
-    }
-    return d + 'Z';
-  }
-
   function defs(svg) {
     var d = mk('defs', {}, svg);
     var brass = mk('radialGradient', { id: 'gwBrass', cx: '35%', cy: '30%', r: '75%' }, d);
@@ -39,68 +26,47 @@ GW.gears = (function () {
     mk('stop', { offset: '35%', 'stop-color': '#e0b04a' }, brass);
     mk('stop', { offset: '80%', 'stop-color': '#a8741a' }, brass);
     mk('stop', { offset: '100%', 'stop-color': '#6e4a0e' }, brass);
-    var copper = mk('radialGradient', { id: 'gwCopper', cx: '35%', cy: '30%', r: '75%' }, d);
-    mk('stop', { offset: '0%', 'stop-color': '#ffd2b0' }, copper);
-    mk('stop', { offset: '45%', 'stop-color': '#c4703a' }, copper);
-    mk('stop', { offset: '100%', 'stop-color': '#6b3417' }, copper);
-    var plank = mk('linearGradient', { id: 'gwPlank', x1: '0', y1: '0', x2: '1', y2: '0' }, d);
-    mk('stop', { offset: '0%', 'stop-color': '#5c3a1e' }, plank);
-    mk('stop', { offset: '50%', 'stop-color': '#6d4526' }, plank);
-    mk('stop', { offset: '100%', 'stop-color': '#4e3018' }, plank);
     var shadow = mk('filter', { id: 'gwShadow', x: '-20%', y: '-20%', width: '140%', height: '140%' }, d);
-    mk('feDropShadow', { dx: '3', dy: '5', stdDeviation: '3', 'flood-color': '#000', 'flood-opacity': '0.55' }, shadow);
+    mk('feDropShadow', { dx: '6', dy: '10', stdDeviation: '6', 'flood-color': '#1a0c02', 'flood-opacity': '0.6' }, shadow);
+    var glow = mk('radialGradient', { id: 'gwGlow', cx: '50%', cy: '30%', r: '70%' }, d);
+    mk('stop', { offset: '0%', 'stop-color': '#ffd27a', 'stop-opacity': '0.0' }, glow);
+    mk('stop', { offset: '70%', 'stop-color': '#000', 'stop-opacity': '0.15' }, glow);
+    mk('stop', { offset: '100%', 'stop-color': '#000', 'stop-opacity': '0.55' }, glow);
   }
 
   function wall(svg) {
-    var g = mk('g', { 'class': 'wall' }, svg);
-    for (var x = 0; x < VIEW.w; x += 75) {
-      mk('rect', { x: x, y: 0, width: 75, height: VIEW.h, fill: 'url(#gwPlank)' }, g);
-      mk('rect', { x: x, y: 0, width: 2, height: VIEW.h, fill: '#2b1a0c', opacity: 0.8 }, g);
-      mk('circle', { cx: x + 12, cy: 18, r: 2.5, fill: '#2b1a0c' }, g);
-      mk('circle', { cx: x + 12, cy: 380, r: 2.5, fill: '#2b1a0c' }, g);
-    }
-    // floor ledge
-    mk('rect', { x: 0, y: 402, width: VIEW.w, height: 38, fill: '#3b2412' }, g);
-    mk('rect', { x: 0, y: 398, width: VIEW.w, height: 8, fill: '#b8862b' }, g);
+    mk('image', { href: 'assets/bg/wall.webp', x: 0, y: 0, width: VIEW.w, height: VIEW.h, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    mk('rect', { x: 0, y: 0, width: VIEW.w, height: VIEW.h, fill: '#2a1004', opacity: 0.22 }, svg);
+  }
+
+  function vignette(svg) {
+    mk('rect', { x: 0, y: 0, width: VIEW.w, height: VIEW.h, fill: 'url(#gwGlow)', 'pointer-events': 'none' }, svg);
   }
 
   function hatch(svg) {
     var g = mk('g', { 'class': 'hatch' }, svg), h = HATCH;
-    mk('rect', { x: h.x - 8, y: h.y - 8, width: h.size + 16, height: h.size + 16, rx: 6, fill: 'url(#gwBrass)', filter: 'url(#gwShadow)' }, g);
-    mk('rect', { x: h.x, y: h.y, width: h.size, height: h.size, rx: 3, fill: '#140b05' }, g);
-    var flap = mk('rect', { id: 'gwFlap', x: h.x, y: h.y, width: h.size, height: h.size * 0.55, fill: '#7a5320', stroke: '#3a250c', 'stroke-width': 2 }, g);
+    mk('rect', { x: h.x - 12, y: h.y - 12, width: h.size + 24, height: h.size + 24, rx: 8, fill: 'url(#gwBrass)', filter: 'url(#gwShadow)' }, g);
+    mk('rect', { x: h.x, y: h.y, width: h.size, height: h.size, rx: 4, fill: '#140b05' }, g);
+    var flap = mk('rect', { id: 'gwFlap', x: h.x, y: h.y, width: h.size, height: h.size * 0.55, fill: '#7a5320', stroke: '#3a250c', 'stroke-width': 3 }, g);
     flap.style.transformOrigin = (h.x + h.size / 2) + 'px ' + h.y + 'px';
-    [h.x + 6, h.x + h.size - 6].forEach(function (x) {
-      [h.y - 2, h.y + h.size + 2].forEach(function (y) { mk('circle', { cx: x, cy: y, r: 3, fill: '#5a3d0c' }, g); });
+    [h.x - 4, h.x + h.size + 4].forEach(function (x) {
+      [h.y - 4, h.y + h.size + 4].forEach(function (y) { mk('circle', { cx: x, cy: y, r: 5, fill: '#5a3d0c' }, g); });
     });
-    // little chute arrows like the sketch
-    for (var i = 0; i < 3; i++) {
-      var y = h.y - 70 + i * 16;
-      mk('path', { d: 'M' + (h.x + h.size / 2 - 10) + ' ' + y + ' l10 9 l10 -9', fill: 'none', stroke: '#e0b04a', 'stroke-width': 3, opacity: 0.35 + i * 0.2, 'stroke-linecap': 'round' }, g);
-    }
   }
 
+  // A gear drawn from one of Mara's images.  phase = angle of a tooth center in the image.
   function addGear(svg, opt) {
-    var outer = mk('g', { transform: 'translate(' + opt.cx + ' ' + opt.cy + ')', filter: 'url(#gwShadow)' }, svg);
+    var size = opt.rp / PITCH;
+    var outer = mk('g', { transform: 'translate(' + opt.cx.toFixed(1) + ' ' + opt.cy.toFixed(1) + ')', filter: 'url(#gwShadow)' }, svg);
     var bump = mk('g', { 'class': 'gear-bump' }, outer);
     var rot = mk('g', {}, bump);
-    var rp = MODULE * opt.teeth / 2;
-    mk('path', { d: gearPath(opt.teeth), fill: opt.fill || 'url(#gwBrass)', stroke: '#4a300a', 'stroke-width': 1.5, 'stroke-linejoin': 'round' }, rot);
-    mk('circle', { r: rp - 1.25 * MODULE - 6, fill: 'none', stroke: '#6e4a0e', 'stroke-width': 2, opacity: 0.6 }, rot);
-    var holes = opt.holes || 0;
-    for (var i = 0; i < holes; i++) {
-      var a = i * 2 * Math.PI / holes;
-      mk('circle', { cx: Math.cos(a) * rp * 0.55, cy: Math.sin(a) * rp * 0.55, r: rp * 0.13, fill: '#2a180a', stroke: '#6e4a0e', 'stroke-width': 1.5 }, rot);
-    }
-    mk('circle', { r: Math.max(6, rp * 0.16), fill: '#7a5320', stroke: '#3a250c', 'stroke-width': 2 }, rot);
-    mk('circle', { r: Math.max(3, rp * 0.06), fill: '#1c1006' }, rot);
-    var g = { id: opt.id, teeth: opt.teeth, cx: opt.cx, cy: opt.cy, rot: rot, bump: bump, driver: opt.driver || null, angle: 0 };
-    gears.push(g);
+    mk('image', { href: 'assets/gears/' + opt.img + '.webp', x: -size / 2, y: -size / 2, width: size, height: size }, rot);
+    var g = { id: opt.id, teeth: opt.teeth, phase: opt.phase, cx: opt.cx, cy: opt.cy, rp: opt.rp, rot: rot, bump: bump, angle: 0 };
+    gears[opt.id] = g;
     return g;
   }
 
-  function place(from, teeth, dirDeg) {
-    var dist = MODULE * (from.teeth + teeth) / 2;
+  function at(from, dist, dirDeg) {
     return { cx: from.cx + dist * Math.cos(rad(dirDeg)), cy: from.cy + dist * Math.sin(rad(dirDeg)) };
   }
 
@@ -110,42 +76,54 @@ GW.gears = (function () {
     return theta + Math.PI + (theta - driver.angle) * driver.teeth / gear.teeth - Math.PI / gear.teeth;
   }
 
+  // The gear train:  drive (8) -> compound (12, with a 7 tooth pinion in front) -> big (15).
+  var TRAIN = {
+    module1: 9,            // tooth size for drive <-> compound
+    bigRp: 170,
+    big:   { img: 'gear_brass_02', teeth: 15, phase: 5.71 },
+    comp:  { img: 'gear_brass_04', teeth: 12, phase: 15.22 },
+    pin:   { img: 'gear_brass_06', teeth: 7,  phase: 38.03 },
+    drive: { img: 'gear_brass_05', teeth: 8,  phase: 21.43 }
+  };
+  var RATIO = (TRAIN.big.teeth / TRAIN.pin.teeth) * (TRAIN.comp.teeth / TRAIN.drive.teeth);
   var drive;
 
   function build(svg) {
     svg.setAttribute('viewBox', '0 0 ' + VIEW.w + ' ' + VIEW.h);
-    defs(svg); wall(svg); hatch(svg);
-    // Positions are worked out from the big gear so everything fits the wall.
-    var bigPos = { cx: 300, cy: 200, teeth: 40 };
-    var idlerPos = place(bigPos, 20, 150); idlerPos.teeth = 20;
-    var drivePos = place(idlerPos, 10, 200);
-    var decorPos = place(bigPos, 16, -55); decorPos.teeth = 16;
-    var decor2Pos = place(decorPos, 12, 8);
+    defs(svg); wall(svg);
+    var T = TRAIN, m2 = T.bigRp / T.big.teeth;
+    var bigPos = { cx: 620, cy: 470 };
+    var pinRp = m2 * T.pin.teeth;
+    var compPos = at(bigPos, T.bigRp + pinRp, 160);
+    var compRp = T.module1 * T.comp.teeth, driveRp = T.module1 * T.drive.teeth;
+    var drivePos = at(compPos, compRp + driveRp, 195);
 
-    // Draw small to big so the big gear's shadow falls on the wall, not on the others.
-    var decor2 = addGear(svg, { id: 'decor2', teeth: 12, cx: decor2Pos.cx, cy: decor2Pos.cy, holes: 0, fill: 'url(#gwCopper)' });
-    var decor = addGear(svg, { id: 'decor', teeth: 16, cx: decorPos.cx, cy: decorPos.cy, holes: 4 });
-    var big = addGear(svg, { id: 'big', teeth: 40, cx: bigPos.cx, cy: bigPos.cy, holes: 7 });
-    var idler = addGear(svg, { id: 'idler', teeth: 20, cx: idlerPos.cx, cy: idlerPos.cy, holes: 5, fill: 'url(#gwCopper)' });
-    drive = addGear(svg, { id: 'drive', teeth: 10, cx: drivePos.cx, cy: drivePos.cy, holes: 0 });
-    idler.driver = drive; big.driver = idler; decor.driver = big; decor2.driver = decor;
+    hatch(svg);
+    var comp = addGear(svg, { id: 'comp', img: T.comp.img, teeth: T.comp.teeth, phase: T.comp.phase, rp: compRp, cx: compPos.cx, cy: compPos.cy });
+    addGear(svg, { id: 'big', img: T.big.img, teeth: T.big.teeth, phase: T.big.phase, rp: T.bigRp, cx: bigPos.cx, cy: bigPos.cy });
+    addGear(svg, { id: 'pin', img: T.pin.img, teeth: T.pin.teeth, phase: T.pin.phase, rp: pinRp, cx: compPos.cx, cy: compPos.cy });
+    drive = addGear(svg, { id: 'drive', img: T.drive.img, teeth: T.drive.teeth, phase: T.drive.phase, rp: driveRp, cx: drivePos.cx, cy: drivePos.cy });
+    comp.rot.parentNode.parentNode.removeAttribute('filter'); // sits behind, keep its shadow soft
+    vignette(svg);
 
-    // Tap hint ring around the little gear
-    var ring = mk('circle', { 'class': 'tap-ring', cx: drive.cx, cy: drive.cy, r: 44, fill: 'none', stroke: '#ffe08a', 'stroke-width': 3 }, svg);
+    var ring = mk('circle', { 'class': 'tap-ring', cx: drive.cx, cy: drive.cy, r: driveRp * 1.35, fill: 'none', stroke: '#ffe08a', 'stroke-width': 5 }, svg);
     ring.style.transformOrigin = drive.cx + 'px ' + drive.cy + 'px';
-    var label = mk('text', { 'class': 'tap-label', x: drive.cx, y: drive.cy + 72, 'text-anchor': 'middle' }, svg);
+    var label = mk('text', { 'class': 'tap-label', x: drive.cx, y: drive.cy + driveRp * 1.35 + 44, 'text-anchor': 'middle' }, svg);
     label.textContent = 'TAP!';
+  }
+
+  function setRot(g) {
+    g.rot.setAttribute('transform', 'rotate(' + (deg(g.angle) - g.phase).toFixed(2) + ')');
   }
 
   // bigDeg is the display angle of the big gear in degrees.
   function update(bigDeg) {
-    drive.angle = rad(bigDeg * 40 / 10);
-    var order = ['drive', 'idler', 'big', 'decor', 'decor2'];
-    order.forEach(function (id) {
-      var g = gears.filter(function (x) { return x.id === id; })[0];
-      if (g.driver) g.angle = meshAngle(g.driver, g);
-      g.rot.setAttribute('transform', 'rotate(' + deg(g.angle).toFixed(2) + ')');
-    });
+    var G = gears;
+    G.drive.angle = rad(bigDeg * RATIO);
+    G.comp.angle = meshAngle(G.drive, G.comp);
+    G.pin.angle = G.comp.angle;
+    G.big.angle = meshAngle(G.pin, G.big);
+    ['drive', 'comp', 'pin', 'big'].forEach(function (id) { setRot(G[id]); });
   }
 
   function restartAnim(node, cls) {

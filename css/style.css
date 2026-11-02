@@ -20,9 +20,11 @@ body {
   color: var(--cream);
   background-color: var(--oak-deep);
   background-image:
-    repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 140px),
-    repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 7px),
-    linear-gradient(180deg, #3a2412, #22150a);
+    radial-gradient(ellipse at 50% 0%, rgba(255,190,90,.18), transparent 60%),
+    linear-gradient(180deg, rgba(20,10,3,.72), rgba(10,5,1,.88)),
+    url('../assets/bg/planks.webp');
+  background-size: auto, auto, 768px auto;
+  background-attachment: fixed;
   min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
 }
@@ -92,7 +94,7 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 
 /* ---------- machine ---------- */
 .machine {
-  position: relative; width: 100%; aspect-ratio: 600 / 440;
+  position: relative; width: 100%; max-width: calc(100vh - 200px); min-width: min(100%, 420px); margin: 0 auto; aspect-ratio: 1 / 1;
   border: 4px solid var(--brass); border-radius: var(--radius); overflow: hidden;
   box-shadow: inset 0 0 0 2px var(--brass-dark), inset 0 0 40px rgba(0,0,0,.6), 0 6px 16px rgba(0,0,0,.6);
   cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation;
@@ -109,15 +111,16 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 
 .tap-ring { animation: ring 1.6s ease-out infinite; opacity: .8; }
 @keyframes ring { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
-.tap-label { font: bold 20px var(--font); fill: var(--brass-light); stroke: #2a1a0c; stroke-width: 4px; paint-order: stroke; letter-spacing: 2px; }
+.tap-label { font: bold 36px var(--font); fill: var(--brass-light); stroke: #2a1a0c; stroke-width: 7px; paint-order: stroke; letter-spacing: 2px; }
 
 #gwFlap.flap-open { animation: flap .45s ease-out; }
 @keyframes flap { 0% { transform: scaleY(1); } 25% { transform: scaleY(.08); } 70% { transform: scaleY(.08); } 100% { transform: scaleY(1); } }
 
 .float-text {
   position: absolute; transform: translate(-50%, -50%);
-  font-weight: bold; font-size: clamp(1rem, 2.6vw, 1.6rem); color: var(--brass-light);
-  text-shadow: 0 2px 0 #3a2208, 0 0 6px rgba(0,0,0,.8);
+  font-weight: bold; font-size: clamp(1.1rem, 2.8vw, 1.8rem); color: #fffaf0;
+  -webkit-text-stroke: 1px #2a1606;
+  text-shadow: 0 2px 0 #2a1606, 0 0 8px rgba(0,0,0,.95), 0 0 2px #000;
   animation: floatUp 1s ease-out forwards; white-space: nowrap;
 }
 .float-text.items { color: #b9f3b9; font-size: 1rem; }
@@ -150,7 +153,7 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 @keyframes claimed { to { transform: scale(2); opacity: 0; } }
 .rare-popup.fade { transition: opacity .5s; opacity: 0; }
 
-.progress-row { display: flex; align-items: center; gap: 10px; margin: 8px 2px; font-size: .9rem; }
+.progress-row { max-width: calc(100vh - 200px); min-width: min(100%, 420px); margin-left: auto !important; margin-right: auto !important; display: flex; align-items: center; gap: 10px; margin: 8px 2px; font-size: .9rem; }
 .progress { flex: 1; height: 12px; background: #2a1a0c; border: 2px solid var(--brass-dark); border-radius: 8px; overflow: hidden; }
 #nextBar { height: 100%; width: 0; background: linear-gradient(90deg, var(--brass-dark), var(--brass-light)); }
 
