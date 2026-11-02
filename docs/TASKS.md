@@ -47,6 +47,9 @@ Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest 
 Packing Line notes (Nathan, 2026-11-02, still open):
 - The player drags one item tile from the shelf into a box.  That one drag ships a big batch, since shipping one sock out of 13.7M means nothing.
 - Open question: a fixed batch per box (something like a million), or a "drop how many?" choice.  Leaning toward a fixed big number, since a gnome factory runs on nonsense, not logic.  To be tuned in play.
+- Percentage idea: each drag ships a percentage of that item, and box upgrades raise it (draft names: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%).  Pay per box, not per item, so shrinking batches don't shrink the reward.
+- Junk can ship down to zero, since it refills in seconds.  Rares (Tiny Monsters, Number Twos, Legendary Treasures) either stay off the line or always keep one.  Leaning junk-only.
+- **Before building any Packing Line mechanics: play with the math first.**  Model the batch sizes, refill rates, and payouts across early, mid, and late game, and settle the numbers with Nathan before writing game code.
 
 Open question in the proposal: should packed items come out of the shelf counts, or should shipping be free?
 
