@@ -2,6 +2,15 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.19 (2026-11-02)
+
+Documentation and tools.  No gameplay changes.
+
+* New `docs/` folder: environment and commands, architecture, art pipeline, recipes, current tasks, and the decision log, so the project can be picked up cold.
+* New `tools/art.py`: the art pipeline used so far (check, cutout, sheet, pair, fit, gear) as one script.
+* New `tools/smoke-test.js`: headless desktop and phone test with screenshots.
+* `assets/README.md` updated to the current art spec.
+
 ## v0.2.0-draft.18 (2026-11-02)
 
 * Gnome badges redrawn with red beards to match the Shop Floor gnomes.

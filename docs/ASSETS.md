@@ -1,0 +1,66 @@
+# Art and assets
+
+All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation).  Raw PNGs stay on Nathan's side; the repo holds compressed WebP made by `tools/art.py`.
+
+## Folder map
+
+| Folder | Contents | Size in game files | Made with |
+| --- | --- | --- | --- |
+| `assets/bg/` | `machine_wall` (1000x1000), `floor` (1600x900), `floor_tall` (900x1599), `planks` (page background), `wall` (old plain wall, unused) | as listed | resize only |
+| `assets/gears/` | `gear_brass_01` to `08`, 512x512 | 512 | resize only |
+| `assets/crew/` | Station art: `<type>_static` / `<type>_action` pairs, `matry_closed/open/set3/set5`, `dummy_static/action`, `slash`, `weapon_*`, `help_wanted` | max 560 | `art.py pair`, `art.py sheet --keep-shape` |
+| `assets/icons/` | Gear-framed badges: `icon_tiny`, `icon_necro`, `icon_warrior`, `icon_cloner`, `icon_matryoshka` | 192 | `art.py cutout` then `art.py sheet` |
+| `assets/hats/` | `hat_classic`, `hat_valentine`, `hat_clover`, `hat_easter`, `hat_witch`, `hat_santa` | max 256 | `art.py fit` style crop |
+| `assets/monsters/` | 43 Tiny Monsters: `<family>_<variant>` (normal, glowing, goopy, evil) | 256 | `art.py sheet` |
+| `assets/plops/` | Number Twos: `plop_normal/steam/prize/golden` | 256 | `art.py sheet` |
+| `assets/ui/` | `title` (lettered sign), `sign_blank` (pause screen) | 1200 wide | crop + resize |
+| `assets/emoji/` | Twemoji SVGs for junk items, named by codepoint (`1f9e6.svg` = socks) | vector | copied from Twemoji |
+
+Twemoji graphics are by jdecked/twemoji, licensed CC-BY 4.0.  The credit line is in the game's Info tab and must stay there.
+
+## Processing Mara's images
+
+```
+python3 tools/art.py check incoming/new.png        # always first
+```
+
+| Situation | Command |
+| --- | --- |
+| No transparency (solid black or white background) | `art.py cutout in.png --color black --out clear.png`, then continue with `clear.png` |
+| A sheet of separate pictures (badges, monsters, weapons) | `art.py sheet in.png --out assets/<folder> --names a b c ... --size 256` (pictures are taken top row first, left to right; pass `--row-height` if rows are uneven) |
+| A static/action pair (left half and right half) | `art.py pair in.png --names x_static x_action --out assets/crew` |
+| One picture | `art.py fit in.png --out assets/<folder>/<name>.webp --size 256` |
+| A new gear | `art.py gear in.png` prints tooth count and phase for `js/gears.js` |
+
+The `pair` command crops both frames with one shared box, so the character stays in the same spot when the game swaps frames.  If the generator drew the character in a different spot in each frame (the Necromancer), fix it with `actionDx` in the station config instead of re-cutting.
+
+## Placement numbers (all in `js/config.js`)
+
+| What | Config key | Meaning |
+| --- | --- | --- |
+| Gear axles and sizes | `TRAIN` and positions in `js/gears.js` | Measured from the mounts painted on `machine_wall` |
+| Hatch opening | `HATCH` in `js/gears.js` | Measured from the painted hatch |
+| Station slots | `floor.layouts.wide.slots` / `.tall.slots` | `[x %, feet line %]` per station, bottom row first |
+| Station parts | `floor.stations.<gnome>.parts` | Image, height (% of floor height), upgrade swaps, count stages, overlap, `actionDx` |
+| Weapons | `floor.weapons` | Grip point, fist position in each frame, angle in each frame, length per weapon |
+| Hats | `hats.spots.<image name>` | `[center x %, brim y %, width %]` on that picture |
+
+These were placed by eye from screenshots.  When art changes, re-check them with `node tools/smoke-test.js` and the screenshots in `tools/out/`.
+
+## Lessons learned about AI art (pass these to Mara)
+
+- **Proofread every letter** of any text in an image.  The GNOMEWORKS sign came out right; plenty do not.
+- **Check transparency on a dark background.**  Some outputs fake transparency with a painted checkerboard, and some come back on solid black.
+- **Give sheets real gaps.**  Pictures that touch (a fox's lightning bolt, a bat wing) merge into one blob for the slicer.  A clear grid with space between cells slices perfectly.
+- **Generate animation frames together**, side by side in one image, feet on the same line, facing the same way.  Frames made separately never match.
+- **Faint ghost watermarks** sometimes appear in corners.  `art.py` drops anything under alpha 30, which removes them.
+- **Hats need a "worn" view.**  Hats drawn from below show the inside of the brim and look like they float.  The current hats need that lip removed in GIMP (open task).
+- **Painted lighting rotates with the gear.**  Highlights baked into a gear image spin with it.  Nobody notices at speed.
+- **Style drift is real.**  The two mice (Goopamice, Hexamice) came out sketchier than the rest of the monster set.  Ask for the same style prompt every time.
+
+## Rights
+
+- Art: generated for Nathan and The Stoned Gnome through Nathan's ChatGPT account.
+- Junk item art: Twemoji, CC-BY 4.0, credited in the game.
+- Music (planned): Nathan's Steammetal Studios tracks made on Suno's Pro plan, which carries commercial rights for songs made while subscribed.  Songs made on Suno's free plan are personal use only and must not ship.
+- Sound effects: synthesized in code, no outside rights involved.

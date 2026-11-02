@@ -22,9 +22,8 @@ GW.state = (function () {
       leveled: {},
       oneTime: {},
       revealed: {},         // shop entries stay visible once unlocked
-      items: {}, 
+      items: {},            // item id -> count found
       seen: {},             // items the player has looked at on the shelf
-          // id -> count
       clicks: {},           // source -> lifetime clicks
       bonusCogs: { items: 0, sprockets: 0 },
       stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }

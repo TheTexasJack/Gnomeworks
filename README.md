@@ -2,7 +2,7 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.2.0-draft.18** (Layer 2 in progress: real art)
+Current version: **v0.2.0-draft.19** (Layer 2 in progress: real art)
 
 ## Play it
 
@@ -26,6 +26,10 @@ Plain HTML, CSS, and JavaScript.  No frameworks and no build tools, so it can be
 | `js/gears.js` | Draws the wall, the meshing gears, and the hatch |
 | `js/ui.js` | Shop, shelf, stats, gnome crew, effects |
 | `js/main.js` | Input, the game loop, popups, autosave |
+
+## Project docs
+
+Everything needed to pick the project up cold is in [docs/](docs/README.md): environment and commands, architecture, the art pipeline, recipes, current tasks, and the decision log.  The art pipeline and smoke test scripts are in [tools/](tools/).
 
 ## Tuning the game
 
