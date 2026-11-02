@@ -368,7 +368,7 @@ body.tap-hint-done .tap-label { opacity: 0; }
 .shelf-sum::before { content: '\25B8'; transition: transform .15s; display: inline-block; }
 details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .shelf-gname { flex: 1; min-width: 0; font-size: .9rem; }
-.shelf-gcount { font-size: .8rem; color: var(--cream); opacity: .85; white-space: nowrap; }
+.shelf-gcount { font-size: .8rem; color: #fffaf0; opacity: 1; white-space: nowrap; }
 .new-pill { font-size: .65rem; padding: 1px 6px; border-radius: 10px; background: #e63946; color: #fff; letter-spacing: .05em; }
 .shelf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; padding: 0 8px 8px; }
 .shelf-tile {
@@ -386,8 +386,8 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .shelf-tile.unknown .item-icon { color: var(--cream); }
 .tile-new { display: none; position: absolute; top: -7px; right: -5px; font-size: .55rem; font-weight: bold; padding: 1px 4px; border-radius: 6px; background: #e63946; color: #fff; }
 .shelf-tile.is-new .tile-new { display: block; }
-.tile-name { font-size: .68rem; line-height: 1.1; margin-top: 2px; }
-.tile-count { font-size: .72rem; color: var(--brass-light); }
+.tile-name { font-size: .7rem; line-height: 1.1; margin-top: 2px; color: #fffaf0; font-weight: bold; text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.9); }
+.tile-count { font-size: .72rem; color: #ffeaa8; font-weight: bold; text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.9); }
 .shelf-tile.flash { animation: flash .6s ease-out; }
 @keyframes flash { 0% { transform: scale(1.18); background: rgba(255,224,138,.5); } 100% { transform: scale(1); } }
 .shelf-foot { text-align: center; font-size: .8rem; opacity: .8; margin-top: 6px; }

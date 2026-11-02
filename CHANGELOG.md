@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.34 (2026-11-02)
+
+- Shelf labels are easier to read: item names are bright white and bold, counts are pale gold, both with a dark outline.  Group counts are brighter too.
+
 ## v0.2.0-draft.33 (2026-11-02)
 
 - The right panel (Shop, Stats, Info) is now a clipboard: Mara's brass clip, wood board, and grid paper, built so the paper repeats seamlessly however long the list gets.  Text on it is dark ink.  A T-square and a set square peek out from behind the top corners.
