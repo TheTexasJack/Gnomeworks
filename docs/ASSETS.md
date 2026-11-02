@@ -8,8 +8,8 @@ All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation
 | --- | --- | --- | --- |
 | `assets/bg/` | `machine_wall` (1000x1000), `floor` (1600x900), `floor_tall` (900x1599), `planks` (page background and side panels), `planks_h` (planks turned sideways, gnome strip), `banner_scenic` (1920x220, desktop header: factory, sky, blimp; the base for holiday versions), `banner_wide` (1920x220, spare: gnomes and conveyor), `banner_phone` (1200x400, phone header), `wall` (old plain wall, unused) | as listed | resize only |
 | `assets/gears/` | `gear_brass_01` to `08`, 512x512 | 512 | resize only |
-| `assets/crew/` | Station art: `<type>_static` / `<type>_action` pairs, `matry_closed/open/set3/set5`, `dummy_static/action`, `slash`, `weapon_*`, `help_wanted` | max 560 | `art.py pair`, `art.py sheet --keep-shape` |
-| `assets/icons/` | Gear-framed badges: `icon_tiny`, `icon_necro`, `icon_warrior`, `icon_cloner`, `icon_matryoshka` | 192 | `art.py cutout` then `art.py sheet` |
+| `assets/crew/` | Station art: `<type>_static` / `<type>_action` pairs, `matry_closed/open/set3/set5`, `dummy_static/action`, `slash`, `weapon_*`, `help_wanted`, `wizard_static/action`, `fx_swirl`, `fx_swirl_cogs`, `fx_swirl_debris` (swirls for the Wizard and Wild Magic) | max 560 | `art.py pair`, `art.py sheet --keep-shape` |
+| `assets/icons/` | Gear-framed badges: `icon_tiny`, `icon_necro`, `icon_warrior`, `icon_cloner`, `icon_matryoshka`, `icon_wizard` (temporary: his picture fit to a square, no gear frame yet) | 192 | `art.py cutout` then `art.py sheet` |
 | `assets/hats/` | `hat_classic`, `hat_valentine`, `hat_clover`, `hat_easter`, `hat_witch`, `hat_santa` | max 256 | `art.py fit` style crop |
 | `assets/monsters/` | 43 Tiny Monsters: `<family>_<variant>` (normal, glowing, goopy, evil) | 256 | `art.py sheet` |
 | `assets/plops/` | Number Twos: `plop_normal/steam/prize/golden` | 256 | `art.py sheet` |

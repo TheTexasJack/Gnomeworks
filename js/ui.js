@@ -374,6 +374,7 @@ GW.ui = (function () {
         var wrap = el('span', 'part');
         wrap.style.height = (pi.h * layout().scale) + 'cqh';
         if (part.z) wrap.style.zIndex = part.z;
+        if (part.anim === 'spin') wrap.classList.add('part-spin');
         if (part.overlap) wrap.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
         var im = el('img', 'f-static'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
         wrap.appendChild(im);
@@ -385,6 +386,10 @@ GW.ui = (function () {
         }
         addHat(wrap, pi.img, act, part.actionDx || 0);
         if (part.weapon) addWeapon(wrap, s);
+        if (part.fx) {
+          var fxi = el('img', 'f-swirl'); fxi.src = crewImg(part.fx); fxi.alt = ''; fxi.draggable = false;
+          wrap.insertBefore(fxi, wrap.firstChild);
+        }
         if (part.anim === 'hit') {
           var sl = el('img', 'f-slash'); sl.src = crewImg('slash'); sl.alt = ''; sl.draggable = false;
           wrap.appendChild(sl);
@@ -456,6 +461,17 @@ GW.ui = (function () {
         setTimeout(function () { e.classList.add('act'); }, d * 0.36);
         setTimeout(function () { e.classList.remove('act'); }, d * 1.6);
       }
+      return;
+    }
+    if (p.anim === 'spin') {
+      // Wizard: flips to the upside-down pose and spins in place, swirl flaring behind him.
+      var turns = d > 450 ? 1 : 2;
+      setTimeout(function () {
+        e.classList.add('act', 'spinning');
+        e.animate([{ transform: 'rotate(0deg) scale(1)' }, { transform: 'rotate(' + (180 * turns) + 'deg) scale(.92)' }, { transform: 'rotate(' + (360 * turns) + 'deg) scale(1)' }],
+          { duration: d * 1.1, easing: 'ease-in-out' });
+        setTimeout(function () { e.classList.remove('act', 'spinning'); }, d * 1.1);
+      }, d * 0.2);
       return;
     }
     if (p.anim === 'hit') {

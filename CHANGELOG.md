@@ -2,6 +2,12 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.35 (2026-11-02)
+
+- New gnome: the Gnome Wizard (Jarrett's idea).  "It is not the cog that turns, but you."  Unlocks at 1M cogs seen, costs 1.6M, clicks 1,400 a second.  On the Shop Floor he flips to his upside-down pose (with its own painted magic) and spins in place, faster the more you own.
+- Wizard upgrades: Dizzy Robes, Counter-Clockwise Casting, Tornado Beard, and Perpetual Pirouette (Wizards x2 each, at 5, 15, 30, and 50 Wizards).  Not the Cog, But You (at 25 Wizards): every Wizard makes all other gnomes 1% faster, up to +50%.
+- Wizard art and three swirl effects by Mara.  The swirls are saved for spinning items in the Wild Magic event.
+
 ## v0.2.0-draft.34 (2026-11-02)
 
 - Shelf labels are easier to read: item names are bright white and bold, counts are pale gold, both with a dark outline.  Group counts are brighter too.

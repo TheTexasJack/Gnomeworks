@@ -23,6 +23,19 @@ GW.econ = (function () {
     return producerDef('tiny').rate * m;
   }
 
+  // One-time upgrades with mult: { producer, x } stack on that gnome type.
+  function prodMult(s, pid) {
+    var m = 1;
+    C.oneTime.forEach(function (u) { if (u.mult && u.mult.producer === pid && s.oneTime[u.id]) m *= u.mult.x; });
+    return m;
+  }
+  // Wizard aura: boosts every gnome type except the Wizard himself.
+  function auraMult(s) {
+    var A = C.wizardAura;
+    if (!s.oneTime.wiz_not_cog) return 1;
+    return 1 + Math.min(A.cap, A.perWizard * (s.producers.wizard || 0));
+  }
+
   function weapon(s) {
     var best = { value: C.warrior.baseWeapon, name: C.warrior.baseWeaponName, stick: false };
     C.oneTime.forEach(function (u) {
@@ -33,7 +46,7 @@ GW.econ = (function () {
 
   // Clicks per second from every automatic source.
   function rates(s) {
-    var g = globalMult(s) * pokerMult(s);
+    var base = globalMult(s) * pokerMult(s), aura = auraMult(s), g = base * aura;
     var w = weapon(s);
     var swipes = s.producers.warrior * producerDef('warrior').swipesPerSec;
     var r = {
@@ -42,7 +55,7 @@ GW.econ = (function () {
       stick: w.stick ? swipes * 1 * g : 0
     };
     C.producers.forEach(function (p) {
-      if (p.rate && p.id !== 'tiny') r[p.id] = (s.producers[p.id] || 0) * p.rate * g;
+      if (p.rate && p.id !== 'tiny') r[p.id] = (s.producers[p.id] || 0) * p.rate * prodMult(s, p.id) * (p.id === 'wizard' ? base : g);
     });
     var total = 0;
     Object.keys(r).forEach(function (k) { total += r[k]; });

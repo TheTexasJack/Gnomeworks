@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.34';
+GW.VERSION = '0.2.0-draft.35';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -28,6 +28,9 @@ GW.CONFIG = {
   // Wide screens: when the space beside the machine is at least this wide (px), the
   // next-item gauge and the crew move into side rails next to it.
   layout: { railMinWidth: 100 },
+
+  // "Not the Cog, But You": each Wizard adds this much to every other gnome type, up to the cap.
+  wizardAura: { perWizard: 0.01, cap: 0.5 },
 
   tap: {
     maxTapsPerSecond: 20,       // human cap; extra taps are ignored
@@ -250,7 +253,9 @@ GW.CONFIG = {
     { id: 'cloner',  icon: 'icon_cloner', name: 'Gnome Cloner',  desc: 'Bubbling vat, questionable ethics, endless coworkers.',
       baseCost: 12000, growth: 1.15, rate: 40, unlock: { cogsSeen: 8000 } },
     { id: 'matryoshka', icon: 'icon_matryoshka', name: 'Matryoshka Gnome', desc: 'Open him up.  There is another gnome inside.  And another.',
-      baseCost: 140000, growth: 1.15, rate: 260, unlock: { cogsSeen: 90000 } }
+      baseCost: 140000, growth: 1.15, rate: 260, unlock: { cogsSeen: 90000 } },
+    { id: 'wizard', icon: 'icon_wizard', name: 'Gnome Wizard', desc: 'It is not the cog that turns, but you.',
+      baseCost: 1600000, growth: 1.15, rate: 1400, unlock: { cogsSeen: 1000000 } }
   ],
 
   // The Shop Floor: where each gnome type works.  slot = station number (0 to 11, bottom row first).
@@ -282,7 +287,8 @@ GW.CONFIG = {
       tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16, actionDx: -21 }] },
       warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17, weapon: true, z: 2 }, { img: 'dummy_static', h: 12, anim: 'hit' }] },
       cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17 }] },
-      matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] }
+      matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] },
+      wizard:     { label: 'Wizard', slot: 5, parts: [{ img: 'wizard_static', h: 17, anim: 'spin' }] }
     },
 
     // Squish and boing.  Faster gnome types bounce faster, within these limits (seconds per bounce).
@@ -322,6 +328,17 @@ GW.CONFIG = {
       cost: 25000,   unlock: { producer: 'tiny', count: 30 } },
     { id: 'inv_steam',  name: 'Steam Gauntlets',        desc: 'Wildly unsafe.  Tiny gnomes x2.',
       cost: 300000,  unlock: { producer: 'tiny', count: 50 } },
+    // Wizard line.  mult = { producer, x }: that gnome type's output is multiplied by x.
+    { id: 'wiz_robes',    name: 'Dizzy Robes',               desc: 'Robes cut for maximum twirl.  Wizards x2.',
+      cost: 20000000,     mult: { producer: 'wizard', x: 2 }, unlock: { producer: 'wizard', count: 5 } },
+    { id: 'wiz_ccw',      name: 'Counter-Clockwise Casting', desc: 'Spin the other way.  Nobody knows why it works.  Wizards x2.',
+      cost: 200000000,    mult: { producer: 'wizard', x: 2 }, unlock: { producer: 'wizard', count: 15 } },
+    { id: 'wiz_beard',    name: 'Tornado Beard',             desc: 'The beard spins too.  Wizards x2.',
+      cost: 2500000000,   mult: { producer: 'wizard', x: 2 }, unlock: { producer: 'wizard', count: 30 } },
+    { id: 'wiz_pirouette', name: 'Perpetual Pirouette',      desc: 'He has not stopped since Tuesday.  Wizards x2.',
+      cost: 30000000000,  mult: { producer: 'wizard', x: 2 }, unlock: { producer: 'wizard', count: 50 } },
+    { id: 'wiz_not_cog',  name: 'Not the Cog, But You',      desc: 'Every Wizard makes all other gnomes 1% faster (up to +50%).',
+      cost: 1000000000,   aura: true, unlock: { producer: 'wizard', count: 25 } },
     { id: 'rally',      name: 'Rally Cry',              desc: 'Each tap also adds 5% of your gnome clicks per second.',
       cost: 25000,   unlock: { cogsSeen: 10000 } },
     // Warrior weapons.  Each one replaces the last.

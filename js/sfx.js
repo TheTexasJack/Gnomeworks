@@ -188,6 +188,9 @@ GW.sfx = (function () {
       case 'cloner':
         tone({ f: vary(300), to: 700, glide: 0.08, dur: 0.14, vol: 0.09 * q });
         tone({ f: vary(420), to: 900, glide: 0.06, dur: 0.1, vol: 0.06 * q, at: 0.09 }); break;
+      case 'wizard':
+        noise({ f: 600, to: 2400, q: 3, dur: 0.32, vol: 0.09 * q });
+        tone({ f: vary(660), to: 990, glide: 0.25, dur: 0.3, vol: 0.05 * q, type: 'sine', at: 0.05 }); break;
       case 'matryoshka':
         noise({ f: 1400, q: 2, dur: 0.025, vol: 0.2 * q });
         tone({ f: vary(420), to: 220, dur: 0.1, vol: 0.12 * q }); break;
