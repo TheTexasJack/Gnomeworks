@@ -3,9 +3,12 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.1';
+GW.VERSION = '0.2.0-draft.2';
 
 GW.CONFIG = {
+  // Shop branding.  Leave logo null until the shop's new logo is final.
+  branding: { shopName: 'The Stoned Gnome', logo: null },
+
   // Bumping the season wipes every player's local save on their next visit.
   season: 1,
   saveKey: 'gnomeworks.save',

@@ -10,7 +10,7 @@
 <body>
   <div id="app">
     <header class="topbar">
-      <h1 class="title">Gnomeworks</h1>
+      <h1 class="title"><img src="assets/ui/title.webp" alt="Gnomeworks" width="1200" height="385"></h1>
       <button type="button" id="pauseBtn" class="pause-btn" aria-pressed="false">&#9208; Pause</button>
       <div class="wallet" aria-live="off">
         <span class="wallet-main"><span class="cog-icon" aria-hidden="true">&#9881;&#65039;</span><span id="cogs">0</span></span>
@@ -31,7 +31,7 @@
           <div id="rareSlot"></div>
           <div id="pauseOverlay" hidden>
             <div class="pause-card">
-              <div class="pause-title">Paused</div>
+              <div class="pause-sign"><span class="pause-title">Paused</span></div>
               <div class="pause-sub">The gnomes are on break.</div>
               <button type="button" id="resumeBtn">&#9654; Resume</button>
             </div>
@@ -72,7 +72,7 @@
       </aside>
     </main>
 
-    <footer class="footer">Gnomeworks <span data-version></span> &middot; made for The Stoned Gnome</footer>
+    <footer class="footer">Gnomeworks <span data-version></span><span id="madeFor"></span></footer>
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
 

@@ -2,6 +2,12 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.2 (2026-11-01)
+
+* Mara's Gnomeworks sign is now the title in the header.
+* The pause screen uses her blank sign with PAUSED lettered on it.
+* Shop name moved into `branding` in `js/config.js`, with a slot for the shop logo once the rebrand is final.
+
 ## v0.2.0-draft.1 (2026-11-01)
 
 First art pass, for review.

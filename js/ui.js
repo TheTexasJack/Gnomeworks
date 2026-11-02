@@ -265,6 +265,12 @@ GW.ui = (function () {
     onBuy = buyHandler;
     fx = $('#fx');
     $all('[data-version]').forEach(function (e) { e.textContent = 'v' + GW.VERSION; });
+    var b = C.branding || {}, made = $('#madeFor');
+    if (made && b.shopName) {
+      made.textContent = ' \u00B7 made for ';
+      if (b.logo) { var lg = el('img', 'shop-logo'); lg.src = b.logo; lg.alt = b.shopName; made.appendChild(lg); }
+      else made.appendChild(document.createTextNode(b.shopName));
+    }
     buildShop($('#shop'));
     buildShelf(s);
     initTabs();
