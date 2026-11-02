@@ -13,7 +13,7 @@ All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation
 | `assets/hats/` | `hat_classic`, `hat_valentine`, `hat_clover`, `hat_easter`, `hat_witch`, `hat_santa` | max 256 | `art.py fit` style crop |
 | `assets/monsters/` | 43 Tiny Monsters: `<family>_<variant>` (normal, glowing, goopy, evil) | 256 | `art.py sheet` |
 | `assets/plops/` | Number Twos: `plop_normal/steam/prize/golden` | 256 | `art.py sheet` |
-| `assets/ui/` | `title` (lettered sign), `sign_blank` (pause screen) | 1200 wide | crop + resize |
+| `assets/ui/` | `title` (lettered sign), `sign_blank` (pause screen), `clipboard` (844x1080, right panel; border-image slices 281 / 70 / 218, middle = 15 grid squares), `tsquare`, `triangle` and their `_tilt` versions (peek out behind the clipboard) | 1200 wide | crop + resize |
 | `assets/emoji/` | Twemoji SVGs for junk items, named by codepoint (`1f9e6.svg` = socks) | vector | copied from Twemoji |
 
 Twemoji graphics are by jdecked/twemoji, licensed CC-BY 4.0.  The credit line is in the game's Info tab and must stay there.

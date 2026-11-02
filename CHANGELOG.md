@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.33 (2026-11-02)
+
+- The right panel (Shop, Stats, Info) is now a clipboard: Mara's brass clip, wood board, and grid paper, built so the paper repeats seamlessly however long the list gets.  Text on it is dark ink.  A T-square and a set square peek out from behind the top corners.
+- Info: the sound note now points to the speaker button next to the tabs.
+
 ## v0.2.0-draft.32 (2026-11-02)
 
 - New junk item: Control Knobs, in Questionable Inventions.  Every junk group now has 10 items, and the collection totals 130.

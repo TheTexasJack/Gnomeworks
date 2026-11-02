@@ -426,3 +426,42 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 @media (prefers-reduced-motion: reduce) {
   .tap-ring, .crew-gnome, .rare-popup { animation: none !important; }
 }
+
+/* ---------- right panel as a clipboard (Mara's art, assets/ui/clipboard.webp, 844x1080) ----------
+   Border-image slices: top 281 (clip + paper header), sides 70 (wood rails), bottom 218 (nameplate).
+   The middle 581 rows are exactly 15 grid squares, so "round" repeats it down the page seamlessly.
+   --cb is the panel width divided by 844; main.js keeps it current. */
+.panel.side-col {
+  --cb: .52;
+  background:
+    url('../assets/ui/tsquare_tilt.webp') left -2% top -10px / 26% auto no-repeat,
+    url('../assets/ui/triangle_tilt.webp') right -3% top -6px / 22% auto no-repeat;
+  background-origin: border-box;
+  box-shadow: none; border-radius: 0;
+  border-style: solid; border-color: transparent;
+  border-width: calc(281px * var(--cb)) calc(70px * var(--cb)) calc(218px * var(--cb));
+  border-image: url('../assets/ui/clipboard.webp') 281 70 218 fill / 1 / 0 stretch round;
+  padding: 2px 8px 4px;
+  color: #3b2410;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.55));
+  scrollbar-width: thin; scrollbar-color: rgba(110,70,30,.6) transparent;
+}
+.side-col .shop-head { padding-left: 6px; }
+.side-col .shop-head, .side-col .stats-sec th, .side-col .info h3 {
+  color: #5a2f0c; text-shadow: none; border-bottom: 2px solid rgba(110,60,20,.55);
+}
+.side-col .shop-row {
+  color: #3b2410; background: rgba(255,248,228,.62);
+  border: 1.5px solid rgba(120,75,30,.55); box-shadow: 0 1px 2px rgba(80,40,10,.25);
+}
+.side-col .shop-row:hover:not(.cant):not(.done) { border-color: #8a5a1c; background: rgba(255,250,236,.85); }
+.side-col .shop-row.ready { border-color: #b07a1e; box-shadow: 0 0 0 1px rgba(200,140,40,.6), 0 0 10px rgba(230,170,60,.45); }
+.side-col .shop-cost { color: #7a4508; }
+.side-col .shop-row.cant .shop-cost { color: #a07a58; }
+.side-col .shop-desc, .side-col .shop-owned { opacity: 1; color: #5e4026; }
+.side-col .shop-meter { background: rgba(90,50,15,.2); }
+.side-col .stats-table td { border-bottom: 1px solid rgba(110,70,30,.2); }
+.side-col .stats-table td:last-child { color: #7a4508; }
+.side-col .info a { color: #8a3d08; }
+.side-col .info .fine { opacity: 1; color: #6e5338; }
+.side-col .shop-icon { filter: drop-shadow(0 2px 2px rgba(60,30,5,.4)); }
