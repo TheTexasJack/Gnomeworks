@@ -37,10 +37,12 @@ body {
 .topbar {
   display: grid; grid-template-columns: auto 1fr; grid-template-areas: "title wallet";
   align-items: center; gap: 10px 16px; padding: 8px 16px; margin-bottom: 10px;
+  min-height: clamp(120px, 13vw, 180px);
+  /* Mara's gnome industry banner: a soft shade on the left for the logo and the right for the counter */
   background:
     var(--rivets),
-    linear-gradient(180deg, rgba(255,200,110,.16), rgba(30,15,4,.35) 55%, rgba(15,7,2,.6)),
-    url('../assets/bg/planks_h.webp') center / 640px auto repeat;
+    linear-gradient(90deg, rgba(10,5,1,.45), rgba(10,5,1,0) 22%, rgba(10,5,1,0) 80%, rgba(10,5,1,.35)),
+    url('../assets/bg/banner_wide.webp') center 62% / cover no-repeat, #3a2412;
   border: 3px solid var(--brass); border-radius: var(--radius);
   box-shadow: inset 0 0 0 2px var(--brass-dark), 0 4px 10px rgba(0,0,0,.5);
 }
@@ -57,9 +59,11 @@ body {
 .cog-icon { margin-right: 6px; }
 .wallet-sub { display: block; font-size: .8rem; opacity: .8; }
 @media (max-width: 720px) {
-  .topbar { grid-template-columns: 1fr; grid-template-areas: "title" "wallet"; padding: 8px 10px; }
-  .title { justify-self: center; }
-  .wallet { justify-self: center; min-width: 0; padding: 3px 16px 4px; }
+  .topbar { grid-template-columns: 1fr; grid-template-areas: "title" "wallet"; padding: 8px 10px;
+    background: var(--rivets), linear-gradient(180deg, rgba(10,5,1,.15), rgba(10,5,1,0) 40%, rgba(10,5,1,.25)), url('../assets/bg/banner_phone.webp') 30% 45% / cover no-repeat, #3a2412; }
+  .title, .wallet { justify-self: end; }
+  .topbar { min-height: 160px; align-content: space-between; }
+  .wallet { min-width: 0; padding: 3px 16px 4px; }
   .wallet-main { font-size: 1.35rem; }
   .wallet-sub { font-size: .72rem; }
 }

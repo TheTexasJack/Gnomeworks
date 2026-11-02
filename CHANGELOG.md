@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.25 (2026-11-02)
+
+- New header banners by Mara: a gnome industry scene on desktop (gnomes boxing junk off the conveyor) and a gnome with a hand truck on phones.  The header is a bit taller to show them.  Soft shading at the edges keeps the logo and the cog counter readable.
+- On phones the logo and the cog counter sit on the right so the gnome stays in view.
+
 ## v0.2.0-draft.24 (2026-11-02)
 
 - The cog counter sits at the right end of the banner on desktop, leaving room for a banner picture.  On phones it is a compact centered plate instead of a full-width bar.
