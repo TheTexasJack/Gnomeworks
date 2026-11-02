@@ -2,7 +2,7 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.2.0-draft.5** (Layer 2 in progress: real art)
+Current version: **v0.2.0-draft.6** (Layer 2 in progress: real art)
 
 ## Play it
 
@@ -40,7 +40,8 @@ Open `js/config.js`, change a number, reload.  Everything the game uses is in th
 
 * Only a real tap or key press counts.  Scripted clicks are ignored.
 * Taps are capped at 20 per second.
-* Rare popups only appear when a person has tapped in the last 30 seconds, and only a real tap can claim them.  No gnome or upgrade can ever grab one.
+* Shiny popups appear every 45 to 120 seconds whether or not you are tapping, and only a real tap can claim them.  No gnome or upgrade can ever grab one.
+* Legendaries only come from "hot" (gold) shinies, which means you tapped the gear in the last 30 seconds.
 
 ## Art
 

@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.5';
+GW.VERSION = '0.2.0-draft.6';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -27,18 +27,18 @@ GW.CONFIG = {
 
   tap: {
     maxTapsPerSecond: 20,       // human cap; extra taps are ignored
-    activeWindowSeconds: 30     // rare popups only appear if a human tapped this recently
+    activeWindowSeconds: 30     // tapping the gear this recently makes popups "hot" (Legendary possible)
   },
 
   // Rare popups on the side of the machine.  Only a real tap can claim them.
   popup: {
-    minSeconds: 75,
-    maxSeconds: 200,
-    lifetimeSeconds: 12,
-    legendaryChance: 0.06,      // chance a claimed popup is a Legendary
+    minSeconds: 45,
+    maxSeconds: 120,
+    lifetimeSeconds: 20,
+    legendaryChance: 0.06,      // chance a claimed HOT popup is a Legendary (only if you have been tapping)
     superRareChance: 0.3,       // chance it is a Super Rare (otherwise a Lucky Sprocket)
     pityCount: 6,               // guarantees a Super Rare or better after this many Sprockets
-    legendaryPity: 25,          // guarantees a Legendary after this many popups without one
+    legendaryPity: 25,          // guarantees a Legendary on a hot popup after this many popups without one
     luckySprocketSeconds: 60    // Lucky Sprocket pays this many seconds of production (min 50 taps worth)
   },
 

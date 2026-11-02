@@ -26,7 +26,7 @@ window.GW = window.GW || {};
 
   // ---------- tapping ----------
   var machine = document.getElementById('machine');
-  var bucket = C.tap.maxTapsPerSecond, lastRefill = performance.now(), lastHumanTap = 0;
+  var bucket = C.tap.maxTapsPerSecond, lastRefill = performance.now(), lastHumanTap = -Infinity;
 
   function allowTap() {
     var now = performance.now();
@@ -108,11 +108,13 @@ window.GW = window.GW || {};
     slot.appendChild(b);
     s.stats.popupsSeen += 1;
     popup = { el: b, expires: performance.now() + C.popup.lifetimeSeconds * 1000 };
+    var flash = document.getElementById('edgeFlash');
+    flash.classList.remove('on'); void flash.offsetWidth; flash.classList.add('on');
   }
 
   function claim(b) {
     if (!popup || popup.el !== b) return;
-    var res = E.claimPopup(s);
+    var res = E.claimPopup(s, isHot(performance.now()));
     b.classList.add('claimed');
     setTimeout(function () { b.remove(); }, 400);
     popup = null;
@@ -132,15 +134,17 @@ window.GW = window.GW || {};
       popup = null;
     }
     if (!popup && now >= nextPopupAt) {
-      var active = now - lastHumanTap < C.tap.activeWindowSeconds * 1000;
-      if (active && !document.hidden) {
+      if (!document.hidden) {
         spawnPopup();
         nextPopupAt = now + U.rand(C.popup.minSeconds, C.popup.maxSeconds) * 1000;
       } else {
-        nextPopupAt = now + 5000; // wait for a human
+        nextPopupAt = now + 5000;
       }
     }
+    if (popup) popup.el.classList.toggle('hot', isHot(now));
   }
+
+  function isHot(now) { return now - lastHumanTap < C.tap.activeWindowSeconds * 1000; }
 
   // ---------- main loop ----------
   var last = performance.now(), slowTimer = 0, saveTimer = 0;

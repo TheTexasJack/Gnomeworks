@@ -150,9 +150,18 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
   position: absolute; width: 58px; height: 58px; border-radius: 50%;
   border: 3px solid var(--brass-light); background: radial-gradient(circle, #fff6c9, #c77dff 70%);
   font-size: 30px; cursor: pointer; animation: shimmer 1s ease-in-out infinite alternate;
-  box-shadow: 0 0 18px 6px rgba(199,125,255,.7);
+  box-shadow: 0 0 0 3px #2a1206, 0 0 18px 6px rgba(199,125,255,.8);
 }
 @keyframes shimmer { from { transform: scale(.92) rotate(-8deg); } to { transform: scale(1.08) rotate(8deg); } }
+.rare-popup { animation: popIn .5s cubic-bezier(.3,1.6,.5,1), shimmer 1s ease-in-out .5s infinite alternate; }
+@keyframes popIn { from { transform: scale(0) rotate(-90deg); } to { transform: scale(1) rotate(0); } }
+.rare-popup.hot {
+  background: radial-gradient(circle, #fffbe0, #ffb703 70%); border-color: #fff3b0;
+  box-shadow: 0 0 0 3px #2a1206, 0 0 22px 10px rgba(255,183,3,.9);
+}
+#edgeFlash { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: 0; box-shadow: inset 0 0 60px 18px rgba(255,215,90,.9); }
+#edgeFlash.on { animation: edge 1.2s ease-out; }
+@keyframes edge { 0% { opacity: 0; } 15% { opacity: 1; } 100% { opacity: 0; } }
 .rare-popup.claimed { animation: claimed .4s ease-out forwards; }
 @keyframes claimed { to { transform: scale(2); opacity: 0; } }
 .rare-popup.fade { transition: opacity .5s; opacity: 0; }

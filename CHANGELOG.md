@@ -2,6 +2,12 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.6 (2026-11-01)
+
+* Shinies now appear every 45 to 120 seconds whether or not you are tapping, and stay for 20 seconds.
+* A shiny turns gold ("hot") while you have tapped the gear in the last 30 seconds.  Only hot shinies can be Legendary, and the Legendary guarantee waits for a hot one.
+* Shinies pop in with a bounce, and the machine edges flash gold when one appears.
+
 ## v0.2.0-draft.5 (2026-11-01)
 
 * Shorter, punnier monster names (9 letters or less).  Families: Tickhop, Hootgear, Magmander, Shroomtle, Zapfox, Potamice, Fluffbat, Pebblem, Bloomlet, Cogsnake, and the slimes.  Every glowing, goopy, and evil form has its own name, like Scowl, Gooconda, and Vampuff.

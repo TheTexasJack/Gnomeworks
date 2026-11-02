@@ -177,11 +177,12 @@ GW.econ = (function () {
   }
 
   // ---- rare popups (claimed only by a real tap) ----
-  function claimPopup(s) {
+  // hot = the player tapped the gear recently.  Only hot popups can be Legendary.
+  function claimPopup(s, hot) {
     s.stats.popupsClaimed += 1;
     s.stats.legPity = (s.stats.legPity || 0) + 1;
     var roll = Math.random(), tier = null;
-    if (s.stats.legPity >= C.popup.legendaryPity || roll < C.popup.legendaryChance) tier = 'legendary';
+    if (hot && (s.stats.legPity >= C.popup.legendaryPity || roll < C.popup.legendaryChance)) tier = 'legendary';
     else if (s.stats.pity >= C.popup.pityCount - 1 || roll < C.popup.legendaryChance + C.popup.superRareChance) tier = 'superrare';
     if (tier) {
       s.stats.pity = 0;
