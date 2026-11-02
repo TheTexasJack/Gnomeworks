@@ -2,6 +2,13 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.3 (2026-11-01)
+
+* 79 junk items from Nathan's curated emoji list, in 8 groups: Laundry and Clothing, Bathroom Disasters, Office Nonsense, Workshop Junk, Kitchen Experiments, Toys and Curiosities, Questionable Inventions, and Absolutely Random.  Two per group are Uncommon.
+* Junk uses bundled Twemoji art (CC-BY 4.0, credited in the Info tab), so every device sees the same pictures.  If a picture fails to load, the device emoji shows instead.
+* The shelf is grouped now.  Each group folds open or shut and shows found/total, completed groups glow, and new finds get a NEW badge until you look at them.
+* Removed the old placeholder items (chips, shirt, trading card).  Testers who already found them keep the count in their save, but they no longer show on the shelf.
+
 ## v0.2.0-draft.2 (2026-11-01)
 
 * Mara's Gnomeworks sign is now the title in the header.

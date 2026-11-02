@@ -40,12 +40,21 @@ GW.ui = (function () {
   }
 
   // ---------- items ----------
+  function emojiFile(e) {
+    var cps = Array.from(e).map(function (c) { return c.codePointAt(0).toString(16); });
+    if (cps.indexOf('200d') < 0) cps = cps.filter(function (c) { return c !== 'fe0f'; });
+    return 'assets/emoji/' + cps.join('-') + '.svg';
+  }
+
   function itemIcon(item, big) {
     var wrap = el('span', 'item-icon' + (big ? ' big' : '') + (item.tint ? ' tint-' + item.tint : ''));
-    if (item.img) {
-      var img = el('img'); img.src = item.img; img.alt = item.name; wrap.appendChild(img);
+    var src = item.img || (item.emoji ? emojiFile(item.emoji) : null);
+    if (src) {
+      var img = el('img'); img.src = src; img.alt = item.name; img.draggable = false;
+      img.onerror = function () { wrap.textContent = item.emoji || '?'; }; // fall back to the device emoji
+      wrap.appendChild(img);
     } else {
-      wrap.textContent = item.emoji;
+      wrap.textContent = item.emoji || '?';
     }
     return wrap;
   }
@@ -101,39 +110,100 @@ GW.ui = (function () {
   }
 
   // ---------- shelf ----------
-  function buildShelf(s) {
-    $all('[data-shelf]').forEach(function (box) {
-      box.innerHTML = '';
-      ['common', 'uncommon', 'rare', 'superrare'].forEach(function (tier) {
-        var items = C.items.filter(function (i) { return i.tier === tier; });
-        if (!items.length) return;
-        var group = el('div', 'shelf-group tier-' + tier);
-        var head = el('div', 'shelf-tier', C.tiers[tier].label);
-        head.style.color = C.tiers[tier].color;
-        group.appendChild(head);
-        var grid = el('div', 'shelf-grid');
-        items.forEach(function (item) {
-          var n = s.items[item.id] || 0;
-          var tile = el('div', 'shelf-tile' + (n ? '' : ' unknown'));
-          tile.dataset.item = item.id;
-          tile.style.borderColor = C.tiers[tier].color;
-          if (n) {
-            tile.appendChild(itemIcon(item));
-            tile.appendChild(el('div', 'tile-name', item.name));
-            tile.appendChild(el('div', 'tile-count', '×' + fmt(n)));
-          } else {
-            tile.appendChild(el('span', 'item-icon', '?'));
-            tile.appendChild(el('div', 'tile-name', '???'));
-          }
-          grid.appendChild(tile);
-        });
-        group.appendChild(grid);
-        box.appendChild(group);
+  // Built once, then updated in place so open groups stay open while items roll in.
+  var shelves = [];          // one per [data-shelf] container
+  var openGroups = {};       // group id -> true, shared by both shelves
+  var tierOrder = ['superrare', 'rare', 'uncommon', 'common'];
+
+  function groupItems(gid) {
+    return C.items.filter(function (i) { return i.group === gid; })
+      .sort(function (a, b) { return tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier); });
+  }
+
+  function makeShelf(box) {
+    box.innerHTML = '';
+    var sh = { box: box, groups: {}, tiles: {}, foot: null };
+    C.groups.forEach(function (g) {
+      var items = groupItems(g.id);
+      if (!items.length) return;
+      var det = el('details', 'shelf-group');
+      det.dataset.group = g.id;
+      var sum = el('summary', 'shelf-sum');
+      var name = el('span', 'shelf-gname', g.name);
+      var newPill = el('span', 'new-pill', 'NEW');
+      var count = el('span', 'shelf-gcount');
+      sum.appendChild(name); sum.appendChild(newPill); sum.appendChild(count);
+      det.appendChild(sum);
+      var grid = el('div', 'shelf-grid');
+      items.forEach(function (item) {
+        var tile = el('div', 'shelf-tile unknown');
+        tile.dataset.item = item.id;
+        tile.style.borderColor = C.tiers[item.tier].color;
+        tile.title = '???';
+        var icon = el('span', 'item-icon', '?');
+        var nm = el('div', 'tile-name', '???');
+        var ct = el('div', 'tile-count');
+        var badge = el('span', 'tile-new', 'NEW');
+        tile.appendChild(badge); tile.appendChild(icon); tile.appendChild(nm); tile.appendChild(ct);
+        grid.appendChild(tile);
+        sh.tiles[item.id] = { tile: tile, icon: icon, name: nm, count: ct, known: false, item: item };
       });
-      var found = C.items.filter(function (i) { return s.items[i.id]; }).length;
-      var foot = el('div', 'shelf-foot', 'Found ' + found + ' of ' + C.items.length);
-      box.appendChild(foot);
+      det.appendChild(grid);
+      det.addEventListener('toggle', function () {
+        openGroups[g.id] = det.open;
+        shelves.forEach(function (o) { var d = o.groups[g.id]; if (d && d.det !== det && d.det.open !== det.open) d.det.open = det.open; });
+        if (det.open) setTimeout(function () { markSeen(g.id); }, 2500);
+      });
+      box.appendChild(det);
+      sh.groups[g.id] = { det: det, count: count, newPill: newPill, items: items };
     });
+    sh.foot = el('div', 'shelf-foot');
+    box.appendChild(sh.foot);
+    return sh;
+  }
+
+  function markSeen(gid) {
+    var s = GW.game.s, changed = false;
+    groupItems(gid).forEach(function (i) { if (s.items[i.id] && !s.seen[i.id]) { s.seen[i.id] = true; changed = true; } });
+    if (changed) updateShelf(s);
+  }
+
+  function updateShelf(s) {
+    s.seen = s.seen || {};
+    shelves.forEach(function (sh) {
+      var found = 0;
+      Object.keys(sh.groups).forEach(function (gid) {
+        var g = sh.groups[gid], have = 0, fresh = false;
+        g.items.forEach(function (item) {
+          var n = s.items[item.id] || 0, t = sh.tiles[item.id];
+          if (n) {
+            have++;
+            if (!t.known) {
+              t.known = true;
+              t.tile.classList.remove('unknown');
+              t.tile.title = item.name + ' (' + C.tiers[item.tier].label + ')';
+              var ic = itemIcon(item); t.tile.replaceChild(ic, t.icon); t.icon = ic;
+              t.name.textContent = item.name;
+            }
+            t.count.textContent = '\u00D7' + fmt(n);
+            var isNew = !s.seen[item.id];
+            t.tile.classList.toggle('is-new', isNew);
+            if (isNew) fresh = true;
+          }
+        });
+        found += have;
+        g.count.textContent = have + ' / ' + g.items.length;
+        g.newPill.hidden = !fresh;
+        g.det.classList.toggle('complete', have === g.items.length);
+        if (openGroups[gid] !== undefined && g.det.open !== openGroups[gid]) g.det.open = openGroups[gid];
+      });
+      sh.foot.textContent = 'Found ' + found + ' of ' + C.items.length;
+    });
+  }
+
+  function buildShelf(s) {
+    if (!shelves.length) shelves = $all('[data-shelf]').map(makeShelf);
+    updateShelf(s);
   }
 
   function flashShelf(itemId) {

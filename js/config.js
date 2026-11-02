@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.2';
+GW.VERSION = '0.2.0-draft.3';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -48,20 +48,115 @@ GW.CONFIG = {
     superrare: { label: 'Super Rare', weight: 0,  bonus: 0,    color: '#c77dff' }
   },
 
-  // img paths are used once the real art exists.  Until then the emoji shows.
+  // Item groups for the shelf, in display order.
+  groups: [
+    { id: "treasures", name: "Legendary Treasures" },
+    { id: "monsters", name: "Tiny Monsters" },
+    { id: "laundry", name: "Laundry & Clothing" },
+    { id: "bathroom", name: "Bathroom Disasters" },
+    { id: "office", name: "Office Nonsense" },
+    { id: "workshop", name: "Workshop Junk" },
+    { id: "kitchen", name: "Kitchen Experiments" },
+    { id: "toys", name: "Toys & Curiosities" },
+    { id: "inventions", name: "Questionable Inventions" },
+    { id: "random", name: "Absolutely Random" },
+  ],
+
+  // Emoji items use the bundled Twemoji art in assets/emoji.  img paths override it.
   items: [
-    { id: 'socks',         name: 'Socks',              tier: 'common',    emoji: '🧦' },
-    { id: 'pencil',        name: 'Pencil',             tier: 'common',    emoji: '✏️' },
-    { id: 'chips',         name: 'Bag of Chips',       tier: 'common',    emoji: '🍟' },
-    { id: 'beans',         name: "Can o' Beans",       tier: 'common',    emoji: '🥫' },
-    { id: 'shirt',         name: 'Shirt',              tier: 'common',    emoji: '👕' },
-    { id: 'underpants',    name: 'Underpants',         tier: 'common',    emoji: '🩲' },
-    { id: 'tcg_card',      name: 'Trading Card',       tier: 'uncommon',  emoji: '🃏' },
-    { id: 'dice',          name: 'Lucky Die',          tier: 'uncommon',  emoji: '🎲' },
-    { id: 'tiny_monster',  name: 'Tiny Monster',       tier: 'rare',      emoji: '👾' },
-    { id: 'purple_underpants', name: 'Purple Underpants', tier: 'superrare', emoji: '🩲', tint: 'purple' },
-    { id: 'diamond_pick',  name: 'Diamond Pickaxe',    tier: 'superrare', emoji: '⛏️' },
-    { id: 'magic_sword',   name: 'Magical Sword',      tier: 'superrare', emoji: '🗡️' }
+    // Laundry & Clothing
+    { id: "socks", name: "Socks", group: "laundry", tier: "common", emoji: "🧦" },
+    { id: "underpants", name: "Underpants", group: "laundry", tier: "common", emoji: "🩲" },
+    { id: "shorts", name: "Shorts", group: "laundry", tier: "common", emoji: "🩳" },
+    { id: "sneaker", name: "Sneaker", group: "laundry", tier: "common", emoji: "👟" },
+    { id: "boot", name: "Work Boot", group: "laundry", tier: "uncommon", emoji: "🥾" },
+    { id: "gloves", name: "Gloves", group: "laundry", tier: "uncommon", emoji: "🧤" },
+    { id: "scarf", name: "Scarf", group: "laundry", tier: "common", emoji: "🧣" },
+    { id: "necktie", name: "Necktie", group: "laundry", tier: "common", emoji: "👔" },
+    { id: "flipflop", name: "Flip-Flop", group: "laundry", tier: "common", emoji: "🩴" },
+    { id: "cap", name: "Ball Cap", group: "laundry", tier: "common", emoji: "🧢" },
+    // Bathroom Disasters
+    { id: "toilet", name: "Toilet", group: "bathroom", tier: "common", emoji: "🚽" },
+    { id: "poop", name: "Suspicious Pile", group: "bathroom", tier: "uncommon", emoji: "💩" },
+    { id: "plunger", name: "Plunger", group: "bathroom", tier: "common", emoji: "🪠" },
+    { id: "tp", name: "Toilet Paper", group: "bathroom", tier: "common", emoji: "🧻" },
+    { id: "soap", name: "Soap", group: "bathroom", tier: "common", emoji: "🧼" },
+    { id: "sponge", name: "Sponge", group: "bathroom", tier: "common", emoji: "🧽" },
+    { id: "toothbrush", name: "Toothbrush", group: "bathroom", tier: "common", emoji: "🪥" },
+    { id: "bucket", name: "Bucket", group: "bathroom", tier: "common", emoji: "🪣" },
+    { id: "bathtub", name: "Bathtub", group: "bathroom", tier: "uncommon", emoji: "🛁" },
+    { id: "lotion", name: "Lotion", group: "bathroom", tier: "common", emoji: "🧴" },
+    // Office Nonsense
+    { id: "pencil", name: "Pencil", group: "office", tier: "common", emoji: "✏️" },
+    { id: "pen", name: "Pen", group: "office", tier: "common", emoji: "🖊️" },
+    { id: "crayon", name: "Crayon", group: "office", tier: "common", emoji: "🖍️" },
+    { id: "paperclip", name: "Paperclip", group: "office", tier: "common", emoji: "📎" },
+    { id: "pushpin", name: "Pushpin", group: "office", tier: "common", emoji: "📌" },
+    { id: "scissors", name: "Scissors", group: "office", tier: "uncommon", emoji: "✂️" },
+    { id: "ruler", name: "Ruler", group: "office", tier: "common", emoji: "📏" },
+    { id: "triangle", name: "Triangle Ruler", group: "office", tier: "common", emoji: "📐" },
+    { id: "books", name: "Stack of Books", group: "office", tier: "uncommon", emoji: "📚" },
+    { id: "wastebasket", name: "Wastebasket", group: "office", tier: "common", emoji: "🗑️" },
+    // Workshop Junk
+    { id: "cog", name: "Spare Cog", group: "workshop", tier: "common", emoji: "⚙️" },
+    { id: "bolt", name: "Nut and Bolt", group: "workshop", tier: "common", emoji: "🔩" },
+    { id: "wrench", name: "Wrench", group: "workshop", tier: "common", emoji: "🔧" },
+    { id: "hammer", name: "Hammer", group: "workshop", tier: "common", emoji: "🔨" },
+    { id: "screwdriver", name: "Screwdriver", group: "workshop", tier: "common", emoji: "🪛" },
+    { id: "saw", name: "Saw", group: "workshop", tier: "common", emoji: "🪚" },
+    { id: "magnet", name: "Magnet", group: "workshop", tier: "common", emoji: "🧲" },
+    { id: "toolbox", name: "Toolbox", group: "workshop", tier: "uncommon", emoji: "🧰" },
+    { id: "brick", name: "Brick", group: "workshop", tier: "common", emoji: "🧱" },
+    { id: "ladder", name: "Ladder", group: "workshop", tier: "uncommon", emoji: "🪜" },
+    // Kitchen Experiments
+    { id: "spoon", name: "Spoon", group: "kitchen", tier: "common", emoji: "🥄" },
+    { id: "beans", name: "Can o' Beans", group: "kitchen", tier: "common", emoji: "🥫" },
+    { id: "salt", name: "Salt Shaker", group: "kitchen", tier: "common", emoji: "🧂" },
+    { id: "teapot", name: "Teapot", group: "kitchen", tier: "uncommon", emoji: "🫖" },
+    { id: "bowl", name: "Bowl", group: "kitchen", tier: "common", emoji: "🥣" },
+    { id: "fork_knife", name: "Fork and Knife", group: "kitchen", tier: "common", emoji: "🍴" },
+    { id: "potato", name: "Potato", group: "kitchen", tier: "common", emoji: "🥔" },
+    { id: "cheese", name: "Wedge of Cheese", group: "kitchen", tier: "uncommon", emoji: "🧀" },
+    { id: "pretzel", name: "Pretzel", group: "kitchen", tier: "common", emoji: "🥨" },
+    { id: "banana", name: "Banana", group: "kitchen", tier: "common", emoji: "🍌" },
+    // Toys & Curiosities
+    { id: "dice", name: "Lucky Die", group: "toys", tier: "common", emoji: "🎲" },
+    { id: "puzzle", name: "Puzzle Piece", group: "toys", tier: "common", emoji: "🧩" },
+    { id: "yoyo", name: "Yo-Yo", group: "toys", tier: "common", emoji: "🪀" },
+    { id: "kite", name: "Kite", group: "toys", tier: "common", emoji: "🪁" },
+    { id: "dart", name: "Dartboard", group: "toys", tier: "common", emoji: "🎯" },
+    { id: "balloon", name: "Balloon", group: "toys", tier: "common", emoji: "🎈" },
+    { id: "eightball", name: "Magic 8-Ball", group: "toys", tier: "uncommon", emoji: "🎱" },
+    { id: "maracas", name: "Maracas", group: "toys", tier: "common", emoji: "🪇" },
+    { id: "magic_wand", name: "Magic Wand", group: "toys", tier: "uncommon", emoji: "🪄" },
+    { id: "fishing_rod", name: "Fishing Rod", group: "toys", tier: "common", emoji: "🎣" },
+    // Questionable Inventions
+    { id: "test_tube", name: "Test Tube", group: "inventions", tier: "common", emoji: "🧪" },
+    { id: "petri", name: "Petri Dish", group: "inventions", tier: "common", emoji: "🧫" },
+    { id: "battery", name: "Battery", group: "inventions", tier: "common", emoji: "🔋" },
+    { id: "dead_battery", name: "Dead Battery", group: "inventions", tier: "common", emoji: "🪫" },
+    { id: "lightbulb", name: "Lightbulb", group: "inventions", tier: "common", emoji: "💡" },
+    { id: "plug", name: "Plug", group: "inventions", tier: "common", emoji: "🔌" },
+    { id: "extinguisher", name: "Fire Extinguisher", group: "inventions", tier: "uncommon", emoji: "🧯" },
+    { id: "firecracker", name: "Firecracker", group: "inventions", tier: "uncommon", emoji: "🧨" },
+    { id: "alarm_clock", name: "Alarm Clock", group: "inventions", tier: "common", emoji: "⏰" },
+    // Absolutely Random
+    { id: "mousetrap", name: "Mousetrap", group: "random", tier: "common", emoji: "🪤" },
+    { id: "log", name: "Log", group: "random", tier: "common", emoji: "🪵" },
+    { id: "chair", name: "Chair", group: "random", tier: "common", emoji: "🪑" },
+    { id: "plant", name: "Potted Plant", group: "random", tier: "common", emoji: "🪴" },
+    { id: "candle", name: "Candle", group: "random", tier: "uncommon", emoji: "🕯️" },
+    { id: "broom", name: "Broom", group: "random", tier: "common", emoji: "🧹" },
+    { id: "basket", name: "Laundry Basket", group: "random", tier: "common", emoji: "🧺" },
+    { id: "box", name: "Cardboard Box", group: "random", tier: "common", emoji: "📦" },
+    { id: "flute", name: "Flute", group: "random", tier: "common", emoji: "🪈" },
+    { id: "amphora", name: "Old Vase", group: "random", tier: "uncommon", emoji: "🏺" },
+    // Tiny Monsters (critter art coming)
+    { id: 'tiny_monster', name: 'Tiny Monster', group: 'monsters', tier: 'rare', emoji: '👾' },
+    // Legendary Treasures (popups only)
+    { id: 'purple_underpants', name: 'Purple Underpants', group: 'treasures', tier: 'superrare', emoji: '🩲', tint: 'purple' },
+    { id: 'diamond_pick', name: 'Diamond Pickaxe', group: 'treasures', tier: 'superrare', emoji: '⛏️' },
+    { id: 'magic_sword', name: 'Magical Sword', group: 'treasures', tier: 'superrare', emoji: '🗡️' }
   ],
 
   // Hat of the month.  Month 1 = January.  Missing months use the default.
