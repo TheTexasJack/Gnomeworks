@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.8';
+GW.VERSION = '0.2.0-draft.9';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -35,8 +35,8 @@ GW.CONFIG = {
     minSeconds: 45,
     maxSeconds: 120,
     lifetimeSeconds: 20,
-    legendaryChance: 0.06,      // chance a claimed HOT popup is a Legendary (only if you have been tapping)
-    superRareChance: 0.3,       // chance it is a Super Rare (otherwise a Lucky Sprocket)
+    legendaryChance: 0.09,      // chance a claimed HOT popup is a Legendary (only if you have been tapping)
+    superRareChance: 0.45,       // chance it is a Super Rare (otherwise a Lucky Sprocket)
     pityCount: 6,               // guarantees a Super Rare or better after this many Sprockets
     legendaryPity: 25,          // guarantees a Legendary on a hot popup after this many popups without one
     luckySprocketSeconds: 60    // Lucky Sprocket pays this many seconds of production (min 50 taps worth)
@@ -46,7 +46,7 @@ GW.CONFIG = {
   tiers: {
     common:    { label: 'Common',     weight: 70, bonus: 0.10, color: '#c9b79c' },
     uncommon:  { label: 'Uncommon',   weight: 22, bonus: 0.50, color: '#7fc97f' },
-    rare:      { label: 'Rare',       weight: 8,  bonus: 2.00, color: '#6fa8ff' },
+    rare:      { label: 'Rare',       weight: 12, bonus: 2.00, color: '#6fa8ff' },
     superrare: { label: 'Super Rare', weight: 0,  bonus: 0,    color: '#c77dff' },  // popups only
     legendary: { label: 'Legendary',  weight: 0,  bonus: 0,    color: '#ffb703' }   // popups only
   },

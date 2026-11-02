@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.9 (2026-11-01)
+
+* Rarer items are 50% more common, from tester feedback.  Rare machine drops went from 8 to 12 weight (about 7.8% to 11.3% of drops).  Shinies: Super Rare 30% to 45%, Legendary 6% to 9% (gold shinies only).  Lucky Sprockets drop from 64% to 46% of shinies.
+
 ## v0.2.0-draft.8 (2026-11-01)
 
 * Filled the monster gaps: Glowbat (Super Rare), Goopamice (Super Rare), and Hexamice (Legendary).  Every family except the slimes now has all four forms, 43 monsters in total.
