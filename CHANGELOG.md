@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.18 (2026-11-02)
+
+* Gnome badges redrawn with red beards to match the Shop Floor gnomes.
+
 ## v0.2.0-draft.17 (2026-11-02)
 
 * Hats are back, with Mara's art.  The gnomes on the Shop Floor wear the hat of the month, and it rides along through the squish and boing.
