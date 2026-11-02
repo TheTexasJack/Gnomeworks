@@ -222,6 +222,11 @@ window.GW = window.GW || {};
   });
   applyView();
 
+  // ---------- TAP label: fades out after a minute, the ring keeps pulsing ----------
+  if (C.tap.labelFadeSeconds > 0) {
+    setTimeout(function () { document.body.classList.add('tap-hint-done'); }, C.tap.labelFadeSeconds * 1000);
+  }
+
   // ---------- sound settings ----------
   var muteBtn = document.getElementById('muteBtn');
   var fxSlider = document.getElementById('fxVol'), chatterBox = document.getElementById('chatterOn');

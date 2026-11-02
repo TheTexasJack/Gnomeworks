@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.29 (2026-11-02)
+
+- The word TAP under the little gear fades out about a minute after the page opens.  The pulsing ring stays as the hint.  Tunable as `tap.labelFadeSeconds` in config.
+
 ## v0.2.0-draft.28 (2026-11-02)
 
 - The desktop banner is now the factory-and-sky scene: brighter, calmer, and roomy enough for holiday versions later (Santa in the sky, a dragon on the mountain).  The gnome-and-conveyor strip is kept as a spare.

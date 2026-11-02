@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.28';
+GW.VERSION = '0.2.0-draft.29';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -27,7 +27,8 @@ GW.CONFIG = {
 
   tap: {
     maxTapsPerSecond: 20,       // human cap; extra taps are ignored
-    activeWindowSeconds: 30     // tapping the gear this recently makes popups "hot" (Legendary possible)
+    activeWindowSeconds: 30,    // tapping the gear this recently makes popups "hot" (Legendary possible)
+    labelFadeSeconds: 60        // the word TAP under the little gear fades away this long after the page opens (0 = never)
   },
 
   // Rare popups on the side of the machine.  Only a real tap can claim them.

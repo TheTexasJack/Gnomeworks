@@ -220,7 +220,8 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 
 .tap-ring { animation: ring 1.6s ease-out infinite; opacity: .8; }
 @keyframes ring { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
-.tap-label { font: bold 36px var(--font); fill: var(--brass-light); stroke: #2a1a0c; stroke-width: 7px; paint-order: stroke; letter-spacing: 2px; }
+.tap-label { font: bold 36px var(--font); fill: var(--brass-light); stroke: #2a1a0c; stroke-width: 7px; paint-order: stroke; letter-spacing: 2px; transition: opacity 2.5s ease; }
+body.tap-hint-done .tap-label { opacity: 0; }
 
 #gwFlap.flap-open { animation: flap .45s ease-out; }
 @keyframes flap { 0% { transform: scaleY(1); } 25% { transform: scaleY(.08); } 70% { transform: scaleY(.08); } 100% { transform: scaleY(1); } }
