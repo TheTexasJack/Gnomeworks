@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.7';
+GW.VERSION = '0.2.0-draft.8';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -179,7 +179,10 @@ GW.CONFIG = {
     { id: 'fox_evil', name: 'Snarlfox', group: 'monsters', family: 'fox', variant: 'evil', tier: 'legendary', img: 'assets/monsters/fox_evil.webp' },
     { id: 'mouse_normal', name: 'Potamice', group: 'monsters', family: 'mouse', variant: 'normal', tier: 'rare', img: 'assets/monsters/mouse_normal.webp' },
     { id: 'mouse_glowing', name: 'Lumimouse', group: 'monsters', family: 'mouse', variant: 'glowing', tier: 'superrare', img: 'assets/monsters/mouse_glowing.webp' },
+    { id: 'mouse_goopy', name: 'Goopamice', group: 'monsters', family: 'mouse', variant: 'goopy', tier: 'superrare', img: 'assets/monsters/mouse_goopy.webp' },
+    { id: 'mouse_evil', name: 'Hexamice', group: 'monsters', family: 'mouse', variant: 'evil', tier: 'legendary', img: 'assets/monsters/mouse_evil.webp' },
     { id: 'fluffbat_normal', name: 'Fluffbat', group: 'monsters', family: 'fluffbat', variant: 'normal', tier: 'rare', img: 'assets/monsters/fluffbat_normal.webp' },
+    { id: 'fluffbat_glowing', name: 'Glowbat', group: 'monsters', family: 'fluffbat', variant: 'glowing', tier: 'superrare', img: 'assets/monsters/fluffbat_glowing.webp' },
     { id: 'fluffbat_goopy', name: 'Gloopbat', group: 'monsters', family: 'fluffbat', variant: 'goopy', tier: 'superrare', img: 'assets/monsters/fluffbat_goopy.webp' },
     { id: 'fluffbat_evil', name: 'Vampuff', group: 'monsters', family: 'fluffbat', variant: 'evil', tier: 'legendary', img: 'assets/monsters/fluffbat_evil.webp' },
     { id: 'golem_normal', name: 'Pebblem', group: 'monsters', family: 'golem', variant: 'normal', tier: 'rare', img: 'assets/monsters/golem_normal.webp' },

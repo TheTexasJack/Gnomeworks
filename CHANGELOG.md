@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.8 (2026-11-01)
+
+* Filled the monster gaps: Glowbat (Super Rare), Goopamice (Super Rare), and Hexamice (Legendary).  Every family except the slimes now has all four forms, 43 monsters in total.
+
 ## v0.2.0-draft.7 (2026-11-01)
 
 * New shelf group, Number Twos: Ploppy (Rare, from the machine), Cogplop and Prizeplop (Super Rare, from shinies), and Goldplop (Legendary, gold shinies only).
