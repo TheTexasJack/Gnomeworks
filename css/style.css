@@ -373,7 +373,7 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .shelf-gname { flex: 1; min-width: 0; font-size: .9rem; }
 .shelf-gcount { font-size: .8rem; color: #fffaf0; opacity: 1; white-space: nowrap; }
 .new-pill { font-size: .65rem; padding: 1px 6px; border-radius: 10px; background: #e63946; color: #fff; letter-spacing: .05em; }
-.shelf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; padding: 0 8px 8px; }
+.shelf-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 0 8px 8px; }
 .shelf-tile {
   position: relative; display: flex; flex-direction: column; align-items: center; padding: 6px 2px 4px;
   background: rgba(0,0,0,.28); border: 2px solid; border-radius: 8px; text-align: center;

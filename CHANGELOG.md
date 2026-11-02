@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.36 (2026-11-02)
+
+- Every junk group grows from 10 to 12 items, so the shelf fills clean 4-by-3 rows on phones and desktop alike.  The desktop shelf now shows 4 per row to match.  New items: Jeans, Coat, Razor, Hair Pick, Clipboard, Printer, Clamp, Hook, Frying Pan, Jar, Teddy Bear, Boomerang, Microscope, Satellite Dish, Pet Rock, and Shopping Cart.  The collection totals 146.
+- New doc: docs/INVENTORY.md, the master list of every collectible.
+
 ## v0.2.0-draft.35 (2026-11-02)
 
 - New gnome: the Gnome Wizard (Jarrett's idea).  "It is not the cog that turns, but you."  Unlocks at 1M cogs seen, costs 1.6M, clicks 1,400 a second.  On the Shop Floor he flips to his upside-down pose (with its own painted magic) and spins in place, faster the more you own.

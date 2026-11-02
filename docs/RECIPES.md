@@ -9,6 +9,7 @@ Every recipe ends the same way: bump `GW.VERSION` in `js/config.js`, add a line 
 3. Add a line to `items` in `js/config.js`:
    `{ id: "rubber_duck", name: "Rubber Duck", group: "toys", tier: "common", emoji: "🦆" },`
 4. The shelf, drops, and counts pick it up automatically.
+5. Check `docs/INVENTORY.md` beforehand so the emoji isn't already used, keep each junk group at 12 (4 per shelf row), and rerun `node tools/inventory.js` afterward to refresh it.
 
 Skip flags, people, hand gestures, skin tones, religious or political symbols, and anything like weapons-for-real or drugs.  It is a public store game.
 

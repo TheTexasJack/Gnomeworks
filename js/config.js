@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.35';
+GW.VERSION = '0.2.0-draft.36';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -87,6 +87,8 @@ GW.CONFIG = {
     { id: "necktie", name: "Necktie", group: "laundry", tier: "common", emoji: "👔" },
     { id: "flipflop", name: "Flip-Flop", group: "laundry", tier: "common", emoji: "🩴" },
     { id: "cap", name: "Ball Cap", group: "laundry", tier: "common", emoji: "🧢" },
+    { id: "jeans", name: "Jeans", group: "laundry", tier: "common", emoji: "👖" },
+    { id: "coat", name: "Coat", group: "laundry", tier: "common", emoji: "🧥" },
     // Bathroom Disasters
     { id: "toilet", name: "Toilet", group: "bathroom", tier: "common", emoji: "🚽" },
     { id: "poop_knife", name: "Poop Knife", group: "bathroom", tier: "uncommon", emoji: "🔪" },
@@ -98,6 +100,8 @@ GW.CONFIG = {
     { id: "bucket", name: "Bucket", group: "bathroom", tier: "common", emoji: "🪣" },
     { id: "bathtub", name: "Bathtub", group: "bathroom", tier: "uncommon", emoji: "🛁" },
     { id: "lotion", name: "Lotion", group: "bathroom", tier: "common", emoji: "🧴" },
+    { id: "razor", name: "Razor", group: "bathroom", tier: "common", emoji: "🪒" },
+    { id: "comb", name: "Hair Pick", group: "bathroom", tier: "common", emoji: "🪮" },
     // Office Nonsense
     { id: "pencil", name: "Pencil", group: "office", tier: "common", emoji: "✏️" },
     { id: "pen", name: "Pen", group: "office", tier: "common", emoji: "🖊️" },
@@ -109,6 +113,8 @@ GW.CONFIG = {
     { id: "triangle", name: "Triangle Ruler", group: "office", tier: "common", emoji: "📐" },
     { id: "books", name: "Stack of Books", group: "office", tier: "uncommon", emoji: "📚" },
     { id: "wastebasket", name: "Wastebasket", group: "office", tier: "common", emoji: "🗑️" },
+    { id: "clipboard", name: "Clipboard", group: "office", tier: "common", emoji: "📋" },
+    { id: "printer", name: "Printer", group: "office", tier: "common", emoji: "🖨️" },
     // Workshop Junk
     { id: "cog", name: "Spare Cog", group: "workshop", tier: "common", emoji: "⚙️" },
     { id: "bolt", name: "Nut and Bolt", group: "workshop", tier: "common", emoji: "🔩" },
@@ -120,6 +126,8 @@ GW.CONFIG = {
     { id: "toolbox", name: "Toolbox", group: "workshop", tier: "uncommon", emoji: "🧰" },
     { id: "brick", name: "Brick", group: "workshop", tier: "common", emoji: "🧱" },
     { id: "ladder", name: "Ladder", group: "workshop", tier: "uncommon", emoji: "🪜" },
+    { id: "clamp", name: "Clamp", group: "workshop", tier: "common", emoji: "🗜️" },
+    { id: "hook", name: "Hook", group: "workshop", tier: "common", emoji: "🪝" },
     // Kitchen Experiments
     { id: "spoon", name: "Spoon", group: "kitchen", tier: "common", emoji: "🥄" },
     { id: "beans", name: "Can o' Beans", group: "kitchen", tier: "common", emoji: "🥫" },
@@ -131,6 +139,8 @@ GW.CONFIG = {
     { id: "cheese", name: "Wedge of Cheese", group: "kitchen", tier: "uncommon", emoji: "🧀" },
     { id: "pretzel", name: "Pretzel", group: "kitchen", tier: "common", emoji: "🥨" },
     { id: "banana", name: "Banana", group: "kitchen", tier: "common", emoji: "🍌" },
+    { id: "frying_pan", name: "Frying Pan", group: "kitchen", tier: "common", emoji: "🍳" },
+    { id: "jar", name: "Jar", group: "kitchen", tier: "common", emoji: "🫙" },
     // Toys & Curiosities
     { id: "dice", name: "Lucky Die", group: "toys", tier: "common", emoji: "🎲" },
     { id: "puzzle", name: "Puzzle Piece", group: "toys", tier: "common", emoji: "🧩" },
@@ -142,6 +152,8 @@ GW.CONFIG = {
     { id: "maracas", name: "Maracas", group: "toys", tier: "common", emoji: "🪇" },
     { id: "magic_wand", name: "Magic Wand", group: "toys", tier: "uncommon", emoji: "🪄" },
     { id: "fishing_rod", name: "Fishing Rod", group: "toys", tier: "common", emoji: "🎣" },
+    { id: "teddy", name: "Teddy Bear", group: "toys", tier: "common", emoji: "🧸" },
+    { id: "boomerang", name: "Boomerang", group: "toys", tier: "common", emoji: "🪃" },
     // Questionable Inventions
     { id: "test_tube", name: "Test Tube", group: "inventions", tier: "common", emoji: "🧪" },
     { id: "petri", name: "Petri Dish", group: "inventions", tier: "common", emoji: "🧫" },
@@ -153,6 +165,8 @@ GW.CONFIG = {
     { id: "firecracker", name: "Firecracker", group: "inventions", tier: "uncommon", emoji: "🧨" },
     { id: "alarm_clock", name: "Alarm Clock", group: "inventions", tier: "common", emoji: "⏰" },
     { id: "control_knobs", name: "Control Knobs", group: "inventions", tier: "common", emoji: "🎛️" },
+    { id: "microscope", name: "Microscope", group: "inventions", tier: "common", emoji: "🔬" },
+    { id: "dish", name: "Satellite Dish", group: "inventions", tier: "common", emoji: "📡" },
     // Absolutely Random
     { id: "mousetrap", name: "Mousetrap", group: "random", tier: "common", emoji: "🪤" },
     { id: "log", name: "Log", group: "random", tier: "common", emoji: "🪵" },
@@ -164,6 +178,8 @@ GW.CONFIG = {
     { id: "box", name: "Cardboard Box", group: "random", tier: "common", emoji: "📦" },
     { id: "flute", name: "Flute", group: "random", tier: "common", emoji: "🪈" },
     { id: "amphora", name: "Old Vase", group: "random", tier: "uncommon", emoji: "🏺" },
+    { id: "pet_rock", name: "Pet Rock", group: "random", tier: "common", emoji: "🪨" },
+    { id: "cart", name: "Shopping Cart", group: "random", tier: "common", emoji: "🛒" },
     // Tiny Monsters.  One family per row on the shelf: normal, glowing, goopy, evil.
     // Normal ones come out of the machine (Rare).  The rest only come from popups.
     { id: 'rabbit_normal', name: 'Tickhop', group: 'monsters', family: 'rabbit', variant: 'normal', tier: 'rare', img: 'assets/monsters/rabbit_normal.webp' },
