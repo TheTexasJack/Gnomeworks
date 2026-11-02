@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.22 (2026-11-02)
+
+* The side panels, the header banner, and the gnome strip use Mara's painted wood planks (darkened for readable text) with brass corner rivets, in place of the old flat gradients.
+
 ## v0.2.0-draft.21 (2026-11-02)
 
 Interface cleanup, step 1.

@@ -2,7 +2,7 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.2.0-draft.21** (Layer 2 in progress: real art)
+Current version: **v0.2.0-draft.22** (Layer 2 in progress: real art)
 
 ## Play it
 
