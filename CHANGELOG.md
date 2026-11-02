@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.12 (2026-11-01)
+
+* New machine wall from Mara with the gearbox, gauges, pipes, and chute painted in.  The gears now sit on its mounts, and the hatch flap opens over its built-in opening.
+* Phones get Mara's tall Shop Floor, with bigger gnomes and a vertical layout.  It switches automatically under 720px wide.
+
 ## v0.2.0-draft.11 (2026-11-01)
 
 * Bathroom Disasters: Suspicious Pile is out (the Number Twos have that covered), and the Poop Knife is in.  Still Uncommon.

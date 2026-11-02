@@ -312,18 +312,35 @@ GW.ui = (function () {
     updateFloor(s);
   }
 
+  var tallQuery = window.matchMedia('(max-width: 720px)');
+  function layout() { return F.layouts[tallQuery.matches ? 'tall' : 'wide']; }
+
   function buildFloor() {
     var floor = $('#floor');
-    floor.appendChild(el('div', 'belt'));
-    F.slots.forEach(function (xy, i) {
+    floor.innerHTML = '';
+    slotEls = [];
+    var L = layout();
+    floor.style.backgroundImage = "url('" + L.bg + "')";
+    $('#machine').style.setProperty('--floor-aspect', L.aspect);
+    var belt = el('div', 'belt');
+    belt.style.left = L.belt.left + '%'; belt.style.width = L.belt.width + '%';
+    belt.style.top = L.belt.top + '%'; belt.style.height = L.belt.height + '%';
+    floor.appendChild(belt);
+    floor.style.setProperty('--ride-top', L.belt.ride + '%');
+    floor.style.setProperty('--ride-from', L.belt.left + '%');
+    floor.style.setProperty('--ride-to', (L.belt.left + L.belt.width) + '%');
+    L.slots.forEach(function (xy) {
       var st = el('div', 'station'); st.style.left = xy[0] + '%'; st.style.bottom = (100 - xy[1]) + '%';
-      var plate = el('div', 'plate', '???'); plate.style.left = xy[0] + '%'; plate.style.top = (xy[1] + F.plateDrop) + '%';
+      var plate = el('div', 'plate', '???'); plate.style.left = xy[0] + '%'; plate.style.top = (xy[1] + L.plateDrop) + '%';
+      plate.style.width = L.plateW + 'cqw'; plate.style.fontSize = L.plateFont + 'cqw';
       floor.appendChild(st); floor.appendChild(plate);
       slotEls.push({ st: st, plate: plate });
     });
     floor.appendChild(el('div', 'belt-items'));
     floorBuilt = true;
+    floorSig = '';
   }
+  tallQuery.addEventListener('change', function () { buildFloor(); updateFloor(GW.game.s); });
 
   function updateFloor(s) {
     if (!floorBuilt) buildFloor();
@@ -340,8 +357,8 @@ GW.ui = (function () {
       cfg.parts.forEach(function (part) {
         var pi = partImg(s, pid, part);
         var im = el('img'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
-        im.style.height = pi.h + 'cqh';
-        if (part.overlap) im.style.marginRight = -part.overlap + 'cqw';
+        im.style.height = (pi.h * layout().scale) + 'cqh';
+        if (part.overlap) im.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
         slot.st.appendChild(im);
       });
       slot.plate.textContent = cfg.label + ' \u00D7' + fmt(n);
@@ -353,7 +370,7 @@ GW.ui = (function () {
   function helpWanted(slot) {
     slot.st.className = 'station hiring';
     slot.st.innerHTML = '';
-    var im = el('img'); im.src = crewImg('help_wanted'); im.alt = 'Help wanted'; im.draggable = false; im.style.height = '15cqh';
+    var im = el('img'); im.src = crewImg('help_wanted'); im.alt = 'Help wanted'; im.draggable = false; im.style.height = (15 * layout().scale) + 'cqh';
     slot.st.appendChild(im);
     slot.plate.textContent = '???';
     slot.plate.classList.add('locked');

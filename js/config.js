@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.11';
+GW.VERSION = '0.2.0-draft.12';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -243,12 +243,27 @@ GW.CONFIG = {
   // The Shop Floor: where each gnome type works.  slot = station number (0 to 11, bottom row first).
   // parts are drawn left to right, h = height as a percent of the floor.
   floor: {
-    slots: [
-      [22.9, 80.0], [41.0, 80.0], [59.5, 80.0], [78.1, 80.0],
-      [22.9, 54.0], [41.0, 54.0], [59.5, 54.0], [78.1, 54.0],
-      [22.9, 28.0], [41.0, 28.0], [59.5, 28.0], [78.1, 28.0]
-    ],
-    plateDrop: 2.1,     // plate sits this far below the feet line
+    // Two backgrounds: wide for desktop, tall for phones.  slots are [x %, feet line %].
+    layouts: {
+      wide: {
+        bg: 'assets/bg/floor.webp', aspect: '1600 / 900', scale: 1, plateDrop: 2.1, plateW: 8.6, plateFont: 1.05,
+        belt: { left: 9.4, width: 81.2, top: 87.4, height: 5.6, ride: 89.6 },
+        slots: [
+          [22.9, 80.0], [41.0, 80.0], [59.5, 80.0], [78.1, 80.0],
+          [22.9, 54.0], [41.0, 54.0], [59.5, 54.0], [78.1, 54.0],
+          [22.9, 28.0], [41.0, 28.0], [59.5, 28.0], [78.1, 28.0]
+        ]
+      },
+      tall: {
+        bg: 'assets/bg/floor_tall.webp', aspect: '900 / 1599', scale: 0.5, plateDrop: 1.5, plateW: 11.4, plateFont: 1.9,
+        belt: { left: 11.5, width: 77, top: 83.4, height: 4.2, ride: 85.4 },
+        slots: [
+          [22.0, 66.1], [42.3, 66.1], [62.2, 66.1], [81.8, 66.1],
+          [22.8, 51.5], [43.0, 51.5], [62.2, 51.5], [81.6, 51.5],
+          [25.2, 35.6], [43.6, 35.6], [62.2, 35.6], [80.8, 35.6]
+        ]
+      }
+    },
     stations: {
       tiny:       { label: 'Tiny', slot: 0, parts: [{ img: 'tiny_static', h: 17, upgrade: { two_hands: 'twohand_static' } }] },
       tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16 }] },

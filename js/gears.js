@@ -5,7 +5,7 @@ window.GW = window.GW || {};
 GW.gears = (function () {
   var NS = 'http://www.w3.org/2000/svg';
   var VIEW = { w: 1000, h: 1000 };
-  var HATCH = { x: 712, y: 752, size: 116 };
+  var HATCH = { x: 692, y: 752, w: 116, h: 109 };   // the opening in Mara's machine wall
   var PITCH = 0.355;   // pitch radius as a fraction of the gear image width (measured from Mara's art)
   var gears = {};
 
@@ -35,7 +35,7 @@ GW.gears = (function () {
   }
 
   function wall(svg) {
-    mk('image', { href: 'assets/bg/wall.webp', x: 0, y: 0, width: VIEW.w, height: VIEW.h, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    mk('image', { href: 'assets/bg/machine_wall.webp', x: 0, y: 0, width: VIEW.w, height: VIEW.h, preserveAspectRatio: 'xMidYMid slice' }, svg);
     mk('rect', { x: 0, y: 0, width: VIEW.w, height: VIEW.h, fill: '#2a1004', opacity: 0.22 }, svg);
   }
 
@@ -44,14 +44,10 @@ GW.gears = (function () {
   }
 
   function hatch(svg) {
+    // The frame is part of the wall art now.  Only the flap is drawn, so it can swing open.
     var g = mk('g', { 'class': 'hatch' }, svg), h = HATCH;
-    mk('rect', { x: h.x - 12, y: h.y - 12, width: h.size + 24, height: h.size + 24, rx: 8, fill: 'url(#gwBrass)', filter: 'url(#gwShadow)' }, g);
-    mk('rect', { x: h.x, y: h.y, width: h.size, height: h.size, rx: 4, fill: '#140b05' }, g);
-    var flap = mk('rect', { id: 'gwFlap', x: h.x, y: h.y, width: h.size, height: h.size * 0.55, fill: '#7a5320', stroke: '#3a250c', 'stroke-width': 3 }, g);
-    flap.style.transformOrigin = (h.x + h.size / 2) + 'px ' + h.y + 'px';
-    [h.x - 4, h.x + h.size + 4].forEach(function (x) {
-      [h.y - 4, h.y + h.size + 4].forEach(function (y) { mk('circle', { cx: x, cy: y, r: 5, fill: '#5a3d0c' }, g); });
-    });
+    var flap = mk('rect', { id: 'gwFlap', x: h.x + 2, y: h.y + 2, width: h.w - 4, height: h.h * 0.5, rx: 2, fill: 'url(#gwBrass)', stroke: '#4a300a', 'stroke-width': 3, opacity: 0.95 }, g);
+    flap.style.transformOrigin = (h.x + h.w / 2) + 'px ' + h.y + 'px';
   }
 
   // A gear drawn from one of Mara's images.  phase = angle of a tooth center in the image.
@@ -78,8 +74,8 @@ GW.gears = (function () {
 
   // The gear train:  drive (8) -> compound (12, with a 7 tooth pinion in front) -> big (15).
   var TRAIN = {
-    module1: 9,            // tooth size for drive <-> compound
-    bigRp: 170,
+    module1: 9.015,            // tooth size for drive <-> compound
+    bigRp: 162.1,          // sized so the gears sit on the mounts in Mara's machine wall
     big:   { img: 'gear_brass_02', teeth: 15, phase: 5.71 },
     comp:  { img: 'gear_brass_04', teeth: 12, phase: 15.22 },
     pin:   { img: 'gear_brass_06', teeth: 7,  phase: 38.03 },
@@ -92,11 +88,12 @@ GW.gears = (function () {
     svg.setAttribute('viewBox', '0 0 ' + VIEW.w + ' ' + VIEW.h);
     defs(svg); wall(svg);
     var T = TRAIN, m2 = T.bigRp / T.big.teeth;
-    var bigPos = { cx: 620, cy: 470 };
+    // Axle positions measured from the mounts painted on the wall.
+    var bigPos = { cx: 616.4, cy: 466.5 };
     var pinRp = m2 * T.pin.teeth;
-    var compPos = at(bigPos, T.bigRp + pinRp, 160);
+    var compPos = { cx: 385.2, cy: 521.5 };
     var compRp = T.module1 * T.comp.teeth, driveRp = T.module1 * T.drive.teeth;
-    var drivePos = at(compPos, compRp + driveRp, 195);
+    var drivePos = { cx: 211.3, cy: 473.7 };
 
     hatch(svg);
     var comp = addGear(svg, { id: 'comp', img: T.comp.img, teeth: T.comp.teeth, phase: T.comp.phase, rp: compRp, cx: compPos.cx, cy: compPos.cy });
@@ -137,7 +134,7 @@ GW.gears = (function () {
 
   // Points in percent of the machine box, for positioning HTML effects over the SVG.
   function pct(x, y) { return { x: x / VIEW.w * 100, y: y / VIEW.h * 100 }; }
-  function hatchMouth() { return pct(HATCH.x + HATCH.size / 2, HATCH.y + HATCH.size / 2); }
+  function hatchMouth() { return pct(HATCH.x + HATCH.w / 2, HATCH.y + HATCH.h / 2); }
   function driveCenter() { return pct(drive.cx, drive.cy); }
 
   return { build: build, update: update, bumpDrive: bumpDrive, openFlap: openFlap, hatchMouth: hatchMouth, driveCenter: driveCenter, VIEW: VIEW };

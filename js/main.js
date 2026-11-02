@@ -177,7 +177,7 @@ window.GW = window.GW || {};
 
     drainPops(Math.min(dt, 1));
     if (extraItems >= 1 && Math.random() < dt * 2) {
-      var m = s.view === 'floor' ? { x: 86, y: 92 } : G.hatchMouth();
+      var m = s.view === 'floor' ? { x: 92, y: 98 } : G.hatchMouth();
       UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
       extraItems = 0;
     }
