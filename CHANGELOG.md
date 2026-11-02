@@ -2,6 +2,12 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.17 (2026-11-02)
+
+* Hats are back, with Mara's art.  The gnomes on the Shop Floor wear the hat of the month, and it rides along through the squish and boing.
+* Calendar: Valentine (February), Shamrock (March), Bunny (April), Witch (October), Santa (December), and the Classic red hat every other month.
+* The Info tab says which hat is in season.  Preview any hat with ?hat=witch (or santa, easter, clover, valentine, classic) on the address.
+
 ## v0.2.0-draft.16 (2026-11-02)
 
 * Mara's gear-framed badges for all five gnome types, shown on their shop rows and in the crew strip under the machine.

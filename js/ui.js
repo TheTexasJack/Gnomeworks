@@ -375,6 +375,7 @@ GW.ui = (function () {
           if (part.actionDx) ai.style.transform = 'translateX(' + part.actionDx + '%)';
           wrap.appendChild(ai);
         }
+        addHat(wrap, pi.img, act, part.actionDx || 0);
         if (part.weapon) addWeapon(wrap, s);
         if (part.anim === 'hit') {
           var sl = el('img', 'f-slash'); sl.src = crewImg('slash'); sl.alt = ''; sl.draggable = false;
@@ -393,6 +394,17 @@ GW.ui = (function () {
   function actionFor(img) {
     if (/_static$/.test(img)) return img.replace(/_static$/, '_action');
     return { matry_closed: 'matry_open' }[img] || null;
+  }
+
+  function addHat(wrap, img, act, dx) {
+    var spots = C.hats.spots, sp = spots[img];
+    if (!sp) return;
+    var sa = (act && spots[act]) || sp;
+    var hat = currentHat();
+    var im = el('img', 'f-hat'); im.src = 'assets/hats/hat_' + hat.id + '.webp'; im.alt = ''; im.draggable = false;
+    im.style.setProperty('--hx', sp[0] + '%'); im.style.setProperty('--hy', sp[1] + '%'); im.style.setProperty('--hw', sp[2] + '%');
+    im.style.setProperty('--hxa', (sa[0] + dx) + '%'); im.style.setProperty('--hya', sa[1] + '%'); im.style.setProperty('--hwa', sa[2] + '%');
+    wrap.appendChild(im);
   }
 
   function addWeapon(wrap, s) {
@@ -535,7 +547,8 @@ GW.ui = (function () {
     buildShelf(s);
     initTabs();
     updateShop(s); updateCrew(s); updateHeader(s);
-    // Hats are parked until they are redrawn for the new gnome art.
+    var hn = $('#hatNote');
+    if (hn) hn.textContent = 'This month the gnomes are wearing: ' + currentHat().name + '.';
   }
 
   return {

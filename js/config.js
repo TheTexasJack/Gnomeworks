@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.16';
+GW.VERSION = '0.2.0-draft.17';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -212,17 +212,24 @@ GW.CONFIG = {
   ],
 
   // Hat of the month.  Month 1 = January.  Missing months use the default.
+  // Hat of the month for the gnomes on the Shop Floor.  Month 1 = January.  Missing months use the default.
+  // Preview any hat by adding ?hat=witch (or santa, easter, clover, valentine, classic) to the address.
   hats: {
-    default: { id: 'classic', name: 'Classic Gnome Hat', color: '#b22222' },
+    default: { id: 'classic', name: 'Classic Gnome Hat' },
     byMonth: {
-      1:  { id: 'party',    name: 'Party Hat',     color: '#e6c229', trim: '🎉' },
-      2:  { id: 'heart',    name: 'Heart Hat',     color: '#d6336c', trim: '❤️' },
-      3:  { id: 'clover',   name: 'Clover Hat',    color: '#2b9348', trim: '☘️' },
-      4:  { id: 'flower',   name: 'Flower Hat',    color: '#f28482', trim: '🌸' },
-      7:  { id: 'firework', name: 'Firework Hat',  color: '#1d4e89', trim: '🎆' },
-      10: { id: 'witch',    name: 'Witch Hat',     color: '#3c1361', trim: '🎃' },
-      11: { id: 'harvest',  name: 'Harvest Hat',   color: '#9c6644', trim: '🍂' },
-      12: { id: 'santa',    name: 'Santa Hat',     color: '#c1121f', trim: '❄️' }
+      2:  { id: 'valentine', name: 'Valentine Hat' },
+      3:  { id: 'clover',    name: 'Shamrock Hat' },
+      4:  { id: 'easter',    name: 'Bunny Hat' },
+      10: { id: 'witch',     name: 'Witch Hat' },
+      12: { id: 'santa',     name: 'Santa Hat' }
+    },
+    // Where the hat sits on each picture: [center x %, brim y %, width %].
+    spots: {
+      tiny_static:    [74.5, 21.5, 31], tiny_action:    [58.6, 25.5, 31],
+      twohand_static: [74.7, 21.5, 30], twohand_action: [58.1, 31.5, 28],
+      cloner_static:  [74.1, 29.0, 27], cloner_action:  [63.4, 36.0, 26],
+      warrior_static: [55.5, 18.5, 31], warrior_action: [50.5, 13.0, 32],
+      necro_static:   [58.5, 19.0, 24], necro_action:   [70.3, 19.5, 23]
     }
   },
 

@@ -65,6 +65,11 @@ body {
 .station .part > .f-action { position: absolute; left: 0; bottom: 0; height: 100%; opacity: 0; }
 .station .part.act > .f-action { opacity: 1; }
 .station .part.act > .f-static { opacity: 0; }
+.f-hat {
+  position: absolute; left: var(--hx); top: var(--hy); width: var(--hw) !important; height: auto;
+  transform: translate(-50%, -100%); pointer-events: none; z-index: 1;
+}
+.part.act > .f-hat { left: var(--hxa); top: var(--hya); width: var(--hwa) !important; }
 .f-weapon {
   position: absolute; left: var(--fx); top: var(--fy); height: auto; filter: drop-shadow(0 .4cqh .4cqh rgba(0,0,0,.5));
   transform-origin: var(--grip) 50%; transform: translate(calc(var(--grip) * -1), -50%) rotate(var(--rot));
