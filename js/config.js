@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.45';
+GW.VERSION = '0.2.0-draft.46';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -44,7 +44,7 @@ GW.CONFIG = {
   // Clone Attack (needs at least one Cloner).  Escaped clones snatch junk off the belt and
   // run the Shop Floor stairs.  Drag one into the vat to get the junk back.
   clones: {
-    count: 2, stealShare: 0.10, wanderSeconds: 3, loops: 2, speed: 24, climbSpeed: 16, fallSpeed: 70,
+    count: 4, stealShare: 0.10, wanderSeconds: 3, loops: 2, speed: 24, climbSpeed: 16, fallSpeed: 70,
     rescueSeconds: 10, waitForFloorSeconds: 20,
     minSeconds: 150, maxSeconds: 360, clonersPerHalving: 40, floorSeconds: 60,
     variants: ['normal', 'cyclops', 'goblin', 'twohead', 'slime', 'mushroom', 'crystal', 'cyborg', 'ghost', 'wolf'],

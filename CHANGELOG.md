@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.46 (2026-11-02)
+
+- Clone Attack: 4 clones per attack (was 2), each a different mutant.
+
 ## v0.2.0-draft.45 (2026-11-02)
 
 - Clone Attack: the clones' "heh heh" is now a real recorded giggle (recorded for the game by Nathan's daughter), trimmed and leveled.  The code-made giggle stays as a fallback.
