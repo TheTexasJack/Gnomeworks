@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.44 (2026-11-02)
+
+- Clone Attack: a glowing green arrow with "Drop here!" bobs over the vat for the whole attack, marking exactly where to let go.  The drop spot sits higher, so the dangling clone clears the rim and falls in.  The arrow bobs faster while you're carrying a clone.
+
 ## v0.2.0-draft.43 (2026-11-02)
 
 - Opening the game straight from disk (index.html on your computer) no longer logs an error trying to load the splash sound; it quietly uses the code-made sploop instead.

@@ -36,6 +36,7 @@ GW.clones = (function () {
       var v = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
       active.clones.push(makeClone(floor, v, L, i));
     }
+    showArrow(true);
     GW.ui.toast('Clone Attack!  Grab the escaped clones and drop them back in the vat!', 'super');
   }
 
@@ -60,16 +61,18 @@ GW.clones = (function () {
       e.preventDefault();
       el.setPointerCapture(e.pointerId);
       c.held = true; el.classList.add('held'); c.img.src = IMG(c.v, 'held');
-      document.getElementById('floor').classList.add('dragging');
+      document.getElementById('floor').classList.add('dragging', 'dragging-clone');
+      placeArrow();
       moveTo(c, e);
     });
-    el.addEventListener('pointermove', function (e) { if (c.held) { moveTo(c, e); markVat(overVat(e, c)); } });
+    el.addEventListener('pointermove', function (e) { if (c.held) { moveTo(c, e); markVat(overVat(e)); } });
     var up = function (e) {
       if (!c.held) return;
       c.held = false; el.classList.remove('held');
       document.getElementById('floor').classList.remove('dragging');
       markVat(false);
-      if (overVat(e, c)) sploosh(c); else drop(c);
+      document.getElementById('floor').classList.remove('dragging-clone');
+      if (overVat(e)) sploosh(c); else drop(c);
     };
     el.addEventListener('pointerup', up);
     el.addEventListener('pointercancel', up);
@@ -87,13 +90,35 @@ GW.clones = (function () {
   }
   // The pointer is the pinching hand, so the clone dangles below it.  A good drop is with the
   // clone hanging over the mouth of the vat: pointer above the rim, about one clone-height up.
-  function overVat(e, c) {
+  // Where the hand should be to drop a clone in: centered over the vat, high enough that the
+  // dangling clone clears the rim.  The glowing arrow marks this spot.
+  function dropSpot() {
     var vat = document.querySelector('#floor .part-vat');
-    if (!vat) return false;
-    var r = vat.getBoundingClientRect(), padX = r.width * 0.15;
-    var hang = c ? c.el.getBoundingClientRect().height : r.height;
-    return e.clientX > r.left - padX && e.clientX < r.right + padX &&
-      e.clientY > r.top - hang * 1.15 && e.clientY < r.top + r.height * 0.3;
+    if (!vat) return null;
+    var r = vat.getBoundingClientRect(), fr = document.getElementById('floor').getBoundingClientRect();
+    var one = document.querySelector('#floor .clone');
+    var hang = (one ? one.offsetHeight : fr.height * K.height * C.floor.layouts[layoutName()].scale / 100) * 1.12;   // held clone, hand to toes
+    return { x: r.left + r.width / 2, y: r.top - hang * 0.9, w: r.width, hang: hang, fr: fr };
+  }
+  function overVat(e) {
+    var d = dropSpot();
+    if (!d) return false;
+    return Math.abs(e.clientX - d.x) < d.w * 0.65 && Math.abs(e.clientY - d.y) < d.hang * 0.6;
+  }
+  function placeArrow() {
+    var a = document.getElementById('cloneArrow'), d = dropSpot();
+    if (!a || !d) return;
+    a.style.left = ((d.x - d.fr.left) / d.fr.width * 100) + '%';
+    a.style.top = ((d.y - d.fr.top) / d.fr.height * 100) + '%';
+  }
+  function showArrow(on) {
+    var a = document.getElementById('cloneArrow');
+    if (on && !a) {
+      a = U.el('div', 'clone-arrow'); a.id = 'cloneArrow';
+      a.innerHTML = '<svg viewBox="0 0 60 80" aria-hidden="true"><path d="M18 4h24v34h14L30 76 4 38h14z"/></svg><span>Drop here!</span>';
+      document.getElementById('floor').appendChild(a);
+    }
+    if (a) { a.hidden = !on; if (on) placeArrow(); }
   }
   function markVat(on) {
     var vat = document.querySelector('#floor .part-vat');
@@ -211,6 +236,7 @@ GW.clones = (function () {
   function maybeEnd() {
     if (!active || active.clones.some(function (c) { return !c.done; })) return;
     var s = active.s; active = null;
+    showArrow(false);
     nextAt = performance.now() + interval(s);
   }
 
@@ -219,6 +245,7 @@ GW.clones = (function () {
     var s = active.s;
     active.clones.forEach(function (c) { if (!c.done && c.item) s.items[c.item.id] += c.stolen; c.el.remove(); });
     document.getElementById('cloneAlert').hidden = true;
+    var a = document.getElementById('cloneArrow'); if (a) a.remove();
     active = null; nextAt = performance.now() + interval(s);
     GW.ui.buildShelf(s);
   }
