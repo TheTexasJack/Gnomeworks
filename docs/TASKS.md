@@ -44,6 +44,11 @@ Producers for the 7 empty stations: Golem Pilot (1.6M), Boiler Stoker (20M), Gno
 
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
+Tiny Monster info card (Nathan, 2026-11-02, future):
+- Tap a Tiny Monster on the shelf to open an info screen: the monster's art big, its full name, tier, how many you own, and lore text.
+- Needs a Gnomeworks lore bible first (the gnomeverse: the machine, the factory, where Tiny Monsters come from, the four forms: normal, glowing, goopy, evil).  Write the lore with Nathan before the per-monster entries.
+- Could extend to junk items and Number Twos later.
+
 Packing Line notes (Nathan, 2026-11-02, still open):
 - The player drags one item tile from the shelf into a box.  That one drag ships a big batch, since shipping one sock out of 13.7M means nothing.
 - Open question: a fixed batch per box (something like a million), or a "drop how many?" choice.  Leaning toward a fixed big number, since a gnome factory runs on nonsense, not logic.  To be tuned in play.
