@@ -36,6 +36,12 @@ The event clicker.  Discussed 2026-11-02.
 
 - Nothing; numbers settled 2026-11-02 (below).  Tune after play.
 
+**Prey and hits (decided 2026-11-02)**
+
+- No hit poses.  A kill shows a cartoon burst image instead; Nathan sends a few colors and Claudia picks what reads best on the Day and Night hunts.
+- Death sound: Alex records a silly "UGH!" (a few takes get picked at random).  Then she gets the "Voices by Alex" credit.
+- **Banana Monster boss**, requested by Jarrett's 6-year-old daughter: takes **3 hits**, white or yellow burst, and tiny bananas fly out when he goes down.  Draft: rarer than normal prey, and worth more food to make the 3 bolts worth it.
+
 **Numbers (approved 2026-11-02)**
 
 - Requirements: own a Gnome Cloner and the Wild Magic upgrade, plus 100B cogs.
