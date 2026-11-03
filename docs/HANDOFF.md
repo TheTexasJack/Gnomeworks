@@ -59,3 +59,4 @@ Expect side requests from Jarrett and his 6-year-old daughter too (she asked for
 | [INVENTORY.md](INVENTORY.md) | Every collectible (generated) |
 | [TASKS.md](TASKS.md) | Status, backlog, known issues |
 | [DECISIONS.md](DECISIONS.md) | Why things are the way they are |
+| [lore/](lore/README.md) | The world, and the planned Lore tab |

@@ -113,6 +113,10 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 
 **Needs first:** a Gnomeworks lore bible (the machine, the factory, where Tiny Monsters come from, what makes a form glowing, goopy, or evil), written with Nathan before any per-monster entries.  Could extend to junk and Number Twos later.
 
+## Lore tab
+
+**Discussion stage (2026-11-03).**  A Lore tab in the style of the Mass Effect codex: players who want to know more can tap and read, and players who just want to click never have to.  Sections: Tiny Monsters (the shelf info card), hunt creatures (Alex's), regions, junk groups, the factory, and TNP Corp.  Writing lives in [lore/](lore/README.md).
+
 ## Rogue Gnome (Jarrett's idea)
 
 **Talked through, not approved.**

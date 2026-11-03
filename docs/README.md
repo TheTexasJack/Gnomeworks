@@ -14,6 +14,7 @@ Start here if you are picking this project up cold, whether you are a person or 
 | [INVENTORY.md](INVENTORY.md) | Every collectible, generated from the config by `node tools/inventory.js` |
 | [TASKS.md](TASKS.md) | Current status, what is waiting on whom, known issues, and the backlog |
 | [DECISIONS.md](DECISIONS.md) | Why things are the way they are, with dates |
+| [lore/](lore/README.md) | The world: factory, TNP Corp, regions, Tiny Monsters, hunt creatures, junk groups |
 
 ## The project in one paragraph
 
