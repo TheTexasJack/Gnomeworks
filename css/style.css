@@ -527,8 +527,19 @@ body.paused .wild-target, body.paused .wild-target * { animation-play-state: pau
   animation: arrowBob .7s ease-in-out infinite alternate; }
 .clone-arrow svg { width: 100%; height: auto; display: block; fill: #9dff5a; stroke: #1d4a06; stroke-width: 3;
   filter: drop-shadow(0 0 .8cqh rgba(150,255,90,1)) drop-shadow(0 0 2cqh rgba(150,255,90,.7)); }
+.clone-hint {
+  position: absolute; left: 50%; top: 2.5%; transform: translateX(-50%); z-index: 7; pointer-events: none; text-align: center;
+  padding: 1.2cqh 3cqw; border-radius: 1.6cqh; border: .4cqh solid #ffd23f; white-space: nowrap;
+  background: rgba(40,8,6,.86); box-shadow: 0 0 0 .4cqh #2a1206, 0 .8cqh 2cqh rgba(0,0,0,.6);
+}
+.clone-hint b { display: block; font-size: 4.6cqh; color: #fff3c4; text-shadow: 0 .3cqh 0 #000; }
+.clone-hint span { display: block; font-size: 3cqh; color: #ffd9a0; margin-top: .3cqh; }
+.clone-hint.holding { border-color: #9dff5a; background: rgba(8,36,6,.88); }
+.clone-hint.holding b { color: #eaffd6; }
+.clone-hint.holding span { color: #b6ff8a; }
+@media (max-width: 720px) { .clone-hint b { font-size: 3.4cqh; } .clone-hint span { font-size: 2.3cqh; } }
 .clone-arrow span { display: block; position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%); white-space: nowrap;
-  font-weight: bold; font-size: 2.6cqh; color: #eaffd6; text-shadow: 0 0 .6cqh #000, 0 0 1.2cqh rgba(120,255,60,.9); }
+  font-weight: bold; font-size: 3.8cqh; color: #eaffd6; text-shadow: 0 0 .6cqh #000, 0 0 1.2cqh rgba(120,255,60,.9); }
 #floor.dragging-clone .clone-arrow { animation-duration: .35s; }
 #floor.dragging-clone .clone-arrow svg { filter: drop-shadow(0 0 1.2cqh rgba(150,255,90,1)) drop-shadow(0 0 3cqh rgba(150,255,90,.9)); }
 @keyframes arrowBob { from { transform: translate(-50%, -62%); } to { transform: translate(-50%, -38%); } }
@@ -611,3 +622,4 @@ body.paused .clone-img { animation-play-state: paused; }
 .night .rails .progress-row, .night .rails .crew {
   background: var(--rivets), linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.6)), url('../assets/bg/boards_night.webp') center / 400px auto repeat;
 }
+.clone-arrow.label-left span { left: auto; right: 30%; transform: none; }

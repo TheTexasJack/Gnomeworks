@@ -37,7 +37,6 @@ GW.clones = (function () {
       active.clones.push(makeClone(floor, v, L, i));
     }
     showArrow(true);
-    GW.ui.toast('Clone Attack!  Grab the escaped clones and drop them back in the vat!', 'super');
   }
 
   function makeClone(floor, v, L, i) {
@@ -62,6 +61,7 @@ GW.clones = (function () {
       el.setPointerCapture(e.pointerId);
       c.held = true; el.classList.add('held'); c.img.src = IMG(c.v, 'held');
       document.getElementById('floor').classList.add('dragging', 'dragging-clone');
+      hint(true);
       placeArrow();
       moveTo(c, e);
     });
@@ -72,6 +72,7 @@ GW.clones = (function () {
       document.getElementById('floor').classList.remove('dragging');
       markVat(false);
       document.getElementById('floor').classList.remove('dragging-clone');
+      hint(false);
       if (overVat(e)) sploosh(c); else drop(c);
     };
     el.addEventListener('pointerup', up);
@@ -108,7 +109,9 @@ GW.clones = (function () {
   function placeArrow() {
     var a = document.getElementById('cloneArrow'), d = dropSpot();
     if (!a || !d) return;
-    a.style.left = ((d.x - d.fr.left) / d.fr.width * 100) + '%';
+    var xp = (d.x - d.fr.left) / d.fr.width * 100;
+    a.style.left = xp + '%';
+    a.classList.toggle('label-left', xp > 70);   // keep the label on screen near the right edge
     a.style.top = ((d.y - d.fr.top) / d.fr.height * 100) + '%';
   }
   function showArrow(on) {
@@ -119,6 +122,21 @@ GW.clones = (function () {
       document.getElementById('floor').appendChild(a);
     }
     if (a) { a.hidden = !on; if (on) placeArrow(); }
+    // Big instruction banner across the top of the floor, up for the whole attack.
+    var h = document.getElementById('cloneHint');
+    if (on && !h) {
+      h = U.el('div', 'clone-hint'); h.id = 'cloneHint';
+      document.getElementById('floor').appendChild(h);
+    }
+    if (h) { h.hidden = !on; if (on) hint(false); }
+  }
+  function hint(holding) {
+    var h = document.getElementById('cloneHint');
+    if (!h) return;
+    h.classList.toggle('holding', !!holding);
+    h.innerHTML = holding
+      ? '<b>Now drop him in the vat!</b><span>Let go on the green arrow</span>'
+      : '<b>Clones are stealing your junk!</b><span>Grab a clone and drop him in the vat</span>';
   }
   function markVat(on) {
     var vat = document.querySelector('#floor .part-vat');
@@ -246,6 +264,7 @@ GW.clones = (function () {
     active.clones.forEach(function (c) { if (!c.done && c.item) s.items[c.item.id] += c.stolen; c.el.remove(); });
     document.getElementById('cloneAlert').hidden = true;
     var a = document.getElementById('cloneArrow'); if (a) a.remove();
+    var h = document.getElementById('cloneHint'); if (h) h.remove();
     active = null; nextAt = performance.now() + interval(s);
     GW.ui.buildShelf(s);
   }
