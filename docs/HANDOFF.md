@@ -15,9 +15,9 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 
 - The player drags one item tile from the shelf into a box; one drag ships a big batch.
 - Reshaped 2026-11-03: shipping **drains** the shelf (that's the point; an empty shelf sends players back to the clicker).  Every item stops at 1.  Open and Close buttons on a shipping door.
-- Shipping pays its **own currency** (draft: stamps), never cogs.  Box upgrades are speed upgrades.
-- Later layers, all drafts: stamp shop and a Packing Gnome, orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of our company vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
-- **Next math step:** stamp prices and stamp-shop costs.  Agree the numbers with Nathan, then build the core (layer 1).
+- Shipping pays its **own currency** called **Stonks**, never cogs.  Stamps are a separate shipping mechanic (right stamp for the right region).  Box upgrades are speed upgrades.
+- Later layers, all drafts: Stonks shop and a Packing Gnome, orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of our company vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
+- **Next math step:** Stonks prices and Stonks-shop costs.  Agree the numbers with Nathan, then build the core (layer 1).
 - Waiting on Nathan and Mara for the company name, lore, and region maps (they feed shipping labels).
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.

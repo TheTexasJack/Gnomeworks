@@ -71,7 +71,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **Shipping removes items from the shelf.**  Players can sell off everything they have.
 - **Every item stops at 1.**  The last one is the display copy, so collections and shelf tiles never go dark.
 - **Open and Close buttons.**  Open raises the shipping door and makes the shelf draggable.  Close shuts it, and the player goes back to the clicker.
-- **Shipping does not pay cogs.**  It pays its own currency (draft name: postage stamps).
+- **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
 - **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
 
@@ -84,8 +84,9 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 
 **Ideas on the table (drafts, build in this order)**
 
-1. **Core:** Open and Close, drag to box, stamps, stop at 1.
-2. **Stamp shop:** box upgrades, then a Packing Gnome that packs on his own while the door is open (the factory-automation step), faster belt, wider door.
+1. **Core:** Open and Close, drag to box, Stonks, stop at 1.
+   - **Stamps are a shipping cost and a mechanic, separate from the currency.**  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  TNP fakes carry Christmas-looking stamps (snowflakes, holly).  Stonks can buy stamp sheets for newly unlocked regions.
+2. **Stonks shop:** box upgrades, then a Packing Gnome that packs on his own while the door is open (the factory-automation step), faster belt, wider door.
 3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
 4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:
    - A height chart painted on the dock wall.  Gnomes are short.  A "gnome" past the line is a TNP elf in a borrowed hat.
