@@ -61,7 +61,7 @@ GW.sfx = (function () {
   // ---- recorded samples (a few real sounds; everything else is made in code) ----
   var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3' };
   function loadSamples() {
-    if (!window.fetch) return;
+    if (!window.fetch || location.protocol === 'file:') return;   // opened from disk: use the code-made sounds
     Object.keys(SAMPLE_FILES).forEach(function (k) {
       fetch(SAMPLE_FILES[k]).then(function (r) { return r.arrayBuffer(); })
         .then(function (buf) { return new Promise(function (ok, bad) { ctx.decodeAudioData(buf, ok, bad); }); })

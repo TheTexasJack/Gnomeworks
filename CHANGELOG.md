@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.43 (2026-11-02)
+
+- Opening the game straight from disk (index.html on your computer) no longer logs an error trying to load the splash sound; it quietly uses the code-made sploop instead.
+
 ## v0.2.0-draft.42 (2026-11-02)
 
 - Clone Attack: the SPLOOSH is now a real recorded splash ("Splash 2" by freesound_community on Pixabay, trimmed to 1.4 seconds, 12 KB).  The code-made sploop stays as a fallback if the file can't load.  Credited in Info.
