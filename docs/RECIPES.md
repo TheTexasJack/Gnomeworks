@@ -32,6 +32,19 @@ Skip flags, people, hand gestures, skin tones, religious or political symbols, a
 6. Optional: a chatter sound in `js/sfx.js` `chatter()` under the new id.
 7. Check the floor screenshot from the smoke test at both sizes and adjust `h`, overlap, and hat spots.
 
+## Give a picture a Night version
+
+1. Make the night picture the **exact same size** as the day one (so stations, plates, and hatches still line up), and name it `<name>_night.webp` next to it.
+2. If code loads the picture (machine wall, floors, Help Wanted, title), add the pair to `NIGHT` in `js/theme.js`.  If CSS loads it, add a `.night ...` rule in the Night section at the bottom of `css/style.css`.
+3. Check both themes: Info > Look > Theme.
+
+## Add an event
+
+1. Copy the shape of `js/wild.js`: `tick(now, s)` to start it on a timer, `shift(ms)` for Pause, `start()` to fire it.  Add its script to `index.html` before `main.js`, and call its `tick` and `shift` from `main.js`.
+2. Put every number in a new `CONFIG` block.  Pay out in "seconds of production."
+3. Real taps only (`e.isTrusted`), a reduced-motion version, and a `?debug=1` button.
+4. Write it up in `docs/EVENTS.md`.
+
 ## Add a hat
 
 1. Art: one hat, worn view (no inside of the brim showing).  `art.py fit` into `assets/hats/hat_<id>.webp`.

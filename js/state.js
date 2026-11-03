@@ -3,7 +3,7 @@ window.GW = window.GW || {};
 
 GW.state = (function () {
   var C = GW.CONFIG;
-  var SOURCES = ['tap', 'tiny', 'tinier', 'warrior', 'stick', 'cloner', 'matryoshka'];
+  var SOURCES = ['tap', 'tiny', 'tinier', 'warrior', 'stick', 'cloner', 'matryoshka', 'wizard'];
 
   function fresh() {
     var s = {

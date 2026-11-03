@@ -2,13 +2,13 @@
 
 A gnome-powered clicker game made for The Stoned Gnome.  Tap the little gear, the little gear turns the big gear, and every full turn of the big gear pops something out of the hatch in the wall.
 
-Current version: **v0.2.0-draft.50** (Layer 2 in progress: real art)
+Current version: **v0.2.0-draft.51** (Layer 2 in progress: real art)
 
 ## Play it
 
 * **Online:** once GitHub Pages is on, the game lives at https://thetexasjack.github.io/Gnomeworks/ (capital G matters)
 * **On your own computer:** download the repo and open `index.html` in a browser.  No install or build step needed.
-* **Testing helpers:** add `?debug=1` to the address for buttons that add cogs, spawn a rare popup, or skip ahead an hour.  Add `?hat=witch` (or any hat id from the config) to preview a month's hat.
+* **Testing helpers:** add `?debug=1` to the address for buttons that add cogs, spawn a rare popup, fire Wild Magic or a Clone Attack, or skip ahead an hour.  Add `?hat=witch` (or any hat id from the config) to preview a month's hat.
 
 ## How it is built
 
@@ -20,11 +20,14 @@ Plain HTML, CSS, and JavaScript.  No frameworks and no build tools, so it can be
 | `css/style.css` | The oak and brass tavern look |
 | `js/config.js` | **The tuning file.**  Items, upgrades, costs, drop rates, hats, season |
 | `js/util.js` | Number formatting and small helpers |
-| `js/sfx.js` | Sound effects, synthesized in code (no sound files) |
+| `js/theme.js` | Day and Night themes |
+| `js/sfx.js` | Sound effects, mostly synthesized in code, plus a couple of recorded ones |
 | `js/state.js` | Saving and loading (this browser only) |
 | `js/economy.js` | All the math: rates, taps, item drops, shop, popups, offline progress |
 | `js/gears.js` | Draws the wall, the meshing gears, and the hatch |
 | `js/ui.js` | Shop, shelf, stats, gnome crew, effects |
+| `js/wild.js` | Wild Magic event |
+| `js/clones.js` | Clone Attack event |
 | `js/main.js` | Input, the game loop, popups, autosave |
 
 ## Project docs
@@ -47,15 +50,16 @@ Open `js/config.js`, change a number, reload.  Everything the game uses is in th
 * Taps are capped at 20 per second.
 * Shiny popups appear every 45 to 120 seconds whether or not you are tapping, and only a real tap can claim them.  No gnome or upgrade can ever grab one.
 * Legendaries only come from "hot" (gold) shinies, which means you tapped the gear in the last 30 seconds.
+* Events (Wild Magic, Clone Attack) pay out only for real taps and drags.
 
 ## Art
 
-Placeholder emoji and simple drawn gnomes are used until the real art lands.  See `assets/README.md` for the art spec and file names.
+Mara's painted art for the gnomes, machine, floors, banners, monsters, and events; Twemoji for junk items.  See [docs/ASSETS.md](docs/ASSETS.md).
 
 ## Roadmap
 
-* v0.1: core game, placeholder art  (this version)
-* v0.2: real art and extra juice
+* v0.1: core game, placeholder art
+* v0.2: real art, Night theme, and the first events  (this version)
 * v0.3: accounts (Discord or email sign-in) and leaderboard
 * v0.4: admin tools and visit stats
 * v0.5: security pass and a setup guide for the shop

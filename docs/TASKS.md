@@ -1,19 +1,19 @@
 # Tasks and status
 
-Last updated 2026-11-02, at v0.2.0-draft.20.
+Last updated 2026-11-02, at v0.2.0-draft.51.
 
 ## Where we are
 
 | Layer | Version | Status |
 | --- | --- | --- |
 | Core game: gears, items, shop, saves | v0.1 | Done |
-| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections | v0.2 | Mostly done (draft.19), polish items below |
+| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections, Night theme, first events | v0.2 | Mostly done (draft.51), polish items below |
 | Accounts and leaderboard | v0.3 | Waiting on Jarrett's yes or no |
 | Admin tools and stats | v0.4 | Planned |
 | Security pass and Jarrett's guide | v0.5 | Planned |
 | Live on the Wix site | v1.0 | Planned |
 
-Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 147 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 3 Legendary Treasures), 6 hats.
+Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 147 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 3 Legendary Treasures), 6 hats, 2 events (Wild Magic, Clone Attack) plus shinies, Day and Night themes.  Details: [EVENTS.md](EVENTS.md).  Unbuilt designs: [DESIGNS.md](DESIGNS.md).
 
 ## Waiting on Jarrett
 
@@ -34,27 +34,24 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 ## Claudia (ready to build when asked)
 
 - [ ] Drop in the fixed hats and re-check every hat spot.
-- [ ] Phone header polish: the cog count wraps under the title sign.
+- [ ] Gear-framed shop badge for the Gnome Wizard (his icon is a placeholder).
+- [ ] Math pass: Megagnome, the hunt, the Packing Line, and mid-to-late pacing.  Then build the Megagnome.
+- [ ] Packing Line, after the math pass.
+- [ ] Version stamps on CSS and JS links (`style.css?v=...`) so a new release never mixes old and new files.
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 
+## Done since the last docs pass (draft.20 to draft.51)
+
+Interface: oak-and-brass buttons, pause and sound moved beside the tabs, plank then clipboard panels (shop and, on desktop, the shelf), Mara's and Nathan's banners (desktop and phone), wider desktop layout with side rails for the next-item gauge and crew, seamless page boards, TAP label fades after a minute, brighter shelf labels, monster names shrink to fit.  Content: Gnome Wizard and five Wizard upgrades, 16 more junk items (12 per group), Control Knobs, basic slime (Jellybub), pixel Lucky Purple Underpants, painted Diamond Pickaxe and Magical Sword, new Warrior description.  Events: Wild Magic, Clone Attack.  Themes: Night.  Tools: `docs/INVENTORY.md` generator.  Full list in `CHANGELOG.md`.
+
 ## Proposal backlog (all drafts, nothing approved yet)
 
-Producers for the 7 empty stations: Golem Pilot (1.6M), Boiler Stoker (20M), Gnome Bard (260M), Shroom Farmer (3.6B), Airship Captain (51B), Clockwork Chrononaut (750B), Moonsmith (11T).
+Producers for the 6 empty stations (the Wizard took the Golem Pilot's 1.6M slot): Golem Pilot, Boiler Stoker (20M), Gnome Bard (260M), Shroom Farmer (3.6B), Airship Captain (51B), Clockwork Chrononaut (750B), Moonsmith (11T).
 
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
-Tiny Monster info card (Nathan, 2026-11-02, future):
-- Tap a Tiny Monster on the shelf to open an info screen: the monster's art big, its name, and lore text.  No owned count (the shelf tile already shows it).
-- Needs a Gnomeworks lore bible first (the gnomeverse: the machine, the factory, where Tiny Monsters come from, the four forms: normal, glowing, goopy, evil).  Write the lore with Nathan before the per-monster entries.
-- Could extend to junk items and Number Twos later.
-
-Packing Line notes (Nathan, 2026-11-02, still open):
-- The player drags one item tile from the shelf into a box.  That one drag ships a big batch, since shipping one sock out of 13.7M means nothing.
-- Open question: a fixed batch per box (something like a million), or a "drop how many?" choice.  Leaning toward a fixed big number, since a gnome factory runs on nonsense, not logic.  To be tuned in play.
-- Percentage idea: each drag ships a percentage of that item, and box upgrades raise it (draft names: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%).  Pay per box, not per item, so shrinking batches don't shrink the reward.
-- Junk can ship down to zero, since it refills in seconds.  Rares (Tiny Monsters, Number Twos, Legendary Treasures) either stay off the line or always keep one.  Leaning junk-only.
-- **Before building any Packing Line mechanics: play with the math first.**  Model the batch sizes, refill rates, and payouts across early, mid, and late game, and settle the numbers with Nathan before writing game code.
+The Packing Line, the Megagnome and his hunt, the Tiny Monster info card, and the Rogue are written up in [DESIGNS.md](DESIGNS.md).
 
 Open question in the proposal: should packed items come out of the shelf counts, or should shipping be free?
 
@@ -71,4 +68,6 @@ Open question in the proposal: should packed items come out of the shelf counts,
 | Goopamice and Hexamice are drawn in a sketchier style | Accepted |
 | "Glimmander" is 10 letters (target 9) | Accepted |
 | The `v0.1.0` git tag never made it to GitHub | Accepted; history lives in commit messages and the changelog |
+| Gnome Wizard clicks were missing from Stats | Fixed in draft.51 |
+| Two of Nathan's three day board images are unused spares | Accepted, kept for later |
 | Sounds are fairly quiet on desktop speakers | Watch it; raise `fxBus` gain in `sfx.js` if testers agree |

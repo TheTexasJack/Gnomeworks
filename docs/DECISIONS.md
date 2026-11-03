@@ -6,6 +6,18 @@ Why the game is the way it is.  Newest first within each day.
 
 | Decision | Why |
 | --- | --- |
+| Megagnome is one per player, spends event charges on his own, and charges come from a crossbow hunt that costs cogs per shot | Idle pull for events, a cog sink, and real effort up front so auto-help is earned.  Feeding him gnomes was dropped: it broke price math, and real play showed counts stay under 100. |
+| Hunt prey is wild game, not Tiny Monsters | The monsters are the collection; shooting them feels wrong |
+| Event instructions can be turned off (Info > Look) | Experienced players may not want the big signs |
+| Clone Attack sends 4 clones, with a big sign and a "Drop here!" arrow | Jarrett's playtest: 2 was too easy, and the vat drop wasn't obvious |
+| Clones never steal from someone who isn't on the Shop Floor | Losing junk you couldn't see is unfair; they give up after 20 seconds |
+| Night theme, Auto by default, Evil saved as a future unlockable skin | Night is what people expect from dark mode; Evil is louder, better as a reward |
+| Recorded sounds allowed for a few moments (splash, clone giggle) | A real splash and Alex's giggle beat the synth; code-made fallbacks stay |
+| Wider desktop layout (1800px) with side rails | Wide screens had dead gutters, and the next-item gauge and crew were below the fold |
+| Junk groups are 12 items (4 per shelf row) | Full rows on phones and desktop |
+| Clipboard panels (Mara's art, sliced in code) | Worksite feel while keeping the wood |
+| Wizard spins in place with only his own painted magic | The extra swirl was too much; saved for Wild Magic |
+| Every Packing Line and Megagnome number goes through a math pass before code | Both touch the whole economy |
 | Move the repo off Nathan's personal GitHub before sharing (Jarrett picks the name) | The account name shows in the game's address.  Saves are tied to the address, so the final home must be set before launch. |
 | Badges redrawn with red beards | Match the red-haired Shop Floor gnomes |
 | Hats go on the floor gnomes per month; skeletons and dolls stay hatless | Mara's hats fit the gnome heads; the others have no single head to place them on |

@@ -1,6 +1,6 @@
 # Gnomeworks project docs
 
-Start here if you are picking this project up cold, whether you are a person or an AI assistant in a fresh session.  These docs describe the game as of **v0.2.0-draft.19** (2026-11-02).
+Start here if you are picking this project up cold, whether you are a person or an AI assistant in a fresh session.  These docs describe the game as of **v0.2.0-draft.51** (2026-11-02).
 
 | Doc | What it covers |
 | --- | --- |
@@ -8,6 +8,9 @@ Start here if you are picking this project up cold, whether you are a person or 
 | [ARCHITECTURE.md](ARCHITECTURE.md) | How the game is put together: files, the game loop, save data, the economy math, the views, sound |
 | [ASSETS.md](ASSETS.md) | The art pipeline from Mara's images to the game, folder map, naming, and the placement numbers |
 | [RECIPES.md](RECIPES.md) | Step-by-step: add an item, a monster, a gnome type, a hat, a sound; start a new season; ship a release |
+| [EVENTS.md](EVENTS.md) | Shinies, Wild Magic, Clone Attack: how each works, config keys, art, sound, playtest notes |
+| [DESIGNS.md](DESIGNS.md) | Features talked through but not built (Megagnome and the hunt, Packing Line, monster info card, Rogue), with what's decided and what's open |
+| [INVENTORY.md](INVENTORY.md) | Every collectible, generated from the config by `node tools/inventory.js` |
 | [TASKS.md](TASKS.md) | Current status, what is waiting on whom, known issues, and the backlog |
 | [DECISIONS.md](DECISIONS.md) | Why things are the way they are, with dates |
 
@@ -23,7 +26,8 @@ Gnomeworks is a browser clicker game for The Stoned Gnome game store, meant to b
 | Jarrett | Owner of The Stoned Gnome.  Final say on branding, music, accounts, the repo home, and which features ship. |
 | Mara | Nathan's ChatGPT.  Makes the art through ChatGPT image generation (called CI2.5 in this project). |
 | Claudia | Nathan's Claude.  Writes and tests the code, processes the art, and keeps these docs. |
-| Testers | Nathan's sisters, playing the live build on phones. |
+| Testers | Nathan's sisters and Jarrett, playing the live build. |
+| Alex | Nathan's daughter.  Recorded the clone giggle. |
 
 ## How we work
 

@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.51 (2026-11-02)
+
+- Stats: the Gnome Wizards' clicks now show (and count toward the total), and a new Events section counts Wild Magic spells, spells fully broken, clones splooshed, and clones that got away.
+- Docs pass: new docs/EVENTS.md (every built event) and docs/DESIGNS.md (Megagnome and the hunt, Packing Line, monster info card, Rogue, with what's decided and what's open).  TASKS, ARCHITECTURE, DECISIONS, RECIPES, and both READMEs brought up to date.
+
 ## v0.2.0-draft.50 (2026-11-02)
 
 - New setting in Info > Look: "Show event instructions."  On by default.  Turn it off to hide the big Clone Attack signs and the "Drop here!" label (the glowing arrow stays, so you can still find the vat).
