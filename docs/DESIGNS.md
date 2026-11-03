@@ -34,9 +34,13 @@ The event clicker.  Discussed 2026-11-02.
 
 **Open**
 
-- His requirement checklist (draft: own a Gnome Cloner and the Wild Magic upgrade, since those are the events he helps with).
-- The hunt cooldown length and the shot price.
-- How many shots per hunt.
+- Nothing; numbers settled 2026-11-02 (below).  Tune after play.
+
+**Numbers (approved 2026-11-02)**
+
+- Requirements: own a Gnome Cloner and the Wild Magic upgrade, plus 100B cogs.
+- Hunt cooldown: 10 minutes.
+- 5 bolts per hunt; each shot costs 5 seconds of production.
 
 **Art needed (Mara)**
 
