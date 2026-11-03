@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.58';
+GW.VERSION = '0.2.0-draft.59';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -355,11 +355,13 @@ GW.CONFIG = {
       cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17, z: 2, overlap: 3 }, { img: '../clones/vat_full', h: 13, anim: 'none', cls: 'part-vat' }] },
       matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] },
       wizard:     { label: 'Wizard', slot: 5, parts: [{ img: 'wizard_static', h: 17, anim: 'spin' }] },
-      mega:       { label: 'Megagnome', slot: 6, parts: [{ img: '../mega/mega_idle', h: 22, anim: 'none', cls: 'part-mega' }] }
+      mega:       { label: 'Megagnome', slot: 6, parts: [{ img: '../mega/mega_idle', h: 22, anim: 'jiggle', cls: 'part-mega' }] }
     },
 
     // Squish and boing.  Faster gnome types bounce faster, within these limits (seconds per bounce).
-    anim: { slowest: 2.2, fastest: 0.45, boing: 0.55 },
+    anim: { slowest: 2.2, fastest: 0.45, boing: 0.55,
+      // The Megagnome is not a producer, so he jiggles on his own beat (seconds between jiggles, jiggle length).
+      megaEvery: 2.4, megaJiggle: 0.9 },
 
     // Warrior weapons, pinned to his fists.  len = length as a share of his height.
     // fist / fistAct = [x %, y %] of the warrior picture.  rot = weapon angle in each pose.

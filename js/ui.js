@@ -466,6 +466,11 @@ GW.ui = (function () {
     Object.keys(anims).forEach(function (pid) {
       var a = anims[pid];
       if (!a.parts.length || now < a.next) return;
+      if (pid === 'mega') {
+        a.next = now + A.megaEvery * 1000 * (0.85 + Math.random() * 0.3);
+        a.parts.forEach(function (p) { playPart(p, A.megaJiggle * 1000, calm); });
+        return;
+      }
       var rate = pid === 'warrior' ? (s.producers.warrior || 0) * E.producerDef('warrior').swipesPerSec : (r[pid] || 0);
       var period = Math.max(A.fastest, Math.min(A.slowest, A.slowest / (1 + Math.log10(1 + rate))));
       if (calm) period = Math.max(period, 1.4);
@@ -485,6 +490,19 @@ GW.ui = (function () {
         setTimeout(function () { e.classList.add('act'); }, d * 0.36);
         setTimeout(function () { e.classList.remove('act'); }, d * 1.6);
       }
+      return;
+    }
+    if (p.anim === 'jiggle') {
+      // Megagnome: a soft belly jiggle while he stands around.  Skipped mid-chomp and when motion is reduced.
+      var im = e.querySelector('.f-static');
+      if (calm || (im && im.src.indexOf('mega_idle') < 0)) return;
+      e.animate([
+        { transform: 'scale(1, 1)' },
+        { transform: 'scale(1.045, 0.955)', offset: 0.25 },
+        { transform: 'scale(0.975, 1.03)', offset: 0.5 },
+        { transform: 'scale(1.015, 0.99)', offset: 0.75 },
+        { transform: 'scale(1, 1)' }
+      ], { duration: d, easing: 'ease-in-out' });
       return;
     }
     if (p.anim === 'spin') {

@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.59 (2026-11-03)
+
+- The Megagnome gives a soft belly jiggle every couple of seconds on the Shop Floor, so he no longer stands frozen while the crew works.  He holds still while chomping and burping, and on devices set to reduce motion.  Timing lives in `floor.anim` (`megaEvery`, `megaJiggle`).
+
 ## v0.2.0-draft.58 (2026-11-03)
 
 - The Megagnome goes hatless again; the hats didn't suit him.
