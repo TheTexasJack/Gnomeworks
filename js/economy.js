@@ -70,12 +70,21 @@ GW.econ = (function () {
   }
 
   // ---- item drops ----
-  function machinePool() { return C.items.filter(function (i) { return C.tiers[i.tier].weight > 0; }); }
+  // The drop pool and its per-tier split never change while the game runs, so build them once.
+  var _pool = null, _byTier = null;
+  function machinePool() {
+    if (!_pool) _pool = C.items.filter(function (i) { return C.tiers[i.tier].weight > 0; });
+    return _pool;
+  }
+  function poolTier(t) {
+    if (!_byTier) { _byTier = {}; machinePool().forEach(function (i) { (_byTier[i.tier] = _byTier[i.tier] || []).push(i); }); }
+    return _byTier[t] || [];
+  }
 
   function rollOne() {
     var tiers = Object.keys(C.tiers).filter(function (t) { return C.tiers[t].weight > 0; });
     var tier = U.pickWeighted(tiers, function (t) { return C.tiers[t].weight; });
-    var pool = machinePool().filter(function (i) { return i.tier === tier; });
+    var pool = poolTier(tier);
     if (!pool.length) pool = machinePool();
     return pool[Math.floor(Math.random() * pool.length)];
   }
@@ -92,7 +101,7 @@ GW.econ = (function () {
     Object.keys(C.tiers).forEach(function (t) { totalW += C.tiers[t].weight; });
     var assigned = 0;
     Object.keys(C.tiers).forEach(function (t) {
-      var items = pool.filter(function (i) { return i.tier === t; });
+      var items = poolTier(t);
       if (!items.length || !C.tiers[t].weight) return;
       var share = n * C.tiers[t].weight / totalW;
       items.forEach(function (item) {
@@ -138,7 +147,22 @@ GW.econ = (function () {
 
   function tick(s, dt, events) {
     var r = rates(s);
-    Object.keys(r).forEach(function (k) { if (k !== 'total' && r[k] > 0) addClicks(s, k, r[k] * dt, events, 1); });
+    // Credit each gnome type its clicks, but turn the gear and roll items once for all of them.
+    var all = 0;
+    Object.keys(r).forEach(function (k) {
+      if (k === 'total' || !(r[k] > 0)) return;
+      var n = r[k] * dt;
+      s.clicks[k] = (s.clicks[k] || 0) + n; all += n;
+    });
+    if (all > 0) {
+      s.cogs += all; s.cogsSeen += all;
+      s.bigAngle += all * 360 / clicksPerItem(s);
+      if (s.bigAngle >= 360) {
+        var turns = Math.floor(s.bigAngle / 360);
+        s.bigAngle -= turns * 360;
+        grantItems(s, turns, events, 1);
+      }
+    }
     s.stats.playSeconds += dt;
     var cps = r.total;
     if (cps > s.stats.bestCps) s.stats.bestCps = cps;

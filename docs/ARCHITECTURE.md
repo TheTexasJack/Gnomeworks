@@ -25,7 +25,7 @@ The rule that keeps this sane: **economy reports, UI draws.**  `GW.econ` changes
 `requestAnimationFrame` drives everything.  Each frame:
 
 1. Work out `dt` (seconds since last frame).  If paused, push timers forward and skip the economy.  If `dt` is over 5 seconds (the tab was asleep), run the offline catch-up instead of a normal tick so thousands of items do not try to animate.
-2. `econ.tick(s, dt, events)` adds gnome clicks for the elapsed time.
+2. `econ.tick(s, dt, events)` adds gnome clicks for the elapsed time.  Each gnome type is credited in Stats, but the gear turns and items roll once per tick for all of them together (rolling per type was the late-game lag).
 3. The big gear's display angle chases the logical angle, capped at 540 degrees a second so it never blurs.
 4. Queued item pops drain at up to 3 a second; any extra become a "+N items" note.
 5. Shinies spawn, glow gold when "hot," and expire.  Events tick: `GW.wild.tick`, `GW.clones.tick` (see [EVENTS.md](EVENTS.md)).

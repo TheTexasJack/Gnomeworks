@@ -546,6 +546,7 @@ GW.ui = (function () {
     setTimeout(function () { p.remove(); }, 1300);
   }
 
+  var tickerOn = null;
   var toastTimer;
   function toast(msg, cls) {
     var t = $('#toast');
@@ -559,7 +560,11 @@ GW.ui = (function () {
   function updateHeader(s) {
     $('#cogs').textContent = fmt(s.cogs);
     $('#cps').textContent = fmt(E.rates(s).total);
-    $('#nextBar').style.setProperty('--p', (s.bigAngle / 360 * 100).toFixed(1) + '%');
+    // Next-item bar: a real fill while items come slowly; once they come faster than the eye can
+    // follow, it becomes a steady ticker (a CSS animation, no per-frame work).
+    var bar = $('#nextBar'), fast = E.rates(s).total / E.clicksPerItem(s) > C.machine.tickerItemsPerSec;
+    if (fast !== tickerOn) { tickerOn = fast; bar.parentNode.classList.toggle('ticker', fast); }
+    if (!fast) bar.style.setProperty('--p', (s.bigAngle / 360 * 100).toFixed(1) + '%');
     $('#itemsMade').textContent = fmt(s.itemsMade);
   }
 

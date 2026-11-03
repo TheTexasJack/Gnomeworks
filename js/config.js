@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.51';
+GW.VERSION = '0.2.0-draft.52';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -19,6 +19,7 @@ GW.CONFIG = {
   currency: { name: 'Cogs', icon: '⚙️' },
 
   machine: {
+    tickerItemsPerSec: 2,      // past this many items a second the next-item bar becomes a steady ticker
     baseClicksPerItem: 20,      // clicks for one full turn of the big gear (one item)
     minClicksPerItem: 3,
     maxVisualItemsPerSecond: 3, // extra items still count, they just skip the pop animation

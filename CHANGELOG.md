@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.52 (2026-11-02)
+
+- Smoother late game.  The gnome math used to roll item drops once per gnome type every frame; now it rolls once for all of them, and the drop tables are built once instead of every roll.  On a save like Nathan's (17M clicks a second) the game math dropped from about 400 ms to about 40 ms per 5 seconds, and the worst frame hitch from about 150 ms to about 40 ms.
+- Next-item bar: once items come faster than 2 a second (when the fill was just a blur), it becomes a steady brass ticker that marches at a constant pace.  Slow games keep the real fill.  Tunable as `machine.tickerItemsPerSec`.
+
 ## v0.2.0-draft.51 (2026-11-02)
 
 - Stats: the Gnome Wizards' clicks now show (and count toward the total), and a new Events section counts Wild Magic spells, spells fully broken, clones splooshed, and clones that got away.
