@@ -56,6 +56,13 @@ Producers for the 6 empty stations (the Wizard took the Golem Pilot's 1.6M slot)
 
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
+Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
+
+- Many proposal items will likely be dropped or changed.
+- The Alchemy Cauldron overlaps the Clone game that already exists, so it is likely dropped or folded in.
+- Nathan will push for the Golem Pilot and Expeditions later (send-a-crew-out missions, as in FF14 ventures and STO duty officers).
+- Current focus: the lore, the region maps, and the Packing Line outline, since shipping closes the game loop.
+
 The Packing Line, the Megagnome and his hunt, the Tiny Monster info card, and the Rogue are written up in [DESIGNS.md](DESIGNS.md).
 
 Open question in the proposal: should packed items come out of the shelf counts, or should shipping be free?
