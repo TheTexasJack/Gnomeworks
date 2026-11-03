@@ -14,10 +14,11 @@ For a fresh session picking up Gnomeworks.  Written 2026-11-03 at **v0.2.0-draft
 Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS.md#packing-line).  The short version:
 
 - The player drags one item tile from the shelf into a box; one drag ships a big batch.
-- Leaning: each drag ships a **percentage** of that item, raised by box upgrades (draft names Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%).  Pay **per box**, not per item.
-- Leaning **junk-only** (junk refills in seconds; rares stay off the line).
-- Open: what a box pays, whether shipping removes items from the shelf, whether it's an event (pops up) or a station you open any time.
-- **Rule from Nathan: do the math pass first.**  Model batch sizes, refill rates, and payouts at early, mid, and late game (use his real numbers above), agree the numbers with him, then build.
+- Reshaped 2026-11-03: shipping **drains** the shelf (that's the point; an empty shelf sends players back to the clicker).  Every item stops at 1.  Open and Close buttons on a shipping door.
+- Shipping pays its **own currency** (draft: stamps), never cogs.  Box upgrades are speed upgrades.
+- Later layers, all drafts: stamp shop and a Packing Gnome, orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of our company vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
+- **Next math step:** stamp prices and stamp-shop costs.  Agree the numbers with Nathan, then build the core (layer 1).
+- Waiting on Nathan and Mara for the company name, lore, and region maps (they feed shipping labels).
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.
 

@@ -61,22 +61,52 @@ The event clicker.  Discussed 2026-11-02.
 
 ## Packing Line
 
-Nathan's sorting game, first mini-game in line.  Discussed 2026-11-02.
+Nathan's sorting game, first mini-game in line.  Discussed 2026-11-02, reshaped 2026-11-03.
+
+The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line is where the stock goes out.  Emptying the shelf is the point.  An empty shelf sends the player back to the gear to click more.  A shipping game grows out of the clicker.
 
 **Decided**
 
 - The player drags **one item tile** from the shelf into a box.  One drag ships a big batch.
-- **Play with the math first** before building any mechanics: batch sizes, refill rates, and payouts across early, mid, and late game.
+- **Shipping removes items from the shelf.**  Players can sell off everything they have.
+- **Every item stops at 1.**  The last one is the display copy, so collections and shelf tiles never go dark.
+- **Open and Close buttons.**  Open raises the shipping door and makes the shelf draggable.  Close shuts it, and the player goes back to the clicker.
+- **Shipping does not pay cogs.**  It pays its own currency (draft name: postage stamps).
+- Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
+- **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
 
-**Ideas on the table**
+**Math pass notes (2026-11-03, model at early, mid, and Nathan's day-2 numbers)**
 
-- Percentage per drag, raised by box upgrades (draft: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%).  Pay per box, not per item, so shrinking batches don't shrink the reward.
-- Junk can ship down to zero (it refills in seconds).  Rares either stay off the line or always keep one.  Leaning junk-only.
-- Open from the proposal: do packed items leave the shelf counts, or is shipping free?
+- Paying per item at the item drop bonus is worthless: under 2 seconds of production even for a 90% drag late game.  Any per-item price has to scale with the game (for example, priced in gear turns).
+- A percentage drag takes about that percentage of ~35 minutes to grow back, at every stage, because growth compounds.  Shoebox holes refill in minutes, Container holes in about half an hour.
+- Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
+- Box upgrades (draft: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) are **speed** upgrades: fewer drags to empty a pile.
+
+**Ideas on the table (drafts, build in this order)**
+
+1. **Core:** Open and Close, drag to box, stamps, stop at 1.
+2. **Stamp shop:** box upgrades, then a Packing Gnome that packs on his own while the door is open (the factory-automation step), faster belt, wider door.
+3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
+4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:
+   - A height chart painted on the dock wall.  Gnomes are short.  A "gnome" past the line is a TNP elf in a borrowed hat.
+   - Fake trucks with picture tells: candy-cane mudflaps, a jingle on arrival, hoofprints, a plate reading N0RTH.  One tell early, two or three later.
+   - Bad paperwork: items not in the catalog, snowflake stamps, shipping labels whose region doesn't match the order.
+   - Picture tells first, so a 6-year-old can play without reading.
+5. **The stock ticker:** a screen with two lines, our company vs TNP Corp.  The second game's goal is keeping our line above theirs.  Getting fooled or missing orders pushes TNP up, clean shipments push ours up.
+   - A scoreboard only: players never buy, sell, or bet on shares (standing no-gambling rule).
+   - TNP moves only while the player works shifts, so nobody comes back to a lost lead after being away.
+   - Mistakes should be recoverable (a meter that clean shifts push back down), avoiding losses that stack forever.
+6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).
+
+**Waiting on Nathan and Mara:** the name of our company, the lore, and the region maps.  Regions feed the shipping labels (where stock goes) and the Tiny Monster info cards (where monsters live), so the shelf, the maps, and the dock share one world.
+
+**Earlier idea, replaced:** a truck every few minutes with a fixed number of boxes, paid per box in seconds of production.  Dropped once draining the shelf became the point.
 
 ## Tiny Monster info card
 
 **Decided:** tap a Tiny Monster on the shelf to open an info screen with the art big, its name, and lore.  No owned count (the tile shows it).
+
+**Ties to the Packing Line:** the region maps Nathan and Mara are making can say where each monster lives, and the same regions feed shipping labels.
 
 **Needs first:** a Gnomeworks lore bible (the machine, the factory, where Tiny Monsters come from, what makes a form glowing, goopy, or evil), written with Nathan before any per-monster entries.  Could extend to junk and Number Twos later.
 
