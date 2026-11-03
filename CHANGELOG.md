@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.42 (2026-11-02)
+
+- Clone Attack: the SPLOOSH is now a real recorded splash ("Splash 2" by freesound_community on Pixabay, trimmed to 1.4 seconds, 12 KB).  The code-made sploop stays as a fallback if the file can't load.  Credited in Info.
+
 ## v0.2.0-draft.41 (2026-11-02)
 
 - Clone Attack: the drop spot moved up.  Since you hold a clone by the pinching hand, you now drop him with him dangling over the mouth of the vat, not on top of it.  The vat glows green while he's in the right spot.

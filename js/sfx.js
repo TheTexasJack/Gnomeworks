@@ -41,6 +41,7 @@ GW.sfx = (function () {
       noiseBuf = ctx.createBuffer(1, len, ctx.sampleRate);
       var d = noiseBuf.getChannelData(0);
       for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      loadSamples();
       apply();
     }
     if (ctx.state === 'suspended') ctx.resume();
@@ -56,6 +57,25 @@ GW.sfx = (function () {
   }
 
   function vary(f) { return f * (0.96 + Math.random() * 0.08); }
+
+  // ---- recorded samples (a few real sounds; everything else is made in code) ----
+  var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3' };
+  function loadSamples() {
+    if (!window.fetch) return;
+    Object.keys(SAMPLE_FILES).forEach(function (k) {
+      fetch(SAMPLE_FILES[k]).then(function (r) { return r.arrayBuffer(); })
+        .then(function (buf) { return new Promise(function (ok, bad) { ctx.decodeAudioData(buf, ok, bad); }); })
+        .then(function (b) { samples[k] = b; })
+        .catch(function () { /* stays on the code-made fallback */ });
+    });
+  }
+  function sample(k, vol) {
+    if (!samples[k]) return false;
+    var src = ctx.createBufferSource(), g = ctx.createGain();
+    src.buffer = samples[k]; g.gain.value = vol || 1;
+    src.connect(g); g.connect(fxBus); src.start();
+    return true;
+  }
 
   // ---- building blocks ----
   function tone(o) {
@@ -210,6 +230,7 @@ GW.sfx = (function () {
   // ...and a deep gloopy SPLOOP with bubbles when one goes back in the vat.
   function sploop() {
     if (!ready()) return;
+    if (sample('sploosh', 0.9)) return;   // the recorded splash; the lines below are the fallback
     tone({ f: 260, to: 60, dur: 0.38, vol: 0.32, type: 'sine', glide: 0.3 });
     noise({ f: 700, to: 160, q: 1.5, dur: 0.32, vol: 0.18, filter: 'lowpass' });
     [0.22, 0.3, 0.37, 0.46].forEach(function (at) { tone({ f: vary(600 + Math.random() * 500), to: 1300, dur: 0.06, vol: 0.06, at: at }); });
