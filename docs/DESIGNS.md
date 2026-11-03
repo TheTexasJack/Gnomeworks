@@ -4,6 +4,8 @@ Features that have been talked through but have no code.  Each one lists what Na
 
 ## Megagnome and the hunt
 
+**Built in draft.54** (see [EVENTS.md](EVENTS.md)).  Kept here as the design record.
+
 The event clicker.  Discussed 2026-11-02.
 
 **Decided**

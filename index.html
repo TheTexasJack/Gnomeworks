@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Gnomeworks: a gnome-powered clicker from The Stoned Gnome.">
   <title>Gnomeworks</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=0.2.0-draft.54">
   <script>
     // Day / Night theme, set before anything draws so there's no flash.  'auto' follows the device.
     (function () {
@@ -93,14 +93,14 @@
                 <option value="night">Night</option>
               </select>
             </label>
-            <label class="setting"><input type="checkbox" id="hintsOn"> Show event instructions (the big signs during Clone Attack)</label>
+            <label class="setting"><input type="checkbox" id="hintsOn"> Show event instructions (the big signs during Clone Attack and the hunt)</label>
             <h3>Sound</h3>
             <label class="setting">Effects volume <input type="range" id="fxVol" min="0" max="100" step="5"></label>
             <label class="setting"><input type="checkbox" id="chatterOn"> Gnome chatter on the Shop Floor</label>
             <p class="fine">Playing your own music?  Game sounds mix in on top of it on most phones.  The speaker button next to the tabs turns all game sound off.</p>
             <h3>Start over</h3>
             <button type="button" id="resetBtn" class="btn danger">Reset my progress</button>
-            <p class="fine">Junk item art: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a>, licensed CC-BY 4.0.  Splash sound: freesound_community on <a href="https://pixabay.com/sound-effects/" target="_blank" rel="noopener">Pixabay</a>.</p>
+            <p class="fine">Junk item art: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a>, licensed CC-BY 4.0.  Splash sound: freesound_community on <a href="https://pixabay.com/sound-effects/" target="_blank" rel="noopener">Pixabay</a>.  Voices by Alex Gore.</p>
             <p class="fine">Gnomeworks <span data-version></span></p>
           </div>
         </div>
@@ -111,16 +111,18 @@
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/config.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/util.js"></script>
-  <script src="js/sfx.js"></script>
-  <script src="js/state.js"></script>
-  <script src="js/economy.js"></script>
-  <script src="js/gears.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/wild.js"></script>
-  <script src="js/clones.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/config.js?v=0.2.0-draft.54"></script>
+  <script src="js/theme.js?v=0.2.0-draft.54"></script>
+  <script src="js/util.js?v=0.2.0-draft.54"></script>
+  <script src="js/sfx.js?v=0.2.0-draft.54"></script>
+  <script src="js/state.js?v=0.2.0-draft.54"></script>
+  <script src="js/economy.js?v=0.2.0-draft.54"></script>
+  <script src="js/gears.js?v=0.2.0-draft.54"></script>
+  <script src="js/ui.js?v=0.2.0-draft.54"></script>
+  <script src="js/wild.js?v=0.2.0-draft.54"></script>
+  <script src="js/clones.js?v=0.2.0-draft.54"></script>
+  <script src="js/mega.js?v=0.2.0-draft.54"></script>
+  <script src="js/hunt.js?v=0.2.0-draft.54"></script>
+  <script src="js/main.js?v=0.2.0-draft.54"></script>
 </body>
 </html>

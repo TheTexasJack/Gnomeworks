@@ -265,6 +265,10 @@ GW.ui = (function () {
       ['Spells fully broken', s.stats.wildCleared || 0],
       ['Clones splooshed', s.stats.clonesSplooshed || 0],
       ['Clones that got away', s.stats.clonesEscaped || 0],
+      ['Megagnome helps', s.stats.megaHelps || 0],
+      ['Hunts', s.mega ? s.mega.hunts : 0],
+      ['Hunt kills', s.mega ? s.mega.kills : 0],
+      ['Banana Monsters beaten', s.mega ? s.mega.bossKills : 0],
       ['Cogs', null],
       ['Lifetime cogs', s.cogsSeen],
       ['From items', s.bonusCogs.items],
@@ -301,11 +305,12 @@ GW.ui = (function () {
   }
 
   function stationSig(s) {
-    return E.weapon(s).value + '#' + Object.keys(F.stations).map(function (pid) {
-      return pid + ':' + (s.producers[pid] || 0) + ':' + F.stations[pid].parts.map(function (p) { return partImg(s, pid, p).img; }).join(',');
+    return E.weapon(s).value + '#' + (s.mega ? s.mega.food : 0) + '#' + Object.keys(F.stations).map(function (pid) {
+      return pid + ':' + countFor(s, pid) + ':' + F.stations[pid].parts.map(function (p) { return partImg(s, pid, p).img; }).join(',');
     }).join('|');
   }
 
+  function countFor(s, pid) { return pid === 'mega' ? (s.mega && s.mega.owned ? 1 : 0) : (s.producers[pid] || 0); }
   var crewSig = '', floorSig = '', floorBuilt = false, slotEls = [];
   function updateCrew(s) {
     var sig = stationSig(s);
@@ -327,6 +332,17 @@ GW.ui = (function () {
       group.appendChild(cnt);
       box.appendChild(group);
     });
+    if (s.mega && s.mega.owned) {
+      var mg = el('div', 'crew-group crew-mega');
+      mg.title = 'The Megagnome: ' + s.mega.food + ' of ' + C.mega.maxFood + ' food';
+      var mi = el('img', 'crew-thumb'); mi.alt = 'Megagnome'; mi.src = 'assets/icons/icon_mega.webp';
+      mg.appendChild(mi);
+      var mc = el('span', 'crew-count');
+      mc.appendChild(el('span', 'crew-name', 'Megagnome '));
+      mc.appendChild(document.createTextNode('\uD83C\uDF56' + s.mega.food + '/' + C.mega.maxFood));
+      mg.appendChild(mc);
+      box.appendChild(mg);
+    }
     if (!box.children.length) box.appendChild(el('div', 'crew-empty', 'No gnomes yet.  Tap the little gear!'));
     updateFloor(s);
   }
@@ -368,7 +384,7 @@ GW.ui = (function () {
     floorSig = sig;
     var used = {};
     Object.keys(F.stations).forEach(function (pid) {
-      var cfg = F.stations[pid], slot = slotEls[cfg.slot], n = s.producers[pid] || 0;
+      var cfg = F.stations[pid], slot = slotEls[cfg.slot], n = countFor(s, pid);
       used[cfg.slot] = true;
       slot.st.innerHTML = '';
       delete anims[pid];
@@ -405,7 +421,7 @@ GW.ui = (function () {
         parts.push({ el: wrap, anim: part.anim || 'boing', hasAction: !!act });
       });
       anims[pid] = { parts: parts, next: performance.now() + Math.random() * 800 };
-      slot.plate.textContent = cfg.label + ' \u00D7' + fmt(n);
+      slot.plate.textContent = pid === 'mega' ? cfg.label : cfg.label + ' \u00D7' + fmt(n);
       slot.plate.classList.remove('locked');
     });
     slotEls.forEach(function (slot, i) { if (!used[i]) helpWanted(slot); });

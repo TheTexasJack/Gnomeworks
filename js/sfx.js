@@ -59,7 +59,13 @@ GW.sfx = (function () {
   function vary(f) { return f * (0.96 + Math.random() * 0.08); }
 
   // ---- recorded samples (a few real sounds; everything else is made in code) ----
-  var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3', hehe: 'assets/sfx/hehe.mp3' };
+  var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3', hehe: 'assets/sfx/hehe.mp3', yum: 'assets/sfx/yum.mp3', burp: 'assets/sfx/burp.mp3',
+    ugh_high1: 'assets/sfx/ugh_high1.mp3', ugh_high2: 'assets/sfx/ugh_high2.mp3', ugh_high3: 'assets/sfx/ugh_high3.mp3',
+    ugh_short: 'assets/sfx/ugh_short.mp3', ugh_splat: 'assets/sfx/ugh_splat.mp3', ugh_low: 'assets/sfx/ugh_low.mp3',
+    ugh_choke: 'assets/sfx/ugh_choke.mp3' };
+  // Alex's hunt voices.  Regular kills pick one at random (never the same twice in a row).
+  // The Banana boss grunts low when hit and chokes when he goes down.  ugh_disgust.mp3 is a spare.
+  var UGH_KILL = ['ugh_high1', 'ugh_high2', 'ugh_high3', 'ugh_short', 'ugh_splat'], lastUgh = '';
   function loadSamples() {
     if (!window.fetch || location.protocol === 'file:') return;   // opened from disk: use the code-made sounds
     Object.keys(SAMPLE_FILES).forEach(function (k) {
@@ -237,7 +243,38 @@ GW.sfx = (function () {
     [0.22, 0.3, 0.37, 0.46].forEach(function (at) { tone({ f: vary(600 + Math.random() * 500), to: 1300, dur: 0.06, vol: 0.06, at: at }); });
   }
 
+  // Megagnome and the hunt.
+  function yum() {
+    if (!ready()) return;
+    if (sample('yum', 1)) return;
+    tone({ f: 180, to: 120, dur: 0.18, vol: 0.2, type: 'triangle' });
+    tone({ f: 150, to: 90, dur: 0.2, vol: 0.18, type: 'triangle', at: 0.2 });
+  }
+  function burp() {
+    if (!ready()) return;
+    if (sample('burp', 1)) return;
+    tone({ f: 95, to: 70, dur: 0.5, vol: 0.3, type: 'sawtooth', lp: 500 });
+    noise({ f: 300, q: 2, dur: 0.45, vol: 0.12 });
+  }
+  function twang() {
+    if (!ready()) return;
+    tone({ f: vary(220), to: 140, dur: 0.22, vol: 0.18, type: 'triangle' });
+    noise({ f: 2400, to: 900, q: 3, dur: 0.12, vol: 0.12 });
+  }
+  // Until Alex records her "UGH!": a quick low grunt.
+  function ugh(kind) {
+    if (!ready()) return;
+    if (kind === 'bossHit' && sample('ugh_low', 1)) return;
+    if (kind === 'bossDie' && sample('ugh_choke', 1)) return;
+    var pick = UGH_KILL.filter(function (k) { return k !== lastUgh; });
+    lastUgh = pick[Math.floor(Math.random() * pick.length)];
+    if (sample(lastUgh, 1)) return;
+    tone({ f: vary(210), to: 120, dur: 0.22, vol: 0.2, type: 'sawtooth', lp: 900 });
+    noise({ f: 500, q: 2, dur: 0.12, vol: 0.1 });
+  }
+
   return {
+    yum: yum, burp: burp, twang: twang, ugh: ugh,
     hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },

@@ -26,7 +26,7 @@ GW.wild = (function () {
     var box = document.getElementById('rareSlot');
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var pool = junk(), now = performance.now();
-    active = { s: s, left: W.targets, caught: 0, ends: now + W.durationSeconds * 1000, els: [], style: st };
+    active = { s: s, left: W.targets, caught: 0, ends: now + W.durationSeconds * 1000, els: [], style: st, megaAt: now + GW.CONFIG.mega.firstCrackSeconds * 1000 };
     var bonusIdx = st === 'storm' ? Math.floor(Math.random() * W.targets) : -1;
     var spots = [];
     for (var i = 0; i < W.targets; i++) {
@@ -70,7 +70,7 @@ GW.wild = (function () {
     active.els.push(b);
   }
 
-  function hit(b, bonus) {
+  function hit(b, bonus, byMega) {
     if (!active || b.classList.contains('caught')) return;
     var s = active.s;
     b.classList.add('caught');
@@ -81,7 +81,7 @@ GW.wild = (function () {
     document.getElementById('fx').appendChild(burst);
     setTimeout(function () { burst.remove(); }, 700);
     GW.ui.floatText(parseFloat(b.style.left) + 4, parseFloat(b.style.top), '+' + C.currency.icon + ' ' + U.fmt(amt), bonus ? 'big' : '');
-    GW.sfx.click(); GW.sfx.sprocket();
+    if (byMega) { GW.sfx.yum(); GW.mega.chomp(true); } else { GW.sfx.click(); GW.sfx.sprocket(); }
     setTimeout(function () { b.remove(); }, 350);
     active.caught += 1; active.left -= 1;
     if (active.left <= 0) finish(true);
@@ -110,13 +110,25 @@ GW.wild = (function () {
 
   // Called every frame while the game is running.
   function tick(now, s) {
-    if (active) { if (now >= active.ends) finish(false); return; }
+    if (active) {
+      if (now >= active.ends) { finish(false); return; }
+      // The Megagnome snaps up a regular spinning item now and then.  The golden one is for real hands.
+      if (now >= active.megaAt && GW.mega.canHelp()) {
+        var t = active.els.filter(function (b) { return !b.classList.contains('caught') && !b.classList.contains('wt-bonus') && b.isConnected; })[0];
+        if (t && GW.mega.spend('wild')) {
+          active.megaAt = now + GW.CONFIG.mega.helpEverySeconds * 1000;
+          GW.ui.floatText(parseFloat(t.style.left), parseFloat(t.style.top) - 6, 'CHOMP!', 'big');
+          hit(t, false, true);
+        }
+      }
+      return;
+    }
     if (!unlocked(s)) { nextAt = 0; return; }
     if (!nextAt) { nextAt = now + interval(s); return; }
     if (now >= nextAt && !document.hidden) start(s);
   }
   // Called while paused so nothing expires or starts.
-  function shift(ms) { if (active) active.ends += ms; if (nextAt) nextAt += ms; }
+  function shift(ms) { if (active) { active.ends += ms; active.megaAt += ms; } if (nextAt) nextAt += ms; }
 
   return { start: start, tick: tick, shift: shift, isActive: function () { return !!active; } };
 })();

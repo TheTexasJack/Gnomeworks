@@ -2,6 +2,15 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.54 (2026-11-03)
+
+- Version stamps: every CSS and JS link carries the version (`main.js?v=0.2.0-draft.54`), so after a release browsers pull a matching set instead of mixing new and cached files.  `tools/stamp.js` writes them; the smoke test fails if they're stale.
+- The hunt opens with a big "Feed the Megagnome!" sign explaining the pull-back and food, and his shop row says "Tap here to go hunting."  Both follow the Info > Look > "Show event instructions" setting.
+- **The Megagnome.**  Listed in the shop from the start with his checklist (a Gnome Cloner, the Wild Magic upgrade) and a 100B price, plus a "ready in about..." countdown once the checklist is done.  One per player, events only: he stands on the Shop Floor and spends his food by himself.  During a Clone Attack he waits 4 seconds, then eats a loose clone every 2.5 seconds (the junk comes back).  If you're on the Machine view when clones break loose, he eats them before anyone gets out.  During Wild Magic he snaps up regular spinning items (never the golden one).  Chomp and burp sounds by Nathan; his food shows on his shop icon, crew badge, and the Stats tab.
+- **The hunt.**  Tap his shop row to go hunting (every 10 minutes).  A box pops up over the machine: prey runs back and forth, you drag down to pull the crossbow back, sideways to aim, and let go to fire.  5 bolts, each shot costs 5 seconds of production, you can miss.  One hit kills (8 kinds of beast, each with its own color of Mara's goo splat).  Each kill is 1 food, up to 5.  Day and Night forest backdrops.
+- **The Banana Monster** (requested by Jarrett's daughter): a rare boss that takes 3 hits, sheds bananas, and bursts into a shower of them for 3 food.  Beating him can drop the new 4th Legendary Treasure, the **Banana Monster Trophy** (25% a time, guaranteed by the 4th boss), which never comes from shinies.
+- Hunt voices by Alex: five "UGH!" takes picked at random for kills (never the same twice in a row), a low grunt when the Banana boss is hit, and a choke when he goes down.  "Voices by Alex Gore" is credited in Info.
+
 ## v0.2.0-draft.53 (2026-11-02)
 
 - Safety ceiling: cogs, items, clicks, and every other running total stop at 1e300 (`maxNumber` in config), just below where JavaScript numbers break into Infinity.  Nobody is near it (late saves are around 1e10), but a months-long save can never break.

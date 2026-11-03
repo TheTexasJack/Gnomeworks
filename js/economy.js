@@ -241,7 +241,7 @@ GW.econ = (function () {
     if (tier) {
       s.stats.pity = 0;
       if (tier === 'legendary') s.stats.legPity = 0;
-      var pool = C.items.filter(function (i) { return i.tier === tier; });
+      var pool = C.items.filter(function (i) { return i.tier === tier && !i.huntOnly; });
       var item = U.pickWeighted(pool, function (i) { return s.items[i.id] ? 1 : 3; }); // favors ones you lack
       var isNew = !s.items[item.id];
       s.items[item.id] = (s.items[item.id] || 0) + 1;

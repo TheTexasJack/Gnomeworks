@@ -53,10 +53,24 @@ Everything that interrupts the normal tap-and-idle loop.  Built events are first
 | Stats | `clonesSplooshed`, `clonesEscaped` |
 | Playtest notes | Jarrett (2026-11-02): didn't know to drop them in the vat and felt overwhelmed for a second (good).  Fixed with the big sign and arrow.  2 clones felt too easy; now 4. |
 
+### The Megagnome and the hunt (draft.54)
+
+| | |
+| --- | --- |
+| Get him | Shop row "The Megagnome," always listed: needs a Gnome Cloner, the Wild Magic upgrade, and 100B cogs.  One per player. |
+| What he does | Events only.  Spends food automatically: eats a loose clone every 2.5 seconds after a 4-second "first crack" for the player; eats clones before they escape if you're on the Machine view; catches regular Wild Magic items (never the golden one).  Shinies stay hands-only. |
+| Food | Max 5.  Shown on his shop icon, crew badge, and Stats. |
+| The hunt | Tap his row (every 10 minutes).  Drag down to pull back, sideways to aim (slingshot style), release to fire.  5 bolts, 5 seconds of production per shot, you can miss.  Prey runs back and forth and speeds up after each kill.  Kill = 1 food.  The hunt ends when bolts run out or he's full. |
+| Boss | Banana Monster, 15% of spawns: 3 hits, 3 food, bananas everywhere.  Drops the Banana Monster Trophy (Legendary, `huntOnly`) 25% of the time, guaranteed by the 4th boss kill. |
+| Code | `js/mega.js` (shop row, food, poses, helping), `js/hunt.js` (the mini-game); hooks in `clones.js` (`megaHelp`) and `wild.js` (`megaAt`) |
+| Config | `mega` |
+| Art | `assets/mega/` (poses, crossbow, bolt, 8 prey, banana boss, Day and Night backdrops), `icons/icon_mega`, `treasures/banana_trophy` |
+| Sound | `assets/sfx/yum.mp3`, `burp.mp3` (Nathan); Alex's `ugh_high1/2/3`, `ugh_short`, `ugh_splat` (random kills), `ugh_low` (boss hit), `ugh_choke` (boss death), `ugh_disgust` (spare); the twang is code-made |
+| Save | `s.mega { owned, food, nextHunt, hunts, kills, bossKills, trophyPity, eaten }`; `stats.megaHelps`, `stats.huntShots` |
+
 ## Planned (not built)
 
 | Event | Status | Where |
 | --- | --- | --- |
-| Megagnome hunt (crossbow mini-game feeding the Megagnome) | Design agreed, numbers not set | [DESIGNS.md](DESIGNS.md#megagnome-and-the-hunt) |
 | Packing Line (drag shelf items into boxes) | Ideas gathered, math pass first | [DESIGNS.md](DESIGNS.md#packing-line) |
 | Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions | Proposal ideas only | Jarrett's proposal doc |

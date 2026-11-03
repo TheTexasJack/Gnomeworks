@@ -15,6 +15,7 @@ window.GW = window.GW || {};
     if (E.buy(s, kind, id)) { SFX.buy(); UI.updateShop(s); UI.updateCrew(s); UI.updateHeader(s); }
     else SFX.nope();
   });
+  GW.mega.buildRow();
   // Browsers only allow sound after a real tap or key press.
   ['pointerdown', 'keydown'].forEach(function (ev) {
     document.addEventListener(ev, function (e) { if (e.isTrusted) SFX.unlock(); }, true);
@@ -57,7 +58,7 @@ window.GW = window.GW || {};
 
   machine.addEventListener('pointerdown', function (e) {
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
-    if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert')) return;
+    if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt')) return;
     e.preventDefault();
     if (!allowTap()) return;
     var box = machine.getBoundingClientRect();
@@ -179,6 +180,7 @@ window.GW = window.GW || {};
       handleEvents(ev);
       GW.wild.tick(now, s);
       GW.clones.tick(now, dt, s);
+      GW.hunt.tick(Math.min(dt, 0.1));
     }
 
     // Big gear display chases the logical angle, capped so it never blurs into nothing.
@@ -202,7 +204,7 @@ window.GW = window.GW || {};
     slowTimer += dt;
     if (slowTimer > 0.25) {
       slowTimer = 0;
-      UI.updateShop(s); UI.updateCrew(s); UI.updateStats(s);
+      UI.updateShop(s); UI.updateCrew(s); UI.updateStats(s); GW.mega.update(s);
       if (shelfDirty) { UI.buildShelf(s); shelfDirty = false; }
     }
     saveTimer += dt;
@@ -338,6 +340,9 @@ window.GW = window.GW || {};
       w.addEventListener('click', function () { GW.wild.start(s, st); });
       bar.appendChild(w);
     });
+    var mg = U.el('button', '', 'Mega');
+    mg.addEventListener('click', function () { s.mega.owned = true; s.mega.nextHunt = 0; UI.updateCrew(s); UI.rebuildFloor(); });
+    bar.appendChild(mg);
     var cl = U.el('button', '', 'Clones');
     cl.addEventListener('click', function () { GW.clones.trigger(s); });
     bar.appendChild(cl);

@@ -1,6 +1,6 @@
 # Recipes
 
-Every recipe ends the same way: bump `GW.VERSION` in `js/config.js`, add a line to `CHANGELOG.md`, run `node tools/smoke-test.js`, commit, push.
+Every recipe ends the same way: bump `GW.VERSION` in `js/config.js`, run `node tools/stamp.js`, add a line to `CHANGELOG.md`, run `node tools/smoke-test.js`, commit, push.
 
 ## Add a junk item
 
@@ -65,6 +65,7 @@ Everything is in `js/config.js`: costs, rates, odds, shiny timing, offline cap, 
 
 ```
 # 1. bump GW.VERSION in js/config.js (and the version line in README.md)
+node tools/stamp.js          # stamps the version on every CSS and JS link in index.html
 # 2. add the top entry to CHANGELOG.md
 node tools/smoke-test.js
 git add -A

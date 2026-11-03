@@ -20,8 +20,20 @@ GW.clones = (function () {
   // ---------- start: warn on the Machine view, or go straight to the floor ----------
   function trigger(s) {
     if (active) return;
-    active = { s: s, phase: 'waiting', waitEnds: performance.now() + K.waitForFloorSeconds * 1000, clones: [] };
+    active = { s: s, phase: 'waiting', waitEnds: performance.now() + K.waitForFloorSeconds * 1000, clones: [], count: K.count };
     if (s.view === 'floor') { launch(); return; }
+    // Not watching the floor: the Megagnome deals with what he can before anyone escapes.
+    var ate = 0;
+    while (ate < active.count && GW.mega.spend('clone')) ate++;
+    if (ate) {
+      var amt = reward(s) * ate;
+      s.cogs += amt; s.cogsSeen += amt;
+      s.stats.clonesSplooshed = (s.stats.clonesSplooshed || 0) + ate;
+      active.count -= ate;
+      GW.sfx.burp();
+      GW.ui.toast('The Megagnome ate ' + ate + ' escaped clone' + (ate > 1 ? 's' : '') + ' while you were busy.  BURP.  +' + C.currency.icon + ' ' + U.fmt(amt), 'lucky');
+      if (active.count <= 0) { active = null; nextAt = performance.now() + interval(s); return; }
+    }
     var alertEl = document.getElementById('cloneAlert');
     alertEl.hidden = false;
     GW.sfx.hehe();
@@ -31,8 +43,9 @@ GW.clones = (function () {
     var s = active.s, L = K.paths[layoutName()], floor = document.getElementById('floor');
     document.getElementById('cloneAlert').hidden = true;
     active.phase = 'run'; active.layout = layoutName();
+    active.megaAt = performance.now() + C.mega.firstCrackSeconds * 1000;
     var pool = K.variants.slice();
-    for (var i = 0; i < K.count; i++) {
+    for (var i = 0; i < active.count; i++) {
       var v = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
       active.clones.push(makeClone(floor, v, L, i));
     }
@@ -284,15 +297,40 @@ GW.clones = (function () {
       if (active.clones.some(function (c) { return !c.done && !c.el.isConnected; })) { abort(); return; }
       if (s.view !== 'floor') { shift(dt * 1000); return; }   // frozen while you're not watching
       active.clones.forEach(function (c) { step(c, Math.min(dt, 0.1)); });
+      if (active && now >= active.megaAt) megaHelp(now);
       return;
     }
     if (!(s.producers.cloner > 0)) { nextAt = 0; return; }
     if (!nextAt) { nextAt = now + interval(s); return; }
     if (now >= nextAt && !document.hidden) trigger(s);
   }
+  // The Megagnome eats one loose clone (not one you're holding) every few seconds while he has food.
+  function megaHelp(now) {
+    if (!GW.mega.canHelp()) return;
+    var c = active.clones.filter(function (k) { return !k.done && !k.held; })[0];
+    var m = GW.mega.mouth();
+    if (!c || !m || !GW.mega.spend('clone')) return;
+    active.megaAt = now + C.mega.helpEverySeconds * 1000;
+    var s = active.s;
+    c.done = true;
+    c.el.style.transition = 'left .45s ease-in, top .45s ease-in, transform .45s ease-in, opacity .45s';
+    c.el.style.left = m.x + '%'; c.el.style.top = m.y + '%';
+    c.el.style.transform = 'translate(-50%, -100%) scale(.25)'; c.el.style.opacity = '0';
+    c.el.style.pointerEvents = 'none';
+    setTimeout(function () { c.el.remove(); }, 480);
+    GW.mega.chomp();
+    var amt = reward(s);
+    s.cogs += amt; s.cogsSeen += amt;
+    s.stats.clonesSplooshed = (s.stats.clonesSplooshed || 0) + 1;
+    if (c.item) { s.items[c.item.id] = (s.items[c.item.id] || 0) + c.stolen; GW.ui.buildShelf(s); }
+    GW.ui.toast('CHOMP!  The Megagnome ate a clone' + (c.item ? ' and spat out ' + U.fmt(c.stolen) + ' ' + c.item.name : '') + '.', 'lucky');
+    maybeEnd();
+  }
+
   function shift(ms) {
     if (nextAt) nextAt += ms;
     if (active) {
+      if (active.megaAt) active.megaAt += ms;
       if (active.waitEnds) active.waitEnds += ms;
       active.clones.forEach(function (c) { c.wanderEnds += ms; });
     }

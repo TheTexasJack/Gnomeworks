@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.53';
+GW.VERSION = '0.2.0-draft.54';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -59,6 +59,24 @@ GW.CONFIG = {
       wide: { start: [84, 80], loop: [[3, 80], [9.5, 56], [3.5, 55], [12.5, 29], [88, 29], [88, 55, 'f'], [90.5, 55], [97, 80], [84, 80]], exit: [[112, 80]], wander: [70, 92] },
       tall: { start: [84, 80], loop: [[4, 80], [13, 36], [87, 36], [87, 52, 'f'], [93, 52], [98, 80], [84, 80]], exit: [[112, 80]], wander: [68, 92] }
     }
+  },
+
+  // The Megagnome: one per player, events only.  He spends food automatically to help with
+  // Clone Attack and Wild Magic.  Food comes from the crossbow hunt.
+  mega: {
+    cost: 100000000000, requires: { producer: 'cloner', oneTime: 'wiz_wild' },
+    maxFood: 5, firstCrackSeconds: 4, helpEverySeconds: 2.5,
+    huntCooldownSeconds: 600, bolts: 5, shotSeconds: 5, minShotTaps: 20,
+    preySpeed: 16, speedUpPerHit: 1.15, boltFlightSeconds: 0.28,
+    bossChance: 0.15, bossHits: 3, bossFood: 3, trophyChance: 0.25, trophyPity: 4,
+    // Prey: img in assets/mega, which way the picture faces, burst color.
+    prey: [
+      { id: 'cockatrice', face: 1, burst: 'yellow' }, { id: 'boar', face: 1, burst: 'red' },
+      { id: 'octopanther', face: 1, burst: 'purple' }, { id: 'fishfrog', face: -1, burst: 'green' },
+      { id: 'shroomturtle', face: 1, burst: 'green' }, { id: 'wyvern', face: 1, burst: 'purple' },
+      { id: 'elk', face: -1, burst: 'red' }, { id: 'crystalizard', face: -1, burst: 'blue' }
+    ],
+    boss: { id: 'banana', face: 1, burst: 'white' }
   },
 
   tap: {
@@ -263,7 +281,9 @@ GW.CONFIG = {
     // Legendary Treasures (popups only)
     { id: 'purple_underpants', name: 'Lucky Purple Underpants', group: 'treasures', tier: 'legendary', img: 'assets/treasures/purple_underpants.png', pixel: true },
     { id: 'diamond_pick', name: 'Diamond Pickaxe', group: 'treasures', tier: 'legendary', img: 'assets/treasures/diamond_pick.webp' },
-    { id: 'magic_sword', name: 'Magical Sword', group: 'treasures', tier: 'legendary', img: 'assets/treasures/magic_sword.webp' }
+    { id: 'magic_sword', name: 'Magical Sword', group: 'treasures', tier: 'legendary', img: 'assets/treasures/magic_sword.webp' },
+    // Only from beating the Banana Monster in a hunt (never from shinies).
+    { id: 'banana_trophy', name: 'Banana Monster Trophy', group: 'treasures', tier: 'legendary', img: 'assets/treasures/banana_trophy.webp', huntOnly: true }
   ],
 
   // Hat of the month.  Month 1 = January.  Missing months use the default.
@@ -334,7 +354,8 @@ GW.CONFIG = {
       warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17, weapon: true, z: 2 }, { img: 'dummy_static', h: 12, anim: 'hit' }] },
       cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17, z: 2, overlap: 3 }, { img: '../clones/vat_full', h: 13, anim: 'none', cls: 'part-vat' }] },
       matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] },
-      wizard:     { label: 'Wizard', slot: 5, parts: [{ img: 'wizard_static', h: 17, anim: 'spin' }] }
+      wizard:     { label: 'Wizard', slot: 5, parts: [{ img: 'wizard_static', h: 17, anim: 'spin' }] },
+      mega:       { label: 'Megagnome', slot: 6, parts: [{ img: '../mega/mega_idle', h: 22, anim: 'none', cls: 'part-mega' }] }
     },
 
     // Squish and boing.  Faster gnome types bounce faster, within these limits (seconds per bounce).

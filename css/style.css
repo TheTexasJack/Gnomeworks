@@ -640,3 +640,63 @@ body.paused .clone-img { animation-play-state: paused; }
 @keyframes tickerUp { from { background-position: 0 0; } to { background-position: 0 -18px; } }
 body.paused .progress.ticker #nextBar { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .progress.ticker #nextBar { animation: none; } }
+
+/* ---------- Megagnome ---------- */
+.mega-row .mega-icon { position: relative; flex: none; align-self: center; }
+.food-badge { position: absolute; right: -6px; bottom: -4px; font-size: .78rem; font-weight: bold; padding: 1px 5px; border-radius: 9px;
+  background: #3a1f0b; color: #ffe08a; border: 1px solid var(--brass); white-space: nowrap; }
+.mega-desc .req { display: inline-block; margin-right: 8px; font-weight: bold; }
+.mega-desc .req.ok { color: #2f7d1e; } .mega-desc .req.no { color: #a33; }
+.night .mega-desc .req.ok { color: #8fe36a; } .night .mega-desc .req.no { color: #ff8a80; }
+
+/* ---------- The hunt ---------- */
+.hunt { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; container-type: size;
+  background: rgba(0,0,0,.6); touch-action: none; user-select: none; -webkit-user-select: none; animation: huntIn .25s ease-out; }
+.hunt.closing { opacity: 0; transition: opacity .3s; }
+@keyframes huntIn { from { opacity: 0; } to { opacity: 1; } }
+.hunt-box { position: relative; width: min(96cqw, 90cqh * 1.6, 960px); aspect-ratio: 16 / 10; container-type: size; overflow: hidden; cursor: crosshair;
+  background: center / cover no-repeat; border: 4px solid var(--brass); border-radius: var(--radius);
+  box-shadow: inset 0 0 0 2px var(--brass-dark), 0 10px 30px rgba(0,0,0,.7); }
+.hunt-top { position: absolute; left: 0; right: 0; top: 0; display: flex; gap: 2cqw; align-items: center; padding: 1.4cqh 2cqw;
+  background: linear-gradient(180deg, rgba(0,0,0,.7), rgba(0,0,0,0)); color: #fff3c4; font-weight: bold; font-size: max(.75rem, 3.6cqh); z-index: 3; }
+.hunt-top .hunt-cost { flex: 1; text-align: right; opacity: .9; }
+.hunt-top .btn { padding: .6cqh 2cqw; font-size: max(.7rem, 3.2cqh); }
+.hunt-bolts { letter-spacing: 2px; color: #ffd23f; }
+.hunt-tip { position: absolute; left: 50%; top: 14%; transform: translateX(-50%); z-index: 2; pointer-events: none; text-align: center;
+  width: max-content; max-width: 86%; padding: 1.2cqh 3cqw; border-radius: 1.6cqh; border: .4cqh solid #ffd23f;
+  background: rgba(40,20,6,.82); box-shadow: 0 0 0 .4cqh #2a1206, 0 .8cqh 2cqh rgba(0,0,0,.5); }
+.hunt-tip b { display: block; font-size: max(.85rem, 4.6cqh); color: #fff3c4; text-shadow: 0 .3cqh 0 #000; }
+.hunt-tip span { display: block; font-size: max(.7rem, 3cqh); color: #ffd9a0; margin-top: .3cqh; }
+.no-hints .hunt-tip { display: none; }
+.prey { position: absolute; height: 30cqh; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; transition: opacity .25s, transform .25s; }
+.prey img { height: 100%; width: auto; display: block; filter: drop-shadow(0 1cqh 1cqh rgba(0,0,0,.5)); }
+.prey.flip img { transform: scaleX(-1); }
+.prey.boss { height: 40cqh; }
+.prey.dead { opacity: 0; transform: translate(-50%, -50%) scale(1.3); }
+.boss-tag { position: absolute; left: 50%; top: -8%; transform: translateX(-50%); font-weight: bold; font-size: 4cqh; color: #fff3a0;
+  text-shadow: 0 0 6px #000, 0 2px 0 #7a5a00; animation: alertPulse .5s ease-in-out infinite alternate; }
+.hunt-reticle { position: absolute; width: 9cqh; height: 9cqh; transform: translate(-50%, -50%); z-index: 2; pointer-events: none;
+  border: .5cqh solid rgba(255,80,60,.9); border-radius: 50%; box-shadow: 0 0 1cqh rgba(255,80,60,.8); }
+.hunt-reticle::before, .hunt-reticle::after { content: ''; position: absolute; background: rgba(255,80,60,.9); }
+.hunt-reticle::before { left: 50%; top: -30%; bottom: -30%; width: .4cqh; transform: translateX(-50%); }
+.hunt-reticle::after { top: 50%; left: -30%; right: -30%; height: .4cqh; transform: translateY(-50%); }
+.hunt-bow { position: absolute; left: 50%; bottom: -6%; width: 46cqw; transform: translateX(-50%); transform-origin: 50% 100%; z-index: 4; pointer-events: none; }
+.hunt-bow .bow-img { width: 100%; display: block; position: relative; z-index: 1; }
+.hunt-bow .bow-string { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; overflow: visible; }
+.hunt-bow .bow-string polyline { fill: none; stroke: #e8dcc0; stroke-width: 4; stroke-linejoin: round; filter: drop-shadow(0 0 2px rgba(0,0,0,.8)); }
+.hunt-bow .bow-bolt { position: absolute; left: 48.7%; width: 9.5%; transform: translateX(-50%); z-index: 3; }
+.flying-bolt { position: absolute; width: 4cqw; z-index: 3; pointer-events: none; }
+.hunt-burst { position: absolute; width: 30cqh; height: auto; transform: translate(-50%, -50%); z-index: 2; pointer-events: none;
+  animation: huntBurst .7s ease-out forwards; }
+.hunt-burst.big { width: 50cqh; }
+@keyframes huntBurst { from { transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(.2); opacity: 1; } 25% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1.05); } 70% { opacity: 1; } to { transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(1.15); opacity: 0; } }
+.flying-banana { position: absolute; width: 6cqh; z-index: 3; pointer-events: none; }
+.hunt-float { position: absolute; transform: translate(-50%, -50%); z-index: 3; pointer-events: none; font-weight: bold; font-size: 5cqh;
+  color: #fff3c4; text-shadow: 0 0 6px #000; animation: huntFloat .9s ease-out forwards; }
+.hunt-float.miss { color: #ddd; font-size: 4cqh; }
+@keyframes huntFloat { to { transform: translate(-50%, -160%); opacity: 0; } }
+.hunt-over { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: 5; padding: 2cqh 4cqw; border-radius: 1.5cqh;
+  background: rgba(30,15,4,.9); border: .5cqh solid var(--brass); color: #fff3c4; font-weight: bold; font-size: 5cqh; white-space: nowrap; }
+body.paused .hunt { pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .boss-tag { animation: none; } .hunt-burst { animation-duration: .01s; } }
+@media (max-width: 720px) { .hunt-box { width: min(96cqw, 80cqh); aspect-ratio: 1 / 1; } .hunt-bow { width: 70cqw; } }

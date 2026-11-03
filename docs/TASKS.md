@@ -13,7 +13,7 @@ Last updated 2026-11-02, at v0.2.0-draft.51.
 | Security pass and Jarrett's guide | v0.5 | Planned |
 | Live on the Wix site | v1.0 | Planned |
 
-Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 147 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 3 Legendary Treasures), 6 hats, 2 events (Wild Magic, Clone Attack) plus shinies, Day and Night themes.  Details: [EVENTS.md](EVENTS.md).  Unbuilt designs: [DESIGNS.md](DESIGNS.md).
+Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 148 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 4 Legendary Treasures), 6 hats, 2 events (Wild Magic, Clone Attack) plus shinies, the Megagnome and his hunt, Day and Night themes.  Details: [EVENTS.md](EVENTS.md).  Unbuilt designs: [DESIGNS.md](DESIGNS.md).
 
 ## Waiting on Jarrett
 
@@ -35,9 +35,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [ ] Gear-framed shop badge for the Gnome Wizard (his icon is a placeholder).
-- [ ] Math pass: Megagnome, the hunt, the Packing Line, and mid-to-late pacing.  Then build the Megagnome.
+- [ ] Math pass: the Packing Line and mid-to-late pacing.  (Megagnome built in draft.54; tune his numbers after play.)
 - [ ] Packing Line, after the math pass.
-- [ ] Version stamps on CSS and JS links (`style.css?v=...`) so a new release never mixes old and new files.
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 

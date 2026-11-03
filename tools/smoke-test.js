@@ -17,6 +17,10 @@ fs.mkdirSync(OUT, { recursive: true });
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
+  // Every CSS and JS link must carry the current version (run tools/stamp.js after bumping it).
+  const ver = (fs.readFileSync(path.join(ROOT, 'js/config.js'), 'utf8').match(/GW\.VERSION\s*=\s*'([^']+)'/) || [])[1];
+  const links = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').match(/(?:src|href)="(?:css|js)\/[^"]+"/g) || [];
+  links.filter(l => !l.includes('?v=' + ver + '"')).forEach(l => errors.push('index.html: stale or missing version stamp on ' + l + ' (run node tools/stamp.js)'));
   for (const [name, viewport, touch] of [['desktop', { width: 1400, height: 900 }, false], ['phone', { width: 390, height: 844 }, true]]) {
     const ctx = await browser.newContext({ viewport, hasTouch: touch, isMobile: touch });
     const page = await ctx.newPage();

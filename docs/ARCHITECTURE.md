@@ -2,7 +2,7 @@
 
 ## Big picture
 
-One HTML page, eleven plain scripts, no framework, no build.  Every script adds one module to a single global object, `window.GW`, and the load order in `index.html` matters:
+One HTML page, thirteen plain scripts, no framework, no build.  Every script adds one module to a single global object, `window.GW`, and the load order in `index.html` matters:
 
 | Order | File | Module | Job |
 | --- | --- | --- | --- |
@@ -16,6 +16,8 @@ One HTML page, eleven plain scripts, no framework, no build.  Every script adds 
 | 7 | `js/ui.js` | `GW.ui` | Shop, shelf, stats, crew strip, Shop Floor, floating text, toasts, squish animations |
 | 7b | `js/wild.js` | `GW.wild` | Wild Magic event |
 | 7c | `js/clones.js` | `GW.clones` | Clone Attack event |
+| 7d | `js/mega.js` | `GW.mega` | The Megagnome: shop row, food, poses, helping in events |
+| 7e | `js/hunt.js` | `GW.hunt` | The crossbow hunt mini-game |
 | 8 | `js/main.js` | (runs once) | Loads the save, wires input, runs the game loop, shinies, pause, sound settings, autosave |
 
 The rule that keeps this sane: **economy reports, UI draws.**  `GW.econ` changes numbers and returns an `events` object (items made, items to animate, new discoveries).  `main.js` hands those events to `GW.ui` and `GW.sfx`.

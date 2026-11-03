@@ -2,11 +2,11 @@
 
 Every collectible in the game, by shelf group.  Generated from `js/config.js` by `node tools/inventory.js`, so rerun it after any item change instead of editing this file by hand.
 
-Total: **147** collectibles.  Game version 0.2.0-draft.48.
+Total: **148** collectibles.  Game version 0.2.0-draft.54.
 
 | Group | Items |
 | --- | --- |
-| Legendary Treasures | 3 |
+| Legendary Treasures | 4 |
 | Tiny Monsters | 44 |
 | Number Twos | 4 |
 | Laundry & Clothing | 12 |
@@ -18,13 +18,14 @@ Total: **147** collectibles.  Game version 0.2.0-draft.48.
 | Questionable Inventions | 12 |
 | Absolutely Random | 12 |
 
-## Legendary Treasures (3)
+## Legendary Treasures (4)
 
 | Item | Tier | Emoji | Twemoji file |
 | --- | --- | --- | --- |
 | Lucky Purple Underpants | Legendary |  | assets/treasures/purple_underpants.png |
 | Diamond Pickaxe | Legendary |  | assets/treasures/diamond_pick.webp |
 | Magical Sword | Legendary |  | assets/treasures/magic_sword.webp |
+| Banana Monster Trophy | Legendary |  | assets/treasures/banana_trophy.webp |
 
 ## Tiny Monsters (44)
 
