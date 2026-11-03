@@ -45,7 +45,7 @@ Producers for the 7 empty stations: Golem Pilot (1.6M), Boiler Stoker (20M), Gno
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
 Tiny Monster info card (Nathan, 2026-11-02, future):
-- Tap a Tiny Monster on the shelf to open an info screen: the monster's art big, its full name, tier, how many you own, and lore text.
+- Tap a Tiny Monster on the shelf to open an info screen: the monster's art big, its name, and lore text.  No owned count (the shelf tile already shows it).
 - Needs a Gnomeworks lore bible first (the gnomeverse: the machine, the factory, where Tiny Monsters come from, the four forms: normal, glowing, goopy, evil).  Write the lore with Nathan before the per-monster entries.
 - Could extend to junk items and Number Twos later.
 
