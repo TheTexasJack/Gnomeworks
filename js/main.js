@@ -274,6 +274,14 @@ window.GW = window.GW || {};
   themeSel.value = GW.theme.setting();
   themeSel.addEventListener('change', function () { GW.theme.set(themeSel.value); SFX.click(); });
   GW.theme.apply();
+  var hintsOn = document.getElementById('hintsOn');
+  function applyHints(on) { document.documentElement.classList.toggle('no-hints', !on); }
+  var hintsPref = true; try { hintsPref = localStorage.getItem('gnomeworks.hints') !== 'off'; } catch (e) {}
+  hintsOn.checked = hintsPref; applyHints(hintsPref);
+  hintsOn.addEventListener('change', function () {
+    try { localStorage.setItem('gnomeworks.hints', hintsOn.checked ? 'on' : 'off'); } catch (e) {}
+    applyHints(hintsOn.checked); SFX.click();
+  });
 
   // ---------- pause ----------
   var pauseBtn = document.getElementById('pauseBtn');

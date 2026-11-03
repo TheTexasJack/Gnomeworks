@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.50 (2026-11-02)
+
+- New setting in Info > Look: "Show event instructions."  On by default.  Turn it off to hide the big Clone Attack signs and the "Drop here!" label (the glowing arrow stays, so you can still find the vat).
+
 ## v0.2.0-draft.49 (2026-11-02)
 
 - Clone Attack is easier to understand: a big sign across the top of the Shop Floor stays up for the whole attack ("Clones are stealing your junk!  Grab a clone and drop him in the vat").  While you're holding a clone it turns green and says "Now drop him in the vat!  Let go on the green arrow."  The arrow's "Drop here!" label is bigger and stays on screen on phones.  The pop-up toast at the start is gone, since the sign replaces it.  (Jarrett's playtest: he didn't know where to drop them.)

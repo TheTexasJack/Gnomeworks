@@ -623,3 +623,5 @@ body.paused .clone-img { animation-play-state: paused; }
   background: var(--rivets), linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.6)), url('../assets/bg/boards_night.webp') center / 400px auto repeat;
 }
 .clone-arrow.label-left span { left: auto; right: 30%; transform: none; }
+/* Info > Look > Show event instructions, unchecked: hide the big signs and arrow labels (the arrow stays). */
+.no-hints .clone-hint, .no-hints .clone-arrow span { display: none !important; }

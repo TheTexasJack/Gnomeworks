@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.49';
+GW.VERSION = '0.2.0-draft.50';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
