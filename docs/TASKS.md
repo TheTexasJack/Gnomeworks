@@ -28,7 +28,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 ## Nathan
 
-- [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.  **Before December 1** (the Santa hat shows the lip most, and the Megagnome wears it too).
+- [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.  **Before December 1** (the Santa hat shows the lip most).
 - [ ] Optional: on the Android phone, Settings, Accessibility, "Remove animations" is likely on.  Turning it off brings back the full bounce.
 
 ## Claudia (ready to build when asked)
@@ -48,7 +48,7 @@ Interface: oak-and-brass buttons, pause and sound moved beside the tabs, plank t
 
 ## Done draft.52 to draft.57
 
-Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 safety ceiling, the Megagnome (shop checklist, events-only helper, food), the crossbow hunt with splats and Alex's voices, the Banana Monster boss and its trophy, version stamps on CSS and JS, hunt instructions, crossbow tilt fix, boss-needs-3-bolts fix, Megagnome hats.
+Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 safety ceiling, the Megagnome (shop checklist, events-only helper, food), the crossbow hunt with splats and Alex's voices, the Banana Monster boss and its trophy, version stamps on CSS and JS, hunt instructions, crossbow tilt fix, boss-needs-3-bolts fix.  (Megagnome hats tried and removed.)
 
 ## Proposal backlog (all drafts, nothing approved yet)
 
