@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.59';
+GW.VERSION = '0.2.0-draft.60';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -74,7 +74,7 @@ GW.CONFIG = {
       { id: 'cockatrice', face: 1, burst: 'yellow' }, { id: 'boar', face: 1, burst: 'red' },
       { id: 'octopanther', face: 1, burst: 'purple' }, { id: 'fishfrog', face: -1, burst: 'green' },
       { id: 'shroomturtle', face: 1, burst: 'green' }, { id: 'wyvern', face: 1, burst: 'purple' },
-      { id: 'elk', face: -1, burst: 'red' }, { id: 'crystalizard', face: -1, burst: 'blue' }
+      { id: 'elk', face: 1, burst: 'red' }, { id: 'crystalizard', face: -1, burst: 'blue' }
     ],
     boss: { id: 'banana', face: 1, burst: 'white' }
   },

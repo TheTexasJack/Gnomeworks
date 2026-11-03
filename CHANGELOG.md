@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.60 (2026-11-03)
+
+- Hunt prey fix: the Shroomturtle picture held two creatures (the turtle and the elk), the elk picture was really the Crystal Lizard, and the Crystal Lizard had no picture at all.  Split and renamed so each creature has its own picture, and the elk now faces the right way.  The turtle and elk were cut from the shared sheet, so they're a little softer than the rest; a fresh cut from Mara's original would sharpen them.
+
 ## v0.2.0-draft.59 (2026-11-03)
 
 - The Megagnome gives a soft belly jiggle every couple of seconds on the Shop Floor, so he no longer stands frozen while the crew works.  He holds still while chomping and burping, and on devices set to reduce motion.  Timing lives in `floor.anim` (`megaEvery`, `megaJiggle`).
