@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.48 (2026-11-02)
+
+- Legendary Treasures: the Diamond Pickaxe and Magical Sword get Mara's painted art in place of their emoji.
+
 ## v0.2.0-draft.47 (2026-11-02)
 
 - Night theme.  Info > Look > Theme: Auto (follows your device's dark mode, the default), Day, or Night.  Night swaps in Mara's moonlit art: the banner, the title sign, the machine wall, both Shop Floor layouts, Help Wanted signs, the pause sign, black wood boards, and chalkboard clipboards with dark measuring tools.  Text on the chalkboards is chalk white.  Phones get their own moonlit banner too.
