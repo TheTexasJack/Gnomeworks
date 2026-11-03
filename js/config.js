@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.60';
+GW.VERSION = '0.2.0-draft.61';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -69,12 +69,12 @@ GW.CONFIG = {
     huntCooldownSeconds: 600, bolts: 5, shotSeconds: 5, minShotTaps: 20,
     preySpeed: 16, speedUpPerHit: 1.15, boltFlightSeconds: 0.28,
     bossChance: 0.15, bossHits: 3, bossFood: 3, trophyChance: 0.25, trophyPity: 4,
-    // Prey: img in assets/mega, which way the picture faces, burst color.
+    // Prey: img in assets/mega, which way the picture faces, burst color, size (1 = normal; smaller is harder to hit).
     prey: [
       { id: 'cockatrice', face: 1, burst: 'yellow' }, { id: 'boar', face: 1, burst: 'red' },
       { id: 'octopanther', face: 1, burst: 'purple' }, { id: 'fishfrog', face: -1, burst: 'green' },
-      { id: 'shroomturtle', face: 1, burst: 'green' }, { id: 'wyvern', face: 1, burst: 'purple' },
-      { id: 'elk', face: 1, burst: 'red' }, { id: 'crystalizard', face: -1, burst: 'blue' }
+      { id: 'shroomturtle', face: 1, burst: 'green', size: 0.75 }, { id: 'wyvern', face: 1, burst: 'purple' },
+      { id: 'elk', face: 1, burst: 'red', size: 0.85 }, { id: 'crystalizard', face: -1, burst: 'blue' }
     ],
     boss: { id: 'banana', face: 1, burst: 'white' }
   },

@@ -668,7 +668,7 @@ body.paused .progress.ticker #nextBar { animation-play-state: paused; }
 .hunt-tip b { display: block; font-size: max(.85rem, 4.6cqh); color: #fff3c4; text-shadow: 0 .3cqh 0 #000; }
 .hunt-tip span { display: block; font-size: max(.7rem, 3cqh); color: #ffd9a0; margin-top: .3cqh; }
 .no-hints .hunt-tip { display: none; }
-.prey { position: absolute; height: 30cqh; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; transition: opacity .25s, transform .25s; }
+.prey { position: absolute; height: calc(30cqh * var(--size, 1)); transform: translate(-50%, -50%); z-index: 1; pointer-events: none; transition: opacity .25s, transform .25s; }
 .prey img { height: 100%; width: auto; display: block; filter: drop-shadow(0 1cqh 1cqh rgba(0,0,0,.5)); }
 .prey.flip img { transform: scaleX(-1); }
 .prey.boss { height: 40cqh; }

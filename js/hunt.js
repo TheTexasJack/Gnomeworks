@@ -70,6 +70,7 @@ GW.hunt = (function () {
     var im = U.el('img'); im.src = 'assets/mega/prey_' + def.id + '.webp'; im.alt = ''; im.draggable = false;
     el.appendChild(im);
     if (boss) el.appendChild(U.el('div', 'boss-tag', 'BOSS!'));
+    if (def.size) el.style.setProperty('--size', def.size);
     h.field.appendChild(el);
     var dir = Math.random() < 0.5 ? 1 : -1;
     h.prey = { el: el, def: def, boss: boss, hp: boss ? M.bossHits : 1, x: dir > 0 ? 12 : 88, dir: dir, t: 0, dead: false };

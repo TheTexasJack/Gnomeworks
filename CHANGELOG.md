@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.61 (2026-11-03)
+
+- Hunt prey can have their own size (`size` in `mega.prey`, 1 = normal).  The Shroomturtle runs at 75% and the elk at 85%, so they're harder to hit.
+
 ## v0.2.0-draft.60 (2026-11-03)
 
 - Hunt prey fix: the Shroomturtle picture held two creatures (the turtle and the elk), the elk picture was really the Crystal Lizard, and the Crystal Lizard had no picture at all.  Split and renamed so each creature has its own picture, and the elk now faces the right way.  The turtle and elk were cut from the shared sheet, so they're a little softer than the rest; a fresh cut from Mara's original would sharpen them.
