@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.37 (2026-11-02)
+
+- New Warrior Gnome description: "The might of adventure powers the machine."
+
 ## v0.2.0-draft.36 (2026-11-02)
 
 - Every junk group grows from 10 to 12 items, so the shelf fills clean 4-by-3 rows on phones and desktop alike.  The desktop shelf now shows 4 per row to match.  New items: Jeans, Coat, Razor, Hair Pick, Clipboard, Printer, Clamp, Hook, Frying Pan, Jar, Teddy Bear, Boomerang, Microscope, Satellite Dish, Pet Rock, and Shopping Cart.  The collection totals 146.

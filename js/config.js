@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.36';
+GW.VERSION = '0.2.0-draft.37';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -264,7 +264,7 @@ GW.CONFIG = {
       baseCost: 15,   growth: 1.15, rate: 0.5, unlock: { cogsSeen: 10 } },
     { id: 'tinier',  icon: 'icon_necro', name: 'Gnome Necromancer', desc: 'Raises skeleton gnomes to crank for him.  No lunch breaks.  No lungs.',
       baseCost: 250,  growth: 1.15, rate: 4,   unlock: { producer: 'tiny', count: 10 } },
-    { id: 'warrior', icon: 'icon_warrior', name: 'Warrior Gnome', desc: 'Swipes the gear with a weapon twice a second.',
+    { id: 'warrior', icon: 'icon_warrior', name: 'Warrior Gnome', desc: 'The might of adventure powers the machine.',
       baseCost: 1100, growth: 1.15, swipesPerSec: 2, unlock: { cogsSeen: 800 } },
     { id: 'cloner',  icon: 'icon_cloner', name: 'Gnome Cloner',  desc: 'Bubbling vat, questionable ethics, endless coworkers.',
       baseCost: 12000, growth: 1.15, rate: 40, unlock: { cogsSeen: 8000 } },
