@@ -2,6 +2,13 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.40 (2026-11-02)
+
+- Clone Attack event (prototype).  Needs a Cloner; comes around every few minutes, sooner with more Cloners.  Two escaped clones (from 10 mutant kinds) mill around the Shop Floor, snatch an item off the belt (10% of your stack of it) with a gremlin "heh heh", then run the stairs Donkey Kong style for two laps and escape with it.  Press and hold a clone, drag him into the vat behind the Cloner, and SPLOOSH: the junk comes back plus 10 seconds of production.  Drop him anywhere else and he falls to the floor below and keeps running.  On the Machine view Mara's "Clones are loose in the shop!" sign pops up instead; tap it to jump to the floor.  Ignore it for 20 seconds and the clones give up, taking nothing.  Real pointers only; freezes with Pause or when you leave the floor.
+- The Cloner station now has Mara's goop vat behind him.
+- New Tiny Monster: the basic slime (normal form), finishing the slime family (draft name: Jellybub).  147 collectibles.
+- Fix: the Wild Magic event never started on its own (only from the debug bar).  It now runs on its timer once the upgrade is bought.
+
 ## v0.2.0-draft.39 (2026-11-02)
 
 - Desktop: the Collection Shelf is on a clipboard too, matching the shop.  Still 4 items per row.  Its set square and T-square sit flipped from the shop's, so the two boards don't look copy-pasted.  Phones are unchanged (everything already shares one clipboard there).
@@ -17,7 +24,7 @@ Every change gets a new version number.  Newest at the top.
 
 ## v0.2.0-draft.36 (2026-11-02)
 
-- Every junk group grows from 10 to 12 items, so the shelf fills clean 4-by-3 rows on phones and desktop alike.  The desktop shelf now shows 4 per row to match.  New items: Jeans, Coat, Razor, Hair Pick, Clipboard, Printer, Clamp, Hook, Frying Pan, Jar, Teddy Bear, Boomerang, Microscope, Satellite Dish, Pet Rock, and Shopping Cart.  The collection totals 146.
+- Every junk group grows from 10 to 12 items, so the shelf fills clean 4-by-3 rows on phones and desktop alike.  The desktop shelf now shows 4 per row to match.  New items: Jeans, Coat, Razor, Hair Pick, Clipboard, Printer, Clamp, Hook, Frying Pan, Jar, Teddy Bear, Boomerang, Microscope, Satellite Dish, Pet Rock, and Shopping Cart.  The collection totals 146 (147 with the basic slime in draft.40).
 - New doc: docs/INVENTORY.md, the master list of every collectible.
 
 ## v0.2.0-draft.35 (2026-11-02)

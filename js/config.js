@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.39';
+GW.VERSION = '0.2.0-draft.40';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -39,6 +39,21 @@ GW.CONFIG = {
     style: 'storm', targets: 6, durationSeconds: 9, staggerSeconds: 1.2,
     secondsPerTarget: 8, bonusMultiplier: 3, allClearSeconds: 30,
     minSeconds: 120, maxSeconds: 300, wizardsPerHalving: 40, floorSeconds: 45
+  },
+
+  // Clone Attack (needs at least one Cloner).  Escaped clones snatch junk off the belt and
+  // run the Shop Floor stairs.  Drag one into the vat to get the junk back.
+  clones: {
+    count: 2, stealShare: 0.10, wanderSeconds: 3, loops: 2, speed: 24, climbSpeed: 16, fallSpeed: 70,
+    rescueSeconds: 10, waitForFloorSeconds: 20,
+    minSeconds: 150, maxSeconds: 360, clonersPerHalving: 40, floorSeconds: 60,
+    variants: ['normal', 'cyclops', 'goblin', 'twohead', 'slime', 'mushroom', 'crystal', 'cyborg', 'ghost', 'wolf'],
+    height: 16,   // cqh on the wide floor (scaled by the layout's scale)
+    // Paths are [x %, feet y %] points on each floor picture.  'f' marks a fall (drop straight down).
+    paths: {
+      wide: { start: [84, 80], loop: [[3, 80], [9.5, 56], [3.5, 55], [12.5, 29], [88, 29], [88, 55, 'f'], [90.5, 55], [97, 80], [84, 80]], exit: [[112, 80]], wander: [70, 92] },
+      tall: { start: [84, 80], loop: [[4, 80], [13, 36], [87, 36], [87, 52, 'f'], [93, 52], [98, 80], [84, 80]], exit: [[112, 80]], wander: [68, 92] }
+    }
   },
 
   tap: {
@@ -231,6 +246,7 @@ GW.CONFIG = {
     { id: 'snake_glowing', name: 'Neonsnake', group: 'monsters', family: 'snake', variant: 'glowing', tier: 'superrare', img: 'assets/monsters/snake_glowing.webp' },
     { id: 'snake_goopy', name: 'Gooconda', group: 'monsters', family: 'snake', variant: 'goopy', tier: 'superrare', img: 'assets/monsters/snake_goopy.webp' },
     { id: 'snake_evil', name: 'Venomcog', group: 'monsters', family: 'snake', variant: 'evil', tier: 'legendary', img: 'assets/monsters/snake_evil.webp' },
+    { id: 'slime_normal', name: 'Jellybub', group: 'monsters', family: 'slime', variant: 'normal', tier: 'rare', img: 'assets/monsters/slime_normal.webp' },
     { id: 'slime_glowing', name: 'Glowjelly', group: 'monsters', family: 'slime', variant: 'glowing', tier: 'superrare', img: 'assets/monsters/slime_glowing.webp' },
     { id: 'slime_goopy', name: 'Gloob', group: 'monsters', family: 'slime', variant: 'goopy', tier: 'superrare', img: 'assets/monsters/slime_goopy.webp' },
     { id: 'slime_evil', name: 'Shadooze', group: 'monsters', family: 'slime', variant: 'evil', tier: 'legendary', img: 'assets/monsters/slime_evil.webp' },
@@ -311,7 +327,7 @@ GW.CONFIG = {
       tiny:       { label: 'Tiny', slot: 0, parts: [{ img: 'tiny_static', h: 17, upgrade: { two_hands: 'twohand_static' } }] },
       tinier:     { label: 'Necro', slot: 1, parts: [{ img: 'skeleton_static', h: 8.5, overlap: 3 }, { img: 'necro_static', h: 16, actionDx: -21 }] },
       warrior:    { label: 'Warrior', slot: 2, parts: [{ img: 'warrior_static', h: 17, weapon: true, z: 2 }, { img: 'dummy_static', h: 12, anim: 'hit' }] },
-      cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17 }] },
+      cloner:     { label: 'Cloner', slot: 3, parts: [{ img: 'cloner_static', h: 17, z: 2, overlap: 3 }, { img: '../clones/vat_full', h: 13, anim: 'none', cls: 'part-vat' }] },
       matryoshka: { label: 'Matryoshka', slot: 4, parts: [{ img: 'matry_closed', h: 15, stages: [[25, 'matry_set5', 13], [10, 'matry_set3', 14]] }] },
       wizard:     { label: 'Wizard', slot: 5, parts: [{ img: 'wizard_static', h: 17, anim: 'spin' }] }
     },

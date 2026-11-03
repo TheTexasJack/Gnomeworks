@@ -197,7 +197,26 @@ GW.sfx = (function () {
     }
   }
 
+  // Clone Attack: a nasal gremlin giggle when a clone grabs something...
+  function hehe() {
+    if (!ready()) return;
+    [0, 0.17].forEach(function (at, i) {
+      var f = vary(i ? 330 : 380);
+      tone({ f: f, to: f * 0.78, dur: 0.11, vol: 0.13, type: 'square', lp: 1800, at: at });
+      tone({ f: f * 2.02, to: f * 1.5, dur: 0.09, vol: 0.05, type: 'sawtooth', lp: 2600, at: at + 0.005 });
+      noise({ f: 1400, q: 5, dur: 0.06, vol: 0.06, at: at });
+    });
+  }
+  // ...and a deep gloopy SPLOOP with bubbles when one goes back in the vat.
+  function sploop() {
+    if (!ready()) return;
+    tone({ f: 260, to: 60, dur: 0.38, vol: 0.32, type: 'sine', glide: 0.3 });
+    noise({ f: 700, to: 160, q: 1.5, dur: 0.32, vol: 0.18, filter: 'lowpass' });
+    [0.22, 0.3, 0.37, 0.46].forEach(function (at) { tone({ f: vary(600 + Math.random() * 500), to: 1300, dur: 0.06, vol: 0.06, at: at }); });
+  }
+
   return {
+    hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },
     tap: tap, drop: drop, buy: buy, nope: nope, click: click, shiny: shiny,

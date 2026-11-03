@@ -508,3 +508,33 @@ body.paused .wild-target, body.paused .wild-target * { animation-play-state: pau
 /* Reduced motion: no spinning or bobbing, just a steady glow and a gentle pulse. */
 .wild-target.wt-calm, .wild-target.wt-calm .wt-item, .wild-target.wt-calm .wt-swirl { animation: none !important; }
 .wild-target.wt-calm .wt-item { filter: drop-shadow(0 0 10px rgba(200,120,255,1)); }
+
+/* ---------- Clone Attack ---------- */
+.clone { position: absolute; transform: translate(-50%, -100%); z-index: 6; cursor: grab; touch-action: none; aspect-ratio: 240 / 310; }
+.clone-img { height: 100%; width: auto; display: block; margin: 0 auto; filter: drop-shadow(0 .6cqh .6cqh rgba(0,0,0,.55)); user-select: none; pointer-events: none;
+  animation: cloneRun .28s ease-in-out infinite alternate; }
+.clone.calm .clone-img { animation: none; }
+.clone.flip .clone-img, .clone.flip .clone-loot { transform: scaleX(-1); }
+.clone .clone-loot { position: absolute; left: 62%; top: 38%; width: 46% !important; height: auto !important; pointer-events: none; filter: drop-shadow(0 0 4px #fff); }
+.clone.flip .clone-loot { left: -8%; }
+.clone.held { transform: translate(-50%, -6%); cursor: none; z-index: 9; }
+.clone.held .clone-img { height: 118%; animation: cloneDangle .5s ease-in-out infinite alternate; transform-origin: 50% 0; }
+.clone.held .clone-loot { display: none; }
+#floor.dragging { cursor: none; }
+.clone.splooshed { transition: transform .45s ease-in, opacity .45s; transform: translate(-50%, -20%) scale(.2); opacity: 0; pointer-events: none; }
+.part-vat.splooshing { animation: vatWobble .7s ease-out; }
+@keyframes cloneRun { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-4%) rotate(2deg); } }
+.clone.flip .clone-img { animation-name: cloneRunFlip; }
+@keyframes cloneRunFlip { from { transform: scaleX(-1) translateY(0) rotate(-2deg); } to { transform: scaleX(-1) translateY(-4%) rotate(2deg); } }
+@keyframes cloneDangle { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+@keyframes vatWobble { 0% { transform: scale(1); } 30% { transform: scale(1.08, .94); } 60% { transform: scale(.97, 1.04); } 100% { transform: scale(1); } }
+body.paused .clone-img { animation-play-state: paused; }
+.clone-alert {
+  position: absolute; left: 50%; top: 6%; transform: translateX(-50%); z-index: 8; width: 62%; max-width: 440px;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.6));
+  animation: alertPulse .8s ease-in-out infinite alternate;
+}
+.clone-alert img { width: 100%; height: auto; display: block; pointer-events: none; }
+@keyframes alertPulse { from { transform: translateX(-50%) scale(1); } to { transform: translateX(-50%) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .clone-alert { animation: none; } }

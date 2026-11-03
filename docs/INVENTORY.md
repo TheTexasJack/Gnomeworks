@@ -2,12 +2,12 @@
 
 Every collectible in the game, by shelf group.  Generated from `js/config.js` by `node tools/inventory.js`, so rerun it after any item change instead of editing this file by hand.
 
-Total: **146** collectibles.  Game version 0.2.0-draft.36.
+Total: **147** collectibles.  Game version 0.2.0-draft.40.
 
 | Group | Items |
 | --- | --- |
 | Legendary Treasures | 3 |
-| Tiny Monsters | 43 |
+| Tiny Monsters | 44 |
 | Number Twos | 4 |
 | Laundry & Clothing | 12 |
 | Bathroom Disasters | 12 |
@@ -26,7 +26,7 @@ Total: **146** collectibles.  Game version 0.2.0-draft.36.
 | Diamond Pickaxe | Legendary | ⛏️ | 26cf.svg |
 | Magical Sword | Legendary | 🗡️ | 1f5e1.svg |
 
-## Tiny Monsters (43)
+## Tiny Monsters (44)
 
 | Family | Normal | Glowing | Goopy | Evil |
 | --- | --- | --- | --- | --- |
@@ -40,7 +40,7 @@ Total: **146** collectibles.  Game version 0.2.0-draft.36.
 | golem | Pebblem (Rare) | Glowlem (Super Rare) | Goolem (Super Rare) | Grimlem (Legendary) |
 | sprout | Bloomlet (Rare) | Glowbulb (Super Rare) | Goobloom (Super Rare) | Chomplet (Legendary) |
 | snake | Cogsnake (Rare) | Neonsnake (Super Rare) | Gooconda (Super Rare) | Venomcog (Legendary) |
-| slime | **missing** | Glowjelly (Super Rare) | Gloob (Super Rare) | Shadooze (Legendary) |
+| slime | Jellybub (Rare) | Glowjelly (Super Rare) | Gloob (Super Rare) | Shadooze (Legendary) |
 
 ## Number Twos (4)
 

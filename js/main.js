@@ -57,7 +57,7 @@ window.GW = window.GW || {};
 
   machine.addEventListener('pointerdown', function (e) {
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
-    if (e.target.closest('.rare-popup, .wild-target')) return;
+    if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert')) return;
     e.preventDefault();
     if (!allowTap()) return;
     var box = machine.getBoundingClientRect();
@@ -168,6 +168,7 @@ window.GW = window.GW || {};
       if (popup) popup.expires += dt * 1000;
       nextPopupAt += dt * 1000;
       GW.wild.shift(dt * 1000);
+      GW.clones.shift(dt * 1000);
     } else if (dt > 5) {
       // Tab was asleep.  Catch up quietly instead of dumping thousands of pops.
       var off = E.offline(s, dt);
@@ -176,6 +177,8 @@ window.GW = window.GW || {};
       var ev = E.newEvents();
       E.tick(s, dt, ev);
       handleEvents(ev);
+      GW.wild.tick(now, s);
+      GW.clones.tick(now, dt, s);
     }
 
     // Big gear display chases the logical angle, capped so it never blurs into nothing.
@@ -239,6 +242,9 @@ window.GW = window.GW || {};
     b.addEventListener('click', function () { s.view = b.dataset.view; SFX.click(); applyView(); UI.updateFloor(s); });
   });
   applyView();
+  var cloneAlert = document.getElementById('cloneAlert');
+  cloneAlert.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+  cloneAlert.addEventListener('click', function () { s.view = 'floor'; SFX.click(); applyView(); UI.updateFloor(s); });
 
   // ---------- TAP label: fades out after a minute, the ring keeps pulsing ----------
   if (C.tap.labelFadeSeconds > 0) {
@@ -317,6 +323,9 @@ window.GW = window.GW || {};
       w.addEventListener('click', function () { GW.wild.start(s, st); });
       bar.appendChild(w);
     });
+    var cl = U.el('button', '', 'Clones');
+    cl.addEventListener('click', function () { GW.clones.trigger(s); });
+    bar.appendChild(cl);
     var hour = U.el('button', '', '+1 hour');
     hour.addEventListener('click', function () { E.offline(s, 3600); shelfDirty = true; });
     bar.appendChild(hour);

@@ -375,6 +375,7 @@ GW.ui = (function () {
         wrap.style.height = (pi.h * layout().scale) + 'cqh';
         if (part.z) wrap.style.zIndex = part.z;
         if (part.anim === 'spin') wrap.classList.add('part-spin');
+        if (part.cls) wrap.classList.add(part.cls);
         if (part.overlap) wrap.style.marginRight = -(part.overlap * (layout().scale < 1 ? 0.9 : 1)) + 'cqw';
         var im = el('img', 'f-static'); im.src = crewImg(pi.img); im.alt = ''; im.draggable = false;
         wrap.appendChild(im);
@@ -455,6 +456,7 @@ GW.ui = (function () {
 
   function playPart(p, d, calm) {
     var e = p.el;
+    if (p.anim === 'none') return;
     if (calm) {
       // Gentle version: swap to the action pose and back, nothing moves or shakes.
       if (p.hasAction || p.anim === 'hit' || e.querySelector('.f-weapon')) {
@@ -592,6 +594,7 @@ GW.ui = (function () {
 
   return {
     init: init, updateShop: updateShop, updateFloor: updateFloor, animateFloor: animateFloor, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
+    floorLayout: layout,
     buildShelf: buildShelf, flashItem: flashShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
   };
 })();
