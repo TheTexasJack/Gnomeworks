@@ -41,6 +41,7 @@ The event clicker.  Discussed 2026-11-02.
 - No hit poses.  A kill shows a cartoon burst image instead; Nathan sends a few colors and Claudia picks what reads best on the Day and Night hunts.
 - Death sound: Alex records a silly "UGH!" (a few takes get picked at random).  Then she gets the "Voices by Alex" credit.
 - **Banana Monster boss**, requested by Jarrett's 6-year-old daughter: takes **3 hits**, white or yellow burst, and tiny bananas fly out when he goes down.  Draft: rarer than normal prey, and worth more food to make the 3 bolts worth it.
+- **Banana Monster Trophy**: a 4th Legendary Treasure for her (fills the treasures row to 4).  Art from Nathan.  Draft: it only drops from beating the Banana Monster boss in a hunt (a chance each time, guaranteed by some number of boss kills), so it's the one Legendary you earn by hunting instead of from a gold shiny.
 
 **Numbers (approved 2026-11-02)**
 
