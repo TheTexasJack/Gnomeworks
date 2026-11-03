@@ -1,9 +1,10 @@
 # Gnomeworks project docs
 
-Start here if you are picking this project up cold, whether you are a person or an AI assistant in a fresh session.  These docs describe the game as of **v0.2.0-draft.51** (2026-11-02).
+Start here if you are picking this project up cold, whether you are a person or an AI assistant in a fresh session.  These docs describe the game as of **v0.2.0-draft.57** (2026-11-03).
 
 | Doc | What it covers |
 | --- | --- |
+| [HANDOFF.md](HANDOFF.md) | **Read first in a new session.**  Where things stand, what's next, and how Nathan likes to work |
 | [ENVIRONMENT.md](ENVIRONMENT.md) | Where the code lives, the tools, the exact commands, and the quirks of the build environment |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | How the game is put together: files, the game loop, save data, the economy math, the views, sound |
 | [ASSETS.md](ASSETS.md) | The art pipeline from Mara's images to the game, folder map, naming, and the placement numbers |
@@ -27,7 +28,8 @@ Gnomeworks is a browser clicker game for The Stoned Gnome game store, meant to b
 | Mara | Nathan's ChatGPT.  Makes the art through ChatGPT image generation (called CI2.5 in this project). |
 | Claudia | Nathan's Claude.  Writes and tests the code, processes the art, and keeps these docs. |
 | Testers | Nathan's sisters and Jarrett, playing the live build. |
-| Alex | Nathan's daughter.  Recorded the clone giggle. |
+| Alex Gore | Nathan's daughter.  Voices: the clone giggle and the hunt grunts (credited in Info as "Voices by Alex Gore"). |
+| Jarrett's daughter | Age 6.  Asked for the Banana Monster; the Banana Monster Trophy is for her. |
 
 ## How we work
 

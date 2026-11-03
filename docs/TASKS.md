@@ -1,13 +1,13 @@
 # Tasks and status
 
-Last updated 2026-11-02, at v0.2.0-draft.51.
+Last updated 2026-11-03, at v0.2.0-draft.57.
 
 ## Where we are
 
 | Layer | Version | Status |
 | --- | --- | --- |
 | Core game: gears, items, shop, saves | v0.1 | Done |
-| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections, Night theme, first events | v0.2 | Mostly done (draft.51), polish items below |
+| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections, Night theme, first events | v0.2 | Mostly done (draft.57), polish items below |
 | Accounts and leaderboard | v0.3 | Waiting on Jarrett's yes or no |
 | Admin tools and stats | v0.4 | Planned |
 | Security pass and Jarrett's guide | v0.5 | Planned |
@@ -36,13 +36,19 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [ ] Gear-framed shop badge for the Gnome Wizard (his icon is a placeholder).
 - [ ] Math pass: the Packing Line and mid-to-late pacing.  (Megagnome built in draft.54; tune his numbers after play.)
-- [ ] Packing Line, after the math pass.
+- [ ] Packing Line, after the math pass.  **Next session.**
+- [ ] Tap the Megagnome on the Shop Floor to start a hunt (today only his shop row does).
+- [ ] Keyboard play for the hunt (arrows plus Space).
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 
-## Done since the last docs pass (draft.20 to draft.51)
+## Done draft.20 to draft.51
 
 Interface: oak-and-brass buttons, pause and sound moved beside the tabs, plank then clipboard panels (shop and, on desktop, the shelf), Mara's and Nathan's banners (desktop and phone), wider desktop layout with side rails for the next-item gauge and crew, seamless page boards, TAP label fades after a minute, brighter shelf labels, monster names shrink to fit.  Content: Gnome Wizard and five Wizard upgrades, 16 more junk items (12 per group), Control Knobs, basic slime (Jellybub), pixel Lucky Purple Underpants, painted Diamond Pickaxe and Magical Sword, new Warrior description.  Events: Wild Magic, Clone Attack.  Themes: Night.  Tools: `docs/INVENTORY.md` generator.  Full list in `CHANGELOG.md`.
+
+## Done draft.52 to draft.57
+
+Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 safety ceiling, the Megagnome (shop checklist, events-only helper, food), the crossbow hunt with splats and Alex's voices, the Banana Monster boss and its trophy, version stamps on CSS and JS, hunt instructions, crossbow tilt fix, boss-needs-3-bolts fix, Megagnome hats.
 
 ## Proposal backlog (all drafts, nothing approved yet)
 

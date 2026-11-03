@@ -56,7 +56,11 @@ node tools/smoke-test.js
 #   (in Claude's cloud session Playwright is installed globally:
 #    NODE_PATH=$(npm root -g) node tools/smoke-test.js)
 
+# Rebuild docs/INVENTORY.md after any item change
+node tools/inventory.js
+
 # Ship a change (after bumping GW.VERSION and adding a CHANGELOG line)
+node tools/stamp.js          # version stamps on every CSS and JS link; the smoke test fails without it
 git add -A
 git commit -m "v0.2.0-draft.N: what changed"
 git push origin main
@@ -72,7 +76,11 @@ Claudia works in an isolated cloud Linux container attached to this repo through
 - **Playwright and Chromium come preinstalled.**  Do not run `playwright install`.  Use `NODE_PATH=$(npm root -g)` when running scripts from the repo.
 - **Headless Chromium has no ears.**  Sound code can be checked for errors and for signal level (by tapping an AnalyserNode), but loudness and feel need a human.
 - **Commit attribution.**  Commits from Claude sessions end with a `Co-Authored-By: Claude` line and a session link, per the session's instructions.
-- **Images Nathan attaches** arrive in `/mnt/user-data/uploads/`.  Process them from there into `assets/`; never commit the raw uploads.
+- **Images Nathan attaches** arrive in `/mnt/user-data/uploads/`.  Process them from there into `assets/`; never commit the raw uploads.  Zips go to `/home/claude/incoming/<name>/` first.
+- **Sounds** (mp3) get trimmed and leveled with ffmpeg: `ffmpeg -i in.mp3 -af "silenceremove=start_periods=1:start_threshold=-40dB,loudnorm=I=-16:TP=-1.5" -ac 1 -b:a 64k assets/sfx/name.mp3`, then added to `SAMPLE_FILES` in `js/sfx.js`.  Samples only load over http, so test with `python3 -m http.server`; opened from disk the game uses the code-made fallbacks.
+- **The push warning** "This repository moved.  Please use the new location" is only GitHub noting the capital G in `Gnomeworks`.  Pushes succeed.
+- **Work on a branch for anything Nathan should see first** (`git checkout -b feature`), send screenshots or a short video (Playwright `recordVideo` plus ffmpeg), and fast-forward merge to `main` when he says push.  Small straight fixes can go straight to `main`.
+- **Don't chain `pkill` into a command list**; it can end the shell with exit 144 and skip what follows.
 
 ## Repo layout
 
@@ -81,14 +89,19 @@ index.html            page structure
 css/style.css         the oak and brass look, all layout and animation CSS
 js/config.js          THE tuning file: every number, item, gnome, hat, and placement
 js/util.js            number formatting, random helpers, DOM shortcuts
-js/sfx.js             sound effects, synthesized with Web Audio
+js/theme.js           Day / Night themes
+js/sfx.js             sound effects: Web Audio synth plus a few recorded samples
 js/state.js           save data: create, load, migrate, save
 js/economy.js         all game math, no DOM
 js/gears.js           the machine view: wall, meshing gears, hatch (SVG)
 js/ui.js              shop, shelf, stats, crew strip, Shop Floor, effects
-js/main.js            input, game loop, shinies, pause, sound settings, wiring
+js/wild.js            Wild Magic event
+js/clones.js          Clone Attack event
+js/mega.js            the Megagnome
+js/hunt.js            the crossbow hunt
+js/main.js            input, game loop, shinies, pause, settings, wiring
 assets/               all art (see docs/ASSETS.md)
-tools/                art pipeline and smoke test
+tools/                art.py (art pipeline), smoke-test.js, stamp.js, inventory.js
 docs/                 these docs
 CHANGELOG.md          every version, newest first
 README.md             short public readme
