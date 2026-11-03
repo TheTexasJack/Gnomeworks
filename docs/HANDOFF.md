@@ -34,7 +34,7 @@ Expect side requests from Jarrett and his 6-year-old daughter too (she asked for
 - **Ideas are drafts** until he approves them.  He wants honest pushback and his words followed exactly.  Don't ask him follow-up questions at the end of replies.
 - **Repo writing:** two spaces after periods, no em dashes, no "not X, it's Y" phrasing.
 - **Mara** is his ChatGPT and makes the art.  He often fixes art himself in GIMP.  **Alex Gore** (his daughter) records voices.
-- **Standing game rules:** no gambling mechanics, real taps only for anything rare, kid-friendly (cartoon splats are fine for this D&D crowd), phone first, every number in `js/config.js`.
+- **Standing game rules:** no gambling mechanics unless Jarrett (the owner) directly asks for one, real taps only for anything rare, kid-friendly (cartoon splats are fine for this D&D crowd), phone first, every number in `js/config.js`.
 - He plays on Linux Mint; Jarrett plays on desktop; testers use phones (one Android has reduced motion on).
 
 ## Things that bit us (so they don't again)

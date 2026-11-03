@@ -7,7 +7,7 @@ Everything that interrupts the normal tap-and-idle loop.  Built events are first
 - **Real hands only.**  Anything that pays out checks `event.isTrusted`, so scripted clicks never count.
 - **Pause freezes it.**  `main.js` calls each event's `shift(ms)` while paused, pushing every timer forward.
 - **Reduced motion.**  Devices that ask for less motion get still, glowing versions (no spinning, bobbing, or pulsing).
-- **No gambling.**  Events pay out for doing something, never for betting.
+- **No gambling.**  Events pay out for doing something, never for betting.  Jarrett owns the game and can ask for otherwise.
 - **Rewards scale with income.**  Payouts are "N seconds of your production," so they matter at 100 cogs or 100 billion.
 - **Off-screen fairness.**  An event never takes something from a player who couldn't see it.
 - **Debug buttons.**  `?debug=1` adds buttons to fire each event on demand.

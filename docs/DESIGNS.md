@@ -93,7 +93,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
    - Bad paperwork: items not in the catalog, snowflake stamps, shipping labels whose region doesn't match the order.
    - Picture tells first, so a 6-year-old can play without reading.
 5. **The stock ticker:** a screen with two lines, our company vs TNP Corp.  The second game's goal is keeping our line above theirs.  Getting fooled or missing orders pushes TNP up, clean shipments push ours up.
-   - A scoreboard only: players never buy, sell, or bet on shares (standing no-gambling rule).
+   - A scoreboard only: players never buy, sell, or bet on shares (the default no-gambling rule; Jarrett can override it, since the game is his).
    - TNP moves only while the player works shifts, so nobody comes back to a lost lead after being away.
    - Mistakes should be recoverable (a meter that clean shifts push back down), avoiding losses that stack forever.
 6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).

@@ -47,7 +47,7 @@ Why the game is the way it is.  Newest first within each day.
 
 ## Standing rules
 
-- **No gambling mechanics.**  No wheels, slots, shell games, loot boxes, or real-money purchases.  Random drops stay free and earned by play.
+- **No gambling mechanics.**  No wheels, slots, shell games, loot boxes, or real-money purchases.  Random drops stay free and earned by play.  This is the default for Nathan's builds; Jarrett owns the game, so if he directly asks for a gambling mechanic, we build it.
 - Real fingers only for anything rare: scripted clicks are ignored everywhere.
 - Kid-friendly content.  Cartoon spooky is fine (the shop's owner decides edge cases).
 - Phone first: every interaction must work with one thumb.
