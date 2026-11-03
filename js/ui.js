@@ -47,7 +47,7 @@ GW.ui = (function () {
   }
 
   function itemIcon(item, big) {
-    var wrap = el('span', 'item-icon' + (big ? ' big' : '') + (item.tint ? ' tint-' + item.tint : ''));
+    var wrap = el('span', 'item-icon' + (big ? ' big' : '') + (item.tint ? ' tint-' + item.tint : '') + (item.pixel ? ' pixel' : ''));
     var src = item.img || (item.emoji ? emojiFile(item.emoji) : null);
     if (src) {
       var img = el('img'); img.src = src; img.alt = item.name; img.draggable = false;
@@ -333,7 +333,7 @@ GW.ui = (function () {
     floor.innerHTML = '';
     slotEls = [];
     var L = layout();
-    floor.style.backgroundImage = "url('" + L.bg + "')";
+    floor.style.backgroundImage = "url('" + GW.theme.img(L.bg) + "')";
     $('#machine').style.setProperty('--floor-aspect', L.aspect);
     var belt = el('div', 'belt');
     belt.style.left = L.belt.left + '%'; belt.style.width = L.belt.width + '%';
@@ -501,7 +501,7 @@ GW.ui = (function () {
   function helpWanted(slot) {
     slot.st.className = 'station hiring';
     slot.st.innerHTML = '';
-    var im = el('img'); im.src = crewImg('help_wanted'); im.alt = 'Help wanted'; im.draggable = false; im.style.height = (15 * layout().scale) + 'cqh';
+    var im = el('img'); im.src = GW.theme.img(crewImg('help_wanted')); im.alt = 'Help wanted'; im.draggable = false; im.style.height = (15 * layout().scale) + 'cqh';
     slot.st.appendChild(im);
     slot.plate.textContent = '???';
     slot.plate.classList.add('locked');
@@ -595,6 +595,7 @@ GW.ui = (function () {
   return {
     init: init, updateShop: updateShop, updateFloor: updateFloor, animateFloor: animateFloor, updateStats: updateStats, updateCrew: updateCrew, updateHeader: updateHeader,
     floorLayout: layout,
+    rebuildFloor: function () { buildFloor(); updateFloor(GW.game.s); },
     buildShelf: buildShelf, flashItem: flashShelf, floatText: floatText, popItem: popItem, toast: toast, itemIcon: itemIcon
   };
 })();

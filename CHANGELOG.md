@@ -2,6 +2,12 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.47 (2026-11-02)
+
+- Night theme.  Info > Look > Theme: Auto (follows your device's dark mode, the default), Day, or Night.  Night swaps in Mara's moonlit art: the banner, the title sign, the machine wall, both Shop Floor layouts, Help Wanted signs, the pause sign, black wood boards, and chalkboard clipboards with dark measuring tools.  Text on the chalkboards is chalk white.  Phones get their own moonlit banner too.
+- New page boards: the background wood is a fresh plank set, mirror-tiled so there are no seams at the edges.  The side rails and gnome strip use it too.
+- Legendary Treasure: the Purple Underpants are now the Lucky Purple Underpants, in pixel art (kept crisp, never blurred).
+
 ## v0.2.0-draft.46 (2026-11-02)
 
 - Clone Attack: 4 clones per attack (was 2), each a different mutant.

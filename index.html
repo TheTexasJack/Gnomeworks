@@ -6,6 +6,14 @@
   <meta name="description" content="Gnomeworks: a gnome-powered clicker from The Stoned Gnome.">
   <title>Gnomeworks</title>
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Day / Night theme, set before anything draws so there's no flash.  'auto' follows the device.
+    (function () {
+      var t = 'auto'; try { t = localStorage.getItem('gnomeworks.theme') || 'auto'; } catch (e) {}
+      var night = t === 'night' || (t === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.classList.toggle('night', night);
+    })();
+  </script>
 </head>
 <body>
   <div id="app">
@@ -77,6 +85,14 @@
             <p>Tap the gear and the shiny turns gold.  Only a gold shiny can hold a Legendary.</p>
             <h3>Playing as a guest</h3>
             <p>Your progress saves in this browser only.  Clearing your browser data or switching devices starts you fresh.  Accounts and a leaderboard are on the way.</p>
+            <h3>Look</h3>
+            <label class="setting">Theme
+              <select id="themeSel">
+                <option value="auto">Auto (match my device)</option>
+                <option value="day">Day</option>
+                <option value="night">Night</option>
+              </select>
+            </label>
             <h3>Sound</h3>
             <label class="setting">Effects volume <input type="range" id="fxVol" min="0" max="100" step="5"></label>
             <label class="setting"><input type="checkbox" id="chatterOn"> Gnome chatter on the Shop Floor</label>
@@ -95,6 +111,7 @@
   <div id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/config.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/util.js"></script>
   <script src="js/sfx.js"></script>
   <script src="js/state.js"></script>

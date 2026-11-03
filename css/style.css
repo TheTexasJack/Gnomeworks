@@ -24,8 +24,8 @@ body {
   background-image:
     radial-gradient(ellipse at 50% 0%, rgba(255,190,90,.18), transparent 60%),
     linear-gradient(180deg, rgba(20,10,3,.72), rgba(10,5,1,.88)),
-    url('../assets/bg/planks.webp');
-  background-size: auto, auto, 768px auto;
+    url('../assets/bg/boards_day.webp');
+  background-size: auto, auto, 512px auto;
   background-attachment: fixed;
   min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
@@ -296,7 +296,7 @@ body.tap-hint-done .tap-label { opacity: 0; }
 }
 .rails .progress-row, .rails .crew {
   border-radius: var(--radius);
-  background: var(--rivets), linear-gradient(180deg, rgba(20,10,3,.55), rgba(10,5,1,.75)), url('../assets/bg/planks.webp') center / 400px auto repeat;
+  background: var(--rivets), linear-gradient(180deg, rgba(20,10,3,.55), rgba(10,5,1,.75)), url('../assets/bg/boards_day.webp') center / 400px auto repeat;
   border: 2px solid var(--brass); box-shadow: inset 0 0 0 1px var(--brass-dark), inset 0 0 18px rgba(0,0,0,.5);
 }
 .rails .progress-label, .rails .progress-made { color: var(--brass-light); font-weight: bold; line-height: 1.2; }
@@ -316,7 +316,7 @@ body.tap-hint-done .tap-label { opacity: 0; }
   background:
     var(--rivets),
     linear-gradient(180deg, rgba(20,10,3,.55), rgba(10,5,1,.75)),
-    url('../assets/bg/planks_h.webp') center / 640px auto repeat;
+    url('../assets/bg/boards_day_h.webp') center / auto 400px repeat;
   border: 2px solid var(--brass); box-shadow: inset 0 0 0 1px var(--brass-dark), inset 0 0 18px rgba(0,0,0,.5);
 }
 .crew-group { display: flex; align-items: flex-end; gap: 0; }
@@ -549,3 +549,65 @@ body.paused .clone-img { animation-play-state: paused; }
 .clone-alert img { width: 100%; height: auto; display: block; pointer-events: none; }
 @keyframes alertPulse { from { transform: translateX(-50%) scale(1); } to { transform: translateX(-50%) scale(1.06); } }
 @media (prefers-reduced-motion: reduce) { .clone-alert { animation: none; } }
+
+.item-icon.pixel img { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* =====================================================================
+   NIGHT THEME (html.night).  Painted art swaps in theme.js; this is the rest.
+   ===================================================================== */
+.night body {
+  background-color: #0d0e12;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(120,150,255,.10), transparent 60%),
+    linear-gradient(180deg, rgba(5,6,10,.55), rgba(3,3,6,.78)),
+    url('../assets/bg/boards_night.webp');
+}
+.night .topbar {
+  background:
+    var(--rivets),
+    linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,0) 22%, rgba(0,0,0,0) 80%, rgba(0,0,0,.35)),
+    url('../assets/bg/banner_scenic_night.webp') center / cover no-repeat, #0e1020;
+}
+@media (max-width: 720px) {
+  .night .topbar {
+    background: var(--rivets), linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,0) 40%, rgba(0,0,0,.25)),
+      url('../assets/bg/banner_phone_night.webp') center / cover no-repeat, #0e1020;
+  }
+}
+.night .wallet { background: linear-gradient(180deg, #111219, #1c1d26); }
+.night #pauseOverlay .pause-sign { background-image: url('../assets/ui/sign_blank_night.webp'); }
+
+/* Clipboards become chalkboards. */
+.night .panel.side-col, .night .panel.shelf-col { border-image-source: url('../assets/ui/clipboard_night.webp'); color: #ecebe4; }
+.night .panel.side-col {
+  background:
+    url('../assets/ui/tsquare_tilt_night.webp') left -2% top -10px / 26% auto no-repeat,
+    url('../assets/ui/triangle_tilt_night.webp') right -3% top -6px / 22% auto no-repeat;
+  background-origin: border-box;
+}
+.night .panel.shelf-col {
+  background:
+    url('../assets/ui/triangle_tilt_l_night.webp') left -4% top -4px / 27% auto no-repeat,
+    url('../assets/ui/tsquare_tilt_r_night.webp') right 0% top -14px / 22% auto no-repeat;
+  background-origin: border-box;
+}
+.night .side-col .shop-head, .night .side-col .stats-sec th, .night .side-col .info h3, .night .shelf-col .panel-title {
+  color: #f4f1e6; text-shadow: 0 0 3px rgba(255,255,255,.25); border-bottom-color: rgba(240,240,230,.35);
+}
+.night .side-col .shop-row { color: #ecebe4; background: rgba(255,255,255,.06); border-color: rgba(220,220,210,.35); box-shadow: none; }
+.night .side-col .shop-row:hover:not(.cant):not(.done) { border-color: #f4f1e6; background: rgba(255,255,255,.1); }
+.night .side-col .shop-row.ready { border-color: var(--brass); box-shadow: 0 0 0 1px rgba(212,164,58,.6), 0 0 10px rgba(212,164,58,.35); }
+.night .side-col .shop-cost, .night .side-col .stats-table td:last-child { color: var(--brass-light); }
+.night .side-col .shop-row.cant .shop-cost { color: #9a9488; }
+.night .side-col .shop-desc, .night .side-col .shop-owned { color: #c9c6bb; }
+.night .side-col .shop-meter { background: rgba(255,255,255,.12); }
+.night .side-col .stats-table td { border-bottom-color: rgba(255,255,255,.12); }
+.night .side-col .info a { color: var(--brass-light); }
+.night .side-col .info .fine, .night .shelf-col .shelf-foot { color: #b9b6ab; }
+.night .shelf-group { background: rgba(0,0,0,.45); }
+
+/* Wood strips go dark. */
+.night .crew { background: var(--rivets), linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.6)), url('../assets/bg/boards_night_h.webp') center / auto 400px repeat; }
+.night .rails .progress-row, .night .rails .crew {
+  background: var(--rivets), linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.6)), url('../assets/bg/boards_night.webp') center / 400px auto repeat;
+}

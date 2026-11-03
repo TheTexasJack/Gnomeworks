@@ -35,7 +35,7 @@ GW.gears = (function () {
   }
 
   function wall(svg) {
-    mk('image', { href: 'assets/bg/machine_wall.webp', x: 0, y: 0, width: VIEW.w, height: VIEW.h, preserveAspectRatio: 'xMidYMid slice' }, svg);
+    mk('image', { id: 'machineWall', href: GW.theme.img('assets/bg/machine_wall.webp'), x: 0, y: 0, width: VIEW.w, height: VIEW.h, preserveAspectRatio: 'xMidYMid slice' }, svg);
     mk('rect', { x: 0, y: 0, width: VIEW.w, height: VIEW.h, fill: '#2a1004', opacity: 0.22 }, svg);
   }
 

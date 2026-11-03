@@ -2,7 +2,7 @@
 
 Every collectible in the game, by shelf group.  Generated from `js/config.js` by `node tools/inventory.js`, so rerun it after any item change instead of editing this file by hand.
 
-Total: **147** collectibles.  Game version 0.2.0-draft.40.
+Total: **147** collectibles.  Game version 0.2.0-draft.47.
 
 | Group | Items |
 | --- | --- |
@@ -22,7 +22,7 @@ Total: **147** collectibles.  Game version 0.2.0-draft.40.
 
 | Item | Tier | Emoji | Twemoji file |
 | --- | --- | --- | --- |
-| Purple Underpants | Legendary | 🩲 | 1fa72.svg |
+| Lucky Purple Underpants | Legendary |  | assets/treasures/purple_underpants.png |
 | Diamond Pickaxe | Legendary | ⛏️ | 26cf.svg |
 | Magical Sword | Legendary | 🗡️ | 1f5e1.svg |
 
@@ -188,4 +188,4 @@ Total: **147** collectibles.  Game version 0.2.0-draft.40.
 
 Check here before picking a new junk emoji, so nothing repeats.
 
-🧦 🩲 🩳 👟 🥾 🧤 🧣 👔 🩴 🧢 👖 🧥 🚽 🔪 🪠 🧻 🧼 🧽 🪥 🪣 🛁 🧴 🪒 🪮 ✏️ 🖊️ 🖍️ 📎 📌 ✂️ 📏 📐 📚 🗑️ 📋 🖨️ ⚙️ 🔩 🔧 🔨 🪛 🪚 🧲 🧰 🧱 🪜 🗜️ 🪝 🥄 🥫 🧂 🫖 🥣 🍴 🥔 🧀 🥨 🍌 🍳 🫙 🎲 🧩 🪀 🪁 🎯 🎈 🎱 🪇 🪄 🎣 🧸 🪃 🧪 🧫 🔋 🪫 💡 🔌 🧯 🧨 ⏰ 🎛️ 🔬 📡 🪤 🪵 🪑 🪴 🕯️ 🧹 🧺 📦 🪈 🏺 🪨 🛒 🩲 ⛏️ 🗡️
+🧦 🩲 🩳 👟 🥾 🧤 🧣 👔 🩴 🧢 👖 🧥 🚽 🔪 🪠 🧻 🧼 🧽 🪥 🪣 🛁 🧴 🪒 🪮 ✏️ 🖊️ 🖍️ 📎 📌 ✂️ 📏 📐 📚 🗑️ 📋 🖨️ ⚙️ 🔩 🔧 🔨 🪛 🪚 🧲 🧰 🧱 🪜 🗜️ 🪝 🥄 🥫 🧂 🫖 🥣 🍴 🥔 🧀 🥨 🍌 🍳 🫙 🎲 🧩 🪀 🪁 🎯 🎈 🎱 🪇 🪄 🎣 🧸 🪃 🧪 🧫 🔋 🪫 💡 🔌 🧯 🧨 ⏰ 🎛️ 🔬 📡 🪤 🪵 🪑 🪴 🕯️ 🧹 🧺 📦 🪈 🏺 🪨 🛒 ⛏️ 🗡️

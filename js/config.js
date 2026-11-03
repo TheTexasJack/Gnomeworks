@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.46';
+GW.VERSION = '0.2.0-draft.47';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -256,7 +256,7 @@ GW.CONFIG = {
     { id: 'plop_prize',  name: 'Prizeplop', group: 'plops', family: 'plop', variant: 'prize',  tier: 'superrare', img: 'assets/plops/plop_prize.webp' },
     { id: 'plop_golden', name: 'Goldplop',  group: 'plops', family: 'plop', variant: 'golden', tier: 'legendary', img: 'assets/plops/plop_golden.webp' },
     // Legendary Treasures (popups only)
-    { id: 'purple_underpants', name: 'Purple Underpants', group: 'treasures', tier: 'legendary', emoji: '🩲', tint: 'purple' },
+    { id: 'purple_underpants', name: 'Lucky Purple Underpants', group: 'treasures', tier: 'legendary', img: 'assets/treasures/purple_underpants.png', pixel: true },
     { id: 'diamond_pick', name: 'Diamond Pickaxe', group: 'treasures', tier: 'legendary', emoji: '⛏️' },
     { id: 'magic_sword', name: 'Magical Sword', group: 'treasures', tier: 'legendary', emoji: '🗡️' }
   ],

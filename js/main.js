@@ -269,6 +269,12 @@ window.GW = window.GW || {};
   chatterBox.addEventListener('change', function () { SFX.set('chatter', chatterBox.checked); applyAudioUI(); });
   applyAudioUI();
 
+  // ---------- theme ----------
+  var themeSel = document.getElementById('themeSel');
+  themeSel.value = GW.theme.setting();
+  themeSel.addEventListener('change', function () { GW.theme.set(themeSel.value); SFX.click(); });
+  GW.theme.apply();
+
   // ---------- pause ----------
   var pauseBtn = document.getElementById('pauseBtn');
   function applyPause() {
