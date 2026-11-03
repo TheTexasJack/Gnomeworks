@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.37';
+GW.VERSION = '0.2.0-draft.38';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -31,6 +31,15 @@ GW.CONFIG = {
 
   // "Not the Cog, But You": each Wizard adds this much to every other gnome type, up to the cap.
   wizardAura: { perWizard: 0.01, cap: 0.5 },
+
+  // Wild Magic event (unlocked by the Wild Magic upgrade).  Junk spins around the machine;
+  // tap each one before it fizzles.  style: 'spin' (bare spinning emoji), 'whoosh' (emoji in a
+  // purple swirl), 'storm' (whoosh, plus one golden cog-swirl bonus target).  ?wild=<style> overrides.
+  wild: {
+    style: 'storm', targets: 6, durationSeconds: 9, staggerSeconds: 1.2,
+    secondsPerTarget: 8, bonusMultiplier: 3, allClearSeconds: 30,
+    minSeconds: 120, maxSeconds: 300, wizardsPerHalving: 40, floorSeconds: 45
+  },
 
   tap: {
     maxTapsPerSecond: 20,       // human cap; extra taps are ignored
@@ -355,6 +364,8 @@ GW.CONFIG = {
       cost: 30000000000,  mult: { producer: 'wizard', x: 2 }, unlock: { producer: 'wizard', count: 50 } },
     { id: 'wiz_not_cog',  name: 'Not the Cog, But You',      desc: 'Every Wizard makes all other gnomes 1% faster (up to +50%).',
       cost: 1000000000,   aura: true, unlock: { producer: 'wizard', count: 25 } },
+    { id: 'wiz_wild',     name: 'Wild Magic',                desc: 'Let the Wizards lose control now and then.  Tap the spinning junk for cogs.',
+      cost: 100000000,    unlock: { producer: 'wizard', count: 10 } },
     { id: 'rally',      name: 'Rally Cry',              desc: 'Each tap also adds 5% of your gnome clicks per second.',
       cost: 25000,   unlock: { cogsSeen: 10000 } },
     // Warrior weapons.  Each one replaces the last.

@@ -57,7 +57,7 @@ window.GW = window.GW || {};
 
   machine.addEventListener('pointerdown', function (e) {
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
-    if (e.target.closest('.rare-popup')) return;
+    if (e.target.closest('.rare-popup, .wild-target')) return;
     e.preventDefault();
     if (!allowTap()) return;
     var box = machine.getBoundingClientRect();
@@ -167,6 +167,7 @@ window.GW = window.GW || {};
       // Frozen: push timers forward so nothing expires or spawns while paused.
       if (popup) popup.expires += dt * 1000;
       nextPopupAt += dt * 1000;
+      GW.wild.shift(dt * 1000);
     } else if (dt > 5) {
       // Tab was asleep.  Catch up quietly instead of dumping thousands of pops.
       var off = E.offline(s, dt);
@@ -310,6 +311,11 @@ window.GW = window.GW || {};
     var pop = U.el('button', '', 'Popup');
     pop.addEventListener('click', function () { lastHumanTap = performance.now(); nextPopupAt = 0; });
     bar.appendChild(pop);
+    ['spin', 'whoosh', 'storm'].forEach(function (st) {
+      var w = U.el('button', '', 'Wild: ' + st);
+      w.addEventListener('click', function () { GW.wild.start(s, st); });
+      bar.appendChild(w);
+    });
     var hour = U.el('button', '', '+1 hour');
     hour.addEventListener('click', function () { E.offline(s, 3600); shelfDirty = true; });
     bar.appendChild(hour);

@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.38 (2026-11-02)
+
+- Wild Magic event (prototype).  Buy the Wild Magic upgrade (10 Wizards, 100M) and every few minutes the Wizards lose control: 6 pieces of junk spin around the machine inside purple swirls.  Tap each one (real taps only) for 8 seconds of production, catch all 6 for a 30-second bonus, and one golden cog swirl pays triple.  The spell fizzles on its own after 9 seconds.  More Wizards make it come around more often.  Freezes with Pause; reduced motion gets glowing, still targets.  Debug bar (?debug=1) has buttons to fire each style.
+
 ## v0.2.0-draft.37 (2026-11-02)
 
 - New Warrior Gnome description: "The might of adventure powers the machine."

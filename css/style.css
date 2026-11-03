@@ -468,3 +468,33 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .side-col .info a { color: #8a3d08; }
 .side-col .info .fine { opacity: 1; color: #6e5338; }
 .side-col .shop-icon { filter: drop-shadow(0 2px 2px rgba(60,30,5,.4)); }
+
+/* ---------- Wild Magic event ---------- */
+.wild-target {
+  position: absolute; width: 74px; height: 74px; margin: -37px 0 0 -37px; padding: 0; border: 0; background: none;
+  cursor: pointer; animation: wtIn .45s cubic-bezier(.3,1.6,.5,1) backwards, wtBob 1.6s ease-in-out .45s infinite alternate;
+  -webkit-tap-highlight-color: transparent; z-index: 3;
+}
+.wild-target .wt-item { position: absolute; left: 50%; top: 50%; width: 52px !important; height: 52px !important; margin: -26px 0 0 -26px; z-index: 1;
+  animation: wtSpin var(--spin, .8s) linear infinite; filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(200,120,255,.95)); }
+.wild-target .wt-item { --d: var(--dir, 1); }
+.wild-target .wt-swirl { position: absolute; left: 50%; top: 50%; width: 132px; height: auto; transform: translate(-50%, -50%); pointer-events: none;
+  animation: wtSwirl 1.1s ease-in-out infinite alternate; opacity: .7; }
+.wild-target.wt-bonus .wt-swirl { width: 160px; opacity: .85; }
+.wild-target.wt-bonus .wt-item { filter: drop-shadow(0 0 8px rgba(255,200,60,1)); }
+.wild-target.wt-spin { width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: radial-gradient(circle, rgba(200,120,255,.45), transparent 70%); }
+.wild-target.caught { pointer-events: none; animation: wtCaught .35s ease-out forwards; }
+.wild-target.fizzle { pointer-events: none; animation: wtFizzle .6s ease-in forwards; }
+.wt-burst { position: absolute; width: 170px; margin: -85px 0 0 -85px; pointer-events: none; animation: wtBurst .7s ease-out forwards; }
+#machine.wild-on #edgeFlash { opacity: 1; box-shadow: inset 0 0 50px 12px rgba(190,90,255,.55); transition: opacity .3s; }
+@keyframes wtIn { from { transform: scale(0) rotate(-180deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes wtBob { from { transform: translate(-6px, -5px); } to { transform: translate(6px, 5px); } }
+@keyframes wtSpin { from { transform: rotate(0deg); } to { transform: rotate(calc(360deg * var(--d))); } }
+@keyframes wtSwirl { from { transform: translate(-50%, -50%) rotate(-14deg) scale(.92); } to { transform: translate(-50%, -50%) rotate(14deg) scale(1.06); } }
+@keyframes wtCaught { to { transform: scale(1.6); opacity: 0; } }
+@keyframes wtFizzle { to { transform: scale(.2) rotate(120deg); opacity: 0; filter: grayscale(1); } }
+@keyframes wtBurst { from { transform: scale(.3) rotate(0); opacity: 1; } to { transform: scale(1.5) rotate(160deg); opacity: 0; } }
+body.paused .wild-target, body.paused .wild-target * { animation-play-state: paused !important; }
+/* Reduced motion: no spinning or bobbing, just a steady glow and a gentle pulse. */
+.wild-target.wt-calm, .wild-target.wt-calm .wt-item, .wild-target.wt-calm .wt-swirl { animation: none !important; }
+.wild-target.wt-calm .wt-item { filter: drop-shadow(0 0 10px rgba(200,120,255,1)); }
