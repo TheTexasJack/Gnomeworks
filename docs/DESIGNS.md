@@ -63,6 +63,8 @@ The event clicker.  Discussed 2026-11-02.
 
 Nathan's sorting game, first mini-game in line.  Discussed 2026-11-02, reshaped 2026-11-03.
 
+The full working guide (build layers, difficulty ramp, asset list for Mara, lore inputs, mechanics to borrow) is the Claude doc "Gnomeworks Packing Line: Design and Asset Guide": https://claude.ai/artifact/Krkzpd61ihTKBBCCgLMdWT
+
 The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line is where the stock goes out.  Emptying the shelf is the point.  An empty shelf sends the player back to the gear to click more.  A shipping game grows out of the clicker.
 
 **Decided**
