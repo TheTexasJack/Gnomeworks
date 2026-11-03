@@ -28,7 +28,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 ## Nathan
 
-- [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.
+- [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.  **Before December 1** (the Santa hat shows the lip most, and the Megagnome wears it too).
 - [ ] Optional: on the Android phone, Settings, Accessibility, "Remove animations" is likely on.  Turning it off brings back the full bounce.
 
 ## Claudia (ready to build when asked)
@@ -58,7 +58,7 @@ Open question in the proposal: should packed items come out of the shelf counts,
 
 | Issue | Status |
 | --- | --- |
-| Hats show the inside of the brim | Fix in progress (GIMP) |
+| Hats show the inside of the brim | Fix in progress (GIMP), due before December 1.  Hat spots won't need retuning if the canvas size stays the same. |
 | Shop Floor gnomes stood still on devices set to reduce motion (Nathan's Android) | Fixed in draft.20: gentle pose swaps |
 | Tall phone floor has an empty bottom level with no plates | Accepted; Mara could add a 4th plate row for 16 stations |
 | Matryoshka sets (10 and 25 owned) only wiggle, no open/close | Accepted, Nathan likes it |
