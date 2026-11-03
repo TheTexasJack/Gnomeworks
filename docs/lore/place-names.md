@@ -8,9 +8,9 @@ Status: **Working list, unclassified and not yet placed on the map.**  Nathan su
 - No regions, towns, landmarks, or points of interest are assigned yet.  Sorting comes next.
 - The one master map focuses on Gnome Island and the surrounding area.  The wider world, including the mythical North Pole, stays off-map for future expansion.
 - "Defined Areas" and "Regions" were headings, not place names.  Repeated "Gnomadica" and "Cogbottom" entries were removed.
-- Total: **102 unique names**.  Earlier chat counts of 100 were in error; the source list had 100 lines, including two headings and two duplicate entries.  Six new names were added afterward.
+- Total: **100 unique names**.  Earlier chat counts of 100 were in error; the source list had 100 lines, including two headings and two duplicate entries.  Six new names were added afterward, then Gnanada and South Ham'n'Gnome were dropped to finalize a 100-name pool.
 
-## Unsorted names (102)
+## Unsorted names (100)
 
 1. Gloopenstein
 2. Port Gnaru
@@ -26,91 +26,89 @@ Status: **Working list, unclassified and not yet placed on the map.**  Nathan su
 12. Sockarillo
 13. Gnafrica
 14. Gnomerica
-15. Gnanada
-16. Gnufoundland
-17. Gnohio
-18. Cogington
-19. Cogsworth
-20. Sproing
-21. Broken Wheel
-22. Flybar
-23. Pulley Junction
-24. Crystals on the Flats
-25. Mines of the Unknown Office
-26. Mortuary Mines
-27. Cog'n'Barrel
-28. Twinshift
-29. Woods of the Elder
-30. The Ancient Device
-31. Springwater
-32. Gnome'n'Pinion
-33. Don't Grind Angry
-34. Hunter's Folly
-35. Mountain of Exclusion
-36. Hills of Ratios
-37. Steam Stream
-38. Glowrock Retreat
-39. Bottoms Up
-40. Slanic
-41. The Crafter's Mines
-42. Mouse Reserve
-43. Flies and Springwater
-44. Bog of Eternal Regret
-45. Dungeon of Soup
-46. Dungeon of Anger
-47. Dungeon of the Squirrel's Nut
-48. Dungeon of the Deep
-49. Unspoken Dungeon
-50. Place of Many Names
-51. Rubber Ribbiter
-52. Swamp of Low Visits
-53. Hot Fire Volcano
-54. Minor Heat Volcano
-55. Depths of the Undercover
-56. Ancient Pet Rock
-57. Lost Boot
-58. Slimes Akummin
-59. Gnomish Heights
-60. Pixie Puddles
-61. Fairy Fen
-62. Snakes N Sliders
-63. Pretty Good Chances
-64. Gnix Goop
-65. I Crant Spellit
-66. Rocks Throw
-67. Sleeping Dogs Hollar
-68. Sky Dream
-69. Lost Valley
-70. Frozen Fields
-71. Brassin
-72. Brokit Fixit
-73. Anterpiller's Mound
-74. Mycelia
-75. Gnyannis
-76. Werewolf London
-77. Creepy Gnut
-78. Fortress of Easy Defeat
-79. Fortress of Impossibility
-80. Fortress of Moderation
-81. Bob's Hut
-82. Crossroads
-83. North Ham'n'Gnome
-84. South Ham'n'Gnome
-85. Runningnomata
-86. Stellar Review
-87. Dice and Doodles
-88. Farms of Verdon't
-89. Gnomish Farms
-90. Ogre's Hold
-91. Giantation
-92. Big ole' Hole
-93. Grit Spit and Fellers
-94. the Windy Sands
-95. Desert of Desire
-96. Satiated Desert
-97. Backwater Cog
-98. Port Gnasher
-99. River's Belt
-100. Cogbend Hold
-101. Brasstop
-102. Eversummer
+15. Gnufoundland
+16. Gnohio
+17. Cogington
+18. Cogsworth
+19. Sproing
+20. Broken Wheel
+21. Flybar
+22. Pulley Junction
+23. Crystals on the Flats
+24. Mines of the Unknown Office
+25. Mortuary Mines
+26. Cog'n'Barrel
+27. Twinshift
+28. Woods of the Elder
+29. The Ancient Device
+30. Springwater
+31. Gnome'n'Pinion
+32. Don't Grind Angry
+33. Hunter's Folly
+34. Mountain of Exclusion
+35. Hills of Ratios
+36. Steam Stream
+37. Glowrock Retreat
+38. Bottoms Up
+39. Slanic
+40. The Crafter's Mines
+41. Mouse Reserve
+42. Flies and Springwater
+43. Bog of Eternal Regret
+44. Dungeon of Soup
+45. Dungeon of Anger
+46. Dungeon of the Squirrel's Nut
+47. Dungeon of the Deep
+48. Unspoken Dungeon
+49. Place of Many Names
+50. Rubber Ribbiter
+51. Swamp of Low Visits
+52. Hot Fire Volcano
+53. Minor Heat Volcano
+54. Depths of the Undercover
+55. Ancient Pet Rock
+56. Lost Boot
+57. Slimes Akummin
+58. Gnomish Heights
+59. Pixie Puddles
+60. Fairy Fen
+61. Snakes N Sliders
+62. Pretty Good Chances
+63. Gnix Goop
+64. I Crant Spellit
+65. Rocks Throw
+66. Sleeping Dogs Hollar
+67. Sky Dream
+68. Lost Valley
+69. Frozen Fields
+70. Brassin
+71. Brokit Fixit
+72. Anterpiller's Mound
+73. Mycelia
+74. Gnyannis
+75. Werewolf London
+76. Creepy Gnut
+77. Fortress of Easy Defeat
+78. Fortress of Impossibility
+79. Fortress of Moderation
+80. Bob's Hut
+81. Crossroads
+82. North Ham'n'Gnome
+83. Runningnomata
+84. Stellar Review
+85. Dice and Doodles
+86. Farms of Verdon't
+87. Gnomish Farms
+88. Ogre's Hold
+89. Giantation
+90. Big ole' Hole
+91. Grit Spit and Fellers
+92. the Windy Sands
+93. Desert of Desire
+94. Satiated Desert
+95. Backwater Cog
+96. Port Gnasher
+97. River's Belt
+98. Cogbend Hold
+99. Brasstop
+100. Eversummer
