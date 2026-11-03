@@ -110,7 +110,8 @@ GW.hunt = (function () {
     line.setAttribute('points', TIP_L.join(',') + ' ' + NOCK[0] + ',' + ny + ' ' + TIP_R.join(','));
     bolt.style.top = ((ny - 150) / 418 * 100) + '%';
     bolt.hidden = h.bolts <= 0;
-    bow.style.transform = 'translateX(-50%) translateX(' + ((aim - 50) * 0.25) + '%) rotate(' + ((aim - 50) * 0.45) + 'deg) translateY(' + (p * 4) + '%)';
+    // Swing from a pivot below the box, small angles only, so the cut-off arms never come into view.
+    bow.style.transform = 'translateX(-50%) rotate(' + ((aim - 50) * 0.22) + 'deg) translateY(' + (p * 4) + '%)';
     var ret = h.el.querySelector('.hunt-reticle');
     ret.hidden = p < 0.3;
     ret.style.left = aim + '%'; ret.style.top = LANE_Y + '%';

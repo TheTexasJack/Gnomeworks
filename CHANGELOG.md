@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.55 (2026-11-03)
+
+- Hunt: the crossbow sits lower and swings from a pivot below the box with a smaller tilt, and the painted arms fade out at the cut edges, so aiming hard left or right no longer shows where the arms end.
+
 ## v0.2.0-draft.54 (2026-11-03)
 
 - Version stamps: every CSS and JS link carries the version (`main.js?v=0.2.0-draft.54`), so after a release browsers pull a matching set instead of mixing new and cached files.  `tools/stamp.js` writes them; the smoke test fails if they're stale.
