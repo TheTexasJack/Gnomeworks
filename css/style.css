@@ -382,14 +382,16 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .shelf-tile.unknown { opacity: .4; border-style: dashed; }
 .shelf-grid.families { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
 .shelf-grid.families .shelf-tile { padding: 4px 1px 3px; }
-.shelf-grid.families .tile-name { font-size: .58rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.shelf-grid.families .tile-name { white-space: nowrap; max-width: 100%; }
 .shelf-grid.families .item-icon { width: 40px; height: 40px; }
 .shelf-gap { border: 2px dotted rgba(255,255,255,.06); border-radius: 8px; }
 .shelf-tile[style*="rgb(255, 183, 3)"]:not(.unknown) { box-shadow: 0 0 10px rgba(255,183,3,.65); }
 .shelf-tile.unknown .item-icon { color: var(--cream); }
 .tile-new { display: none; position: absolute; top: -7px; right: -5px; font-size: .55rem; font-weight: bold; padding: 1px 4px; border-radius: 6px; background: #e63946; color: #fff; }
 .shelf-tile.is-new .tile-new { display: block; }
-.tile-name { font-size: .7rem; line-height: 1.1; margin-top: 2px; color: #fffaf0; font-weight: bold; text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.9); }
+.shelf-tile { container-type: inline-size; }
+/* Names shrink to fit narrow tiles (phones), never past .5rem, never above .7rem. */
+.tile-name { font-size: clamp(.5rem, 15.5cqw, .7rem); line-height: 1.1; margin-top: 2px; color: #fffaf0; font-weight: bold; text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.9); }
 .tile-count { font-size: .72rem; color: #ffeaa8; font-weight: bold; text-shadow: 0 1px 2px #000, 0 0 4px rgba(0,0,0,.9); }
 .shelf-tile.flash { animation: flash .6s ease-out; }
 @keyframes flash { 0% { transform: scale(1.18); background: rgba(255,224,138,.5); } 100% { transform: scale(1); } }
@@ -434,7 +436,7 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
    Border-image slices: top 281 (clip + paper header), sides 70 (wood rails), bottom 218 (nameplate).
    The middle 581 rows are exactly 15 grid squares, so "round" repeats it down the page seamlessly.
    --cb is the panel width divided by 844; main.js keeps it current. */
-.panel.side-col {
+.panel.side-col, .panel.shelf-col {
   --cb: .52;
   background:
     url('../assets/ui/tsquare_tilt.webp') left -2% top -10px / 26% auto no-repeat,
@@ -449,6 +451,14 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
   filter: drop-shadow(0 6px 10px rgba(0,0,0,.55));
   scrollbar-width: thin; scrollbar-color: rgba(110,70,30,.6) transparent;
 }
+.panel.shelf-col {
+  background:
+    url('../assets/ui/triangle_tilt_l.webp') left -4% top -4px / 27% auto no-repeat,
+    url('../assets/ui/tsquare_tilt_r.webp') right 0% top -14px / 22% auto no-repeat;
+  background-origin: border-box;
+}
+.shelf-col .panel-title { color: #5a2f0c; text-shadow: none; margin-top: 2px; }
+.shelf-col .shelf-foot { color: #5e4026; opacity: 1; font-weight: bold; }
 .side-col .shop-head { padding-left: 6px; }
 .side-col .shop-head, .side-col .stats-sec th, .side-col .info h3 {
   color: #5a2f0c; text-shadow: none; border-bottom: 2px solid rgba(110,60,20,.55);

@@ -209,10 +209,11 @@ window.GW = window.GW || {};
   requestAnimationFrame(frame);
 
   // ---------- clipboard: border-image sizes follow the panel width ----------
-  var sideCol = document.querySelector('.side-col');
-  function fitClipboard() { sideCol.style.setProperty('--cb', (sideCol.offsetWidth / 844).toFixed(4)); }
-  if (window.ResizeObserver) new ResizeObserver(fitClipboard).observe(sideCol);
-  fitClipboard();
+  U.$all('.side-col, .shelf-col').forEach(function (col) {
+    function fitClipboard() { if (col.offsetWidth) col.style.setProperty('--cb', (col.offsetWidth / 844).toFixed(4)); }
+    if (window.ResizeObserver) new ResizeObserver(fitClipboard).observe(col);
+    fitClipboard();
+  });
 
   // ---------- side rails: on wide screens the progress gauge and crew stand beside the machine ----------
   var machineCol = document.querySelector('.machine-col');
