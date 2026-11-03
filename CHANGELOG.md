@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.41 (2026-11-02)
+
+- Clone Attack: the drop spot moved up.  Since you hold a clone by the pinching hand, you now drop him with him dangling over the mouth of the vat, not on top of it.  The vat glows green while he's in the right spot.
+
 ## v0.2.0-draft.40 (2026-11-02)
 
 - Clone Attack event (prototype).  Needs a Cloner; comes around every few minutes, sooner with more Cloners.  Two escaped clones (from 10 mutant kinds) mill around the Shop Floor, snatch an item off the belt (10% of your stack of it) with a gremlin "heh heh", then run the stairs Donkey Kong style for two laps and escape with it.  Press and hold a clone, drag him into the vat behind the Cloner, and SPLOOSH: the junk comes back plus 10 seconds of production.  Drop him anywhere else and he falls to the floor below and keeps running.  On the Machine view Mara's "Clones are loose in the shop!" sign pops up instead; tap it to jump to the floor.  Ignore it for 20 seconds and the clones give up, taking nothing.  Real pointers only; freezes with Pause or when you leave the floor.

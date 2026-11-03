@@ -63,12 +63,13 @@ GW.clones = (function () {
       document.getElementById('floor').classList.add('dragging');
       moveTo(c, e);
     });
-    el.addEventListener('pointermove', function (e) { if (c.held) moveTo(c, e); });
+    el.addEventListener('pointermove', function (e) { if (c.held) { moveTo(c, e); markVat(overVat(e, c)); } });
     var up = function (e) {
       if (!c.held) return;
       c.held = false; el.classList.remove('held');
       document.getElementById('floor').classList.remove('dragging');
-      if (overVat(e)) sploosh(c); else drop(c);
+      markVat(false);
+      if (overVat(e, c)) sploosh(c); else drop(c);
     };
     el.addEventListener('pointerup', up);
     el.addEventListener('pointercancel', up);
@@ -84,11 +85,19 @@ GW.clones = (function () {
     c.y = (e.clientY - r.top) / r.height * 100;
     place(c);
   }
-  function overVat(e) {
+  // The pointer is the pinching hand, so the clone dangles below it.  A good drop is with the
+  // clone hanging over the mouth of the vat: pointer above the rim, about one clone-height up.
+  function overVat(e, c) {
     var vat = document.querySelector('#floor .part-vat');
     if (!vat) return false;
-    var r = vat.getBoundingClientRect(), pad = r.width * 0.2;
-    return e.clientX > r.left - pad && e.clientX < r.right + pad && e.clientY > r.top - pad && e.clientY < r.bottom + pad;
+    var r = vat.getBoundingClientRect(), padX = r.width * 0.15;
+    var hang = c ? c.el.getBoundingClientRect().height : r.height;
+    return e.clientX > r.left - padX && e.clientX < r.right + padX &&
+      e.clientY > r.top - hang * 1.15 && e.clientY < r.top + r.height * 0.3;
+  }
+  function markVat(on) {
+    var vat = document.querySelector('#floor .part-vat');
+    if (vat) vat.classList.toggle('vat-ready', !!on);
   }
 
   // ---------- the run ----------

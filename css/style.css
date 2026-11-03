@@ -523,6 +523,7 @@ body.paused .wild-target, body.paused .wild-target * { animation-play-state: pau
 #floor.dragging { cursor: none; }
 .clone.splooshed { transition: transform .45s ease-in, opacity .45s; transform: translate(-50%, -20%) scale(.2); opacity: 0; pointer-events: none; }
 .part-vat.splooshing { animation: vatWobble .7s ease-out; }
+.part-vat.vat-ready > img { filter: drop-shadow(0 0 1.2cqh rgba(140,255,90,.95)) drop-shadow(0 0 2.5cqh rgba(140,255,90,.6)); }
 @keyframes cloneRun { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-4%) rotate(2deg); } }
 .clone.flip .clone-img { animation-name: cloneRunFlip; }
 @keyframes cloneRunFlip { from { transform: scaleX(-1) translateY(0) rotate(-2deg); } to { transform: scaleX(-1) translateY(-4%) rotate(2deg); } }
