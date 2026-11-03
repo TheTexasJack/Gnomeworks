@@ -9,6 +9,7 @@ Lore has only small effects on gameplay.  Its job is the feel of the world: play
 A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is built yet.
 
 - **Decided:** entries fill in as players discover things.  A Tiny Monster's entry opens when it's caught, a hunt creature's when it's first shot, a region's when the dock first ships there.  Undiscovered entries stay locked, like the ??? tiles on the shelf.
+- **Far future:** a narration button on each entry.  Tracked in [DESIGNS.md](../DESIGNS.md#far-future).
 
 - **Tiny Monsters:** tap a monster on the shelf to open its entry, like a Pokedex (already planned as the Tiny Monster info card in [DESIGNS.md](../DESIGNS.md)).
 - **Hunt creatures:** Alex's idea.  Entries for the creatures the Megagnome hunts, and why (for example, why there are so many Banana Monsters).

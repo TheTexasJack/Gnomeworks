@@ -137,3 +137,11 @@ Before the Packing Line and the Megagnome get code, one pass over the numbers: t
 | Holiday banners (Santa in the night sky, a dragon on the mountain), switched by month like the hats | Idea; Mara keeps the logo and counter areas clear |
 | "Voices by Alex" credit in Info | When Alex records more sounds |
 | Turn events off entirely (a "no Clone Attacks" switch) | Offered, not asked for; would cost those players the rewards |
+
+## Far future
+
+Ideas with merit that are parked until the game is further along.  Not planned, not scheduled.
+
+| Idea | What it needs | Notes |
+| --- | --- | --- |
+| Lore narration: a small play button at the end of each Lore tab entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |
