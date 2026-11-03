@@ -14,12 +14,19 @@ The event clicker.  Discussed 2026-11-02.
 - **Charges come from a hunting mini-game**, not from feeding him gnomes.  (The earlier "feed him 200 Tiny Gnomes" idea was dropped; it broke the price math, and two days of real play showed counts stay under 100 anyway.)
 - **The hunt:** a small box pops up.  Prey moves back and forth.  Drag down to pull the crossbow back, aim, release to fire.  **One hit kills.  You can miss.  Every shot costs cogs.**  Hits are food, food refills his charges, with a gulp and a burp.
 
+- **Price: 100B cogs.**  Several days of play; a goal to shoot for.
+- **He's listed in the shop from the start**, unlike other gnomes that appear when unlocked, with a short checklist of his requirements and his cost, and a countdown to when you can afford him (like the shop meters).
+- **Events only.**  He makes no clicks.
+- **Food counter next to his icon.**  Each hunt kill is 1 food.  He spends food automatically on events.  **Max 5 food**, enough to cover one missed event (a Clone Attack is 4 clones).
+- **Hunt cooldown:** a delay before you can hunt again, so food builds up over time instead of all at once.
+- **Crossbow art without the string**; the string is drawn in code so it stretches with the pull.  Bolt as its own image.
+
 **Draft details (not approved)**
 
 - Clone Attack: every few seconds he eats one clone (1 charge), the loot comes back like a sploosh.  If you're on the Machine view he handles the clones off-screen and a toast tells you ("The Megagnome ate 3 clones while you were busy.  BURP.").
 - Wild Magic: he catches a regular spinning item now and then; the golden cog stays for real hands.
 - Shinies stay hands-only.  He never touches them.
-- Charges cap around 10.  With an empty belly he sits there looking sad and hungry.
+- With an empty belly he sits there looking sad and hungry.
 - Shot price around 5 seconds of production, so a good hunter profits a little and a sloppy one breaks even.
 - The prey starts slow and speeds up with each hit.
 - The prey is its own wild game (boars, running turnips, fat chickens, walking mushrooms), **not Tiny Monsters**, since those are the collection.  Cartoon, no blood.
@@ -27,9 +34,9 @@ The event clicker.  Discussed 2026-11-02.
 
 **Open**
 
-- Price.  Nathan suggested 10B; at Nathan's own two-day pace (8.75M a second) that is 19 minutes of income, so Claudia suggested 100B to 250B, after Perpetual Pirouette (30B).  Settle in the math pass.
-- Does he also produce clicks, or is he events only?
-- Charges per hit, the charge cap, the hunt cooldown, the shot price.
+- His requirement checklist (draft: own a Gnome Cloner and the Wild Magic upgrade, since those are the events he helps with).
+- The hunt cooldown length and the shot price.
+- How many shots per hunt.
 
 **Art needed (Mara)**
 
