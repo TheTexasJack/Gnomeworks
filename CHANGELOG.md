@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.56 (2026-11-03)
+
+- Hunt fix: the Banana Monster only appears while you still have at least 3 bolts, so he can always be beaten.  (Nathan met him with one bolt left.)
+
 ## v0.2.0-draft.55 (2026-11-03)
 
 - Hunt: the crossbow sits lower and swings from a pivot below the box with a smaller tilt, and the painted arms fade out at the cut edges, so aiming hard left or right no longer shows where the arms end.

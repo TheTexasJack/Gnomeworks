@@ -63,7 +63,8 @@ GW.hunt = (function () {
 
   // ---------- prey ----------
   function spawn(allowBoss) {
-    var boss = allowBoss && Math.random() < M.bossChance;
+    // The boss only shows up while there are enough bolts left to actually beat him.
+    var boss = allowBoss && h.bolts >= M.bossHits && Math.random() < M.bossChance;
     var def = boss ? M.boss : M.prey[Math.floor(Math.random() * M.prey.length)];
     var el = U.el('div', 'prey' + (boss ? ' boss' : ''));
     var im = U.el('img'); im.src = 'assets/mega/prey_' + def.id + '.webp'; im.alt = ''; im.draggable = false;
