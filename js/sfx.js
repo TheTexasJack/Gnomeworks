@@ -59,7 +59,7 @@ GW.sfx = (function () {
   function vary(f) { return f * (0.96 + Math.random() * 0.08); }
 
   // ---- recorded samples (a few real sounds; everything else is made in code) ----
-  var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3' };
+  var samples = {}, SAMPLE_FILES = { sploosh: 'assets/sfx/sploosh.mp3', hehe: 'assets/sfx/hehe.mp3' };
   function loadSamples() {
     if (!window.fetch || location.protocol === 'file:') return;   // opened from disk: use the code-made sounds
     Object.keys(SAMPLE_FILES).forEach(function (k) {
@@ -220,6 +220,7 @@ GW.sfx = (function () {
   // Clone Attack: a nasal gremlin giggle when a clone grabs something...
   function hehe() {
     if (!ready()) return;
+    if (sample('hehe', 1)) return;   // the recorded giggle; the lines below are the fallback
     [0, 0.17].forEach(function (at, i) {
       var f = vary(i ? 330 : 380);
       tone({ f: f, to: f * 0.78, dur: 0.11, vol: 0.13, type: 'square', lp: 1800, at: at });

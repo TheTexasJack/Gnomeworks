@@ -13,7 +13,7 @@ All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation
 | `assets/hats/` | `hat_classic`, `hat_valentine`, `hat_clover`, `hat_easter`, `hat_witch`, `hat_santa` | max 256 | `art.py fit` style crop |
 | `assets/monsters/` | 43 Tiny Monsters: `<family>_<variant>` (normal, glowing, goopy, evil) | 256 | `art.py sheet` |
 | `assets/clones/` | Clone Attack: `clone_<kind>_run`, `_grab`, `_held` for 10 kinds (normal, cyclops, goblin, twohead, slime, mushroom, crystal, cyborg, ghost, wolf), `vat_full`, `vat_sploosh`, `clone_warning` (Machine-view sign) | ~320 tall | cut with one shared scale per sheet so poses match |
-| `assets/sfx/` | `sploosh.mp3` (Clone Attack splash; "Splash 2" by freesound_community on Pixabay, Pixabay Content License; trimmed to 1.4 s, mono 64 kbps) | 12 KB | `ffmpeg -af atrim,afade -ac 1 -b:a 64k` |
+| `assets/sfx/` | `sploosh.mp3` (Clone Attack splash; "Splash 2" by freesound_community on Pixabay, Pixabay Content License; trimmed to 1.4 s, mono 64 kbps), `hehe.mp3` (clone giggle, recorded for the game by Nathan's daughter; trimmed, +6.5 dB) | 12 KB / 8 KB | `ffmpeg -af atrim,afade -ac 1 -b:a 64k` |
 | `assets/plops/` | Number Twos: `plop_normal/steam/prize/golden` | 256 | `art.py sheet` |
 | `assets/ui/` | `title` (lettered sign), `sign_blank` (pause screen), `clipboard` (844x1080, right panel; border-image slices 281 / 70 / 218, middle = 15 grid squares), `tsquare`, `triangle` and their `_tilt` versions (peek out behind the shop clipboard), `triangle_tilt_l` and `tsquare_tilt_r` (the shelf clipboard's pair) | 1200 wide | crop + resize |
 | `assets/emoji/` | Twemoji SVGs for junk items, named by codepoint (`1f9e6.svg` = socks) | vector | copied from Twemoji |

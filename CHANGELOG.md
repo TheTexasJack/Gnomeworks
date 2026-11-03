@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.45 (2026-11-02)
+
+- Clone Attack: the clones' "heh heh" is now a real recorded giggle (recorded for the game by Nathan's daughter), trimmed and leveled.  The code-made giggle stays as a fallback.
+
 ## v0.2.0-draft.44 (2026-11-02)
 
 - Clone Attack: a glowing green arrow with "Drop here!" bobs over the vat for the whole attack, marking exactly where to let go.  The drop spot sits higher, so the dangling clone clears the rim and falls in.  The arrow bobs faster while you're carrying a clone.
