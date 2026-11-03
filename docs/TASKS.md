@@ -70,4 +70,5 @@ Open question in the proposal: should packed items come out of the shelf counts,
 | The `v0.1.0` git tag never made it to GitHub | Accepted; history lives in commit messages and the changelog |
 | Gnome Wizard clicks were missing from Stats | Fixed in draft.51 |
 | Two of Nathan's three day board images are unused spares | Accepted, kept for later |
+| Numbers past 1e300 | Capped (draft.53).  If players ever reach it, the answer is a big-number library or a prestige reset, not raising the cap. |
 | Sounds are fairly quiet on desktop speakers | Watch it; raise `fxBus` gain in `sfx.js` if testers agree |

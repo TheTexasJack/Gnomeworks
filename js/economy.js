@@ -143,6 +143,19 @@ GW.econ = (function () {
     }
   }
 
+  // Keep every running total under CONFIG.maxNumber (and never NaN or Infinity).
+  function capAll(s) {
+    var M = C.maxNumber;
+    function cap(obj) {
+      Object.keys(obj).forEach(function (k) {
+        var v = obj[k];
+        if (typeof v === 'number' && !(v <= M)) obj[k] = M;
+      });
+    }
+    ['cogs', 'cogsSeen', 'itemsMade'].forEach(function (k) { if (!(s[k] <= M)) s[k] = M; });
+    cap(s.items); cap(s.clicks); cap(s.bonusCogs); cap(s.stats);
+  }
+
   function newEvents() { return { itemsMade: 0, visualItems: [], newItems: [] }; }
 
   function tick(s, dt, events) {
@@ -250,7 +263,7 @@ GW.econ = (function () {
     return { seconds: capped, cogs: s.cogs - before, items: s.itemsMade - itemsBefore };
   }
 
-  return {
+  return { capAll: capAll,
     clicksPerItem: clicksPerItem, rates: rates, tapValue: tapValue, weapon: weapon,
     tick: tick, tap: tap, newEvents: newEvents,
     producerCost: producerCost, leveledCost: leveledCost, isVisible: isVisible, buy: buy,

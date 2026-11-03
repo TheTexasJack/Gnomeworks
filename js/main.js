@@ -206,6 +206,7 @@ window.GW = window.GW || {};
       if (shelfDirty) { UI.buildShelf(s); shelfDirty = false; }
     }
     saveTimer += dt;
+    E.capAll(s);
     if (saveTimer > C.autosaveSeconds) { saveTimer = 0; GW.state.save(s); }
     requestAnimationFrame(frame);
   }

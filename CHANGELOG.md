@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.53 (2026-11-02)
+
+- Safety ceiling: cogs, items, clicks, and every other running total stop at 1e300 (`maxNumber` in config), just below where JavaScript numbers break into Infinity.  Nobody is near it (late saves are around 1e10), but a months-long save can never break.
+
 ## v0.2.0-draft.52 (2026-11-02)
 
 - Smoother late game.  The gnome math used to roll item drops once per gnome type every frame; now it rolls once for all of them, and the drop tables are built once instead of every roll.  On a save like Nathan's (17M clicks a second) the game math dropped from about 400 ms to about 40 ms per 5 seconds, and the worst frame hitch from about 150 ms to about 40 ms.

@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.52';
+GW.VERSION = '0.2.0-draft.53';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -17,6 +17,10 @@ GW.CONFIG = {
   offline: { maxHours: 8, efficiency: 1.0 },
 
   currency: { name: 'Cogs', icon: '⚙️' },
+
+  // Hard ceiling for every running total.  JavaScript numbers break past about 1.8e308
+  // (they turn into Infinity), so nothing is allowed to grow past this.
+  maxNumber: 1e300,
 
   machine: {
     tickerItemsPerSec: 2,      // past this many items a second the next-item bar becomes a steady ticker
