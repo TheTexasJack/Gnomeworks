@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.56';
+GW.VERSION = '0.2.0-draft.57';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -304,7 +304,9 @@ GW.CONFIG = {
       twohand_static: [74.7, 21.5, 30], twohand_action: [58.1, 31.5, 28],
       cloner_static:  [74.1, 29.0, 27], cloner_action:  [63.4, 36.0, 26],
       warrior_static: [55.5, 18.5, 31], warrior_action: [50.5, 13.0, 32],
-      necro_static:   [58.5, 19.0, 24], necro_action:   [70.3, 19.5, 23]
+      necro_static:   [58.5, 19.0, 24], necro_action:   [70.3, 19.5, 23],
+      // Megagnome: one spot per pose (mega.js moves the hat when he chomps and burps)
+      '../mega/mega_idle': [42, 8, 33], '../mega/mega_eat': [37, 8, 33], '../mega/mega_burp': [65, 10, 34]
     }
   },
 

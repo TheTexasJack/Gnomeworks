@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.57 (2026-11-03)
+
+- The Megagnome wears the month's hat (Santa in December), and it stays on his head when he chomps and burps.  The Matryoshka and Wizard stay hatless.
+
 ## v0.2.0-draft.56 (2026-11-03)
 
 - Hunt fix: the Banana Monster only appears while you still have at least 3 bolts, so he can always be beaten.  (Nathan met him with one bolt left.)

@@ -20,7 +20,7 @@ Why the game is the way it is.  Newest first within each day.
 | Every Packing Line and Megagnome number goes through a math pass before code | Both touch the whole economy |
 | Move the repo off Nathan's personal GitHub before sharing (Jarrett picks the name) | The account name shows in the game's address.  Saves are tied to the address, so the final home must be set before launch. |
 | Badges redrawn with red beards | Match the red-haired Shop Floor gnomes |
-| Hats go on the floor gnomes per month; skeletons and dolls stay hatless | Mara's hats fit the gnome heads; the others have no single head to place them on |
+| Hats go on the floor gnomes per month, Megagnome included; skeletons, dolls, and the Wizard stay hatless | Mara's hats fit the gnome heads; the others have no single head to place them on |
 | Sound effects synthesized in code, music left to Jarrett | No files, no licenses, tiny download.  Music is a brand choice. |
 | Sounds mix with the player's own music on iPhones | Many players will run Spotify or similar; a game tap sound must not pause their music |
 | Players can bring their own music by muting game sound; no embedded Spotify or YouTube | Embeds bring logins, 30 second previews, ads, and nested iframes inside Wix |

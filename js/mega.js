@@ -94,6 +94,9 @@ GW.mega = (function () {
   function poseImg() { return document.querySelector('#floor .part-mega .f-static'); }
   function pose(name) {
     var im = poseImg(); if (im) im.src = 'assets/mega/mega_' + name + '.webp';
+    // Keep his hat on his head as he moves.
+    var hat = document.querySelector('#floor .part-mega .f-hat'), sp = C.hats.spots['../mega/mega_' + name];
+    if (hat && sp) { hat.style.setProperty('--hx', sp[0] + '%'); hat.style.setProperty('--hy', sp[1] + '%'); hat.style.setProperty('--hw', sp[2] + '%'); }
   }
   // Chomp, then burp, then back to idle.
   function chomp(quiet) {
