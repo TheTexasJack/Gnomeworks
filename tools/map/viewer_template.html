@@ -159,7 +159,7 @@ function show(id, fly) {
     if (l.trade_draft.imports) add('proposal', 'Add to Factory Imports: ' + l.trade_draft.imports);
     if (l.trade_draft.exports) add('proposal', 'Factory Exports: ' + l.trade_draft.exports);
   }
-  add('k', 'Status'); add('draft', l.status && ADDED.has(l.id) ? `${l.status[0].toUpperCase()}${l.status.slice(1)}, map v${DATA.version}` : `Proposed placement on map v${DATA.version}`);
+  add('k', 'Map'); add('draft', `On map v${DATA.version}`);
   if (l.gazetteer_anchor) {
     const a = document.createElement('a'); a.className = 'ghlink'; a.target = '_blank'; a.rel = 'noopener';
     a.href = `${DATA.gazetteer_url}#${l.gazetteer_anchor}`; a.textContent = 'Open in the gazetteer on GitHub'; el.appendChild(a);

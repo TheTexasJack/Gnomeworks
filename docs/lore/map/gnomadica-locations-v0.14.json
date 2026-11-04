@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.13",
+ "version": "0.14",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -748,7 +748,7 @@
     "Location": "Old nut grove at the edge of a ruined watchpost.",
     "Region": "Gnomerica.",
     "About": "Bent branches and squeaky acorns make this grove seem spooky after sundown.  By daylight, it is mostly squirrels.  Bent nut trees surround a ruined watchpost where branches squeak even when the air is still.  By day the grove is full of ordinary squirrels, curious Potamice, and cheerful children gathering fallen shells.  After dusk, the shadows turn long enough to give the place its rather unfair reputation.",
-    "Major Facts": "The grove is not confirmed to be linked to Cave of the Gnut.  Some nights, the acorns spell messages that disappear by morning.  An old map marks a trail toward Cave of the Gnut, but the letters have been chewed from the page.  Overnight, the acorns sometimes arrange themselves into messages that disappear before breakfast.  A local hexamouse keeper suspects the animals are communicating, while a nervous surveyor claims the grove is correcting his spelling.",
+    "Major Facts": "Some nights, the acorns spell messages that disappear by morning.  An old map marks a trail toward Cave of the Gnut, but the letters have been chewed from the page.  Overnight, the acorns sometimes arrange themselves into messages that disappear before breakfast.  A local hexamouse keeper suspects the animals are communicating, while a nervous surveyor claims the grove is correcting his spelling.",
     "Flora": "Nut trees, thornbushes",
     "Fauna": "Hexamice, Scowl"
    },
@@ -1673,7 +1673,7 @@
     "Location": "Sea cave below Port Gnasher's outer reef.",
     "Region": "Slaanilok.",
     "About": "Below the waves, slippery steps lead into rooms built before the present harbors.  Fish swim through the doorways as if they own the place.  Stone stairs descend beneath the outer reefs into a drowned hall where fish drift through carved doorways.  Merfolk guides and lamia divers maintain a safe visitor line along the upper chambers, but beyond it lie rooms untouched since the old sea roads vanished.  Every surface glitters with salt and ancient shells.",
-    "Major Facts": "At low tide, one bell can be heard from shore.  No one knows whether it rings underwater or in a very wet imagination.  A bronze bell rings underwater at low tide and can sometimes be heard from Port Gnasher.  The harbor pilots of Slaanilok disagree about whether it warns of storms or announces a long-forgotten dinner hour.  A merfolk historian keeps a list of inscriptions rescued from fallen walls, and visitors are warned that taking souvenirs may loosen the delicate masonry.",
+    "Major Facts": "At low tide, one bell can be heard from shore.  Those that hear it are said to lose their memories.  A bell ring at low tide and can sometimes be heard from Port Gnasher.  A local group of Gnome adventurers investigated the bell once spent a considerable amount of time interviewing the citizenry, annoying people.  A merfolk historian keeps a list of inscriptions rescued from fallen adventurers who keep seeking the bell, and visitors are always stealing old bits of the ruins.  They are warned that taking souvenirs may loosen the delicate masonry.",
     "Flora": "Sea kelp, cave algae",
     "Fauna": "Jellybub, Gloopbat"
    },
@@ -2464,7 +2464,7 @@
     "Location": "Sealed stone chamber beyond the eastern highland ruins.",
     "Region": "Gno Dao Cradle.",
     "About": "A huge buried machine rests beneath the mountains, covered in symbols nobody can read yet.  Its lights blink once every spring.  Beneath the Cradle sits a vast metal-and-stone machine surrounded by mathematical marks that no scholar has fully read.  It blinks once each spring, causing mountain watchers to argue over whether it is waking, counting, or politely greeting the season.  Lamia archivists and dwarf engineers record every change with meticulous care.",
-    "Major Facts": "The Device predates Gnomeworks but is not confirmed to be connected to the factory.  The spring blink is recorded by the mountain watch.  The Device is older than modern Gnomeworks, but no known evidence proves the two machines share an origin.  One narrow corridor is shaped to fit a person of giant size, while another is too small for a gnome's boot.  The observatory at Stellar Review compares the yearly blink with unusual star positions.  The chamber remains sealed except during approved research expeditions.",
+    "Major Facts": "The Device is older than Gnomeworks.  The spring blink is recorded by the mountain watch.  The Device is older than modern Gnomeworks, but no known evidence proves the two machines share an origin.  One narrow corridor is shaped to fit a person of giant size, while another is too small for a gnome's boot.  The observatory at Stellar Review compares the yearly blink with unusual star positions.  The chamber remains sealed except during approved research expeditions.",
     "Flora": "Crystal lichen, metal moss",
     "Fauna": "Neonsnake, Glowlem"
    },
@@ -2508,7 +2508,7 @@
     "Location": "South tip of Innie Lake, where the Slanic river leaves through the spillway.",
     "Region": "Slanic, on the edge of Gnomerica.",
     "About": "A great curved stone wall holds back Innie Lake, with a brass gear as big as a house turning in the middle.  When the gear turns, the spillway gates open and the Slanic river rushes out below.  Every gnome knows the name, and every gnome says it with a perfectly straight face.",
-    "Major Facts": "Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became Innie Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Who built the dam, when, and what was left behind in the drowned valley are open questions.  Named by Nathan on 2026-11-03; the lake is modeled on Lake Texoma and its Denison Dam.",
+    "Major Facts": "Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became Innie Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Nobody agrees on who built the dam, or what was left behind in the drowned valley.",
     "Flora": "River reeds, willow",
     "Fauna": "Jellybub, Shroomtle, Potamice"
    },
@@ -2529,7 +2529,7 @@
     "Location": "South-central main island, behind Gnod Dam, between Pulley Junction and Gloopenstein.",
     "Region": "Slanic, on the edge of Gnomerica.",
     "About": "A big blue lake with long arms that reach up every valley, like fingers on a hand.  Little boats fish its coves, and warm water from Steam Stream makes its north arm steam on cold mornings.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  Innie Lake is a reservoir: when the gnomes built Gnod Dam, the water filled a whole river valley and climbed every creek, the way Lake Texoma fills the Red River valley.  The old riverbed still runs along the bottom, and an old road runs down into the water from the west.  Steam Stream, the Ratios creek, and an east creek feed it, and the Slanic river leaves through the dam's spillway.",
+    "Major Facts": "Innie Lake is a reservoir: when the gnomes built Gnod Dam, the water filled a whole river valley and climbed every creek.  The old riverbed still runs along the bottom, and an old road runs down into the water from the west.  Steam Stream, the Ratios creek, and an east creek feed it, and the Slanic river leaves through the dam's spillway.",
     "Flora": "River reeds, willow",
     "Fauna": "Jellybub, Shroomtle, Potamice"
    },
@@ -2550,7 +2550,7 @@
     "Location": "Northeast shore of Gnonmoon, facing Gnafrica across the strait.",
     "Region": "Gnonmoon.",
     "About": "A deep, quiet bay tucked into Gnonmoon's northeast shore.  A small town sits on its western shore where a stream meets the water.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  The town's name is still open.",
+    "Major Facts": "Its sheltered water makes it Gnonmoon's harbor.",
     "Flora": "Sea grass"
    },
    "gazetteer_anchor": "zohee-bay"
@@ -2567,10 +2567,10 @@
    "mentions": "",
    "status": "named by Nathan",
    "gazetteer": {
-    "Location": "The round-topped island in the northeast sea, across the water from the tip of the Gno Dao Cradle arm (Island B on the map).",
+    "Location": "The round-topped island in the northeast sea, across the water from the tip of the Gno Dao Cradle arm.",
     "Region": "Gnomadica, northeastern island.",
     "About": "A round-topped island with a snowy ridge across its north and pine woods down its middle.  Tables Edge hides deep in the woods, and two more towns sit on the coast.  Say the name three times fast.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  Tables Edge is its first named town and its main shipping destination.  The two coastal towns' names, people, and trade are still open.  The Lantern Chain ferry reaches its southern tip.",
+    "Major Facts": "Most of the island's shipping goes to Tables Edge.  Two smaller towns sit on the coast.  The Lantern Chain ferry reaches its southern tip.",
     "Flora": "Salt pine, frost moss"
    },
    "gazetteer_anchor": "shen-shin"
@@ -2587,10 +2587,10 @@
    "mentions": "",
    "status": "named by Nathan",
    "gazetteer": {
-    "Location": "The island west of Gnafrica's coast, with a long narrow neck to the north and a wide body to the south (Island D on the map).",
+    "Location": "The island west of Gnafrica's coast, with a long narrow neck to the north and a wide body to the south.",
     "Region": "Gnomadica, southwestern island.",
     "About": "A moon-named island with a long rocky neck, a deep bay on its northeast side, woods and hills in its middle, and three old standing stones on its southern hills.  On clear nights the moon looks bigger here than anywhere else.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  Zohee Bay, the Three Idols, and Demon's Gutt are here, plus one town on Zohee Bay whose name is still open.  Planned: a moonsmith, coming later.",
+    "Major Facts": "Zohee Bay, the Three Idols, and Demon's Gutt are here, plus a small town on Zohee Bay.",
     "Flora": "Oak, moonpetal"
    },
    "gazetteer_anchor": "gnonmoon"
@@ -2607,10 +2607,10 @@
    "mentions": "",
    "status": "named by Nathan",
    "gazetteer": {
-    "Location": "The long island in the southeast sea, at the south end of the Lantern Chain ferry (Island E on the map).",
+    "Location": "The long island in the southeast sea, at the south end of the Lantern Chain ferry.",
     "Region": "Gnomadica, its own region.",
     "About": "A long, sunny island with palm woods at its north end, the town of Eversummer in the middle, and a castle on its southern tip.  The knights who live here are famous for one very short word.",
-    "Major Facts": "Named by Nathan on 2026-11-03, and made its own region the same night.  Eversummer and Castle Gnaagh are here.  Gni gets to have fun with its theme: knights on quests, prized shrubberies, and coconuts everywhere, which is why Eversummer can never settle whether a coconut is a fruit or a very stubborn bowling ball.  The ferry from Legipt is still its main trade route north.",
+    "Major Facts": "Eversummer and Castle Gnaagh are here.  Gni is a land of knights on quests, prized shrubberies, and coconuts everywhere, which is why Eversummer can never settle whether a coconut is a fruit or a very stubborn bowling ball.  The ferry from Legipt is its main trade route north.",
     "Flora": "Palms"
    },
    "gazetteer_anchor": "island-of-gni"
@@ -2627,14 +2627,14 @@
    "mentions": "Slaanilok",
    "status": "placed by Nathan",
    "gazetteer": {
-    "Location": "South end of Slaanilok's main island (Island C), where the trade route leaves south for Eversummer.",
+    "Location": "South end of Slaanilok's main island, where the trade route leaves south for Eversummer.",
     "Region": "Slaanilok.",
     "Factory Imports": "None",
     "Factory Exports": "None",
     "Non-Factory Imports": "None",
     "Non-Factory Exports": "None",
     "About": "A big, ancient lizard city built around a stepped pyramid older than anyone can remember.  Ferries leave its docks for Eversummer and the islands to the south.",
-    "Major Facts": "Named by Nathan on 2026-11-03, one of Slaanilok's lizard towns.  Its age, its rulers, and what it trades are still open.",
+    "Major Facts": "The oldest of Slaanilok's lizard towns.  Nobody remembers who built the pyramid.",
     "Flora": "Palms"
    },
    "gazetteer_anchor": "legipt",
@@ -2658,7 +2658,7 @@
     "Location": "Southern tip of the Island of Gni, below Eversummer.",
     "Region": "Gni.",
     "About": "A stone castle with two towers and a red flag, home of the Knights of Gni.  Visitors are welcome, as long as they bring a shrubbery.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  The knights, their customs, and the castle's history are still open.",
+    "Major Facts": "The Knights of Gni ride out from here on their quests.",
     "Flora": "Palms"
    },
    "gazetteer_anchor": "gnaagh"
@@ -2678,7 +2678,7 @@
     "Location": "Southern hills of Gnonmoon.",
     "Region": "Gnonmoon.",
     "About": "Three tall standing stones on a hilltop, side by side like singers on a stage.  The middle stone is the tallest, and on windy nights the hilltop hums.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  Who raised the stones, and why they hum, are still open.",
+    "Major Facts": "Nobody remembers who raised the stones, or why they hum.",
     "Flora": "Hill grass"
    },
    "gazetteer_anchor": "three-idols"
@@ -2698,7 +2698,7 @@
     "Location": "Western hills of Gnonmoon.",
     "Region": "Gnonmoon.",
     "About": "A twisting cave that winds down into the hills like a long, grumbling belly.  Brave explorers say you can hear it growl.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  What lives at the bottom is still open.",
+    "Major Facts": "Nobody has ever reached the bottom.",
     "Flora": "Cave moss"
    },
    "gazetteer_anchor": "demons-gutt"
@@ -2722,7 +2722,7 @@
     "Non-Factory Imports": "None",
     "Non-Factory Exports": "None",
     "About": "A tiny snowy hamlet of a few cozy houses, a woodpile, and one very old, very famous dog.  Everyone agrees the hamlet was named after him.  Nobody agrees on whether that was a compliment.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  Its people, its trade, and the dog's real name are still open.",
+    "Major Facts": "Nobody remembers the dog's real name.",
     "Flora": "Salt pine, frost moss"
    },
    "gazetteer_anchor": "gassy-dog",
@@ -2749,7 +2749,7 @@
     "Non-Factory Imports": "None",
     "Non-Factory Exports": "tables; pine benches; spare table legs; sawdust for packing crates",
     "About": "A woodworking town hidden deep in the pines, where every house has a workshop and every workshop makes tables.  Big tables, small tables, tables for giants and tables for gnomes.  Watch out for your shins.",
-    "Major Facts": "Named by Nathan on 2026-11-03.  It is Shen Shin's first named town and the island's shipping destination.  The town's woodworkers, and how many shins its table corners have claimed, are still open.",
+    "Major Facts": "Shen Shin's busiest town, where most of the island's shipping goes.  Nobody has counted how many shins its table corners have claimed.",
     "Flora": "Salt pine, frost moss"
    },
    "gazetteer_anchor": "tables-edge"
@@ -2766,14 +2766,14 @@
    "mentions": "Slaanilok",
    "status": "placed by Nathan",
    "gazetteer": {
-    "Location": "Down in the palm woods of Slaanilok's main island (Island C), northeast of Legipt.",
+    "Location": "Down in the palm woods of Slaanilok's main island, northeast of Legipt.",
     "Region": "Slaanilok.",
     "Factory Imports": "None",
     "Factory Exports": "None",
     "Non-Factory Imports": "None",
     "Non-Factory Exports": "None",
     "About": "A lizard town tucked under the palm trees.  The number is part of the name, and nobody has explained it yet.",
-    "Major Facts": "Named by Nathan on 2026-11-03, one of Slaanilok's lizard towns.  Its story and trade are still open.",
+    "Major Facts": "One of Slaanilok's lizard towns.  Ask a local about the 45 and you get a different story every time.",
     "Flora": "Palms"
    },
    "gazetteer_anchor": "monit-45",
@@ -2950,5 +2950,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.16.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.17.md"
 }
