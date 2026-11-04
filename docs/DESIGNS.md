@@ -79,7 +79,11 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **The gazetteer's imports and exports are base values.**  The game reads a destinations file generated from the gazetteer, so lore and game never drift apart.
 - **Variable needs and a market for imports and exports are held for a separate future game,** kept out of the Packing Line.
 - **Region unlock by expedition (Nathan's idea, 2026-11-04, details open):** after enough successful missions, an Expedition button appears.  The player drags a few crew from the factory into a small adventure squad (mostly cosmetic) and sends them off.  About 10 minutes later the squad returns with a short story: why the region opens up, who matters there, and what they want.  The region is then unlocked.
-    - Draft notes from Claudia: the story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.  The timer should run while the player is away.  For kids, the expedition always succeeds, so any mishaps are funny and never cost anything.  Sending crew should not pause production.  Unlock order is open: a fixed order is simplest, and letting players pick a neighboring region on the map is the fancier option.
+    - **Theater, not a mini-game** (Nathan): the squad is about five adventurers from the factory.  They are not counted or spent, and sending them never touches production.
+    - **Guardrails (agreed):** the timer runs while the player is away; the expedition always succeeds, and any mishaps are only funny.
+    - The return story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.
+    - Unlock order is open: a fixed order is simplest, and letting players pick a neighboring region on the map is the fancier option.
+    - **Heroes are a separate, long-term idea:** named hero characters who sit in the background for lore and moments like this.  They need their own design, apart from the expedition squad, and are not needed now.
 - **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
 - **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
