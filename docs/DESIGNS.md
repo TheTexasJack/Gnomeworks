@@ -84,7 +84,10 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
     - The return story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.
     - **Unlock order (decided):** a counterclockwise spiral around the map.  Gnomerica is home.  The main island goes Gnohio, Gnafrica, Slanic, Gno Dao Cradle.  The outer islands go Gni, Slaanilok, Shen Shin, Gnufoundland, Gnonmoon.  The pattern itself is the reason.
     - **Each unlock adds a new thing to watch for and a new step in sending a package.**  Details to be worked out later.
-    - **Future producers come from regions** (Nathan, 2026-11-04): each region unlock also unlocks the producer that region supplies.  Gnonmoon is last, so the **Moonsmith is last** too.  The other pairings are open.
+    - **Future producers come from regions** (Nathan, 2026-11-04): a region unlock can unlock the producer that region supplies.  Gnonmoon is last, so the **Moonsmith is last** too.  The other pairings are open.
+    - **Not every region brings a producer.**  A region can bring some other thing or an event, or nothing at all.
+    - **Lore decides the pairing, and producer prices are balanced on their own.**  The shipping game only unlocks a producer; it does not set its price.  Balancing the two together would force placements that break the lore (like moving Mycelia's mushrooms to the wrong region).
+    - **The producer list can change** to fit this structure, to make a better mini-game, or because Jarrett (or Elana) asks.
     - **Heroes are a separate, long-term idea:** named hero characters who sit in the background for lore and moments like this.  They need their own design, apart from the expedition squad, and are not needed now.
 - **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
