@@ -126,9 +126,22 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 
 - **The packing is the game (Nathan, 2026-11-04):** a match game, Simon Says with a shipping veneer.  Read what the package needs, put the right things on it, ship.
 - **Boxes and packing supplies are free (Nathan, 2026-11-04).**  The factory makes them, so stock is unlimited, as in most shipping games: the point is the packing.  Every box and supply sits on the packing bench from the start and does nothing until a region needs it.
+- **Hidden alternates (Nathan, 2026-11-04):** some requirements have a secret second answer that also counts, and the player is never told.  Gni accepts a Red Herring sticker or an actual red herring fish.  Gni also accepts a Shrubbery sticker or the real shrub from the corner of the room, which the player can click to add to the box (taking it changes nothing in the room).
+- **Throw-ins (Nathan's idea, 2026-11-04, settle with the mechanics):** a few grabbable things around the packing room that do nothing and change nothing.  They are just fun to toss in, and the shipping log can react ("Ugh, not this guy!  He gets 10 rocks with his order!").  The mechanics pass has to say whether extras ever count against a package; the Gnonmoon dog toy is the one known exception, where an extra matters a lot.
 - **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, a weight sticker, and the correct box for its destination.
 - **The dog toy on Gnonmoon:** a dog toy in a Gnonmoon package gets a big reaction.  Most recipients REALLY hate it, and one particular person REALLY loves dog stuff.  The reaction shows up in the shipping log and moves Stonks a lot.
 - **The shipment score is the core mechanic (Nathan, 2026-11-04):** a successful shipment sends our Stonks up.  A failed one sends our Stonks down and TNP Corp's Stonks up.
+
+**Packing Line asset list (draft from the complications; finalize after the mechanics pass, make nothing yet)**
+
+- The packing room backdrop, the bench, and the shipping door.
+- Boxes: plain cardboard, temperature-controlled, water-resistant, wooden (Shen Shin).
+- Region stamps, one per region (ten), with each region's Tiny Monster once those are assigned.
+- Supplies and stickers: safety stickers, the wireless tracker, weight stickers (Light, Medium, Heavy), the Red Herring sticker, the Shrubbery sticker, the anti-demon rune (drawn by the player).
+- Gni's secret alternates: a red herring fish and a shrub in the corner of the room.
+- Bug repellent spray can and its spray cloud.
+- Complimentary gifts: dog toy or treat, Idol gift.
+- Throw-ins: a few silly grabbables (rocks and the like).
 
 Notes to settle when this is built (Claudia):
 - Packages to regions without a special box use a plain cardboard box.
