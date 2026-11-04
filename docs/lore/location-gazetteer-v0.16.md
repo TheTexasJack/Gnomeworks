@@ -1043,7 +1043,7 @@
 - **Location:** Sea cave below Port Gnasher's outer reef.
 - **Region:** Slaanilok.
 - **About:** Below the waves, slippery steps lead into rooms built before the present harbors.  Fish swim through the doorways as if they own the place.  Stone stairs descend beneath the outer reefs into a drowned hall where fish drift through carved doorways.  Merfolk guides and lamia divers maintain a safe visitor line along the upper chambers, but beyond it lie rooms untouched since the old sea roads vanished.  Every surface glitters with salt and ancient shells.
-- **Major Facts:** At low tide, one bell can be heard from shore.  No one knows whether it rings underwater or in a very wet imagination.  A bronze bell rings underwater at low tide and can sometimes be heard from Port Gnasher.  The harbor pilots of Slaanilok disagree about whether it warns of storms or announces a long-forgotten dinner hour.  A merfolk historian keeps a list of inscriptions rescued from fallen walls, and visitors are warned that taking souvenirs may loosen the delicate masonry.
+- **Major Facts:** At low tide, one bell can be heard from shore.  Those that hear it are said to lose their memories.  A bell ring at low tide and can sometimes be heard from Port Gnasher.  A local group of Gnome adventurers investigated the bell once and spent considerable amount of time interviewing the citizenry, annoying people.  A merfolk historian keeps a list of inscriptions rescued from fallen adventurers who seek the bell, and visitors are always stealing old bits of the ruins.  They are warned that taking souvenirs may loosen the delicate masonry.
 - **Flora:** Sea kelp, cave algae
 - **Fauna:** Jellybub, Gloopbat
 - **Bounties:**
