@@ -6,8 +6,8 @@ Written by Claudia on 2026-11-04 for the next "Gnomeworks map and lore" thread. 
 
 | Thing | Current file or link | State |
 | --- | --- | --- |
-| Gazetteer | `docs/lore/location-gazetteer-v0.19.md` | 100 original places plus 13 added while mapping.  Production notes removed.  Nathan's cleanup pass is next. |
-| Master map | `docs/lore/map/gnomadica-map-v0.20.*` (SVG, viewer HTML, JSON) | Ten regions, all pins checked on land. |
+| Gazetteer | `docs/lore/location-gazetteer-v0.20.md` | 100 original places plus 13 added while mapping.  Production notes removed.  v0.20 cleanup pass done (2026-11-04). |
+| Master map | `docs/lore/map/gnomadica-map-v0.21.*` (SVG, viewer HTML, JSON) | Ten regions, all pins checked on land. |
 | Public map link | https://thetexasjack.github.io/Gnomeworks/map/ (`#full` hides the side panel) | Always the latest build. |
 | Map builder | `tools/map/build_map.py`, pins in `tools/map/places.py`, viewer in `tools/map/viewer_template.html` | Run `python3 tools/map/build_map.py` after any gazetteer change, then push. |
 | Map notes and change log | `docs/lore/map/README.md` | Lists every map version and open map items. |
@@ -19,7 +19,7 @@ Written by Claudia on 2026-11-04 for the next "Gnomeworks map and lore" thread. 
 
 ## Next up: Nathan's lore pass
 
-1. Clean up the gazetteer: many About lines say the same thing twice (Farms of Verdon't is an example).
+1. ~~Clean up the gazetteer.~~  Done in v0.20: doubled About and Major Facts lines merged.
 2. Approve, change, or drop the trade draft, then copy approved lines into the gazetteer.
 3. Decide whether Tiny Monsters, Number Twos, and Legendary Treasures ever ship.  The Crafter's Mines already imports the Diamond Pickaxe (a treasure).
 4. Assign Tiny Monsters to regions, so each region's monster can go on its stamp.
