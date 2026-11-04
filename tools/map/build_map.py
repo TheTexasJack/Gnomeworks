@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.14'
+VERSION = '0.15'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -774,7 +774,7 @@ def build():
     add('<g class="pin arealabel" data-id="innie-lake">')
     text(858, 802, 'Innie Lake', 12, fill='#1f4d63', anchor='middle', style='italic', ls=2)
     add('</g>')
-    text(560, 336, 'northern river', 7.5, fill='#2f5d73', anchor='middle', style='italic', rot=-8)
+    text(572, 362, 'northern river', 7.5, fill='#2f5d73', anchor='middle', style='italic', rot=-7)
     text(470, 840, 'the Dry Ridge', 8.5, fill='#5a4a32', anchor='middle', style='italic', ls=1, rot=4)
     add('</g>')
     # sea and island tags (descriptive only: no seas or islands B and D have names yet)
