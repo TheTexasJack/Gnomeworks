@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.12'
+VERSION = '0.13'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -396,6 +396,56 @@ FIELDS = [
 
 # ------------------------------------------------------------------ audit parse (types and clues)
 
+import glob
+
+
+def gazetteer_path():
+    files = glob.glob(os.path.join(ROOT, 'docs', 'lore', 'location-gazetteer-v*.md'))
+    assert len(files) == 1, files  # the lore folder keeps only the latest gazetteer
+    return files[0]
+
+
+def gh_anchor(heading):
+    # GitHub's heading anchors: lowercase, punctuation dropped, spaces become hyphens
+    return re.sub(r'[^a-z0-9 _-]', '', heading.lower()).replace(' ', '-')
+
+
+GAZ_FIELDS = ['Location', 'Region', 'Factory Imports', 'Factory Exports', 'Non-Factory Imports', 'Non-Factory Exports',
+              'About', 'Major Facts', 'Flora', 'Fauna']
+
+
+def parse_gazetteer():
+    path = gazetteer_path()
+    text_ = open(path, encoding='utf-8').read()
+    out = {}
+    for blk in re.split(r'\n(?=### )', text_):
+        if not blk.startswith('### '):
+            continue
+        name = blk.split('\n')[0][4:].strip()
+        f = {}
+        for k in GAZ_FIELDS:
+            m = re.search(r'- \*\*' + re.escape(k) + r':\*\* ?(.*)', blk)
+            if m and m.group(1).strip():
+                f[k] = m.group(1).strip()
+        out[name] = dict(fields=f, anchor=gh_anchor(name))
+    url = 'https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/' + os.path.basename(path)
+    return out, url
+
+
+def parse_trade_draft():
+    files = glob.glob(os.path.join(ROOT, 'docs', 'lore', 'trade-draft-v*.md'))
+    out = {}
+    for path in files:
+        sec = None
+        for line in open(path, encoding='utf-8'):
+            if line.startswith('## '):
+                sec = 'imports' if 'imports' in line.lower() else 'exports' if 'exports' in line.lower() else None
+            elif sec and line.startswith('| ') and not line.startswith('| Place') and not line.startswith('| ---'):
+                c = [x.strip() for x in line.strip().strip('|').split('|')]
+                out.setdefault(c[0], {})[sec] = f'{c[2]}  ({c[3]})'
+    return out
+
+
 def parse_audit():
     sec_type = {
         'I.': 'region', 'II.': 'city', 'III.': 'settlement', 'IV.': 'natural',
@@ -695,8 +745,12 @@ def build():
 
     # ---------------- region labels
     add('<g id="region-labels" font-style="normal">')
+    add('<g class="pin arealabel" data-id="island-of-gni">')
     text(1434, 942, 'ISLAND OF GNI', 11, fill=shade(REGION_COLORS['Gni'], 0.5), anchor='middle', weight='bold', ls=3, rot=-85, opacity=0.85)
+    add('</g>')
+    add('<g class="pin arealabel" data-id="shen-shin">')
     text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
+    add('</g>')
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
         'Slanic': (936, 902, 0, 19), 'Gnufoundland': (262, 268, -4, 17), 'Slaanilok': (1450, 598, -80, 17),
@@ -714,8 +768,12 @@ def build():
     add('<g id="area-labels">')
     for name, (x, y, rot, sz) in AREA_LABELS.items():
         water = name in ("River's Belt", 'Steam Stream')
+        add(f'<g class="pin arealabel" data-id="{slug(name)}">')
         text(x, y, name, sz, fill='#2f5d73' if water else '#5a4a32', anchor='middle', style='italic', ls=1, rot=rot)
+        add('</g>')
+    add('<g class="pin arealabel" data-id="innie-lake">')
     text(858, 802, 'Innie Lake', 12, fill='#1f4d63', anchor='middle', style='italic', ls=2)
+    add('</g>')
     text(560, 336, 'northern river', 7.5, fill='#2f5d73', anchor='middle', style='italic', rot=-8)
     text(470, 840, 'the Dry Ridge', 8.5, fill='#5a4a32', anchor='middle', style='italic', ls=1, rot=4)
     add('</g>')
@@ -723,8 +781,12 @@ def build():
     add('<g id="sea-labels">')
     text(430, 322, 'the narrow sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=3, halo=False, rot=-6)
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
+    add('<g class="pin arealabel" data-id="gnonmoon">')
     text(170, 846, 'GNONMOON', 11, fill='#3d4f5c', anchor='middle', weight='bold', ls=3, rot=-88, opacity=0.85)
+    add('</g>')
+    add('<g class="pin arealabel" data-id="zohee-bay">')
     text(236, 943, 'Zohee Bay', 9, fill='#2a5566', anchor='start', style='italic', ls=1)
+    add('</g>')
     text(1580, 1000, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     text(130, 520, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     add('</g>')
@@ -1079,12 +1141,26 @@ if __name__ == '__main__':
                   + [dict(id='zohee-bay', name='Zohee Bay', type='natural', region='Gnonmoon', x=236, y=940, tier=2,
                           clue='A deep bay cut into the northeast shore of Gnonmoon, with a town on its western shore.',
                           mentions='Gnonmoon', status='named by Nathan')]
+                  + [dict(id=slug(n), name=n, type='region', region=reg, x=x, y=y, tier=0, clue=c, mentions='', status='named by Nathan')
+                     for n, reg, x, y, c in [('Shen Shin', 'Shen Shin', 1505, 210, 'The round-topped island in the northeast sea (Island B).'),
+                                             ('Gnonmoon', 'Gnonmoon', 175, 930, 'The island west of Gnafrica (Island D).'),
+                                             ('Island of Gni', 'Gni', 1445, 940, 'The long island at the south end of the Lantern Chain (Island E), its own region.')]]
                   + [dict(id=slug(n), name=n, type=a['type'], region=a['region'], x=a['x'], y=a['y'], tier=a['tier'],
                           clue=a['clue'], mentions=a['region'], status='placed by Nathan') for n, a in ADDED_PLACES.items()]
                   + [dict(id=uid, name=f'{reg} {uid.rsplit("-", 1)[1]} (name open)', type='city', region=reg, x=x, y=y, tier=2,
                           clue=f'An unnamed town on {reg}, kept as an option for later.', mentions=reg,
                           status='placed by Nathan, name open') for uid, (x, y, reg) in UNNAMED_TOWNS.items()],
     )
+    gaz, gaz_url = parse_gazetteer()
+    draft = parse_trade_draft()
+    data['gazetteer_url'] = gaz_url
+    for rec in data['locations'] + data['added_places']:
+        g = gaz.get(rec['name'])
+        if g:
+            rec['gazetteer'] = g['fields']
+            rec['gazetteer_anchor'] = g['anchor']
+        if rec['name'] in draft:
+            rec['trade_draft'] = draft[rec['name']]
     json.dump(data, open(os.path.join(OUT_DIR, f'gnomadica-locations-v{VERSION}.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)
     tpl = open(os.path.join(HERE, 'viewer_template.html'), encoding='utf-8').read()

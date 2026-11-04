@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1660 1150" width="1660" height="1150" font-family="'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,'TeX Gyre Pagella',Georgia,serif">
-<title>Gnomadica master map v0.12 (working draft)</title>
+<title>Gnomadica master map v0.13 (working draft)</title>
 <defs>
 <filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.27  0 0 0 0 0.16  0 0 0 0.55 0"/></filter>
 <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.2  0 0 0 0.5 -0.12"/></filter>
@@ -2240,8 +2240,12 @@
 <use href="#boat" transform="translate(1050 120) scale(1.1)"/>
 <use href="#boat" transform="translate(60 640) scale(1)"/>
 <g id="region-labels" font-style="normal">
+<g class="pin arealabel" data-id="island-of-gni">
 <text x="1434.0" y="942.0" font-size="11" fill="#58304d" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="3" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-85 1434.0 942.0)">ISLAND OF GNI</text>
+</g>
+<g class="pin arealabel" data-id="shen-shin">
 <text x="1532.0" y="214.0" font-size="15" fill="#3d4f5c" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="5" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-74 1532.0 214.0)">SHEN SHIN</text>
+</g>
 <text x="780.0" y="476.0" font-size="21" fill="#61491d" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNOMERICA</text>
 <text x="400.0" y="415.0" font-size="21" fill="#394a28" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNOHIO</text>
 <text x="452.0" y="1086.0" font-size="19" fill="#5d331f" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNAFRICA</text>
@@ -2252,33 +2256,75 @@
 <text font-size="15" font-weight="bold" letter-spacing="4" fill="#3e354f" opacity="0.8" stroke="#f3e7c6" stroke-width="3" paint-order="stroke"><textPath href="#cradlePath" startOffset="50%" text-anchor="middle">GNO DAO CRADLE</textPath></text>
 </g>
 <g id="area-labels">
+<g class="pin arealabel" data-id="woods-of-the-elder">
 <text x="735.0" y="372.0" font-size="15" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Woods of the Elder</text>
+</g>
+<g class="pin arealabel" data-id="hills-of-ratios">
 <text x="790.0" y="494.0" font-size="10" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Hills of Ratios</text>
+</g>
+<g class="pin arealabel" data-id="mouse-reserve">
 <text x="452.0" y="456.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Mouse Reserve</text>
+</g>
+<g class="pin arealabel" data-id="farms-of-verdon-t">
 <text x="428.0" y="608.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Farms of Verdon&#39;t</text>
+</g>
+<g class="pin arealabel" data-id="river-s-belt">
 <text x="430.0" y="662.0" font-size="11" fill="#2f5d73" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-14 430.0 662.0)">River&#39;s Belt</text>
+</g>
+<g class="pin arealabel" data-id="desert-of-desire">
 <text x="470.0" y="1062.0" font-size="10" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Desert of Desire</text>
+</g>
+<g class="pin arealabel" data-id="satiated-desert">
 <text x="568.0" y="1024.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-14 568.0 1024.0)">Satiated Desert</text>
+</g>
+<g class="pin arealabel" data-id="the-windy-sands">
 <text x="348.0" y="965.0" font-size="10" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-64 348.0 965.0)">the Windy Sands</text>
+</g>
+<g class="pin arealabel" data-id="frozen-fields">
 <text x="262.0" y="182.0" font-size="11" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Frozen Fields</text>
+</g>
+<g class="pin arealabel" data-id="fairy-fen">
 <text x="772.0" y="968.0" font-size="10" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Fairy Fen</text>
+</g>
+<g class="pin arealabel" data-id="bog-of-eternal-regret">
 <text x="775.0" y="1034.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Bog of Eternal Regret</text>
+</g>
+<g class="pin arealabel" data-id="swamp-of-low-visits">
 <text x="596.0" y="948.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-20 596.0 948.0)">Swamp of Low Visits</text>
+</g>
+<g class="pin arealabel" data-id="gnomish-heights">
 <text x="1145.0" y="258.0" font-size="14" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-40 1145.0 258.0)">Gnomish Heights</text>
+</g>
+<g class="pin arealabel" data-id="mountain-of-exclusion">
 <text x="1090.0" y="414.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Mountain of Exclusion</text>
+</g>
+<g class="pin arealabel" data-id="jinlo-fields">
 <text x="1002.0" y="403.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Jinlo fields</text>
+</g>
+<g class="pin arealabel" data-id="steam-stream">
 <text x="925.0" y="600.0" font-size="9" fill="#2f5d73" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-78 925.0 600.0)">Steam Stream</text>
+</g>
+<g class="pin arealabel" data-id="lost-valley">
 <text x="962.0" y="370.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Lost Valley</text>
+</g>
+<g class="pin arealabel" data-id="crystals-on-the-flats">
 <text x="1160.0" y="463.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Crystals on the Flats</text>
+</g>
+<g class="pin arealabel" data-id="innie-lake">
 <text x="858.0" y="802.0" font-size="12" fill="#1f4d63" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="2" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Innie Lake</text>
+</g>
 <text x="560.0" y="336.0" font-size="7.5" fill="#2f5d73" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-8 560.0 336.0)">northern river</text>
 <text x="470.0" y="840.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(4 470.0 840.0)">the Dry Ridge</text>
 </g>
 <g id="sea-labels">
 <text x="430.0" y="322.0" font-size="12" fill="#2a5566" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="3" opacity="1" transform="rotate(-6 430.0 322.0)">the narrow sea</text>
 <text x="1360.0" y="450.0" font-size="9" fill="#2a5566" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1.5" opacity="1" transform="rotate(-64 1360.0 450.0)">Lantern Chain</text>
+<g class="pin arealabel" data-id="gnonmoon">
 <text x="170.0" y="846.0" font-size="11" fill="#3d4f5c" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="3" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-88 170.0 846.0)">GNONMOON</text>
+</g>
+<g class="pin arealabel" data-id="zohee-bay">
 <text x="236.0" y="943.0" font-size="9" fill="#2a5566" text-anchor="start" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Zohee Bay</text>
+</g>
 <text x="1580.0" y="1000.0" font-size="12" fill="#2a5566" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="4" opacity="1" transform="rotate(-90 1580.0 1000.0)">open sea</text>
 <text x="130.0" y="520.0" font-size="12" fill="#2a5566" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="4" opacity="1" transform="rotate(-90 130.0 520.0)">open sea</text>
 </g>
@@ -2633,7 +2679,7 @@
 <text x="760.0" y="78.0" font-size="30" fill="#2b2118" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="8" opacity="1">GNOMADICA</text>
 <text x="760.0" y="98.0" font-size="12.5" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Gnome Island and the Nearby Isles</text>
 <line x1="670" y1="108" x2="850" y2="108" stroke="#a07c3c" stroke-width="0.8"/>
-<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.12  ·  working draft, awaiting canon review</text>
+<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.13  ·  working draft, awaiting canon review</text>
 <text x="760.0" y="135.0" font-size="8" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Charted for The Stoned Gnome · Gnomeworks</text>
 </g>
 <g id="legend">

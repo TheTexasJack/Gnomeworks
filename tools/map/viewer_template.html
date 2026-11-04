@@ -9,7 +9,7 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; background: #2a1f15; color: var(--ink);
     font-family: 'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,Georgia,serif; }
-  .app { display: grid; grid-template-columns: 1fr 300px; height: 100%; }
+  .app { display: grid; grid-template-columns: 1fr 380px; height: 100%; }
   .stage { position: relative; overflow: hidden; background: #86afb4; cursor: grab; touch-action: none; }
   .stage.drag { cursor: grabbing; }
   #map { width: 100%; height: 100%; display: block; }
@@ -36,6 +36,13 @@
   ul.regions li { padding: 2px 0; cursor: pointer; }
   ul.regions li:hover { text-decoration: underline; }
   .hint { font-size: 12px; color: var(--ink2); }
+  #info .trade { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; font-size: 13px; }
+  #info .trade b { font-weight: normal; color: var(--ink2); white-space: nowrap; }
+  #info .ghlink { display: inline-block; margin-top: 10px; padding: 4px 10px; border: 1px solid var(--oak); border-radius: 4px; background: var(--brass); color: var(--ink); text-decoration: none; font-size: 13px; }
+  #info .ghlink:hover { background: #ddb85e; }
+  #info .proposal { background: #fff3d6; border: 1px dashed #a07c3c; border-radius: 4px; padding: 6px 8px; margin-top: 4px; font-size: 13px; }
+  .arealabel { cursor: pointer; }
+  .arealabel:hover text { fill: #7a3b2a; }
   @media (max-width: 760px) {
     .app { grid-template-columns: 1fr; grid-template-rows: 62% 38%; }
     aside { border-left: 0; border-top: 3px solid var(--oak); }
@@ -106,7 +113,8 @@ function centerOn(x, y, w) { const r = stage.getBoundingClientRect(); const ar =
 
 stage.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.deltaY > 0 ? 1.15 : 1 / 1.15, e.clientX, e.clientY); }, { passive: false });
 const ptrs = new Map(); let last = null, pinchD = 0, moved = 0;
-stage.addEventListener('pointerdown', e => { ptrs.set(e.pointerId, e); stage.setPointerCapture(e.pointerId); last = e; moved = 0; stage.classList.add('drag'); });
+let downPin = null;
+stage.addEventListener('pointerdown', e => { const pg = e.target.closest && e.target.closest('.pin'); downPin = pg ? pg.dataset.id : null; ptrs.set(e.pointerId, e); stage.setPointerCapture(e.pointerId); last = e; moved = 0; stage.classList.add('drag'); });
 stage.addEventListener('pointermove', e => {
   if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, e);
   const r = stage.getBoundingClientRect();
@@ -116,7 +124,7 @@ stage.addEventListener('pointermove', e => {
     vb.x -= dx / r.width * vb.w; vb.y -= dy / r.height * vb.h; apply(); }
   last = e;
 });
-function up(e) { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinchD = 0; if (!ptrs.size) { last = null; stage.classList.remove('drag'); } }
+function up(e) { if (e.type === 'pointerup' && downPin && moved <= 6 && ptrs.size === 1) show(downPin); if (ptrs.size <= 1) downPin = null; ptrs.delete(e.pointerId); if (ptrs.size < 2) pinchD = 0; if (!ptrs.size) { last = null; stage.classList.remove('drag'); } }
 stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
 
 function show(id, fly) {
@@ -130,12 +138,34 @@ function show(id, fly) {
   add('name', l.name);
   const m = add('meta', `${TYPE[l.type] || l.type}  ·  ${l.region}`);
   const c = document.createElement('span'); c.className = 'chip'; c.style.background = col; m.prepend(c);
-  add('k', ADDED.has(l.id) ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
-  if (l.mentions && !/^No other/.test(l.mentions)) { add('k', 'Linked in its story'); add('', l.mentions); }
+  const G = l.gazetteer;
+  if (G) {
+    if (G['Location']) { add('k', 'Location'); add('', G['Location']); }
+    if (G['About']) { add('k', 'About'); add('', G['About']); }
+    if (G['Major Facts']) { add('k', 'Major Facts'); add('', G['Major Facts']); }
+    const trade = ['Factory Imports', 'Factory Exports', 'Non-Factory Imports', 'Non-Factory Exports'].filter(k => G[k]);
+    if (trade.length) {
+      add('k', 'Trade');
+      const t = add('trade', '');
+      trade.forEach(k => { const b = document.createElement('b'); b.textContent = k; const s = document.createElement('span'); s.textContent = G[k]; t.append(b, s); });
+    }
+    if (G['Flora']) { add('k', 'Flora'); add('', G['Flora']); }
+    if (G['Fauna']) { add('k', 'Fauna'); add('', G['Fauna']); }
+  } else {
+    add('k', ADDED.has(l.id) ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
+  }
+  if (l.trade_draft) {
+    add('k', 'Trade draft v0.1 proposes');
+    if (l.trade_draft.imports) add('proposal', 'Add to Factory Imports: ' + l.trade_draft.imports);
+    if (l.trade_draft.exports) add('proposal', 'Factory Exports: ' + l.trade_draft.exports);
+  }
   add('k', 'Status'); add('draft', l.status && ADDED.has(l.id) ? `${l.status[0].toUpperCase()}${l.status.slice(1)}, map v${DATA.version}` : `Proposed placement on map v${DATA.version}`);
+  if (l.gazetteer_anchor) {
+    const a = document.createElement('a'); a.className = 'ghlink'; a.target = '_blank'; a.rel = 'noopener';
+    a.href = `${DATA.gazetteer_url}#${l.gazetteer_anchor}`; a.textContent = 'Open in the gazetteer on GitHub'; el.appendChild(a);
+  }
   if (fly) centerOn(l.x, l.y, Math.min(vb.w, W / 3.2));
 }
-svg.addEventListener('click', e => { if (moved > 6) return; const g = e.target.closest('.pin'); if (g) show(g.dataset.id); });
 
 const dl = document.getElementById('names');
 DATA.locations.concat(DATA.added_places || []).sort((a, b) => a.name.localeCompare(b.name)).forEach(l => { const o = document.createElement('option'); o.value = l.name; dl.appendChild(o); });
@@ -153,7 +183,7 @@ Object.entries(DATA.regions).forEach(([name, r]) => {
   const li = document.createElement('li'); const n = everyone.filter(x => x.region === name && x.type !== 'region').length;
   li.innerHTML = `<span class="chip" style="background:${r.color}"></span>`;
   li.appendChild(document.createTextNode(`${name}  (${n})`));
-  li.onclick = () => { const rec = DATA.locations.find(x => x.type === 'region' && x.name === name); if (rec) show(rec.id, true); else centerOn(r.x, r.y, W / 3.2); };
+  li.onclick = () => { const rec = everyone.find(x => x.type === 'region' && (x.name === name || x.region === name)); if (rec) show(rec.id, true); else centerOn(r.x, r.y, W / 3.2); };
   ul.appendChild(li);
 });
 window.addEventListener('resize', fit); fit();
