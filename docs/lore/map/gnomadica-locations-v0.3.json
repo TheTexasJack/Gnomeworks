@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.2",
+ "version": "0.3",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -35,7 +35,7 @@
  "islands": {
   "M": "Main island (Gnome Island)",
   "A": "Gnufoundland (proposed)",
-  "B": "unclaimed",
+  "B": "Shen Shin (named by Nathan 2026-11-03)",
   "C": "Slaanilok (proposed)",
   "D": "unclaimed",
   "E": "Slaanilok, Eversummer (proposed)"
@@ -1254,6 +1254,42 @@
    "clue": "The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.",
    "mentions": "the Inner Lake; Slanic",
    "status": "proposed, not one of the 100 gazetteer entries"
+  },
+  {
+   "id": "shen-shin-town-1",
+   "name": "Shen Shin town 1 (name open)",
+   "type": "city",
+   "region": "Shen Shin",
+   "x": 1532,
+   "y": 82,
+   "tier": 1,
+   "clue": "One of three towns on Shen Shin.  Its name is still open.",
+   "mentions": "Shen Shin",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "shen-shin-town-2",
+   "name": "Shen Shin town 2 (name open)",
+   "type": "city",
+   "region": "Shen Shin",
+   "x": 1566,
+   "y": 196,
+   "tier": 1,
+   "clue": "One of three towns on Shen Shin.  Its name is still open.",
+   "mentions": "Shen Shin",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "shen-shin-town-3",
+   "name": "Shen Shin town 3 (name open)",
+   "type": "city",
+   "region": "Shen Shin",
+   "x": 1484,
+   "y": 322,
+   "tier": 1,
+   "clue": "One of three towns on Shen Shin.  Its name is still open.",
+   "mentions": "Shen Shin",
+   "status": "placed by Nathan, name open"
   }
  ]
 }

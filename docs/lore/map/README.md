@@ -1,14 +1,14 @@
-# Gnomadica master map, v0.2
+# Gnomadica master map, v0.3
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1, then v0.2 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.7.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.3 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.8.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.2.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.2.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.2.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus new landmarks such as Gnod Dam. |
+| `gnomadica-map-v0.3.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.3.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.3.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus new landmarks such as Gnod Dam. |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
@@ -16,6 +16,11 @@ Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.3
+
+- Island B is **Shen Shin** (Nathan).  It has three town dots with names still open, kept in the JSON's `landmarks` list.
+- Its pine woods moved onto land.  Trees now skip any spot within 5 px of a coast, so no forest anywhere can spill into the sea.
 
 ## Changes in v0.2
 
@@ -31,7 +36,7 @@ Each of these needs a yes, a no, or a change from Nathan.
 3. **Two northwestern rivers.**  River's Belt runs west to Port Gnaru.  A separate, unnamed northern river runs from the Woods of the Elder to North Ham'n'Gnome's estuary.
 4. **Island A is Gnufoundland.**  Its hook encloses the warm sheltered bay, with Gnyannis on the bay's north shore.
 5. **Islands C and E are Slaanilok.**  Eversummer is on E, the southern end of the chain.  The Lantern Chain ferry runs from Port Gnasher to C, then on to E, with a third run toward B.
-6. **Islands B and D are unclaimed**, left open for future names.
+6. **Island B is Shen Shin** (decided by Nathan).  **Island D is unclaimed**, left open for a future name.
 7. **Gno Dao Cradle runs along the long upper-right arm**, with the Gnomish Heights as its spine and the three fortresses climbing toward its tip.
 8. **Gnafrica is the southwest peninsula**, walled off by a low range labeled "the Dry Ridge" (from the Gnafrica clue "beyond the dry ridge").  Suggested climate story: the ridge blocks rain, and a cold current off the southwest coast keeps that coast dry and windy.
 9. **Dungeon of the Deep sits under Port Gnasher's reef** on the main island side of the strait.  The gazetteer still files it under Slaanilok.  Pick one.
@@ -46,6 +51,6 @@ These have no names and can move or vanish freely: the woods and downs between G
 
 - The lake's name, and names for the seas.
 - Gnod Dam's story: who built it, when, and what lies at the bottom of the drowned valley.
-- Islands B and D.
+- Island D, and names for Shen Shin's three towns.
 - A scale bar.  The main island is hundreds of miles across, so the map carries no scale yet.
 - Which master-map pins should drop to regional maps later (shops, shrines, single monuments are drawn small and can be hidden in the viewer).

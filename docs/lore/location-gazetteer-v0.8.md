@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.7 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.8 Working Draft)
 
 
 ## How to read this draft
@@ -28,6 +28,7 @@
 | Gnafrica | Southwest main island | Sunlands, deserts, and volcanic cones |
 | Gnufoundland | Northern offshore island | Fog, snow, and cold-water ports |
 | Slaanilok | Eastern offshore islands | Ferries, sea trade, and warm coasts |
+| Shen Shin | Northeastern offshore island (Island B) | Three towns, names open |
 
 ## Category index
 
@@ -38,7 +39,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Landmarks added while mapping (outside the 100-name pool): **1 place**
+- VIII. Places added while mapping (outside the 100-name pool): **2 places**
 
 ## I. Major regions and the mapped area
 
@@ -1350,7 +1351,7 @@
 - **Fauna:** Pebblem, Glowlem
 - **Bounties:**
 
-## VIII. Landmarks added while mapping
+## VIII. Places added while mapping
 
 Places named while drawing the master map.  They sit outside Nathan's original 100-name pool.
 
@@ -1363,4 +1364,15 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **Major Facts:** Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became the Inner Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Who built the dam, when, and what was left behind in the drowned valley are open questions.  So is the lake's own name.  Named by Nathan on 2026-11-03; the lake is modeled on Lake Texoma and its Denison Dam.
 - **Flora:** River reeds, willow
 - **Fauna:** Jellybub, Shroomtle, Potamice
+- **Bounties:**
+
+### Shen Shin
+
+- **Name:** Shen Shin
+- **Location:** The round-topped island in the northeast sea, across the water from the tip of the Gno Dao Cradle arm (Island B on the map).
+- **Region:** Gnomadica, northeastern island.
+- **About:** A round-topped island with a snowy ridge across its north, pine woods down its middle, and three towns along its coast.  Say the name three times fast.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Its three towns are on the map, and their names, people, and trade are still open.  The Lantern Chain ferry reaches its southern tip.
+- **Flora:** Salt pine, frost moss
+- **Fauna:**
 - **Bounties:**

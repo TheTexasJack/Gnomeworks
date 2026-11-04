@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.2'
+VERSION = '0.3'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -229,6 +229,8 @@ ISLETS = [(86, 262, 7), (74, 300, 5), (572, 112, 6), (586, 88, 4), (1618, 150, 7
           (252, 708, 5), (700, 1086, 6), (992, 1052, 5), (1350, 676, 3), (1344, 706, 3), (1360, 694, 2.5),
           (232, 744, 3), (1196, 760, 4), (614, 1040, 4)]
 
+SHEN_SHIN_TOWNS = [(1532, 82), (1566, 196), (1484, 322)]   # Island B, three towns, names open
+UNNAMED_TOWNS = SHEN_SHIN_TOWNS
 rough_main = 0.2
 main = fractal(MAIN, iters=5, rough=rough_main)
 isles = {k: fractal(v, iters=5, rough=0.19) for k, v in
@@ -356,7 +358,7 @@ FORESTS = [
     dict(area=[(106, 200), (150, 214), (146, 252), (112, 262)], d=10, kind='pine'),
     dict(area=[(328, 200), (372, 196), (376, 246), (334, 248)], d=10, kind='pine'),
     dict(area=[(200, 286), (250, 284), (240, 300), (200, 300)], d=10, kind='pine'),
-    dict(area=[(1412, 160), (1470, 180), (1480, 280), (1440, 300), (1420, 230)], d=10, kind='pine'),
+    dict(area=[(1440, 165), (1495, 180), (1505, 280), (1470, 305), (1450, 235)], d=10, kind='pine'),   # Shen Shin
     dict(area=[(1500, 640), (1535, 640), (1530, 700), (1480, 715), (1470, 680)], d=10, kind='palm'),
     dict(area=[(1400, 860), (1480, 850), (1470, 920), (1420, 930)], d=11, kind='palm'),
     dict(area=[(150, 940), (230, 935), (250, 990), (150, 990)], d=10, kind='tree'),
@@ -594,6 +596,8 @@ def build():
     glyphs = []
     for f in FORESTS:
         for p in poisson(f['area'], f['d']):
+            if not on_land(p, 5):
+                continue
             glyphs.append((p[1], f'<use href="#{f["kind"]}" x="{p[0]:.1f}" y="{p[1]:.1f}"/>'))
     for m in MARSH:
         for p in poisson(m, 9):
@@ -672,6 +676,7 @@ def build():
 
     # ---------------- region labels
     add('<g id="region-labels" font-style="normal">')
+    text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
         'Slanic': (936, 902, 0, 19), 'Gnufoundland': (262, 268, -4, 17), 'Slaanilok': (1468, 605, -80, 17),
@@ -699,8 +704,6 @@ def build():
     add('<g id="sea-labels">')
     text(430, 322, 'the narrow sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=3, halo=False, rot=-6)
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
-    text(1505, 395, 'Island B', 10, fill='#2a5566', anchor='middle', style='italic', halo=False)
-    text(1505, 408, 'unclaimed', 8, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(176, 768, 'Island D', 10, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(176, 755, 'unclaimed', 8, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(1462, 459, 'Island C', 8.5, fill='#2a5566', anchor='middle', style='italic', halo=False)
@@ -734,6 +737,10 @@ def build():
         add('</g>')
     add('</g>')
 
+    # unnamed towns (names still open)
+    for i, (x, y) in enumerate(UNNAMED_TOWNS, 1):
+        add(f'<g class="pin t1" data-id="shen-shin-town-{i}">{marker("x", "city", 1, x, y)}</g>')
+
     # ---------------- furniture
     cartouche()
     compass(1330, 372)
@@ -744,6 +751,20 @@ def build():
     return records
 
 # ------------------------------------------------------------------ drawing helpers
+
+def on_land(p, margin=0):
+    if not any(inside(p, poly) for poly in ALL_LAND):
+        return False
+    return margin == 0 or not near_coast(p, margin)
+
+
+def near_coast(p, d):
+    for poly in ALL_LAND:
+        for q in poly:
+            if (q[0] - p[0]) ** 2 + (q[1] - p[1]) ** 2 < d * d:
+                return True
+    return False
+
 
 def near_land(x, y, d):
     for poly in ALL_LAND + islets:
@@ -966,11 +987,14 @@ def check(records):
         if r['type'] == 'region':
             continue
         pt = (r['x'], r['y'])
-        on_land = any(inside(pt, poly) for poly in ALL_LAND)
-        if not on_land and r['name'] not in WATER_OK:
+        landed = any(inside(pt, poly) for poly in ALL_LAND)
+        if not landed and r["name"] not in WATER_OK:
             problems.append(f"in the sea: {r['name']} {pt}")
         if inside(pt, lake_poly):
             problems.append(f"in the lake: {r['name']} {pt}")
+    for x, y in UNNAMED_TOWNS:
+        if not on_land((x, y), 4):
+            problems.append(f'unnamed town off the island or on the coast: {(x, y)}')
     return problems
 
 
@@ -985,13 +1009,16 @@ if __name__ == '__main__':
         page=dict(width=W, height=H, units='svg', north='page top (proposed)'),
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v) for k, v in REGION_COLORS.items()},
-        islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='unclaimed',
+        islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
                      C='Slaanilok (proposed)', D='unclaimed', E='Slaanilok, Eversummer (proposed)'),
         locations=recs,
         landmarks=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, '
                              'and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.',
-                        mentions='the Inner Lake; Slanic', status='proposed, not one of the 100 gazetteer entries')],
+                        mentions='the Inner Lake; Slanic', status='proposed, not one of the 100 gazetteer entries')]
+                  + [dict(id=f'shen-shin-town-{i}', name=f'Shen Shin town {i} (name open)', type='city', region='Shen Shin',
+                          x=x, y=y, tier=1, clue='One of three towns on Shen Shin.  Its name is still open.', mentions='Shen Shin',
+                          status='placed by Nathan, name open') for i, (x, y) in enumerate(SHEN_SHIN_TOWNS, 1)],
     )
     json.dump(data, open(os.path.join(OUT_DIR, f'gnomadica-locations-v{VERSION}.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)
