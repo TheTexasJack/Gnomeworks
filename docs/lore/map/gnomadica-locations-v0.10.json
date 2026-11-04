@@ -1,12 +1,12 @@
 {
  "map": "Gnomadica master map",
- "version": "0.9",
+ "version": "0.10",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
   "height": 1150,
   "units": "svg",
-  "north": "page top (proposed)"
+  "north": "page top"
  },
  "notes": "Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.",
  "regions": {

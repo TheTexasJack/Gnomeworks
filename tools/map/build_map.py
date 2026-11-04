@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.9'
+VERSION = '0.10'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -705,8 +705,8 @@ def build():
         col = shade(REGION_COLORS[reg], 0.45)
         text(x, y, reg.upper(), sz, fill=col, anchor='middle', weight='bold', ls=7, rot=rot, opacity=0.8)
     # Gno Dao Cradle follows the arm
-    add('<path id="cradlePath" d="M1172,372 L1322,238" fill="none"/>')
-    add(f'<text font-size="15" font-weight="bold" letter-spacing="5" fill="{shade(REGION_COLORS["Gno Dao Cradle"], 0.45)}" opacity="0.8" '
+    add('<path id="cradlePath" d="M1158,390 L1340,228" fill="none"/>')
+    add(f'<text font-size="15" font-weight="bold" letter-spacing="4" fill="{shade(REGION_COLORS["Gno Dao Cradle"], 0.45)}" opacity="0.8" '
         f'stroke="#f3e7c6" stroke-width="3" paint-order="stroke"><textPath href="#cradlePath" startOffset="50%" text-anchor="middle">GNO DAO CRADLE</textPath></text>')
     add('</g>')
 
@@ -782,7 +782,6 @@ def build():
 
     # ---------------- furniture
     cartouche()
-    compass(1330, 372)
     legend(1086, 948)
     border()
     add(f'<rect width="{W}" height="{H}" filter="url(#paper)" opacity="0.22" style="mix-blend-mode:multiply" pointer-events="none"/>')
@@ -967,16 +966,15 @@ def cartouche():
     add('</g>')
 
 
-def compass(cx, cy):
-    add('<g id="compass">')
-    add(f'<path d="{gear_path(cx, cy, 30, 14, 0.12)}" fill="#e8d6a6" stroke="{C["coast"]}" stroke-width="1"/>')
-    add(f'<circle cx="{cx}" cy="{cy}" r="22" fill="#f3e6c2" stroke="{C["coast"]}" stroke-width="0.8"/>')
+def compass(cx, cy, sc=1.0):
+    add(f'<g id="compass" transform="translate({cx} {cy}) scale({sc})">')
+    add(f'<path d="{gear_path(0, 0, 30, 14, 0.12)}" fill="#e8d6a6" stroke="{C["coast"]}" stroke-width="1"/>')
+    add(f'<circle cx="0" cy="0" r="22" fill="#f3e6c2" stroke="{C["coast"]}" stroke-width="0.8"/>')
     for a, L, col in [(0, 34, '#7a3b2a'), (180, 22, C['coast']), (90, 22, C['coast']), (270, 22, C['coast']),
                       (45, 13, '#8a6a2f'), (135, 13, '#8a6a2f'), (225, 13, '#8a6a2f'), (315, 13, '#8a6a2f')]:
-        add(f'<path d="M{cx},{cy - L} L{cx + 4},{cy} L{cx},{cy + 3} L{cx - 4},{cy} Z" fill="{col}" transform="rotate({a} {cx} {cy})"/>')
-    add(f'<circle cx="{cx}" cy="{cy}" r="2.5" fill="#c9a24a" stroke="{C["coast"]}" stroke-width="0.7"/>')
-    text(cx, cy - 40, 'N', 13, fill='#7a3b2a', anchor='middle', weight='bold')
-    text(cx, cy + 46, 'north proposed', 7.5, fill=C['ink2'], anchor='middle', style='italic')
+        add(f'<path d="M0,{-L} L4,0 L0,3 L-4,0 Z" fill="{col}" transform="rotate({a})"/>')
+    add(f'<circle cx="0" cy="0" r="2.5" fill="#c9a24a" stroke="{C["coast"]}" stroke-width="0.7"/>')
+    text(0, -38, 'N', 14, fill='#7a3b2a', anchor='middle', weight='bold', halo=False)
     add('</g>')
 
 
@@ -1012,6 +1010,7 @@ def legend(x, y):
         if 'Rail' == lab:
             add(f'<line x1="{cx}" y1="{yy}" x2="{cx + 26}" y2="{yy}" stroke="{C["rail"]}" stroke-width="1"/>')
         text(cx + 32, yy + 3.5, lab, 9, anchor='start', halo=False)
+    compass(x + 226, y + 134, 0.62)
     text(x + 12, y + h - 22, 'Region colors are soft washes.  No borders are drawn yet.', 7.6, fill=C['ink2'], style='italic', halo=False)
     text(x + 12, y + h - 10, 'No scale bar yet: the main island is hundreds of miles across.', 7.6, fill=C['ink2'], style='italic', halo=False)
     add('</g>')
@@ -1064,7 +1063,7 @@ if __name__ == '__main__':
     open(svg_path, 'w', encoding='utf-8').write('\n'.join(out))
     data = dict(
         map='Gnomadica master map', version=VERSION, status='working draft, awaiting canon review',
-        page=dict(width=W, height=H, units='svg', north='page top (proposed)'),
+        page=dict(width=W, height=H, units='svg', north='page top'),
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v, x=(PLACES[k][0] if k in PLACES else 1445), y=(PLACES[k][1] if k in PLACES else 940)) for k, v in REGION_COLORS.items()},
         islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',

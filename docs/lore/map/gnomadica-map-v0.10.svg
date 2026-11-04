@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1660 1150" width="1660" height="1150" font-family="'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,'TeX Gyre Pagella',Georgia,serif">
-<title>Gnomadica master map v0.9 (working draft)</title>
+<title>Gnomadica master map v0.10 (working draft)</title>
 <defs>
 <filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.27  0 0 0 0 0.16  0 0 0 0.55 0"/></filter>
 <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.2  0 0 0 0.5 -0.12"/></filter>
@@ -2248,8 +2248,8 @@
 <text x="936.0" y="902.0" font-size="19" fill="#234540" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">SLANIC</text>
 <text x="262.0" y="268.0" font-size="17" fill="#405060" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-4 262.0 268.0)">GNUFOUNDLAND</text>
 <text x="1450.0" y="598.0" font-size="17" fill="#643d36" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-80 1450.0 598.0)">SLAANILOK</text>
-<path id="cradlePath" d="M1172,372 L1322,238" fill="none"/>
-<text font-size="15" font-weight="bold" letter-spacing="5" fill="#3e354f" opacity="0.8" stroke="#f3e7c6" stroke-width="3" paint-order="stroke"><textPath href="#cradlePath" startOffset="50%" text-anchor="middle">GNO DAO CRADLE</textPath></text>
+<path id="cradlePath" d="M1158,390 L1340,228" fill="none"/>
+<text font-size="15" font-weight="bold" letter-spacing="4" fill="#3e354f" opacity="0.8" stroke="#f3e7c6" stroke-width="3" paint-order="stroke"><textPath href="#cradlePath" startOffset="50%" text-anchor="middle">GNO DAO CRADLE</textPath></text>
 </g>
 <g id="area-labels">
 <text x="735.0" y="372.0" font-size="15" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Woods of the Elder</text>
@@ -2621,23 +2621,8 @@
 <text x="760.0" y="78.0" font-size="30" fill="#2b2118" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="8" opacity="1">GNOMADICA</text>
 <text x="760.0" y="98.0" font-size="12.5" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Gnome Island and the Nearby Isles</text>
 <line x1="670" y1="108" x2="850" y2="108" stroke="#a07c3c" stroke-width="0.8"/>
-<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.9  ·  working draft, awaiting canon review</text>
+<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.10  ·  working draft, awaiting canon review</text>
 <text x="760.0" y="135.0" font-size="8" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Charted for The Stoned Gnome · Gnomeworks</text>
-</g>
-<g id="compass">
-<path d="M1360.0,372.0 L1359.8,375.4 L1355.7,377.9 L1354.9,380.7 L1357.0,385.0 L1355.4,388.0 L1350.6,388.5 L1348.7,390.7 L1348.7,395.5 L1346.0,397.4 L1341.5,395.8 L1338.7,396.9 L1336.7,401.2 L1333.4,401.8 L1330.0,398.4 L1327.0,398.2 L1323.3,401.2 L1320.1,400.3 L1318.5,395.8 L1316.0,394.4 L1311.3,395.5 L1308.8,393.2 L1309.4,388.5 L1307.6,386.0 L1303.0,385.0 L1301.7,381.9 L1304.3,377.9 L1303.8,375.0 L1300.0,372.0 L1300.2,368.6 L1304.3,366.1 L1305.1,363.3 L1303.0,359.0 L1304.6,356.0 L1309.4,355.5 L1311.3,353.3 L1311.3,348.5 L1314.0,346.6 L1318.5,348.2 L1321.3,347.1 L1323.3,342.8 L1326.6,342.2 L1330.0,345.6 L1333.0,345.8 L1336.7,342.8 L1339.9,343.7 L1341.5,348.2 L1344.0,349.6 L1348.7,348.5 L1351.2,350.8 L1350.6,355.5 L1352.4,358.0 L1357.0,359.0 L1358.3,362.1 L1355.7,366.1 L1356.2,369.0 Z" fill="#e8d6a6" stroke="#4b3a28" stroke-width="1"/>
-<circle cx="1330" cy="372" r="22" fill="#f3e6c2" stroke="#4b3a28" stroke-width="0.8"/>
-<path d="M1330,338 L1334,372 L1330,375 L1326,372 Z" fill="#7a3b2a" transform="rotate(0 1330 372)"/>
-<path d="M1330,350 L1334,372 L1330,375 L1326,372 Z" fill="#4b3a28" transform="rotate(180 1330 372)"/>
-<path d="M1330,350 L1334,372 L1330,375 L1326,372 Z" fill="#4b3a28" transform="rotate(90 1330 372)"/>
-<path d="M1330,350 L1334,372 L1330,375 L1326,372 Z" fill="#4b3a28" transform="rotate(270 1330 372)"/>
-<path d="M1330,359 L1334,372 L1330,375 L1326,372 Z" fill="#8a6a2f" transform="rotate(45 1330 372)"/>
-<path d="M1330,359 L1334,372 L1330,375 L1326,372 Z" fill="#8a6a2f" transform="rotate(135 1330 372)"/>
-<path d="M1330,359 L1334,372 L1330,375 L1326,372 Z" fill="#8a6a2f" transform="rotate(225 1330 372)"/>
-<path d="M1330,359 L1334,372 L1330,375 L1326,372 Z" fill="#8a6a2f" transform="rotate(315 1330 372)"/>
-<circle cx="1330" cy="372" r="2.5" fill="#c9a24a" stroke="#4b3a28" stroke-width="0.7"/>
-<text x="1330.0" y="332.0" font-size="13" fill="#7a3b2a" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="0" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">N</text>
-<text x="1330.0" y="418.0" font-size="7.5" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">north proposed</text>
 </g>
 <g id="legend">
 <rect x="1086" y="948" width="268" height="186" rx="5" fill="#f3e6c2" stroke="#4b3a28" stroke-width="1.4" opacity="0.96"/>
@@ -2667,6 +2652,20 @@
 <text x="1286.0" y="1032.5" font-size="9" fill="#2b2118" text-anchor="start" font-weight="normal" font-style="normal" letter-spacing="0" opacity="1">Ferry</text>
 <line x1="1254" y1="1044" x2="1280" y2="1044" stroke="#4f86a6" stroke-width="2.4" stroke-linecap="round"/>
 <text x="1286.0" y="1047.5" font-size="9" fill="#2b2118" text-anchor="start" font-weight="normal" font-style="normal" letter-spacing="0" opacity="1">River</text>
+<g id="compass" transform="translate(1312 1082) scale(0.62)">
+<path d="M30.0,0.0 L29.8,3.4 L25.7,5.9 L24.9,8.7 L27.0,13.0 L25.4,16.0 L20.6,16.5 L18.7,18.7 L18.7,23.5 L16.0,25.4 L11.5,23.8 L8.7,24.9 L6.7,29.2 L3.4,29.8 L0.0,26.4 L-3.0,26.2 L-6.7,29.2 L-9.9,28.3 L-11.5,23.8 L-14.0,22.4 L-18.7,23.5 L-21.2,21.2 L-20.6,16.5 L-22.4,14.0 L-27.0,13.0 L-28.3,9.9 L-25.7,5.9 L-26.2,3.0 L-30.0,0.0 L-29.8,-3.4 L-25.7,-5.9 L-24.9,-8.7 L-27.0,-13.0 L-25.4,-16.0 L-20.6,-16.5 L-18.7,-18.7 L-18.7,-23.5 L-16.0,-25.4 L-11.5,-23.8 L-8.7,-24.9 L-6.7,-29.2 L-3.4,-29.8 L-0.0,-26.4 L3.0,-26.2 L6.7,-29.2 L9.9,-28.3 L11.5,-23.8 L14.0,-22.4 L18.7,-23.5 L21.2,-21.2 L20.6,-16.5 L22.4,-14.0 L27.0,-13.0 L28.3,-9.9 L25.7,-5.9 L26.2,-3.0 Z" fill="#e8d6a6" stroke="#4b3a28" stroke-width="1"/>
+<circle cx="0" cy="0" r="22" fill="#f3e6c2" stroke="#4b3a28" stroke-width="0.8"/>
+<path d="M0,-34 L4,0 L0,3 L-4,0 Z" fill="#7a3b2a" transform="rotate(0)"/>
+<path d="M0,-22 L4,0 L0,3 L-4,0 Z" fill="#4b3a28" transform="rotate(180)"/>
+<path d="M0,-22 L4,0 L0,3 L-4,0 Z" fill="#4b3a28" transform="rotate(90)"/>
+<path d="M0,-22 L4,0 L0,3 L-4,0 Z" fill="#4b3a28" transform="rotate(270)"/>
+<path d="M0,-13 L4,0 L0,3 L-4,0 Z" fill="#8a6a2f" transform="rotate(45)"/>
+<path d="M0,-13 L4,0 L0,3 L-4,0 Z" fill="#8a6a2f" transform="rotate(135)"/>
+<path d="M0,-13 L4,0 L0,3 L-4,0 Z" fill="#8a6a2f" transform="rotate(225)"/>
+<path d="M0,-13 L4,0 L0,3 L-4,0 Z" fill="#8a6a2f" transform="rotate(315)"/>
+<circle cx="0" cy="0" r="2.5" fill="#c9a24a" stroke="#4b3a28" stroke-width="0.7"/>
+<text x="0.0" y="-38.0" font-size="14" fill="#7a3b2a" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="0" opacity="1">N</text>
+</g>
 <text x="1098.0" y="1112.0" font-size="7.6" fill="#4a3b2a" text-anchor="start" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Region colors are soft washes.  No borders are drawn yet.</text>
 <text x="1098.0" y="1124.0" font-size="7.6" fill="#4a3b2a" text-anchor="start" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">No scale bar yet: the main island is hundreds of miles across.</text>
 </g>

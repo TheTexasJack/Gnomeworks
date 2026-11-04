@@ -1,14 +1,14 @@
-# Gnomadica master map, v0.9
+# Gnomadica master map, v0.10
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.9 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.13.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.10 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.13.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.9.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.9.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.9.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
+| `gnomadica-map-v0.10.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.10.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.10.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
@@ -16,6 +16,11 @@ Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.10
+
+- Fixed the cut-off GNO DAO CRADLE label.
+- The compass rose moved into the key and simply points up to N.  North is the top of the page.
 
 ## Changes in v0.9
 
@@ -60,7 +65,7 @@ The coastlines come from the written description of Nathan's sketch in World Map
 
 Each of these needs a yes, a no, or a change from Nathan.
 
-1. **North is the top of the page.**  Every directional clue in the gazetteer already assumes it.
+1. **North is the top of the page** (decided by Nathan).  Every directional clue in the gazetteer already assumes it.
 2. **The interior loop is a lake, and the gnomes made it.**  Nathan confirmed it is a lake on 2026-11-03 and pointed to Lake Texoma as the model.  Innie Lake (named by Nathan) is a reservoir: the gnomes built **Gnod Dam** (Nathan's name) at its south tip, and the water climbed every valley behind it.  That gives it long drowned arms and small coves in place of a round shore.  Steam Stream fills the north arm with warm water, the Ratios creek fills the west arm, and an east creek fills the east arm.  The old riverbed still runs down the middle, and an old road runs down into the water from the west.  The Slanic river leaves through the dam's spillway and becomes the delta.  Gnod Dam is a new landmark, kept in the JSON's `added_places` list apart from the 100 gazetteer entries.
 3. **Two northwestern rivers.**  River's Belt runs west to Port Gnaru.  A separate, unnamed northern river runs from the Woods of the Elder to North Ham'n'Gnome's estuary.
 4. **Island A is Gnufoundland.**  Its hook encloses the warm sheltered bay, with Gnyannis on the bay's north shore.
