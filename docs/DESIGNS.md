@@ -100,6 +100,37 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
 - Box upgrades (draft: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) are **speed** upgrades: fewer drags to empty a pile.
 
+**Shipping log (Nathan, 2026-11-04, decided; build after the core)**
+
+- After a package ships, the player can open its **shipping log**: about **10 short entries** on how the journey went, auto-filled at random from a pool of events.  Flavor only: it changes nothing in the game.
+- The pool can mix general road events with region lines (crossing Gnod Dam, a stop in Gassy Dog, a Lantern Chain ferry) and lines about the packing (a tracker pinging from the mountains, an 800 lb "light" box).  Event logic is still to be written.
+
+**Packing complications by region (Nathan, 2026-11-04, decided; details open)**
+
+Each region unlock adds one complication, and they stack.  Some apply to every package from then on, and some only to packages bound for that region.
+
+| Unlocks with | New requirement | Applies to |
+| --- | --- | --- |
+| Gnomerica | The correct supplies in the box | Every package |
+| Gnohio | Safety stickers, 5 to 10 per box | Every package |
+| Gnafrica | Temperature-controlled box | Gnafrica packages |
+| Slanic | Water-resistant box | Slanic packages |
+| Gno Dao Cradle | A wireless tracker in the box (boxes kept getting lost in the mountains) | Every package |
+| Gni | A Shrubbery or Red Herring sticker | Gni packages only |
+| Slaanilok | Water-resistant box, sprayed with bug repellent | Slaanilok packages |
+| Shen Shin | Wooden box; every package is weighed and gets a weight sticker (Light, Medium, or Heavy, with a made-up number: gnomes use magic, so an 800 lb box is fine) | Wooden box: Shen Shin packages.  Weighing: every package |
+| Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
+| Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
+
+- **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, a weight sticker, and the correct box for its destination.
+- **The dog toy on Gnonmoon:** a dog toy in a Gnonmoon package gets a big reaction.  Most recipients REALLY hate it, and one particular person REALLY loves dog stuff.  The reaction shows up in the shipping log and affects the shipment score a lot.
+
+Notes to settle when this is built (Claudia):
+- The wooden box is read here as Shen Shin's own box, matching how the other regions get a box type, while weighing applies to everyone.  Change this if wooden boxes are meant for every package.
+- Packages to regions without a special box use a plain cardboard box.
+- The shipment score (which the Gnonmoon dog toy moves) is not defined yet.  The shipping log itself stays flavor only.
+- The rune tracing game needs to work with a finger on phones as well as a mouse.
+
 **Ideas on the table (drafts, build in this order)**
 
 1. **Core:** Open and Close, drag to box, Stonks, stop at 1.

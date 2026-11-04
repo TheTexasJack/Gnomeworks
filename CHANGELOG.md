@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.62 (2026-11-04)
+
+- The Gnome Wizard has his real gear-framed badge (Nathan's art), replacing the temporary square picture.
+
 ## v0.2.0-draft.61 (2026-11-03)
 
 - Hunt prey can have their own size (`size` in `mega.prey`, 1 = normal).  The Shroomturtle runs at 75% and the elk at 85%, so they're harder to hit.
