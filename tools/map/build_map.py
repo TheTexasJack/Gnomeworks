@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.8'
+VERSION = '0.9'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -237,6 +237,12 @@ rough_main = 0.2
 main = fractal(MAIN, iters=5, rough=rough_main)
 isles = {k: fractal(v, iters=5, rough=0.19) for k, v in
          dict(A=ISLE_A, B=ISLE_B, C=ISLE_C, D=ISLE_D, E=ISLE_E).items()}
+# Gnonmoon (Island D) is redrawn with Zohee Bay cut into its northeast shore.  It uses its own
+# seed so the other islands keep their exact shapes.
+GNONMOON = [(150, 790), (170, 780), (186, 800), (190, 850), (196, 892), (220, 898), (244, 894), (256, 908),
+            (238, 920), (218, 926), (206, 940), (220, 954), (246, 958), (264, 978), (258, 1030), (230, 1070), (180, 1086),
+            (130, 1076), (95, 1040), (85, 990), (105, 950), (140, 920), (152, 870), (146, 830)]
+isles['D'] = fractal(GNONMOON, iters=5, rough=0.16, r=np.random.default_rng(2084))
 lake, lake_isles = build_lake()
 # seat Gnod Dam on the lake's southern tip, where the old channel leaves
 _tip = max((p for p in lake if abs(p[0] - DAM[0]) < 14), key=lambda p: p[1])
@@ -717,8 +723,8 @@ def build():
     add('<g id="sea-labels">')
     text(430, 322, 'the narrow sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=3, halo=False, rot=-6)
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
-    text(176, 768, 'Island D', 10, fill='#2a5566', anchor='middle', style='italic', halo=False)
-    text(176, 755, 'unclaimed', 8, fill='#2a5566', anchor='middle', style='italic', halo=False)
+    text(170, 846, 'GNONMOON', 11, fill='#3d4f5c', anchor='middle', weight='bold', ls=3, rot=-88, opacity=0.85)
+    text(236, 943, 'Zohee Bay', 9, fill='#2a5566', anchor='start', style='italic', ls=1)
     text(1580, 1000, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     text(130, 520, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     add('</g>')
@@ -751,17 +757,25 @@ def build():
     # unnamed towns (names still open)
     for uid, (x, y, reg) in UNNAMED_TOWNS.items():
         add(f'<g class="pin t1" data-id="{uid}">{marker("x", "city", 2, x, y)}</g>')
+    # the Three Idols: three standing stones
+    ix, iy = ADDED_PLACES['Three Idols']['x'], ADDED_PLACES['Three Idols']['y']
+    for dx, h in [(-5, 9), (0, 12), (5, 9)]:
+        add(f'<path d="M{ix + dx - 1.8:.1f},{iy:.1f} L{ix + dx - 1.4:.1f},{iy - h + 1.5:.1f} Q{ix + dx:.1f},{iy - h:.1f} {ix + dx + 1.4:.1f},{iy - h + 1.5:.1f} L{ix + dx + 1.8:.1f},{iy:.1f} Z" fill="#b9b2a2" stroke="{C["coast"]}" stroke-width="0.6"/>')
     # Legipt's ancient step pyramid
     lx, ly = ADDED_PLACES['Legipt']['x'], ADDED_PLACES['Legipt']['y'] - 13
     for k, (w_, h_) in enumerate([(13, 3), (10, 3), (7, 3), (4, 3)]):
         add(f'<rect x="{lx - w_ / 2:.1f}" y="{ly - (k + 1) * h_:.1f}" width="{w_}" height="{h_}" fill="{"#d9bf86" if k % 2 == 0 else "#c9ad72"}" stroke="{C["coast"]}" stroke-width="0.6"/>')
     add(f'<rect x="{lx - 1}" y="{ly - 3}" width="2" height="3" fill="{C["coast"]}"/>')
     for name, a in ADDED_PLACES.items():
-        sym = castle(a['x'], a['y']) if name == 'Gnaagh' else marker(name, a['type'], a['tier'], a['x'], a['y'])
+        sym = (castle(a['x'], a['y']) if name == 'Gnaagh' else
+               '<circle cx="{0}" cy="{1}" r="9" fill="none"/>'.format(a['x'], a['y'] - 5) if name == 'Three Idols' else
+               marker(name, a['type'], a['tier'], a['x'], a['y']))
         add(f'<g class="pin t{a["tier"]}" data-id="{slug(name)}">{sym}')
         dx, dy, anc = a['label']
         if a['tier'] == 1:
             text(a['x'] + dx, a['y'] + dy, name, 13.5, weight='bold', anchor=anc, ls=0.4)
+        elif a['type'] in ('poi', 'expedition'):
+            text(a['x'] + dx, a['y'] + dy, name, 9.4, anchor=anc)
         else:
             text(a['x'] + dx, a['y'] + dy, name, 11.5, weight='bold', anchor=anc)
         add('</g>')
@@ -1054,7 +1068,7 @@ if __name__ == '__main__':
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v, x=(PLACES[k][0] if k in PLACES else 1445), y=(PLACES[k][1] if k in PLACES else 940)) for k, v in REGION_COLORS.items()},
         islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
-                     C='Slaanilok (proposed)', D='unclaimed', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
+                     C='Slaanilok (proposed)', D='Gnonmoon (named by Nathan 2026-11-03)', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of Innie Lake.  The gnomes dammed a river valley here, '
@@ -1063,6 +1077,9 @@ if __name__ == '__main__':
                   + [dict(id='innie-lake', name='Innie Lake', type='natural', region='Slanic', x=858, y=798, tier=1,
                           clue='The big reservoir behind Gnod Dam, filling a drowned river valley with long arms and small coves.',
                           mentions='Gnod Dam; Steam Stream; Slanic', status='named by Nathan')]
+                  + [dict(id='zohee-bay', name='Zohee Bay', type='natural', region='Gnonmoon', x=236, y=940, tier=2,
+                          clue='A deep bay cut into the northeast shore of Gnonmoon, with a town on its western shore.',
+                          mentions='Gnonmoon', status='named by Nathan')]
                   + [dict(id=slug(n), name=n, type=a['type'], region=a['region'], x=a['x'], y=a['y'], tier=a['tier'],
                           clue=a['clue'], mentions=a['region'], status='placed by Nathan') for n, a in ADDED_PLACES.items()]
                   + [dict(id=uid, name=f'{reg} {uid.rsplit("-", 1)[1]} (name open)', type='city', region=reg, x=x, y=y, tier=2,

@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.8",
+ "version": "0.9",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -56,7 +56,7 @@
   "A": "Gnufoundland (proposed)",
   "B": "Shen Shin (named by Nathan 2026-11-03)",
   "C": "Slaanilok (proposed)",
-  "D": "unclaimed",
+  "D": "Gnonmoon (named by Nathan 2026-11-03)",
   "E": "Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)"
  },
  "locations": [
@@ -1287,6 +1287,18 @@
    "status": "named by Nathan"
   },
   {
+   "id": "zohee-bay",
+   "name": "Zohee Bay",
+   "type": "natural",
+   "region": "Gnonmoon",
+   "x": 236,
+   "y": 940,
+   "tier": 2,
+   "clue": "A deep bay cut into the northeast shore of Gnonmoon, with a town on its western shore.",
+   "mentions": "Gnonmoon",
+   "status": "named by Nathan"
+  },
+  {
    "id": "legipt",
    "name": "Legipt",
    "type": "city",
@@ -1308,6 +1320,30 @@
    "tier": 1,
    "clue": "The castle of the Knights of Gni, on the south end of the Island of Gni below Eversummer.",
    "mentions": "Gni",
+   "status": "placed by Nathan"
+  },
+  {
+   "id": "three-idols",
+   "name": "Three Idols",
+   "type": "poi",
+   "region": "Gnonmoon",
+   "x": 206,
+   "y": 1006,
+   "tier": 2,
+   "clue": "Three standing stones on the southern hills of Gnonmoon.",
+   "mentions": "Gnonmoon",
+   "status": "placed by Nathan"
+  },
+  {
+   "id": "demon-s-gutt",
+   "name": "Demon's Gutt",
+   "type": "expedition",
+   "region": "Gnonmoon",
+   "x": 118,
+   "y": 1010,
+   "tier": 2,
+   "clue": "A dungeon in the western hills of Gnonmoon.",
+   "mentions": "Gnonmoon",
    "status": "placed by Nathan"
   },
   {
@@ -1380,6 +1416,18 @@
    "tier": 2,
    "clue": "An unnamed town on Slaanilok, kept as an option for later.",
    "mentions": "Slaanilok",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnonmoon-town-1",
+   "name": "Gnonmoon 1 (name open)",
+   "type": "city",
+   "region": "Gnonmoon",
+   "x": 192,
+   "y": 936,
+   "tier": 2,
+   "clue": "An unnamed town on Gnonmoon, kept as an option for later.",
+   "mentions": "Gnonmoon",
    "status": "placed by Nathan, name open"
   },
   {

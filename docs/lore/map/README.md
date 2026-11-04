@@ -1,14 +1,14 @@
-# Gnomadica master map, v0.8
+# Gnomadica master map, v0.9
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.8 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.12.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.9 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.13.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.8.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.8.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.8.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
+| `gnomadica-map-v0.9.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.9.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.9.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
@@ -16,6 +16,11 @@ Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.9
+
+- Island D is **Gnonmoon** (Nathan), redrawn with **Zohee Bay** cut into its northeast shore.  It adds the **Three Idols** standing stones, the dungeon **Demon's Gutt**, and an unnamed town on Zohee Bay.  A moonsmith is planned there later.
+- Gnonmoon uses its own random seed, so redrawing it left every other coastline unchanged.
 
 ## Changes in v0.8
 
@@ -60,7 +65,7 @@ Each of these needs a yes, a no, or a change from Nathan.
 3. **Two northwestern rivers.**  River's Belt runs west to Port Gnaru.  A separate, unnamed northern river runs from the Woods of the Elder to North Ham'n'Gnome's estuary.
 4. **Island A is Gnufoundland.**  Its hook encloses the warm sheltered bay, with Gnyannis on the bay's north shore.
 5. **Island C is Slaanilok.**  Island C holds the lizard towns of Legipt and Monit-45.  Island E is now the Island of Gni, its own region, with Eversummer and Castle Gnaagh.  The Lantern Chain ferry runs from Port Gnasher to C, then on to E, with a third run toward B.
-6. **Island B is Shen Shin** (decided by Nathan).  **Island D is unclaimed**, left open for a future name.
+6. **Island B is Shen Shin** (decided by Nathan).  **Island D is Gnonmoon** (decided by Nathan).
 7. **Gno Dao Cradle runs along the long upper-right arm**, with the Gnomish Heights as its spine and the three fortresses climbing toward its tip.
 8. **Gnafrica is the southwest peninsula**, walled off by a low range labeled "the Dry Ridge" (from the Gnafrica clue "beyond the dry ridge").  Suggested climate story: the ridge blocks rain, and a cold current off the southwest coast keeps that coast dry and windy.
 9. **Dungeon of the Deep sits under Port Gnasher's reef** on the main island side of the strait.  The gazetteer still files it under Slaanilok.  Pick one.
@@ -75,6 +80,6 @@ These have no names and can move or vanish freely: the woods and downs between G
 
 - Names for the seas.
 - Gnod Dam's story: who built it, when, and what lies at the bottom of the drowned valley.
-- Island D, and names for Shen Shin's three towns.
+- Names for the unnamed towns on Shen Shin, Slaanilok, Gnomerica, and Gnonmoon.
 - A scale bar.  The main island is hundreds of miles across, so the map carries no scale yet.
 - Which master-map pins should drop to regional maps later (shops, shrines, single monuments are drawn small and can be hidden in the viewer).

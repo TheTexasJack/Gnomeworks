@@ -2,7 +2,7 @@
 
 **Purpose:** Extract what the current gazetteer already says about terrain and relative placement, before drawing mountains, watersheds, biomes, roads, or settlement pins.  This is a research ledger, not a proposed finished map.
 
-**Sources:** [Location Gazetteer v0.5](location-gazetteer-v0.12.md), its 100-place name pool in [place-names.md](place-names.md), and Nathan's hand-drawn master coastline.  Nathan has established that the main island is hundreds of miles across, approximately UK-sized.  The coastal outline is the geographic starting point; the draft's directional notes were largely invented before the map and are **not** canon.
+**Sources:** [Location Gazetteer v0.5](location-gazetteer-v0.13.md), its 100-place name pool in [place-names.md](place-names.md), and Nathan's hand-drawn master coastline.  Nathan has established that the main island is hundreds of miles across, approximately UK-sized.  The coastal outline is the geographic starting point; the draft's directional notes were largely invented before the map and are **not** canon.
 
 ## The two inventories
 

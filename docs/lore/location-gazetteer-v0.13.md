@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.12 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.13 Working Draft)
 
 
 ## How to read this draft
@@ -29,6 +29,7 @@
 | Gnufoundland | Northern offshore island | Fog, snow, and cold-water ports |
 | Slaanilok | Eastern offshore islands | Ferries, sea trade, and warm coasts |
 | Shen Shin | Northeastern offshore island (Island B) | Three towns, names open |
+| Gnonmoon | Southwestern offshore island (Island D) | Zohee Bay, the Three Idols, Demon's Gutt |
 | Gni | Southeastern offshore island, the Island of Gni (Island E) | Knights, Eversummer, and Castle Gnaagh |
 
 ## Category index
@@ -40,7 +41,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **7 places**
+- VIII. Places added while mapping (outside the 100-name pool): **11 places**
 
 ## I. Major regions and the mapped area
 
@@ -1438,5 +1439,49 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **About:** A stone castle with two towers and a red flag, home of the Knights of Gni.  Visitors are welcome, as long as they bring a shrubbery.
 - **Major Facts:** Named by Nathan on 2026-11-03.  The knights, their customs, and the castle's history are still open.
 - **Flora:** Palms
+- **Fauna:**
+- **Bounties:**
+
+### Gnonmoon
+
+- **Name:** Gnonmoon
+- **Location:** The island west of Gnafrica's coast, with a long narrow neck to the north and a wide body to the south (Island D on the map).
+- **Region:** Gnomadica, southwestern island.
+- **About:** A moon-named island with a long rocky neck, a deep bay on its northeast side, woods and hills in its middle, and three old standing stones on its southern hills.  On clear nights the moon looks bigger here than anywhere else.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Zohee Bay, the Three Idols, and Demon's Gutt are here, plus one town on Zohee Bay whose name is still open.  Planned: a moonsmith, coming later.
+- **Flora:** Oak, moonpetal
+- **Fauna:**
+- **Bounties:**
+
+### Zohee Bay
+
+- **Name:** Zohee Bay
+- **Location:** Northeast shore of Gnonmoon, facing Gnafrica across the strait.
+- **Region:** Gnonmoon.
+- **About:** A deep, quiet bay tucked into Gnonmoon's northeast shore.  A small town sits on its western shore where a stream meets the water.
+- **Major Facts:** Named by Nathan on 2026-11-03.  The town's name is still open.
+- **Flora:** Sea grass
+- **Fauna:**
+- **Bounties:**
+
+### Three Idols
+
+- **Name:** Three Idols
+- **Location:** Southern hills of Gnonmoon.
+- **Region:** Gnonmoon.
+- **About:** Three tall standing stones on a hilltop, side by side like singers on a stage.  The middle stone is the tallest, and on windy nights the hilltop hums.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Who raised the stones, and why they hum, are still open.
+- **Flora:** Hill grass
+- **Fauna:**
+- **Bounties:**
+
+### Demon's Gutt
+
+- **Name:** Demon's Gutt
+- **Location:** Western hills of Gnonmoon.
+- **Region:** Gnonmoon.
+- **About:** A twisting cave that winds down into the hills like a long, grumbling belly.  Brave explorers say you can hear it growl.
+- **Major Facts:** Named by Nathan on 2026-11-03.  What lives at the bottom is still open.
+- **Flora:** Cave moss
 - **Fauna:**
 - **Bounties:**

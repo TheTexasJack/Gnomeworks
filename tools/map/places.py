@@ -152,6 +152,10 @@ ADDED_PLACES = {
                    clue='Big, ancient lizard city at the south end of Island C, where the trade route leaves south for Eversummer.'),
     "Gnaagh": dict(x=1446, y=1022, tier=1, label=(12, 2, "start"), type='expedition', region='Gni',
                    clue='The castle of the Knights of Gni, on the south end of the Island of Gni below Eversummer.'),
+    "Three Idols": dict(x=206, y=1006, tier=2, label=(0, 13, "middle"), type='poi', region='Gnonmoon',
+                        clue='Three standing stones on the southern hills of Gnonmoon.'),
+    "Demon's Gutt": dict(x=118, y=1010, tier=2, label=(0, -8, "middle"), type='expedition', region='Gnonmoon',
+                         clue='A dungeon in the western hills of Gnonmoon.'),
     "Monit-45": dict(x=1508, y=672, tier=2, label=(0, -9, "middle"), type='city', region='Slaanilok',
                      clue='Lizard town down in the trees of Island C.'),
 }
@@ -163,6 +167,7 @@ UNNAMED_TOWNS = {
     "shen-shin-town-3": (1484, 322, 'Shen Shin'),
     "slaanilok-town-1": (1398, 612, 'Slaanilok'),   # on the bay edge, where the Port Gnasher ferry lands
     "slaanilok-town-2": (1478, 494, 'Slaanilok'),   # north shore, toward the Shen Shin ferry
+    "gnonmoon-town-1": (192, 936, 'Gnonmoon'),     # on the shore of Zohee Bay
     "gnomerica-town-1": (1028, 786, 'Gnomerica'),   # in the forest east of Innie Lake
     "gnomerica-town-2": (1090, 630, 'Gnomerica'),   # north of Gnew York
 }
