@@ -13,7 +13,7 @@ Last updated 2026-11-04, at v0.2.0-draft.62.
 | Security pass and Jarrett's guide | v0.5 | Planned |
 | Live on the Wix site | v1.0 | Planned |
 
-Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 148 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 4 Legendary Treasures), 6 hats, 2 events (Wild Magic, Clone Attack) plus shinies, the Megagnome and his hunt, Day and Night themes.  Details: [EVENTS.md](EVENTS.md).  Unbuilt designs: [DESIGNS.md](DESIGNS.md).
+Game content right now: 6 gnome types (Tiny, Necromancer with skeleton crew, Warrior, Cloner, Matryoshka, Wizard), 6 empty stations, 148 collectibles (96 junk items in 8 groups of 12, 44 Tiny Monsters, 4 Number Twos, 4 Legendary Treasures), 6 hats, 2 events (Wild Magic, Clone Attack) plus shinies, the Megagnome and the hunt that feeds him, Day and Night themes.  Details: [EVENTS.md](EVENTS.md).  Unbuilt designs: [DESIGNS.md](DESIGNS.md).
 
 ## Waiting on Jarrett
 
