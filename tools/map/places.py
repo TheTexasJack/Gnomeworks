@@ -141,7 +141,7 @@ AREA_LABELS = {
     "Gnomish Heights": (1145, 258, -40, 14),
     "Mountain of Exclusion": (1090, 414, 0, 8.5),
     "Jinlo fields": (1002, 403, 0, 8.5),
-    "Steam Stream": (925, 600, -78, 9),
+    "Steam Stream": (916, 657, -80, 9),
     "Lost Valley": (962, 370, 0, 8.5),
     "Crystals on the Flats": (1160, 463, 0, 9),
 }
