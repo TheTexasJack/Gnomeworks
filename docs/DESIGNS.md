@@ -122,6 +122,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 | Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
 | Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
 
+- **Boxes and packing supplies are free (Nathan, 2026-11-04).**  The factory makes them, so stock is unlimited, as in most shipping games: the point is the packing.  Every box and supply sits on the packing bench from the start and does nothing until a region needs it.
 - **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, a weight sticker, and the correct box for its destination.
 - **The dog toy on Gnonmoon:** a dog toy in a Gnonmoon package gets a big reaction.  Most recipients REALLY hate it, and one particular person REALLY loves dog stuff.  The reaction shows up in the shipping log and moves Stonks a lot.
 - **The shipment score is the core mechanic (Nathan, 2026-11-04):** a successful shipment sends our Stonks up.  A failed one sends our Stonks down and TNP Corp's Stonks up.
@@ -129,7 +130,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 Notes to settle when this is built (Claudia):
 - Packages to regions without a special box use a plain cardboard box.
 - The shipping log itself stays flavor only.  Stonks carry the score.
-- Open: Stonks is both the shipping currency (spent on box upgrades) and our line on the ticker.  When a failure sends Stonks down, decide whether the player loses spendable Stonks, only the ticker line drops, or both.  The ticker notes call for recoverable mistakes and no losses that stack forever.
+- Open: Stonks is both the shipping currency and our line on the ticker.  With boxes and supplies free, Stonks has fewer things to buy.  The box-size speed upgrades (Shoebox, Crate, Pallet, Shipping Container) are still listed as Stonks purchases below until Nathan says otherwise.  When a failure sends Stonks down, decide whether the player loses spendable Stonks, only the ticker line drops, or both.  The ticker notes call for recoverable mistakes and no losses that stack forever.
 - The rune tracing game needs to work with a finger on phones as well as a mouse.
 
 **Ideas on the table (drafts, build in this order)**
