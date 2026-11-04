@@ -82,7 +82,8 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
     - **Theater, not a mini-game** (Nathan): the squad is about five adventurers from the factory.  They are not counted or spent, and sending them never touches production.
     - **Guardrails (agreed):** the timer runs while the player is away; the expedition always succeeds, and any mishaps are only funny.
     - The return story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.
-    - Unlock order is open: a fixed order is simplest, and letting players pick a neighboring region on the map is the fancier option.
+    - **Unlock order (decided):** a counterclockwise spiral around the map.  Gnomerica is home.  The main island goes Gnohio, Gnafrica, Slanic, Gno Dao Cradle.  The outer islands go Gni, Slaanilok, Shen Shin, Gnufoundland, Gnonmoon.  The pattern itself is the reason.
+    - **Each unlock adds a new thing to watch for and a new step in sending a package.**  Details to be worked out later.
     - **Heroes are a separate, long-term idea:** named hero characters who sit in the background for lore and moments like this.  They need their own design, apart from the expedition squad, and are not needed now.
 - **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
