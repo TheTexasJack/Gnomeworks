@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1660 1150" width="1660" height="1150" font-family="'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,'TeX Gyre Pagella',Georgia,serif">
-<title>Gnomadica master map v0.16 (working draft)</title>
+<title>Gnomadica master map v0.17 (working draft)</title>
 <defs>
 <filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.27  0 0 0 0 0.16  0 0 0 0.55 0"/></filter>
 <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.2  0 0 0 0.5 -0.12"/></filter>
@@ -2290,7 +2290,7 @@
 <text x="775.0" y="1034.0" font-size="9" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">Bog of Eternal Regret</text>
 </g>
 <g class="pin arealabel" data-id="swamp-of-low-visits">
-<text x="596.0" y="948.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-20 596.0 948.0)">Swamp of Low Visits</text>
+<text x="597.0" y="965.0" font-size="8.5" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-20 597.0 965.0)">Swamp of Low Visits</text>
 </g>
 <g class="pin arealabel" data-id="gnomish-heights">
 <text x="1145.0" y="258.0" font-size="14" fill="#5a4a32" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="1" opacity="1" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-40 1145.0 258.0)">Gnomish Heights</text>
@@ -2679,7 +2679,7 @@
 <text x="760.0" y="78.0" font-size="30" fill="#2b2118" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="8" opacity="1">GNOMADICA</text>
 <text x="760.0" y="98.0" font-size="12.5" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Gnome Island and the Nearby Isles</text>
 <line x1="670" y1="108" x2="850" y2="108" stroke="#a07c3c" stroke-width="0.8"/>
-<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.16  ·  working draft, awaiting canon review</text>
+<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.17  ·  working draft, awaiting canon review</text>
 <text x="760.0" y="135.0" font-size="8" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Charted for The Stoned Gnome · Gnomeworks</text>
 </g>
 <g id="legend">

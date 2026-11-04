@@ -137,7 +137,7 @@ AREA_LABELS = {
     "Frozen Fields": (262, 182, 0, 11),
     "Fairy Fen": (772, 968, 0, 10),
     "Bog of Eternal Regret": (775, 1034, 0, 9),
-    "Swamp of Low Visits": (596, 948, -20, 8.5),
+    "Swamp of Low Visits": (597, 965, -20, 8.5),
     "Gnomish Heights": (1145, 258, -40, 14),
     "Mountain of Exclusion": (1090, 414, 0, 8.5),
     "Jinlo fields": (1002, 403, 0, 8.5),
