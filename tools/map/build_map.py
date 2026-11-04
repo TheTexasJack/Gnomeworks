@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.18'
+VERSION = '0.19'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -34,7 +34,7 @@ C = dict(
 REGION_COLORS = {
     'Gnomerica': '#d9a441', 'Gnohio': '#7fa65a', 'Gnafrica': '#cf7346', 'Slanic': '#4f9a8f',
     'Gno Dao Cradle': '#8a77b0', 'Gnufoundland': '#8fb3d6', 'Slaanilok': '#e0887a',
-    'Gni': '#b0609a',
+    'Gni': '#b0609a', 'Shen Shin': '#9aa64a', 'Gnonmoon': '#7a8ca6',
 }
 
 rng = np.random.default_rng(1103)  # seed: the day this map started (11/03)
@@ -574,6 +574,8 @@ def build():
         'Gnufoundland': [(300, 160, 170), (470, 80, 80)],
         'Slaanilok': [(1465, 600, 120)],
         'Gni': [(1445, 930, 105)],
+        'Shen Shin': [(1505, 205, 115)],
+        'Gnonmoon': [(175, 950, 105), (168, 840, 50)],
     }
     add('<g id="washes">')
     for reg, bl in blobs.items():
@@ -749,7 +751,7 @@ def build():
     text(1434, 942, 'ISLAND OF GNI', 11, fill=shade(REGION_COLORS['Gni'], 0.5), anchor='middle', weight='bold', ls=3, rot=-85, opacity=0.85)
     add('</g>')
     add('<g class="pin arealabel" data-id="shen-shin">')
-    text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
+    text(1532, 214, 'SHEN SHIN', 15, fill=shade(REGION_COLORS['Shen Shin'], 0.5), anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
     add('</g>')
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
@@ -782,7 +784,7 @@ def build():
     text(430, 322, 'the narrow sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=3, halo=False, rot=-6)
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
     add('<g class="pin arealabel" data-id="gnonmoon">')
-    text(170, 846, 'GNONMOON', 11, fill='#3d4f5c', anchor='middle', weight='bold', ls=3, rot=-88, opacity=0.85)
+    text(170, 846, 'GNONMOON', 11, fill=shade(REGION_COLORS['Gnonmoon'], 0.5), anchor='middle', weight='bold', ls=3, rot=-88, opacity=0.85)
     add('</g>')
     add('<g class="pin arealabel" data-id="zohee-bay">')
     text(236, 943, 'Zohee Bay', 9, fill='#2a5566', anchor='start', style='italic', ls=1)
@@ -1128,8 +1130,8 @@ if __name__ == '__main__':
         page=dict(width=W, height=H, units='svg', north='page top'),
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v, x=(PLACES[k][0] if k in PLACES else 1445), y=(PLACES[k][1] if k in PLACES else 940)) for k, v in REGION_COLORS.items()},
-        islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
-                     C='Slaanilok (proposed)', D='Gnonmoon (named by Nathan 2026-11-03)', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
+        islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin, its own region',
+                     C='Slaanilok (proposed)', D='Gnonmoon, its own region', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of Innie Lake.  The gnomes dammed a river valley here, '

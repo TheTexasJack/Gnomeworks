@@ -73,6 +73,11 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **Shipping removes items from the shelf.**  Players can sell off everything they have.
 - **Every item stops at 1.**  The last one is the display copy, so collections and shelf tiles never go dark.
 - **Open and Close buttons.**  Open raises the shipping door and makes the shelf draggable.  Close shuts it, and the player goes back to the clicker.
+- **Destinations come from the Gnomadica map and gazetteer** (decided 2026-11-04).  Each region gets its own stamp; towns are the address line.  Early shifts check only the region stamp, later shifts check the town too.
+- **Every island is its own region:** Gnufoundland, Shen Shin, Slaanilok, Gni, and Gnonmoon, alongside the five main-island regions.  Ten regions, ten stamps.
+- **Regions unlock as you go:** after a set number of successful missions, the next region opens.  Gnomerica (the factory's home) is first.  Its unlock also opens that region's Lore tab entries.
+- **The gazetteer's imports and exports are base values.**  The game reads a destinations file generated from the gazetteer, so lore and game never drift apart.
+- **Variable needs and a market for imports and exports are held for a separate future game,** kept out of the Packing Line.
 - **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
 - **Math before code** still holds: stamp prices and upgrade costs get a pass before building.

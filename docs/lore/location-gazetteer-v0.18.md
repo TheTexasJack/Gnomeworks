@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.17 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.18 Working Draft)
 
 
 ## How to read this draft
@@ -1383,7 +1383,7 @@ Places added while drawing the master map, beyond the original 100 names.
 
 - **Name:** Shen Shin
 - **Location:** The round-topped island in the northeast sea, across the water from the tip of the Gno Dao Cradle arm.
-- **Region:** Gnomadica, northeastern island.
+- **Region:** Gnomadica, its own region.
 - **About:** A round-topped island with a snowy ridge across its north and pine woods down its middle.  Tables Edge hides deep in the woods, and two more towns sit on the coast.  Say the name three times fast.
 - **Major Facts:** Most of the island's shipping goes to Tables Edge.  Two smaller towns sit on the coast.  The Lantern Chain ferry reaches its southern tip.
 - **Flora:** Salt pine, frost moss
@@ -1446,7 +1446,7 @@ Places added while drawing the master map, beyond the original 100 names.
 
 - **Name:** Gnonmoon
 - **Location:** The island west of Gnafrica's coast, with a long narrow neck to the north and a wide body to the south.
-- **Region:** Gnomadica, southwestern island.
+- **Region:** Gnomadica, its own region.
 - **About:** A moon-named island with a long rocky neck, a deep bay on its northeast side, woods and hills in its middle, and three old standing stones on its southern hills.  On clear nights the moon looks bigger here than anywhere else.
 - **Major Facts:** Zohee Bay, the Three Idols, and Demon's Gutt are here, plus a small town on Zohee Bay.
 - **Flora:** Oak, moonpetal
