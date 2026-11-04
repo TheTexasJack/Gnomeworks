@@ -1,10 +1,10 @@
 # Hunt creatures
 
-Alex's section: the creatures the Megagnome hunts with the crossbow, and why.
+Alex's section: the creatures the gnomes (the player) hunt with the crossbow to feed the Megagnome.  He never hunts himself; he stays home being fat and lazy.
 
 ## Open questions
 
-- Where does the Megagnome hunt?  (Why is settled: to eat.)
+- Where do the gnomes hunt?  (Why is settled: to feed the Megagnome.)
 - Why are there so many Banana Monsters?
 - Which region does each creature come from?
 
@@ -14,7 +14,7 @@ Alex's section: the creatures the Megagnome hunts with the crossbow, and why.
 ### <Name>
 
 - Region:
-- Why the Megagnome hunts it:
+- Why the gnomes hunt it for him:
 - Lore tab text: a few sentences.
 ```
 
