@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.4",
+ "version": "0.5",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -38,7 +38,7 @@
   "B": "Shen Shin (named by Nathan 2026-11-03)",
   "C": "Slaanilok (proposed)",
   "D": "unclaimed",
-  "E": "Slaanilok, Eversummer (proposed)"
+  "E": "Island of Gni, home of Eversummer and Castle Gnaagh (named by Nathan 2026-11-03)"
  },
  "locations": [
   {
@@ -1265,6 +1265,18 @@
    "tier": 1,
    "clue": "Big, ancient lizard city at the south end of Island C, where the trade route leaves south for Eversummer.",
    "mentions": "Slaanilok",
+   "status": "placed by Nathan"
+  },
+  {
+   "id": "gnaagh",
+   "name": "Gnaagh",
+   "type": "expedition",
+   "region": "Island of Gni",
+   "x": 1446,
+   "y": 1022,
+   "tier": 1,
+   "clue": "The castle of the Knights of Gni, on the south end of the Island of Gni below Eversummer.",
+   "mentions": "Island of Gni",
    "status": "placed by Nathan"
   },
   {

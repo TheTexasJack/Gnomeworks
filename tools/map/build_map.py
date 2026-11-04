@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.4'
+VERSION = '0.5'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -685,6 +685,7 @@ def build():
 
     # ---------------- region labels
     add('<g id="region-labels" font-style="normal">')
+    text(1434, 942, 'ISLAND OF GNI', 11, fill='#3d4f5c', anchor='middle', weight='bold', ls=3, rot=-85, opacity=0.85)
     text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
@@ -715,7 +716,6 @@ def build():
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
     text(176, 768, 'Island D', 10, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(176, 755, 'unclaimed', 8, fill='#2a5566', anchor='middle', style='italic', halo=False)
-    text(1505, 1080, 'Island E', 8.5, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(1580, 1000, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     text(130, 520, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     add('</g>')
@@ -754,7 +754,8 @@ def build():
         add(f'<rect x="{lx - w_ / 2:.1f}" y="{ly - (k + 1) * h_:.1f}" width="{w_}" height="{h_}" fill="{"#d9bf86" if k % 2 == 0 else "#c9ad72"}" stroke="{C["coast"]}" stroke-width="0.6"/>')
     add(f'<rect x="{lx - 1}" y="{ly - 3}" width="2" height="3" fill="{C["coast"]}"/>')
     for name, a in ADDED_PLACES.items():
-        add(f'<g class="pin t{a["tier"]}" data-id="{slug(name)}">{marker(name, a["type"], a["tier"], a["x"], a["y"])}')
+        sym = castle(a['x'], a['y']) if name == 'Gnaagh' else marker(name, a['type'], a['tier'], a['x'], a['y'])
+        add(f'<g class="pin t{a["tier"]}" data-id="{slug(name)}">{sym}')
         dx, dy, anc = a['label']
         if a['tier'] == 1:
             text(a['x'] + dx, a['y'] + dy, name, 13.5, weight='bold', anchor=anc, ls=0.4)
@@ -861,6 +862,22 @@ def gnod_dam():
     add(f'<circle cx="{x}" cy="{y + 2.5}" r="1.6" fill="{C["coast"]}"/>')
     add('</g>')
     text(x + 20, y + 6, 'Gnod Dam', 11, weight='bold', anchor='start', ls=0.4)
+
+
+def castle(x, y):
+    st, sw = C['coast'], 0.7
+    g = []
+    g.append(f'<rect x="{x - 7}" y="{y - 7}" width="14" height="8" fill="#d6c7a4" stroke="{st}" stroke-width="{sw}"/>')
+    for tx in (x - 10, x + 5):
+        g.append(f'<rect x="{tx}" y="{y - 13}" width="5" height="14" fill="#cbb994" stroke="{st}" stroke-width="{sw}"/>')
+        for k in range(3):
+            g.append(f'<rect x="{tx + k * 2 - 0.3:.1f}" y="{y - 15}" width="1.4" height="2" fill="#cbb994" stroke="{st}" stroke-width="0.4"/>')
+    for k in range(4):
+        g.append(f'<rect x="{x - 5 + k * 3}" y="{y - 9}" width="1.6" height="2" fill="#d6c7a4" stroke="{st}" stroke-width="0.4"/>')
+    g.append(f'<path d="M{x - 2},{y + 1} L{x - 2},{y - 3} Q{x},{y - 5.5} {x + 2},{y - 3} L{x + 2},{y + 1} Z" fill="{st}"/>')
+    g.append(f'<line x1="{x + 7.5}" y1="{y - 15}" x2="{x + 7.5}" y2="{y - 21}" stroke="{st}" stroke-width="0.6"/>')
+    g.append(f'<path d="M{x + 7.5},{y - 21} l5,1.5 l-5,1.5 Z" fill="#9b3b2e"/>')
+    return ''.join(g)
 
 
 def marker(name, typ, tier, x, y):
@@ -1034,7 +1051,7 @@ if __name__ == '__main__':
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v) for k, v in REGION_COLORS.items()},
         islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
-                     C='Slaanilok (proposed)', D='unclaimed', E='Slaanilok, Eversummer (proposed)'),
+                     C='Slaanilok (proposed)', D='unclaimed', E='Island of Gni, home of Eversummer and Castle Gnaagh (named by Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, '

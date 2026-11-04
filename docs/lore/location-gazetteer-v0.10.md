@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.9 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.10 Working Draft)
 
 
 ## How to read this draft
@@ -29,6 +29,7 @@
 | Gnufoundland | Northern offshore island | Fog, snow, and cold-water ports |
 | Slaanilok | Eastern offshore islands | Ferries, sea trade, and warm coasts |
 | Shen Shin | Northeastern offshore island (Island B) | Three towns, names open |
+| Island of Gni | Southeastern offshore island (Island E) | Eversummer and Castle Gnaagh |
 
 ## Category index
 
@@ -39,7 +40,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **4 places**
+- VIII. Places added while mapping (outside the 100-name pool): **6 places**
 
 ## I. Major regions and the mapped area
 
@@ -1403,6 +1404,28 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **Non-Factory Exports:** None
 - **About:** A lizard town tucked under the palm trees.  The number is part of the name, and nobody has explained it yet.
 - **Major Facts:** Named by Nathan on 2026-11-03, one of Slaanilok's lizard towns.  Its story and trade are still open.
+- **Flora:** Palms
+- **Fauna:**
+- **Bounties:**
+
+### Island of Gni
+
+- **Name:** Island of Gni
+- **Location:** The long island in the southeast sea, at the south end of the Lantern Chain ferry (Island E on the map).
+- **Region:** Gnomadica, southeastern island.
+- **About:** A long, sunny island with palm woods at its north end, the town of Eversummer in the middle, and a castle on its southern tip.  The knights who live here are famous for one very short word.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Eversummer and Castle Gnaagh are here.  Whether Gni belongs to Slaanilok or stands on its own is still open.
+- **Flora:** Palms
+- **Fauna:**
+- **Bounties:**
+
+### Gnaagh
+
+- **Name:** Gnaagh
+- **Location:** Southern tip of the Island of Gni, below Eversummer.
+- **Region:** Island of Gni.
+- **About:** A stone castle with two towers and a red flag, home of the Knights of Gni.  Visitors are welcome, as long as they bring a shrubbery.
+- **Major Facts:** Named by Nathan on 2026-11-03.  The knights, their customs, and the castle's history are still open.
 - **Flora:** Palms
 - **Fauna:**
 - **Bounties:**
