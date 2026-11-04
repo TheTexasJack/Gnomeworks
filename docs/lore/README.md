@@ -27,7 +27,7 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
 | [location-gazetteer-v0.5.md](location-gazetteer-v0.5.md) | 100 places; trades at 52 specific settlements and producers, with full lore, flora and fauna | **v0.5 review draft, awaiting Nathan and Alex** |
 | [map-geography-audit-v0.1.md](map-geography-audit-v0.1.md) | 50 named terrain-bearing sites, 20 geographic systems, 11 relationship chains, and placement clues for all 100 locations | **First-pass map planning, not canon** |
-| [world-map-v0.1.md](world-map-v0.1.md) | Master map design: Section 1, Geographic Outline, using the coastline, scale and candidate terrain systems | **First section drafted for review** |
+| [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss | Waiting on Alex |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |
