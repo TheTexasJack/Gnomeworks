@@ -42,10 +42,21 @@
   #info .ghlink:hover { background: #ddb85e; }
   #info .proposal { background: #fff3d6; border: 1px dashed #a07c3c; border-radius: 4px; padding: 6px 8px; margin-top: 4px; font-size: 13px; }
   .arealabel { cursor: pointer; }
+  .app { position: relative; }
+  #panelToggle { position: absolute; top: 50%; right: 380px; transform: translate(50%, -50%); z-index: 5;
+    width: 26px; height: 64px; padding: 0; border: 2px solid var(--oak); border-radius: 6px; background: var(--brass);
+    color: var(--ink); font-size: 16px; line-height: 1; cursor: pointer; box-shadow: 0 2px 6px #0006; }
+  #panelToggle:hover { background: #ddb85e; }
+  .app.collapsed { grid-template-columns: 1fr 0; }
+  .app.collapsed aside { display: none; }
+  .app.collapsed #panelToggle { right: 0; transform: translate(0, -50%); border-right: 0; border-radius: 6px 0 0 6px; }
   .arealabel:hover text { fill: #7a3b2a; }
   @media (max-width: 760px) {
     .app { grid-template-columns: 1fr; grid-template-rows: 62% 38%; }
     aside { border-left: 0; border-top: 3px solid var(--oak); }
+    #panelToggle { display: none; }
+    .app.collapsed { grid-template-columns: 1fr; }
+    .app.collapsed aside { display: block; }
   }
 </style>
 </head>
@@ -54,6 +65,7 @@
   <div class="stage" id="stage">
 __SVG__
   </div>
+  <button id="panelToggle" title="Hide the side panel" aria-label="Hide the side panel">&#9654;</button>
   <aside>
     <h1>GNOMADICA</h1>
     <div class="ver">Master Map v__VERSION__  ·  working draft, awaiting canon review</div>
@@ -186,7 +198,17 @@ Object.entries(DATA.regions).forEach(([name, r]) => {
   li.onclick = () => { const rec = everyone.find(x => x.type === 'region' && (x.name === name || x.region === name)); if (rec) show(rec.id, true); else centerOn(r.x, r.y, W / 3.2); };
   ul.appendChild(li);
 });
-window.addEventListener('resize', fit); fit();
+const app = document.querySelector('.app'), tog = document.getElementById('panelToggle');
+function setPanel(hidden) {
+  app.classList.toggle('collapsed', hidden);
+  tog.innerHTML = hidden ? '&#9664;' : '&#9654;';
+  tog.title = tog.ariaLabel = hidden ? 'Show the side panel' : 'Hide the side panel';
+  requestAnimationFrame(fit);
+}
+tog.addEventListener('click', () => setPanel(!app.classList.contains('collapsed')));
+window.addEventListener('resize', fit);
+setPanel(location.hash === '#full');
+window.addEventListener('hashchange', () => setPanel(location.hash === '#full'));
 </script>
 </body>
 </html>

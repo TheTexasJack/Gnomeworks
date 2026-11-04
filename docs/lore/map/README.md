@@ -1,23 +1,27 @@
-# Gnomadica master map, v0.17
+# Gnomadica master map, v0.18
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.17) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.17.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.18) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.17.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.17.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.17.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.17.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
+| `gnomadica-map-v0.18.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.18.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.18.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
-**Shareable link:** https://thetexasjack.github.io/Gnomeworks/map/ always shows the latest map.  The build copies the viewer to `/map/index.html` on every run, separate from the game.
+**Shareable link:** https://thetexasjack.github.io/Gnomeworks/map/ always shows the latest map.  https://thetexasjack.github.io/Gnomeworks/map/#full opens it full screen with the side panel hidden.  The build copies the viewer to `/map/index.html` on every run, separate from the game.
 
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
 
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.18
+
+- On desktop, a brass tab on the edge of the side panel hides it so the map fills the screen, and brings it back.  Adding `#full` to the link opens the map with the panel already hidden, which suits sharing.
 
 ## Changes in v0.17
 
