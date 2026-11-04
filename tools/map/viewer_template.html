@@ -82,9 +82,10 @@ const svg = document.getElementById('map');
 const stage = document.getElementById('stage');
 const W = DATA.page.width, H = DATA.page.height;
 let vb = { x: 0, y: 0, w: W, h: H };
-const byId = {}; DATA.locations.concat(DATA.landmarks || []).forEach(l => byId[l.id] = l);
+const byId = {}; DATA.locations.concat(DATA.added_places || []).forEach(l => byId[l.id] = l);
 const TYPE = { region: 'Region', city: 'City or port', settlement: 'Village or settlement', natural: 'Natural landmark',
   expedition: 'Dungeon, mine or ruin', business: 'Shop or attraction', poi: 'Roadside curiosity', landmark: 'Landmark (new)' };
+const ADDED = new Set((DATA.added_places || []).map(l => l.id));
 
 function apply() { svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
 function clamp() {
@@ -129,17 +130,17 @@ function show(id, fly) {
   add('name', l.name);
   const m = add('meta', `${TYPE[l.type] || l.type}  ·  ${l.region}`);
   const c = document.createElement('span'); c.className = 'chip'; c.style.background = col; m.prepend(c);
-  add('k', l.type === 'landmark' ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
+  add('k', ADDED.has(l.id) ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
   if (l.mentions && !/^No other/.test(l.mentions)) { add('k', 'Linked in its story'); add('', l.mentions); }
-  add('k', 'Status'); add('draft', `Proposed placement on map v${DATA.version}`);
+  add('k', 'Status'); add('draft', l.status && ADDED.has(l.id) ? `${l.status[0].toUpperCase()}${l.status.slice(1)}, map v${DATA.version}` : `Proposed placement on map v${DATA.version}`);
   if (fly) centerOn(l.x, l.y, Math.min(vb.w, W / 3.2));
 }
 svg.addEventListener('click', e => { if (moved > 6) return; const g = e.target.closest('.pin'); if (g) show(g.dataset.id); });
 
 const dl = document.getElementById('names');
-DATA.locations.concat(DATA.landmarks || []).sort((a, b) => a.name.localeCompare(b.name)).forEach(l => { const o = document.createElement('option'); o.value = l.name; dl.appendChild(o); });
+DATA.locations.concat(DATA.added_places || []).sort((a, b) => a.name.localeCompare(b.name)).forEach(l => { const o = document.createElement('option'); o.value = l.name; dl.appendChild(o); });
 document.getElementById('q').addEventListener('change', e => {
-  const v = e.target.value.trim().toLowerCase(); const all = DATA.locations.concat(DATA.landmarks || []); const l = all.find(x => x.name.toLowerCase() === v)
+  const v = e.target.value.trim().toLowerCase(); const all = DATA.locations.concat(DATA.added_places || []); const l = all.find(x => x.name.toLowerCase() === v)
     || all.find(x => x.name.toLowerCase().includes(v)); if (l) show(l.id, true); });
 document.getElementById('zin').onclick = () => { const r = stage.getBoundingClientRect(); zoomAt(1 / 1.4, r.left + r.width / 2, r.top + r.height / 2); };
 document.getElementById('zout').onclick = () => { const r = stage.getBoundingClientRect(); zoomAt(1.4, r.left + r.width / 2, r.top + r.height / 2); };

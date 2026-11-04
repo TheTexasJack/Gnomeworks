@@ -145,3 +145,20 @@ AREA_LABELS = {
     "Lost Valley": (962, 370, 0, 8.5),
     "Crystals on the Flats": (1160, 463, 0, 9),
 }
+
+# Places added while mapping, outside the 100-name pool.  They render as pins and go to the JSON's added_places list.
+ADDED_PLACES = {
+    "Legipt": dict(x=1452, y=708, tier=1, label=(10, 9, "start"), type='city', region='Slaanilok',
+                   clue='Big, ancient lizard city at the south end of Island C, where the trade route leaves south for Eversummer.'),
+    "Monit-45": dict(x=1508, y=672, tier=2, label=(0, -9, "middle"), type='city', region='Slaanilok',
+                     clue='Lizard town down in the trees of Island C.'),
+}
+
+# Towns placed by Nathan whose names are still open: id -> (x, y, island or region)
+UNNAMED_TOWNS = {
+    "shen-shin-town-1": (1532, 82, 'Shen Shin'),
+    "shen-shin-town-2": (1566, 196, 'Shen Shin'),
+    "shen-shin-town-3": (1484, 322, 'Shen Shin'),
+    "slaanilok-town-1": (1398, 612, 'Slaanilok'),   # on the bay edge, where the Port Gnasher ferry lands
+    "slaanilok-town-2": (1478, 494, 'Slaanilok'),   # north shore, toward the Shen Shin ferry
+}

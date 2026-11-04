@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.8 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.9 Working Draft)
 
 
 ## How to read this draft
@@ -39,7 +39,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **2 places**
+- VIII. Places added while mapping (outside the 100-name pool): **4 places**
 
 ## I. Major regions and the mapped area
 
@@ -1374,5 +1374,35 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **About:** A round-topped island with a snowy ridge across its north, pine woods down its middle, and three towns along its coast.  Say the name three times fast.
 - **Major Facts:** Named by Nathan on 2026-11-03.  Its three towns are on the map, and their names, people, and trade are still open.  The Lantern Chain ferry reaches its southern tip.
 - **Flora:** Salt pine, frost moss
+- **Fauna:**
+- **Bounties:**
+
+### Legipt
+
+- **Name:** Legipt
+- **Location:** South end of Slaanilok's main island (Island C), where the trade route leaves south for Eversummer.
+- **Region:** Slaanilok.
+- **Factory Imports:** None
+- **Factory Exports:** None
+- **Non-Factory Imports:** None
+- **Non-Factory Exports:** None
+- **About:** A big, ancient lizard city built around a stepped pyramid older than anyone can remember.  Ferries leave its docks for Eversummer and the islands to the south.
+- **Major Facts:** Named by Nathan on 2026-11-03, one of Slaanilok's lizard towns.  Its age, its rulers, and what it trades are still open.
+- **Flora:** Palms
+- **Fauna:**
+- **Bounties:**
+
+### Monit-45
+
+- **Name:** Monit-45
+- **Location:** Down in the palm woods of Slaanilok's main island (Island C), northeast of Legipt.
+- **Region:** Slaanilok.
+- **Factory Imports:** None
+- **Factory Exports:** None
+- **Non-Factory Imports:** None
+- **Non-Factory Exports:** None
+- **About:** A lizard town tucked under the palm trees.  The number is part of the name, and nobody has explained it yet.
+- **Major Facts:** Named by Nathan on 2026-11-03, one of Slaanilok's lizard towns.  Its story and trade are still open.
+- **Flora:** Palms
 - **Fauna:**
 - **Bounties:**

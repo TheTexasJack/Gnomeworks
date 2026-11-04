@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.3'
+VERSION = '0.4'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -229,8 +229,7 @@ ISLETS = [(86, 262, 7), (74, 300, 5), (572, 112, 6), (586, 88, 4), (1618, 150, 7
           (252, 708, 5), (700, 1086, 6), (992, 1052, 5), (1350, 676, 3), (1344, 706, 3), (1360, 694, 2.5),
           (232, 744, 3), (1196, 760, 4), (614, 1040, 4)]
 
-SHEN_SHIN_TOWNS = [(1532, 82), (1566, 196), (1484, 322)]   # Island B, three towns, names open
-UNNAMED_TOWNS = SHEN_SHIN_TOWNS
+from places import ADDED_PLACES, UNNAMED_TOWNS  # noqa: E402
 rough_main = 0.2
 main = fractal(MAIN, iters=5, rough=rough_main)
 isles = {k: fractal(v, iters=5, rough=0.19) for k, v in
@@ -601,19 +600,29 @@ def build():
             glyphs.append((p[1], f'<use href="#{f["kind"]}" x="{p[0]:.1f}" y="{p[1]:.1f}"/>'))
     for m in MARSH:
         for p in poisson(m, 9):
+            if not on_land(p, 4):
+                continue
             glyphs.append((p[1], f'<use href="#tuft" x="{p[0]:.1f}" y="{p[1]:.1f}"/>'))
         for p in poisson(m, 22)[:6]:
+            if not on_land(p, 5):
+                continue
             glyphs.append((p[1] - 1, f'<ellipse cx="{p[0]:.1f}" cy="{p[1]:.1f}" rx="{rng.uniform(2.5, 5):.1f}" ry="1.4" fill="{C["lake"]}" stroke="{C["river"]}" stroke-width="0.4"/>'))
     for dz in DUNES:
         for p in poisson(dz['area'], dz['d']):
+            if not on_land(p, 7):
+                continue
             glyphs.append((p[1], f'<use href="#dune" x="{p[0]:.1f}" y="{p[1]:.1f}"/>'))
     for hl in HILLS:
         for p in poisson(hl['area'], hl['d']):
             s = rng.uniform(*hl['s'])
-            glyphs.append((p[1], hill(p[0], p[1], s)))
+            g_ = hill(p[0], p[1], s)
+            if on_land(p, s + 3):
+                glyphs.append((p[1], g_))
     for g in MTN_GROUPS:
         for (x, y), s in along(g['ridge'], g['step'], g['band'], g['s']):
-            glyphs.append((y, mountain(x, y, s, snow=rng.random() < g['snow'], dry=g.get('dry', False))))
+            g_ = mountain(x, y, s, snow=rng.random() < g['snow'], dry=g.get('dry', False))
+            if on_land((x, y), s + 2):
+                glyphs.append((y, g_))
     for k in range(5):  # Mountain of Exclusion: one great wall of peaks
         x = EXCLUSION[0] - 28 + k * 14
         y = EXCLUSION[1] + (abs(k - 2) * 4) - 6
@@ -679,7 +688,7 @@ def build():
     text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
-        'Slanic': (936, 902, 0, 19), 'Gnufoundland': (262, 268, -4, 17), 'Slaanilok': (1468, 605, -80, 17),
+        'Slanic': (936, 902, 0, 19), 'Gnufoundland': (262, 268, -4, 17), 'Slaanilok': (1450, 598, -80, 17),
     }
     for reg, (x, y, rot, sz) in reg_lbl.items():
         col = shade(REGION_COLORS[reg], 0.45)
@@ -706,7 +715,6 @@ def build():
     text(1360, 450, 'Lantern Chain', 9, fill='#2a5566', anchor='middle', style='italic', ls=1.5, halo=False, rot=-64)
     text(176, 768, 'Island D', 10, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(176, 755, 'unclaimed', 8, fill='#2a5566', anchor='middle', style='italic', halo=False)
-    text(1462, 459, 'Island C', 8.5, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(1505, 1080, 'Island E', 8.5, fill='#2a5566', anchor='middle', style='italic', halo=False)
     text(1580, 1000, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
     text(130, 520, 'open sea', 12, fill='#2a5566', anchor='middle', style='italic', ls=4, halo=False, rot=-90)
@@ -738,8 +746,21 @@ def build():
     add('</g>')
 
     # unnamed towns (names still open)
-    for i, (x, y) in enumerate(UNNAMED_TOWNS, 1):
-        add(f'<g class="pin t1" data-id="shen-shin-town-{i}">{marker("x", "city", 1, x, y)}</g>')
+    for uid, (x, y, reg) in UNNAMED_TOWNS.items():
+        add(f'<g class="pin t1" data-id="{uid}">{marker("x", "city", 2, x, y)}</g>')
+    # Legipt's ancient step pyramid
+    lx, ly = ADDED_PLACES['Legipt']['x'], ADDED_PLACES['Legipt']['y'] - 13
+    for k, (w_, h_) in enumerate([(13, 3), (10, 3), (7, 3), (4, 3)]):
+        add(f'<rect x="{lx - w_ / 2:.1f}" y="{ly - (k + 1) * h_:.1f}" width="{w_}" height="{h_}" fill="{"#d9bf86" if k % 2 == 0 else "#c9ad72"}" stroke="{C["coast"]}" stroke-width="0.6"/>')
+    add(f'<rect x="{lx - 1}" y="{ly - 3}" width="2" height="3" fill="{C["coast"]}"/>')
+    for name, a in ADDED_PLACES.items():
+        add(f'<g class="pin t{a["tier"]}" data-id="{slug(name)}">{marker(name, a["type"], a["tier"], a["x"], a["y"])}')
+        dx, dy, anc = a['label']
+        if a['tier'] == 1:
+            text(a['x'] + dx, a['y'] + dy, name, 13.5, weight='bold', anchor=anc, ls=0.4)
+        else:
+            text(a['x'] + dx, a['y'] + dy, name, 11.5, weight='bold', anchor=anc)
+        add('</g>')
 
     # ---------------- furniture
     cartouche()
@@ -992,9 +1013,12 @@ def check(records):
             problems.append(f"in the sea: {r['name']} {pt}")
         if inside(pt, lake_poly):
             problems.append(f"in the lake: {r['name']} {pt}")
-    for x, y in UNNAMED_TOWNS:
-        if not on_land((x, y), 4):
-            problems.append(f'unnamed town off the island or on the coast: {(x, y)}')
+    for uid, (x, y, reg) in UNNAMED_TOWNS.items():
+        if not on_land((x, y)):
+            problems.append(f'unnamed town in the sea: {uid} {(x, y)}')
+    for name, a in ADDED_PLACES.items():
+        if not on_land((a['x'], a['y'])):
+            problems.append(f"added place in the sea: {name}")
     return problems
 
 
@@ -1012,13 +1036,15 @@ if __name__ == '__main__':
         islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
                      C='Slaanilok (proposed)', D='unclaimed', E='Slaanilok, Eversummer (proposed)'),
         locations=recs,
-        landmarks=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
+        added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, '
                              'and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.',
                         mentions='the Inner Lake; Slanic', status='proposed, not one of the 100 gazetteer entries')]
-                  + [dict(id=f'shen-shin-town-{i}', name=f'Shen Shin town {i} (name open)', type='city', region='Shen Shin',
-                          x=x, y=y, tier=1, clue='One of three towns on Shen Shin.  Its name is still open.', mentions='Shen Shin',
-                          status='placed by Nathan, name open') for i, (x, y) in enumerate(SHEN_SHIN_TOWNS, 1)],
+                  + [dict(id=slug(n), name=n, type=a['type'], region=a['region'], x=a['x'], y=a['y'], tier=a['tier'],
+                          clue=a['clue'], mentions=a['region'], status='placed by Nathan') for n, a in ADDED_PLACES.items()]
+                  + [dict(id=uid, name=f'{reg} {uid.rsplit("-", 1)[1]} (name open)', type='city', region=reg, x=x, y=y, tier=2,
+                          clue=f'An unnamed town on {reg}, kept as an option for later.', mentions=reg,
+                          status='placed by Nathan, name open') for uid, (x, y, reg) in UNNAMED_TOWNS.items()],
     )
     json.dump(data, open(os.path.join(OUT_DIR, f'gnomadica-locations-v{VERSION}.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)
