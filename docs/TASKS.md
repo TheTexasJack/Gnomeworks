@@ -1,13 +1,13 @@
 # Tasks and status
 
-Last updated 2026-11-03, at v0.2.0-draft.57.
+Last updated 2026-11-04, at v0.2.0-draft.62.
 
 ## Where we are
 
 | Layer | Version | Status |
 | --- | --- | --- |
 | Core game: gears, items, shop, saves | v0.1 | Done |
-| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections, Night theme, first events | v0.2 | Mostly done (draft.57), polish items below |
+| Art and juice: Mara's art, Shop Floor, animation, sound, hats, collections, Night theme, first events | v0.2 | Mostly done (draft.62), polish items below |
 | Accounts and leaderboard | v0.3 | Waiting on Jarrett's yes or no |
 | Admin tools and stats | v0.4 | Planned |
 | Security pass and Jarrett's guide | v0.5 | Planned |
@@ -34,13 +34,30 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 ## Claudia (ready to build when asked)
 
 - [ ] Drop in the fixed hats and re-check every hat spot.
-- [ ] Gear-framed shop badge for the Gnome Wizard (his icon is a placeholder).
-- [ ] Math pass: the Packing Line and mid-to-late pacing.  (Megagnome built in draft.54; tune his numbers after play.)
-- [ ] Packing Line, after the math pass.  **Next session.**
+- [x] Gear-framed shop badge for the Gnome Wizard (draft.62).
+- [ ] Packing Line, in Nathan's order: lore pass, then mechanics, then assets, then build.  See "Packing Line next steps" below.
+- [ ] Mid-to-late pacing pass.  (Megagnome built in draft.54; tune his numbers after play.)
 - [ ] Tap the Megagnome on the Shop Floor to start a hunt (today only his shop row does).
 - [ ] Keyboard play for the hunt (arrows plus Space).
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
+
+## Packing Line next steps (2026-11-04)
+
+1. **Lore pass** (Lore thread): canon review of the map v0.19 and gazetteer v0.18, the trade draft, Tiny Monsters assigned to regions (for stamps), our company's name, TNP Corp's story.
+2. **Mechanics to settle:**
+    - [ ] How much of a pile one package ships.
+    - [ ] What a failed shipment does: spendable Stonks, the ticker line, or both (mistakes must be recoverable).
+    - [ ] What Stonks buy, if anything (the Stonks shop needs a fresh look; an auto-packer may clash with packing being the game).
+    - [ ] The match game's rules (Simon Says inspired) and how a purchase order is read.
+    - [ ] The "new thing to watch for" each region unlock adds.
+    - [ ] Shipping log event logic, and throw-ins.
+    - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
+    - [ ] Rune tracing that works with a finger on phones.
+3. **Assets:** finalize the draft list in DESIGNS.md, then hand it to Mara.  Nothing made before the mechanics are settled.
+4. **Build:** layer 1 core.
+
+The Claude doc "Gnomeworks Packing Line: Design and Asset Guide" is v0.1 and older than these decisions; DESIGNS.md is current.
 
 ## Done draft.20 to draft.51
 
@@ -49,6 +66,10 @@ Interface: oak-and-brass buttons, pause and sound moved beside the tabs, plank t
 ## Done draft.52 to draft.57
 
 Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 safety ceiling, the Megagnome (shop checklist, events-only helper, food), the crossbow hunt with splats and Alex's voices, the Banana Monster boss and its trophy, version stamps on CSS and JS, hunt instructions, crossbow tilt fix, boss-needs-3-bolts fix.  (Megagnome hats tried and removed.)
+
+## Done draft.58 to draft.62
+
+Megagnome hatless, then his belly jiggle, hunt prey split fix (Shroomturtle, elk, Crystal Lizard), per-prey size, the Gnome Wizard's badge.
 
 ## Proposal backlog (all drafts, nothing approved yet)
 
@@ -69,7 +90,7 @@ Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
 
 The Packing Line, the Megagnome and his hunt, the Tiny Monster info card, and the Rogue are written up in [DESIGNS.md](DESIGNS.md).
 
-Open question in the proposal: should packed items come out of the shelf counts, or should shipping be free?
+Answered 2026-11-03: shipped items leave the shelf, down to 1.
 
 ## Known issues and accepted quirks
 
