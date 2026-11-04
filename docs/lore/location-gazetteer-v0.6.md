@@ -1,11 +1,12 @@
-# Gnomeworks: Location Gazetteer (v0.5 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.6 Working Draft)
 
 
 ## How to read this draft
 
 - **Location** means a *proposed* place on the one master map, described in relative directions so it can be moved when the map is drawn.  There are no fixed coordinates yet.
 - **Region** gives the proposed parent area.  Gnomadica covers the mapped island and nearby offshore areas, not the whole planet.  The North Pole and wider world remain outside the map.
-- **Trade fields** appear only for specific settlements, functioning production sites, and businesses.  Broad regions, unworked landscapes, abandoned ruins and other non-trading places have no trade fields.  Regional trade is represented through its individual producing and receiving locations.
+- **Trade fields** appear only on places that buy our goods or make their own: cities and ports, villages, shops and attractions, and working mines or strongholds that produce, such as The Crafter's Mines (tools and food in, ore out) and Ogre's Hold.  Natural landmarks and roadside POIs never carry trade fields.  Broad regions, unworked landscapes, and abandoned ruins have none either.  Regional trade is represented through its individual producing and receiving locations.
+- **Humanoid monsters are people.**  Ogres, goblins, giants, and their neighbors trade, work, and keep homes like anyone else.
 - **Factory Imports / Factory Exports** list only goods that exist in the current Gnomeworks collectible catalog (`docs/INVENTORY.md` and `js/config.js`).  All items use their exact written names without emoji icons or tags.  A trade listing does not mean a shipping order is implemented.
 - **Non-Factory Imports / Non-Factory Exports** list tangible, shippable goods outside the existing factory catalog, including fantasy objects.  Services, rumors, and activities are excluded.  These goods do not become new factory collectibles.
 - **None** means no trade item of that type has been proposed yet, not that the location can never trade it.
@@ -37,6 +38,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
+- VIII. Landmarks added while mapping (outside the 100-name pool): **1 place**
 
 ## I. Major regions and the mapped area
 
@@ -679,10 +681,6 @@
 - **Name:** Jinlo fields
 - **Location:** Northeast cultivated terraces below Gno Dao Cradle.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Bucket; Socks
-- **Factory Exports:** None
-- **Non-Factory Imports:** Rake; seed grain
-- **Non-Factory Exports:** terrace rice; wildflower seeds
 - **About:** Golden fields ripple along mountain terraces where tiny owl creatures nest in the stone walls.  Green terraces descend the highland slopes beside stone irrigation channels and little shrines.  Goatfolk porters, gnome gardeners, and lamia herbalists share the work, while children leave seeds for the visiting Bloomlets.  Small wind chimes hang between the terraces, and their sound carries down the valley whenever the mountain breeze moves through the rice.
 - **Major Facts:** Families ring little handbells at sunrise to keep wandering goats out of the crops.  The goats learned to ring back.  Mountain springs feed the terraces before joining the Steam Stream.  Harvest rice reaches Twinshift by mule, and special herbs travel to Glowrock Retreat.  A brass plaque honors the goat who rescued the seed stock from a runaway cart.
 - **Flora:** Ironfern, crystal lichen
@@ -694,10 +692,6 @@
 - **Name:** Crystals on the Flats
 - **Location:** Eastern mineral plain between the mountains and the eastern shore.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Diamond Pickaxe; Gloves
-- **Factory Exports:** None
-- **Non-Factory Imports:** Lantern Fuel; water carts
-- **Non-Factory Exports:** raw crystal; mirror sand
 - **About:** Glittering crystal spires sprout from a wide salt flat.  They sparkle prettily and crunch loudly under boots.  Crystal spires ring softly in the wind across a pale mineral plain.  Friendly golem surveyors show visitors safe routes, and miners gather loose shards while protecting the oldest formations.  The glittering landscape changes color from violet to pale gold through the day, making it a favorite subject for patient visiting artists.
 - **Major Facts:** Reflections sometimes look a moment ahead of their owners.  Miners insist it is only the sun playing tricks.  Sunrise reflections sometimes appear to move ahead of their owners, a mystery studied at Stellar Review.  The loose crystal goes to Cogbend Hold for careful cutting.  Stories claim an underground bell field answers the Ancient Device, though no expedition has verified it.
 - **Flora:** Crystal lichen, glasswort
@@ -918,10 +912,6 @@
 - **Name:** Anterpiller's Mound
 - **Location:** Southern forest edge where Slanic rises into hills.
 - **Region:** Slanic.
-- **Factory Imports:** Microscope; Potted Plant; Jar
-- **Factory Exports:** None
-- **Non-Factory Imports:** leaf baskets
-- **Non-Factory Exports:** silk thread; pressed leaves
 - **About:** An enormous mound of leaves and earth shelters giant fuzzy caterpillars.  Their tunnels look surprisingly tidy.  A forest hill rises from Slanic's drier edge, riddled with tidy tunnels made by giant, wonderfully fuzzy caterpillars.  The little caretakers have built twig bridges and soft-leaf nests so the animals can crawl without trampling visitors.  Some caterpillars wear hats woven by fairy children from Fairy Fen.
 - **Major Facts:** The caterpillars build little leaf hats in spring.  Rangers ask visitors not to applaud during molting season.  In spring the caterpillars shed bright silk that Mycelia's weavers collect only after it has fallen.  The annual Hat Parade is held after molting season, when the caterpillars look their finest.  Rangers ask guests not to applaud while an animal is trying to change its skin, an etiquette rule that has also proved useful at the town's swimming pool.
 - **Flora:** Glowcap mushrooms, bog reeds
@@ -1358,4 +1348,19 @@
 - **Major Facts:** The caretaker insists the rock is the oldest pet in the region.  Its last recorded trick was 'stay,' performed flawlessly.  The caretaker insists it is the oldest pet in Gnohio and proudly records its every trick.  Its best performance is still 'stay,' executed without a single mistake.  Some scholars believe the stone came from the Crystals on the Flats, although the boulder has never answered their questions.  The annual birthday party attracts a crowd of visitors and exactly one cake the rock never eats.
 - **Flora:** Moss, woodland violets
 - **Fauna:** Pebblem, Glowlem
+- **Bounties:**
+
+## VIII. Landmarks added while mapping
+
+Places named while drawing the master map.  They sit outside Nathan's original 100-name pool.
+
+### Gnod Dam
+
+- **Name:** Gnod Dam
+- **Location:** South tip of the Inner Lake, where the Slanic river leaves through the spillway.
+- **Region:** Slanic, on the edge of Gnomerica.
+- **About:** A great curved stone wall holds back the Inner Lake, with a brass gear as big as a house turning in the middle.  When the gear turns, the spillway gates open and the Slanic river rushes out below.  Every gnome knows the name, and every gnome says it with a perfectly straight face.
+- **Major Facts:** Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became the Inner Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Who built the dam, when, and what was left behind in the drowned valley are open questions.  So is the lake's own name.  Named by Nathan on 2026-11-03; the lake is modeled on Lake Texoma and its Denison Dam.
+- **Flora:** River reeds, willow
+- **Fauna:** Jellybub, Shroomtle, Potamice
 - **Bounties:**

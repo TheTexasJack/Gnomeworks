@@ -1,6 +1,6 @@
 # Gnomadica master map, v0.2
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1, then v0.2 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.5.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1, then v0.2 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.6.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 

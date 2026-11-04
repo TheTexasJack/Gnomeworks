@@ -25,7 +25,7 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [tnp-corp.md](tnp-corp.md) | The North Pole Corp, the rival | Seeds from 2026-11-03 |
 | [regions.md](regions.md) | The regions the dock ships to | Waiting on maps |
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
-| [location-gazetteer-v0.5.md](location-gazetteer-v0.5.md) | 100 places; trades at 52 specific settlements and producers, with full lore, flora and fauna | **v0.5 review draft, awaiting Nathan and Alex** |
+| [location-gazetteer-v0.6.md](location-gazetteer-v0.6.md) | 100 places plus Gnod Dam; trades at 49 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.6 review draft, awaiting Nathan and Alex** |
 | [map-geography-audit-v0.1.md](map-geography-audit-v0.1.md) | 50 named terrain-bearing sites, 20 geographic systems, 11 relationship chains, and placement clues for all 100 locations | **First-pass map planning, not canon** |
 | [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
 | [map/](map/README.md) | Gnomadica master map v0.2 (Inner Lake behind Gnod Dam): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.2 draft map, awaiting canon review** |
@@ -35,8 +35,10 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 
 ## Rules for lore files
 
-- Gazetteer revisions use version numbers in filenames, such as `location-gazetteer-v0.5.md`.  Keep **only the latest version** in the working repository; delete all prior gazetteer files when publishing an updated one.  Older versions remain recoverable through Git history.
+- Gazetteer revisions use version numbers in filenames, such as `location-gazetteer-v0.6.md`.  Keep **only the latest version** in the working repository; delete all prior gazetteer files when publishing an updated one.  Older versions remain recoverable through Git history.
 
+- Claudia may update the gazetteer as the map and lore develop (Nathan, 2026-11-03), publishing each change as a new version.
+- **Trade rule:** imports and exports belong only to places that buy or make goods: cities and ports, villages, shops, and working mines or strongholds that produce.  Natural landmarks and POIs never trade.  Think about who would buy our junk.
 - Only what Nathan, Alex, or Mara have said or approved.  Open questions are marked as open questions.
 - **Lore publishing workflow:** Mara may commit clearly labeled working drafts directly to GitHub and then send the link to Nathan for review.  Publication is not canon approval.  Nathan decides what becomes canon, and Alex develops or approves the stories in her sections.  Proposed classifications, geography, character histories, and trade goods must remain labeled as drafts until approved.
 - Kid-friendly and in plain English.  Elana (Jarrett's daughter, 6) reads, and the entries should encourage her to read: short sentences, everyday words, keep it fun.
