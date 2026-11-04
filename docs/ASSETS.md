@@ -2,6 +2,8 @@
 
 All art except the junk emoji comes from Mara (Nathan's ChatGPT image generation).  Raw PNGs stay on Nathan's side; the repo holds compressed WebP made by `tools/art.py`.
 
+**Visual house style:** [Gnomeworks Brasswood Cartoon Art-Style Bible](ART-STYLE-BIBLE.md) and [frozen reference gallery](art-style/REFERENCE-GALLERY.md).  Those references are the style authority for new art.  This file remains the implementation pipeline and final-size reference.
+
 ## Folder map
 
 | Folder | Contents | Size in game files | Made with |

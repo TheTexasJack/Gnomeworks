@@ -8,6 +8,7 @@ Start here if you are picking this project up cold, whether you are a person or 
 | [ENVIRONMENT.md](ENVIRONMENT.md) | Where the code lives, the tools, the exact commands, and the quirks of the build environment |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | How the game is put together: files, the game loop, save data, the economy math, the views, sound |
 | [ASSETS.md](ASSETS.md) | The art pipeline from Mara's images to the game, folder map, naming, and the placement numbers |
+| [ART-STYLE-BIBLE.md](ART-STYLE-BIBLE.md) | **Canonical Gnomeworks Brasswood Cartoon visual language**, with frozen sample references and an asset-brief template |
 | [RECIPES.md](RECIPES.md) | Step-by-step: add an item, a monster, a gnome type, a hat, a sound; start a new season; ship a release |
 | [EVENTS.md](EVENTS.md) | Shinies, Wild Magic, Clone Attack: how each works, config keys, art, sound, playtest notes |
 | [DESIGNS.md](DESIGNS.md) | Features talked through but not built (Megagnome and the hunt, Packing Line, monster info card, Rogue), with what's decided and what's open |
