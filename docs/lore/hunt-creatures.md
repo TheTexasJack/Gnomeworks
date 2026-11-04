@@ -4,7 +4,7 @@ Alex's section: the creatures the Megagnome hunts with the crossbow, and why.
 
 ## Open questions
 
-- Why does the Megagnome hunt, and where?
+- Where does the Megagnome hunt?  (Why is settled: to eat.)
 - Why are there so many Banana Monsters?
 - Which region does each creature come from?
 
