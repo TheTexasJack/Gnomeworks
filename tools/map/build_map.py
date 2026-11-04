@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.6'
+VERSION = '0.7'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -157,7 +157,7 @@ ISLE_D = [(150, 790), (170, 780), (186, 800), (190, 850), (202, 900), (240, 930)
 ISLE_E = [(1395, 840), (1440, 820), (1490, 836), (1500, 880), (1486, 930), (1470, 980), (1456, 1030),
           (1440, 1066), (1424, 1040), (1418, 990), (1405, 940), (1390, 890)]
 
-# The Inner Lake is a reservoir: the gnomes dammed a river valley at Gnod Dam and the water
+# Innie Lake is a reservoir: the gnomes dammed a river valley at Gnod Dam and the water
 # climbed every creek, the way Lake Texoma fills the Red and Washita valleys (Nathan, 2026-11-03).
 # Each arm is (centerline, radius at head, radius at mouth).  The mask is grown, blurred, roughened
 # and contoured, so the shoreline gets long drowned arms and many small coves.
@@ -560,7 +560,7 @@ def build():
         add(f'<use href="#crystal" x="{p[0]:.1f}" y="{p[1]:.1f}" transform="rotate({rng.uniform(-20, 20):.0f} {p[0]:.1f} {p[1]:.1f})"/>')
     add('</g>')
 
-    # ---------------- the Inner Lake (reservoir behind Gnod Dam)
+    # ---------------- Innie Lake (reservoir behind Gnod Dam)
     ld = d_of(lake)
     add(f'<path d="{ld}" fill="url(#lakeGrad)"/>')
     add(f'<clipPath id="lakeclip"><path d="{ld}"/></clipPath>')
@@ -709,8 +709,7 @@ def build():
     for name, (x, y, rot, sz) in AREA_LABELS.items():
         water = name in ("River's Belt", 'Steam Stream')
         text(x, y, name, sz, fill='#2f5d73' if water else '#5a4a32', anchor='middle', style='italic', ls=1, rot=rot)
-    text(858, 798, 'the Inner Lake', 10.5, fill='#1f4d63', anchor='middle', style='italic', ls=1.5)
-    text(858, 809, '(name open)', 7.5, fill='#1f4d63', anchor='middle', style='italic')
+    text(858, 802, 'Innie Lake', 12, fill='#1f4d63', anchor='middle', style='italic', ls=2)
     text(560, 336, 'northern river', 7.5, fill='#2f5d73', anchor='middle', style='italic', rot=-8)
     text(470, 840, 'the Dry Ridge', 8.5, fill='#5a4a32', anchor='middle', style='italic', ls=1, rot=4)
     add('</g>')
@@ -1058,9 +1057,12 @@ if __name__ == '__main__':
                      C='Slaanilok (proposed)', D='unclaimed', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
-                        clue='The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, '
+                        clue='The great gnome dam at the south tip of Innie Lake.  The gnomes dammed a river valley here, '
                              'and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.',
-                        mentions='the Inner Lake; Slanic', status='proposed, not one of the 100 gazetteer entries')]
+                        mentions='Innie Lake; Slanic', status='proposed, not one of the 100 gazetteer entries')]
+                  + [dict(id='innie-lake', name='Innie Lake', type='natural', region='Slanic', x=858, y=798, tier=1,
+                          clue='The big reservoir behind Gnod Dam, filling a drowned river valley with long arms and small coves.',
+                          mentions='Gnod Dam; Steam Stream; Slanic', status='named by Nathan')]
                   + [dict(id=slug(n), name=n, type=a['type'], region=a['region'], x=a['x'], y=a['y'], tier=a['tier'],
                           clue=a['clue'], mentions=a['region'], status='placed by Nathan') for n, a in ADDED_PLACES.items()]
                   + [dict(id=uid, name=f'{reg} {uid.rsplit("-", 1)[1]} (name open)', type='city', region=reg, x=x, y=y, tier=2,

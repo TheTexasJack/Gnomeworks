@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.11 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.12 Working Draft)
 
 
 ## How to read this draft
@@ -40,7 +40,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **6 places**
+- VIII. Places added while mapping (outside the 100-name pool): **7 places**
 
 ## I. Major regions and the mapped area
 
@@ -1359,10 +1359,21 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 ### Gnod Dam
 
 - **Name:** Gnod Dam
-- **Location:** South tip of the Inner Lake, where the Slanic river leaves through the spillway.
+- **Location:** South tip of Innie Lake, where the Slanic river leaves through the spillway.
 - **Region:** Slanic, on the edge of Gnomerica.
-- **About:** A great curved stone wall holds back the Inner Lake, with a brass gear as big as a house turning in the middle.  When the gear turns, the spillway gates open and the Slanic river rushes out below.  Every gnome knows the name, and every gnome says it with a perfectly straight face.
-- **Major Facts:** Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became the Inner Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Who built the dam, when, and what was left behind in the drowned valley are open questions.  So is the lake's own name.  Named by Nathan on 2026-11-03; the lake is modeled on Lake Texoma and its Denison Dam.
+- **About:** A great curved stone wall holds back Innie Lake, with a brass gear as big as a house turning in the middle.  When the gear turns, the spillway gates open and the Slanic river rushes out below.  Every gnome knows the name, and every gnome says it with a perfectly straight face.
+- **Major Facts:** Gnomes built the dam across a river valley, and the water climbed every creek behind it until the valley became Innie Lake.  The old riverbed still runs along the lake bottom, and an old road runs down into the water from the west.  Who built the dam, when, and what was left behind in the drowned valley are open questions.  Named by Nathan on 2026-11-03; the lake is modeled on Lake Texoma and its Denison Dam.
+- **Flora:** River reeds, willow
+- **Fauna:** Jellybub, Shroomtle, Potamice
+- **Bounties:**
+
+### Innie Lake
+
+- **Name:** Innie Lake
+- **Location:** South-central main island, behind Gnod Dam, between Pulley Junction and Gloopenstein.
+- **Region:** Slanic, on the edge of Gnomerica.
+- **About:** A big blue lake with long arms that reach up every valley, like fingers on a hand.  Little boats fish its coves, and warm water from Steam Stream makes its north arm steam on cold mornings.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Innie Lake is a reservoir: when the gnomes built Gnod Dam, the water filled a whole river valley and climbed every creek, the way Lake Texoma fills the Red River valley.  The old riverbed still runs along the bottom, and an old road runs down into the water from the west.  Steam Stream, the Ratios creek, and an east creek feed it, and the Slanic river leaves through the dam's spillway.
 - **Flora:** River reeds, willow
 - **Fauna:** Jellybub, Shroomtle, Potamice
 - **Bounties:**

@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.6",
+ "version": "0.7",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -1270,9 +1270,21 @@
    "x": 860.2,
    "y": 867.1,
    "tier": 1,
-   "clue": "The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.",
-   "mentions": "the Inner Lake; Slanic",
+   "clue": "The great gnome dam at the south tip of Innie Lake.  The gnomes dammed a river valley here, and the water climbed every creek to make the lake.  The Slanic river leaves from its spillway.",
+   "mentions": "Innie Lake; Slanic",
    "status": "proposed, not one of the 100 gazetteer entries"
+  },
+  {
+   "id": "innie-lake",
+   "name": "Innie Lake",
+   "type": "natural",
+   "region": "Slanic",
+   "x": 858,
+   "y": 798,
+   "tier": 1,
+   "clue": "The big reservoir behind Gnod Dam, filling a drowned river valley with long arms and small coves.",
+   "mentions": "Gnod Dam; Steam Stream; Slanic",
+   "status": "named by Nathan"
   },
   {
    "id": "legipt",
