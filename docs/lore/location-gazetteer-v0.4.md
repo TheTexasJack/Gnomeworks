@@ -1166,8 +1166,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** cool water
 - **Non-Factory Exports:** red stone; old warning signs
-- **About:** A dramatic dungeon full of doors that slam for no reason.  Even the echoes sound irritated.
-- **Major Facts:** An explorer discovered that the safest way through is to say 'please.'  The dungeon has never apologized back.
+- **About:** A dramatic dungeon full of doors that slam for no reason.  Even the echoes sound irritated.  Red stone halls beneath the desert look fierce, with grumbling vents and doors that slam whenever someone forgets their manners.  A retired orc counselor now guides visiting adventurers through the place, teaching breathing tricks that help even an irritated fire elemental settle down.  The angriest room contains a surprisingly comfortable reading chair.
+- **Major Facts:** An explorer discovered that the safest way through is to say 'please.'  The dungeon has never apologized back.  Local guides from Sockarillo discovered that saying 'please' opens the stiffest doors.  An old plaque identifies the chambers as a training ground for guards learning to keep calm during a siege.  The annual Quietest Shout Competition rewards anyone who can explain a problem without making the walls rattle.  The dungeon still owes several visitors an apology.
 - **Flora:** Ashgrass, red thistle
 - **Fauna:** Doomander, Snarlfox
 - **Bounties:**
@@ -1181,8 +1181,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** seed bags
 - **Non-Factory Exports:** giant acorns; carved nutshell tokens
-- **About:** Tiny tunnels wind through an enormous old tree stump.  Its smallest doors hide surprisingly roomy chambers.
-- **Major Facts:** Squirrels have stored nuts here for generations.  The largest nut is guarded by three extremely serious chipmunks.
+- **About:** Tiny tunnels wind through an enormous old tree stump.  Its smallest doors hide surprisingly roomy chambers.  A warren of tiny doors curls through the roots of an enormous ancient stump beneath Anterpiller's Mound.  Squirrel families run storerooms there, and a kindly mouse-sized clockmaker has built little elevators from walnut shells.  Big adventurers must leave their backpacks outside and remember that small folk have perfectly good locks.
+- **Major Facts:** Squirrels have stored nuts here for generations.  The largest nut is guarded by three extremely serious chipmunks.  Three serious chipmunks guard the legendary giant nut, a relic that has been passed through generations of woodland keepers.  The Nut Council meets twice a year to decide which acorns should be planted and which may become lunch.  One lost blueprint suggests the tunnels connect to the Cave of the Gnut, but the squirrel archivist will only release it to someone who brings a very good pencil.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -1196,8 +1196,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** diving rope
 - **Non-Factory Exports:** sea glass; ancient ship bells
-- **About:** Below the waves, slippery steps lead into rooms built before the present harbors.  Fish swim through the doorways as if they own the place.
-- **Major Facts:** At low tide, one bell can be heard from shore.  No one knows whether it rings underwater or in a very wet imagination.
+- **About:** Below the waves, slippery steps lead into rooms built before the present harbors.  Fish swim through the doorways as if they own the place.  Stone stairs descend beneath the outer reefs into a drowned hall where fish drift through carved doorways.  Merfolk guides and lamia divers maintain a safe visitor line along the upper chambers, but beyond it lie rooms untouched since the old sea roads vanished.  Every surface glitters with salt and ancient shells.
+- **Major Facts:** At low tide, one bell can be heard from shore.  No one knows whether it rings underwater or in a very wet imagination.  A bronze bell rings underwater at low tide and can sometimes be heard from Port Gnasher.  The harbor pilots of Slaanilok disagree about whether it warns of storms or announces a long-forgotten dinner hour.  A merfolk historian keeps a list of inscriptions rescued from fallen walls, and visitors are warned that taking souvenirs may loosen the delicate masonry.
 - **Flora:** Sea kelp, cave algae
 - **Fauna:** Jellybub, Gloopbat
 - **Bounties:**
@@ -1211,8 +1211,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** soft shoes
 - **Non-Factory Exports:** riddle stones; silent charms
-- **About:** A quiet underground maze where every voice becomes a whisper.  It is a favorite destination for very noisy adventurers who need a rest.
-- **Major Facts:** A sign over the door says 'Shhh.'  The sign is the only thing anyone agrees the dungeon has said.
+- **About:** A quiet underground maze where every voice becomes a whisper.  It is a favorite destination for very noisy adventurers who need a rest.  Mossy steps lead under the Woods of the Elder to a maze where every voice becomes a whisper.  Gnome rangers bring chatty school groups here to learn how to listen to creaking trees and quiet animals.  The entrance is tended by a gentle ghost librarian who lends lanterns and asks borrowers to bring them back.
+- **Major Facts:** A sign over the door says 'Shhh.'  The sign is the only thing anyone agrees the dungeon has said.  The door bears the ancient inscription 'Shhh,' which has inspired decades of very serious academic debate.  The Woodland Council protects the deeper chambers from treasure hunters, though it sometimes permits supervised expeditions to inspect old carvings.  A Hootgear family nests by the third passage, and even the ghost librarian lowers her voice near their eggs.
 - **Flora:** Hush moss, black fern
 - **Fauna:** Scowl, Shadooze
 - **Bounties:**
@@ -1226,8 +1226,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** winter rope
 - **Non-Factory Exports:** hidden maps; sealed letters
-- **About:** Narrow tunnels run beneath frozen storage sheds.  Nobody is sure whether the old passage was used by smugglers or very shy mail carriers.
-- **Major Facts:** One tunnel ends under a perfectly ordinary rug.  There are rumors of suspicious shipping documents tucked behind the stones.
+- **About:** Narrow tunnels run beneath frozen storage sheds.  Nobody is sure whether the old passage was used by smugglers or very shy mail carriers.  A stairway beneath Gnufoundland's storage sheds leads into dry tunnels, hidden lift shafts, and rooms behind walls that open only when the floorboards are pressed just so.  Friendly werewolf night guards inspect the accessible sections, while curious gnomish historians study the old freight marks.  A rug at the far end is suspiciously ordinary.
+- **Major Facts:** One tunnel ends under a perfectly ordinary rug.  There are rumors of suspicious shipping documents tucked behind the stones.  Some tunnels may once have served smugglers, but several records suggest they were emergency routes for winter medicine and food.  Paperwork found behind a stone wall carries an unfamiliar snowflake stamp that resembles certain suspicious dock labels.  Gnyannis and Werewolf London jointly supervise any further investigation, mostly to ensure nobody gets lost under the bakery again.
 - **Flora:** Frost lichen, cave moss
 - **Fauna:** Vampuff, Glowbat
 - **Bounties:**
@@ -1241,8 +1241,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** lantern oil
 - **Non-Factory Exports:** odd nutshell carvings; carved wooden charms
-- **About:** Bent branches and squeaky acorns make this grove seem spooky after sundown.  By daylight, it is mostly squirrels.
-- **Major Facts:** The grove is not confirmed to be linked to Cave of the Gnut.  Some nights, the acorns spell messages that disappear by morning.
+- **About:** Bent branches and squeaky acorns make this grove seem spooky after sundown.  By daylight, it is mostly squirrels.  Bent nut trees surround a ruined watchpost where branches squeak even when the air is still.  By day the grove is full of ordinary squirrels, curious Potamice, and cheerful children gathering fallen shells.  After dusk, the shadows turn long enough to give the place its rather unfair reputation.
+- **Major Facts:** The grove is not confirmed to be linked to Cave of the Gnut.  Some nights, the acorns spell messages that disappear by morning.  An old map marks a trail toward Cave of the Gnut, but the letters have been chewed from the page.  Overnight, the acorns sometimes arrange themselves into messages that disappear before breakfast.  A local hexamouse keeper suspects the animals are communicating, while a nervous surveyor claims the grove is correcting his spelling.
 - **Flora:** Nut trees, thornbushes
 - **Fauna:** Hexamice, Scowl
 - **Bounties:**
@@ -1256,8 +1256,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** hinges
 - **Non-Factory Exports:** training badges; wooden shields
-- **About:** A small stone fortress built to teach new guards how to defend a gate.  The doors are deliberately easy to open.
-- **Major Facts:** Every trainee has 'captured' the fortress at least once.  Its proudest defender is a cardboard knight called Sir Flops.
+- **About:** A small stone fortress built to teach new guards how to defend a gate.  The doors are deliberately easy to open.  This small fort sits beside the lower Cradle road and invites young guards to practice tactics without risking the neighbors' windows.  Wooden doors, harmless spring traps, and an exceedingly polite ogre drill instructor make it the favorite first stop for academy trainees.  It is almost impossible to leave without feeling a little proud.
+- **Major Facts:** Every trainee has 'captured' the fortress at least once.  Its proudest defender is a cardboard knight called Sir Flops.  Every recruit has captured the fortress at least once, including the cook, who defeated the defenders with a tray of biscuits.  Its greatest defender is a cardboard knight called Sir Flops, who has yet to lose a debate because he never speaks.  The fort forms the first lesson on the route leading to Fortress of Moderation and Fortress of Impossibility.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -1271,8 +1271,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** climbing ropes
 - **Non-Factory Exports:** ancient keys; high-altitude maps
-- **About:** This fortress clings to a cliff that seems to have no path up.  Windows and stairways point in confusing directions.
-- **Major Facts:** No expedition has reached the central tower.  A tiny flag on its roof changes color every year.
+- **About:** This fortress clings to a cliff that seems to have no path up.  Windows and stairways point in confusing directions.  High above the mountain saddle stands a fortress whose staircases seem to lead into clouds and whose towers do not agree about their own height.  Goatfolk climbers maintain the lower approach, and a giant architect visits each summer to measure the same wall with increasing frustration.  The view is breathtaking, if anyone ever reaches the roof.
+- **Major Facts:** No expedition has reached the central tower.  A tiny flag on its roof changes color every year.  The final fortress in the old training route was designed to test patience, cooperation, and the ability to ask for help.  Its central tower remains unexplored, though the roof flag changes color every year.  An elderly lamia engineer believes the walls are moved by giant hidden springs; a mountain ranger thinks someone simply changes the flag while everybody is looking down.
 - **Flora:** Frost heather, mountain lichen
 - **Fauna:** Grimlem, Fluffbat
 - **Bounties:**
@@ -1286,8 +1286,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** building timber
 - **Non-Factory Exports:** balanced scales; guide badges
-- **About:** A sensible little stronghold where guards insist on discussing every decision calmly.  The bridge is neither especially high nor especially low.
-- **Major Facts:** Its famous gate opens halfway until visitors promise to be reasonable.  The official motto is 'Let's not overdo it.'
+- **About:** A sensible little stronghold where guards insist on discussing every decision calmly.  The bridge is neither especially high nor especially low.  Halfway between the easy fort and the impossible one stands a sturdy bridge-house where every gate opens at a sensible speed.  Its guards are famous for serving tea before discussing disputes, and its resident minotaur mediator has settled more arguments than the regional courts.  Travelers who boast too loudly are politely invited to carry a bucket.
+- **Major Facts:** Its famous gate opens halfway until visitors promise to be reasonable.  The official motto is 'Let's not overdo it.'  The old motto reads 'Let's not overdo it,' and the gate is set to open halfway until visitors explain their purpose.  Academy trainees come here to practice compromise before attempting the mountain's final fortress.  During the annual Two Cups Festival, everyone is offered exactly enough tea and may request more without shame.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -1301,8 +1301,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** bridge boards
 - **Non-Factory Exports:** stone carvings; giant cooking pots
-- **About:** Huge stone steps climb to an old fortress built for folk far taller than gnomes.  Smaller visitors use the side door.
-- **Major Facts:** The last known ogre keeper left detailed recipes on the wall.  The smallest serving feeds a whole village.
+- **About:** Huge stone steps climb to an old fortress built for folk far taller than gnomes.  Smaller visitors use the side door.  Huge stone steps and great vaulted kitchens mark a fortress built by generations of ogre families.  Today it is a mountain hostel where travelers of every size are welcome, and a smiling ogre chef named Nana Brum cooks enough supper to feed an entire valley.  The little side door was added as a courtesy to visiting gnomes.
+- **Major Facts:** The last known ogre keeper left detailed recipes on the wall.  The smallest serving feeds a whole village.  Nana Brum inherited the fortress from her grandmother, who recorded family recipes directly on the walls.  The smallest serving still fills a village cauldron.  The Hold shelters rescue parties during Gnufoundland's winter storms, and its ogre carpenters maintain the bridge to Giantation.  Its kitchens have never turned away a cold traveler who asked politely.
 - **Flora:** Salt pine, frost moss
 - **Fauna:** Fluffbat, Hootgear, Glowbat
 - **Bounties:**
@@ -1316,8 +1316,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** heavy ropes
 - **Non-Factory Exports:** giant woven cloth; big stone wheels
-- **About:** A broad abandoned worksite where everything is built on a huge scale.  A single chair could seat a family of gnomes.
-- **Major Facts:** Nobody knows why the giants left.  Their largest wheel has a note scratched into it: 'Back after lunch.'
+- **About:** A broad abandoned worksite where everything is built on a huge scale.  A single chair could seat a family of gnomes.  Across a high northern plateau stand enormous benches, windmills, and workshops built to a scale that makes a gnome feel like a crumb.  Giants once built bridges and weather towers here, and several families still return for the summer maintenance season.  Visitors leave their shoes by a doorway large enough for a locomotive.
+- **Major Facts:** Nobody knows why the giants left.  Their largest wheel has a note scratched into it: 'Back after lunch.'  Nobody is quite sure why the old permanent work crews departed, but an unfinished wheel bears a note reading 'Back after lunch.'  Giant descendants from Ogre's Hold have been collecting the old tools to preserve their craft.  A proposed expedition may discover whether the workers moved to the mainland or followed some older road beyond the map.  The local children hope the answer involves cake.
 - **Flora:** Salt pine, frost moss
 - **Fauna:** Fluffbat, Hootgear, Glowbat
 - **Bounties:**
@@ -1331,8 +1331,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** safety ropes
 - **Non-Factory Exports:** colored stone; wax echo cylinders
-- **About:** A tremendous hole in the ground with a very small wooden fence.  It is deeper than anyone has measured properly.
-- **Major Facts:** Visitors are forbidden to throw rocks into it.  The last rock took so long to land that people went home first.
+- **About:** A tremendous hole in the ground with a very small wooden fence.  It is deeper than anyone has measured properly.  A tremendous pit yawns beside the crystal flats, surrounded by a fence that looks as if it was built from leftover toothpicks.  Friendly golem surveyors maintain the viewing platform, while miners debate whether the hole is a collapsed cavern, an ancient quarry, or the work of one very impatient giant.  Nobody is permitted to throw in a rock.
+- **Major Facts:** Visitors are forbidden to throw rocks into it.  The last rock took so long to land that people went home first.  The last stone dropped into the hole took so long to make a sound that the listeners went home to supper.  The Crafter's Mines keep measuring the shaft, but their ropes always return with a slightly different length.  Children have submitted names for the pit's mysterious bottom, including 'Tuesday' and 'Definitely Not a Basement.'  No explorer has confirmed either.
 - **Flora:** Ironfern, pit moss
 - **Fauna:** Pebblem, Goolem
 - **Bounties:**
@@ -1348,8 +1348,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** fresh ale
 - **Non-Factory Exports:** packed lunches; oak barrel hoops
-- **About:** A lively public house where factory crews trade stories after their shifts.  Its barrels are stronger than the furniture.
-- **Major Facts:** The owner keeps a chalkboard of unusual things found in lunch boxes.  The reigning champion is an unopened toolbox.
+- **About:** A lively public house where factory crews trade stories after their shifts.  Its barrels are stronger than the furniture.  Factory crews gather at this warm oak-and-brass public house after shifts, where the taps hiss, the lamps glow, and the owner can recognize a customer by the sound of their boots.  Gnome machinists share tables with ogre haulers, lamia bookkeepers, and fairy travelers, provided everyone respects the house rule against stealing lunches.
+- **Major Facts:** The owner keeps a chalkboard of unusual things found in lunch boxes.  The reigning champion is an unopened toolbox.  The chalkboard of strange lunchbox discoveries includes an unopened toolbox, a singing potato, and a perfectly folded traffic citation.  The owner occasionally hosts old veterans who remember the Red Grass Revolution, though the evening usually ends with somebody arguing about soup.  A miniature cog above the door spins whenever the factory's lunch whistle sounds, and has not stopped since last Thursday.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1363,8 +1363,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** grease
 - **Non-Factory Exports:** gear fittings; repair kits
-- **About:** This friendly repair stall fixes carts, clocks, and the occasional clock-shaped cart.  The mechanics love a difficult problem.
-- **Major Facts:** Its motto is 'We can probably fix that.'  The word 'probably' was added after the flying kettle incident.
+- **About:** This friendly repair stall fixes carts, clocks, and the occasional clock-shaped cart.  The mechanics love a difficult problem.  A crowded repair market near Pulley Junction, its storefronts are decorated with dangling springs, tiny axles, and the occasional clock-shaped cart.  Mechanics of every kind come here to trade difficult repairs for harder questions, and a lamia apprentice named Pip has become famous for fixing watches without uncoiling from her chair.
+- **Major Facts:** Its motto is 'We can probably fix that.'  The word 'probably' was added after the flying kettle incident.  The motto 'We can probably fix that' was revised after the Flying Kettle Incident sent a teapot over three rooftops.  Cogsworth ships precision parts here, and Brassin sends replacement bell fittings.  Apprentices receive a ceremonial bent nail on their first day, as a reminder that confidence is no substitute for testing.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1378,8 +1378,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** sandpaper
 - **Non-Factory Exports:** polished tools; wooden signs
-- **About:** A workshop that repairs tools and teaches safe sharpening.  Everyone must cool off before touching the grindstone.
-- **Major Facts:** A sign over the door says 'Count to ten.'  The owner counts to eleven when particularly annoyed.
+- **About:** A workshop that repairs tools and teaches safe sharpening.  Everyone must cool off before touching the grindstone.  Brassin's most orderly workshop teaches sharpening, safe machine operation, and the art of leaving an argument outside the door.  Its owner is a friendly minotaur whose enormous horns have never once scratched the low ceiling, an achievement he mentions at every opportunity.  Visitors come to repair tools and occasionally their tempers.
+- **Major Facts:** A sign over the door says 'Count to ten.'  The owner counts to eleven when particularly annoyed.  The famous sign says 'Count to ten,' but the owner counts to eleven during especially difficult jobs.  The workshop exchanges replacement blades with Gnome'n'Pinion and sends its sharpest apprentices to maintain ferry tools in Port Gnasher.  A yearly competition rewards the quietest successful grindstone operator, a title once won by a sleeping dwarf.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -1393,8 +1393,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** clean linen
 - **Non-Factory Exports:** bath soaps; comedy postcards
-- **About:** A bathhouse and snack bar with a very unfortunate name.  The owners insist it makes perfect sense when you see the upstairs pool.
-- **Major Facts:** Its most popular souvenir is a tiny golden plunger.  The town has never recovered from the grand opening ribbon-cutting mishap.
+- **About:** A bathhouse and snack bar with a very unfortunate name.  The owners insist it makes perfect sense when you see the upstairs pool.  A canal-side bathhouse and snack bar in Gloopenstein, this curious establishment has an upstairs pool and a downstairs bakery that keep confusing new customers.  Fairies tend the small tubs, ogres maintain the large ones, and a lamia lifeguard watches the twisting stairwell.  Everyone is welcome as long as they wash the mud off first.
+- **Major Facts:** Its most popular souvenir is a tiny golden plunger.  The town has never recovered from the grand opening ribbon-cutting mishap.  The opening ceremony became legendary when the ribbon-cutting scissors fell into the pool and had to be rescued with a plunger.  The golden plunger souvenir is still the best-selling item.  An old laundry chute connects to the canal, although the staff have wisely blocked it after a towel escaped to Mycelia.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -1408,8 +1408,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** rubber sheets
 - **Non-Factory Exports:** toy frogs; squeaky boots
-- **About:** Visitors can watch a mechanical frog leap across the pond and usually splash everybody.  Nobody is completely certain it is mechanical.
-- **Major Facts:** The frog has won the yearly jumping contest six times.  Officials continue debating whether it is eligible.
+- **About:** Visitors can watch a mechanical frog leap across the pond and usually splash everybody.  Nobody is completely certain it is mechanical.  Beside the Pixie Puddles stands an amusement pier where a great rubber frog bounces across the water and splashes everyone within reach.  Fairy mechanics swear the springs are completely safe, while the local gnome inspector insists the frog is probably alive and simply pretending to be machinery.
+- **Major Facts:** The frog has won the yearly jumping contest six times.  Officials continue debating whether it is eligible.  The frog has won six official jumping contests, and the judges continue arguing whether to award it a medal or a veterinary appointment.  The fairy engineers who built the pier also maintain the lantern walk to Fairy Fen.  Children are invited to sketch the frog, though most pictures show only an enormous splash.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -1423,8 +1423,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** slide wax
 - **Non-Factory Exports:** river postcards; woven mats
-- **About:** A twisting water-slide park inspired by the local Cogsnakes.  Its slides are fun, fast, and frequently full of squeals.
-- **Major Facts:** The longest slide is called The Very Long Noodle.  Every guest gets a free towel if they can find the exit.
+- **About:** A twisting water-slide park inspired by the local Cogsnakes.  Its slides are fun, fast, and frequently full of squeals.  A cheerful river park beside Port Gnaru, its looping brass slides twist over little pools while curious Cogsnakes watch from safe shady rocks.  A lamia safety officer named Miss Slinky teaches children the difference between a real snake, a mechanical slide, and an unexpectedly tangled scarf.
+- **Major Facts:** The longest slide is called The Very Long Noodle.  Every guest gets a free towel if they can find the exit.  The longest slide is called The Very Long Noodle.  A free towel awaits anyone who finds the exit without circling back to the snack stand.  The park's founding family gives its spring festival earnings to River's Belt rescue crews, and the Tiny Monsters have their own quiet resting place away from the crowds.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -1438,8 +1438,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** weather flags
 - **Non-Factory Exports:** weather charts; printed travel guides
-- **About:** A cheerful forecast shop famous for predictions that are usually close enough.  Its signs promise 'A Pretty Good Chance of Sunshine.'
-- **Major Facts:** The owner once predicted rain during a drought and was right for eleven seconds.  That remains the official success story.
+- **About:** A cheerful forecast shop famous for predictions that are usually close enough.  Its signs promise 'A Pretty Good Chance of Sunshine.'  Outside Sockarillo, a weather station occupies an old windmill with a wobbling barometer and an enormous windsock.  Its cheerful owner predicts the next day's weather with a mixture of careful observation and complete confidence.  Local caravan guides check the reports, then look out the window anyway.
+- **Major Facts:** The owner once predicted rain during a drought and was right for eleven seconds.  That remains the official success story.  The best-known forecast predicted eleven seconds of rain during a drought and was precisely correct.  The town keeps the signed report framed above the front desk.  Weather charts travel to Flybar's glider pilots and the Blue Stone Wellkeepers, who appreciate that the station admits when it has made a mistake.
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
 - **Bounties:**
@@ -1453,8 +1453,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** engine grease
 - **Non-Factory Exports:** patched wagons; spare wheel hubs
-- **About:** A repair garage that proudly tackles things no one else will touch.  Its name is both a warning and a promise.
-- **Major Facts:** The shop keeps a shelf of parts labeled 'Definitely Important.'  No one remembers which machine they fit.
+- **About:** A repair garage that proudly tackles things no one else will touch.  Its name is both a warning and a promise.  The garage on Gnohio's back road repairs almost anything with wheels, springs, or an unreasonable number of screws.  Its proprietor, a jovial goblin named Brokit, refuses to throw away a part unless he has failed to find a use for it three separate times.  A lamia mechanic handles the delicate engine work.
+- **Major Facts:** The shop keeps a shelf of parts labeled 'Definitely Important.'  No one remembers which machine they fit.  A shelf labeled 'Definitely Important' holds pieces from machines nobody can identify.  Backwater Cog sends old boat fittings here for salvage, and the garage once rebuilt a delivery cart around a wheel found at Broken Wheel.  Brokit swears the cart drives straighter now, although the driver disagrees.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -1468,8 +1468,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** firewood
 - **Non-Factory Exports:** trail snacks; hand-drawn maps
-- **About:** Bob sells tea, soup, and directions from a hut with a crooked chimney.  He seems to know every trail.
-- **Major Facts:** No one agrees whether Bob is one person or a family tradition.  Bob never answers because he is usually making tea.
+- **About:** Bob sells tea, soup, and directions from a hut with a crooked chimney.  He seems to know every trail.  Below Woods of the Elder sits a crooked little hut where Bob serves tea, soup, and directions to almost anyone who knocks.  Bob seems to know every trail, every visitor's favorite biscuit, and exactly how much honey to put in a dryad's tea.  Nobody has ever seen him hurry.
+- **Major Facts:** No one agrees whether Bob is one person or a family tradition.  Bob never answers because he is usually making tea.  Some locals claim Bob is a single very old gnome; others say the name has been passed down through a family of identical hat-wearers.  The Woodland Council meets here after long walks, and rangers store spare blankets beneath the floor.  Bob declines every question about his age by offering a refill.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1483,8 +1483,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Telescope Parts; star charts
 - **Non-Factory Exports:** bound sky logs; meteor sketches
-- **About:** A tiny observatory welcomes anyone interested in the night sky.  Its guestbook is full of excited drawings.
-- **Major Facts:** The astronomer gives every clear night five stars.  Cloudy nights receive a thoughtful 'could improve.'
+- **About:** A tiny observatory welcomes anyone interested in the night sky.  Its guestbook is full of excited drawings.  A little observatory above Sky Dream welcomes night travelers with telescopes, warm cocoa, and a guestbook full of drawings.  Its astronomer, a lamia scholar named Professor Celestia, can aim three instruments at once and still find time to correct the visitors' spelling of 'constellation.'
+- **Major Facts:** The astronomer gives every clear night five stars.  Cloudy nights receive a thoughtful 'could improve.'  Every clear night receives five stars on the observatory's review board.  Cloudy nights are given a thoughtful 'could improve.'  The professor compares unusual reflections from Crystals on the Flats with the springtime flash from the Ancient Device.  Her notes are carefully catalogued, and the final page of one journal remains mysteriously blank.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -1498,8 +1498,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** drawing paper
 - **Non-Factory Exports:** game boards; picture books
-- **About:** Friends gather here to draw, tell stories, and play tabletop games.  Every table has at least one mystery pencil.
-- **Major Facts:** The shop's first rule is 'Everybody gets a turn.'  A six-year-old once invented a game nobody could finish, and everyone still had fun.
+- **About:** Friends gather here to draw, tell stories, and play tabletop games.  Every table has at least one mystery pencil.  A welcoming art-and-games shop in Cogington, Dice and Doodles fills its walls with children's drawings, colorful game boards, and little shelves of fantasy stories.  Gnomes, werewolves, fairies, and lamia students share tables under the cheerful rule that everybody gets a turn.
+- **Major Facts:** The shop's first rule is 'Everybody gets a turn.'  A six-year-old once invented a game nobody could finish, and everyone still had fun.  A six-year-old once invented a game with no ending, and the regulars still play it whenever a friend visits from afar.  The owner organizes free story nights for the workshop apprentices and sends decorated maps to explorers heading for Woods of the Elder.  The same mystery pencil has been found under every table for three years.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1515,8 +1515,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** wheel timber
 - **Non-Factory Exports:** scrap iron; printed travel storybooks
-- **About:** A giant broken wagon wheel stands beside the road as a landmark.  Nobody moves it because everyone uses it for directions.
-- **Major Facts:** Travelers leave notes in the spokes.  An ancient sign promises repairs 'tomorrow,' but nobody knows which tomorrow.
+- **About:** A giant broken wagon wheel stands beside the road as a landmark.  Nobody moves it because everyone uses it for directions.  A giant wagon wheel stands beside the road between Pulley Junction and Crossroads, broken in a way that makes a surprisingly convenient noticeboard.  Travelers tuck messages between its spokes, and passing children count the spring flowers growing through the old rim.
+- **Major Facts:** Travelers leave notes in the spokes.  An ancient sign promises repairs 'tomorrow,' but nobody knows which tomorrow.  A faded sign promises repairs 'tomorrow,' with no indication of which tomorrow was intended.  Brokit Fixit once offered to repair the monument but was politely refused by three villages who use it for directions.  The lost wheel is said to have belonged to a giant's wedding carriage, though nobody has found the matching axle.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1530,8 +1530,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** name plaques
 - **Non-Factory Exports:** hand-painted signs; tourist sketches
-- **About:** This square has been renamed so many times that every sign gives a different answer.  Locals use all the names and understand each other perfectly.
-- **Major Facts:** A debate about the correct name has continued for ninety years.  The official minutes are kept in separate folders for each spelling.
+- **About:** This square has been renamed so many times that every sign gives a different answer.  Locals use all the names and understand each other perfectly.  This busy little square sits where three district boundaries meet and has been renamed so often that every shop sign uses a different version.  Gnomes call it one thing, the lamia merchants another, and the local fairy schoolchildren have proposed fourteen more.  Everyone knows exactly where to meet, which makes the confusion almost impressive.
+- **Major Facts:** A debate about the correct name has continued for ninety years.  The official minutes are kept in separate folders for each spelling.  The official debate over the proper name has continued for ninety years, and the town clerk keeps a separate folder for every spelling.  The local sign painter claims this is excellent for business.  During the annual Naming Fair, children are invited to invent a new name that will be officially considered and almost certainly ignored.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1545,8 +1545,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** flower wreaths
 - **Non-Factory Exports:** pebble carvings; printed songbooks
-- **About:** A round old boulder sits in a tiny fenced garden.  Generations of travelers have stopped to say hello to it.
-- **Major Facts:** The caretaker insists the rock is the oldest pet in the region.  Its last recorded trick was 'stay,' performed flawlessly.
+- **About:** A round old boulder sits in a tiny fenced garden.  Generations of travelers have stopped to say hello to it.  A round boulder rests in a fenced flower garden beside the western woodland trail, greeting travelers with the same calm expression it has worn for centuries.  Families leave little ribbons and moss bouquets, while a friendly golem gardener makes sure nobody mistakes the rock for building material.
+- **Major Facts:** The caretaker insists the rock is the oldest pet in the region.  Its last recorded trick was 'stay,' performed flawlessly.  The caretaker insists it is the oldest pet in Gnohio and proudly records its every trick.  Its best performance is still 'stay,' executed without a single mistake.  Some scholars believe the stone came from the Crystals on the Flats, although the boulder has never answered their questions.  The annual birthday party attracts a crowd of visitors and exactly one cake the rock never eats.
 - **Flora:** Moss, woodland violets
 - **Fauna:** Pebblem, Glowlem
 - **Bounties:**
