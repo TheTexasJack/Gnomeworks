@@ -98,7 +98,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - Paying per item at the item drop bonus is worthless: under 2 seconds of production even for a 90% drag late game.  Any per-item price has to scale with the game (for example, priced in gear turns).
 - A percentage drag takes about that percentage of ~35 minutes to grow back, at every stage, because growth compounds.  Shoebox holes refill in minutes, Container holes in about half an hour.
 - Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
-- Box upgrades (draft: Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) are **speed** upgrades: fewer drags to empty a pile.
+- ~~Box upgrades (Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) as speed upgrades.~~  Dropped 2026-11-04 (Nathan): boxes cost nothing, and the challenge is the packing match.
 
 **Shipping log (Nathan, 2026-11-04, decided; build after the core)**
 
@@ -122,6 +122,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 | Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
 | Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
 
+- **The packing is the game (Nathan, 2026-11-04):** a match game, Simon Says with a shipping veneer.  Read what the package needs, put the right things on it, ship.
 - **Boxes and packing supplies are free (Nathan, 2026-11-04).**  The factory makes them, so stock is unlimited, as in most shipping games: the point is the packing.  Every box and supply sits on the packing bench from the start and does nothing until a region needs it.
 - **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, a weight sticker, and the correct box for its destination.
 - **The dog toy on Gnonmoon:** a dog toy in a Gnonmoon package gets a big reaction.  Most recipients REALLY hate it, and one particular person REALLY loves dog stuff.  The reaction shows up in the shipping log and moves Stonks a lot.
@@ -130,14 +131,15 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 Notes to settle when this is built (Claudia):
 - Packages to regions without a special box use a plain cardboard box.
 - The shipping log itself stays flavor only.  Stonks carry the score.
-- Open: Stonks is both the shipping currency and our line on the ticker.  With boxes and supplies free, Stonks has fewer things to buy.  The box-size speed upgrades (Shoebox, Crate, Pallet, Shipping Container) are still listed as Stonks purchases below until Nathan says otherwise.  When a failure sends Stonks down, decide whether the player loses spendable Stonks, only the ticker line drops, or both.  The ticker notes call for recoverable mistakes and no losses that stack forever.
+- Open: Stonks is both the shipping currency and our line on the ticker.  The box-size speed upgrades are dropped, so Stonks has almost nothing to buy, which makes it mostly a score.
+- Open: how much of a pile one successful package ships, now that box sizes no longer set it (for example a fixed share of the stack, or all of it down to the display copy).  When a failure sends Stonks down, decide whether the player loses spendable Stonks, only the ticker line drops, or both.  The ticker notes call for recoverable mistakes and no losses that stack forever.
 - The rune tracing game needs to work with a finger on phones as well as a mouse.
 
 **Ideas on the table (drafts, build in this order)**
 
 1. **Core:** Open and Close, drag to box, Stonks, stop at 1.
    - **Stamps are a shipping cost and a mechanic, separate from the currency.**  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  TNP fakes carry Christmas-looking stamps (snowflakes, holly).  Stonks can buy stamp sheets for newly unlocked regions.
-2. **Stonks shop:** box upgrades, then a Packing Gnome that packs on his own while the door is open (the factory-automation step), faster belt, wider door.
+2. **Stonks shop (revisit):** box upgrades are dropped.  Still on the list: a Packing Gnome that packs on his own while the door is open, faster belt, wider door.  An auto-packer may clash with the packing being the game, so this list needs a fresh look.
 3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
 4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:
    - A height chart painted on the dock wall.  Gnomes are short.  A "gnome" past the line is a TNP elf in a borrowed hat.
