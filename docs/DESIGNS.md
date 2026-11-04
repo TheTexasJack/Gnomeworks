@@ -4,6 +4,8 @@ Features that have been talked through but have no code.  Each one lists what Na
 
 ## Megagnome and the hunt
 
+**Built and complete (draft.54 to draft.61; Nathan closed it 2026-11-04).**  Kept here as the record of how it was designed.  No open items.
+
 **Built in draft.54** (see [EVENTS.md](EVENTS.md)).  Kept here as the design record.
 
 The event clicker.  Discussed 2026-11-02.
@@ -196,7 +198,7 @@ Notes to settle when this is built (Claudia):
 
 ## The math pass
 
-Before the Packing Line and the Megagnome get code, one pass over the numbers: the two new systems plus mid-to-late pacing (two days of light play reached 20B and every Wizard upgrade at once).  More producers (#7 to #12) will soak up some of that.
+One pass over the numbers: the Packing Line plus mid-to-late pacing (two days of light play reached 20B and every Wizard upgrade at once).  More producers (#7 to #12) will soak up some of that.
 
 ## Smaller ideas
 

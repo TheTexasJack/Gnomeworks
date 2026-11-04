@@ -36,9 +36,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [x] Gear-framed shop badge for the Gnome Wizard (draft.62).
 - [ ] Packing Line, in Nathan's order: lore pass, then mechanics, then assets, then build.  See "Packing Line next steps" below.
-- [ ] Mid-to-late pacing pass.  (Megagnome built in draft.54; tune his numbers after play.)
-- [ ] Tap the Megagnome on the Shop Floor to start a hunt (today only his shop row does).
-- [ ] Keyboard play for the hunt (arrows plus Space).
+- [ ] Mid-to-late pacing pass.
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 
@@ -69,7 +67,7 @@ Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 saf
 
 ## Done draft.58 to draft.62
 
-Megagnome hatless, then his belly jiggle, hunt prey split fix (Shroomturtle, elk, Crystal Lizard), per-prey size, the Gnome Wizard's badge.
+Megagnome hatless, then his belly jiggle.  **The Megagnome is complete** (Nathan, 2026-11-04); the floor-tap and keyboard hunt ideas are closed.  Also: hunt prey split fix (Shroomturtle, elk, Crystal Lizard), per-prey size, the Gnome Wizard's badge.
 
 ## Proposal backlog (all drafts, nothing approved yet)
 
@@ -88,7 +86,7 @@ Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
 - Nathan will push for the Golem Pilot and Expeditions later (send-a-crew-out missions, as in FF14 ventures and STO duty officers).
 - Current focus: the lore, the region maps, and the Packing Line outline, since shipping closes the game loop.
 
-The Packing Line, the Megagnome and his hunt, the Tiny Monster info card, and the Rogue are written up in [DESIGNS.md](DESIGNS.md).
+The Packing Line, the Tiny Monster info card, and the Rogue are written up in [DESIGNS.md](DESIGNS.md).
 
 Answered 2026-11-03: shipped items leave the shelf, down to 1.
 
