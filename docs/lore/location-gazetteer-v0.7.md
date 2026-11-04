@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.6 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.7 Working Draft)
 
 
 ## How to read this draft
@@ -682,7 +682,7 @@
 - **Location:** Northeast cultivated terraces below Gno Dao Cradle.
 - **Region:** Gno Dao Cradle.
 - **About:** Golden fields ripple along mountain terraces where tiny owl creatures nest in the stone walls.  Green terraces descend the highland slopes beside stone irrigation channels and little shrines.  Goatfolk porters, gnome gardeners, and lamia herbalists share the work, while children leave seeds for the visiting Bloomlets.  Small wind chimes hang between the terraces, and their sound carries down the valley whenever the mountain breeze moves through the rice.
-- **Major Facts:** Families ring little handbells at sunrise to keep wandering goats out of the crops.  The goats learned to ring back.  Mountain springs feed the terraces before joining the Steam Stream.  Harvest rice reaches Twinshift by mule, and special herbs travel to Glowrock Retreat.  A brass plaque honors the goat who rescued the seed stock from a runaway cart.
+- **Major Facts:** Families ring little handbells at sunrise to keep wandering goats out of the crops.  The goats learned to ring back.  Mountain springs feed the terraces before joining the Steam Stream.  Harvest rice reaches Twinshift by mule, and special herbs travel to Glowrock Retreat.  A brass plaque honors the goat who rescued the seed stock from a runaway cart.  The terraces are family farms, kept small on purpose.  Their rice and wildflower seeds sell at farmers markets and in a few small sales, so very little of it ever ships beyond the valley.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
