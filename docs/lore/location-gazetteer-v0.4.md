@@ -774,8 +774,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** survey stakes
 - **Non-Factory Exports:** survey charts; building stone
-- **About:** The oddly even hills look as though someone measured them with a ruler.  Surveyors come here to practice difficult sums.
-- **Major Facts:** One hill is exactly half the size of its neighbor.  Locals claim that is where fractions were invented.
+- **About:** The oddly even hills look as though someone measured them with a ruler.  Surveyors come here to practice difficult sums.  Rolling green hills rise in such regular steps that visiting mathematicians become visibly emotional.  The old stone measuring towers house an eccentric surveyor guild, including a gentle minotaur who prefers counting sheep to solving equations.  Children ride little spring carts down the slopes, safely supervised by someone with a very long measuring tape.
+- **Major Facts:** One hill is exactly half the size of its neighbor.  Locals claim that is where fractions were invented.  Cogington's apprentices come here to practice laying out railroad grades before joining the engineers at Pulley Junction.  Every hill is named after a different fraction, but nobody admits who named the hill called 'Almost One.'  The guild once declared a public holiday when a new slope measured exactly half the height of its neighbor.  Locals celebrated by serving half cakes, then eating the other halves.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -789,8 +789,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Thermometer; water wheels
 - **Non-Factory Exports:** warm mineral water; steam reeds
-- **About:** Mist rises from this warm stream all year long.  Travelers follow it when the mountain paths turn cold.
-- **Major Facts:** The stream whistles as it passes through hollow stones.  The loudest bend is nicknamed The Kettle.
+- **About:** Mist rises from this warm stream all year long.  Travelers follow it when the mountain paths turn cold.  Clouds of warm mist drift through the eastern foothills where hot water flows between smooth stones.  Magmanders warm themselves along the banks, and lamia laundresses use the natural springs to wash the toughest travel clothes.  The water smells faintly of minerals and makes an excellent place to thaw frozen fingers.
+- **Major Facts:** The stream whistles as it passes through hollow stones.  The loudest bend is nicknamed The Kettle.  The stream begins near the highlands above Jinlo fields and winds south toward Slanic, feeding public bathhouses along the way.  Its whistling bend, called the Kettle, became a landmark after an elderly ogre swore it was singing her favorite tea song.  Glowrock Retreat has tried to pipe the sound into its baths, but the pipes only produce polite burps.
 - **Flora:** Steam reeds, hot-water moss
 - **Fauna:** Magmander, Slimetle
 - **Bounties:**
@@ -804,8 +804,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** nest boxes
 - **Non-Factory Exports:** mouse-safe seeds; field notes
-- **About:** A protected woodland where little mice are allowed to live without being chased.  Visitors must speak softly and watch their crumbs.
-- **Major Facts:** Rangers use humane traps to move lost mice home.  Potamice sightings are recorded in the reserve book.
+- **About:** A protected woodland where little mice are allowed to live without being chased.  Visitors must speak softly and watch their crumbs.  Shaded trees and clover meadows shelter a community of tiny mice, including the curious Potamice that visit from Springwater.  Rangers invite children to watch the animals without bothering their nests, and fairy gardeners have planted flowers small enough to look like forests from a mouse's perspective.  Everything is designed to make even a shy creature feel welcome.
+- **Major Facts:** Rangers use humane traps to move lost mice home.  Potamice sightings are recorded in the reserve book.  The reserve was founded after a warehouse owner in Port Gnaru mistook a visiting mouse family for a labor dispute.  A lamia ranger named Miss Whiskerwort keeps the records and makes the visitors sign a promise to leave crumbs only at designated feeding stations.  The rare Lumimouse has been observed near the old lantern stump, where the night patrol never needs to strike a match.
 - **Flora:** Clover, woodland violets
 - **Fauna:** Potamice, Lumimouse
 - **Bounties:**
@@ -819,8 +819,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** netting
 - **Non-Factory Exports:** watercress; dragonfly wing sketches
-- **About:** This wet meadow has wonderfully clear water and an impressive number of flies.  Picnics require both patience and a lid.
-- **Major Facts:** Locals celebrate Fly-Free Day once a year.  It has never been held successfully.
+- **About:** This wet meadow has wonderfully clear water and an impressive number of flies.  Picnics require both patience and a lid.  A pretty meadow where freshwater pools sparkle between reeds and, unfortunately, an astonishing population of flies.  Naiads and gnome gardeners maintain the boardwalk, while the local fairy midwives grow sweet reed for useful potions.  Picnic parties arrive full of optimism and depart with a new appreciation for lids.
+- **Major Facts:** Locals celebrate Fly-Free Day once a year.  It has never been held successfully.  The meadow lies downstream of Springwater and supplies clean marsh reeds to Slanic's weavers.  Each summer the community announces Fly-Free Day, then moves it to a later date when the insects decline to cooperate.  A traveling lamia inventor offered an automatic fly-fan powered by springs; the prototype blew every sandwich into the river instead.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -834,8 +834,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** walkway timber
 - **Non-Factory Exports:** dark peat; glow moss
-- **About:** Mud bubbles beneath crooked trees and makes squelching noises at visitors.  Every path seems shorter on the way in.
-- **Major Facts:** The name honors an explorer who brought only one sock.  His diary begins 'I should have packed two.'
+- **About:** Mud bubbles beneath crooked trees and makes squelching noises at visitors.  Every path seems shorter on the way in.  The peat pools make theatrical bubbling sounds beneath leaning willows, and the safest boardwalk seems determined to move overnight.  Local marsh guides take visitors out in pairs, preferably with matching boots, while shy Shadoozes hide among the black reeds.  The name is more dramatic than the people who live nearby, who mostly worry about keeping their socks dry.
+- **Major Facts:** The name honors an explorer who brought only one sock.  His diary begins 'I should have packed two.'  An old explorer earned the bog's name by carrying only one sock and recording his disappointment across seventy-three diary pages.  Ferry drivers from Mycelia know which paths are stable, and a friendly hag herbalist tends a cottage at the outer bank.  She has never cursed a traveler, but she does charge extra for directions to the part of the bog labeled 'Short Cut.'
 - **Flora:** Black reeds, glowcap mushrooms
 - **Fauna:** Shadooze, Grimtle
 - **Bounties:**
@@ -849,8 +849,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Mosquito Netting; prefabricated platform boards
 - **Non-Factory Exports:** rare marsh herbs; reed frog whistles
-- **About:** This lonely swamp has excellent scenery and terrible customer reviews.  It is mostly visited by people who took the wrong turn.
-- **Major Facts:** Its welcome sign shows a visitor count of one.  The number may refer to the sign painter.
+- **About:** This lonely swamp has excellent scenery and terrible customer reviews.  It is mostly visited by people who took the wrong turn.  This quiet southern marsh has leaning trees, soft moss, and a reputation for receiving only the most determined guests.  A small family of swamp-dwelling lamia keeps the raised walkways in order, and their children leave glowing pebble markers for visitors who lose the main trail.  The air smells of rain and old leaves.
+- **Major Facts:** Its welcome sign shows a visitor count of one.  The number may refer to the sign painter.  The wooden welcome sign displays a visitor count of one, probably the sign painter, though the family insists it should count the postman too.  The crossing links Slanic's wetlands with the dry trails toward Gnafrica.  A small Shroomtle sanctuary sits behind the caretaker's hut, and a yearly open house draws nearly a dozen proud visitors.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -864,8 +864,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** heat shields
 - **Non-Factory Exports:** obsidian; hot ash
-- **About:** A loud volcano whose lava can be seen from the desert road.  Nobody has accused it of subtlety.
-- **Major Facts:** The warning board says HOT FIRE in letters three feet high.  That has not stopped visitors from asking whether it is warm.
+- **About:** A loud volcano whose lava can be seen from the desert road.  Nobody has accused it of subtlety.  The great red cone towers over Gnafrica's desert roads, sending harmless-looking sparks into a sky that is rarely as harmless as it seems.  Magmanders bask on the warm rock, while resident fire elementals maintain marked safe trails and charge tourists for photographs of their own reflections in obsidian.
+- **Major Facts:** The warning board says HOT FIRE in letters three feet high.  That has not stopped visitors from asking whether it is warm.  The three-foot warning board was erected after a visitor asked whether the mountain's lava was actually hot.  Heat-resistant supplies travel to Sockarillo and the workshops near Minor Heat Volcano.  Local guides tell stories of a friendly giant who once plugged a small vent with a frying pan, accidentally inventing the region's first pressure cooker.
 - **Flora:** Flame moss, ash lichen
 - **Fauna:** Magmander, Doomander
 - **Bounties:**
@@ -879,8 +879,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** picnic baskets
 - **Non-Factory Exports:** warm stones; sulfur
-- **About:** This mild volcanic hill steams and grumbles, but rarely erupts.  Travelers sometimes warm their lunches near its vents.
-- **Major Facts:** A sign reads 'Minor Heat, Major Complaints.'  It was installed after a picnic egg exploded.
+- **About:** This mild volcanic hill steams and grumbles, but rarely erupts.  Travelers sometimes warm their lunches near its vents.  Small steam vents and gentle slopes make the lesser volcano popular with hikers who want volcanic scenery without wearing out their eyebrows.  Its nearby village of ash farmers grows hardy ferns, and an orc baker sells bread cooked over carefully watched hot stones.
+- **Major Facts:** A sign reads 'Minor Heat, Major Complaints.'  It was installed after a picnic egg exploded.  The famous 'Minor Heat, Major Complaints' sign appeared after a picnic egg burst during a royal visit.  Apprentices from Hot Fire Volcano study the quieter vents here before undertaking riskier fieldwork.  A Magmander named Toast keeps wandering into the bakery, where the owner has promised it a permanent job as long as it stops sleeping on the dough.
 - **Flora:** Warm fern, ashgrass
 - **Fauna:** Magmander, Glimmander
 - **Bounties:**
@@ -894,8 +894,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Compass; trail rope
 - **Non-Factory Exports:** granite; mountain herbs
-- **About:** Tall gray peaks protect the highland villages from northern winds.  Old stone stairs zigzag across the slopes.
-- **Major Facts:** The first stair was built by someone who hated climbing.  They built quite a lot more before feeling better.
+- **About:** Tall gray peaks protect the highland villages from northern winds.  Old stone stairs zigzag across the slopes.  Tall gray ridges shield the Cradle, their steps cut into rock by generations of gnomes, dwarves, giants, and goatfolk.  Storm bells hang over the passes, and the mountain inns welcome all sorts of travelers, provided they can fit through the door or are willing to use the giant entrance.
+- **Major Facts:** The first stair was built by someone who hated climbing.  They built quite a lot more before feeling better.  The original stairway was commissioned by a gnome who hated climbing, a fact that has puzzled every historian since.  From Cogbend Hold, the main road continues past the Crafter's Mines toward the old ruins.  A giant bridge builder named Oona still maintains the northern span because her grandmother promised the village it would last a thousand winters.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -909,8 +909,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** smooth pebbles
 - **Non-Factory Exports:** rainbow water; water lilies
-- **About:** These puddles shimmer with tiny colors after rain.  They attract harmless little lights that dance above the water.
-- **Major Facts:** Anyone stepping into a puddle may hear a giggle.  The local guide says the puddles have very poor manners.
+- **About:** These puddles shimmer with tiny colors after rain.  They attract harmless little lights that dance above the water.  After each rain, shallow pools shimmer in lilac and green as tiny fairy lanterns float just above the surface.  Gnome children come with little boats to race, while fairy families picnic beside the lily pads.  The puddles occasionally giggle when someone steps into them, but the joke seems to be about wet feet rather than anyone's dignity.
+- **Major Facts:** Anyone stepping into a puddle may hear a giggle.  The local guide says the puddles have very poor manners.  The pools drain toward Fairy Fen, and their water lilies are prized by the herbalists of Slanic.  The annual Lantern Float began as a celebration after the Red Grass Revolution and is still attended by families from both sides of the old dispute.  A Goobloom has taken to decorating the prize table with flowers, sometimes before the judges have finished counting.
 - **Flora:** Water lilies, marsh mint
 - **Fauna:** Jellybub, Goobloom
 - **Bounties:**
@@ -924,8 +924,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** reed boats
 - **Non-Factory Exports:** reed flowers; glimmer dust
-- **About:** A winding fen known for sparkly reeds and tiny footbridges.  Visitors sometimes spot fairies far from the Gnomeworks factory.
-- **Major Facts:** The fen is home to several fairy communities, none responsible for TNP's corporate decisions.  Its annual lantern walk is open to all polite visitors.
+- **About:** A winding fen known for sparkly reeds and tiny footbridges.  Visitors sometimes spot fairies far from the Gnomeworks factory.  The fen is home to several fairy communities with lantern-lit footbridges, busy craft stalls, and tiny houses hidden in flowers.  Visitors meet schoolteachers, mushroom farmers, clockmakers, and gossiping grandparents, each as capable of kindness or foolishness as anyone in Cogbottom.  The reeds sparkle at dusk when the fairy mail carriers return.
+- **Major Facts:** The fen is home to many fairy families with different loyalties and opinions; most have nothing to do with TNP's corporate schemes.  Its annual lantern walk is open to all polite visitors.  During Field Marshal Candy Corn's Circus War, a faction here fought troops from North Gnomerica; the conflict did not speak for every fairy family.  The Red Grass Revolution and the later Confetti Reunion brought former opponents together on more peaceful terms.  Fairy elders still exchange invitations with Gnohio's historical grounds, and the Reed Accord keeps traditional paths open.  The occasional suspicious corporate courier should not be mistaken for the whole community.
 - **Flora:** Glowcap mushrooms, marsh orchids
 - **Fauna:** Goopamice, Shroomtle
 - **Bounties:**
@@ -939,8 +939,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Compass; mule feed
 - **Non-Factory Exports:** rare flowers; moss stone
-- **About:** A sheltered green valley that is hard to find and easy to love.  Mist covers the entrance most mornings.
-- **Major Facts:** Two explorers wrote guidebooks to it.  Their routes disagree, and both books end with 'we are here, probably.'
+- **About:** A sheltered green valley that is hard to find and easy to love.  Mist covers the entrance most mornings.  A hidden green basin lies between steep walls, sheltered from harsh winds and reached through a shifting curtain of mist.  A small settlement of gentle ogres, mountain sprites, and wandering naturalists grows rare herbs near warm springs.  Children tell visitors the valley only appears when someone has remembered to pack lunch.
+- **Major Facts:** Two explorers wrote guidebooks to it.  Their routes disagree, and both books end with 'we are here, probably.'  Two explorers wrote famous guidebooks, each containing a completely different path and both ending 'We are here, probably.'  Sky Dream's astronomers think the stars may reveal a seasonal entrance, though the valley's residents politely insist they have lived there all along.  The oldest local tradition asks every newcomer to plant a tree before asking where the treasure is hidden.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -954,8 +954,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** sled runners
 - **Non-Factory Exports:** winter grain; clear ice
-- **About:** Wind blows over a flat white landscape where ice crystals ring like little bells.  Only hardy farmers and very happy snow hares stay all winter.
-- **Major Facts:** Villagers paint bright orange doors so neighbors can find their houses after a storm.  One door belongs to a snowbank.
+- **About:** Wind blows over a flat white landscape where ice crystals ring like little bells.  Only hardy farmers and very happy snow hares stay all winter.  Snow sweeps across broad white fields where frost moss grows around buried fences and winter hares dart through the drifts.  Hardy farmers and werewolf shepherds share bright-painted houses, and friendly ogres operate snowplows fashioned from old ship anchors.  On moonlit nights the ice crystals ring softly in the wind.
+- **Major Facts:** Villagers paint bright orange doors so neighbors can find their houses after a storm.  One door belongs to a snowbank.  The orange doors help neighbors locate their homes after storms.  One door is attached to a snowbank and has been accidentally delivered mail for twenty years.  Gnyannis takes in most of the field's winter cargo, while Werewolf London organizes rescue teams whenever a blizzard closes the northern tracks.  Young Glowbats sometimes shelter in the barn rafters.
 - **Flora:** Snowbells, frost moss
 - **Fauna:** Fluffbat, Glowbat
 - **Bounties:**
@@ -969,8 +969,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Sunglasses; water skins
 - **Non-Factory Exports:** colored sand; wind-polished pebbles
-- **About:** This desert keeps moving its dunes and occasionally its roads.  Travelers follow stone markers instead of yesterday's footprints.
-- **Major Facts:** The local weather forecast is always 'windy.'  The forecaster has a perfect record.
+- **About:** This desert keeps moving its dunes and occasionally its roads.  Travelers follow stone markers instead of yesterday's footprints.  These dunes crawl across Gnafrica like enormous slow waves, swallowing yesterday's footprints and occasionally yesterday's road signs.  Lamia caravan leaders know the stable stone markers, while giant shepherds herd dust-colored goats between the sparse patches of grass.  The wind makes musical notes through broken brass pipes left by old survey crews.
+- **Major Facts:** The local weather forecast is always 'windy.'  The forecaster has a perfect record.  The weather office always forecasts wind and enjoys an impeccable success record.  Sockarillo and Grit Spit and Fellers maintain the safest supply stations along the eastern edge.  An old wooden post marked 'Almost There' has been found in twelve different locations, making it the desert's most unreliable but beloved landmark.
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
 - **Bounties:**
@@ -984,8 +984,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** well pumps
 - **Non-Factory Exports:** date fruit; aromatic resin
-- **About:** Shimmering sands hide sweet-smelling groves and cool wells.  Merchants come seeking riches and usually leave craving lunch.
-- **Major Facts:** Legends promise a treasure under every third dune.  So far, most treasures have been buried picnic baskets.
+- **About:** Shimmering sands hide sweet-smelling groves and cool wells.  Merchants come seeking riches and usually leave craving lunch.  Between dunes are cool wells, date groves, and shaded markets that tempt hungry travelers to spend their last coins on something delicious.  A friendly sphinx keeps a public water ledger and occasionally asks riddles, although the correct answer is almost always 'please' or 'thank you.'
+- **Major Facts:** Legends promise a treasure under every third dune.  So far, most treasures have been buried picnic baskets.  The legend of treasure beneath every third dune began when a merchant buried picnic baskets to keep them cool.  Sockarillo's guides now use the stories to remind visitors to ration food, not chase mirages.  Once a year, a caravan from Satiated Desert delivers an enormous celebratory pie, which requires four sturdy wheelbarrows and a referee.
 - **Flora:** Date palms, oasis reeds
 - **Fauna:** Bloomlet, Magmander
 - **Bounties:**
@@ -999,8 +999,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** shade tents
 - **Non-Factory Exports:** salt cakes; sturdy gourds
-- **About:** Once crossed by hungry travelers, these sands now have a chain of famous roadside kitchens.
-- **Major Facts:** The oldest inn advertises 'All You Can Carry.'  Customers learned the hard way that the plates count too.
+- **About:** Once crossed by hungry travelers, these sands now have a chain of famous roadside kitchens.  A string of roadside kitchens and shaded ovens makes this sandy stretch the most comfortable place in the sunlands to become very full.  Orc chefs, gnome cooks, and lamia spice merchants trade recipes that occasionally need a fire extinguisher.  Visitors are encouraged to bring their appetites and their own belts.
+- **Major Facts:** The oldest inn advertises 'All You Can Carry.'  Customers learned the hard way that the plates count too.  The oldest inn advertises 'All You Can Carry,' and once tried to include the plates in the weight allowance.  The annual Great Stew Exchange with Grit Spit and Fellers has resulted in several celebrated dishes and one unforgettable turnip incident.  The desert's wells are carefully protected by the Blue Stone Wellkeepers.
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
 - **Bounties:**
@@ -1014,8 +1014,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** canal timber
 - **Non-Factory Exports:** river fish; sealed cargo bundles
-- **About:** This wide river bends around the western farms like a belt around a very round belly.  Its banks are lined with markets and boat sheds.
-- **Major Facts:** Seven bridges cross the Belt.  Each claims to be the shortest route to lunch.
+- **About:** This wide river bends around the western farms like a belt around a very round belly.  Its banks are lined with markets and boat sheds.  The great river curls around Gnohio's farms and winds through seven crossings, each boasting a different route to a good lunch.  Barges carry grain, timber, and factory crates between Springwater, Runningnomata, and Port Gnaru, sharing the banks with naiad gardens and quiet fishing villages.
+- **Major Facts:** Seven bridges cross the Belt.  Each claims to be the shortest route to lunch.  The oldest river pilots carry one decorative brick on an otherwise empty boat for luck.  The custom began when General Gnohio's supply flotilla sailed during the Red Grass Revolution and one captain refused to leave the dock without his lucky ballast.  A traveling lamia historian is collecting the bricks' stories for Gnohio's Confetti Museum, but the oldest captain has threatened to charge admission to his boat.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -1029,8 +1029,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** leaf baskets
 - **Non-Factory Exports:** silk thread; pressed leaves
-- **About:** An enormous mound of leaves and earth shelters giant fuzzy caterpillars.  Their tunnels look surprisingly tidy.
-- **Major Facts:** The caterpillars build little leaf hats in spring.  Rangers ask visitors not to applaud during molting season.
+- **About:** An enormous mound of leaves and earth shelters giant fuzzy caterpillars.  Their tunnels look surprisingly tidy.  A forest hill rises from Slanic's drier edge, riddled with tidy tunnels made by giant, wonderfully fuzzy caterpillars.  The little caretakers have built twig bridges and soft-leaf nests so the animals can crawl without trampling visitors.  Some caterpillars wear hats woven by fairy children from Fairy Fen.
+- **Major Facts:** The caterpillars build little leaf hats in spring.  Rangers ask visitors not to applaud during molting season.  In spring the caterpillars shed bright silk that Mycelia's weavers collect only after it has fallen.  The annual Hat Parade is held after molting season, when the caterpillars look their finest.  Rangers ask guests not to applaud while an animal is trying to change its skin, an etiquette rule that has also proved useful at the town's swimming pool.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -1046,8 +1046,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** archaeology ropes
 - **Non-Factory Exports:** ancient sketches; carved stone fragments
-- **About:** Broken arches and silent courtyards mark a town from a long-forgotten age.  The stone walls contain gears that no longer turn.
-- **Major Facts:** The ruins are protected, and visitors may photograph rather than remove artifacts.  A stone tablet counts five ages but has an empty space for the sixth.
+- **About:** Broken arches and silent courtyards mark a town from a long-forgotten age.  The stone walls contain gears that no longer turn.  Broken arches and silent courtyards lie beneath the northeastern mountain passes, their stone walls fitted with gears whose purpose has been forgotten.  Archaeologists from Cogbend Hold work beside a gentle stone golem who remembers the names of the gardeners but none of the rulers.  The quiet lanes still smell of old rain.
+- **Major Facts:** The ruins are protected, and visitors may photograph rather than remove artifacts.  A stone tablet counts five ages but has an empty space for the sixth.  A tablet counts five ages and leaves a blank space where the sixth should be, giving the site its puzzling name.  Scholars debate whether the ruins connect to the Ancient Device or to older mountain trade routes.  No one is allowed to take artifacts home, especially after a visitor used a ceremonial gear as a pie cutter.  Strange new light has recently appeared under one arch.
 - **Flora:** Ruin ivy, crystal lichen
 - **Fauna:** Cogsnake, Venomcog
 - **Bounties:**
@@ -1061,8 +1061,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** rope
 - **Non-Factory Exports:** rare nutshells; cave moss
-- **About:** A winding cave where the walls are covered in tiny tooth marks.  Something inside keeps collecting nuts from every season.
-- **Major Facts:** Visitors report hearing a polite knocking from behind a stone wall.  The local guide refuses to answer because 'it only encourages them.'
+- **About:** A winding cave where the walls are covered in tiny tooth marks.  Something inside keeps collecting nuts from every season.  Nut trees crowd the cliff above a winding cave where small tooth marks decorate the walls.  The local woodland folk claim a careful collector stores acorns from every season inside.  A volunteer ranger called Aunt Hazel provides helmets, lanterns, and a lecture on respecting other creatures' homes.
+- **Major Facts:** Visitors report hearing a polite knocking from behind a stone wall.  The local guide refuses to answer because 'it only encourages them.'  Visitors sometimes hear a polite knocking behind the deepest stone wall.  A trail connects the cave to Woods of the Elder, but no map agrees on the exact entrance.  The Gnut may be a creature, a title, or a particularly old family name.  Every expedition has been told to leave its findings in place until someone can ask the owner.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1076,8 +1076,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** mine supports
 - **Non-Factory Exports:** iron ore; blank paper forms
-- **About:** A maze of abandoned tunnels lined with dusty filing cabinets.  The miners vanished decades ago, leaving their paperwork in perfect order.
-- **Major Facts:** Every door requires a form signed by the previous door.  Expedition crews may find a map, if they can locate the correct drawer.
+- **About:** A maze of abandoned tunnels lined with dusty filing cabinets.  The miners vanished decades ago, leaving their paperwork in perfect order.  Old shafts beneath Cogington are lined with cabinets, numbered doors, and filing forms that seem to multiply overnight.  The place is explored by clerks, historians, and brave gnomes who have survived the permit desk at Pulley Junction.  An elderly ghost receptionist offers directions with perfect manners.
+- **Major Facts:** Every door requires a form signed by the previous door.  Expedition crews may find a map, if they can locate the correct drawer.  Every locked door requires a document signed behind the previous locked door.  The last mining inspector vanished into the archive years ago but still sends back beautifully completed timesheets.  Some records mention rail shipments predating Cogbottom's modern factory, though the dates are smudged.  Expeditions are advised to carry extra pencils and refrain from telling the receptionist the office is closed.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -1091,8 +1091,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Lantern Fuel; Shovel; safety rails
 - **Non-Factory Exports:** memorial stone; night crystals
-- **About:** An old mine now used to preserve stone markers for those who worked the mountain.  Gentle blue lights shine through the deepest galleries.
-- **Major Facts:** Local families visit once a year to polish the memorial plaques.  The night crystals sometimes hum when someone says a name aloud.
+- **About:** An old mine now used to preserve stone markers for those who worked the mountain.  Gentle blue lights shine through the deepest galleries.  Memorial halls now occupy the old mine galleries, honoring the gnomes, giants, and other miners who worked the mountain.  Blue crystals cast a soft light over carved names, and the caretakers welcome families who come to remember loved ones.  The underground gardens are kept by a gentle ghost who has never missed a watering.
+- **Major Facts:** Local families visit once a year to polish the memorial plaques.  The night crystals sometimes hum when someone says a name aloud.  Each year families polish the plaques and share stories about the people behind the names.  The deepest crystals hum faintly when a visitor speaks a name, which scholars believe may be a lost recording system.  Twinshift sends volunteers to maintain the paths, and no one may remove a stone from the memorial walls.  The mine's history is solemn, but its people insist that remembrance can include laughter.
 - **Flora:** Pale lichen, shade fern
 - **Fauna:** Grimlem, Vampuff
 - **Bounties:**
@@ -1106,8 +1106,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** insulated wiring
 - **Non-Factory Exports:** mysterious diagrams; printed gauge strips
-- **About:** A huge buried machine rests beneath the mountains, covered in symbols nobody can read yet.  Its lights blink once every spring.
-- **Major Facts:** The Device predates Gnomeworks but is not confirmed to be connected to the factory.  The spring blink is recorded by the mountain watch.
+- **About:** A huge buried machine rests beneath the mountains, covered in symbols nobody can read yet.  Its lights blink once every spring.  Beneath the Cradle sits a vast metal-and-stone machine surrounded by mathematical marks that no scholar has fully read.  It blinks once each spring, causing mountain watchers to argue over whether it is waking, counting, or politely greeting the season.  Lamia archivists and dwarf engineers record every change with meticulous care.
+- **Major Facts:** The Device predates Gnomeworks but is not confirmed to be connected to the factory.  The spring blink is recorded by the mountain watch.  The Device is older than modern Gnomeworks, but no known evidence proves the two machines share an origin.  One narrow corridor is shaped to fit a person of giant size, while another is too small for a gnome's boot.  The observatory at Stellar Review compares the yearly blink with unusual star positions.  The chamber remains sealed except during approved research expeditions.
 - **Flora:** Crystal lichen, metal moss
 - **Fauna:** Neonsnake, Glowlem
 - **Bounties:**
@@ -1121,8 +1121,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Compass; trail markers
 - **Non-Factory Exports:** old hunting journals; wildlife sketches
-- **About:** A collapsed lookout tower stands where a famous hunter once tried to catch a shadow.  It remains an excellent place to watch birds.
-- **Major Facts:** The hunter's diary lists fifty footprints and no animals.  Rangers use it as an example of why to look up sometimes.
+- **About:** A collapsed lookout tower stands where a famous hunter once tried to catch a shadow.  It remains an excellent place to watch birds.  This collapsed tower stands at the edge of Mouse Reserve where an ambitious hunter once attempted to capture a shadow.  Today it serves as a pleasant birdwatching point, with benches repaired by friendly rangers and a picnic table that has seen better days.  Most visitors come to watch Hootgears instead of chase anything.
+- **Major Facts:** The hunter's diary lists fifty footprints and no animals.  Rangers use it as an example of why to look up sometimes.  The hunter wrote down fifty footprints and no animals, a mistake every local ranger now uses to teach children to look up.  The old stone steps once connected to a woodland trail toward the Cave of the Gnut.  The reserve committee is considering rebuilding the tower as a lookout, provided nobody tries to trap the moon again.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -1136,8 +1136,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** timber supports
 - **Non-Factory Exports:** metal ore; gem dust
-- **About:** Workshops have been carved into the mine walls beside veins of bright ore.  Old machines still move if turned by hand.
-- **Major Facts:** The deepest lift has seven buttons and only six floors on the plan.  Nobody has pressed the seventh since the last inspection.
+- **About:** Workshops have been carved into the mine walls beside veins of bright ore.  Old machines still move if turned by hand.  Bright ore veins run beside workshops cut into the stone, where dwarf smiths, gnome machinists, and patient golem lifters work side by side.  Steam drills thump in rhythm with hand hammers, and apprentices can tell the hour by the scent of warm metal and lunch pies.
+- **Major Facts:** The deepest lift has seven buttons and only six floors on the plan.  Nobody has pressed the seventh since the last inspection.  The mines send carefully sorted ores through Twinshift to Cogbottom and Cogbend Hold.  Their deepest freight lift has seven buttons but only six levels on the public plan.  Nobody has dared press the seventh since an inspector returned with an excellent gemstone and no explanation.  The miners' guild offers free helmet lessons to visiting explorers.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -1151,8 +1151,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** dry noodles
 - **Non-Factory Exports:** recipe tablets; giant soup pots
-- **About:** A damp stone cellar smells of stew and mystery.  Every room has a different recipe scratched into the wall.
-- **Major Facts:** The last guardian is said to be a ladle the size of a canoe.  The original cook's name has been worn away by hungry adventurers.
+- **About:** A damp stone cellar smells of stew and mystery.  Every room has a different recipe scratched into the wall.  The old underground kitchen smells of broth, garlic, and a mystery ingredient nobody will identify.  Each stone room contains a scratched recipe, and the corridors echo with the clatter of invisible spoons.  A kindly ogre cook runs a soup cart outside the entrance for adventurers who forgot their lunch.
+- **Major Facts:** The last guardian is said to be a ladle the size of a canoe.  The original cook's name has been worn away by hungry adventurers.  The legend of the canoe-sized ladle began during the Great Kitchen Flood, when a burst steam pipe filled the cellar with broth.  Pottery fragments here resemble bowls sold in Cogbottom, though their age is uncertain.  Those who complete the recipe trail may discover a sealed pantry, or merely a very old turnip.  The ogre cook insists those are equally important findings.
 - **Flora:** Mushrooms, soupwort
 - **Fauna:** Jellybub, Potamice
 - **Bounties:**
