@@ -25,7 +25,7 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [tnp-corp.md](tnp-corp.md) | The North Pole Corp, the rival | Seeds from 2026-11-03 |
 | [regions.md](regions.md) | The regions the dock ships to | Waiting on maps |
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
-| [location-gazetteer-v0.3.md](location-gazetteer-v0.3.md) | 100 places, grouped by type, with physical imports and exports, separate flora and fauna fields, and lore | **v0.3 review draft, awaiting Nathan and Alex** |
+| [location-gazetteer-v0.4.md](location-gazetteer-v0.4.md) | 100 places with expanded About and Major Facts, shared histories, trade, flora and fauna | **v0.4 review draft, awaiting Nathan and Alex** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss | Waiting on Alex |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |
@@ -38,5 +38,5 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 - **Lore publishing workflow:** Mara may commit clearly labeled working drafts directly to GitHub and then send the link to Nathan for review.  Publication is not canon approval.  Nathan decides what becomes canon, and Alex develops or approves the stories in her sections.  Proposed classifications, geography, character histories, and trade goods must remain labeled as drafts until approved.
 - Kid-friendly and in plain English.  Elana (Jarrett's daughter, 6) reads, and the entries should encourage her to read: short sentences, everyday words, keep it fun.
 - The big guy at the North Pole is never named.
-- Each entry ends up as one short read in the game, a few sentences.  Longer notes for the writers can sit under it.
+- **About** is an inviting, readable place description.  **Major Facts** holds richer local histories, characters, oddities, and connections for the full lore view.  The game can show a shorter preview and reveal the rest on demand.
 - Same writing rules as the rest of the repo: two spaces after periods, no em dashes, no "not X, it's Y" phrasing.
