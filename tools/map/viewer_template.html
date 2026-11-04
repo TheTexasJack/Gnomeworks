@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gnomadica Master Map v__VERSION__</title>
+<style>
+  :root { --oak:#3b2a1a; --brass:#c9a24a; --paper:#f3e6c2; --ink:#2b2118; --ink2:#5a4a32; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #2a1f15; color: var(--ink);
+    font-family: 'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,Georgia,serif; }
+  .app { display: grid; grid-template-columns: 1fr 300px; height: 100%; }
+  .stage { position: relative; overflow: hidden; background: #86afb4; cursor: grab; touch-action: none; }
+  .stage.drag { cursor: grabbing; }
+  #map { width: 100%; height: 100%; display: block; }
+  .pin { cursor: pointer; }
+  .pin:hover > :first-child, .pin.sel > :first-child { filter: drop-shadow(0 0 3px #ffd77a) drop-shadow(0 0 2px #ffd77a); }
+  .hide-local .pin.t3, .hide-routes #routes, .hide-washes #washes, .hide-terrain #terrain,
+  .hide-labels #area-labels, .hide-labels #region-labels, .hide-labels #sea-labels { display: none; }
+  aside { background: var(--paper); border-left: 3px solid var(--oak); overflow-y: auto; padding: 14px 16px; font-size: 14px; }
+  h1 { font-size: 19px; letter-spacing: 3px; margin: 0 0 2px; }
+  .ver { font-size: 12px; color: #7a3b2a; margin-bottom: 12px; }
+  .box { background: #fbf4dc; border: 1px solid #a07c3c; border-radius: 6px; padding: 10px 12px; margin-bottom: 12px; }
+  .box h2 { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 6px; color: var(--ink2); }
+  label.tog { display: flex; gap: 8px; align-items: center; padding: 2px 0; cursor: pointer; }
+  input[type=search] { width: 100%; padding: 6px 8px; border: 1px solid #a07c3c; border-radius: 4px; background: #fffaf0; font: inherit; }
+  .btns { display: flex; gap: 6px; margin-top: 8px; }
+  button { font: inherit; font-size: 13px; padding: 4px 10px; border: 1px solid var(--oak); border-radius: 4px; background: var(--brass); color: var(--ink); cursor: pointer; }
+  button:hover { background: #ddb85e; }
+  #info .name { font-size: 18px; font-weight: bold; margin-bottom: 2px; }
+  #info .meta { font-size: 12px; color: var(--ink2); margin-bottom: 8px; }
+  #info .k { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink2); margin-top: 8px; }
+  .chip { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: middle; border: 1px solid #0003; }
+  .draft { font-size: 12px; color: #7a3b2a; font-style: italic; }
+  ul.regions { list-style: none; margin: 0; padding: 0; }
+  ul.regions li { padding: 2px 0; cursor: pointer; }
+  ul.regions li:hover { text-decoration: underline; }
+  .hint { font-size: 12px; color: var(--ink2); }
+  @media (max-width: 760px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: 62% 38%; }
+    aside { border-left: 0; border-top: 3px solid var(--oak); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="stage" id="stage">
+__SVG__
+  </div>
+  <aside>
+    <h1>GNOMADICA</h1>
+    <div class="ver">Master Map v__VERSION__  ·  working draft, awaiting canon review</div>
+    <div class="box">
+      <h2>Find a place</h2>
+      <input id="q" type="search" list="names" placeholder="Type a name, like Cogbottom">
+      <datalist id="names"></datalist>
+      <div class="btns"><button id="zin">Zoom in</button><button id="zout">Zoom out</button><button id="reset">Whole map</button></div>
+      <p class="hint">Drag to move.  Scroll or pinch to zoom.  Tap a pin to read about it.</p>
+    </div>
+    <div class="box" id="info">
+      <div class="name">Pick a place</div>
+      <div class="meta">Every pin is a draft placement.</div>
+    </div>
+    <div class="box">
+      <h2>Show</h2>
+      <label class="tog"><input type="checkbox" data-c="hide-local" checked> Shops, shrines and small sites</label>
+      <label class="tog"><input type="checkbox" data-c="hide-routes" checked> Roads, rail and ferries</label>
+      <label class="tog"><input type="checkbox" data-c="hide-terrain" checked> Mountains, forests and marsh</label>
+      <label class="tog"><input type="checkbox" data-c="hide-washes" checked> Region colors</label>
+      <label class="tog"><input type="checkbox" data-c="hide-labels" checked> Region and landform names</label>
+    </div>
+    <div class="box">
+      <h2>Regions</h2>
+      <ul class="regions" id="regions"></ul>
+    </div>
+    <p class="draft">Proposed north is the top of the page.  Islands B and D are unclaimed.  Region washes show where a region sits, and no borders are drawn yet.  The Inner Lake is a reservoir behind Gnod Dam.</p>
+  </aside>
+</div>
+<script>
+const DATA = __DATA__;
+const svg = document.getElementById('map');
+const stage = document.getElementById('stage');
+const W = DATA.page.width, H = DATA.page.height;
+let vb = { x: 0, y: 0, w: W, h: H };
+const byId = {}; DATA.locations.concat(DATA.landmarks || []).forEach(l => byId[l.id] = l);
+const TYPE = { region: 'Region', city: 'City or port', settlement: 'Village or settlement', natural: 'Natural landmark',
+  expedition: 'Dungeon, mine or ruin', business: 'Shop or attraction', poi: 'Roadside curiosity', landmark: 'Landmark (new)' };
+
+function apply() { svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
+function clamp() {
+  vb.w = Math.min(Math.max(vb.w, W / 12), W * 1.2); vb.h = vb.w * H / W;
+  vb.x = Math.min(Math.max(vb.x, -vb.w * 0.3), W - vb.w * 0.7);
+  vb.y = Math.min(Math.max(vb.y, -vb.h * 0.3), H - vb.h * 0.7);
+}
+function fit() { const r = stage.getBoundingClientRect(); const ar = r.width / r.height;
+  if (ar > W / H) { vb.h = H; vb.w = H * ar; vb.x = (W - vb.w) / 2; vb.y = 0; } else { vb.w = W; vb.h = W / ar; vb.x = 0; vb.y = (H - vb.h) / 2; } apply(); }
+function toSvg(cx, cy) { const r = stage.getBoundingClientRect(); return { x: vb.x + (cx - r.left) / r.width * vb.w, y: vb.y + (cy - r.top) / r.height * vb.h }; }
+function zoomAt(f, cx, cy) {
+  const r = stage.getBoundingClientRect(); const ar = r.width / r.height;
+  const p = toSvg(cx, cy); const nw = Math.min(Math.max(vb.w * f, W / 12), W * 1.2);
+  vb.x = p.x - (p.x - vb.x) * nw / vb.w; vb.y = p.y - (p.y - vb.y) * nw / vb.w; vb.w = nw; vb.h = nw / ar; apply();
+}
+function centerOn(x, y, w) { const r = stage.getBoundingClientRect(); const ar = r.width / r.height;
+  vb.w = w; vb.h = w / ar; vb.x = x - vb.w / 2; vb.y = y - vb.h / 2; apply(); }
+
+stage.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.deltaY > 0 ? 1.15 : 1 / 1.15, e.clientX, e.clientY); }, { passive: false });
+const ptrs = new Map(); let last = null, pinchD = 0, moved = 0;
+stage.addEventListener('pointerdown', e => { ptrs.set(e.pointerId, e); stage.setPointerCapture(e.pointerId); last = e; moved = 0; stage.classList.add('drag'); });
+stage.addEventListener('pointermove', e => {
+  if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, e);
+  const r = stage.getBoundingClientRect();
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    if (pinchD) zoomAt(pinchD / d, (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2); pinchD = d; moved = 99; return; }
+  if (last) { const dx = e.clientX - last.clientX, dy = e.clientY - last.clientY; moved += Math.abs(dx) + Math.abs(dy);
+    vb.x -= dx / r.width * vb.w; vb.y -= dy / r.height * vb.h; apply(); }
+  last = e;
+});
+function up(e) { ptrs.delete(e.pointerId); if (ptrs.size < 2) pinchD = 0; if (!ptrs.size) { last = null; stage.classList.remove('drag'); } }
+stage.addEventListener('pointerup', up); stage.addEventListener('pointercancel', up);
+
+function show(id, fly) {
+  const l = byId[id]; if (!l) return;
+  document.querySelectorAll('.pin.sel').forEach(n => n.classList.remove('sel'));
+  const g = svg.querySelector(`.pin[data-id="${id}"]`); if (g) g.classList.add('sel');
+  const col = (DATA.regions[l.region] || {}).color || '#888';
+  const el = document.getElementById('info');
+  el.innerHTML = '';
+  const add = (cls, txt) => { const d = document.createElement('div'); d.className = cls; d.textContent = txt; el.appendChild(d); return d; };
+  add('name', l.name);
+  const m = add('meta', `${TYPE[l.type] || l.type}  ·  ${l.region}`);
+  const c = document.createElement('span'); c.className = 'chip'; c.style.background = col; m.prepend(c);
+  add('k', l.type === 'landmark' ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
+  if (l.mentions && !/^No other/.test(l.mentions)) { add('k', 'Linked in its story'); add('', l.mentions); }
+  add('k', 'Status'); add('draft', `Proposed placement on map v${DATA.version}`);
+  if (fly) centerOn(l.x, l.y, Math.min(vb.w, W / 3.2));
+}
+svg.addEventListener('click', e => { if (moved > 6) return; const g = e.target.closest('.pin'); if (g) show(g.dataset.id); });
+
+const dl = document.getElementById('names');
+DATA.locations.concat(DATA.landmarks || []).sort((a, b) => a.name.localeCompare(b.name)).forEach(l => { const o = document.createElement('option'); o.value = l.name; dl.appendChild(o); });
+document.getElementById('q').addEventListener('change', e => {
+  const v = e.target.value.trim().toLowerCase(); const all = DATA.locations.concat(DATA.landmarks || []); const l = all.find(x => x.name.toLowerCase() === v)
+    || all.find(x => x.name.toLowerCase().includes(v)); if (l) show(l.id, true); });
+document.getElementById('zin').onclick = () => { const r = stage.getBoundingClientRect(); zoomAt(1 / 1.4, r.left + r.width / 2, r.top + r.height / 2); };
+document.getElementById('zout').onclick = () => { const r = stage.getBoundingClientRect(); zoomAt(1.4, r.left + r.width / 2, r.top + r.height / 2); };
+document.getElementById('reset').onclick = fit;
+document.querySelectorAll('input[data-c]').forEach(cb => cb.addEventListener('change', () => document.body.classList.toggle(cb.dataset.c, !cb.checked)));
+
+const ul = document.getElementById('regions');
+DATA.locations.filter(l => l.type === 'region' && l.region !== 'Gnomadica').forEach(l => {
+  const li = document.createElement('li'); const n = DATA.locations.filter(x => x.region === l.region && x.type !== 'region').length;
+  li.innerHTML = `<span class="chip" style="background:${DATA.regions[l.region].color}"></span>`;
+  li.appendChild(document.createTextNode(`${l.name}  (${n})`)); li.onclick = () => show(l.id, true); ul.appendChild(li);
+});
+window.addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
