@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.14 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.15 Working Draft)
 
 
 ## How to read this draft
@@ -28,7 +28,7 @@
 | Gnafrica | Southwest main island | Sunlands, deserts, and volcanic cones |
 | Gnufoundland | Northern offshore island | Fog, snow, and cold-water ports |
 | Slaanilok | Eastern offshore islands | Ferries, sea trade, and warm coasts |
-| Shen Shin | Northeastern offshore island (Island B) | Three towns, names open |
+| Shen Shin | Northeastern offshore island (Island B) | Tables Edge and two towns with names open |
 | Gnonmoon | Southwestern offshore island (Island D) | Zohee Bay, the Three Idols, Demon's Gutt |
 | Gni | Southeastern offshore island, the Island of Gni (Island E) | Knights, Eversummer, and Castle Gnaagh |
 
@@ -41,7 +41,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **12 places**
+- VIII. Places added while mapping (outside the 100-name pool): **13 places**
 
 ## I. Major regions and the mapped area
 
@@ -1384,8 +1384,8 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **Name:** Shen Shin
 - **Location:** The round-topped island in the northeast sea, across the water from the tip of the Gno Dao Cradle arm (Island B on the map).
 - **Region:** Gnomadica, northeastern island.
-- **About:** A round-topped island with a snowy ridge across its north, pine woods down its middle, and three towns along its coast.  Say the name three times fast.
-- **Major Facts:** Named by Nathan on 2026-11-03.  Its three towns are on the map, and their names, people, and trade are still open.  The Lantern Chain ferry reaches its southern tip.
+- **About:** A round-topped island with a snowy ridge across its north and pine woods down its middle.  Tables Edge hides deep in the woods, and two more towns sit on the coast.  Say the name three times fast.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Tables Edge is its first named town and its main shipping destination.  The two coastal towns' names, people, and trade are still open.  The Lantern Chain ferry reaches its southern tip.
 - **Flora:** Salt pine, frost moss
 - **Fauna:**
 - **Bounties:**
@@ -1497,6 +1497,21 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **Non-Factory Exports:** None
 - **About:** A tiny snowy hamlet of a few cozy houses, a woodpile, and one very old, very famous dog.  Everyone agrees the hamlet was named after him.  Nobody agrees on whether that was a compliment.
 - **Major Facts:** Named by Nathan on 2026-11-03.  Its people, its trade, and the dog's real name are still open.
+- **Flora:** Salt pine, frost moss
+- **Fauna:**
+- **Bounties:**
+
+### Tables Edge
+
+- **Name:** Tables Edge
+- **Location:** Deep in the pine forest in the middle of Shen Shin.
+- **Region:** Shen Shin.
+- **Factory Imports:** None
+- **Factory Exports:** None
+- **Non-Factory Imports:** None
+- **Non-Factory Exports:** tables
+- **About:** A woodworking town hidden deep in the pines, where every house has a workshop and every workshop makes tables.  Big tables, small tables, tables for giants and tables for gnomes.  Watch out for your shins.
+- **Major Facts:** Named by Nathan on 2026-11-03.  It is Shen Shin's first named town and the island's shipping destination.  The town's woodworkers, and how many shins its table corners have claimed, are still open.
 - **Flora:** Salt pine, frost moss
 - **Fauna:**
 - **Bounties:**

@@ -158,6 +158,8 @@ ADDED_PLACES = {
                          clue='A dungeon in the western hills of Gnonmoon.'),
     "Gassy Dog": dict(x=318, y=112, tier=2, label=(7, 4, "start"), type='settlement', region='Gnufoundland',
                       clue='Small hamlet southeast of Werewolf London, on the trail to the Frozen Fields.'),
+    "Tables Edge": dict(x=1470, y=238, tier=1, label=(0, -11, "middle"), type='city', region='Shen Shin',
+                        clue='Town deep in the pine forest of Shen Shin.  They make and export tables.  Watch your shins.'),
     "Monit-45": dict(x=1508, y=672, tier=2, label=(0, -9, "middle"), type='city', region='Slaanilok',
                      clue='Lizard town down in the trees of Island C.'),
 }
@@ -165,7 +167,6 @@ ADDED_PLACES = {
 # Towns placed by Nathan whose names are still open: id -> (x, y, island or region)
 UNNAMED_TOWNS = {
     "shen-shin-town-1": (1532, 82, 'Shen Shin'),
-    "shen-shin-town-2": (1566, 196, 'Shen Shin'),
     "shen-shin-town-3": (1484, 322, 'Shen Shin'),
     "slaanilok-town-1": (1398, 612, 'Slaanilok'),   # on the bay edge, where the Port Gnasher ferry lands
     "slaanilok-town-2": (1478, 494, 'Slaanilok'),   # north shore, toward the Shen Shin ferry

@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.11",
+ "version": "0.12",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -1359,6 +1359,18 @@
    "status": "placed by Nathan"
   },
   {
+   "id": "tables-edge",
+   "name": "Tables Edge",
+   "type": "city",
+   "region": "Shen Shin",
+   "x": 1470,
+   "y": 238,
+   "tier": 1,
+   "clue": "Town deep in the pine forest of Shen Shin.  They make and export tables.  Watch your shins.",
+   "mentions": "Shen Shin",
+   "status": "placed by Nathan"
+  },
+  {
    "id": "monit-45",
    "name": "Monit-45",
    "type": "city",
@@ -1377,18 +1389,6 @@
    "region": "Shen Shin",
    "x": 1532,
    "y": 82,
-   "tier": 2,
-   "clue": "An unnamed town on Shen Shin, kept as an option for later.",
-   "mentions": "Shen Shin",
-   "status": "placed by Nathan, name open"
-  },
-  {
-   "id": "shen-shin-town-2",
-   "name": "Shen Shin 2 (name open)",
-   "type": "city",
-   "region": "Shen Shin",
-   "x": 1566,
-   "y": 196,
    "tier": 2,
    "clue": "An unnamed town on Shen Shin, kept as an option for later.",
    "mentions": "Shen Shin",

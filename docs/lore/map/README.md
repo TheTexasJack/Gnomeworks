@@ -1,14 +1,14 @@
-# Gnomadica master map, v0.11
+# Gnomadica master map, v0.12
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.11 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.14.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.12 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.15.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.11.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.11.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.11.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
+| `gnomadica-map-v0.12.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.12.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.12.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
 **Shareable link:** https://thetexasjack.github.io/Gnomeworks/map/ always shows the latest map.  The build copies the viewer to `/map/index.html` on every run, separate from the game.
@@ -18,6 +18,10 @@ Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.12
+
+- **Tables Edge** (Nathan), Shen Shin's first named town, deep in its pine forest.  It exports tables.  Shen Shin's east-coast spare was moved into the woods to become it, leaving two unnamed towns on the island.
 
 ## Changes in v0.11
 
@@ -93,6 +97,6 @@ These have no names and can move or vanish freely: the woods and downs between G
 
 - Names for the seas.
 - Gnod Dam's story: who built it, when, and what lies at the bottom of the drowned valley.
-- Names for the unnamed towns (15 so far; Gnufoundland and Gno Dao Cradle have none yet).
+- Names for the unnamed towns (14 so far; Gnufoundland and Gno Dao Cradle have none yet).
 - A scale bar.  The main island is hundreds of miles across, so the map carries no scale yet.
 - Which master-map pins should drop to regional maps later (shops, shrines, single monuments are drawn small and can be hidden in the viewer).
