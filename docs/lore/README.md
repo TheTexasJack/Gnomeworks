@@ -25,17 +25,17 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [tnp-corp.md](tnp-corp.md) | The North Pole Corp, the rival | Seeds from 2026-11-03 |
 | [regions.md](regions.md) | The regions the dock ships to | Waiting on maps |
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
-| [location-gazetteer-v0.13.md](location-gazetteer-v0.13.md) | 100 places plus Innie Lake, Gnod Dam, Shen Shin, Legipt, Monit-45, the Island of Gni, Gnaagh, and Gnonmoon with its places; trades at 49 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.13 review draft, awaiting Nathan and Alex** |
+| [location-gazetteer-v0.14.md](location-gazetteer-v0.14.md) | 100 places plus Innie Lake, Gnod Dam, Shen Shin, Legipt, Monit-45, the Island of Gni, Gnaagh, Gnonmoon with its places, and Gassy Dog; trades at 49 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.14 review draft, awaiting Nathan and Alex** |
 | [map-geography-audit-v0.1.md](map-geography-audit-v0.1.md) | 50 named terrain-bearing sites, 20 geographic systems, 11 relationship chains, and placement clues for all 100 locations | **First-pass map planning, not canon** |
 | [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
-| [map/](map/README.md) | Gnomadica master map v0.10 (Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region, Gnonmoon): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.10 draft map, awaiting canon review** |
+| [map/](map/README.md) | Gnomadica master map v0.11 (Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region, Gnonmoon): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.11 draft map, awaiting canon review** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss | Waiting on Alex |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |
 
 ## Rules for lore files
 
-- Gazetteer revisions use version numbers in filenames, such as `location-gazetteer-v0.13.md`.  Keep **only the latest version** in the working repository; delete all prior gazetteer files when publishing an updated one.  Older versions remain recoverable through Git history.
+- Gazetteer revisions use version numbers in filenames, such as `location-gazetteer-v0.14.md`.  Keep **only the latest version** in the working repository; delete all prior gazetteer files when publishing an updated one.  Older versions remain recoverable through Git history.
 
 - Claudia may update the gazetteer as the map and lore develop (Nathan, 2026-11-03), publishing each change as a new version.
 - **Trade rule:** imports and exports belong only to places that buy or make goods: cities and ports, villages, shops, and working mines or strongholds that produce.  Natural landmarks and POIs never trade.  Think about who would buy our junk.

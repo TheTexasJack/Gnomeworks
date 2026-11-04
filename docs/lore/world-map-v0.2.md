@@ -2,7 +2,7 @@
 
 Master map planning document, expanded one section at a time.  Section 1 defines the geographic foundation; Section 2 inventories the proposed region-to-place hierarchy and constraints for later placement.
 
-**Source of truth:** Nathan's hand-drawn coastline and his statement that the main island is country-sized, approximately comparable to the UK and hundreds of miles across.  [Map Geography Audit v0.1](map-geography-audit-v0.1.md) catalogs named terrain and placement clues; [Location Gazetteer v0.5](location-gazetteer-v0.13.md) supplies proposed lore and location descriptions.  Geography invented in the gazetteer remains provisional and must fit the approved coastline, never the reverse.
+**Source of truth:** Nathan's hand-drawn coastline and his statement that the main island is country-sized, approximately comparable to the UK and hundreds of miles across.  [Map Geography Audit v0.1](map-geography-audit-v0.1.md) catalogs named terrain and placement clues; [Location Gazetteer v0.5](location-gazetteer-v0.14.md) supplies proposed lore and location descriptions.  Geography invented in the gazetteer remains provisional and must fit the approved coastline, never the reverse.
 
 ## 1. Geographic Outline
 
@@ -100,7 +100,7 @@ In particular, do not label islands A–E as Gnufoundland or Slaanilok, and do n
 
 ## 2. Regional Place Groupings and Placement Clues
 
-This is **the second map pass**, based on the latest [100-place Gazetteer v0.5](location-gazetteer-v0.13.md), the [geography audit](map-geography-audit-v0.1.md), and Section 1 of this map document.  It answers **what belongs to each proposed region** before determining exact city and POI coordinates.
+This is **the second map pass**, based on the latest [100-place Gazetteer v0.5](location-gazetteer-v0.14.md), the [geography audit](map-geography-audit-v0.1.md), and Section 1 of this map document.  It answers **what belongs to each proposed region** before determining exact city and POI coordinates.
 
 **Authority:** The grouping faithfully records the gazetteer's current parent-region assignments.  Those assignments and all local directions were drafted before the hand-drawn coastline.  They remain **proposed**, subject to Nathan and Alex's review.  The fixed constraints are the original coastline and the main island's country-sized scale.  No new site is declared canon or placed on a specific island silhouette by this pass.
 

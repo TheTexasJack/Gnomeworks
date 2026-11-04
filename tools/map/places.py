@@ -156,6 +156,8 @@ ADDED_PLACES = {
                         clue='Three standing stones on the southern hills of Gnonmoon.'),
     "Demon's Gutt": dict(x=118, y=1010, tier=2, label=(0, -8, "middle"), type='expedition', region='Gnonmoon',
                          clue='A dungeon in the western hills of Gnonmoon.'),
+    "Gassy Dog": dict(x=318, y=112, tier=2, label=(7, 4, "start"), type='settlement', region='Gnufoundland',
+                      clue='Small hamlet southeast of Werewolf London, on the trail to the Frozen Fields.'),
     "Monit-45": dict(x=1508, y=672, tier=2, label=(0, -9, "middle"), type='city', region='Slaanilok',
                      clue='Lizard town down in the trees of Island C.'),
 }
@@ -170,4 +172,12 @@ UNNAMED_TOWNS = {
     "gnonmoon-town-1": (192, 936, 'Gnonmoon'),     # on the shore of Zohee Bay
     "gnomerica-town-1": (1028, 786, 'Gnomerica'),   # in the forest east of Innie Lake
     "gnomerica-town-2": (1090, 630, 'Gnomerica'),   # north of Gnew York
+    # seven spares placed by Claudia for future use (2026-11-03)
+    "gnohio-town-1": (320, 468, 'Gnohio'),          # northwest coast of Gnohio
+    "gnohio-town-2": (424, 782, 'Gnohio'),          # south Gnohio, between Brokit Fixit and the hollow
+    "gnomerica-town-3": (900, 352, 'Gnomerica'),    # north coast, east of the Woods of the Elder
+    "gnomerica-town-4": (1200, 628, 'Gnomerica'),   # Port Gnasher's hill country
+    "slanic-town-1": (1040, 880, 'Slanic'),         # the southeast downs, up the coast from Brassin
+    "gnafrica-town-1": (395, 1062, 'Gnafrica'),     # south of Grit Spit, on the edge of the dunes
+    "gni-town-1": (1462, 862, 'Gni'),               # north end of the Island of Gni, in the palms
 }

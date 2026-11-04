@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.10'
+VERSION = '0.11'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -774,7 +774,7 @@ def build():
         dx, dy, anc = a['label']
         if a['tier'] == 1:
             text(a['x'] + dx, a['y'] + dy, name, 13.5, weight='bold', anchor=anc, ls=0.4)
-        elif a['type'] in ('poi', 'expedition'):
+        elif a['type'] in ('poi', 'expedition', 'settlement'):
             text(a['x'] + dx, a['y'] + dy, name, 9.4, anchor=anc)
         else:
             text(a['x'] + dx, a['y'] + dy, name, 11.5, weight='bold', anchor=anc)
@@ -1047,8 +1047,8 @@ def check(records):
         if inside(pt, lake_poly):
             problems.append(f"in the lake: {r['name']} {pt}")
     for uid, (x, y, reg) in UNNAMED_TOWNS.items():
-        if not on_land((x, y)):
-            problems.append(f'unnamed town in the sea: {uid} {(x, y)}')
+        if not on_land((x, y), 4) or inside((x, y), lake):
+            problems.append(f'unnamed town in the water or on the coast: {uid} {(x, y)}')
     for name, a in ADDED_PLACES.items():
         if not on_land((a['x'], a['y'])):
             problems.append(f"added place in the sea: {name}")

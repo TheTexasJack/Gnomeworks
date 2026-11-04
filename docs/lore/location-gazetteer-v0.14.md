@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.13 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.14 Working Draft)
 
 
 ## How to read this draft
@@ -41,7 +41,7 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **11 places**
+- VIII. Places added while mapping (outside the 100-name pool): **12 places**
 
 ## I. Major regions and the mapped area
 
@@ -1483,5 +1483,20 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **About:** A twisting cave that winds down into the hills like a long, grumbling belly.  Brave explorers say you can hear it growl.
 - **Major Facts:** Named by Nathan on 2026-11-03.  What lives at the bottom is still open.
 - **Flora:** Cave moss
+- **Fauna:**
+- **Bounties:**
+
+### Gassy Dog
+
+- **Name:** Gassy Dog
+- **Location:** Southeast of Werewolf London on Gnufoundland, along the trail to the Frozen Fields.
+- **Region:** Gnufoundland.
+- **Factory Imports:** None
+- **Factory Exports:** None
+- **Non-Factory Imports:** None
+- **Non-Factory Exports:** None
+- **About:** A tiny snowy hamlet of a few cozy houses, a woodpile, and one very old, very famous dog.  Everyone agrees the hamlet was named after him.  Nobody agrees on whether that was a compliment.
+- **Major Facts:** Named by Nathan on 2026-11-03.  Its people, its trade, and the dog's real name are still open.
+- **Flora:** Salt pine, frost moss
 - **Fauna:**
 - **Bounties:**

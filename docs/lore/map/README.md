@@ -1,14 +1,14 @@
-# Gnomadica master map, v0.10
+# Gnomadica master map, v0.11
 
-**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.10 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.13.md).  Nothing here is canon until Nathan approves it.
+**Status: working draft, awaiting canon review.**  Built by Claudia on 2026-11-03 (v0.1 through v0.11 the same night) from [World Map v0.2](../world-map-v0.2.md), the [geography audit](../map-geography-audit-v0.1.md), and the [gazetteer](../location-gazetteer-v0.14.md).  Nothing here is canon until Nathan approves it.
 
 ## Files
 
 | File | What it is |
 | --- | --- |
-| `gnomadica-map-v0.10.svg` | The master map.  Opens in any browser or in Inkscape. |
-| `gnomadica-map-v0.10.html` | The same map with zoom, search, layer switches, and a card for every pin. |
-| `gnomadica-locations-v0.10.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
+| `gnomadica-map-v0.11.svg` | The master map.  Opens in any browser or in Inkscape. |
+| `gnomadica-map-v0.11.html` | The same map with zoom, search, layer switches, and a card for every pin. |
+| `gnomadica-locations-v0.11.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
@@ -16,6 +16,12 @@ Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same
 ## The coastline
 
 The coastlines come from the written description of Nathan's sketch in World Map v0.2, section 1.2.  Nathan's pen ruined the original, and he treats it as a rough guide.  The shapes are separate from the pins, so any coastline change in `build_map.py` is safe: the pin check flags anything that ends up in the water.
+
+## Changes in v0.11
+
+- **Gassy Dog** (Nathan), a small hamlet southeast of Werewolf London on Gnufoundland.
+- Seven spare unnamed towns placed by Claudia for future use: northwest Gnohio coast, south Gnohio, the north coast east of the Woods of the Elder, Port Gnasher's hill country, the southeast downs above Brassin, south Gnafrica by the dunes, and the north end of the Island of Gni.
+- Unnamed towns are now checked to stay off the coast and out of Innie Lake.
 
 ## Changes in v0.10
 
@@ -85,6 +91,6 @@ These have no names and can move or vanish freely: the woods and downs between G
 
 - Names for the seas.
 - Gnod Dam's story: who built it, when, and what lies at the bottom of the drowned valley.
-- Names for the unnamed towns on Shen Shin, Slaanilok, Gnomerica, and Gnonmoon.
+- Names for the unnamed towns (15 so far, across every region and island except Gnufoundland).
 - A scale bar.  The main island is hundreds of miles across, so the map carries no scale yet.
 - Which master-map pins should drop to regional maps later (shops, shrines, single monuments are drawn small and can be hidden in the viewer).

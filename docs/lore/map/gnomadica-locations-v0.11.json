@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.10",
+ "version": "0.11",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -1347,6 +1347,18 @@
    "status": "placed by Nathan"
   },
   {
+   "id": "gassy-dog",
+   "name": "Gassy Dog",
+   "type": "settlement",
+   "region": "Gnufoundland",
+   "x": 318,
+   "y": 112,
+   "tier": 2,
+   "clue": "Small hamlet southeast of Werewolf London, on the trail to the Frozen Fields.",
+   "mentions": "Gnufoundland",
+   "status": "placed by Nathan"
+  },
+  {
    "id": "monit-45",
    "name": "Monit-45",
    "type": "city",
@@ -1452,6 +1464,90 @@
    "tier": 2,
    "clue": "An unnamed town on Gnomerica, kept as an option for later.",
    "mentions": "Gnomerica",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnohio-town-1",
+   "name": "Gnohio 1 (name open)",
+   "type": "city",
+   "region": "Gnohio",
+   "x": 320,
+   "y": 468,
+   "tier": 2,
+   "clue": "An unnamed town on Gnohio, kept as an option for later.",
+   "mentions": "Gnohio",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnohio-town-2",
+   "name": "Gnohio 2 (name open)",
+   "type": "city",
+   "region": "Gnohio",
+   "x": 424,
+   "y": 782,
+   "tier": 2,
+   "clue": "An unnamed town on Gnohio, kept as an option for later.",
+   "mentions": "Gnohio",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnomerica-town-3",
+   "name": "Gnomerica 3 (name open)",
+   "type": "city",
+   "region": "Gnomerica",
+   "x": 900,
+   "y": 352,
+   "tier": 2,
+   "clue": "An unnamed town on Gnomerica, kept as an option for later.",
+   "mentions": "Gnomerica",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnomerica-town-4",
+   "name": "Gnomerica 4 (name open)",
+   "type": "city",
+   "region": "Gnomerica",
+   "x": 1200,
+   "y": 628,
+   "tier": 2,
+   "clue": "An unnamed town on Gnomerica, kept as an option for later.",
+   "mentions": "Gnomerica",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "slanic-town-1",
+   "name": "Slanic 1 (name open)",
+   "type": "city",
+   "region": "Slanic",
+   "x": 1040,
+   "y": 880,
+   "tier": 2,
+   "clue": "An unnamed town on Slanic, kept as an option for later.",
+   "mentions": "Slanic",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnafrica-town-1",
+   "name": "Gnafrica 1 (name open)",
+   "type": "city",
+   "region": "Gnafrica",
+   "x": 395,
+   "y": 1062,
+   "tier": 2,
+   "clue": "An unnamed town on Gnafrica, kept as an option for later.",
+   "mentions": "Gnafrica",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gni-town-1",
+   "name": "Gni 1 (name open)",
+   "type": "city",
+   "region": "Gni",
+   "x": 1462,
+   "y": 862,
+   "tier": 2,
+   "clue": "An unnamed town on Gni, kept as an option for later.",
+   "mentions": "Gni",
    "status": "placed by Nathan, name open"
   }
  ]
