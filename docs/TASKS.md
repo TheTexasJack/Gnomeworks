@@ -54,6 +54,8 @@ Late-game lag fix (one item roll per tick) and the next-item ticker, a 1e300 saf
 
 Producers for the 6 empty stations (the Wizard took the Golem Pilot's 1.6M slot): Golem Pilot, Boiler Stoker (20M), Gnome Bard (260M), Shroom Farmer (3.6B), Airship Captain (51B), Clockwork Chrononaut (750B), Moonsmith (11T).
 
+Future producers unlock with regions (see the Packing Line in DESIGNS.md).  Moonsmith comes from Gnonmoon, the last region.  Other region pairings are open.
+
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
 Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
