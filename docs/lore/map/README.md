@@ -91,6 +91,6 @@ These have no names and can move or vanish freely: the woods and downs between G
 
 - Names for the seas.
 - Gnod Dam's story: who built it, when, and what lies at the bottom of the drowned valley.
-- Names for the unnamed towns (15 so far, across every region and island except Gnufoundland).
+- Names for the unnamed towns (15 so far; Gnufoundland and Gno Dao Cradle have none yet).
 - A scale bar.  The main island is hundreds of miles across, so the map carries no scale yet.
 - Which master-map pins should drop to regional maps later (shops, shrines, single monuments are drawn small and can be hidden in the viewer).
