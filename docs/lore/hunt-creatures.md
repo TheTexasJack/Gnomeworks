@@ -20,7 +20,7 @@ Alex's section: the creatures the gnomes (the player) hunt with the crossbow to 
 
 ## Creatures
 
-Names and entries by Alex, 2026-11-04.  Every entry is written by Dr. Quartz, a traveling naturalist, in his field notes.
+Names and entries by Alex, 2026-11-04.  Every entry is written by Dr. Quartz, a traveling naturalist, in his field notes.  **Who he is (Nathan and Alex, 2026-11-04):** mostly Professor Oak (a real, trusted naturalist), with a little Volo (he embellishes, and his notes are not always reliable).  Someone else sometimes adds a dry note after his, as in the Improbable Gryphon entry.
 
 | Game creature | Picture file | Alex's name | Places it ties to |
 | --- | --- | --- | --- |
