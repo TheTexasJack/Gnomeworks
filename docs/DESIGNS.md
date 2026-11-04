@@ -78,6 +78,8 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **Regions unlock as you go:** after a set number of successful missions, the next region opens.  Gnomerica (the factory's home) is first.  Its unlock also opens that region's Lore tab entries.
 - **The gazetteer's imports and exports are base values.**  The game reads a destinations file generated from the gazetteer, so lore and game never drift apart.
 - **Variable needs and a market for imports and exports are held for a separate future game,** kept out of the Packing Line.
+- **Region unlock by expedition (Nathan's idea, 2026-11-04, details open):** after enough successful missions, an Expedition button appears.  The player drags a few crew from the factory into a small adventure squad (mostly cosmetic) and sends them off.  About 10 minutes later the squad returns with a short story: why the region opens up, who matters there, and what they want.  The region is then unlocked.
+    - Draft notes from Claudia: the story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.  The timer should run while the player is away.  For kids, the expedition always succeeds, so any mishaps are funny and never cost anything.  Sending crew should not pause production.  Unlock order is open: a fixed order is simplest, and letting players pick a neighboring region on the map is the fancier option.
 - **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
 - **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
