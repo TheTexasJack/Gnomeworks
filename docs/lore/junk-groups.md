@@ -1,6 +1,6 @@
 # Junk groups
 
-One Lore tab entry per group, answering why the gnome factory makes so much of it.  No entries for single items: everyone knows what a sock is.  The question is why gnomes make so many.
+One Gnomopedia entry per group, answering why the gnome factory makes so much of it.  No entries for single items: everyone knows what a sock is.  The question is why gnomes make so many.
 
 ## Entry template
 
@@ -9,7 +9,7 @@ One Lore tab entry per group, answering why the gnome factory makes so much of i
 
 - Why the factory makes it:
 - Who buys it (customers and regions, for the Packing Line):
-- Lore tab text: a few sentences.
+- Gnomopedia text: a few sentences.
 ```
 
 ## Groups

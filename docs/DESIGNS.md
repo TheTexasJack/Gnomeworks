@@ -77,13 +77,13 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **Open and Close buttons.**  Open raises the shipping door and makes the shelf draggable.  Close shuts it, and the player goes back to the clicker.
 - **Destinations come from the Gnomadica map and gazetteer** (decided 2026-11-04).  Each region gets its own stamp; towns are the address line.  Early shifts check only the region stamp, later shifts check the town too.
 - **Every island is its own region:** Gnufoundland, Shen Shin, Slaanilok, Gni, and Gnonmoon, alongside the five main-island regions.  Ten regions, ten stamps.
-- **Regions unlock as you go:** after a set number of successful missions, the next region opens.  Gnomerica (the factory's home) is first.  Its unlock also opens that region's Lore tab entries.
+- **Regions unlock as you go:** after a set number of successful missions, the next region opens.  Gnomerica (the factory's home) is first.  Its unlock also opens that region's Gnomopedia entries.
 - **The gazetteer's imports and exports are base values.**  The game reads a destinations file generated from the gazetteer, so lore and game never drift apart.
 - **Variable needs and a market for imports and exports are held for a separate future game,** kept out of the Packing Line.
 - **Region unlock by expedition (Nathan's idea, 2026-11-04, details open):** after enough successful missions, an Expedition button appears.  The player drags a few crew from the factory into a small adventure squad (mostly cosmetic) and sends them off.  About 10 minutes later the squad returns with a short story: why the region opens up, who matters there, and what they want.  The region is then unlocked.
     - **Theater, not a mini-game** (Nathan): the squad is about five adventurers from the factory.  They are not counted or spent, and sending them never touches production.
     - **Guardrails (agreed):** the timer runs while the player is away; the expedition always succeeds, and any mishaps are only funny.
-    - The return story doubles as the region's first Lore tab entry, and "what they want" can become that region's first order on the order board.
+    - The return story doubles as the region's first Gnomopedia entry, and "what they want" can become that region's first order on the order board.
     - **Unlock order (decided):** a counterclockwise spiral around the map.  Gnomerica is home.  The main island goes Gnohio, Gnafrica, Slanic, Gno Dao Cradle.  The outer islands go Gni, Slaanilok, Shen Shin, Gnufoundland, Gnonmoon.  The pattern itself is the reason.
     - **Each unlock adds a new thing to watch for and a new step in sending a package.**  Details to be worked out later.
     - **Future producers come from regions** (Nathan, 2026-11-04): a region unlock can unlock the producer that region supplies.  Gnonmoon is last, so the **Moonsmith is last** too.  The other pairings are open.
@@ -184,9 +184,9 @@ Notes to settle when this is built (Claudia):
 
 **Needs first:** a Gnomeworks lore bible (the machine, the factory, where Tiny Monsters come from, what makes a form glowing, goopy, or evil), written with Nathan before any per-monster entries.  Could extend to junk and Number Twos later.
 
-## Lore tab
+## Gnomopedia
 
-**Discussion stage (2026-11-03).**  A Lore tab in the style of the Mass Effect codex: players who want to know more can tap and read, and players who just want to click never have to.  Sections: Tiny Monsters (the shelf info card), hunt creatures (Alex's), regions, junk groups, the factory, and TNP Corp.  Writing lives in [lore/](lore/README.md).
+**Discussion stage (2026-11-03).**  A Gnomopedia in the style of the Mass Effect codex: players who want to know more can tap and read, and players who just want to click never have to.  Sections: Tiny Monsters (the shelf info card), hunt creatures (Alex's), regions, junk groups, the factory, and TNP Corp.  Writing lives in [lore/](lore/README.md).
 
 ## Rogue Gnome (Jarrett's idea)
 
@@ -215,4 +215,4 @@ Ideas with merit that are parked until the game is further along.  Not planned, 
 
 | Idea | What it needs | Notes |
 | --- | --- | --- |
-| Lore narration: a small play button at the end of each Lore tab entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |
+| Lore narration: a small play button at the end of each Gnomopedia entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |

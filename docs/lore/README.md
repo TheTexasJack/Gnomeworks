@@ -4,14 +4,15 @@ The home for everything about why the gnome factory does what it does.  Nathan, 
 
 Lore has only small effects on gameplay.  Its job is the feel of the world: players who want to know more can read, and players who just want to click never have to.
 
-## The Lore tab (planned, discussion stage)
+## The Gnomopedia (the planned lore tab, discussion stage)
 
-A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is built yet.
+The Gnomopedia: a lore tab in the game, in the spirit of the Mass Effect codex (named 2026-11-04).  Nothing is built yet.
 
 - **Decided:** entries fill in as players discover things.  A Tiny Monster's entry opens when it's caught, a hunt creature's when it's first shot, a region's when the dock first ships there.  Undiscovered entries stay locked, like the ??? tiles on the shelf.
 - **Far future:** a narration button on each entry.  Tracked in [DESIGNS.md](../DESIGNS.md#far-future).
 
 - **Tiny Monsters:** tap a monster on the shelf to open its entry, like a Pokedex (already planned as the Tiny Monster info card in [DESIGNS.md](../DESIGNS.md)).
+- **Dr. Quartz:** the traveling naturalist who writes the creature entries (mostly Professor Oak, a little Volo).  He appears only in the Gnomopedia.  Portrait: `assets/lore/dr_quartz.webp`.
 - **Hunt creatures:** Alex's idea.  Entries for the creatures the gnomes hunt to feed the Megagnome, and why (for example, why there are so many Banana Monsters).
 - **Regions:** each region's name and why it's called that, notes on its style, a picture, and its lore.  The Packing Line needs these for stamps, labels, and orders.
 - **Junk groups:** why the factory makes so much of each group.  The entry for Laundry & Clothing explains why gnomes make socks, without explaining what a sock is.

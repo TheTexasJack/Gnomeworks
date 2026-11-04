@@ -14,7 +14,7 @@ Tap a Tiny Monster on the shelf to open its entry, like a Pokedex.  11 families,
 ### <Name> (<family>, <form>)
 
 - Region:
-- Lore tab text: a few sentences.
+- Gnomopedia text: a few sentences.
 ```
 
 ## Families
