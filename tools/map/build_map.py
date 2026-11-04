@@ -1092,5 +1092,9 @@ if __name__ == '__main__':
     html = (tpl.replace('__VERSION__', VERSION).replace('__SVG__', svg_inline)
                .replace('__DATA__', json.dumps(data, ensure_ascii=False).replace('</', '<\\/')))
     open(os.path.join(OUT_DIR, f'gnomadica-map-v{VERSION}.html'), 'w', encoding='utf-8').write(html)
+    # Stable public address for sharing: https://thetexasjack.github.io/Gnomeworks/map/
+    # Always the latest build, so the link never changes when the version bumps.
+    os.makedirs(os.path.join(ROOT, 'map'), exist_ok=True)
+    open(os.path.join(ROOT, 'map', 'index.html'), 'w', encoding='utf-8').write(html)
     print(svg_path, f'{os.path.getsize(svg_path) / 1024:.0f} KB', len(recs), 'locations')
     print('\n'.join(probs) if probs else 'all pins on land')

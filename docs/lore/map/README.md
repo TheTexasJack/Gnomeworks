@@ -11,6 +11,8 @@
 | `gnomadica-locations-v0.11.json` | All 100 entries with pin coordinates, type, region, and the gazetteer's own placement clue, plus places added while mapping and unnamed towns (`added_places`). |
 | `../../../tools/map/` | The builder.  `places.py` holds the pins; `build_map.py` holds the coastlines, lake, rivers, terrain, and roads. |
 
+**Shareable link:** https://thetexasjack.github.io/Gnomeworks/map/ always shows the latest map.  The build copies the viewer to `/map/index.html` on every run, separate from the game.
+
 Rebuild with `python3 tools/map/build_map.py`.  The build is seeded, so the same inputs always draw the same map.  It refuses to run unless all 100 gazetteer names have a pin, and it reports any pin that lands in the sea or the lake.
 
 ## The coastline
