@@ -73,7 +73,7 @@ __SVG__
       <h2>Regions</h2>
       <ul class="regions" id="regions"></ul>
     </div>
-    <p class="draft">Proposed north is the top of the page.  Island B is Shen Shin and Island E is the Island of Gni.  Island D is unclaimed.  Region washes show where a region sits, and no borders are drawn yet.  The Inner Lake is a reservoir behind Gnod Dam.</p>
+    <p class="draft">Proposed north is the top of the page.  Island B is Shen Shin.  Island E is the Island of Gni, its own region.  Island D is unclaimed.  Region washes show where a region sits, and no borders are drawn yet.  The Inner Lake is a reservoir behind Gnod Dam.</p>
   </aside>
 </div>
 <script>
@@ -84,7 +84,7 @@ const W = DATA.page.width, H = DATA.page.height;
 let vb = { x: 0, y: 0, w: W, h: H };
 const byId = {}; DATA.locations.concat(DATA.added_places || []).forEach(l => byId[l.id] = l);
 const TYPE = { region: 'Region', city: 'City or port', settlement: 'Village or settlement', natural: 'Natural landmark',
-  expedition: 'Dungeon, mine or ruin', business: 'Shop or attraction', poi: 'Roadside curiosity', landmark: 'Landmark (new)' };
+  expedition: 'Dungeon, mine, ruin or stronghold', business: 'Shop or attraction', poi: 'Roadside curiosity', landmark: 'Landmark (new)' };
 const ADDED = new Set((DATA.added_places || []).map(l => l.id));
 
 function apply() { svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`); }
@@ -148,10 +148,13 @@ document.getElementById('reset').onclick = fit;
 document.querySelectorAll('input[data-c]').forEach(cb => cb.addEventListener('change', () => document.body.classList.toggle(cb.dataset.c, !cb.checked)));
 
 const ul = document.getElementById('regions');
-DATA.locations.filter(l => l.type === 'region' && l.region !== 'Gnomadica').forEach(l => {
-  const li = document.createElement('li'); const n = DATA.locations.filter(x => x.region === l.region && x.type !== 'region').length;
-  li.innerHTML = `<span class="chip" style="background:${DATA.regions[l.region].color}"></span>`;
-  li.appendChild(document.createTextNode(`${l.name}  (${n})`)); li.onclick = () => show(l.id, true); ul.appendChild(li);
+const everyone = DATA.locations.concat(DATA.added_places || []);
+Object.entries(DATA.regions).forEach(([name, r]) => {
+  const li = document.createElement('li'); const n = everyone.filter(x => x.region === name && x.type !== 'region').length;
+  li.innerHTML = `<span class="chip" style="background:${r.color}"></span>`;
+  li.appendChild(document.createTextNode(`${name}  (${n})`));
+  li.onclick = () => { const rec = DATA.locations.find(x => x.type === 'region' && x.name === name); if (rec) show(rec.id, true); else centerOn(r.x, r.y, W / 3.2); };
+  ul.appendChild(li);
 });
 window.addEventListener('resize', fit); fit();
 </script>

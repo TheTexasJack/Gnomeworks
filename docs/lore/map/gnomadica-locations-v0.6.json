@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.5",
+ "version": "0.6",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -11,25 +11,44 @@
  "notes": "Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.",
  "regions": {
   "Gnomerica": {
-   "color": "#d9a441"
+   "color": "#d9a441",
+   "x": 790,
+   "y": 470
   },
   "Gnohio": {
-   "color": "#7fa65a"
+   "color": "#7fa65a",
+   "x": 420,
+   "y": 405
   },
   "Gnafrica": {
-   "color": "#cf7346"
+   "color": "#cf7346",
+   "x": 470,
+   "y": 880
   },
   "Slanic": {
-   "color": "#4f9a8f"
+   "color": "#4f9a8f",
+   "x": 770,
+   "y": 935
   },
   "Gno Dao Cradle": {
-   "color": "#8a77b0"
+   "color": "#8a77b0",
+   "x": 1120,
+   "y": 300
   },
   "Gnufoundland": {
-   "color": "#8fb3d6"
+   "color": "#8fb3d6",
+   "x": 290,
+   "y": 235
   },
   "Slaanilok": {
-   "color": "#e0887a"
+   "color": "#e0887a",
+   "x": 1460,
+   "y": 560
+  },
+  "Gni": {
+   "color": "#b0609a",
+   "x": 1445,
+   "y": 940
   }
  },
  "islands": {
@@ -38,7 +57,7 @@
   "B": "Shen Shin (named by Nathan 2026-11-03)",
   "C": "Slaanilok (proposed)",
   "D": "unclaimed",
-  "E": "Island of Gni, home of Eversummer and Castle Gnaagh (named by Nathan 2026-11-03)"
+  "E": "Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)"
  },
  "locations": [
   {
@@ -813,7 +832,7 @@
    "id": "eversummer",
    "name": "Eversummer",
    "type": "city",
-   "region": "Slaanilok",
+   "region": "Gni",
    "x": 1445,
    "y": 955,
    "tier": 1,
@@ -1271,12 +1290,12 @@
    "id": "gnaagh",
    "name": "Gnaagh",
    "type": "expedition",
-   "region": "Island of Gni",
+   "region": "Gni",
    "x": 1446,
    "y": 1022,
    "tier": 1,
    "clue": "The castle of the Knights of Gni, on the south end of the Island of Gni below Eversummer.",
-   "mentions": "Island of Gni",
+   "mentions": "Gni",
    "status": "placed by Nathan"
   },
   {

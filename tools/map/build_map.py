@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.5'
+VERSION = '0.6'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -34,6 +34,7 @@ C = dict(
 REGION_COLORS = {
     'Gnomerica': '#d9a441', 'Gnohio': '#7fa65a', 'Gnafrica': '#cf7346', 'Slanic': '#4f9a8f',
     'Gno Dao Cradle': '#8a77b0', 'Gnufoundland': '#8fb3d6', 'Slaanilok': '#e0887a',
+    'Gni': '#b0609a',
 }
 
 rng = np.random.default_rng(1103)  # seed: the day this map started (11/03)
@@ -230,6 +231,8 @@ ISLETS = [(86, 262, 7), (74, 300, 5), (572, 112, 6), (586, 88, 4), (1618, 150, 7
           (232, 744, 3), (1196, 760, 4), (614, 1040, 4)]
 
 from places import ADDED_PLACES, UNNAMED_TOWNS  # noqa: E402
+# Gni became its own region on 2026-11-03 (Nathan), so Eversummer moves out of Slaanilok.
+REGION_OVERRIDES = {'Eversummer': 'Gni'}
 rough_main = 0.2
 main = fractal(MAIN, iters=5, rough=rough_main)
 isles = {k: fractal(v, iters=5, rough=0.19) for k, v in
@@ -513,7 +516,8 @@ def build():
         'Slanic': [(800, 990, 120), (640, 920, 70), (990, 990, 55)],
         'Gno Dao Cradle': [(1040, 420, 90), (1170, 300, 95), (1260, 150, 60), (1170, 510, 55)],
         'Gnufoundland': [(300, 160, 170), (470, 80, 80)],
-        'Slaanilok': [(1465, 600, 120), (1445, 940, 100)],
+        'Slaanilok': [(1465, 600, 120)],
+        'Gni': [(1445, 930, 105)],
     }
     add('<g id="washes">')
     for reg, bl in blobs.items():
@@ -685,7 +689,7 @@ def build():
 
     # ---------------- region labels
     add('<g id="region-labels" font-style="normal">')
-    text(1434, 942, 'ISLAND OF GNI', 11, fill='#3d4f5c', anchor='middle', weight='bold', ls=3, rot=-85, opacity=0.85)
+    text(1434, 942, 'ISLAND OF GNI', 11, fill=shade(REGION_COLORS['Gni'], 0.5), anchor='middle', weight='bold', ls=3, rot=-85, opacity=0.85)
     text(1532, 214, 'SHEN SHIN', 15, fill='#3d4f5c', anchor='middle', weight='bold', ls=5, rot=-74, opacity=0.85)
     reg_lbl = {
         'Gnomerica': (780, 476, 0, 21), 'Gnohio': (400, 415, 0, 21), 'Gnafrica': (452, 1086, 0, 19),
@@ -726,7 +730,7 @@ def build():
     for name, (x, y, tier, lab) in PLACES.items():
         meta = info[name]
         typ = meta['type']
-        rec = dict(id=slug(name), name=name, type=typ, region=name if typ == 'region' else region_of(meta['parent'], name), x=x, y=y,
+        rec = dict(id=slug(name), name=name, type=typ, region=name if typ == 'region' else REGION_OVERRIDES.get(name, region_of(meta['parent'], name)), x=x, y=y,
                    tier=tier, clue=meta['clue'], mentions=meta['mentions'], status='proposed')
         records.append(rec)
         if typ == 'region' or name in AREA_LABELS:
@@ -1049,9 +1053,9 @@ if __name__ == '__main__':
         map='Gnomadica master map', version=VERSION, status='working draft, awaiting canon review',
         page=dict(width=W, height=H, units='svg', north='page top (proposed)'),
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
-        regions={k: dict(color=v) for k, v in REGION_COLORS.items()},
+        regions={k: dict(color=v, x=(PLACES[k][0] if k in PLACES else 1445), y=(PLACES[k][1] if k in PLACES else 940)) for k, v in REGION_COLORS.items()},
         islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin (named by Nathan 2026-11-03)',
-                     C='Slaanilok (proposed)', D='unclaimed', E='Island of Gni, home of Eversummer and Castle Gnaagh (named by Nathan 2026-11-03)'),
+                     C='Slaanilok (proposed)', D='unclaimed', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
                         clue='The great gnome dam at the south tip of the Inner Lake.  The gnomes dammed a river valley here, '

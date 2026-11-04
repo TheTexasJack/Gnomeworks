@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.10 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.11 Working Draft)
 
 
 ## How to read this draft
@@ -29,7 +29,7 @@
 | Gnufoundland | Northern offshore island | Fog, snow, and cold-water ports |
 | Slaanilok | Eastern offshore islands | Ferries, sea trade, and warm coasts |
 | Shen Shin | Northeastern offshore island (Island B) | Three towns, names open |
-| Island of Gni | Southeastern offshore island (Island E) | Eversummer and Castle Gnaagh |
+| Gni | Southeastern offshore island, the Island of Gni (Island E) | Knights, Eversummer, and Castle Gnaagh |
 
 ## Category index
 
@@ -332,8 +332,8 @@
 ### Eversummer
 
 - **Name:** Eversummer
-- **Location:** Southernmost sunny island of the eastern chain.
-- **Region:** Slaanilok.
+- **Location:** Middle of the Island of Gni, the sunny island at the south end of the Lantern Chain.
+- **Region:** Gni.
 - **Factory Imports:** Flip-Flop; Fishing Rod
 - **Factory Exports:** None
 - **Non-Factory Imports:** Sunscreen; cool ice
@@ -1412,9 +1412,9 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 
 - **Name:** Island of Gni
 - **Location:** The long island in the southeast sea, at the south end of the Lantern Chain ferry (Island E on the map).
-- **Region:** Gnomadica, southeastern island.
+- **Region:** Gnomadica, its own region.
 - **About:** A long, sunny island with palm woods at its north end, the town of Eversummer in the middle, and a castle on its southern tip.  The knights who live here are famous for one very short word.
-- **Major Facts:** Named by Nathan on 2026-11-03.  Eversummer and Castle Gnaagh are here.  Whether Gni belongs to Slaanilok or stands on its own is still open.
+- **Major Facts:** Named by Nathan on 2026-11-03, and made its own region the same night.  Eversummer and Castle Gnaagh are here.  Gni gets to have fun with its theme: knights on quests, prized shrubberies, and coconuts everywhere, which is why Eversummer can never settle whether a coconut is a fruit or a very stubborn bowling ball.  The ferry from Legipt is still its main trade route north.
 - **Flora:** Palms
 - **Fauna:**
 - **Bounties:**
@@ -1423,7 +1423,7 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 
 - **Name:** Gnaagh
 - **Location:** Southern tip of the Island of Gni, below Eversummer.
-- **Region:** Island of Gni.
+- **Region:** Gni.
 - **About:** A stone castle with two towers and a red flag, home of the Knights of Gni.  Visitors are welcome, as long as they bring a shrubbery.
 - **Major Facts:** Named by Nathan on 2026-11-03.  The knights, their customs, and the castle's history are still open.
 - **Flora:** Palms

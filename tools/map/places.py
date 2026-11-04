@@ -150,7 +150,7 @@ AREA_LABELS = {
 ADDED_PLACES = {
     "Legipt": dict(x=1452, y=708, tier=1, label=(10, 9, "start"), type='city', region='Slaanilok',
                    clue='Big, ancient lizard city at the south end of Island C, where the trade route leaves south for Eversummer.'),
-    "Gnaagh": dict(x=1446, y=1022, tier=1, label=(12, 2, "start"), type='expedition', region='Island of Gni',
+    "Gnaagh": dict(x=1446, y=1022, tier=1, label=(12, 2, "start"), type='expedition', region='Gni',
                    clue='The castle of the Knights of Gni, on the south end of the Island of Gni below Eversummer.'),
     "Monit-45": dict(x=1508, y=672, tier=2, label=(0, -9, "middle"), type='city', region='Slaanilok',
                      clue='Lizard town down in the trees of Island C.'),

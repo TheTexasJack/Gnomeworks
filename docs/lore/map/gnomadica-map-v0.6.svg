@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1660 1150" width="1660" height="1150" font-family="'Palatino Linotype','Book Antiqua',Palatino,'URW Palladio L',P052,'TeX Gyre Pagella',Georgia,serif">
-<title>Gnomadica master map v0.5 (working draft)</title>
+<title>Gnomadica master map v0.6 (working draft)</title>
 <defs>
 <filter id="paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.27  0 0 0 0 0.16  0 0 0 0.55 0"/></filter>
 <filter id="mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="4" seed="3"/><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.36  0 0 0 0 0.2  0 0 0 0.5 -0.12"/></filter>
@@ -404,7 +404,8 @@
 <g filter="url(#wash)" opacity="0.42"><circle cx="800" cy="990" r="120" fill="#4f9a8f"/><circle cx="640" cy="920" r="70" fill="#4f9a8f"/><circle cx="990" cy="990" r="55" fill="#4f9a8f"/></g>
 <g filter="url(#wash)" opacity="0.42"><circle cx="1040" cy="420" r="90" fill="#8a77b0"/><circle cx="1170" cy="300" r="95" fill="#8a77b0"/><circle cx="1260" cy="150" r="60" fill="#8a77b0"/><circle cx="1170" cy="510" r="55" fill="#8a77b0"/></g>
 <g filter="url(#wash)" opacity="0.42"><circle cx="300" cy="160" r="170" fill="#8fb3d6"/><circle cx="470" cy="80" r="80" fill="#8fb3d6"/></g>
-<g filter="url(#wash)" opacity="0.42"><circle cx="1465" cy="600" r="120" fill="#e0887a"/><circle cx="1445" cy="940" r="100" fill="#e0887a"/></g>
+<g filter="url(#wash)" opacity="0.42"><circle cx="1465" cy="600" r="120" fill="#e0887a"/></g>
+<g filter="url(#wash)" opacity="0.42"><circle cx="1445" cy="930" r="105" fill="#b0609a"/></g>
 </g>
 <rect width="1660" height="1150" filter="url(#mottle)" opacity="0.5"/>
 <use href="#land0" fill="none" stroke="#d8c08a" stroke-width="14" opacity="0.7" filter="url(#soft)"/>
@@ -2239,7 +2240,7 @@
 <use href="#boat" transform="translate(1050 120) scale(1.1)"/>
 <use href="#boat" transform="translate(60 640) scale(1)"/>
 <g id="region-labels" font-style="normal">
-<text x="1434.0" y="942.0" font-size="11" fill="#3d4f5c" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="3" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-85 1434.0 942.0)">ISLAND OF GNI</text>
+<text x="1434.0" y="942.0" font-size="11" fill="#58304d" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="3" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-85 1434.0 942.0)">ISLAND OF GNI</text>
 <text x="1532.0" y="214.0" font-size="15" fill="#3d4f5c" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="5" opacity="0.85" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke" transform="rotate(-74 1532.0 214.0)">SHEN SHIN</text>
 <text x="780.0" y="476.0" font-size="21" fill="#61491d" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNOMERICA</text>
 <text x="400.0" y="415.0" font-size="21" fill="#394a28" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="7" opacity="0.8" stroke="#f3e7c6" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNOHIO</text>
@@ -2609,7 +2610,7 @@
 <text x="760.0" y="78.0" font-size="30" fill="#2b2118" text-anchor="middle" font-weight="bold" font-style="normal" letter-spacing="8" opacity="1">GNOMADICA</text>
 <text x="760.0" y="98.0" font-size="12.5" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Gnome Island and the Nearby Isles</text>
 <line x1="670" y1="108" x2="850" y2="108" stroke="#a07c3c" stroke-width="0.8"/>
-<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.5  ·  working draft, awaiting canon review</text>
+<text x="760.0" y="123.0" font-size="9.5" fill="#7a3b2a" text-anchor="middle" font-weight="normal" font-style="normal" letter-spacing="0.5" opacity="1">Master Map v0.6  ·  working draft, awaiting canon review</text>
 <text x="760.0" y="135.0" font-size="8" fill="#4a3b2a" text-anchor="middle" font-weight="normal" font-style="italic" letter-spacing="0" opacity="1">Charted for The Stoned Gnome · Gnomeworks</text>
 </g>
 <g id="compass">
