@@ -28,7 +28,7 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [location-gazetteer-v0.12.md](location-gazetteer-v0.12.md) | 100 places plus Innie Lake, Gnod Dam, Shen Shin, Legipt, Monit-45, the Island of Gni, and Gnaagh; trades at 49 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.12 review draft, awaiting Nathan and Alex** |
 | [map-geography-audit-v0.1.md](map-geography-audit-v0.1.md) | 50 named terrain-bearing sites, 20 geographic systems, 11 relationship chains, and placement clues for all 100 locations | **First-pass map planning, not canon** |
 | [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
-| [map/](map/README.md) | Gnomadica master map v0.7 (Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.7 draft map, awaiting canon review** |
+| [map/](map/README.md) | Gnomadica master map v0.8 (Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.8 draft map, awaiting canon review** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss | Waiting on Alex |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |

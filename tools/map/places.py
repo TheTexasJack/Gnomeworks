@@ -163,4 +163,6 @@ UNNAMED_TOWNS = {
     "shen-shin-town-3": (1484, 322, 'Shen Shin'),
     "slaanilok-town-1": (1398, 612, 'Slaanilok'),   # on the bay edge, where the Port Gnasher ferry lands
     "slaanilok-town-2": (1478, 494, 'Slaanilok'),   # north shore, toward the Shen Shin ferry
+    "gnomerica-town-1": (1028, 786, 'Gnomerica'),   # in the forest east of Innie Lake
+    "gnomerica-town-2": (1090, 630, 'Gnomerica'),   # north of Gnew York
 }

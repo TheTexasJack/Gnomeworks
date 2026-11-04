@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.7",
+ "version": "0.8",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -1380,6 +1380,30 @@
    "tier": 2,
    "clue": "An unnamed town on Slaanilok, kept as an option for later.",
    "mentions": "Slaanilok",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnomerica-town-1",
+   "name": "Gnomerica 1 (name open)",
+   "type": "city",
+   "region": "Gnomerica",
+   "x": 1028,
+   "y": 786,
+   "tier": 2,
+   "clue": "An unnamed town on Gnomerica, kept as an option for later.",
+   "mentions": "Gnomerica",
+   "status": "placed by Nathan, name open"
+  },
+  {
+   "id": "gnomerica-town-2",
+   "name": "Gnomerica 2 (name open)",
+   "type": "city",
+   "region": "Gnomerica",
+   "x": 1090,
+   "y": 630,
+   "tier": 2,
+   "clue": "An unnamed town on Gnomerica, kept as an option for later.",
+   "mentions": "Gnomerica",
    "status": "placed by Nathan, name open"
   }
  ]
