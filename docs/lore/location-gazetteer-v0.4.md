@@ -48,8 +48,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** trade permits
 - **Non-Factory Exports:** printed shipping charts; printed island storybooks
-- **About:** The busy little corner of the world where somebody always needs a sock and somebody else has three thousand.  Its ports connect every strange community in the neighborhood.
-- **Major Facts:** Gnomadica is a working name for the mapped area, not the entire planet.  The world beyond the map stays mysterious.  Factory headquarters sits in Cogbottom.
+- **About:** The busy little corner of the world where somebody always needs a sock and somebody else has three thousand.  Its ports connect every strange community in the neighborhood.  From the brass-smoked chimneys of Cogbottom to the sea lanterns of Slaanilok, every district has a reason to send a parcel and a different reason to refuse one.  Gnomes, fairies, giants, lamia, and other neighbors share roads, ferries, arguments, and recipes; the customs office has yet to devise a form big enough for a giant's signature.
+- **Major Facts:** Gnomadica is a working name for the mapped area, not the entire planet.  The world beyond the map stays mysterious.  Factory headquarters sits in Cogbottom.  The island-wide Postmaster's Bell is rung whenever a packet travels from the Gnohio riverboats to the far eastern ferries without losing a label.  The first successful shipment was a single left sock, which the recipient immediately mailed back in search of its partner.  A collection of public maps shows different names for the same coastline, so surveyors use the oldest landmarks rather than trusting politicians or cartographers with particularly expensive hats.
 - **Flora:** Oak, river reeds, saltgrass, snowbells
 - **Fauna:** Tickhop, Hootgear, Magmander, Shroomtle, Zapfox, Potamice, Fluffbat, Pebblem, Bloomlet, Cogsnake, Jellybub
 - **Bounties:**
@@ -63,8 +63,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** raw iron
 - **Non-Factory Exports:** finished machines; spare axle kits
-- **About:** Brass roofs, gear towers, and shouting shift foremen define the busiest region.  It's where odd ideas become even odder products.
-- **Major Facts:** Cogbottom is its manufacturing heart.  The old public clock has shown lunch time for years, and everyone agrees it is polite to obey.
+- **About:** Brass roofs, gear towers, and shouting shift foremen define the busiest region.  It's where odd ideas become even odder products.  Its brass-roofed towns are stitched together by the Central Rail, the Brass Road, and a surprising number of workers who swear their commute is downhill both ways.  Lamia engineers coil around broken steam pipes to reach awkward valves, while goblin bookkeepers keep honest ledgers and dishonest lunch schedules.
+- **Major Facts:** Cogbottom is its manufacturing heart.  The old public clock has shown lunch time for years, and everyone agrees it is polite to obey.  Its foundries supply Cogsworth and Pulley Junction, while Gnomish Farms feeds the morning shift.  The Great Lunch Whistle once blew for nine hours because a pebble jammed the valve; the workers voted to call it a public holiday.  The Council of Standard Cogs has argued over the proper tooth count for a hundred years and still uses three different standards on the same railway.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -78,8 +78,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** iron lock gates
 - **Non-Factory Exports:** grain; river barges
-- **About:** Wide rivers, farms, and small bridges tie the western towns together.  Locals claim every road leads downhill to a sandwich shop.
-- **Major Facts:** River's Belt is its main waterway.  Its river pilots insist an empty boat is bad luck, so some carry a single decorative brick.
+- **About:** Wide rivers, farms, and small bridges tie the western towns together.  Locals claim every road leads downhill to a sandwich shop.  Named for General José Gnomanion Gnohio, a gnomish hero of the Republic of North Gnomerica Army during the Red Grass Revolution, the region grew around a river town beside his estate.  Families now visit Fort Gnomehagen's living-history grounds, the Confetti Reunion field, and the wonderfully solemn Museum of the World's Largest Piece of Confetti.  Gnome teachers insist the exhibit has deep cultural significance; the pupils mostly want to know whether it will fit through the door.
+- **Major Facts:** Late fashion model Anna Gnicole attended school in the original river town, which also hosts the annual Gen G'ers celebration.  The Gnomerica State Supported Living Center began as a prisoner-of-war compound during Field Marshal Candy Corn's Circus War with a faction from Fairy Fen; it is now a place of care and community, not a monument to its old purpose.  The Confetti Reunion celebrates the families who made peace afterward.  River's Belt is the main waterway, and its pilots still insist an empty boat must carry one lucky decorative brick.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -93,8 +93,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** water filters
 - **Non-Factory Exports:** spices; sunstone; sand glass
-- **About:** Golden grasslands give way to windy dunes and warm red rocks.  Travelers bring plenty of water and very patient hats.
-- **Major Facts:** The region includes the Windy Sands and two famous deserts.  Local guides teach visitors to recognize the safe wells by their blue-painted stones.
+- **About:** Golden grasslands give way to windy dunes and warm red rocks.  Travelers bring plenty of water and very patient hats.  The desert tracks are maintained by gnome well-keepers, lamia caravan guides, and giants who can spot an oasis from miles away.  Sockarillo supplies boots, while Flybar tests gliders in the hot wind.  Every village owns a communal shade cloth, and arguments about who folded it last can outlast a sandstorm.
+- **Major Facts:** The region includes the Windy Sands and two famous deserts.  Local guides teach visitors to recognize the safe wells by their blue-painted stones.  The Blue Stone Wellkeepers protect the safe watering places between the Windy Sands and the Desert of Desire.  A traveling Magmander handler named Auntie Ember teaches visitors how to cross volcanic ground without scorching their socks.  The two volcanoes are said to have been named by rival surveyors who hated each other's poetry.  Guides from Grit Spit and Fellers still swear a third volcano exists, although their map marks it as 'probably lunch.'
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
 - **Bounties:**
@@ -108,8 +108,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** heating coal
 - **Non-Factory Exports:** salt fish; ice glass; seal-safe lantern oil
-- **About:** Fog, cliffs, and long winters shape the northern communities.  Every neighbor knows who borrowed the last warm scarf.
-- **Major Facts:** Frozen Fields covers much of the interior.  Winter shipping travels by sheltered coves when the outer sea freezes.
+- **About:** Fog, cliffs, and long winters shape the northern communities.  Every neighbor knows who borrowed the last warm scarf.  Weather comes in layers here: fog below, snow above, and gossip in the middle.  The docks of Gnyannis and Werewolf London are staffed by hearty fisherfolk, woolly-coated werewolves, and ogres who carry cargo as casually as a gnome carries a teacup.  New arrivals are offered soup before a shipping tariff.
+- **Major Facts:** Frozen Fields covers much of the interior.  Winter shipping travels by sheltered coves when the outer sea freezes.  The Long Lantern Pact requires every coastal town to keep a lamp lit for travelers during winter storms.  Werewolf families coordinate the night watch, while the sheltered bay at Gnyannis serves as a winter refuge for ferries.  A giant knitted mitten hangs in the council chamber to honor the rescue of twelve sailors from a drifting ice floe.  Nobody knows which hand it was intended for.
 - **Flora:** Salt pine, frost moss
 - **Fauna:** Fluffbat, Hootgear, Glowbat
 - **Bounties:**
@@ -123,8 +123,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** rope sails
 - **Non-Factory Exports:** pearls; seaweed paper; blue salt
-- **About:** Boats are more common than carts in these cheerful island communities.  Ferries carry travelers, crates, and the occasional bewildered turtle.
-- **Major Facts:** The largest ports exchange news through lantern signals.  Islanders consider a dry pair of socks the height of luxury.
+- **About:** Boats are more common than carts in these cheerful island communities.  Ferries carry travelers, crates, and the occasional bewildered turtle.  Each island has its own ferry whistle and its own favorite explanation for why the sea is wet.  Lamia tide-readers, merfolk chandlers, gnomish net-menders, and cheerful turtle keepers bustle around warm harbors.  Visitors discover that the last boat of the day leaves precisely when the captain finishes supper.
+- **Major Facts:** The largest ports exchange news through lantern signals.  Islanders consider a dry pair of socks the height of luxury.  The Lantern Chain links its harbors to Port Gnasher by a sequence of signal lights.  The first lantern keeper was a mermaid who wrote warnings on waterproof paper and insisted on charging by the vowel.  Eversummer handles much of the warm-season trade, while older sea roads pass the flooded chambers of Dungeon of the Deep.  Islanders quietly disagree over whether the ancient bells beneath the water are musical instruments or doorbells.
 - **Flora:** Saltgrass, mangroves
 - **Fauna:** Jellybub, Shroomtle, Bloomlet
 - **Bounties:**
@@ -138,8 +138,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** prefabricated walkway planks
 - **Non-Factory Exports:** mushrooms; reed cloth; bog ink
-- **About:** Reed villages sit above winding waterways where little lights blink after dark.  Most locals know the difference between friendly bubbles and running-away bubbles.
-- **Major Facts:** Ink-makers collect the dark pigment that Gloob leaves on reeds, without disturbing the little slimes.  Fairy Fen and the Bog of Eternal Regret are here.  The local water council measures floods with a boot nailed to a post.
+- **About:** Reed villages sit above winding waterways where little lights blink after dark.  Most locals know the difference between friendly bubbles and running-away bubbles.  Marsh houses rest on stilts, and the markets sell waterproof papers, glowcap lanterns, and shoes designed to be retrieved by string.  Fairies from Fairy Fen share the waterways with frog-keepers, friendly slimes, and lamia botanists who can carry six baskets without needing a cart.  Most residents can tell the hour by the color of the mist.
+- **Major Facts:** Ink-makers collect the dark pigment that Gloob leaves on reeds, without disturbing the little slimes.  Fairy Fen and the Bog of Eternal Regret are here.  The local water council measures floods with a boot nailed to a post.  Ink-makers collect dark pigment left by Gloob on the reeds and sell their finest bottles through Gloopenstein.  A centuries-old Reed Accord protects the fairy paths through Fairy Fen, including those of families who opposed Field Marshal Candy Corn's Circus War.  The flood council's boot-shaped water gauge is taken very seriously, although somebody keeps replacing the measuring boot with a larger one.  Mycelia's mushroom growers supply the town's famous midnight soup.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Gloob, Goopamice
 - **Bounties:**
@@ -153,8 +153,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** pack saddles
 - **Non-Factory Exports:** crystal ore; cut stone; mountain tea
-- **About:** Stone bridges, steep passes, and quiet mountain workshops fill the highlands.  Even the goats wear bells so their owners can hear the complaints.
-- **Major Facts:** The Cradle is protected by the Gnomish Heights.  A chain of ancient stone markers points toward the 6th Age Ruins.
+- **About:** Stone bridges, steep passes, and quiet mountain workshops fill the highlands.  Even the goats wear bells so their owners can hear the complaints.  Highland workshops hang from rock ledges beside stone bridges, and the sound of hammering travels farther than conversation.  Goatfolk carry mail across the steepest paths; dwarven gemcutters, lamia archivists, and gnome mechanics work shoulder to shoulder beneath the mountain bells.  Every traveler earns a little brass pin after surviving the climb.
+- **Major Facts:** The Cradle is protected by the Gnomish Heights.  A chain of ancient stone markers points toward the 6th Age Ruins.  Three old road markers point from the Cradle toward the 6th Age Ruins, the Ancient Device, and a fourth place that no surveyor has managed to find.  Cogbend Hold guards the lower pass, while Twinshift keeps the freight lifts moving in two daily shifts.  Local historians are forbidden to declare any mysterious machinery 'the first ever' without checking the basement first.  The Fortresses of Easy Defeat, Moderation, and Impossibility were once a single training route.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
 - **Bounties:**
@@ -170,8 +170,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** coal
 - **Non-Factory Exports:** sealed machinery crates; packing labels
-- **About:** This noisy town is home to the Gnomeworks factory and its endlessly turning gears.  Almost anything can pop out of the machine, whether anyone ordered it or not.
-- **Major Facts:** The Packing Line ships from here.  Town inspectors once tried to catalog every strange item; they ran out of forms before lunchtime.
+- **About:** This noisy town is home to the Gnomeworks factory and its endlessly turning gears.  Almost anything can pop out of the machine, whether anyone ordered it or not.  The Gnomeworks machine makes useful tools, curious junk, and occasional living Tiny Monsters, keeping the sorting crew very busy.  Brass carts rattle from the factory to Pulley Junction, and every neighbor knows the particular whistle that means a shipment of underpants has escaped quality control.  Shopkeepers have learned to price everything in both cogs and patience.
+- **Major Facts:** The Packing Line ships from here.  Town inspectors once tried to catalog every strange item; they ran out of forms before lunchtime.  The town's oldest public argument concerns whether the giant machine is older than the building around it.  Its gear-keepers keep a ceremonial broom for sweeping runaway springs out of the streets.  On Founder's Crank Day, every household turns a small wooden cog to wish the factory another year of good fortune.  The council maintains a Lost and Found for orphaned socks, abandoned hats, and an alarming number of identical clipboards.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -185,8 +185,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** street lamps
 - **Non-Factory Exports:** posters; gossip broadsheets
-- **About:** Tall clock towers and crowded streets give this city a proud, hurried attitude.  Everyone walks fast, even to the bakery next door.
-- **Major Facts:** The mayor holds press conferences from a crate.  A famous pigeon has been elected unofficial traffic marshal three times.
+- **About:** Tall clock towers and crowded streets give this city a proud, hurried attitude.  Everyone walks fast, even to the bakery next door.  The busy streets rise between clock towers, stacked bakeries, brass elevators, and rooftop gardens whose owners argue over the correct height for a tomato.  A lamia tram conductor named Miss Coil keeps the morning commuters moving and can check six tickets before the light changes.  Street musicians play the city's famous tune, 'Honk If You Have Brakes.'
+- **Major Facts:** The mayor holds press conferences from a crate.  A famous pigeon has been elected unofficial traffic marshal three times.  The city built its first elevated tram after the mayor mistook a traffic jam for a parade.  Pigeons still gather beneath the old mayoral balcony, where an unofficial traffic marshal named Colonel Crumb rules the curb with an iron beak.  Port Gnasher carries the eastbound freight that Gnew York cannot fit on its trains.  Every autumn the city stages a Great Hat Migration, a festival in which residents exchange their least sensible headwear.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -200,8 +200,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** harbor chains
 - **Non-Factory Exports:** river fish; ship manifests
-- **About:** The western docks are always muddy, busy, and one crate away from chaos.  Barges and sea boats meet under a great brass crane.
-- **Major Facts:** Its harbor bell rings when the tide turns.  Nobody remembers who taught the town crab to ring it first.
+- **About:** The western docks are always muddy, busy, and one crate away from chaos.  Barges and sea boats meet under a great brass crane.  Here the river barges of Gnohio meet the open sea under a brass crane nicknamed Old Shoulder.  Stevedores include gnomes, riverfolk, and a giant named Mabel who loads ships by hand but refuses to handle fragile teapots.  The fish stalls claim the tide has an appetite of its own.
+- **Major Facts:** Its harbor bell rings when the tide turns.  Nobody remembers who taught the town crab to ring it first.  The harbor bell is tended by a retired crab keeper who trained several actual crabs to ring it; some days the crabs hold the town schedule hostage.  Warehouses receive wheat from Farms of Verdon't, timber from the western woods, and strange machine goods bound for Slaanilok.  The Customs Office keeps a drawer of suspiciously festive paperwork for comparison with legitimate dock seals.  Nobody admits why that drawer is jingling.
 - **Flora:** River reeds, saltgrass
 - **Fauna:** Potamice, Bloomlet
 - **Bounties:**
@@ -215,8 +215,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** dock timber
 - **Non-Factory Exports:** ferry tickets; salted kelp
-- **About:** The port's name sounds fierce, but its busiest workers are cheerful dock gnomes with big teeth painted on their boats.
-- **Major Facts:** Port Gnasher runs the eastern ferry service.  The lighthouse keeper records every suspicious jingle from boats arriving at night.
+- **About:** The port's name sounds fierce, but its busiest workers are cheerful dock gnomes with big teeth painted on their boats.  The harbor boats paint smiling teeth on their bows because the old reef looks like the jaws of an enormous sea beast.  Most crews are friendly enough to offer directions, though they may charge a biscuit for the favor.  A lamia harbor pilot named Captain Nera knows every safe channel and every sailor's favorite complaint.
+- **Major Facts:** Port Gnasher runs the eastern ferry service.  The lighthouse keeper records every suspicious jingle from boats arriving at night.  Captain Nera's grandmother mapped the shoals before the signal lanterns were built, earning a statue that the gulls treat with disrespect.  The ferry captains trade lamps with Slaanilok so a lost traveler can always find a welcoming coast.  The keeper's ledger notes a few suspicious sleigh-bell sounds during certain deliveries, but the town refuses to accuse every festive visitor of being a smuggler.
 - **Flora:** Sea lavender, saltgrass
 - **Fauna:** Jellybub, Shroomtle
 - **Bounties:**
@@ -230,8 +230,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** water pumps
 - **Non-Factory Exports:** glow dye; slime-safe glass
-- **About:** Green windows gleam across this tidy, slightly squishy city.  The streets are swept twice a day and somehow remain sticky.
-- **Major Facts:** The famous municipal slime clock loses an hour whenever it rains.  The town laboratory calls this an exciting research opportunity.
+- **About:** Green windows gleam across this tidy, slightly squishy city.  The streets are swept twice a day and somehow remain sticky.  A shining city of glass tubes, warm fountains, and canals with the consistency of soup.  Its schools teach slime husbandry alongside mathematics, and nobody laughs when a Jellybub needs a little extra time to cross the road.  Inventors arrive hoping to discover an amazing new adhesive; locals beg them to invent a better mop.
+- **Major Facts:** The famous municipal slime clock loses an hour whenever it rains.  The town laboratory calls this an exciting research opportunity.  The Academy of Respectable Goo studies the natural pigments left by Gloob, while Slanic's marsh farmers harvest the reeds used for ink.  A lamia apothecary named Doctor Liss operates the city's most dependable clinic and reminds visitors that slimes need clean water as much as anyone else.  The municipal slime clock loses time in rain because the pendulum keeps stopping to look at puddles.  The academy has called this 'promising research' for thirty years.
 - **Flora:** Glowcap mushrooms, bog mint
 - **Fauna:** Jellybub, Gloob
 - **Bounties:**
@@ -245,8 +245,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** water barrels
 - **Non-Factory Exports:** desert wool; pepper dust
-- **About:** Sockarillo trades boots and blankets to travelers crossing the hot lands.  Its enormous sock sign is visible for miles.
-- **Major Facts:** An annual sock parade shuts down Main Street.  The winning sock must stand upright without help.
+- **About:** Sockarillo trades boots and blankets to travelers crossing the hot lands.  Its enormous sock sign is visible for miles.  Travelers know the place by its enormous sock sign, the smell of hot flatbread, and the shop windows filled with hats meant to resist sandstorms.  Lamia merchants run shaded caravan stalls, while goblin cobblers argue over whether a boot should have a left and right side.  The town's drinking fountain is treated with the respect usually reserved for kings.
+- **Major Facts:** An annual sock parade shuts down Main Street.  The winning sock must stand upright without help.  The Annual Sock Parade began when a merchant mistook the governor's laundry line for festival bunting.  A veteran guide named Old Sandie operates a public well registry, with directions copied from the Blue Stone Wellkeepers.  The winning parade sock must stand upright without a frame or invisible wire.  Every year someone enters a boot and claims it is a sock with ambitions.
 - **Flora:** Sunneedle cactus, desert sage
 - **Fauna:** Zapfox, Magmander
 - **Bounties:**
@@ -260,8 +260,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** paving stones
 - **Non-Factory Exports:** business permits; clock fittings
-- **About:** A proper town of tidy workshops and very serious small hats.  Its residents are proud of keeping the gears on time.
-- **Major Facts:** The town council has seventeen committees and only twelve chairs.  Meetings often end with a polite race to sit down.
+- **About:** A proper town of tidy workshops and very serious small hats.  Its residents are proud of keeping the gears on time.  Here workshops keep polished front steps, market traders measure spring tension with pocket gauges, and councilors wear hats proportionate to their opinions.  Visitors can shop for brass fittings before crossing the square to Dice and Doodles for an afternoon of drawing and tabletop adventures.  The local owls seem especially fond of paper scraps.
+- **Major Facts:** The town council has seventeen committees and only twelve chairs.  Meetings often end with a polite race to sit down.  Cogington's twelve council chairs are famously shared by seventeen committees, which explains why no meeting starts on time.  The town sponsors an annual Student Invention Fair with Cogsworth; one winning entry was a kettle that applauded itself.  The Council Archivist, a retired ogre named Penny, has the only complete list of which invention actually worked.  She refuses to count any object that catches fire during its demonstration.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -275,8 +275,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** steel plate
 - **Non-Factory Exports:** precision springs; repair manuals
-- **About:** Cogsworth builds tiny parts with enormous care.  Its mechanics can hear a loose bolt from across the square.
-- **Major Facts:** A clock tower chimes thirteen at noon because its maker refused to waste a perfectly good bell.
+- **About:** Cogsworth builds tiny parts with enormous care.  Its mechanics can hear a loose bolt from across the square.  A town built around fine gears, tiny watch springs, and mechanics who listen to a clock the way musicians listen to an orchestra.  Lamia machinists operate narrow lathes with extraordinary precision, and the town's baker has devised a gear-shaped pastry with far too many teeth.  Cogsworth's freight travels to Cogbottom along the central rail.
+- **Major Facts:** A clock tower chimes thirteen at noon because its maker refused to waste a perfectly good bell.  The thirteen-bell clock tower was built by Master Gnoseph Cogsworth, who maintained that silence was an engineering error.  Every spring, apprentices march to Pulley Junction to compare clocks with the railway timekeeper, then spend three days arguing about which clock cheated.  A tradition requires newly hired mechanics to fix one harmless broken toy for a child before working on public machinery.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -290,8 +290,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** spring steel
 - **Non-Factory Exports:** coiled springs; spring-mounted handcarts
-- **About:** In Sproing, even the benches have suspiciously lively cushions.  The town takes great pride in its accidental inventions.
-- **Major Facts:** Children hold a yearly bounce festival.  The mayor banned trampoline speeches after one landed on the roof.
+- **About:** In Sproing, even the benches have suspiciously lively cushions.  The town takes great pride in its accidental inventions.  The town nestles among soft hills where every fence seems to contain a spring, every garden gate bounces, and even the local goats walk with suspicious enthusiasm.  Engineers test cushions, shock absorbers, and peculiar pogo carts here before they are shipped to Cogbottom.  Visitors are handed a safety helmet and a warning about ceiling fans.
+- **Major Facts:** Children hold a yearly bounce festival.  The mayor banned trampoline speeches after one landed on the roof.  Sproing's Great Bounce Festival celebrates the accidental invention of the self-returning park bench.  The mayor once tried delivering a speech from a trampoline and was recovered from a nearby roof by a kindly giant.  A brass statue of that giant now stands outside the hall, holding a tiny umbrella.  The school teaches children to check the landing area before they admire how high anything flies.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -305,8 +305,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** canvas wings
 - **Non-Factory Exports:** gliders; wind charts
-- **About:** Rope bridges and little flying machines fill this breezy cliff town.  Visitors are advised to hold onto their hats and their lunches.
-- **Major Facts:** Pilots use the ridge to test new wings.  The oldest wind sock has been officially promoted to flight captain.
+- **About:** Rope bridges and little flying machines fill this breezy cliff town.  Visitors are advised to hold onto their hats and their lunches.  A cliff town of rope bridges, windmills, canvas gliders, and kitchens that weigh their plates before opening the windows.  Its pilots come from all kinds of families, including a fairy engineer whose wing designs are much safer than the name 'Almost Certainly Fine' suggests.  Below the cliffs, the Windy Sands ripple toward Sockarillo.
+- **Major Facts:** Pilots use the ridge to test new wings.  The oldest wind sock has been officially promoted to flight captain.  The test ridge hosts a friendly contest with Sproing to determine whose springs can launch the safest glider.  The oldest windsock has been promoted to honorary flight captain, outranking several pilots who crashed into the same haystack.  A giant sailmaker stitches emergency landing nets for the launch platform.  Pilots who forget to buy a return ticket are expected to walk home.
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
 - **Bounties:**
@@ -320,8 +320,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** rail ties
 - **Non-Factory Exports:** rail coupling pins; lifting rigs
-- **About:** Tracks, cranes, and carts weave together at this busy transfer town.  If a shipment goes missing, it usually turns up under a bigger shipment.
-- **Major Facts:** The station clock runs five minutes fast to discourage dawdling.  No one can agree which five minutes it stole.
+- **About:** Tracks, cranes, and carts weave together at this busy transfer town.  If a shipment goes missing, it usually turns up under a bigger shipment.  Cranes hang above switching yards where Cogbottom's crates join river cargo heading west and mountain ore heading northeast.  Lamia dispatchers use color-coded rail cards, while troll bridge crews keep the tracks safe when a wagon weighs more than its paperwork.  Visitors can find almost any item here, provided they know which pile to ask.
+- **Major Facts:** The station clock runs five minutes fast to discourage dawdling.  No one can agree which five minutes it stole.  The station clock runs five minutes fast because a former manager believed punctuality could be manufactured.  Freight from Twinshift passes through on the way to Cogbottom and Port Gnaru, while goods headed for the island ferries continue toward Gnew York.  The station's famous Missing Crate Office has found every lost box except the one containing its original door sign.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -335,8 +335,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** copper ore
 - **Non-Factory Exports:** polished brass; boat bells
-- **About:** Brassin shines even on foggy days.  Its metalworkers make bells that can be heard across the reeds.
-- **Major Facts:** Each town bell has a name.  The loudest is called Please Stop That.
+- **About:** Brassin shines even on foggy days.  Its metalworkers make bells that can be heard across the reeds.  The workshop streets shine with copper domes, polished bells, and the muddy reflections of Slanic's canals.  Lamia bellcasters, gnome smiths, and fairy lantern-makers share the open foundry square; visitors are warned that a bell's nickname is often more accurate than its official label.  The whole place smells pleasantly of hot metal and marsh mint.
+- **Major Facts:** Each town bell has a name.  The loudest is called Please Stop That.  Its biggest bell, Please Stop That, was cast to warn river pilots of approaching fog and now rings whenever someone drops a hammer.  Brassin's apprentices exchange parts with Gnome'n'Pinion and practice safe sharpening at Don't Grind Angry.  The town honors the Reed Accord by leaving the old fairy footbridge intact even after building a much grander steel one beside it.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
 - **Bounties:**
@@ -350,8 +350,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** tin ore
 - **Non-Factory Exports:** brass plaques; roof vents
-- **About:** A rooftop town built around a hill of chimneys and shiny weather vanes.  Its residents insist that more polish fixes most problems.
-- **Major Facts:** A huge brass hat tops the town hall.  Every winter someone tries to knit it a scarf.
+- **About:** A rooftop town built around a hill of chimneys and shiny weather vanes.  Its residents insist that more polish fixes most problems.  High on a ridge above Cogsworth, chimneys rise through weather vanes and brass-roofed houses that glitter at dawn.  A family of giant roofers does most of the dangerous repairs, with a gnome clerk below calling measurements through a speaking tube.  Children compete to spot storms before the weather bells ring.
+- **Major Facts:** A huge brass hat tops the town hall.  Every winter someone tries to knit it a scarf.  The brass hat on the town hall was donated by a cheerful giant milliner, who considered it a standard size.  Residents knit a scarf for it each winter, using enough yarn to outfit half of Gnomerica.  Its storm warnings travel downhill to Cogsworth and onward to Pulley Junction by a line of spring-loaded signal flags.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
@@ -365,8 +365,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Sunscreen; cool ice
 - **Non-Factory Exports:** citrus; shell buttons
-- **About:** Warm beaches and sleepy palms make Eversummer popular with travelers.  Nobody has successfully scheduled a meeting before noon.
-- **Major Facts:** The town holds a sunset festival every evening.  Visitors can collect the same commemorative postcard on every visit.
+- **About:** Warm beaches and sleepy palms make Eversummer popular with travelers.  Nobody has successfully scheduled a meeting before noon.  Golden beaches and palm-shaded courtyards make this island village a favorite rest stop for weary sailors.  Merfolk vendors sell sea-glass ornaments, lamia gardeners tend fragrant groves, and gnome tourists spend entire mornings debating whether a coconut is a fruit or a very stubborn bowling ball.  Sea breezes carry music past the piers.
+- **Major Facts:** The town holds a sunset festival every evening.  Visitors can collect the same commemorative postcard on every visit.  The nightly Sunset Festival is financed by old ferry tickets collected from travelers who forget which day it is.  Slaanilok boat captains make this their final warm-weather port before heading toward Port Gnasher.  The island's oldest palm is tied with tiny ribbons left by visitors wishing for a safe return voyage; the gardener politely removes the ones made from actual shipping labels.
 - **Flora:** Sunpalms, beach hibiscus
 - **Fauna:** Bloomlet, Shroomtle
 - **Bounties:**
@@ -380,8 +380,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** firewood
 - **Non-Factory Exports:** knitted blankets; cold-water fish
-- **About:** A friendly harbor town where tea is served before questions.  Locals use weather reports as bedtime stories.
-- **Major Facts:** A lighthouse keeper records how many times each guest says 'brrr.'  The record is forty-seven.
+- **About:** A friendly harbor town where tea is served before questions.  Locals use weather reports as bedtime stories.  The harbor sits between steep snowy hills and a sheltered bay warmed by deep currents.  Its fisherfolk welcome strangers with thick tea, woolen mittens, and enough questions to establish their entire family tree by supper.  Werewolf London sends night-watch crews when the fog grows too thick for lanterns.
+- **Major Facts:** A lighthouse keeper records how many times each guest says 'brrr.'  The record is forty-seven.  Gnyannis maintains the western half of the Long Lantern Pact with its northern neighbors.  The lighthouse guestbook records every shiver, sneeze, and especially dramatic 'brrr' made by visiting captains.  During one legendary storm, a young ogre carried the harbor bell through the snow so ships would hear it from safer water.
 - **Flora:** Salt pine, frost moss
 - **Fauna:** Fluffbat, Hootgear, Glowbat
 - **Bounties:**
@@ -395,8 +395,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Water Bottle; bridge cable
 - **Non-Factory Exports:** running ribbons; courier satchels
-- **About:** Everyone in this town seems to be in a hurry.  Its narrow lanes are perfect for foot messengers and terrible for wheelbarrows.
-- **Major Facts:** The annual delivery race ends when the parcel arrives intact.  Speed counts only after that.
+- **About:** Everyone in this town seems to be in a hurry.  Its narrow lanes are perfect for foot messengers and terrible for wheelbarrows.  The narrow lanes are full of runners, messengers, cart drivers, and market folk who believe a good delivery should arrive before the sender finishes speaking.  A retired centaur coach teaches short-legged gnomes how to pace themselves without starting a feud with their knees.  The town's riverside bakery sells its rolls by the stride.
+- **Major Facts:** The annual delivery race ends when the parcel arrives intact.  Speed counts only after that.  The annual intact-parcel race follows River's Belt toward Port Gnaru and back by the orchard road.  Winning requires a readable address and an unbroken parcel; the fastest runner once lost because the recipient was a goose.  A town statute forbids using magical teleportation to skip the course unless the person delivering the package has personally invented the spell.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
@@ -410,8 +410,8 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** smokehouse wood
 - **Non-Factory Exports:** pickled vegetables; river maps
-- **About:** This riverside market is famous for hearty meals and even heartier arguments about sandwiches.
-- **Major Facts:** The old ferry still has a bell labeled 'South,' although there is no South Ham'n'Gnome on this map.
+- **About:** This riverside market is famous for hearty meals and even heartier arguments about sandwiches.  Ferries crowd the mouth of the northern river, where farmers bring grain, bakers bring warm loaves, and sailors bring increasingly unlikely stories about the weather.  The market is named for a celebrated ham sandwich that may never have existed; several vendors continue to claim the original recipe.  Werewolf traders are regular visitors in winter.
+- **Major Facts:** The old ferry still has a bell labeled 'South,' although there is no South Ham'n'Gnome on this map.  The old ferry bell is marked 'South' from a route that disappeared long before the current maps were made.  Some locals believe it named a sister town, while others insist it was simply an instruction to the boat captain.  The town sends the last river cargo of each autumn to Gnyannis before Gnufoundland's outer waters become too rough.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
 - **Bounties:**
