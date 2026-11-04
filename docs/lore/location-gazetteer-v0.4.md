@@ -440,7 +440,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** barber scissors
 - **Non-Factory Exports:** night patrol whistles; wool coats
-- **About:** A foggy port famous for fashionable coats and lively full-moon evenings.  The waterfront is home to friendly werewolf families who run bakeries, tailor shops, schools, and the winter harbor watch.  Their coats have room for tails, and their barbers keep special full-moon hours.  A lamia postal clerk delivers letters through the dockside alleys.
+- **About:** A foggy port famous for fashionable coats and lively full-moon evenings.  The waterfront is home to friendly werewolf families who run bakeries, tailor shops, schools, and the winter harbor watch.  Their coats have room for tails, and their barbers keep special full-moon hours.  A lamia postal clerk delivers letters through the dockside alleys.  Even the street lamps have little silver-colored collars, a gift from the local metalworkers, who thought the town deserved prettier lighting.
 - **Major Facts:** The Night Watch Guild is famous for locating lost travelers in thick fog.  Chief Inspector Fenwick once found a stolen purse and gave its owner a stern lecture about loose clasps.  The annual Howl Concert raises money for the Long Lantern Pact, and visitors from Gnyannis bring cocoa.
 - **Flora:** Salt pine, fogmoss
 - **Fauna:** Fluffbat, Scowl
@@ -457,7 +457,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** apple saplings
 - **Non-Factory Exports:** apple cakes; tiny furniture
-- **About:** Smallerville is proud of being the smallest village with the biggest welcome sign.  Every house has a doorstep garden.  Orchard cottages stand close enough for neighbors to pass sugar through their windows.  A gentle ogre beekeeper tends the village hives and painted the enormous welcome sign without realizing it was bigger than the town hall.
+- **About:** Smallerville is proud of being the smallest village with the biggest welcome sign.  Every house has a doorstep garden.  Orchard cottages stand close enough for neighbors to pass sugar through their windows.  A gentle ogre beekeeper tends the village hives and painted the enormous welcome sign without realizing it was bigger than the town hall.  On festival days, the orchard roads smell of cider, honey, and the smoke from tiny portable pie ovens built by the village children.
 - **Major Facts:** The village librarian issues books using a wheelbarrow.  Residents argue over whether a wheelbarrow is technically a library.  Smallerville sends fruit to the Gnomish Farms markets and Cogbottom's canteen.  Its wheelbarrow librarian brings books from house to house.  A plaque celebrates the day a Tickhop returned a missing library card, though the librarian still suspects the rabbit ate the corner.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
@@ -472,7 +472,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** coal lanterns
 - **Non-Factory Exports:** ore carts; shift rosters
-- **About:** The morning crew and evening crew share one long street.  Nobody admits which crew makes the better biscuits.  The mountain rail village runs day and night, with miners, gnome engineers, and ogre lift operators sharing the same cobbled street.  Both crews boast about their biscuits, and neither will accept the other shift's clock.
+- **About:** The morning crew and evening crew share one long street.  Nobody admits which crew makes the better biscuits.  The mountain rail village runs day and night, with miners, gnome engineers, and ogre lift operators sharing the same cobbled street.  Both crews boast about their biscuits, and neither will accept the other shift's clock.  Its two taverns face one another across the street, each claiming the other shift has been late since the invention of time.
 - **Major Facts:** The town clock has two faces, each showing a different shift.  Tourists often leave an hour early and call it an improvement.  The morning crew hauls ore from The Crafter's Mines; the evening crew handles supplies for Cogbend Hold.  A retired lamia railway inspector hosts the Great Handover Dinner, where every crew must sign for the last teapot before anyone can go home.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
@@ -487,7 +487,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** stone pipes
 - **Non-Factory Exports:** spring water; herbal syrup
-- **About:** Clear streams and flower gardens give this village its gentle pace.  Its drinking fountains gurgle cheerful tunes.  Clear springs pass flower gardens and stone channels before joining the western river.  Naiad gardeners keep the water clean, while the bakery gives free rolls to anyone who helps tidy the banks.
+- **About:** Clear streams and flower gardens give this village its gentle pace.  Its drinking fountains gurgle cheerful tunes.  Clear springs pass flower gardens and stone channels before joining the western river.  Naiad gardeners keep the water clean, while the bakery gives free rolls to anyone who helps tidy the banks.  A blue-painted footbridge lets visitors cross without disturbing the water sprites, who insist they deserve the same privacy as any neighbor.
 - **Major Facts:** The spring never freezes.  Locals say a sleepy water sprite keeps it warm, although nobody has checked the plumbing.  The spring feeds Mouse Reserve and Flies and Springwater.  An old water sprite operates the mill wheel while insisting it is on permanent vacation.  Every First Flow Day, the councilor with the cleanest shoes gets ceremonially splashed.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
@@ -502,7 +502,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** linen towels
 - **Non-Factory Exports:** glowing stones; mineral salts
-- **About:** Travelers visit the retreat to relax in warm mineral pools.  The rocks glow softly enough to read by.  Warm mineral pools glow beneath crystal ceilings and welcome weary travelers of every shape.  A giant bath attendant carries the enormous towels, while a lamia doctor runs the spa's clinic with firm kindness and a formidable clipboard.
+- **About:** Travelers visit the retreat to relax in warm mineral pools.  The rocks glow softly enough to read by.  Warm mineral pools glow beneath crystal ceilings and welcome weary travelers of every shape.  A giant bath attendant carries the enormous towels, while a lamia doctor runs the spa's clinic with firm kindness and a formidable clipboard.  The guest rooms are built in three sizes, and the management will happily rearrange furniture for anyone with a tail, wings, or horns.
 - **Major Facts:** The baths have a strict no-splashing rule.  The sign beneath it says 'especially you, Uncle Gort.'  The baths draw their warmth from the Gnomish Heights.  Uncle Gort once splashed so hard that a wedding party thought it was raining indoors.  Giant-sized soaking tubs were promptly installed, and the local Glowlem is said to brighten whenever someone tells a bad joke.
 - **Flora:** Crystal lichen, blue moss
 - **Fauna:** Glowlem, Glowl
@@ -517,7 +517,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** dry planks
 - **Non-Factory Exports:** reed baskets; lost-boot tags
-- **About:** This little hamlet grew around a roadside boot that nobody could pull from the mud.  Visitors leave spare footwear just in case.  Houses stand on little stilts above stubborn mud.  A friendly werewolf cobbler runs the lost-property shed and recognizes owners from one muddy footprint, though some would rather remain anonymous.
+- **About:** This little hamlet grew around a roadside boot that nobody could pull from the mud.  Visitors leave spare footwear just in case.  Houses stand on little stilts above stubborn mud.  A friendly werewolf cobbler runs the lost-property shed and recognizes owners from one muddy footprint, though some would rather remain anonymous.  The hamlet's inn lends travelers dry slippers, each embroidered with a number because too many guests tried taking home the same lucky pair.
 - **Major Facts:** The original boot is now a protected monument.  Its owner is still listed as 'probably someone with one cold foot.'  The original boot sits in a glass case as the town's oldest mystery.  Spring floods divert Slanic travelers through this hamlet, where the annual Shoe Return Parade reunites dozens of boots with their owners.  One pair has been reclaimed six years running by the same embarrassed merchant.
 - **Flora:** Glowcap mushrooms, bog reeds
 - **Fauna:** Jellybub, Shroomtle, Goopamice
@@ -532,7 +532,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** wooden scoops
 - **Non-Factory Exports:** safe slime gel; reeds
-- **About:** A village of careful slime keepers where nobody steps into a puddle without saying hello first.  Painted homes border channels where Jellybubs bask in warm water.  Residents teach visitors to greet a living slime before stepping over it, and every newcomer gets a mop and a welcome cake.
+- **About:** A village of careful slime keepers where nobody steps into a puddle without saying hello first.  Painted homes border channels where Jellybubs bask in warm water.  Residents teach visitors to greet a living slime before stepping over it, and every newcomer gets a mop and a welcome cake.  The local school has a little doorway for tiny visitors, making it the only classroom where the welcome mat occasionally needs feeding.
 - **Major Facts:** The yearly Slime Parade moves very slowly.  Its record finish time is still being measured.  Growers supply safe slime gel to Gloopenstein and glowing moss to Mycelia.  The Slime Parade moves slowly enough for spectators to eat two lunches.  A Gloob once marked the mayor's sash with a perfect blue pawprint, now treasured in the council hall.
 - **Flora:** Sponge moss, mudwort
 - **Fauna:** Jellybub, Gloob
@@ -547,7 +547,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** rubber boots
 - **Non-Factory Exports:** goo pigments; bouncy paste
-- **About:** Gnix Goop sells colorful mixtures that jiggle in their jars.  The shopkeepers call every spill a demonstration.  Dye sheds and painted cottages fill the marsh road with the smell of soap, herbs, and experimental glop.  Lamia painter Auntie Coil teaches children to mix pigments without bothering the creatures that produce them.
+- **About:** Gnix Goop sells colorful mixtures that jiggle in their jars.  The shopkeepers call every spill a demonstration.  Dye sheds and painted cottages fill the marsh road with the smell of soap, herbs, and experimental glop.  Lamia painter Auntie Coil teaches children to mix pigments without bothering the creatures that produce them.  When evening comes, the painted roofs shine in the reflected marsh lights, turning the whole road into a wandering ribbon of color.
 - **Major Facts:** The oldest jar has a warning label written on the inside.  No one knows how the writer got there.  Gloopenstein buys the village's pigments, while I Crant Spellit requests extra red ink every school term.  Its oldest jar has a warning printed on the inside.  Children name every new color; 'Grandpa's Suspicious Gravy' sells surprisingly well.
 - **Flora:** Glowcap mushrooms, bog mint
 - **Fauna:** Gloob, Goopamice
@@ -562,7 +562,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** writing slates
 - **Non-Factory Exports:** hand-painted road signs; fruit pies
-- **About:** The village sign has been corrected twelve times, and none of the corrections match.  Visitors may spell it however they like.  Schoolchildren write stories here with delightful freedom, even when the village sign has been misspelled twelve different ways.  A traveling fairy calligrapher declared the place impossible to put on a map and was promptly invited to teach handwriting.
+- **About:** The village sign has been corrected twelve times, and none of the corrections match.  Visitors may spell it however they like.  Schoolchildren write stories here with delightful freedom, even when the village sign has been misspelled twelve different ways.  A traveling fairy calligrapher declared the place impossible to put on a map and was promptly invited to teach handwriting.  Every shopkeeper has a personal spelling of the address, which makes the post office the busiest building in the entire village.
 - **Major Facts:** The local spelling contest has no losers.  The judges run out of red ink before the first round ends.  Visiting Goopamice sometimes supply more dye but prefer signing with pawprints.  Gnix Goop supplies the red pigment for the famous spelling contest.  Goopamice leave tiny pawprints on the judges' papers, which are accepted as decorative punctuation.  The town keeps a public ledger of every proposed spelling, and the ledger is now its most popular library book.
 - **Flora:** Bracken, wild daisies
 - **Fauna:** Tickhop, Goopamice
@@ -577,7 +577,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** pack rope
 - **Non-Factory Exports:** skipping stones; gravel
-- **About:** This village sits just a stone's throw from everything, according to every local guide.  Nobody agrees how far that is.  This stony hill village advertises that every attraction is a stone's throw away.  A retired giant surveyor is teaching the gnomes to measure distances without accidentally knocking hats off passersby.
+- **About:** This village sits just a stone's throw from everything, according to every local guide.  Nobody agrees how far that is.  This stony hill village advertises that every attraction is a stone's throw away.  A retired giant surveyor is teaching the gnomes to measure distances without accidentally knocking hats off passersby.  The houses are made from smooth local stone, and nearly every doorstep displays a favorite skipping pebble with a handwritten family name.
 - **Major Facts:** The annual skipping contest has a rule against throwing stones at the mayor.  The rule is oddly specific.  The stone-skipping festival brings visitors from Springwater and Backwater Cog.  The mayor's cap once floated down River's Belt after a particularly ambitious throw, which explains the strict new safety rules.  Local stonecutters produce mile markers for the western roads.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
@@ -592,7 +592,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Dog Beds; meat scraps
 - **Non-Factory Exports:** herding dogs; wind-up lullaby boxes
-- **About:** Dogs snooze on every porch in this quiet hollow.  A barking dog is considered a community announcement.  Porch hounds nap in the sun while werewolf shepherds, bakers, and herbalists go about their ordinary work.  Travelers enjoy quiet nights, excellent biscuits, and an unusually enthusiastic local alarm system.
+- **About:** Dogs snooze on every porch in this quiet hollow.  A barking dog is considered a community announcement.  Porch hounds nap in the sun while werewolf shepherds, bakers, and herbalists go about their ordinary work.  Travelers enjoy quiet nights, excellent biscuits, and an unusually enthusiastic local alarm system.  The noticeboard lists community news beside a schedule of nap times, although none of the dogs has ever bothered to consult it.
 - **Major Facts:** The old bell tower was replaced by a very loud terrier named Mayor.  He has never lost an election.  A terrier named Mayor replaced the village bell after the tower collapsed.  His caretaker maintains that barking at the postman is a legitimate emergency drill.  The hamlet sends winter blankets to rangers in Woods of the Elder.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
@@ -607,7 +607,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Binoculars; glider cloth
 - **Non-Factory Exports:** weather sketches; highland honey
-- **About:** Sky Dream is a hill village that watches cloud shapes all day.  Visitors can sleep in roof rooms with views of the stars.  Houses cling to a high mountain saddle where shepherds, lamia stargazers, and a family of giant lantern tenders share warm roofs.  On clear nights, the village looks like a handful of stars scattered across the rocks.
+- **About:** Sky Dream is a hill village that watches cloud shapes all day.  Visitors can sleep in roof rooms with views of the stars.  Houses cling to a high mountain saddle where shepherds, lamia stargazers, and a family of giant lantern tenders share warm roofs.  On clear nights, the village looks like a handful of stars scattered across the rocks.  Cloud-watchers sell painted weather postcards to travelers, and the favorite view is a sunset when the high clouds resemble floating gears.
 - **Major Facts:** The first local weather station was a gnome with a damp finger.  Records improved after the station received a roof.  Sky Dream sends observations to the Stellar Review observatory.  Its first weather station was a gnome with a wet finger who wrote 'windy' for three years.  A persistent legend says the stars sometimes rearrange themselves into directions to Lost Valley.
 - **Flora:** Cloudberry, frost heather
 - **Fauna:** Fluffbat, Glowbat
@@ -622,7 +622,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** sealed tins of boat tar
 - **Non-Factory Exports:** freshwater eels; old engine parts
-- **About:** Half fishing village, half repair yard, Backwater Cog fixes things the bigger towns have given up on.  Crooked piers support fishermen, salvagers, and mechanics convinced every broken machine deserves one more chance.  A lamia boatwright repairs impossible rudders in an old boathouse, and children race wind-up boats along the shallows.
+- **About:** Half fishing village, half repair yard, Backwater Cog fixes things the bigger towns have given up on.  Crooked piers support fishermen, salvagers, and mechanics convinced every broken machine deserves one more chance.  A lamia boatwright repairs impossible rudders in an old boathouse, and children race wind-up boats along the shallows.  At night the fishing boats hang lamps from their spare cogs, making the river bend look like a little chain of grounded stars.
 - **Major Facts:** Its oldest boat runs backward perfectly.  The owner calls that an advanced docking feature.  Its oldest vessel runs backward more reliably than forward, which the captain calls advanced docking technology.  Salvaged cogs travel to Port Gnaru and new fittings arrive from Cogbottom.  Crews must return anything bearing a family name before selling the scrap.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
@@ -637,7 +637,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** fortification timber
 - **Non-Factory Exports:** stone blocks; guard lanterns
-- **About:** A sturdy hill settlement guards the winding mountain road.  Its gate follows the curve of an enormous fossilized gear.  This strong mountain settlement curls around a fossilized cog.  Gnome guards, dwarven masons, and a patient ogre who clears boulders share the gatehouse and welcome tired travelers with tea and dry socks.
+- **About:** A sturdy hill settlement guards the winding mountain road.  Its gate follows the curve of an enormous fossilized gear.  This strong mountain settlement curls around a fossilized cog.  Gnome guards, dwarven masons, and a patient ogre who clears boulders share the gatehouse and welcome tired travelers with tea and dry socks.  An enormous kettle hangs in the common room, supposedly because the guards once served so many travelers that ordinary teapots went on strike.
 - **Major Facts:** Travelers must answer the gatekeeper's question: 'Any loose bolts?'  Correct answers are accepted in any language.  The gatekeeper's famous question 'Any loose bolts?' dates to a wagon that lost an axle inside the entrance.  Twinshift brings rail supplies, while the Crafter's Mines send ore.  The three training fortresses uphill teach caution, negotiation, and responsible door-closing.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
@@ -652,7 +652,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** water skins
 - **Non-Factory Exports:** prospector maps; cactus syrup
-- **About:** A rough but welcoming rest stop where tired travelers exchange stories and very dusty boots.  Shade awnings and a great water trough welcome caravans crossing the Windy Sands.  An orc called Feller and his three brothers run the rest stop; they have argued about the correct spelling of its sign since opening day.
+- **About:** A rough but welcoming rest stop where tired travelers exchange stories and very dusty boots.  Shade awnings and a great water trough welcome caravans crossing the Windy Sands.  An orc called Feller and his three brothers run the rest stop; they have argued about the correct spelling of its sign since opening day.  A large brass whistle signals incoming dust storms, and every visitor is expected to help fasten the awnings before asking for another bowl.
 - **Major Facts:** The camp's famous stew is stirred with a shovel.  The cook insists the shovel is clean because it's never left the pot.  The legendary stew is stirred with a shovel reserved for cooking.  Feller keeps a book of lost travelers who later returned, requiring each to write the final sentence.  The rumor of a third volcano started when a visitor mistook the kitchen's smoking stew for a distant mountain.
 - **Flora:** Sunneedle cactus, dune grass
 - **Fauna:** Zapfox, Magmander, Pebblem
@@ -667,7 +667,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** seed corn
 - **Non-Factory Exports:** vegetables; fresh eggs
-- **About:** A patchwork of little farms feeds the factory crews.  The farmers measure a good harvest by how many carts need extra wheels.  Patchwork grain fields feed the factory workers, while friendly ogres handle harvests too tall for ordinary ladders.  Apprentices from Cogbottom learn that potatoes cannot be ordered from the conveyor belt.
+- **About:** A patchwork of little farms feeds the factory crews.  The farmers measure a good harvest by how many carts need extra wheels.  Patchwork grain fields feed the factory workers, while friendly ogres handle harvests too tall for ordinary ladders.  Apprentices from Cogbottom learn that potatoes cannot be ordered from the conveyor belt.  Each farmhouse keeps its own brightly painted gear above the door so delivery drivers can tell the difference between two otherwise identical barns.
 - **Major Facts:** A carrot taller than its farmer won the autumn fair.  Nobody has yet worked out how to pull it up.  The Tall Carrot Competition once required a crane from Pulley Junction to lift its winner.  Farmers send grain to Cogbottom and seeds toward Gnohio.  An annual meeting with the local Hootgears attempts to convince the curious owls to stop sitting on scarecrows.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
@@ -682,7 +682,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Scarecrow Parts; Hoe; canal water
 - **Non-Factory Exports:** grain; pickles
-- **About:** These farms grow nearly everything except what the farmers planned.  Their name comes from a sign reading 'Ver, don't!'  These orchards grow nearly everything except what the farmers intended.  The name comes from someone shouting 'Ver, don't!' just as a magical seed bag burst open, though three families claim it was their ancestor.
+- **About:** These farms grow nearly everything except what the farmers planned.  Their name comes from a sign reading 'Ver, don't!'  These orchards grow nearly everything except what the farmers intended.  The name comes from someone shouting 'Ver, don't!' just as a magical seed bag burst open, though three families claim it was their ancestor.  The riverbank orchards are beautiful in spring, when their blossoms turn the old wagon lanes into tunnels of pale pink petals.
 - **Major Facts:** The old scarecrow has become a local celebrity.  Birds perch on it to hear the daily weather report.  A gentle minotaur named Vern runs the mill and remembers every customer's order.  Grain travels to Port Gnaru, while Runningnomata delivers smaller parcels.  At harvest the oddest squash wins a ribbon and often a second career as a doorstop.
 - **Flora:** River reeds, apple blossoms
 - **Fauna:** Tickhop, Potamice, Bloomlet
@@ -697,7 +697,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** road gravel
 - **Non-Factory Exports:** coach wheels; printed travel notices
-- **About:** This little crossroads market exists because everyone stops here eventually.  It sells directions, snacks, and directions to snacks.  Four roads meet beside a village market where tired travelers purchase snacks and argue about which sign points toward home.  A lamia cartographer collects the wrong answers for a future book.
+- **About:** This little crossroads market exists because everyone stops here eventually.  It sells directions, snacks, and directions to snacks.  Four roads meet beside a village market where tired travelers purchase snacks and argue about which sign points toward home.  A lamia cartographer collects the wrong answers for a future book.  The market's brass direction board has a special arrow marked 'Snacks,' which is the only direction everyone follows without further discussion.
 - **Major Facts:** Four signs at the intersection point to Crossroads.  Nobody has had the heart to fix them.  Every original signpost points to Crossroads because the painter thought the town deserved publicity.  It links Gnomerica's workshops, Gnohio's farms, and Slanic's marsh road.  The Spring Meet welcomes neighbors from all three, and its opening ceremony traditionally asks the mayor how to leave.
 - **Flora:** Brassleaf oak, gearvine
 - **Fauna:** Hootgear, Cogsnake, Pebblem
@@ -714,7 +714,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Rake; seed grain
 - **Non-Factory Exports:** terrace rice; wildflower seeds
-- **About:** Golden fields ripple along mountain terraces where tiny owl creatures nest in the stone walls.  Green terraces descend the highland slopes beside stone irrigation channels and little shrines.  Goatfolk porters, gnome gardeners, and lamia herbalists share the work, while children leave seeds for the visiting Bloomlets.
+- **About:** Golden fields ripple along mountain terraces where tiny owl creatures nest in the stone walls.  Green terraces descend the highland slopes beside stone irrigation channels and little shrines.  Goatfolk porters, gnome gardeners, and lamia herbalists share the work, while children leave seeds for the visiting Bloomlets.  Small wind chimes hang between the terraces, and their sound carries down the valley whenever the mountain breeze moves through the rice.
 - **Major Facts:** Families ring little handbells at sunrise to keep wandering goats out of the crops.  The goats learned to ring back.  Mountain springs feed the terraces before joining the Steam Stream.  Harvest rice reaches Twinshift by mule, and special herbs travel to Glowrock Retreat.  A brass plaque honors the goat who rescued the seed stock from a runaway cart.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
@@ -729,7 +729,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Lantern Fuel; water carts
 - **Non-Factory Exports:** raw crystal; mirror sand
-- **About:** Glittering crystal spires sprout from a wide salt flat.  They sparkle prettily and crunch loudly under boots.  Crystal spires ring softly in the wind across a pale mineral plain.  Friendly golem surveyors show visitors safe routes, and miners gather loose shards while protecting the oldest formations.
+- **About:** Glittering crystal spires sprout from a wide salt flat.  They sparkle prettily and crunch loudly under boots.  Crystal spires ring softly in the wind across a pale mineral plain.  Friendly golem surveyors show visitors safe routes, and miners gather loose shards while protecting the oldest formations.  The glittering landscape changes color from violet to pale gold through the day, making it a favorite subject for patient visiting artists.
 - **Major Facts:** Reflections sometimes look a moment ahead of their owners.  Miners insist it is only the sun playing tricks.  Sunrise reflections sometimes appear to move ahead of their owners, a mystery studied at Stellar Review.  The loose crystal goes to Cogbend Hold for careful cutting.  Stories claim an underground bell field answers the Ancient Device, though no expedition has verified it.
 - **Flora:** Crystal lichen, glasswort
 - **Fauna:** Glimmander, Glowlem
@@ -744,7 +744,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** Binoculars; trail maps
 - **Non-Factory Exports:** fallen timber; forest berries
-- **About:** Ancient trees lean close together over shaded paths.  Careful hikers find little houses tucked into old roots.  Old oaks shelter dryad families, gnome rangers, and friendly travelers under arching roots.  Cutting a living tree requires permission, but collecting fallen branches for a campfire is usually fine.
+- **About:** Ancient trees lean close together over shaded paths.  Careful hikers find little houses tucked into old roots.  Old oaks shelter dryad families, gnome rangers, and friendly travelers under arching roots.  Cutting a living tree requires permission, but collecting fallen branches for a campfire is usually fine.  On quiet mornings, squirrels, tiny monsters, and dryad children share the woodland paths, making the forest feel almost like a small town.
 - **Major Facts:** Nobody cuts a living Elder tree.  A carved wooden sign near the entrance reads 'Please ask first.'  Bob's Hut serves tea near the southern entrance, while the Unspoken Dungeon hides deeper north.  Once a year the Woodland Council meets behind a door in the oldest Elder oak; the minutes are written on fallen leaves.  Rangers protect the Hootgear nests and ask visitors to keep the singing gentle.
 - **Flora:** Ancient oak, moonfern
 - **Fauna:** Hootgear, Glowl
@@ -759,7 +759,7 @@
 - **Factory Exports:** None
 - **Non-Factory Imports:** climbing rope
 - **Non-Factory Exports:** mountain herbs; stone slate
-- **About:** A steep mountain with one narrow, often snowy path.  Its name comes from a very old gate that rarely stays open.  A steep mountain of narrow paths and bureaucratic old gates, now home to goatfolk, a retired giant cook, and a remarkably patient gatekeeper.  Travelers learn that warm soup is a more effective pass than an impressive title.
+- **About:** A steep mountain with one narrow, often snowy path.  Its name comes from a very old gate that rarely stays open.  A steep mountain of narrow paths and bureaucratic old gates, now home to goatfolk, a retired giant cook, and a remarkably patient gatekeeper.  Travelers learn that warm soup is a more effective pass than an impressive title.  On clear days, travelers can see the roofs of Cogbend Hold far below, clustered together like coins spilled beside the road.
 - **Major Facts:** The gatekeeper will admit nearly anyone with warm soup.  The official rules say nothing about soup.  The old walls guarded the path toward Fortress of Impossibility.  During one blizzard an ogre rescue team carried stranded climbers to safety, beginning the tradition of soup at the gates.  The rescue pot is displayed at Cogbend Hold.
 - **Flora:** Ironfern, crystal lichen
 - **Fauna:** Pebblem, Fluffbat, Cogsnake
