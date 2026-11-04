@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.19",
+ "version": "0.20",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -285,7 +285,7 @@
     "Non-Factory Imports": "apple saplings",
     "Non-Factory Exports": "apple cakes; tiny furniture",
     "About": "Smallerville is proud of being the smallest village with the biggest welcome sign.  Every house has a doorstep garden.  Orchard cottages stand close enough for neighbors to pass sugar through their windows.  A gentle ogre beekeeper tends the village hives and painted the enormous welcome sign without realizing it was bigger than the town hall.  On festival days, the orchard roads smell of cider, honey, and the smoke from tiny portable pie ovens built by the village children.",
-    "Major Facts": "The village librarian issues books using a wheelbarrow.  Residents argue over whether a wheelbarrow is technically a library.  Smallerville sends fruit to the Gnomish Farms markets and Cogbottom's canteen.  Its wheelbarrow librarian brings books from house to house.  A plaque celebrates the day a Tickhop returned a missing library card, though the librarian still suspects the rabbit ate the corner.",
+    "Major Facts": "The village librarian issues books using a wheelbarrow.  Residents argue over whether a wheelbarrow is technically a library.  Smallerville sends fruit to the Gnomish Farms markets and Cogbottom's canteen.  Its wheelbarrow librarian brings books from house to house.  A plaque celebrates the day a Tickhop returned a missing library card, though the librarian still suspects the rabbit ate the corner.  A pet that escaped from Smallerville a few years ago grew into the beast known as Mr. Fluffy, who is not friendly in the least.  Whispers also say the crystal drake called the Sinner of Smallerville once committed some great misdeed here, though the naturalist Dr. Quartz says all it really does is shoot crystal quills in every direction.",
     "Flora": "Brassleaf oak, gearvine",
     "Fauna": "Hootgear, Cogsnake, Pebblem"
    },
@@ -1199,7 +1199,7 @@
     "Non-Factory Imports": "writing slates",
     "Non-Factory Exports": "hand-painted road signs; fruit pies",
     "About": "The village sign has been corrected twelve times, and none of the corrections match.  Visitors may spell it however they like.  Schoolchildren write stories here with delightful freedom, even when the village sign has been misspelled twelve different ways.  A traveling fairy calligrapher declared the place impossible to put on a map and was promptly invited to teach handwriting.  Every shopkeeper has a personal spelling of the address, which makes the post office the busiest building in the entire village.",
-    "Major Facts": "The local spelling contest has no losers.  The judges run out of red ink before the first round ends.  Visiting Goopamice sometimes supply more dye but prefer signing with pawprints.  Gnix Goop supplies the red pigment for the famous spelling contest.  Goopamice leave tiny pawprints on the judges' papers, which are accepted as decorative punctuation.  The town keeps a public ledger of every proposed spelling, and the ledger is now its most popular library book.",
+    "Major Facts": "The local spelling contest has no losers.  The judges run out of red ink before the first round ends.  Visiting Goopamice sometimes supply more dye but prefer signing with pawprints.  Gnix Goop supplies the red pigment for the famous spelling contest.  Goopamice leave tiny pawprints on the judges' papers, which are accepted as decorative punctuation.  The town keeps a public ledger of every proposed spelling, and the ledger is now its most popular library book.  Local legends tell of the Hizzerl, a tentacled cat that hunts anyone who sweats near it, and the gnomes here insist there are hardly any.  The first Kilar Nanana, the banana monster, was discovered here.",
     "Flora": "Bracken, wild daisies",
     "Fauna": "Tickhop, Goopamice"
    },
@@ -1888,7 +1888,7 @@
     "Non-Factory Imports": "dry packing straw",
     "Non-Factory Exports": "mushrooms; spore paper",
     "About": "Little mushroom roofs dot this damp town.  Its gardeners keep careful notes on which fungi glow, sing, or ask for breakfast.  Mushroom roofs shelter growers, cooks, and a kindly myconid elder who insists the whole village belongs to her garden.  Lamia pharmacists come for medicinal spores, while young gnomes learn which glowing fungi make good lanterns and which taste terrible.",
-    "Major Facts": "Mycelia's mushroom market opens only after the morning mist lifts.  One stall has been waiting for clear weather since last Tuesday.  Growers ship glowcaps and spore paper to Gloopenstein.  The Mushroom Parliament has six elected members and a seventh chair occupied by a toadstool.  No one has proved it can vote, but it has never missed a meeting.",
+    "Major Facts": "Mycelia's mushroom market opens only after the morning mist lifts.  One stall has been waiting for clear weather since last Tuesday.  Growers ship glowcaps and spore paper to Gloopenstein.  The Mushroom Parliament has six elected members and a seventh chair occupied by a toadstool.  No one has proved it can vote, but it has never missed a meeting.  In summer, the Sporebeaks fill Mycelia with a giant spore cloud, and since a Sporebeak breathes fire, the cloud tends to go up in flames.  That keeps Mycelia's clothing makers very busy.",
     "Flora": "Tower mushrooms, glowcap",
     "Fauna": "Shroomtle, Runetle"
    },
@@ -2242,7 +2242,7 @@
     "Location": "Highest northeast mountain saddle beyond the exclusion gate.",
     "Region": "Gno Dao Cradle.",
     "About": "This fortress clings to a cliff that seems to have no path up.  Windows and stairways point in confusing directions.  High above the mountain saddle stands a fortress whose staircases seem to lead into clouds and whose towers do not agree about their own height.  Goatfolk climbers maintain the lower approach, and a giant architect visits each summer to measure the same wall with increasing frustration.  The view is breathtaking, if anyone ever reaches the roof.",
-    "Major Facts": "No expedition has reached the central tower.  A tiny flag on its roof changes color every year.  The final fortress in the old training route was designed to test patience, cooperation, and the ability to ask for help.  Its central tower remains unexplored, though the roof flag changes color every year.  An elderly lamia engineer believes the walls are moved by giant hidden springs; a mountain ranger thinks someone simply changes the flag while everybody is looking down.",
+    "Major Facts": "No expedition has reached the central tower.  A tiny flag on its roof changes color every year.  The final fortress in the old training route was designed to test patience, cooperation, and the ability to ask for help.  Its central tower remains unexplored, though the roof flag changes color every year.  An elderly lamia engineer believes the walls are moved by giant hidden springs; a mountain ranger thinks someone simply changes the flag while everybody is looking down.  Improbable Gryphons fly high above the fortress, and no two of them are alike.",
     "Flora": "Frost heather, mountain lichen",
     "Fauna": "Grimlem, Fluffbat"
    },
@@ -2960,5 +2960,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.18.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.19.md"
 }
