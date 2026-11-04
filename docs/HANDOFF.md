@@ -15,7 +15,7 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 
 - The player drags one item tile from the shelf into a box; one drag ships a big batch.
 - Reshaped 2026-11-03: shipping **drains** the shelf (that's the point; an empty shelf sends players back to the clicker).  Every item stops at 1.  Open and Close buttons on a shipping door.
-- Shipping pays its **own currency** called **Stonks**, never cogs.  Stamps are a separate shipping mechanic (right stamp for the right region).  Boxes and supplies are free, box-size upgrades are dropped, and the packing itself is the game: a match game, Simon Says with a shipping veneer.
+- Shipping pays its **own currency** called **Stonks**, never cogs.  Stamps are a separate shipping mechanic (right stamp for the right region).  Boxes and supplies are free, box-size upgrades are dropped, and the packing itself is the game: a match game inspired by Simon Says.  Complete the order to succeed; extra items do nothing, except on Gnonmoon.
 - Later layers, all drafts: Stonks shop and a Packing Gnome, orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of our company vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
 - **Next math step:** Stonks prices and Stonks-shop costs.  Agree the numbers with Nathan, then build the core (layer 1).
 - Waiting on Nathan and Mara for the company name, lore, and region maps (they feed shipping labels).
