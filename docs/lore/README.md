@@ -25,7 +25,7 @@ A Lore tab in the game, in the spirit of the Mass Effect codex.  Nothing is buil
 | [tnp-corp.md](tnp-corp.md) | The North Pole Corp, the rival | Seeds from 2026-11-03 |
 | [regions.md](regions.md) | The regions the dock ships to | Waiting on maps |
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
-| [location-gazetteer-v0.2.md](location-gazetteer-v0.2.md) | 100 places, grouped by type, with physical imports and exports, flora, fauna, and lore | **v0.2 review draft, awaiting Nathan and Alex** |
+| [location-gazetteer-v0.3.md](location-gazetteer-v0.3.md) | 100 places, grouped by type, with physical imports and exports, separate flora and fauna fields, and lore | **v0.3 review draft, awaiting Nathan and Alex** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss | Waiting on Alex |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |
