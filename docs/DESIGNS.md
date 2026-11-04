@@ -100,6 +100,8 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
 - ~~Box upgrades (Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) as speed upgrades.~~  Dropped 2026-11-04 (Nathan): boxes cost nothing, and the challenge is the packing match.
 
+**Order of work (Nathan, 2026-11-04):** finish the lore pass, then nail down the full gameplay mechanics, then make assets, then build.  No Packing Line assets get made until the mechanics are settled.  First mechanics to settle: how much of a pile one package ships, what the Stonks shop sells (if anything), and what a failed shipment does to spendable Stonks versus the ticker line.
+
 **Shipping log (Nathan, 2026-11-04, decided; build after the core)**
 
 - After a package ships, the player can open its **shipping log**: about **10 short entries** on how the journey went, auto-filled at random from a pool of events.  Flavor only: it changes nothing in the game.
