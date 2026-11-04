@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.15 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.16 Working Draft)
 
 
 ## How to read this draft
@@ -1506,10 +1506,10 @@ Places named while drawing the master map.  They sit outside Nathan's original 1
 - **Name:** Tables Edge
 - **Location:** Deep in the pine forest in the middle of Shen Shin.
 - **Region:** Shen Shin.
-- **Factory Imports:** None
-- **Factory Exports:** None
+- **Factory Imports:** Sneaker; Work Boot; Ruler; Triangle Ruler; Hammer; Saw
+- **Factory Exports:** Log; Chair; Boomerang; Cardboard Box
 - **Non-Factory Imports:** None
-- **Non-Factory Exports:** tables
+- **Non-Factory Exports:** tables; pine benches; spare table legs; sawdust for packing crates
 - **About:** A woodworking town hidden deep in the pines, where every house has a workshop and every workshop makes tables.  Big tables, small tables, tables for giants and tables for gnomes.  Watch out for your shins.
 - **Major Facts:** Named by Nathan on 2026-11-03.  It is Shen Shin's first named town and the island's shipping destination.  The town's woodworkers, and how many shins its table corners have claimed, are still open.
 - **Flora:** Salt pine, frost moss
