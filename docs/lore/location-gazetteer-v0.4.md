@@ -44,12 +44,12 @@
 - **Name:** Gnomadica
 - **Location:** The whole chart: Gnome Island and the nearby isles, seas, and coast.
 - **Region:** Greater mapped area (parent of all regions).
-- **Factory Imports:** Clipboard; Cardboard Box
-- **Factory Exports:** None
-- **Non-Factory Imports:** trade permits
-- **Non-Factory Exports:** printed shipping charts; printed island storybooks
-- **About:** The busy little corner of the world where somebody always needs a sock and somebody else has three thousand.  Its ports connect every strange community in the neighborhood.  From the brass-smoked chimneys of Cogbottom to the sea lanterns of Slaanilok, every district has a reason to send a parcel and a different reason to refuse one.  Gnomes, fairies, giants, lamia, and other neighbors share roads, ferries, arguments, and recipes; the customs office has yet to devise a form big enough for a giant's signature.
-- **Major Facts:** Gnomadica is a working name for the mapped area, not the entire planet.  The world beyond the map stays mysterious.  Factory headquarters sits in Cogbottom.  The island-wide Postmaster's Bell is rung whenever a packet travels from the Gnohio riverboats to the far eastern ferries without losing a label.  The first successful shipment was a single left sock, which the recipient immediately mailed back in search of its partner.  A collection of public maps shows different names for the same coastline, so surveyors use the oldest landmarks rather than trusting politicians or cartographers with particularly expensive hats.
+- **Factory Imports:** N/A
+- **Factory Exports:** N/A
+- **Non-Factory Imports:** N/A
+- **Non-Factory Exports:** N/A
+- **About:** The busy little corner of the world where somebody always needs a sock.  Its ports connect a variety of strange communities in the neighborhood.  From the brass-smoked chimneys of Cogbottom to the sea lanterns of Slaanilok, every district has a reason to send a parcel and a different reason to refuse one.  Gnomes, fairies, giants, lamia, and other neighbors share roads, ferries, arguments, and recipes; the customs office has yet to devise a form big enough for a giant's fingerprint.
+- **Major Facts:** Gnomadica is the collection of islands around a central mainland.  The world beyond is vast and mysterious.  Tales of their adventures often talk of friendly sea monsters that help sailors across the ocean, to merfolk rescuing sailors caught in the storms.  Far away lands tell of even stranger affairs.  The Factory headquarters sits in Cogbottom.  The island-wide Postmaster's Bell is rung whenever a packet travels outward from the Gnohio riverboats.  The first successful shipment was a single left sock, which the recipient immediately mailed back because it didn't match.  A collection of public maps shows different names for the same coastline, so surveyors use the oldest landmarks rather than trusting the various old cartographers from the various races who desire different things in their maps.
 - **Flora:** Oak, river reeds, saltgrass, snowbells
 - **Fauna:** Tickhop, Hootgear, Magmander, Shroomtle, Zapfox, Potamice, Fluffbat, Pebblem, Bloomlet, Cogsnake, Jellybub
 - **Bounties:**
@@ -59,10 +59,10 @@
 - **Name:** Gnomerica
 - **Location:** Central Gnome Island, around the factory and main crossroads.
 - **Region:** Gnomadica, central industrial region.
-- **Factory Imports:** Spare Cog; Nut and Bolt; Work Boot
-- **Factory Exports:** None
-- **Non-Factory Imports:** raw iron
-- **Non-Factory Exports:** finished machines; spare axle kits
+- **Factory Imports:** N/A
+- **Factory Exports:** N/A
+- **Non-Factory Imports:** N/A
+- **Non-Factory Exports:** N/A
 - **About:** Brass roofs, gear towers, and shouting shift foremen define the busiest region.  It's where odd ideas become even odder products.  Its brass-roofed towns are stitched together by the Central Rail, the Brass Road, and a surprising number of workers who swear their commute is downhill both ways.  Lamia engineers coil around broken steam pipes to reach awkward valves, while goblin bookkeepers keep honest ledgers and dishonest lunch schedules.
 - **Major Facts:** Cogbottom is its manufacturing heart.  The old public clock has shown lunch time for years, and everyone agrees it is polite to obey.  Its foundries supply Cogsworth and Pulley Junction, while Gnomish Farms feeds the morning shift.  The Great Lunch Whistle once blew for nine hours because a pebble jammed the valve; the workers voted to call it a public holiday.  The Council of Standard Cogs has argued over the proper tooth count for a hundred years and still uses three different standards on the same railway.
 - **Flora:** Brassleaf oak, gearvine
