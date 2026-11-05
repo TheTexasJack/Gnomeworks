@@ -31,8 +31,8 @@ The Gnomopedia: a lore tab in the game, in the spirit of the Mass Effect codex (
 | [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
 | [HANDOFF-lore-v0.1.md](HANDOFF-lore-v0.1.md) | Start here in a new lore thread: current files, next steps, decisions, and how Nathan works | **Current (2026-11-04)** |
 | [map/](map/README.md) | Gnomadica master map v0.21 (Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region, Gnonmoon): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.21 draft map, awaiting canon review** |
-| [trade-draft-v0.1.md](trade-draft-v0.1.md) | Proposed imports so every junk item has a destination, plus Factory Exports where the lore fits | **Claudia's draft, awaiting Nathan's review** |
-| [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families and their 4 forms | Waiting on lore |
+| [trade-draft-v0.2.md](trade-draft-v0.2.md) | Proposed imports so every junk item has a destination, plus Factory Exports where the lore fits | **Claudia's draft, on hold (2026-11-04)** |
+| [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families, their 4 forms, and draft home regions | Regions drafted (2026-11-04), lore still open |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss, named by Alex, with Dr. Quartz's field notes | **Alex's entries in (2026-11-04)** |
 | [junk-groups.md](junk-groups.md) | The 8 junk groups, plus Number Twos and Legendary Treasures | Waiting on lore |
 

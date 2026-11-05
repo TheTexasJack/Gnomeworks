@@ -1,6 +1,6 @@
-# Gnomeworks trade draft, v0.1
+# Gnomeworks trade draft, v0.2
 
-**Status: Claudia's working draft for Nathan's review, 2026-11-03.**  Nothing here is in the gazetteer yet.  Nathan approves, changes, or drops each line, and the approved ones get copied into the next gazetteer version.
+**Status: on hold (Nathan, 2026-11-04).  Claudia's working draft, first written 2026-11-03.**  Rechecked against gazetteer v0.20 on 2026-11-04: still accurate.  Nothing here is in the gazetteer yet.  Nathan approves, changes, or drops each line, and the approved ones get copied into the next gazetteer version.
 
 ## The goal
 
@@ -9,7 +9,7 @@ Every item the factory makes should have somewhere to ship.  A shelf item can on
 ## Coverage check
 
 - The catalog has **96 junk items** in 8 groups.  Tiny Monsters, Number Twos, and Legendary Treasures are counted separately below.
-- In gazetteer v0.16, **31 junk items** have no importer anywhere, so today they could never ship.
+- In gazetteer v0.20, **31 junk items** have no importer anywhere, so today they could never ship.
 - With the import additions below, **0** are left without an importer.  Every junk item has at least one destination.
 - Each new import was matched to a place whose lore already fits it, and no place gets more than two new imports.
 
@@ -83,6 +83,8 @@ Places with no clear maker story keep **None**.  Being a buyer only is fine.  Ta
 | Legipt | Slaanilok | Old Vase | an ancient city full of old pottery |
 
 ## Open questions for Nathan
+
+- Two lines add new lore: Legipt's lizard priests (Magic Wand) and the Gassy Dog's famous reason for needing a Poop Knife.
 
 - **Tiny Monsters (44), Number Twos (4), and Legendary Treasures (4)** have no importers at all.  Should they ship?  If yes, a few natural homes: Tiny Monsters to Mouse Reserve-style sanctuaries or Slimes Akummin, Number Twos to Gnomish Farms as fertilizer, and treasures through special orders only.
 - The Crafter's Mines already imports **Diamond Pickaxe**, a Legendary Treasure.  Keep it as a special order, or swap it for a junk item.
