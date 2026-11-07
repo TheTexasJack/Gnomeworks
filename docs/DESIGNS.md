@@ -216,3 +216,24 @@ Ideas with merit that are parked until the game is further along.  Not planned, 
 | Idea | What it needs | Notes |
 | --- | --- | --- |
 | Lore narration: a small play button at the end of each Gnomopedia entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |
+
+### Beyond GitHub
+
+Added 2026-11-07.  Gnomeworks is meant to become a full game for the shop one day, and GitHub Pages has limits that will matter then.  (OMNISLATE stays on Pages for good, because it will only ever be a table prop.)
+
+| Limit | GitHub Pages today | Why it matters for Gnomeworks |
+| --- | --- | --- |
+| Site size | 1 GB per published site; 1 GB recommended per source repo.  Each repo gets its own 1 GB. | Art, sound, and music only grow.  The repo was about 16 MB on 2026-11-07. |
+| Bandwidth | Soft limit of 100 GB per month | A game shared beyond the shop could pass this.  OMNISLATE never will. |
+| Builds | Soft limit of 10 builds per hour when deploying from a branch | A heavy push day could stall deploys.  A GitHub Actions workflow removes this limit. |
+| Allowed use | Not for running an online business, e-commerce, or commercial SaaS | If Gnomeworks ever sells anything or takes payments, Pages is the wrong home. |
+| Deploy timeout | 10 minutes | Only matters for a very large site. |
+
+**Options to weigh when the time comes** (Claudia's drafts, nothing decided):
+
+- Cloudflare Pages: free tier with generous bandwidth.  25 MB cap per file.
+- Large media (music, video) moved to object storage such as Cloudflare R2, with the game files staying small.
+- The Cheese Block behind a Cloudflare Tunnel, if the game ever needs server-side saves or accounts.
+- The Wix "Embed a site" element keeps working wherever the game moves, as long as it has a URL.
+
+Source: [GitHub Pages limits](https://docs.github.com/pages/getting-started-with-github-pages/github-pages-limits)
