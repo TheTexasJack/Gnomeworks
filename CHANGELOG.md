@@ -2,6 +2,11 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.63 (2026-11-08)
+
+- Auto clicker fix (a playtester ran one).  The tap cap drops from 20 to 12 a second; fast humans, four-finger drummers included, barely touch it.
+- The gnomes now spot auto clickers by their metronome timing: over 30 fast taps with nearly identical gaps, the gear stops counting taps, sputters, and an ON STRIKE sign drops onto the machine with a random line ("Gnome Union Rule #1: no robots on the gear").  Uneven timing or a 3-second rest lifts the strike.  Caught taps never make shinies hot.  Numbers live in `tap.robot`; Stats keeps a hidden `robotsCaught` count.
+
 ## v0.2.0-draft.62 (2026-11-04)
 
 - The Gnome Wizard has his real gear-framed badge (Nathan's art), replacing the temporary square picture.

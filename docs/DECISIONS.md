@@ -51,3 +51,7 @@ Why the game is the way it is.  Newest first within each day.
 - Real fingers only for anything rare: scripted clicks are ignored everywhere.
 - Kid-friendly content.  Cartoon spooky is fine (the shop's owner decides edge cases).
 - Phone first: every interaction must work with one thumb.
+
+## Auto clickers (2026-11-08)
+
+A playtester ran an auto clicker.  Auto clickers fake real mouse input, so the old "real taps only" check let them through at the 20-a-second cap, and with the Rally upgrade (each tap worth 5% of production) that doubled output forever and kept shinies hot.  Nathan picked: lower the cap to 12, and detect metronome timing.  When caught, something funny happens (the gnomes go on strike).  A same-spot check was left out: it's easy to dodge and could catch phone players who tap one spot.  This stops casual clicker use, not a determined cheater.

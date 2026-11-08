@@ -423,13 +423,31 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 #toast.legendary { border-color: #ffb703; box-shadow: 0 0 30px rgba(255,183,3,.9); font-size: 1.1rem; }
 #toast.new { border-color: #7fc97f; }
 #toast.warn { border-color: #e76f51; }
+.strike-sign {
+  position: absolute; left: 50%; top: 6%; transform: translate(-50%, -30px) rotate(-3deg); width: min(78%, 420px);
+  padding: 10px 14px; border-radius: 10px; text-align: center; z-index: 8; pointer-events: none;
+  background: linear-gradient(180deg, #6d4423, #3a2412); border: 3px solid #e76f51; color: var(--cream);
+  box-shadow: 0 8px 20px rgba(0,0,0,.6); opacity: 0; visibility: hidden; transition: opacity .25s, transform .35s ease, visibility .25s;
+}
+.strike-sign.on { opacity: 1; visibility: visible; transform: translate(-50%, 0) rotate(-3deg); }
+.strike-sign b { display: block; font-size: 1.25rem; color: #ffb703; letter-spacing: .04em; }
+.strike-sign span { display: block; margin-top: 4px; font-weight: bold; font-size: .95rem; }
+/* The gear sputters when the gnomes catch an auto clicker. */
+#machine.robot-jam { animation: robotJam .6s ease-in-out; }
+@keyframes robotJam {
+  0%, 100% { transform: none; }
+  15% { transform: translateX(-6px) rotate(-1deg); }
+  35% { transform: translateX(5px) rotate(1deg); }
+  55% { transform: translateX(-4px); }
+  75% { transform: translateX(2px); }
+}
 
 /* ---------- debug ---------- */
 .debug-bar { position: fixed; left: 6px; bottom: 6px; display: flex; gap: 4px; align-items: center; z-index: 60; background: rgba(0,0,0,.75); padding: 4px; border-radius: 6px; font-size: .75rem; }
 .debug-bar button { font-size: .75rem; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
-  .tap-ring, .crew-gnome, .rare-popup { animation: none !important; }
+  .tap-ring, .crew-gnome, .rare-popup, #machine.robot-jam { animation: none !important; }
 }
 
 /* ---------- right panel as a clipboard (Mara's art, assets/ui/clipboard.webp, 844x1080) ----------

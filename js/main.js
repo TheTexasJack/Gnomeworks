@@ -45,6 +45,43 @@ window.GW = window.GW || {};
     return true;
   }
 
+  // Auto clicker check (see tap.robot in config).  Every real gear tap is timed, even ones over the cap.
+  // When caught, a strike sign hangs on the machine until the timing gets uneven or the gear rests.
+  var R = C.tap.robot, tapTimes = [], robot = false, restTimer = null;
+  var strikeSign = U.el('div', 'strike-sign');
+  strikeSign.setAttribute('role', 'status');
+  machine.appendChild(strikeSign);
+  function setRobot(on) {
+    if (on === robot) return;
+    robot = on;
+    if (on) {
+      strikeSign.innerHTML = '<b>🪧 ON STRIKE 🪧</b><span></span>';
+      strikeSign.lastChild.textContent = R.lines[Math.floor(Math.random() * R.lines.length)];
+      strikeSign.classList.add('on');
+      SFX.hehe();
+      machine.classList.remove('robot-jam'); void machine.offsetWidth; machine.classList.add('robot-jam');
+      s.stats.robotsCaught = (s.stats.robotsCaught || 0) + 1;
+    } else {
+      strikeSign.classList.remove('on');
+      tapTimes = [];
+    }
+  }
+  function isRobot(t) {
+    tapTimes.push(t);
+    if (tapTimes.length > R.window + 1) tapTimes.shift();
+    if (tapTimes.length === R.window + 1) {
+      var gaps = [], sum = 0, i;
+      for (i = 1; i < tapTimes.length; i++) { gaps.push(tapTimes[i] - tapTimes[i - 1]); sum += tapTimes[i] - tapTimes[i - 1]; }
+      var mean = sum / gaps.length, sq = 0;
+      gaps.forEach(function (g) { sq += (g - mean) * (g - mean); });
+      var spread = mean > 0 ? Math.sqrt(sq / gaps.length) / mean : 0;
+      if (!robot && 1000 / mean >= R.minRate && spread < R.maxSpread) setRobot(true);
+      else if (robot && spread > R.humanSpread) setRobot(false);
+    }
+    if (robot) { clearTimeout(restTimer); restTimer = setTimeout(function () { setRobot(false); }, R.restSeconds * 1000); }
+    return robot;
+  }
+
   function doTap(xPct, yPct) {
     if (s.paused) return;
     var ev = E.newEvents();
@@ -60,7 +97,7 @@ window.GW = window.GW || {};
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
     if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt')) return;
     e.preventDefault();
-    if (!allowTap()) return;
+    if (isRobot(performance.now()) || !allowTap()) return;
     var box = machine.getBoundingClientRect();
     doTap((e.clientX - box.left) / box.width * 100, (e.clientY - box.top) / box.height * 100 - 6);
   });
@@ -68,7 +105,7 @@ window.GW = window.GW || {};
     if (!e.isTrusted || e.repeat) return;
     if (e.key !== ' ' && e.key !== 'Enter') return;
     e.preventDefault();
-    if (!allowTap()) return;
+    if (isRobot(performance.now()) || !allowTap()) return;
     var c = G.driveCenter();
     doTap(c.x, c.y - 10);
   });

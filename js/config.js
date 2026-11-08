@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.62';
+GW.VERSION = '0.2.0-draft.63';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -80,7 +80,21 @@ GW.CONFIG = {
   },
 
   tap: {
-    maxTapsPerSecond: 20,       // human cap; extra taps are ignored
+    maxTapsPerSecond: 12,       // human cap; extra taps are ignored (fast humans hold 6 to 10 a second)
+    // Auto clicker check: people tap with uneven timing, auto clickers tap like a metronome.  Over the last
+    // `window` taps, if tapping is at least `minRate` a second and the spread of the gaps is under `maxSpread`
+    // (as a share of the average gap), the gnomes go on strike: taps do nothing until the timing gets
+    // uneven again or the gear rests for `restSeconds`.
+    robot: {
+      window: 30, minRate: 4, maxSpread: 0.04, humanSpread: 0.08, restSeconds: 3,
+      lines: [
+        'Beep boop?  The gnomes spotted a robot on the gear and went on strike.',
+        'Gnome Union Rule #1: no robots on the gear.  Taps paused until a real hand shows up.',
+        'The Tiny Gnome says your finger is suspiciously perfect.',
+        'Nice try, TNP Corp.  Robots don\'t get cogs here.',
+        'The gear refuses to be clicked by a toaster.'
+      ]
+    },
     activeWindowSeconds: 30,    // tapping the gear this recently makes popups "hot" (Legendary possible)
     labelFadeSeconds: 60        // the word TAP under the little gear fades away this long after the page opens (0 = never)
   },
