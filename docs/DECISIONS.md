@@ -55,3 +55,5 @@ Why the game is the way it is.  Newest first within each day.
 ## Auto clickers (2026-11-08)
 
 A playtester ran an auto clicker.  Auto clickers fake real mouse input, so the old "real taps only" check let them through at the 20-a-second cap, and with the Rally upgrade (each tap worth 5% of production) that doubled output forever and kept shinies hot.  Nathan picked: lower the cap to 12, and detect metronome timing.  When caught, something funny happens (the gnomes go on strike).  A same-spot check was left out: it's easy to dodge and could catch phone players who tap one spot.  This stops casual clicker use, not a determined cheater.
+
+**Update 2026-11-08 evening:** the playtester got around the rhythm check with a multi-point Android clicker (10 tap spots, each on its own timer, so the combined taps look uneven).  He is still held to the 12-a-second cap.  Options on the table: a per-spot rhythm check (each spot hits the exact same pixel), or tired arms (tap value fades after about a minute of nonstop tapping, beaten by nothing).  Claudia's lean: tired arms.  Waiting on Nathan's pick.

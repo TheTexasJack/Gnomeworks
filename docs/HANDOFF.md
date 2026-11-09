@@ -7,7 +7,7 @@ For a fresh session picking up Gnomeworks.  Written 2026-11-03, version updated 
 - **Live:** https://thetexasjack.github.io/Gnomeworks/ (repo `TheTexasJack/Gnomeworks`, branch `main`).  Everything is pushed; no open branches.
 - **The game:** 6 gnome types (Tiny, Necromancer, Warrior, Cloner, Matryoshka, Wizard) plus the Megagnome, 148 collectibles, Day and Night themes, desktop and phone layouts.
 - **Events built:** shinies, Wild Magic, Clone Attack, the Megagnome and his crossbow hunt (with the Banana Monster boss).  How each works: [EVENTS.md](EVENTS.md).
-- **Real play data:** Nathan reached 20B cogs and 8.75M clicks a second in about two days of light play, with every gnome count between 50 and 92.  The 15% price climb keeps counts low on its own.
+- **Real play data:** Nathan reached 20B cogs and 8.75M clicks a second in about two days of light play, with every gnome count between 50 and 92.  The 15% price climb keeps counts low on its own.  Playtesters reach the Megagnome in about 5 to 7 hours (2026-11-08, a measurement, not a target).
 
 ## Next session: the Packing Line
 
