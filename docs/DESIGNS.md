@@ -276,7 +276,7 @@ Ideas with merit that are parked until the game is further along.  Not planned, 
 
 | Idea | What it needs | Notes |
 | --- | --- | --- |
-| Robot badge on the leaderboard: players with more than 5 ON STRIKE catches get a 🤖 next to their name (Nathan, 2026-11-08) | Jarrett's accounts and leaderboard | Claudia's draft tweaks: count only catches from draft.66 on (Nathan's own save shows 4 from the touchy pre-fix check), count strikes and never Taking a Break, reset each season or let Jarrett clear it by hand, and treat it as a joke badge since the count lives in the player's save. |
+| Robot badge on the leaderboard: players with more than 5 ON STRIKE catches get a 🤖 next to their name (Nathan, 2026-11-08) | Jarrett's accounts and leaderboard | Claudia's draft tweaks: count only catches from draft.66 on (Nathan's own save shows 4 from the touchy pre-fix check), count strikes and never Taking a Break, treat it as a joke badge since the count lives in the player's save.  **Decided:** a full season reset clears it.  **Dev tag:** Nathan, as the dev, carries every tag plus his own: his flaming book Prometheus symbol (art when the leaderboard is built). |
 | Lore narration: a small play button at the end of each Gnomopedia entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |
 
 ### Beyond GitHub
