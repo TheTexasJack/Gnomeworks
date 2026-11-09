@@ -315,6 +315,23 @@ window.GW = window.GW || {};
     b.addEventListener('click', function () { s.view = b.dataset.view; SFX.click(); applyView(); UI.updateFloor(s); });
   });
   applyView();
+
+  // Swipe between views on touch screens (see views and swipe in config).
+  var swipe = null;
+  machine.addEventListener('pointerdown', function (e) {
+    swipe = (e.pointerType === 'touch' && e.isPrimary && !e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt'))
+      ? { x: e.clientX, y: e.clientY, t: performance.now() } : null;
+  }, true);
+  machine.addEventListener('pointerup', function (e) {
+    if (!swipe || !e.isPrimary) return;
+    var dx = e.clientX - swipe.x, dy = e.clientY - swipe.y, quick = performance.now() - swipe.t <= C.swipe.maxMilliseconds;
+    swipe = null;
+    if (!quick || Math.abs(dx) < C.swipe.minPixels || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    var i = C.views.indexOf(s.view), next = C.views[i + (dx < 0 ? 1 : -1)];
+    if (!next) return;
+    s.view = next; SFX.click(); applyView(); UI.updateFloor(s);
+  }, true);
+  machine.addEventListener('pointercancel', function () { swipe = null; }, true);
   var cloneAlert = document.getElementById('cloneAlert');
   cloneAlert.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
   cloneAlert.addEventListener('click', function () { s.view = 'floor'; SFX.click(); applyView(); UI.updateFloor(s); });

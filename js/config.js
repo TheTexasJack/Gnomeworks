@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.66';
+GW.VERSION = '0.2.0-draft.67';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -78,6 +78,10 @@ GW.CONFIG = {
     ],
     boss: { id: 'banana', face: 1, burst: 'white' }
   },
+
+  // Views in swipe order (phones: swipe left for the next view, right for the previous).  Shipping joins later.
+  views: ['machine', 'floor'],
+  swipe: { minPixels: 60, maxMilliseconds: 600 },   // how far and how fast a swipe must be
 
   tap: {
     maxTapsPerSecond: 12,       // human cap; extra taps are ignored (fast humans hold 6 to 10 a second)

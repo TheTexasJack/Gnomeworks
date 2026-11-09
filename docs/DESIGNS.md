@@ -74,6 +74,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - The player drags **one item tile** from the shelf into a box.  One drag ships a big batch.
 - **Shipping removes items from the shelf.**  Players can sell off everything they have.
 - **Every item stops at 1.**  The last one is the display copy, so collections and shelf tiles never go dark.
+- **Swipe:** when the dock is built as a view, add `'shipping'` to `views` in config so phones can swipe to it (draft.67).
 - **Open and Close buttons.**  Open raises the shipping door and makes the shelf draggable.  Close shuts it, and the player goes back to the clicker.
 - **Destinations come from the Gnomadica map and gazetteer** (decided 2026-11-04).  Each region gets its own stamp; towns are the address line.  Early shifts check only the region stamp, later shifts check the town too.
 - **Every island is its own region:** Gnufoundland, Shen Shin, Slaanilok, Gni, and Gnonmoon, alongside the five main-island regions.  Ten regions, ten stamps.

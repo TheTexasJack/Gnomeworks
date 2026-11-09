@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.67 (2026-11-08)
+
+- Swipe between views on phones and tablets: swipe left on the machine for the Shop Floor, right to come back.  Views live in a list (`views` in config) so the Packing Line can join as a third view.  Short drags and up-and-down scrolling don't switch.  Mouse dragging on desktop does nothing; the buttons still work everywhere.
+
 ## v0.2.0-draft.66 (2026-11-08)
 
 - ON STRIKE was too touchy: Nathan got it from normal clicking after about 50 taps (draft.64's stutter fix made it stricter about steady humans).  It now needs 40 taps within about 1.5% of each other, which only a machine holds.  Taking a Break handles every other clicker.  Tested: a very steady human (4% wobble, 200 taps) gets no strike; a perfect clicker still does.
