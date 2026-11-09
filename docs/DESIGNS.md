@@ -210,25 +210,31 @@ One pass over the numbers: the Packing Line plus mid-to-late pacing (two days of
 | "Voices by Alex" credit in Info | When Alex records more sounds |
 | Turn events off entirely (a "no Clone Attacks" switch) | Offered, not asked for; would cost those players the rewards |
 
-## Borth, the Clockwork Gnome (future)
+## Bortho, the Clockwork Gnome (future)
 
 Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing built.
 
 **Nathan's words, as given:**
 
-- A clockwork gnome named **Borth**, a producer.
+- A clockwork gnome named **Bortho** (first written as Borth; corrected 2026-11-08), a producer.
 - His mini-game is a **cog match game**.  The machine stops and breaks; you play a game to remove the broken cogs and put in the correct cog.
 - A wrong cog would break for cogs.
 - It plays on a different screen from the main machine, which only has 3 cogs.
 
+**How a wrong cog works (Nathan, 2026-11-08):**
+
+- Example: a line of 6 cogs, and one breaks.
+- Put in a cog that's **too big**: it breaks, and it breaks the cogs around it too.
+- Put in a cog that's **too small**: nothing happens, and you have to replace it again.
+- The right size fixes it.
+
 **Overlaps to settle (Jarrett's proposal list):**
 
-- Borth looks like he could take the **Clockwork Chrononaut** slot (producer #11, 750B) or a slot of his own.
-- His mini-game sounds close to **Gear Jam** from the proposal mini-games.  Borth's cog match may be Gear Jam with a name and a face.
+- Bortho looks like he could take the **Clockwork Chrononaut** slot (producer #11, 750B) or a slot of his own.
+- His mini-game sounds close to **Gear Jam** from the proposal mini-games.  Bortho's cog match may be Gear Jam with a name and a face.
 
 **Open questions:**
 
-- "A wrong cog would break for cogs": does a wrong cog cost cogs, break more cogs, or both?
 - Does the machine fully stop while broken, or slow down?  A full stop in an idle game punishes players who are away; a slowdown, or breaks only while the player is present, may fit better.
 - What triggers a break: a random event like Clone Attack, or something Borth's count affects?
 - How many broken cogs per break, and what tells the player which cog is correct (shape, size, color, tooth count)?  Picture tells first, for Elana.
