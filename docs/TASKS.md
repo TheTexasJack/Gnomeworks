@@ -77,6 +77,8 @@ Future producers unlock with regions (see the Packing Line in DESIGNS.md).  Moon
 
 Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest Patrol, Alchemy Cauldron, Bard Jam, Expeditions.
 
+Nathan's own future add (2026-11-08): **Borth, the Clockwork Gnome**, a producer with a cog match repair mini-game.  Queued after the Packing Line.  See [DESIGNS.md](DESIGNS.md#borth-the-clockwork-gnome-future).
+
 Parked (2026-11-04): a later pass on the Tiny Monsters to make each one unique instead of four forms of the same family.  Unique designs could become plushies Jarrett sells at the shop.  Do it together with the Tiny Monster info card pass (quick Pokedex-style card that links into the full Gnomopedia entry), so the cleanup, the unique designs, and the cards land at once.  After lore cleanup and the Packing Line core.  Monsters get assigned to regions during the lore cleanup so they can appear on that region's stamp.
 
 Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
