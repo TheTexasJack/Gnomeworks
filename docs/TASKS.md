@@ -36,7 +36,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [x] Gear-framed shop badge for the Gnome Wizard (draft.62).
 - [ ] Packing Line, in Nathan's order: lore pass, then mechanics, then assets, then build.  See "Packing Line next steps" below.
-- [ ] Mid-to-late pacing pass.
+- [ ] Mid-to-late pacing pass.  Nathan's report (draft.68, 12.35 hours open): the Wizard makes 97% of production, items paid 28% of all cogs, shelf holds 7 to 12 billion of each junk item.
+- [ ] **Future step, before launch:** clean old item IDs out of saves.  Nathan's save still holds `shirt`, `chips`, `tcg_card`, `tiny_monster`, and `poop` from early versions.  They don't show or count anywhere, so it's harmless until then.  Do it as a save-schema bump in `js/state.js` (drop any item ID not in `CONFIG.items` on load), and run it before or with the repo move, since that resets saves anyway.
 - [ ] Themed buttons, when Mara's button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 
