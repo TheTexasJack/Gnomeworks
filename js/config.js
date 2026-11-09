@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.63';
+GW.VERSION = '0.2.0-draft.64';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -82,9 +82,9 @@ GW.CONFIG = {
   tap: {
     maxTapsPerSecond: 12,       // human cap; extra taps are ignored (fast humans hold 6 to 10 a second)
     // Auto clicker check: people tap with uneven timing, auto clickers tap like a metronome.  Over the last
-    // `window` taps, if tapping is at least `minRate` a second and the spread of the gaps is under `maxSpread`
-    // (as a share of the average gap), the gnomes go on strike: taps do nothing until the timing gets
-    // uneven again or the gear rests for `restSeconds`.
+    // `window` taps, if tapping is at least `minRate` a second and the typical distance from the middle gap
+    // is under `maxSpread` (as a share of the middle gap, so one browser stutter doesn't count), the gnomes
+    // go on strike: taps do nothing until the timing passes `humanSpread` or the gear rests `restSeconds`.
     robot: {
       window: 30, minRate: 4, maxSpread: 0.04, humanSpread: 0.08, restSeconds: 3,
       lines: [

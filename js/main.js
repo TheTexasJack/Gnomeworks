@@ -70,11 +70,12 @@ window.GW = window.GW || {};
     tapTimes.push(t);
     if (tapTimes.length > R.window + 1) tapTimes.shift();
     if (tapTimes.length === R.window + 1) {
-      var gaps = [], sum = 0, i;
-      for (i = 1; i < tapTimes.length; i++) { gaps.push(tapTimes[i] - tapTimes[i - 1]); sum += tapTimes[i] - tapTimes[i - 1]; }
-      var mean = sum / gaps.length, sq = 0;
-      gaps.forEach(function (g) { sq += (g - mean) * (g - mean); });
-      var spread = mean > 0 ? Math.sqrt(sq / gaps.length) / mean : 0;
+      // Spread = the typical distance from the middle gap, as a share of it (median based, so one
+      // browser stutter can't make a clicker look human).
+      var gaps = [], i;
+      for (i = 1; i < tapTimes.length; i++) gaps.push(tapTimes[i] - tapTimes[i - 1]);
+      var mid = U.median(gaps), mean = mid;
+      var spread = mid > 0 ? U.median(gaps.map(function (g) { return Math.abs(g - mid); })) / mid : 0;
       if (!robot && 1000 / mean >= R.minRate && spread < R.maxSpread) setRobot(true);
       else if (robot && spread > R.humanSpread) setRobot(false);
     }

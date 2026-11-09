@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.64 (2026-11-08)
+
+- Auto clicker check hardened: it now judges timing by the middle gap instead of the average, so one browser stutter can't make a clicker look human and lift the strike early.  A clicker that stutters every 25 clicks is caught after 30 taps and stays caught.
+
 ## v0.2.0-draft.63 (2026-11-08)
 
 - Auto clicker fix (a playtester ran one).  The tap cap drops from 20 to 12 a second; fast humans, four-finger drummers included, barely touch it.

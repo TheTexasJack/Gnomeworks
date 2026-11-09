@@ -57,5 +57,10 @@ GW.util = (function () {
     mute: '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
   };
 
-  return { ICONS: ICONS, fmt: fmt, fmtTime: fmtTime, rand: rand, pickWeighted: pickWeighted, el: el, $: $, $all: $all };
+  function median(list) {
+    var a = list.slice().sort(function (x, y) { return x - y; }), m = a.length >> 1;
+    return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+  }
+
+  return { median: median, ICONS: ICONS, fmt: fmt, fmtTime: fmtTime, rand: rand, pickWeighted: pickWeighted, el: el, $: $, $all: $all };
 })();
