@@ -236,7 +236,7 @@ Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing buil
 **Open questions:**
 
 - Does the machine fully stop while broken, or slow down?  A full stop in an idle game punishes players who are away; a slowdown, or breaks only while the player is present, may fit better.
-- What triggers a break: a random event like Clone Attack, or something Borth's count affects?
+- What triggers a break: a random event like Clone Attack, or something Bortho's count affects?
 - How many broken cogs per break, and what tells the player which cog is correct (shape, size, color, tooth count)?  Picture tells first, for Elana.
 
 ## Far future
