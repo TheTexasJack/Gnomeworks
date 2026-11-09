@@ -228,6 +228,13 @@ Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing buil
 - Put in a cog that's **too small**: nothing happens, and you have to replace it again.
 - The right size fixes it.
 
+**More decisions (Nathan, 2026-11-08):**
+
+- **The whole machine breaks down** until the player fixes it.
+- **It only goes off while the player is present** (for example, tapped the gear recently), so nobody comes back to a dead machine.
+- **Cogs are told apart by size and color.**  Size alone still works for color-blind players.
+- **Art:** Mara makes an image with the outlines of the right cogs, in their colors and sizes.
+
 **Overlaps to settle (Jarrett's proposal list):**
 
 - Bortho looks like he could take the **Clockwork Chrononaut** slot (producer #11, 750B) or a slot of his own.
@@ -235,9 +242,8 @@ Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing buil
 
 **Open questions:**
 
-- Does the machine fully stop while broken, or slow down?  A full stop in an idle game punishes players who are away; a slowdown, or breaks only while the player is present, may fit better.
 - What triggers a break: a random event like Clone Attack, or something Bortho's count affects?
-- How many broken cogs per break, and what tells the player which cog is correct (shape, size, color, tooth count)?  Picture tells first, for Elana.
+- How many cogs break at once, and how many sizes and colors are in play?
 
 ## Far future
 
