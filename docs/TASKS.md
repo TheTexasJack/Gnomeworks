@@ -79,7 +79,7 @@ Mini-games: Packing Line (Nathan's sorting game, first in line), Gear Jam, Pest 
 
 Nathan's own future add (2026-11-08): **Bortho, the Clockwork Gnome**, a producer with a cog match repair mini-game.  Queued after the Packing Line.  See [DESIGNS.md](DESIGNS.md#bortho-the-clockwork-gnome-future).
 
-Jarrett's request (2026-11-08): **Gnome Engineer**, a producer with a valve-turning mini-game (turn valves until the heat dissipates).  Queued after the Packing Line.  See [DESIGNS.md](DESIGNS.md#gnome-engineer-future-jarretts-request).
+Jarrett's request (2026-11-08): **Gnome Engineer**, replacing the Boiler Stoker, with a valve-turning mini-game (turn valves until the heat dissipates).  Comes after Bortho, since a missed boiler sets off Bortho's breakdown.  See [DESIGNS.md](DESIGNS.md#gnome-engineer-future-jarretts-request).
 
 Parked (2026-11-04): a later pass on the Tiny Monsters to make each one unique instead of four forms of the same family.  Unique designs could become plushies Jarrett sells at the shop.  Do it together with the Tiny Monster info card pass (quick Pokedex-style card that links into the full Gnomopedia entry), so the cleanup, the unique designs, and the cards land at once.  After lore cleanup and the Packing Line core.  Monsters get assigned to regions during the lore cleanup so they can appear on that region's stamp.
 

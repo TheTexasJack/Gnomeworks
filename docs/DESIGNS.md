@@ -247,19 +247,28 @@ Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing buil
 
 ## Gnome Engineer (future, Jarrett's request)
 
-Requested by Jarrett, the game's owner, 2026-11-08.  **Queued behind the Packing Line.**  Nothing built.
+Requested by Jarrett, the game's owner, 2026-11-08.  **Queued behind the Packing Line, and after Bortho** (his failure sets off Bortho's breakdown).  Nothing built.
 
 **Jarrett's words, as relayed:** a **Gnome Engineer**, with a mini-game: **turn valves until heat dissipates.**
 
-**Overlap to settle:** the proposal list has a **Boiler Stoker** producer (#8, 20M).  A valve-turning engineer fits that slot, or he takes his own.
+**Decided (Nathan, 2026-11-08):**
 
-**Open questions:**
+- He **replaces the Boiler Stoker** (producer slot #8, 20M on the proposal list).
+- **Heat builds from water pressure over time.**
+- If the heat isn't let out, it sets off an **immediate broken cog event** (Bortho's breakdown).  So Bortho must exist first.
+- Valves turn with a **circle drag**.
+- It **can go off while the player is away.**  Players coming back after a while find a rush of events waiting, the steam boiler among them.
+- The boiler **idles for a few minutes before it breaks something,** so a player facing several events at once has time to deal with them.
 
-- What builds the heat: a random event, or something the Engineer's count affects?
-- What happens if the heat isn't let out in time?
-- How a valve turns on a phone: tap, drag in a circle, or hold.
-- Does it only go off while the player is present, like Bortho's breakdown?
-- How Bortho's breakdown and the Engineer's heat stay different enough to feel like two games.
+**Claudia's reading, to confirm:** the few-minute countdown starts when the player comes back (or when pressure maxes out while they're watching).  If it ran while they were away, a long absence would always end in a breakdown on arrival.
+
+**Note:** today Wild Magic and Clone Attack only run while the page is open and visible, one at a time, so they don't pile up while a player is away.  A true "rush of events" on return would mean changing that too.  As written, only the boiler waits for the player.
+
+**Still open:**
+
+- How many valves, and how far each must turn.
+- How fast pressure builds, and whether more Engineers make it slower or faster.
+- How the boiler and Bortho's breakdown feel different: Bortho is a matching puzzle, so the Engineer could be about speed and juggling valves.
 
 ## Far future
 
