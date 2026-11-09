@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.65';
+GW.VERSION = '0.2.0-draft.66';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -90,7 +90,7 @@ GW.CONFIG = {
     // tapping during the break starts the timer over, so an auto clicker stays on break.
     break: { workSeconds: 60, pauseSeconds: 2, seconds: 5 },
     robot: {
-      window: 30, minRate: 4, maxSpread: 0.04, humanSpread: 0.08, restSeconds: 3,
+      window: 40, minRate: 4, maxSpread: 0.015, humanSpread: 0.03, restSeconds: 3,
       lines: [
         'Beep boop?  The gnomes spotted a robot on the gear and went on strike.',
         'Gnome Union Rule #1: no robots on the gear.  Taps paused until a real hand shows up.',

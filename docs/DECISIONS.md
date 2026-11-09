@@ -59,3 +59,5 @@ A playtester ran an auto clicker.  Auto clickers fake real mouse input, so the o
 **Update 2026-11-08 evening:** the playtester got around the rhythm check with a multi-point Android clicker (10 tap spots, each on its own timer, so the combined taps look uneven).  He is still held to the 12-a-second cap.  Options on the table: a per-spot rhythm check (each spot hits the exact same pixel), or tired arms (tap value fades after about a minute of nonstop tapping, beaten by nothing).  Claudia's lean: tired arms.
 
 **Picked 2026-11-08:** tired arms, renamed **Taking a Break** by Nathan (a banana and a cup of cocoa, 5-second timer), built in draft.65.  The 5 seconds must be 5 quiet seconds: a plain 5-second pause every minute would leave a clicker about 92% of its taps.
+
+Draft.66: ON STRIKE false-triggered on Nathan's normal clicking, so it was tightened to machine-perfect timing only.  Taking a Break is now the main defense; the strike is the funny catch for crude clickers.

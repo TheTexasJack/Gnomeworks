@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-04, at v0.2.0-draft.65.
+Last updated 2026-11-04, at v0.2.0-draft.66.
 
 ## Where we are
 

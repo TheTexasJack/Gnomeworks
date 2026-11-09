@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Written 2026-11-03, version updated 2026-11-08 to **v0.2.0-draft.65**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Written 2026-11-03, version updated 2026-11-08 to **v0.2.0-draft.66**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 

@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.66 (2026-11-08)
+
+- ON STRIKE was too touchy: Nathan got it from normal clicking after about 50 taps (draft.64's stutter fix made it stricter about steady humans).  It now needs 40 taps within about 1.5% of each other, which only a machine holds.  Taking a Break handles every other clicker.  Tested: a very steady human (4% wobble, 200 taps) gets no strike; a perfect clicker still does.
+
 ## v0.2.0-draft.65 (2026-11-08)
 
 - Taking a Break (Nathan's name for it).  After a minute of nonstop gear tapping, a sign swings onto the machine: the gnomes are enjoying a banana and a cup of cocoa.  Taps do nothing until the gear is left alone for 5 seconds, with a "Back to work in 5…" countdown.  Tapping during the break starts the countdown over, so an auto clicker, multi-point ones included, stays on break.  Shinies, Wild Magic, and clones are not affected.  Numbers live in `tap.break`.
