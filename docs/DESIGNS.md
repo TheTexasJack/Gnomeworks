@@ -245,6 +245,22 @@ Nathan's request, 2026-11-08.  **Queued behind the Packing Line.**  Nothing buil
 - What triggers a break: a random event like Clone Attack, or something Bortho's count affects?
 - How many cogs break at once, and how many sizes and colors are in play?
 
+## Gnome Engineer (future, Jarrett's request)
+
+Requested by Jarrett, the game's owner, 2026-11-08.  **Queued behind the Packing Line.**  Nothing built.
+
+**Jarrett's words, as relayed:** a **Gnome Engineer**, with a mini-game: **turn valves until heat dissipates.**
+
+**Overlap to settle:** the proposal list has a **Boiler Stoker** producer (#8, 20M).  A valve-turning engineer fits that slot, or he takes his own.
+
+**Open questions:**
+
+- What builds the heat: a random event, or something the Engineer's count affects?
+- What happens if the heat isn't let out in time?
+- How a valve turns on a phone: tap, drag in a circle, or hold.
+- Does it only go off while the player is present, like Bortho's breakdown?
+- How Bortho's breakdown and the Engineer's heat stay different enough to feel like two games.
+
 ## Far future
 
 Ideas with merit that are parked until the game is further along.  Not planned, not scheduled.
