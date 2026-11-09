@@ -336,5 +336,5 @@ GW.clones = (function () {
     }
   }
 
-  return { trigger: trigger, tick: tick, shift: shift, isActive: function () { return !!active; } };
+  return { nextIn: function () { return nextAt ? Math.round((nextAt - performance.now()) / 1000) : null; }, trigger: trigger, tick: tick, shift: shift, isActive: function () { return !!active; } };
 })();

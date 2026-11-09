@@ -130,5 +130,5 @@ GW.wild = (function () {
   // Called while paused so nothing expires or starts.
   function shift(ms) { if (active) { active.ends += ms; active.megaAt += ms; } if (nextAt) nextAt += ms; }
 
-  return { start: start, tick: tick, shift: shift, isActive: function () { return !!active; } };
+  return { nextIn: function () { return nextAt ? Math.round((nextAt - performance.now()) / 1000) : null; }, start: start, tick: tick, shift: shift, isActive: function () { return !!active; } };
 })();

@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.68 (2026-11-08)
+
+- Secret game report: on the Info tab, tap the 🔩 next to the version 10 times.  An "Export game report" button appears; it downloads a JSON file and copies it to the clipboard.  The report holds the version, device and screen, cogs, rates by source, tap value, producers, upgrades, collection progress by group, the Megagnome, stats (including anti-clicker catches), what each event is doing and when it's next due, and the full save.  Nothing is sent anywhere.
+
 ## v0.2.0-draft.67 (2026-11-08)
 
 - Swipe between views on phones and tablets: swipe left on the machine for the Shop Floor, right to come back.  Views live in a list (`views` in config) so the Packing Line can join as a third view.  Short drags and up-and-down scrolling don't switch.  Mouse dragging on desktop does nothing; the buttons still work everywhere.

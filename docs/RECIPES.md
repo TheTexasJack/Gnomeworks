@@ -82,3 +82,9 @@ git push origin main
 4. Optional custom domain: add it under Settings, Pages, and add a CNAME DNS record pointing at `<owner>.github.io`.
 5. Update the game link in `README.md`, `docs/README.md`, and the Wix embed.
 6. Everyone's save resets at the new address (saves belong to the address).  Do this once, before launch.
+
+## Get a player's game report
+
+1. Info tab, scroll to the bottom, tap the 🔩 next to the version 10 times.
+2. Tap **Export game report**.  The file downloads (`gnomeworks-report-<version>-<date>.json`) and is copied to the clipboard.
+3. Send the file (or paste the text) to Claudia.  It holds the full save, so it can also restore a save if ever needed.

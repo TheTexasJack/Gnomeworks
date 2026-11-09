@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.67';
+GW.VERSION = '0.2.0-draft.68';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -78,6 +78,9 @@ GW.CONFIG = {
     ],
     boss: { id: 'banana', face: 1, burst: 'white' }
   },
+
+  // Secret game report: tap the bolt next to the version on the Info tab this many times.
+  secretTaps: 10,
 
   // Views in swipe order (phones: swipe left for the next view, right for the previous).  Shipping joins later.
   views: ['machine', 'floor'],

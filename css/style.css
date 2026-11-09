@@ -445,6 +445,10 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
   75% { transform: translateX(2px); }
 }
 
+.secret-gear { cursor: pointer; user-select: none; -webkit-user-select: none; opacity: .55; }
+.export-box { margin-top: 10px; padding: 8px 10px; border: 2px dashed var(--brass); border-radius: 8px; }
+.export-box h3 { margin-top: 0; }
+
 /* ---------- debug ---------- */
 .debug-bar { position: fixed; left: 6px; bottom: 6px; display: flex; gap: 4px; align-items: center; z-index: 60; background: rgba(0,0,0,.75); padding: 4px; border-radius: 6px; font-size: .75rem; }
 .debug-bar button { font-size: .75rem; cursor: pointer; }

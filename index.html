@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Gnomeworks: a gnome-powered clicker from The Stoned Gnome.">
   <title>Gnomeworks</title>
-  <link rel="stylesheet" href="css/style.css?v=0.2.0-draft.67">
+  <link rel="stylesheet" href="css/style.css?v=0.2.0-draft.68">
   <script>
     // Day / Night theme, set before anything draws so there's no flash.  'auto' follows the device.
     (function () {
@@ -101,7 +101,12 @@
             <h3>Start over</h3>
             <button type="button" id="resetBtn" class="btn danger">Reset my progress</button>
             <p class="fine">Junk item art: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a>, licensed CC-BY 4.0.  Splash sound: freesound_community on <a href="https://pixabay.com/sound-effects/" target="_blank" rel="noopener">Pixabay</a>.  Voices by Alex Gore.</p>
-            <p class="fine">Gnomeworks <span data-version></span></p>
+            <p class="fine">Gnomeworks <span data-version></span> <span id="secretGear" class="secret-gear" aria-hidden="true">🔩</span></p>
+            <div id="exportBox" class="export-box" hidden>
+              <h3>Game report</h3>
+              <p class="fine">Everything about this save in one file, for Nathan and Claudia.  Nothing is sent anywhere: it downloads to this device and copies to the clipboard.</p>
+              <button type="button" id="exportBtn" class="btn">Export game report</button>
+            </div>
           </div>
         </div>
       </aside>
@@ -111,18 +116,18 @@
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/config.js?v=0.2.0-draft.67"></script>
-  <script src="js/theme.js?v=0.2.0-draft.67"></script>
-  <script src="js/util.js?v=0.2.0-draft.67"></script>
-  <script src="js/sfx.js?v=0.2.0-draft.67"></script>
-  <script src="js/state.js?v=0.2.0-draft.67"></script>
-  <script src="js/economy.js?v=0.2.0-draft.67"></script>
-  <script src="js/gears.js?v=0.2.0-draft.67"></script>
-  <script src="js/ui.js?v=0.2.0-draft.67"></script>
-  <script src="js/wild.js?v=0.2.0-draft.67"></script>
-  <script src="js/clones.js?v=0.2.0-draft.67"></script>
-  <script src="js/mega.js?v=0.2.0-draft.67"></script>
-  <script src="js/hunt.js?v=0.2.0-draft.67"></script>
-  <script src="js/main.js?v=0.2.0-draft.67"></script>
+  <script src="js/config.js?v=0.2.0-draft.68"></script>
+  <script src="js/theme.js?v=0.2.0-draft.68"></script>
+  <script src="js/util.js?v=0.2.0-draft.68"></script>
+  <script src="js/sfx.js?v=0.2.0-draft.68"></script>
+  <script src="js/state.js?v=0.2.0-draft.68"></script>
+  <script src="js/economy.js?v=0.2.0-draft.68"></script>
+  <script src="js/gears.js?v=0.2.0-draft.68"></script>
+  <script src="js/ui.js?v=0.2.0-draft.68"></script>
+  <script src="js/wild.js?v=0.2.0-draft.68"></script>
+  <script src="js/clones.js?v=0.2.0-draft.68"></script>
+  <script src="js/mega.js?v=0.2.0-draft.68"></script>
+  <script src="js/hunt.js?v=0.2.0-draft.68"></script>
+  <script src="js/main.js?v=0.2.0-draft.68"></script>
 </body>
 </html>

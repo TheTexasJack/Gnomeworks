@@ -262,7 +262,7 @@ Requested by Jarrett, the game's owner, 2026-11-08.  **Queued behind the Packing
 
 **Claudia's reading, to confirm:** the few-minute countdown starts when the player comes back (or when pressure maxes out while they're watching).  If it ran while they were away, a long absence would always end in a breakdown on arrival.
 
-**Note:** today Wild Magic and Clone Attack only run while the page is open and visible, one at a time, so they don't pile up while a player is away.  A true "rush of events" on return would mean changing that too.  As written, only the boiler waits for the player.
+**Note (corrected 2026-11-08):** a rush on return already happens.  If the game stays open in a background tab, every event timer keeps counting, so Wild Magic, a Clone Attack, and a shiny all come due and fire together when the player looks again (Nathan sees this after about 12 hours).  The boiler joins that rush.
 
 **Still open:**
 

@@ -316,6 +316,65 @@ window.GW = window.GW || {};
   });
   applyView();
 
+  // ---------- secret game report (Info tab: tap the bolt 10 times) ----------
+  var secretCount = 0;
+  document.getElementById('secretGear').addEventListener('click', function () {
+    secretCount += 1;
+    if (secretCount < C.secretTaps) return;
+    var box = document.getElementById('exportBox');
+    if (box.hidden) { box.hidden = false; SFX.click(); UI.toast('🔩 Secret found: the game report.'); }
+  });
+  function gameReport() {
+    var r = E.rates(s), found = {}, totals = {}, now = new Date();
+    C.items.forEach(function (it) {
+      var g = it.group || it.tier;
+      totals[g] = (totals[g] || 0) + 1;
+      if ((s.items[it.id] || 0) > 0) found[g] = (found[g] || 0) + 1;
+    });
+    var collection = {};
+    Object.keys(totals).forEach(function (g) { collection[g] = (found[g] || 0) + ' / ' + totals[g]; });
+    return {
+      report: 'Gnomeworks game report',
+      version: GW.VERSION,
+      exportedAt: now.toISOString(),
+      localTime: now.toString(),
+      device: {
+        userAgent: navigator.userAgent,
+        screen: screen.width + 'x' + screen.height, viewport: window.innerWidth + 'x' + window.innerHeight,
+        pixelRatio: window.devicePixelRatio, touch: navigator.maxTouchPoints > 0,
+        reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        theme: document.documentElement.dataset.theme || null
+      },
+      summary: {
+        cogs: s.cogs, cogsSeen: s.cogsSeen, clicksPerSecond: r.total, clicksPerSecondBySource: r,
+        tapValue: E.tapValue(s), clicksPerItem: E.clicksPerItem(s), itemsMade: s.itemsMade,
+        playHours: +((s.stats.playSeconds || 0) / 3600).toFixed(2),
+        producers: s.producers, upgrades: s.leveled, oneTimeUpgrades: Object.keys(s.oneTime || {}).filter(function (k) { return s.oneTime[k]; }),
+        collection: collection, megagnome: s.mega, stats: s.stats
+      },
+      events: {
+        view: s.view, paused: !!s.paused,
+        wildMagic: { active: GW.wild.isActive(), nextInSeconds: GW.wild.nextIn() },
+        cloneAttack: { active: GW.clones.isActive(), nextInSeconds: GW.clones.nextIn() },
+        shiny: { showing: !!popup, nextInSeconds: Math.round((nextPopupAt - performance.now()) / 1000) },
+        antiClicker: { onStrike: robot, takingBreak: onBreak }
+      },
+      save: s
+    };
+  }
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    var text = JSON.stringify(gameReport(), null, 2);
+    var name = 'gnomeworks-report-' + GW.VERSION + '-' + new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-') + '.json';
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+    var done = function (copied) { UI.toast(copied ? 'Report saved and copied.  Send it to Nathan!' : 'Report saved as ' + name + '.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+
   // Swipe between views on touch screens (see views and swipe in config).
   var swipe = null;
   machine.addEventListener('pointerdown', function (e) {
