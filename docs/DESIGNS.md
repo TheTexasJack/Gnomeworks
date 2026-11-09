@@ -215,6 +215,7 @@ Ideas with merit that are parked until the game is further along.  Not planned, 
 
 | Idea | What it needs | Notes |
 | --- | --- | --- |
+| Tired arms: after about a minute of nonstop tapping, each tap is worth less until the player rests a few seconds | A tap-value fade in `economy.js` and a rest timer | Added 2026-11-08 as the backup if an auto clicker ever beats the rhythm check (draft.63).  A playtester's antidetect clicker could not get past it on 2026-11-08. |
 | Lore narration: a small play button at the end of each Gnomopedia entry that reads it aloud | An ElevenLabs build and subscription (or recorded voices), audio files per entry | Added 2026-11-03.  Entries stay plain English for Elana to read; narration would be an extra. |
 
 ### Beyond GitHub
