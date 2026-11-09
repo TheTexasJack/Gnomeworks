@@ -61,3 +61,5 @@ A playtester ran an auto clicker.  Auto clickers fake real mouse input, so the o
 **Picked 2026-11-08:** tired arms, renamed **Taking a Break** by Nathan (a banana and a cup of cocoa, 5-second timer), built in draft.65.  The 5 seconds must be 5 quiet seconds: a plain 5-second pause every minute would leave a clicker about 92% of its taps.
 
 Draft.66: ON STRIKE false-triggered on Nathan's normal clicking, so it was tightened to machine-perfect timing only.  Taking a Break is now the main defense; the strike is the funny catch for crude clickers.
+
+The general rules learned here, for every future clicker game, live in CommandCenter: [Notes for Anti-Cheats](https://github.com/TheTexasJack/CommandCenter/blob/main/docs/ANTI-CHEATS.md).
