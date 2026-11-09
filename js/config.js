@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.64';
+GW.VERSION = '0.2.0-draft.65';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -85,6 +85,10 @@ GW.CONFIG = {
     // `window` taps, if tapping is at least `minRate` a second and the typical distance from the middle gap
     // is under `maxSpread` (as a share of the middle gap, so one browser stutter doesn't count), the gnomes
     // go on strike: taps do nothing until the timing passes `humanSpread` or the gear rests `restSeconds`.
+    // Taking a Break: after `workSeconds` of nonstop gear tapping (no pause longer than `pauseSeconds`),
+    // the gnomes take a break.  Taps do nothing until the gear has been left alone for `seconds`;
+    // tapping during the break starts the timer over, so an auto clicker stays on break.
+    break: { workSeconds: 60, pauseSeconds: 2, seconds: 5 },
     robot: {
       window: 30, minRate: 4, maxSpread: 0.04, humanSpread: 0.08, restSeconds: 3,
       lines: [

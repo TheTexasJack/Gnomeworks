@@ -83,6 +83,36 @@ window.GW = window.GW || {};
     return robot;
   }
 
+  // Taking a Break (see tap.break in config): a banana and a cup of cocoa after a minute of nonstop tapping.
+  var BK = C.tap.break, workStart = 0, lastWorkTap = -Infinity, onBreak = false, breakEnds = 0, breakTick = null;
+  var breakSign = U.el('div', 'strike-sign break-sign');
+  breakSign.setAttribute('role', 'status');
+  breakSign.innerHTML = '<b>☕ TAKING A BREAK 🍌</b><span>The gnomes are enjoying a banana and a cup of cocoa.</span><i></i>';
+  machine.appendChild(breakSign);
+  function breakCountdown() {
+    var left = Math.ceil((breakEnds - performance.now()) / 1000);
+    if (left <= 0) {
+      onBreak = false; clearInterval(breakTick);
+      breakSign.classList.remove('on');
+      lastWorkTap = -Infinity;
+      return;
+    }
+    breakSign.lastChild.textContent = 'Back to work in ' + left + '…';
+  }
+  function takingBreak(t) {
+    if (onBreak) { breakEnds = t + BK.seconds * 1000; breakCountdown(); return true; }   // no tapping on break!
+    if (t - lastWorkTap > BK.pauseSeconds * 1000) workStart = t;
+    lastWorkTap = t;
+    if (t - workStart < BK.workSeconds * 1000) return false;
+    onBreak = true;
+    breakEnds = t + BK.seconds * 1000;
+    breakCountdown();
+    breakSign.classList.add('on');
+    s.stats.breaks = (s.stats.breaks || 0) + 1;
+    clearInterval(breakTick); breakTick = setInterval(breakCountdown, 250);
+    return true;
+  }
+
   function doTap(xPct, yPct) {
     if (s.paused) return;
     var ev = E.newEvents();
@@ -98,7 +128,8 @@ window.GW = window.GW || {};
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
     if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt')) return;
     e.preventDefault();
-    if (isRobot(performance.now()) || !allowTap()) return;
+    var now = performance.now();
+    if (isRobot(now) || takingBreak(now) || !allowTap()) return;
     var box = machine.getBoundingClientRect();
     doTap((e.clientX - box.left) / box.width * 100, (e.clientY - box.top) / box.height * 100 - 6);
   });
@@ -106,7 +137,8 @@ window.GW = window.GW || {};
     if (!e.isTrusted || e.repeat) return;
     if (e.key !== ' ' && e.key !== 'Enter') return;
     e.preventDefault();
-    if (isRobot(performance.now()) || !allowTap()) return;
+    var now = performance.now();
+    if (isRobot(now) || takingBreak(now) || !allowTap()) return;
     var c = G.driveCenter();
     doTap(c.x, c.y - 10);
   });

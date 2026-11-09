@@ -432,6 +432,9 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 .strike-sign.on { opacity: 1; visibility: visible; transform: translate(-50%, 0) rotate(-3deg); }
 .strike-sign b { display: block; font-size: 1.25rem; color: #ffb703; letter-spacing: .04em; }
 .strike-sign span { display: block; margin-top: 4px; font-weight: bold; font-size: .95rem; }
+.strike-sign i { display: block; margin-top: 6px; font-style: normal; font-weight: bold; color: #ffb703; }
+.break-sign { border-color: var(--brass); transform: translate(-50%, -30px) rotate(2deg); }
+.break-sign.on { transform: translate(-50%, 0) rotate(2deg); }
 /* The gear sputters when the gnomes catch an auto clicker. */
 #machine.robot-jam { animation: robotJam .6s ease-in-out; }
 @keyframes robotJam {

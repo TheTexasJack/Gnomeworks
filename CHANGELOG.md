@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.65 (2026-11-08)
+
+- Taking a Break (Nathan's name for it).  After a minute of nonstop gear tapping, a sign swings onto the machine: the gnomes are enjoying a banana and a cup of cocoa.  Taps do nothing until the gear is left alone for 5 seconds, with a "Back to work in 5…" countdown.  Tapping during the break starts the countdown over, so an auto clicker, multi-point ones included, stays on break.  Shinies, Wild Magic, and clones are not affected.  Numbers live in `tap.break`.
+
 ## v0.2.0-draft.64 (2026-11-08)
 
 - Auto clicker check hardened: it now judges timing by the middle gap instead of the average, so one browser stutter can't make a clicker look human and lift the strike early.  A clicker that stutters every 25 clicks is caught after 30 taps and stays caught.
