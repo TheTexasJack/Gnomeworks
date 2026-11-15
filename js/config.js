@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.68';
+GW.VERSION = '0.2.0-draft.69';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -32,7 +32,14 @@ GW.CONFIG = {
 
   // Wide screens: when the space beside the machine is at least this wide (px), the
   // next-item gauge and the crew move into side rails next to it.
-  layout: { railMinWidth: 100 },
+  layout: {
+    railMinWidth: 100,
+    // Height taken by the banner, view buttons, and gaps around the square machine.  The CSS uses the same numbers.
+    machineChrome: 245,
+    // Phones held sideways (landscape, short screens): a slim banner, so the machine gets more of the height.
+    landscapeQuery: '(orientation: landscape) and (max-height: 540px)',
+    landscapeChrome: 118,
+  },
 
   // "Not the Cog, But You": each Wizard adds this much to every other gnome type, up to the cap.
   wizardAura: { perWizard: 0.01, cap: 0.5 },

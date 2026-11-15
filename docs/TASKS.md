@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-04, at v0.2.0-draft.68.
+Last updated 2026-11-15, at v0.2.0-draft.69.
 
 ## Where we are
 
@@ -112,4 +112,5 @@ Answered 2026-11-03: shipped items leave the shelf, down to 1.
 | Gnome Wizard clicks were missing from Stats | Fixed in draft.51 |
 | Two of Nathan's three day board images are unused spares | Accepted, kept for later |
 | Numbers past 1e300 | Capped (draft.53).  If players ever reach it, the answer is a big-number library or a prestige reset, not raising the cap. |
+| Phones held sideways had a tiny machine and a nearly empty clipboard | Fixed in draft.69: landscape phone layout |
 | Sounds are fairly quiet on desktop speakers | Watch it; raise `fxBus` gain in `sfx.js` if testers agree |

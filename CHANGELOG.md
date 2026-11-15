@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.69 (2026-11-15)
+
+- Phones held sideways get their own layout (Nathan's bug: in landscape the machine was tiny and the clipboard list had almost no room).  The banner slims to a thin strip, the machine fills the height with the next-item gauge and crew beside it, the Shop Floor sizes to fit with its bar underneath, and the clipboard drops its clip and nameplate so the list gets the space.  Applies to any landscape screen 540px tall or less; the numbers live in `layout` in config.
+
 ## v0.2.0-draft.68 (2026-11-08)
 
 - Secret game report: on the Info tab, tap the 🔩 next to the version 10 times.  An "Export game report" button appears; it downloads a JSON file and copies it to the clipboard.  The report holds the version, device and screen, cogs, rates by source, tap value, producers, upgrades, collection progress by group, the Megagnome, stats (including anti-clicker catches), what each event is doing and when it's next due, and the full save.  Nothing is sent anywhere.

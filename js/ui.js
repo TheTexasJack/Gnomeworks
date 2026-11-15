@@ -357,6 +357,8 @@ GW.ui = (function () {
     var L = layout();
     floor.style.backgroundImage = "url('" + GW.theme.img(L.bg) + "')";
     $('#machine').style.setProperty('--floor-aspect', L.aspect);
+    var wh = L.aspect.split('/');
+    $('#machine').style.setProperty('--floor-ratio', (parseFloat(wh[0]) / parseFloat(wh[1])).toFixed(4));
     var belt = el('div', 'belt');
     belt.style.left = L.belt.left + '%'; belt.style.width = L.belt.width + '%';
     belt.style.top = L.belt.top + '%'; belt.style.height = L.belt.height + '%';

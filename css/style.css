@@ -729,3 +729,26 @@ body.paused .progress.ticker #nextBar { animation-play-state: paused; }
 body.paused .hunt { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .boss-tag { animation: none; } .hunt-burst { animation-duration: .01s; } }
 @media (max-width: 720px) { .hunt-box { width: min(96cqw, 80cqh); aspect-ratio: 1 / 1; } .hunt-bow { width: 70cqw; } }
+
+/* ---------- phones held sideways (landscape, short screens) ----------
+   Same query as layout.landscapeQuery in config.  The banner slims down, the machine fills the height,
+   and the clipboard drops its clip and nameplate so the list has room.  118px matches layout.landscapeChrome. */
+@media (orientation: landscape) and (max-height: 540px) {
+  #app { padding: 4px 8px; }
+  .topbar { aspect-ratio: auto; min-height: 0; max-height: none; height: 50px; padding: 3px 12px; margin-bottom: 6px; }
+  .title img { height: 42px; }
+  .wallet { min-width: 0; padding: 1px 14px 2px; border-radius: 9px; }
+  .wallet-main { font-size: 1.2rem; }
+  .wallet-sub { font-size: .66rem; }
+  .layout { grid-template-columns: minmax(0, 1fr) clamp(280px, 38vw, 380px); gap: 8px; }
+  .view-toggle { max-width: calc(100dvh - 118px); margin-bottom: 6px; }
+  .view-toggle .btn { padding: 4px 10px; white-space: nowrap; }
+  .machine { max-width: calc(100dvh - 118px); min-width: 0; }
+  .machine.floor-mode { max-width: calc((100dvh - 156px) * var(--floor-ratio, 1.7778)); }  /* leaves room for the next-item bar */
+  .machine-col.rails { grid-template-columns: minmax(0, 1fr) min(calc(100dvh - 118px), 100%) minmax(0, 1fr); align-items: start; }
+  .machine-col.rails > .progress-row, .machine-col.rails > .crew { height: calc(100dvh - 118px); max-height: calc(100dvh - 118px); }
+  .machine-col.rails > .view-toggle { max-width: none; }
+  .side-col, .shelf-col { max-height: calc(100dvh - 68px); top: 4px; }
+  .machine.floor-mode ~ .crew { display: none; }  /* the floor already shows the crew */
+  .panel.side-col, .night .panel.side-col { border-width: 0 calc(70px * var(--cb)); padding: 10px 8px 8px; background: none; }
+}

@@ -293,9 +293,11 @@ window.GW = window.GW || {};
 
   // ---------- side rails: on wide screens the progress gauge and crew stand beside the machine ----------
   var machineCol = document.querySelector('.machine-col');
+  var landQuery = window.matchMedia(C.layout.landscapeQuery);
   function fitRails() {
     var colW = machineCol.clientWidth;
-    var machW = s.view === 'floor' ? colW : Math.min(colW, window.innerHeight - 245);
+    var chrome = landQuery.matches ? C.layout.landscapeChrome : C.layout.machineChrome;
+    var machW = s.view === 'floor' ? colW : Math.min(colW, window.innerHeight - chrome);
     machineCol.classList.toggle('rails', (colW - machW) / 2 >= C.layout.railMinWidth);
   }
   window.addEventListener('resize', fitRails);
