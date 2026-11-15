@@ -54,7 +54,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] Shipping log event logic, and throw-ins.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
     - [ ] Rune tracing that works with a finger on phones.
-3. **Assets:** finalize the draft list in DESIGNS.md, then hand it to Mara.  Nothing made before the mechanics are settled.
+3. **Assets:** tiered list drafted in [art-style/PACKING-LINE-ASSETS-v0.2.md](art-style/PACKING-LINE-ASSETS-v0.2.md) (2026-11-15).  Nathan approves it, then it goes to Mara.  Nothing made before the mechanics are settled.
 4. **Build:** layer 1 core.
 
 The Claude doc "Gnomeworks Packing Line: Design and Asset Guide" is v0.1 and older than these decisions; DESIGNS.md is current.

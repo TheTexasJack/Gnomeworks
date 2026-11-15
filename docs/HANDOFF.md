@@ -18,6 +18,7 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 - Shipping earns **Stonks**, never cogs.  Stonks is a score only, the marker against TNP Corp; nothing in shipping costs anything (Nathan, 2026-11-15).  Stamps are a free shipping mechanic (right stamp for the right region).  Boxes and supplies are free, box-size upgrades are dropped, and the packing itself is the game: a match game inspired by Simon Says.  Complete the order to succeed; extra items do nothing, except on Gnonmoon.
 - Later layers, all drafts: orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of GRIP vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
 - **Shift flow decided (2026-11-15):** chain or button, door opens, a region's truck and driver arrive with 3 work orders, fakes can be dismissed, fill all three, report card.  See DESIGNS.md.
+- **Mara's asset list:** [art-style/PACKING-LINE-ASSETS-v0.2.md](art-style/PACKING-LINE-ASSETS-v0.2.md), three tiers, waiting on Nathan's approval.
 - **Next:** decide whether Tiny Monsters, Number Twos, and Treasures ship, then the Stonks score per region and the build of layer 1.  Every junk item now has a buyer (gazetteer v0.25).
 - Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  Lore, the map, trade, and region stamps are done (2026-11-15); see lore/regions.md.
 

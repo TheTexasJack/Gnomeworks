@@ -117,7 +117,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 
 | Unlocks with | New requirement | Applies to |
 | --- | --- | --- |
-| Gnomerica | The correct supplies in the box | Every package |
+| Gnomerica | The correct supplies in the box (see Correct supplies below) | Every package |
 | Gnohio | Safety stickers, 5 to 10 per box | Every package |
 | Gnafrica | Temperature-controlled box | Gnafrica packages |
 | Slanic | Water-resistant box | Slanic packages |
@@ -127,6 +127,33 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 | Shen Shin | Wooden box.  ~~Every package is weighed and gets a weight sticker~~ (held 2026-11-15: weight is not a mechanic for now; the idea was Light, Medium, or Heavy with a made-up number, since gnomes use magic and an 800 lb box is fine) | Wooden box: Shen Shin packages only (they are insulted by anything less).  Weighing: every package |
 | Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
 | Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
+
+**Correct supplies: Gnomerica's rule (Nathan, 2026-11-15; Claudia's details are DRAFT)**
+
+Every junk item gets a packing tag: **Breakable**, **Soft**, **Heavy**, or none.  A chart in the menu explains the three, and each item tile shows its icon.
+
+- **Breakables go on top**, and a box with a breakable needs **bubble wrap**.  (Nathan)
+- **Packing peanuts** (the cornstarch kind) fill the box.  (Nathan)  Draft: every box gets peanuts.
+- **Heavy goes in first.**  Putting a heavy item in last earns an ❌.  (Nathan)
+- **Outside stickers:** a **FRAGILE** sticker on any box holding a breakable, a **HEAVY** sticker on any box holding something heavy.  (Nathan)
+- Draft: **Soft** items have no rule.  They are safe anywhere, so the chart tells players they never need to worry about them.
+- Draft: each item carries one tag only.  A Toilet is Heavy.
+- Draft ramp: Gnomerica teaches in steps over its first few days (items and the stamp first, then peanuts and the item order, then bubble wrap and the outside stickers), so the tutorial region is never a wall of rules for a six-year-old.
+
+Draft tags (for Nathan to correct; the final list goes in `js/config.js`):
+
+| Group | Breakable | Heavy | Soft |
+| --- | --- | --- | --- |
+| Workshop | | Toolbox, Brick, Ladder | |
+| Random | Potted Plant, Old Vase | Log, Chair, Pet Rock, Shopping Cart | Laundry Basket |
+| Bathroom | | Toilet, Bathtub | Toilet Paper, Sponge |
+| Laundry | | | Socks, Underpants, Shorts, Gloves, Scarf, Necktie, Ball Cap, Jeans, Coat |
+| Kitchen | Salt Shaker, Teapot, Bowl, Jar | Frying Pan | |
+| Office | | Stack of Books, Printer | |
+| Inventions | Test Tube, Petri Dish, Lightbulb, Microscope | Fire Extinguisher | |
+| Toys | Magic 8-Ball, Balloon | | Teddy Bear |
+
+Everything not listed has no tag.
 
 - **The Purchase Order (Nathan, 2026-11-04):** every package comes with a purchase order that tells the player what to load.  It is the thing the player reads and matches.
 - **The packing is the game (Nathan, 2026-11-04):** a match game inspired by Simon Says (the inspiration only, not its rules).  Read what the package needs, put the right things on it, ship.  **Completing the order is what counts.  Extra items do nothing, except on Gnonmoon.**
@@ -139,7 +166,9 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 - **The dog guy's look (Nathan, 2026-11-04):** a kissy, lovable goof who blows kisses and floats hearts, especially over anything dog.  Classic cartoon gush, Tom and Jerry style.  His purchase order mark can be a paw print inside a heart.
 - **The shipment score is the core mechanic (Nathan, 2026-11-04):** a successful shipment sends our Stonks up.  A failed one sends our Stonks down and TNP Corp's Stonks up.
 
-**Packing Line asset list (draft from the complications; finalize after the mechanics pass, make nothing yet)**
+**Packing Line asset list:** superseded by the tiered list in [art-style/PACKING-LINE-ASSETS-v0.2.md](art-style/PACKING-LINE-ASSETS-v0.2.md) (2026-11-15).  The older draft below is kept for history.
+
+**Older draft asset list (2026-11-04)**
 
 - The packing room backdrop, the bench, and the shipping door.
 - Boxes: plain cardboard, temperature-controlled, water-resistant, wooden (Shen Shin).
