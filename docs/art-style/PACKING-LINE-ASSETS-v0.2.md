@@ -2,6 +2,8 @@
 
 **Status: handed to Mara (Nathan, 2026-11-15).**  v0.2 adds Nathan's answers on the truck view, imposters, layouts, and supplies.  Mara is building a checklist to step through each asset; individual designs still go through Nathan's visual approval.  Every asset follows the [Art-Style Bible](../ART-STYLE-BIBLE.md) and gets its own brief from the [template](ASSET-BRIEF-TEMPLATE.md).  Final pixel sizes are set at build time; this list fixes **what** gets made and **in which order**.
 
+**Production tracker:** [Packing Line art production checklist](PACKING-LINE-PRODUCTION-CHECKLIST.md).  Every item stays unchecked until Nathan approves the finished result, including any GIMP cleanup.  Visual approval does not authorize game integration.
+
 The game design behind this list lives in [DESIGNS.md](../DESIGNS.md#packing-line).  Region stamps and colors are in [lore/regions.md](../lore/regions.md).
 
 ## How the list is organized
