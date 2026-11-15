@@ -138,7 +138,7 @@ Every junk item gets a packing tag: **Breakable**, **Soft**, **Heavy**, or none.
 - **Outside stickers:** a **FRAGILE** sticker on any box holding a breakable, a **HEAVY** sticker on any box holding something heavy.  (Nathan)
 - Draft: **Soft** items have no rule.  They are safe anywhere, so the chart tells players they never need to worry about them.
 - Draft: each item carries one tag only.  A Toilet is Heavy.
-- Draft ramp: Gnomerica teaches in steps over its first few days (items and the stamp first, then peanuts and the item order, then bubble wrap and the outside stickers), so the tutorial region is never a wall of rules for a six-year-old.
+- ~~Draft ramp over Gnomerica's first few days.~~  Not needed (Nathan, 2026-11-15): the full rule set is fine from the start, since Elana already plays more complicated games.
 
 Draft tags (for Nathan to correct; the final list goes in `js/config.js`):
 
