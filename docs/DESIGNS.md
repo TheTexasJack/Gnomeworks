@@ -124,7 +124,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 | Gno Dao Cradle | A wireless tracker in the box (boxes kept getting lost in the mountains) | Every package |
 | Gni | A Shrubbery or Red Herring sticker | Gni packages only |
 | Slaanilok | Water-resistant box, sprayed with bug repellent | Slaanilok packages |
-| Shen Shin | Wooden box; every package is weighed and gets a weight sticker (Light, Medium, or Heavy, with a made-up number: gnomes use magic, so an 800 lb box is fine) | Wooden box: Shen Shin packages only (they are insulted by anything less).  Weighing: every package |
+| Shen Shin | Wooden box.  ~~Every package is weighed and gets a weight sticker~~ (held 2026-11-15: weight is not a mechanic for now; the idea was Light, Medium, or Heavy with a made-up number, since gnomes use magic and an 800 lb box is fine) | Wooden box: Shen Shin packages only (they are insulted by anything less).  Weighing: every package |
 | Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
 | Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
 
@@ -134,7 +134,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 - **Boxes and packing supplies are free (Nathan, 2026-11-04).**  The factory makes them, so stock is unlimited, as in most shipping games: the point is the packing.  Every box and supply sits on the packing bench from the start and does nothing until a region needs it.
 - **Hidden alternates (Nathan, 2026-11-04):** some requirements have a secret second answer that also counts, and the player is never told.  Gni accepts a Red Herring sticker or an actual red herring fish.  Gni also accepts a Shrubbery sticker or the real shrub from the corner of the room, which the player can click to add to the box (taking it changes nothing in the room).
 - **Throw-ins (Nathan's idea, 2026-11-04, settle with the mechanics):** a few grabbable things around the packing room that do nothing and change nothing.  They are just fun to toss in, and the shipping log can react ("Ugh, not this guy!  He gets 10 rocks with his order!").  Extras never count against a package (decided).  The only exception is Gnonmoon, where packages must be exact.
-- **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, a weight sticker, and the correct box for its destination.
+- **By Shen Shin**, every package needs the correct supplies, a safety sticker, a tracker, and the correct box for its destination.  (The weight sticker is held, 2026-11-15.)
 - **The Gnonmoon gift slot (Nathan, 2026-11-04):** the dog toy and the Idol gift share one slot.  A normal Gnonmoon package (Idol gift plus the anti-demon rune) ships fine for everyone.  One recipient, the dog guy, has a special mark on his purchase order.  Spotting it and swapping the Idol for a dog toy earns a big Stonks boost, like a critical hit for noticing.  A dog toy sent to anyone else gets creative insults in the shipping log and a big Stonks hit.  The mark keeps this a skill to spot rather than a gamble.
 - **The dog guy's look (Nathan, 2026-11-04):** a kissy, lovable goof who blows kisses and floats hearts, especially over anything dog.  Classic cartoon gush, Tom and Jerry style.  His purchase order mark can be a paw print inside a heart.
 - **The shipment score is the core mechanic (Nathan, 2026-11-04):** a successful shipment sends our Stonks up.  A failed one sends our Stonks down and TNP Corp's Stonks up.
@@ -144,7 +144,7 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 - The packing room backdrop, the bench, and the shipping door.
 - Boxes: plain cardboard, temperature-controlled, water-resistant, wooden (Shen Shin).
 - Region stamps, one per region (ten), with each region's Tiny Monster once those are assigned.
-- Supplies and stickers: safety stickers, the wireless tracker, weight stickers (Light, Medium, Heavy), the Red Herring sticker, the Shrubbery sticker, the anti-demon rune (drawn by the player).
+- Supplies and stickers: safety stickers, the wireless tracker, the Red Herring sticker, the Shrubbery sticker, the anti-demon rune (drawn by the player).
 - Gni's secret alternates: a red herring fish and a shrub in the corner of the room.
 - Bug repellent spray can and its spray cloud.
 - Complimentary gifts: dog toy or treat, Idol gift.
@@ -171,6 +171,8 @@ Settled the same day (Nathan picked each):
 - **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
 - **Both fake mistakes move the ticker.**  Handing orders to a fake sends those orders to TNP (our line down, theirs up).  Dismissing a real driver is a small dip with a grumpy shipping log line, and the replacement driver still comes in.
 - **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
+- **The label is the reading challenge** (Cat Mail Co. style).  An order shows the town, and the player has to know which region that town is in to pick the right region stamp.  Players learn the map by shipping.
+- **No clock.**  A shift ends when the player closes the door: the truck leaves, the report card shows the score, and the next day starts.
 
 **Purchase orders and the order board (approved 2026-11-15; details are Claudia's draft)**
 
