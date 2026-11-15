@@ -37,7 +37,7 @@
 - [ ] **04. Order board.**  Brass-trimmed board with room for three work orders.
   - [ ] Day.
   - [ ] Night, same frame geometry.
-- [ ] **05. Wall map.**  Compact, textless Gnomadica map, region color washes and symbols matching the stamp palette and master map.
+- [ ] **05. Wall map.  IN REVIEW (2026-11-15).**  Compact, textless Gnomadica map, region color washes and symbols matching the stamp palette and master map.  Nathan supplied `gnomadica-map-v0.22.png` as the geographically authoritative reference for this pass.  First stylized candidate is not approved: it regenerated printed place labels and may have altered geography.  Final wall graphic should preserve the source coastline/island layout, fit the existing wide wall frame, remove fine lettering and legend, and reserve dynamic labels for code.  Do not substitute redrawn AI text for source data.
   - [ ] Day.
   - [ ] Night, same geography/geometry.
   - [ ] Space for town names rendered by code; compare against current master map before final approval.
