@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.22 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.23 Working Draft)
 
 
 ## How to read this draft
@@ -11,7 +11,7 @@
 - **Non-Factory Imports / Non-Factory Exports** list tangible, shippable goods outside the existing factory catalog, including fantasy objects.  Services, rumors, and activities are excluded.  These goods do not become new factory collectibles.
 - **None** means no trade item of that type has been proposed yet; the place may still trade it later.
 - **Flora** lists nearby plants.  **Tiny Monsters** lists the Tiny Monsters found nearby.  These habitats are suggestions for Nathan and Alex to approve.
-- **Region entries** also carry a **Preview** (one or two short, easy sentences for young readers), a **Guide** (the explorer's guide write-up, in Alex's style), and **Notable Flora** and **Notable Fauna** (wild plants and animals, separate from the Tiny Monsters).  The Guides for Gnomadica, Gnomerica, Gnohio, Gnafrica, Slanic, Gno Dao Cradle, and Gnufoundland are Alex's.  The Guides for Slaanilok, Shen Shin, Gni, and Gnonmoon are Claudia's drafts in her style, awaiting approval.
+- **Region entries** also carry a **Preview** (one or two short, easy sentences for young readers), a **Guide** (the explorer's guide write-up, in Alex's style), and **Notable Flora** and **Notable Fauna** (wild plants and animals, separate from the Tiny Monsters).  The Guides for Gnomadica, Gnomerica, Gnohio, Gnafrica, Slanic, Gno Dao Cradle, Gnufoundland, and Slaanilok are Alex's, as are all Notable Flora and Fauna except Gnonmoon's.  The Guides for Shen Shin, Gni, and Gnonmoon, Gnonmoon's Notable Flora and Fauna, and every Preview are Claudia's drafts, awaiting approval.
 - **Lore in v0.4** adds draft community histories, characters, connections, and fantasy traditions.  Humanoid species are people with ordinary jobs and different personalities; ancestry or appearance never determines someone's morality.
 - This is a place registry for future shipping, lore cards, and expeditions.  A place can serve several purposes even though it is filed under one primary category here.  Some entries may remain hidden from players until discovered.
 - **Bounties** is intentionally empty in every entry for future use.  These are story hooks only, with no quests or rewards built yet.
@@ -127,14 +127,14 @@
 - **Name:** Slaanilok
 - **Location:** Eastern offshore island chain connected by ferries.
 - **Region:** Gnomadica, eastern archipelago region.
-- **Preview:** Warm islands full of boats, lizard folk, and lots of bugs.
-- **Guide:** The warm chain of islands off the east coast of Gnuma Gnuma.  Boats are the only way to get around, and the Lantern Chain of signal lights guides every ferry home to Port Gnasher.  The lizard folk have lived here longer than anyone, and the step pyramid of Legipt is older than any map.  The mangroves are thick and the bugs are thicker, so locals never leave home without a can of repellent.  Should you visit, keep your socks dry, and if you hear a bell ringing under the water near the outer reef, cover your ears.
+- **Preview:** Warm islands of lizard folk and frog folk.  They believe every story they hear, so be careful what you say!
+- **Guide:** The eastern island of the archipelago.  Monster folk of the reptilian and amphibian varieties call this isle home due to the more tropical climate.  Slaanilok is known as the home of legend and rumor, many unfounded and some true.  Sadly, the natives are none too helpful, as all legends and rumors are true to them.  The rumors of an unusually high number of dungeons on this isle are true, while the dungeons spreading like an illness are false.  Evidence of the "City of Gold" is not true, and the adventures launched to find this place have already hurt local communities.  So if you are feeling adventurous, respect the communities and environment.  WARNING: NATIVES BELIEVE ALL SUPERSTITIONS.  BE MINDFUL OF WHAT YOU SPEAK OF.
 - **About:** Boats are more common than carts in these cheerful island communities, and the ferries carry travelers, crates, and the occasional bewildered turtle.  Each island has its own ferry whistle and its own favorite explanation for why the sea is wet.  Lizard folk, lamia tide-readers, merfolk chandlers, gnomish net-menders, and cheerful turtle keepers bustle around warm harbors.  Visitors discover that the last boat of the day leaves precisely when the captain finishes supper.
 - **Major Facts:** The Lantern Chain links its harbors to Port Gnasher by a line of signal lights, and the largest ports trade news the same way.  The first lantern keeper was a mermaid who wrote warnings on waterproof paper and charged by the vowel.  Ferries from Legipt carry the warm-season trade south to Eversummer, while older sea roads pass the flooded chambers of Dungeon of the Deep.  Islanders quietly disagree over whether the ancient bells beneath the water are musical instruments or doorbells, and all of them agree a dry pair of socks is the height of luxury.
 - **Flora:** Saltgrass, mangroves
 - **Tiny Monsters:** Jellybub, Shroomtle, Bloomlet
-- **Notable Flora:** Lantern Mangrove, Sun Kelp, Pyramid Palm
-- **Notable Fauna:** Skeeterhawk, Ferryback Turtle, Bellfish
+- **Notable Flora:** Drago Palm, Stink Rose, Striped Mum
+- **Notable Fauna:** Scaled Chirper, Shady Herp, Reef Lurker
 - **Bounties:**
 
 ### Slanic
@@ -1436,8 +1436,8 @@ Places added while drawing the master map, beyond the original 100 names.
 - **Major Facts:** Most of the island's shipping goes to Tables Edge.  Two smaller towns sit on the coast.  The Lantern Chain ferry reaches its southern tip.
 - **Flora:** Salt pine, frost moss
 - **Tiny Monsters:**
-- **Notable Flora:** Tabletop Pine, Splinterbark, Frost Moss
-- **Notable Fauna:** Shinkicker Hare, Sawbill, Knot Owl
+- **Notable Flora:** Jomboo, Dakara, Ulmabeans
+- **Notable Fauna:** Greater Ropoda, Ulma Crab, Silk Rattler
 - **Bounties:**
 
 ### Legipt
@@ -1481,8 +1481,8 @@ Places added while drawing the master map, beyond the original 100 names.
 - **Major Facts:** Eversummer and Castle Gnaagh are here.  Gni is a land of knights on quests, prized shrubberies, and coconuts everywhere, which is why Eversummer can never settle whether a coconut is a fruit or a very stubborn bowling ball.  The ferry from Legipt is its main trade route north.
 - **Flora:** Palms
 - **Tiny Monsters:**
-- **Notable Flora:** Prized Shrubbery, Bowling Coconut, Sunpalm
-- **Notable Fauna:** Red Herring, Questing Crab, Coconut Swallow
+- **Notable Flora:** Shrubbery, Pignut, Rubus
+- **Notable Fauna:** Red Herring, Albazoss, Silly Chirper
 - **Bounties:**
 
 ### Gnaagh

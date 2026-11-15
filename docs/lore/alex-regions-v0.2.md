@@ -1,6 +1,6 @@
 # Alex's region write-ups (verbatim)
 
-Alex's original text, received 2026-11-15, kept word for word.  Merge into the gazetteer and the Gnomopedia region pages is pending Nathan's calls.  Her Notable Flora and Fauna are kept for later expansion.
+Alex's original text, received in two batches on 2026-11-15, kept word for word.  Both batches are merged into the gazetteer.  Her Notable Flora and Fauna are kept for later expansion.
 
 ```text
 Gnomadica
@@ -39,4 +39,25 @@ Gnufoundland
 The northern island of the archipelago. From the Frozen Fields to the taiga to the snow caps, under the snow there is plenty to see in Gnufoundland. Cloudeer roam the fields if you're a hunter, lufzins love to roost in the cliffs if you fancy bird watching, Werewolf London has delicious warm beverages once the cold gets to you. Should you ever find yourself lost in the cold, there is always a cabin near.
 Notable Flora : Ogre Breathe, Lobsterapple, Dognip
 Notable Fauna : Cloudeer, Lufzins, Friendly Mimic
+```
+
+## Second batch (2026-11-15)
+
+```text
+1. Slaanilok
+-----------------------
+The eastern island of the archipelago. Monster folk of the reptilian and amphibian varieties call this isle home due to the more
+tropical climate. Slaanilok is known as the home of legend and rumor many unfounded and some true, sadly the natives are none
+to helpful as all legends and rumor are true to them. The rumors of an unusually high amount of dungeons on this isle are true while the dungeons spreading like an illness are false. Evidence of the "City of Gold" is not true, the adventures that are launched to find this place have already hurt local communities. So if you are feeling adventurous respect the communities and environment. WARNING : NATIVES BELIEVE ALL SUPERSTITION BE MINDFUL OF WHAT YOU SPEAK OF
+Notable Flora : Drago Palm, Stink Rose, Striped Mum
+Notable Fauna : Scaled Chirper, Shady Herp, Reef Lurker
+2. 
+Island of Gni
+-----------------------
+Notable Flora : Shrubbery, Pignut, Rubus
+Notable Fauna : Red Herring, Albazoss, Silly Chirper
+3. Shen Shin
+-----------------------
+Notable Flora : Jomboo, Dakara, Ulmabeans
+Notable Fauna : Greater Ropoda, Ulma Crab, Silk Rattler
 ```

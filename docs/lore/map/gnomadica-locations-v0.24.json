@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.23",
+ "version": "0.24",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -209,14 +209,14 @@
    "gazetteer": {
     "Location": "Eastern offshore island chain connected by ferries.",
     "Region": "Gnomadica, eastern archipelago region.",
-    "Preview": "Warm islands full of boats, lizard folk, and lots of bugs.",
-    "Guide": "The warm chain of islands off the east coast of Gnuma Gnuma.  Boats are the only way to get around, and the Lantern Chain of signal lights guides every ferry home to Port Gnasher.  The lizard folk have lived here longer than anyone, and the step pyramid of Legipt is older than any map.  The mangroves are thick and the bugs are thicker, so locals never leave home without a can of repellent.  Should you visit, keep your socks dry, and if you hear a bell ringing under the water near the outer reef, cover your ears.",
+    "Preview": "Warm islands of lizard folk and frog folk.  They believe every story they hear, so be careful what you say!",
+    "Guide": "The eastern island of the archipelago.  Monster folk of the reptilian and amphibian varieties call this isle home due to the more tropical climate.  Slaanilok is known as the home of legend and rumor, many unfounded and some true.  Sadly, the natives are none too helpful, as all legends and rumors are true to them.  The rumors of an unusually high number of dungeons on this isle are true, while the dungeons spreading like an illness are false.  Evidence of the \"City of Gold\" is not true, and the adventures launched to find this place have already hurt local communities.  So if you are feeling adventurous, respect the communities and environment.  WARNING: NATIVES BELIEVE ALL SUPERSTITIONS.  BE MINDFUL OF WHAT YOU SPEAK OF.",
     "About": "Boats are more common than carts in these cheerful island communities, and the ferries carry travelers, crates, and the occasional bewildered turtle.  Each island has its own ferry whistle and its own favorite explanation for why the sea is wet.  Lizard folk, lamia tide-readers, merfolk chandlers, gnomish net-menders, and cheerful turtle keepers bustle around warm harbors.  Visitors discover that the last boat of the day leaves precisely when the captain finishes supper.",
     "Major Facts": "The Lantern Chain links its harbors to Port Gnasher by a line of signal lights, and the largest ports trade news the same way.  The first lantern keeper was a mermaid who wrote warnings on waterproof paper and charged by the vowel.  Ferries from Legipt carry the warm-season trade south to Eversummer, while older sea roads pass the flooded chambers of Dungeon of the Deep.  Islanders quietly disagree over whether the ancient bells beneath the water are musical instruments or doorbells, and all of them agree a dry pair of socks is the height of luxury.",
     "Flora": "Saltgrass, mangroves",
     "Tiny Monsters": "Jellybub, Shroomtle, Bloomlet",
-    "Notable Flora": "Lantern Mangrove, Sun Kelp, Pyramid Palm",
-    "Notable Fauna": "Skeeterhawk, Ferryback Turtle, Bellfish"
+    "Notable Flora": "Drago Palm, Stink Rose, Striped Mum",
+    "Notable Fauna": "Scaled Chirper, Shady Herp, Reef Lurker"
    },
    "gazetteer_anchor": "slaanilok"
   },
@@ -2636,8 +2636,8 @@
     "About": "A round-topped island with a snowy ridge across its north and pine woods down its middle.  Tables Edge hides deep in the woods, and two more towns sit on the coast.  Say the name three times fast.",
     "Major Facts": "Most of the island's shipping goes to Tables Edge.  Two smaller towns sit on the coast.  The Lantern Chain ferry reaches its southern tip.",
     "Flora": "Salt pine, frost moss",
-    "Notable Flora": "Tabletop Pine, Splinterbark, Frost Moss",
-    "Notable Fauna": "Shinkicker Hare, Sawbill, Knot Owl"
+    "Notable Flora": "Jomboo, Dakara, Ulmabeans",
+    "Notable Fauna": "Greater Ropoda, Ulma Crab, Silk Rattler"
    },
    "gazetteer_anchor": "shen-shin"
   },
@@ -2684,8 +2684,8 @@
     "About": "A long, sunny island with palm woods at its north end, the town of Eversummer in the middle, and a castle on its southern tip.  The knights who live here are famous for one very short word.",
     "Major Facts": "Eversummer and Castle Gnaagh are here.  Gni is a land of knights on quests, prized shrubberies, and coconuts everywhere, which is why Eversummer can never settle whether a coconut is a fruit or a very stubborn bowling ball.  The ferry from Legipt is its main trade route north.",
     "Flora": "Palms",
-    "Notable Flora": "Prized Shrubbery, Bowling Coconut, Sunpalm",
-    "Notable Fauna": "Red Herring, Questing Crab, Coconut Swallow"
+    "Notable Flora": "Shrubbery, Pignut, Rubus",
+    "Notable Fauna": "Red Herring, Albazoss, Silly Chirper"
    },
    "gazetteer_anchor": "island-of-gni"
   },
@@ -3024,5 +3024,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.22.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.23.md"
 }
