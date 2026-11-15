@@ -143,7 +143,8 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 
 - The packing room backdrop, the bench, and the shipping door.
 - Boxes: plain cardboard, temperature-controlled, water-resistant, wooden (Shen Shin).
-- Region stamps, one per region (ten), with each region's Tiny Monster once those are assigned.
+- Region stamps, one per region (ten): one color and one symbol each, no names (decided 2026-11-15, see [lore/regions.md](lore/regions.md)).  Placeholder sheet in `docs/lore/stamps/`.
+- The compact lore map for the packing room wall, the player's region reference (Tier 1).
 - Supplies and stickers: safety stickers, the wireless tracker, the Red Herring sticker, the Shrubbery sticker, the anti-demon rune (drawn by the player).
 - Gni's secret alternates: a red herring fish and a shrub in the corner of the room.
 - Bug repellent spray can and its spray cloud.

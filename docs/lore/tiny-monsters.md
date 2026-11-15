@@ -35,9 +35,9 @@ Tap a Tiny Monster on the shelf to open its entry, like a Pokedex.  11 families,
 
 ## Home regions and stamps (draft)
 
-Each region's stamp shows the normal form of its home family.  Families also wander: a place can list Tiny Monsters from other regions in its Tiny Monsters line.
+Each region has a home family.  (Putting the home family on the region's stamp was dropped on 2026-11-15; stamps use a simple symbol instead, listed in [regions.md](regions.md).)  Families also wander: a place can list Tiny Monsters from other regions in its Tiny Monsters line.
 
-| Region | Home family | Stamp monster | Why it lives there |
+| Region | Home family | Normal form | Why it lives there |
 | --- | --- | --- | --- |
 | Gnomerica | Owl | Hootgear | Nests in Woods of the Elder and sits on the Gnomish Farms scarecrows. |
 | Gnohio | Mouse | Potamice | Mouse Reserve was made for them. |

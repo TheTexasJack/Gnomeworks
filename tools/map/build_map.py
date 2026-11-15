@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.27'
+VERSION = '0.28'
 SHOW_TRADE_DRAFT = False  # the trade draft was merged into gazetteer v0.25, so cards no longer show it
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
@@ -35,7 +35,7 @@ C = dict(
 REGION_COLORS = {
     'Gnomerica': '#d9a441', 'Gnohio': '#7fa65a', 'Gnafrica': '#cf7346', 'Slanic': '#4f9a8f',
     'Gno Dao Cradle': '#8a77b0', 'Gnufoundland': '#8fb3d6', 'Slaanilok': '#e0887a',
-    'Gni': '#b0609a', 'Shen Shin': '#9aa64a', 'Gnonmoon': '#7a8ca6',
+    'Gni': '#b0609a', 'Shen Shin': '#9a6b3f', 'Gnonmoon': '#4f5f86',
 }
 
 rng = np.random.default_rng(1103)  # seed: the day this map started (11/03)

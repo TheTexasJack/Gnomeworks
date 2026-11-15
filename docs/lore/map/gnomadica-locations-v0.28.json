@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.27",
+ "version": "0.28",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -51,12 +51,12 @@
    "y": 940
   },
   "Shen Shin": {
-   "color": "#9aa64a",
+   "color": "#9a6b3f",
    "x": 1445,
    "y": 940
   },
   "Gnonmoon": {
-   "color": "#7a8ca6",
+   "color": "#4f5f86",
    "x": 1445,
    "y": 940
   }
