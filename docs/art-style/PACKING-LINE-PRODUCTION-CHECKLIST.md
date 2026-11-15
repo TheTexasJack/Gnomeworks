@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** 0 of 45 numbered work packages approved (01 to 38, plus 05a to 05e, 15a and 15b).  Sub-checkboxes track parts of a package and do not count toward 45.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 01, packing room backdrop, wide and tall.
+**Progress:** 0 of 45 numbered work packages fully approved (01 to 38, plus 05a to 05e, 15a and 15b).  **01 wide day and night are approved**; portrait day and night are still pending, so the parent package remains unchecked.  Sub-checkboxes track parts of a package and do not count toward 45.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 01, portrait daytime packing room.
 
 ## Operating procedure
 
@@ -21,9 +21,9 @@
 
 ### The room
 
-- [ ] **01. Packing room backdrop, wide and tall.**  Follows Nathan's sketch: the cabinet the supply drawer slides from on the left, back wall with blank frames (work orders, map, STONKS, report card and log hooks), bench in the middle, conveyor, roll-up dock door on the right, and the shrub by the door.  Clear packing workspace.
-  - [ ] Wide daytime room (desktop, tablet, landscape phone).
-  - [ ] Wide nighttime twin, identical geometry and placement.
+- [ ] **01. Packing room backdrop, wide and tall.**  **Wide composition approved 2026-11-15:** left-side computer and red-herring lunch (supply menu will be a separate overlay), back wall with blank frames for work orders/map, dark brass-framed STONKS screen and report/log hooks, central clear bench, bottom conveyor, corrected **recessed/flush** roll-up dock door at right, and shrub by door.  Nathan composited the existing matching Gnomeworks banner scenery into the round window of both wide renders.  Tall version still to be produced, preserving these roles.
+  - [x] Wide daytime room (desktop, tablet, landscape phone).  **Approved by Nathan 2026-11-15:** `Gnomeworks_Shipping_Floor_Day.png`.
+  - [x] Wide nighttime twin, identical geometry and placement.  **Approved by Nathan 2026-11-15:** `Gnomeworks_Shipping_Floor_Night(1).png`.
   - [ ] Tall daytime room (portrait phone, same fixture roles).
   - [ ] Tall nighttime twin, identical geometry and placement to tall day.
   - [ ] Shrub by the door, compatible with the separately draggable shrub in 19.
@@ -198,7 +198,7 @@ For every package, append a line when work starts or when a decision changes.  K
 
 | Package | Status | Review / GIMP corrections | Final reference / source | Nathan approval date |
 | --- | --- | --- | --- | --- |
-| 01 | Queued | Wide/tall day/night, fixture placement and draggable shrub alignment to review. | Pending | Pending |
+| 01 | Wide day + night approved; portrait pending | Nathan composited day/night banner scenery into both porthole windows; confirmed final wide pair.  Recessed door geometry is the approved design.  Technical handoff note: uploaded day PNG is 1672 × 941 RGBA, night PNG is 1671 × 941 RGBA, so align the one-pixel width difference when converting for the game.  Do not regenerate approved art for this.  Separate draggable shrub and tall versions remain pending. | Nathan's files: `Gnomeworks_Shipping_Floor_Day.png` and `Gnomeworks_Shipping_Floor_Night(1).png` (art approval only; not deployed) | Wide pair: 2026-11-15; full 01: pending |
 
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
