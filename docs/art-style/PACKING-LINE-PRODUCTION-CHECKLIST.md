@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **3 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **01, 02 and 03 approved:** rooms, door states and draw chain.  Nathan used GIMP to reconcile door geometry, concrete loading-bay wall/floor, and exact frame registration.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next art priority by Nathan:** 05a supply drawer/menu, ahead of 04 order board and 05 map, which remain unchecked.  This is a production-order exception only; item numbering and scope are unchanged.
+**Progress:** **8 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), and 10–13 (four closed/open box pairs).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
 
 ## Operating procedure
 
@@ -42,9 +42,9 @@
   - [ ] Night, same geography/geometry.
   - [ ] Space for town names rendered by code; compare against current master map before final approval.
 
-- [ ] **05a. Supply drawer.  NEXT DESIGN PRIORITY (Nathan, 2026-11-15).**  Pull-out panel from the left with its menu bar on the right edge and empty slot rows (4 boxes, bubble wrap and peanuts, 10 stickers, 10 stamps, other stuff including bug spray, dog toy and Idol).  The game fills the slots as regions unlock; do not paint supplies or words permanently into the drawer.  Preserve clear packing bench in expanded state and show the computer/lunch behind the closed panel.  Build day and night variants; plan portrait placement without covering core interaction.  **No art approved yet.**
-  - [ ] Day.
-  - [ ] Night.
+- [x] **05a. Supply drawer/menu frame.**  **Approved by Nathan 2026-11-15.**  The final is a simple flat blank outer frame; Nathan simplified and rotated the generated frame in GIMP.  No painted sections, boxes, stamps, labels, or supply icons.  Claudia will render all sections, content, and text in code.  The same neutral frame can be reused for day/night and placed responsively without new background art.
+  - [x] One reusable simplified blank frame master for day and night (rather than separate baked theme variants).
+  - [x] Section layout, labels, slots and unlock state delegated to Claudia/code; art need not supply them.
 - [ ] **05b. Conveyor belt.**  Where the junk arrives; tapping it opens the item menu.
   - [ ] Day.
   - [ ] Night.
@@ -61,18 +61,18 @@
 
 ### Boxes
 
-- [ ] **10. Plain cardboard box.**
-  - [ ] Open.
-  - [ ] Closed and taped, matching perspective and size.
-- [ ] **11. Temperature-controlled box.**  Used for Gnafrica and Gnonmoon.
-  - [ ] Open.
-  - [ ] Closed, matching perspective and size.
-- [ ] **12. Water-resistant box.**  Used for Slanic, Slaanilok and Gnufoundland.
-  - [ ] Open.
-  - [ ] Closed, matching perspective and size.
-- [ ] **13. Wooden crate.**  Required by Shen Shin.
-  - [ ] Open.
-  - [ ] Closed, matching perspective and size.
+- [x] **10. Plain cardboard box.  APPROVED 2026-11-15.**  Square front-facing closed/taped master and open variant with flaps folded flat against the walls; minor side-flap compression accepted for consistency.
+  - [x] Open (square silhouette; no outstretched flaps).
+  - [x] Closed and taped, matching general silhouette.
+- [x] **11. Temperature-controlled box.  APPROVED 2026-11-15.**  Used for Gnafrica and Gnonmoon.  Closed cream-and-blue cooler with brass temperature unit; open has the lid/unit entirely removed and blue insulated cavity visible; Nathan confirmed strong alignment.
+  - [x] Open (removable lid/unit absent).
+  - [x] Closed, matching front and base.
+- [x] **12. Water-resistant box.  APPROVED 2026-11-15.**  Used for Slanic, Slaanilok and Gnufoundland.  Olive-green case with orange gasket, brass clasps and dark reinforced corners; closed version remains master.  Final open lidless attempt accepted by Nathan as approximately 95% match, good enough for gameplay.
+  - [x] Open (lid removed; Nathan accepted minor differences).
+  - [x] Closed, matching overall front and base.
+- [x] **13. Wooden crate.  APPROVED 2026-11-15.**  Required by Shen Shin.  Original crate retained; Nathan used GIMP to add only a small peek of a lid behind the top rim, preserving the front face.
+  - [x] Open (GIMP modification, small angled lid visible at top).
+  - [x] Closed (original square wooden crate).
 
 ### Stamps, stickers, supplies
 
@@ -201,7 +201,11 @@ For every package, append a line when work starts or when a decision changes.  K
 | 01 | **Approved: all 4 layouts/themes** | Original room concepts approved.  Nathan then cleaned out the shrub and fixed open/closed door states in GIMP.  **Use Nathan's final GIMP masters at implementation**, not earlier draft backdrop names recorded here.  Earlier note: wide day 1672 × 941 and wide night 1671 × 941 before final GIMP corrections; check final dimensions directly from Nathan's files.  Shrub remains a separate interactive asset under 19. | Finalized GIMP day/night × wide/portrait masters held by Nathan; actual final filenames to be recorded at handoff.  Earlier conceptual masters: `Gnomeworks_Shipping_Floor_Day.png`, `Gnomeworks_Shipping_Floor_Night(1).png`, `steampunk_packing_room_interface.png`, `nighttime_gnomeworks_packing_room.png`.  Art approval only, not integration authorization. | **2026-11-15** |
 | 02 | **Approved: all 8 states** | Nathan completed door opening and closing in GIMP for both layouts and themes.  Open state reveals concrete wall and floor, matching the closed-door frame without unintended room changes.  Truck rear is a separate future overlay, and no extra skyline needs to be painted. | Nathan's final GIMP source files: landscape/portrait × day/night × open/closed; filenames to be recorded upon handoff, not yet pushed into runtime. | **2026-11-15** |
 | 03 | **Approved** | Nathan approved the revised long brass-link draw chain with wooden handle, no ceiling connector, at roughly twice the initial length.  Isolated object; functional animation/integration remains Claudia's responsibility. | Conversation master: `long_brass_chain_with_wooden_pull_handle.png` (not pushed to runtime). | **2026-11-15** |
-| 05a | **Queued: next to design** | Production-order exception requested by Nathan; menu/drawer frame first so the later boxes, stamps, stickers and supplies have established slots.  Day/night and portrait usability require review before approval. | Pending | Pending |
+| 05a | **Approved** | Nathan simplified the proposed blank supply drawer frame in GIMP by rotating and removing unwanted ornamental layout.  Approved simple outline only; all labels, rows and item positions are Claudia's responsibility in code.  One shared frame, no separate baked day/night art, and no edits to the approved room backgrounds. | Nathan's finalized simplified/rotated supply-frame PNG; original generation `Gnomeworks_Supply_Drawer_Blank_Frame_Day.png` is a draft, not the authoritative master. | **2026-11-15** |
+| 10 | **Approved** | Square front-facing cardboard open/closed; flaps folded down to maintain almost-square shape.  Nathan explicitly accepted compressed side-flap proportions. | Conversation source: `box_plain(1).png`; approved open generated after red-line flap adjustment. | **2026-11-15** |
+| 11 | **Approved** | Lid/cooling hardware removed entirely from open cooler; front and blue corner trim match the closed master and were approved as well aligned. | Conversation source: `box_temp(2).png` with approved open lidless counterpart. | **2026-11-15** |
+| 12 | **Approved (~95% visual match)** | Final lidless open waterproof case accepted as good enough for gameplay; previous attempts with mismatched geometry and latches are rejected drafts.  No further generation required. | Conversation source: `box_water(3).png` and accepted final lidless rendering. | **2026-11-15** |
+| 13 | **Approved** | Nathan's GIMP open state keeps original front crate pixel work and adds a small angled lid peeking behind the rim. | Uploaded `box_wood_open.png` plus closed `box_wood.png`; GIMP open master is authoritative. | **2026-11-15** |
 
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
