@@ -16,4 +16,4 @@ Our side: the gnome workshop that runs the machine, makes the junk, and ships it
 - Who runs the workshop, and who is the boss?
 - Why does a gnome factory make junk at all?  Who buys it?
 - Where is the workshop on the map?
-- Where do Tiny Monsters come from, and what makes a form glowing, goopy, or evil?
+- ~~Where do Tiny Monsters come from?~~  The factories make creatures, and the extras end up in Gnomadica's forests (Alex, canon 2026-11-15).  Still open: what makes a form glowing, goopy, or evil.

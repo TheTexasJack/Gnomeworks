@@ -4,7 +4,7 @@ Tap a Tiny Monster on the shelf to open its entry, like a Pokedex.  11 families,
 
 ## Open questions for the whole set
 
-- Where do Tiny Monsters come from, and why does the machine make them?
+- ~~Where do Tiny Monsters come from?~~  The factories make them, and the extras end up living in Gnomadica's forests (Alex, canon 2026-11-15).  Why the machine makes them is still open.
 - What makes a form glowing, goopy, or evil?
 - ~~Which region does each family live in?~~  Drafted below (Claudia, 2026-11-04).  Nathan had no preference, so this stands as the working draft until he or Alex changes it.
 
@@ -35,7 +35,7 @@ Tap a Tiny Monster on the shelf to open its entry, like a Pokedex.  11 families,
 
 ## Home regions and stamps (draft)
 
-Each region's stamp shows the normal form of its home family.  Families also wander: a place can list Tiny Monsters from other regions in its Fauna line.
+Each region's stamp shows the normal form of its home family.  Families also wander: a place can list Tiny Monsters from other regions in its Tiny Monsters line.
 
 | Region | Home family | Stamp monster | Why it lives there |
 | --- | --- | --- | --- |

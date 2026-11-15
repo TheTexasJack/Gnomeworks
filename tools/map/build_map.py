@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.22'
+VERSION = '0.23'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -411,7 +411,7 @@ def gh_anchor(heading):
 
 
 GAZ_FIELDS = ['Location', 'Region', 'Factory Imports', 'Factory Exports', 'Non-Factory Imports', 'Non-Factory Exports',
-              'About', 'Major Facts', 'Flora', 'Fauna']
+              'Preview', 'Guide', 'About', 'Major Facts', 'Flora', 'Tiny Monsters', 'Notable Flora', 'Notable Fauna']
 
 
 def parse_gazetteer():
@@ -764,6 +764,8 @@ def build():
     add('<g class="pin arealabel" data-id="gnuma-gnuma">')
     text(800, 262, 'GNUMA GNUMA', 17, fill='#4a3b26', anchor='middle', weight='bold', ls=10, rot=-2, opacity=0.8)
     add('</g>')
+    # the Cradle is both the mountains and the bay inside the arm
+    text(1022, 214, 'the Cradle', 10, fill='#2a5566', anchor='middle', style='italic', ls=2, halo=False, rot=-38)
     # Gno Dao Cradle follows the arm
     add('<path id="cradlePath" d="M1158,390 L1340,228" fill="none"/>')
     add(f'<text font-size="15" font-weight="bold" letter-spacing="4" fill="{shade(REGION_COLORS["Gno Dao Cradle"], 0.45)}" opacity="0.8" '

@@ -152,7 +152,9 @@ function show(id, fly) {
   const c = document.createElement('span'); c.className = 'chip'; c.style.background = col; m.prepend(c);
   const G = l.gazetteer;
   if (G) {
+    if (G['Preview']) { add('k', 'Preview'); add('', G['Preview']); }
     if (G['Location']) { add('k', 'Location'); add('', G['Location']); }
+    if (G['Guide']) { add('k', "Explorer's Guide"); add('', G['Guide']); }
     if (G['About']) { add('k', 'About'); add('', G['About']); }
     if (G['Major Facts']) { add('k', 'Major Facts'); add('', G['Major Facts']); }
     const trade = ['Factory Imports', 'Factory Exports', 'Non-Factory Imports', 'Non-Factory Exports'].filter(k => G[k]);
@@ -162,7 +164,9 @@ function show(id, fly) {
       trade.forEach(k => { const b = document.createElement('b'); b.textContent = k; const s = document.createElement('span'); s.textContent = G[k]; t.append(b, s); });
     }
     if (G['Flora']) { add('k', 'Flora'); add('', G['Flora']); }
-    if (G['Fauna']) { add('k', 'Fauna'); add('', G['Fauna']); }
+    if (G['Tiny Monsters']) { add('k', 'Tiny Monsters'); add('', G['Tiny Monsters']); }
+    if (G['Notable Flora']) { add('k', 'Notable Flora'); add('', G['Notable Flora']); }
+    if (G['Notable Fauna']) { add('k', 'Notable Fauna'); add('', G['Notable Fauna']); }
   } else {
     add('k', ADDED.has(l.id) ? 'About' : 'Where the gazetteer puts it'); add('', l.clue);
   }
