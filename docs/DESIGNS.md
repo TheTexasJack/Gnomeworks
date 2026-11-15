@@ -173,6 +173,7 @@ Settled the same day (Nathan picked each):
 - **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
 - **The label is the reading challenge** (Cat Mail Co. style).  An order shows the town, and the player has to know which region that town is in to pick the right region stamp.  Players learn the map by shipping.
 - **No clock.**  A shift ends when the player closes the door: the truck leaves, the report card shows the score, and the next day starts.
+- **Closing early is allowed and costs.**  Any order not filled when the door closes is unfulfilled and gets a ❌ on the report card.  Opening and closing the door over and over just tanks our Stonks.
 
 **Purchase orders and the order board (approved 2026-11-15; details are Claudia's draft)**
 
