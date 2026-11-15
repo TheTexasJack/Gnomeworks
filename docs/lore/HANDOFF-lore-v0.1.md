@@ -6,12 +6,12 @@ Written by Claudia on 2026-11-04 for the next "Gnomeworks map and lore" thread. 
 
 | Thing | Current file or link | State |
 | --- | --- | --- |
-| Gazetteer | `docs/lore/location-gazetteer-v0.24.md` | 100 original places plus 14 added while mapping.  Main island named Gnuma Gnuma (v0.21).  v0.22 and v0.23 (2026-11-15) give every region a Preview, an explorer's Guide (Alex's style), and Notable Flora and Fauna; the old Fauna field is now Tiny Monsters. |
-| Master map | `docs/lore/map/gnomadica-map-v0.25.*` (SVG, viewer HTML, JSON) | Ten regions, all pins checked on land. |
+| Gazetteer | `docs/lore/location-gazetteer-v0.25.md` | 100 original places plus 14 added while mapping.  Main island named Gnuma Gnuma (v0.21).  v0.22 and v0.23 (2026-11-15) give every region a Preview, an explorer's Guide (Alex's style), and Notable Flora and Fauna; the old Fauna field is now Tiny Monsters. |
+| Master map | `docs/lore/map/gnomadica-map-v0.26.*` (SVG, viewer HTML, JSON) | Ten regions, all pins checked on land. |
 | Public map link | https://thetexasjack.github.io/Gnomeworks/map/ (`#full` hides the side panel) | Always the latest build. |
 | Map builder | `tools/map/build_map.py`, pins in `tools/map/places.py`, viewer in `tools/map/viewer_template.html` | Run `python3 tools/map/build_map.py` after any gazetteer change, then push. |
 | Map notes and change log | `docs/lore/map/README.md` | Lists every map version and open map items. |
-| Trade draft | `docs/lore/trade-draft-v0.2.md` | Proposed imports so all 96 junk items have a destination, plus Factory Exports.  On hold (Nathan, 2026-11-04). |
+| Trade draft | `docs/lore/trade-draft-v0.2.md` | Merged into gazetteer v0.25 (2026-11-15); kept as the record of why each trade fits. |
 | Hunt creatures | `docs/lore/hunt-creatures.md` | Alex's names and Dr. Quartz entries, verbatim.  Tie-ins already added to the gazetteer. |
 | Dr. Quartz | `assets/lore/dr_quartz.webp`, `_explain`, `_point` | Gnomopedia only.  Mostly Professor Oak, a little Volo. |
 | Packing Line guide | Claude doc "Gnomeworks Packing Line: Design and Asset Guide v0.2" | Updated 2026-11-04.  Repo copy of decisions: Packing Line section of `docs/DESIGNS.md`. |

@@ -92,7 +92,8 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
     - **Lore decides the pairing, and producer prices are balanced on their own.**  The shipping game only unlocks a producer; it does not set its price.  Balancing the two together would force placements that break the lore (like moving Mycelia's mushrooms to the wrong region).
     - **The producer list can change** to fit this structure, to make a better mini-game, or because Jarrett (or Elana) asks.
     - **Heroes are a separate, long-term idea:** named hero characters who sit in the background for lore and moments like this.  They need their own design, apart from the expedition squad, and are not needed now.
-- **Shipping does not pay cogs.**  It pays its own currency: **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
+- **Shipping does not pay cogs.**  It earns **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
+- **Stonks is a score, never spent (Nathan, 2026-11-15).**  Stonks is simply the marker that TNP Corp is measured against.  Nothing in shipping costs anything: stamps, boxes, stickers, and every other supply are free.  There is no Stonks shop.  This keeps the shipping game what it is: an organizer and a Simon Says variant.
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
 - **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
 
@@ -103,7 +104,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
 - ~~Box upgrades (Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) as speed upgrades.~~  Dropped 2026-11-04 (Nathan): boxes cost nothing, and the challenge is the packing match.
 
-**Order of work (Nathan, 2026-11-04):** finish the lore pass, then nail down the full gameplay mechanics, then make assets, then build.  No Packing Line assets get made until the mechanics are settled.  First mechanics to settle: how much of a pile one package ships, what the Stonks shop sells (if anything), and what a failed shipment does to spendable Stonks versus the ticker line.
+**Order of work (Nathan, 2026-11-04):** finish the lore pass, then nail down the full gameplay mechanics, then make assets, then build.  No Packing Line assets get made until the mechanics are settled.  First mechanics to settle: how much of a pile one package ships, what the Stonks shop sells (if anything), and what a failed shipment does to spendable Stonks versus the ticker line.  (2026-11-15: Stonks is score only and nothing is bought, so a failure just drops our line and lifts TNP's.  The pile question has a draft answer in Purchase orders below.)
 
 **Shipping log (Nathan, 2026-11-04, decided; build after the core)**
 
@@ -152,15 +153,23 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 Notes to settle when this is built (Claudia):
 - Packages to regions without a special box use a plain cardboard box.
 - The shipping log itself stays flavor only.  Stonks carry the score.
-- Open: Stonks is both the shipping currency and our line on the ticker.  The box-size speed upgrades are dropped, so Stonks has almost nothing to buy, which makes it mostly a score.
-- Open: how much of a pile one successful package ships, now that box sizes no longer set it (for example a fixed share of the stack, or all of it down to the display copy).  When a failure sends Stonks down, decide whether the player loses spendable Stonks, only the ticker line drops, or both.  The ticker notes call for recoverable mistakes and no losses that stack forever.
+- ~~Open: Stonks is both the shipping currency and our line on the ticker.~~  Settled 2026-11-15: Stonks is only our line on the ticker.
+- Open: how much of a pile one successful package ships, now that box sizes no longer set it (for example a fixed share of the stack, or all of it down to the display copy).  Settled 2026-11-15: there are no spendable Stonks, so a failure only moves the ticker lines.  The ticker notes still call for recoverable mistakes and no losses that stack forever.
 - The rune tracing game needs to work with a finger on phones as well as a mouse.
+
+**Purchase orders and the order board (Claudia's DRAFT, 2026-11-15, not yet approved)**
+
+- **Order board (the player's choice):** 3 purchase orders are up at a time, each from a random trading place in an unlocked region.  The player picks one to pack.
+- **What an order asks for (the randomizer):** items are drawn only from that place's Factory Imports (plus any Bathroom item, since every place buys those), and only from piles with more than 1 on the shelf, so every order can be packed.  Gnomerica orders ask for 1 item; later regions ask for 2 or 3; Gnonmoon must be exact.
+- **Packing:** dragging a shelf tile onto the box puts the whole pile in, down to the display copy.  The label happily reads "1,700,000 Poop Knives."
+- **Rotation:** a pile just shipped sits at 1, so orders skip it until it grows back.
+- **Score:** each correct order lifts our Stonks by an amount set by region difficulty, never by pile size.
 
 **Ideas on the table (drafts, build in this order)**
 
 1. **Core:** Open and Close, drag to box, Stonks, stop at 1.
-   - **Stamps are a shipping cost and a mechanic, separate from the currency.**  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  TNP fakes carry Christmas-looking stamps (snowflakes, holly).  Stonks can buy stamp sheets for newly unlocked regions.
-2. **Stonks shop (revisit):** box upgrades are dropped.  Still on the list: a Packing Gnome that packs on his own while the door is open, faster belt, wider door.  An auto-packer may clash with the packing being the game, so this list needs a fresh look.
+   - **Stamps are a mechanic and cost nothing** (2026-11-15).  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  TNP fakes carry Christmas-looking stamps (snowflakes, holly).  A region's stamps arrive free when it unlocks.
+2. ~~**Stonks shop:**~~  Dropped 2026-11-15 (Nathan): Stonks is never spent, so there is no shop, Packing Gnome, faster belt, or wider door.
 3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
 4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:
    - A height chart painted on the dock wall.  Gnomes are short.  A "gnome" past the line is a TNP elf in a borrowed hat.

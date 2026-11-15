@@ -17,7 +17,8 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.25'
+VERSION = '0.26'
+SHOW_TRADE_DRAFT = False  # the trade draft was merged into gazetteer v0.25, so cards no longer show it
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -1170,7 +1171,7 @@ if __name__ == '__main__':
         if g:
             rec['gazetteer'] = g['fields']
             rec['gazetteer_anchor'] = g['anchor']
-        if rec['name'] in draft:
+        if SHOW_TRADE_DRAFT and rec['name'] in draft:
             rec['trade_draft'] = draft[rec['name']]
     json.dump(data, open(os.path.join(OUT_DIR, f'gnomadica-locations-v{VERSION}.json'), 'w', encoding='utf-8'),
               indent=1, ensure_ascii=False)

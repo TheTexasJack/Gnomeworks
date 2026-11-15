@@ -46,8 +46,9 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 1. **Lore pass** (Lore thread): canon review of the map v0.19 and gazetteer v0.18, the trade draft, Tiny Monsters assigned to regions (for stamps), our company's name, TNP Corp's story.
 2. **Mechanics to settle:**
     - [ ] How much of a pile one package ships.
-    - [ ] What a failed shipment does: spendable Stonks, the ticker line, or both (mistakes must be recoverable).
-    - [ ] What Stonks buy, if anything (the Stonks shop needs a fresh look; an auto-packer may clash with packing being the game).
+    - [x] What a failed shipment does: only the ticker lines move (Stonks is score only, 2026-11-15).
+    - [x] What Stonks buy: nothing.  Stonks is the marker against TNP Corp, and stamps, boxes, and supplies are free (Nathan, 2026-11-15).
+    - [x] Trade draft merged into gazetteer v0.25: every junk item has a buyer, and every trading place buys Bathroom items (2026-11-15).
     - [ ] The match game's rules (Simon Says inspired) and how a purchase order is read.
     - [ ] The "new thing to watch for" each region unlock adds.
     - [ ] Shipping log event logic, and throw-ins.

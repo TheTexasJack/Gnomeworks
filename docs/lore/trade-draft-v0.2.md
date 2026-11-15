@@ -1,6 +1,6 @@
 # Gnomeworks trade draft, v0.2
 
-**Status: on hold (Nathan, 2026-11-04).  Claudia's working draft, first written 2026-11-03.**  Rechecked against gazetteer v0.20 on 2026-11-04: still accurate.  Nothing here is in the gazetteer yet.  Nathan approves, changes, or drops each line, and the approved ones get copied into the next gazetteer version.
+**Status: merged into gazetteer v0.25 (Nathan, 2026-11-15).**  Every import below, and every export except four (Werewolf London Coat, Springwater Potted Plant, Lost Boot Work Boot, Sky Dream Kite, which those places already import), is now in the gazetteer, along with the lizard priests and the Gassy Dog lore.  Kept as the record of why each line fits.
 
 ## The goal
 
@@ -22,7 +22,7 @@ Every item the factory makes should have somewhere to ship.  A shelf item can on
 | Grit Spit and Fellers | Gnafrica | Jeans | tough pants for prospectors |
 | Gnew York | Gnomerica | Toilet; Pushpin | a crowded city always needs one more; for pinning up posters and broadsheets |
 | Gassy Dog | Gnufoundland | Log; Poop Knife | for the hamlet's woodpile; the dog is very famous for a reason |
-| Port Gnasher | Gnomerica | Toothbrush | the dock gnomes paint big teeth on their hats and keep their own teeth just as bright |
+| Port Gnasher | Gnomerica | Toothbrush | the harbor boats paint smiling teeth on their bows, and the dock gnomes keep their own teeth just as bright |
 | Werewolf London | Gnufoundland | Hair Pick | fur gets tangled after full-moon evenings |
 | Twinshift | Gno Dao Cradle | Paperclip | holds the shift rosters together |
 | Dice and Doodles | Gnomerica | Scissors | cutting out game boards and paper crafts |

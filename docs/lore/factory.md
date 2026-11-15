@@ -8,7 +8,7 @@ Our side: the gnome workshop that runs the machine, makes the junk, and ships it
 - **The machine:** gnomes turn the gears, and every full turn of the big gear makes an item.  Most items are junk; rare ones are Tiny Monsters, Number Twos, and Legendary Treasures.
 - **The crew:** Tiny Gnome, Gnome Necromancer (and his skeleton crew), Warrior Gnome, Gnome Cloner, Matryoshka Gnome, Gnome Wizard ("It is not the cog that turns, but you").
 - **The Megagnome:** one per workshop.  He helps during events and eats what the other gnomes hunt for him.  He never hunts himself; he stays home being fat and lazy.  Possible dock role later (guarding against spies) is an open idea.
-- **Stonks:** the money the shipping dock earns.  The name ties to the stock ticker.
+- **Stonks:** the shipping dock's score, the line on the stock ticker that TNP Corp is measured against.  Stonks is never spent.
 - **The Daily Cog:** the workshop newspaper, read between shifts.  Draft story beats: TNP buys up the bolt supply, a defector reindeer, the Megagnome guarding the dock.
 
 ## Open questions

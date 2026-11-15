@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.24 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.25 Working Draft)
 
 
 ## How to read this draft
@@ -10,6 +10,8 @@
 - **Factory Imports / Factory Exports** list only goods that exist in the current Gnomeworks collectible catalog (`docs/INVENTORY.md` and `js/config.js`).  All items use their exact written names without emoji icons or tags.  A trade listing does not mean a shipping order is implemented.
 - **Non-Factory Imports / Non-Factory Exports** list tangible, shippable goods outside the existing factory catalog, including fantasy objects.  Services, rumors, and activities are excluded.  These goods do not become new factory collectibles.
 - **None** means no trade item of that type has been proposed yet; the place may still trade it later.
+- **Everybody needs a bathroom.**  Every place with trade fields also buys any item from the Bathroom group (Toilet, Poop Knife, Plunger, Toilet Paper, Soap, Sponge, Toothbrush, Bucket, Bathtub, Lotion, Razor, Hair Pick), whether or not its own list names them.  The shipping game's destinations file applies this rule.
+- **Order sizes are ridiculous on purpose.**  A purchase order takes the whole pile, so an island town may well receive 1.7 million Poop Knives.  The gnomes ship it anyway.
 - **Flora** lists nearby plants.  **Tiny Monsters** lists the Tiny Monsters found nearby.  These habitats are suggestions for Nathan and Alex to approve.
 - **Region entries** also carry a **Preview** (one or two short, easy sentences for young readers), a **Guide** (the explorer's guide write-up, in Alex's style), and **Notable Flora** and **Notable Fauna** (wild plants and animals, separate from the Tiny Monsters).  The Guides for Gnomadica, Gnomerica, Gnohio, Gnafrica, Slanic, Gno Dao Cradle, Gnufoundland, and Slaanilok are Alex's, as are all Notable Flora and Fauna except Gnonmoon's.  The Guides for Shen Shin, Gni, and Gnonmoon, Gnonmoon's Notable Flora and Fauna, and every Preview are Claudia's drafts, awaiting approval.
 - **Lore in v0.4** adds draft community histories, characters, connections, and fantasy traditions.  Humanoid species are people with ordinary jobs and different personalities; ancestry or appearance never determines someone's morality.
@@ -175,7 +177,7 @@
 - **Location:** Center of Gnuma Gnuma, where three roads meet.
 - **Region:** Gnomerica.
 - **Factory Imports:** Socks; Banana; Clipboard
-- **Factory Exports:** None
+- **Factory Exports:** Spare Cog; Nut and Bolt
 - **Non-Factory Imports:** coal
 - **Non-Factory Exports:** sealed machinery crates; packing labels
 - **About:** This noisy town is home to the Gnomeworks factory and its endlessly turning gears.  The machine makes useful tools, curious junk, and the occasional living Tiny Monster, whether anyone ordered them or not, which keeps the sorting crew very busy.  Brass carts rattle from the factory to Pulley Junction, and every neighbor knows the particular whistle that means a shipment of underpants has escaped quality control.  Shopkeepers price everything in both cogs and patience.
@@ -189,8 +191,8 @@
 - **Name:** Gnew York
 - **Location:** East-central main island at the crossroads of the coast road.
 - **Region:** Gnomerica.
-- **Factory Imports:** Printer; Necktie; Wastebasket
-- **Factory Exports:** None
+- **Factory Imports:** Printer; Necktie; Wastebasket; Toilet; Pushpin
+- **Factory Exports:** Alarm Clock
 - **Non-Factory Imports:** street lamps
 - **Non-Factory Exports:** posters; gossip broadsheets
 - **About:** Tall clock towers and crowded streets give this city a proud, hurried attitude, and everyone walks fast, even to the bakery next door.  Stacked bakeries, brass elevators, and rooftop gardens rise between the towers, and the gardeners argue over the correct height for a tomato.  A lamia tram conductor named Miss Coil keeps the morning commuters moving and can check six tickets before the light changes.  Street musicians play the city's famous tune, 'Honk If You Have Brakes.'
@@ -205,7 +207,7 @@
 - **Location:** Western coast at the mouth of River's Belt.
 - **Region:** Gnohio.
 - **Factory Imports:** Hook; Toolbox; Toilet Paper
-- **Factory Exports:** None
+- **Factory Exports:** Fishing Rod
 - **Non-Factory Imports:** harbor chains
 - **Non-Factory Exports:** river fish; ship manifests
 - **About:** The western docks are always muddy, busy, and one crate away from chaos.  Here the river barges of Gnohio meet the open sea under a great brass crane nicknamed Old Shoulder.  Stevedores include gnomes, riverfolk, and a giant named Mabel who loads ships by hand but refuses to handle fragile teapots.  The fish stalls claim the tide has an appetite of its own.
@@ -219,8 +221,8 @@
 - **Name:** Port Gnasher
 - **Location:** Eastern tip of the main island, facing Slaanilok.
 - **Region:** Gnomerica.
-- **Factory Imports:** Saw; Fishing Rod; Fire Extinguisher
-- **Factory Exports:** None
+- **Factory Imports:** Saw; Fishing Rod; Fire Extinguisher; Toothbrush
+- **Factory Exports:** Hook
 - **Non-Factory Imports:** dock timber
 - **Non-Factory Exports:** ferry tickets; salted kelp
 - **About:** The port's name sounds fierce, but its busiest workers are cheerful dock gnomes.  Harbor boats paint smiling teeth on their bows because the old reef looks like the jaws of an enormous sea beast.  Most crews will happily give directions, though they may charge a biscuit for the favor.  A lamia harbor pilot named Captain Nera knows every safe channel and every sailor's favorite complaint.
@@ -235,7 +237,7 @@
 - **Location:** Southern hill above the marsh road.
 - **Region:** Slanic.
 - **Factory Imports:** Soap; Bucket; Test Tube
-- **Factory Exports:** None
+- **Factory Exports:** Jar; Petri Dish
 - **Non-Factory Imports:** water pumps
 - **Non-Factory Exports:** glow dye; slime-safe glass
 - **About:** Green windows gleam across this tidy, slightly squishy city of glass tubes, warm fountains, and canals with the consistency of soup.  The streets are swept twice a day and somehow stay sticky.  Its schools teach slime husbandry alongside mathematics, and nobody laughs when a Jellybub needs a little extra time to cross the road.  Inventors arrive hoping to discover an amazing new glue; locals beg them to invent a better mop.
@@ -250,7 +252,7 @@
 - **Location:** Southwest desert highway beside a cool spring.
 - **Region:** Gnafrica.
 - **Factory Imports:** Socks; Work Boot; Bathtub
-- **Factory Exports:** None
+- **Factory Exports:** Scarf
 - **Non-Factory Imports:** water barrels
 - **Non-Factory Exports:** desert wool; pepper dust
 - **About:** Sockarillo trades boots and blankets to travelers crossing the hot lands.  Travelers know it by its enormous sock sign, visible for miles, the smell of hot flatbread, and shop windows full of hats built to resist sandstorms.  Lamia merchants run shaded caravan stalls, while goblin cobblers argue over whether a boot should have a left and a right side.  The town's drinking fountain is treated with the respect usually reserved for kings.
@@ -264,7 +266,7 @@
 - **Name:** Cogington
 - **Location:** Northwest of Cogbottom on the brass road.
 - **Region:** Gnomerica.
-- **Factory Imports:** Pen; Clipboard; Necktie
+- **Factory Imports:** Pen; Clipboard; Necktie; Old Vase
 - **Factory Exports:** None
 - **Non-Factory Imports:** paving stones
 - **Non-Factory Exports:** business permits; clock fittings
@@ -280,7 +282,7 @@
 - **Location:** East of Cogbottom along the workshop rail.
 - **Region:** Gnomerica.
 - **Factory Imports:** Spare Cog; Magnet; Alarm Clock
-- **Factory Exports:** None
+- **Factory Exports:** Screwdriver
 - **Non-Factory Imports:** steel plate
 - **Non-Factory Exports:** precision springs; repair manuals
 - **About:** Cogsworth builds tiny parts with enormous care.  It is a town of fine gears and watch springs, where mechanics listen to a clock the way musicians listen to an orchestra and can hear a loose bolt from across the square.  Lamia machinists run narrow lathes with extraordinary precision, and the town baker has invented a gear-shaped pastry with far too many teeth.  Cogsworth's freight travels to Cogbottom along the central rail.
@@ -295,7 +297,7 @@
 - **Location:** North-central main island near the foothills.
 - **Region:** Gnomerica.
 - **Factory Imports:** Clamp; Ladder; Balloon
-- **Factory Exports:** None
+- **Factory Exports:** Mousetrap; Yo-Yo
 - **Non-Factory Imports:** spring steel
 - **Non-Factory Exports:** coiled springs; spring-mounted handcarts
 - **About:** In Sproing, even the benches have suspiciously lively cushions.  The town nestles among soft hills where every fence seems to hold a spring, every garden gate bounces, and even the goats walk with suspicious enthusiasm.  Engineers test cushions, shock absorbers, and peculiar pogo carts here before shipping them to Cogbottom.  Visitors are handed a safety helmet and a warning about ceiling fans.
@@ -324,8 +326,8 @@
 - **Name:** Pulley Junction
 - **Location:** Central rail crossing just south of Cogbottom.
 - **Region:** Gnomerica.
-- **Factory Imports:** Wrench; Nut and Bolt; Cardboard Box
-- **Factory Exports:** None
+- **Factory Imports:** Wrench; Nut and Bolt; Cardboard Box; Control Knobs
+- **Factory Exports:** Ladder
 - **Non-Factory Imports:** rail ties
 - **Non-Factory Exports:** rail coupling pins; lifting rigs
 - **About:** Tracks, cranes, and carts weave together at this busy transfer town.  Cranes hang over switching yards where Cogbottom's crates join river cargo heading west and mountain ore heading northeast.  Lamia dispatchers use color-coded rail cards, while troll bridge crews keep the tracks safe when a wagon weighs more than its paperwork.  If a shipment goes missing, it usually turns up under a bigger shipment.
@@ -340,7 +342,7 @@
 - **Location:** Southeast coast of the main island, near the marsh outlet.
 - **Region:** Slanic.
 - **Factory Imports:** Soap; Bucket; Frying Pan
-- **Factory Exports:** None
+- **Factory Exports:** Teapot; Spoon
 - **Non-Factory Imports:** copper ore
 - **Non-Factory Exports:** polished brass; boat bells
 - **About:** Brassin shines even on foggy days.  Copper domes and polished bells line its workshop streets, reflected in the muddy water of Slanic's canals, and its bells can be heard across the reeds.  Lamia bellcasters, gnome smiths, and fairy lantern-makers share the open foundry square.  The whole place smells pleasantly of hot metal and marsh mint.
@@ -354,8 +356,8 @@
 - **Name:** Brasstop
 - **Location:** Northern ridge above Cogsworth.
 - **Region:** Gnomerica.
-- **Factory Imports:** Toolbox; Lightbulb; Gloves
-- **Factory Exports:** None
+- **Factory Imports:** Toolbox; Lightbulb; Gloves; Brick
+- **Factory Exports:** Satellite Dish
 - **Non-Factory Imports:** tin ore
 - **Non-Factory Exports:** brass plaques; roof vents
 - **About:** A rooftop town high on a ridge above Cogsworth, built around a hill of chimneys, shiny weather vanes, and brass roofs that glitter at dawn.  Its residents insist more polish fixes most problems.  A family of giant roofers does the dangerous repairs, with a gnome clerk below calling measurements through a speaking tube.  Children compete to spot storms before the weather bells ring.
@@ -369,8 +371,8 @@
 - **Name:** Eversummer
 - **Location:** Middle of the Island of Gni, the sunny island at the south end of the Lantern Chain.
 - **Region:** Gni.
-- **Factory Imports:** Flip-Flop; Fishing Rod
-- **Factory Exports:** None
+- **Factory Imports:** Flip-Flop; Fishing Rod; Maracas; Firecracker
+- **Factory Exports:** Banana; Potted Plant
 - **Non-Factory Imports:** Sunscreen; cool ice
 - **Non-Factory Exports:** citrus; shell buttons
 - **About:** Golden beaches, sleepy palms, and shady courtyards make this island town a favorite rest stop for weary sailors.  Nobody has ever managed to schedule a meeting before noon.  Merfolk vendors sell sea-glass ornaments, lamia gardeners tend fragrant groves, and gnome tourists spend whole mornings debating whether a coconut is a fruit or a very stubborn bowling ball.  Sea breezes carry music past the piers.
@@ -399,7 +401,7 @@
 - **Name:** Runningnomata
 - **Location:** North bank of the western river loop.
 - **Region:** Gnohio.
-- **Factory Imports:** Sneaker; Shorts
+- **Factory Imports:** Sneaker; Shorts; Ball Cap
 - **Factory Exports:** None
 - **Non-Factory Imports:** Water Bottle; bridge cable
 - **Non-Factory Exports:** running ribbons; courier satchels
@@ -414,7 +416,7 @@
 - **Name:** North Ham'n'Gnome
 - **Location:** Northern river estuary opposite Gnufoundland.
 - **Region:** Gnohio.
-- **Factory Imports:** Scarf; Potato; Jar
+- **Factory Imports:** Scarf; Potato; Jar; Wedge of Cheese
 - **Factory Exports:** None
 - **Non-Factory Imports:** smokehouse wood
 - **Non-Factory Exports:** pickled vegetables; river maps
@@ -430,7 +432,7 @@
 - **Location:** Southern raised island surrounded by reed beds.
 - **Region:** Slanic.
 - **Factory Imports:** Jar; Microscope; Work Boot
-- **Factory Exports:** None
+- **Factory Exports:** Petri Dish
 - **Non-Factory Imports:** dry packing straw
 - **Non-Factory Exports:** mushrooms; spore paper
 - **About:** Little mushroom roofs dot this damp town.  They shelter growers, cooks, and a kindly myconid elder who insists the whole village belongs to her garden.  Its gardeners keep careful notes on which fungi glow, sing, or ask for breakfast.  Lamia pharmacists come for medicinal spores, while young gnomes learn which glowing fungi make good lanterns and which taste terrible.
@@ -444,7 +446,7 @@
 - **Name:** Werewolf London
 - **Location:** Foggy northern waterfront on Gnufoundland.
 - **Region:** Gnufoundland.
-- **Factory Imports:** Razor; Soap; Coat
+- **Factory Imports:** Razor; Soap; Coat; Hair Pick
 - **Factory Exports:** None
 - **Non-Factory Imports:** barber scissors
 - **Non-Factory Exports:** night patrol whistles; wool coats
@@ -461,8 +463,8 @@
 - **Name:** Smallerville
 - **Location:** Just west of Cogbottom among the orchards.
 - **Region:** Gnomerica.
-- **Factory Imports:** Teddy Bear; Pencil; Socks
-- **Factory Exports:** None
+- **Factory Imports:** Teddy Bear; Pencil; Socks; Yo-Yo
+- **Factory Exports:** Chair
 - **Non-Factory Imports:** apple saplings
 - **Non-Factory Exports:** apple cakes; tiny furniture
 - **About:** Smallerville is proud of being the smallest village with the biggest welcome sign.  Its orchard cottages stand close enough for neighbors to pass sugar through their windows, and every house has a doorstep garden.  A gentle ogre beekeeper tends the village hives and painted the enormous welcome sign without realizing it was bigger than the town hall.  On festival days, the orchard roads smell of cider, honey, and the smoke from tiny portable pie ovens built by the village children.
@@ -476,7 +478,7 @@
 - **Name:** Twinshift
 - **Location:** Eastern foothill rail spur below Gnomish Heights.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Alarm Clock; Gloves; Teapot
+- **Factory Imports:** Alarm Clock; Gloves; Teapot; Paperclip
 - **Factory Exports:** None
 - **Non-Factory Imports:** coal lanterns
 - **Non-Factory Exports:** ore carts; shift rosters
@@ -506,7 +508,7 @@
 - **Name:** Glowrock Retreat
 - **Location:** Northern foothill spa beside a soft-lit cavern.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Bathtub; Lotion; Candle
+- **Factory Imports:** Bathtub; Lotion; Candle; Broom
 - **Factory Exports:** None
 - **Non-Factory Imports:** linen towels
 - **Non-Factory Exports:** glowing stones; mineral salts
@@ -582,7 +584,7 @@
 - **Location:** Stony western hill overlooking the river.
 - **Region:** Gnohio.
 - **Factory Imports:** Hammer; Mousetrap; Gloves
-- **Factory Exports:** None
+- **Factory Exports:** Pet Rock
 - **Non-Factory Imports:** pack rope
 - **Non-Factory Exports:** skipping stones; gravel
 - **About:** Every local guide says this stony hill village is just a stone's throw from everything, and nobody agrees how far that is.  A retired giant surveyor is teaching the gnomes to measure distances without knocking hats off passersby.  The houses are built from smooth local stone, and nearly every doorstep shows off a favorite skipping pebble with a family name written on it.
@@ -611,7 +613,7 @@
 - **Name:** Sky Dream
 - **Location:** High pass above the northeastern farms.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Kite; Scarf
+- **Factory Imports:** Kite; Scarf; Flute
 - **Factory Exports:** None
 - **Non-Factory Imports:** Binoculars; glider cloth
 - **Non-Factory Exports:** weather sketches; highland honey
@@ -626,7 +628,7 @@
 - **Name:** Backwater Cog
 - **Location:** West of River's Belt where the stream splits into backwaters.
 - **Region:** Gnohio.
-- **Factory Imports:** Fishing Rod; Bucket; Spare Cog
+- **Factory Imports:** Fishing Rod; Bucket; Spare Cog; Dead Battery
 - **Factory Exports:** None
 - **Non-Factory Imports:** sealed tins of boat tar
 - **Non-Factory Exports:** freshwater eels; old engine parts
@@ -642,7 +644,7 @@
 - **Location:** Stone ridge at the eastern entrance to Gno Dao Cradle.
 - **Region:** Gno Dao Cradle.
 - **Factory Imports:** Ladder; Wrench; Coat
-- **Factory Exports:** None
+- **Factory Exports:** Brick
 - **Non-Factory Imports:** fortification timber
 - **Non-Factory Exports:** stone blocks; guard lanterns; handheld reality anchors
 - **About:** A sturdy hill settlement guards the winding mountain road, its walls curled around an enormous fossilized gear.  Gnome guards, dwarven masons, and a patient ogre who clears boulders share the gatehouse and greet tired travelers with tea and dry socks.  An enormous kettle hangs in the common room, supposedly because the guards once served so many travelers that the ordinary teapots went on strike.
@@ -656,7 +658,7 @@
 - **Name:** Grit Spit and Fellers
 - **Location:** Desert road camp west of Sockarillo.
 - **Region:** Gnafrica.
-- **Factory Imports:** Salt Shaker; Can o' Beans; Work Boot
+- **Factory Imports:** Salt Shaker; Can o' Beans; Work Boot; Jeans
 - **Factory Exports:** None
 - **Non-Factory Imports:** water skins
 - **Non-Factory Exports:** prospector maps; cactus syrup
@@ -672,7 +674,7 @@
 - **Location:** Central fields between Smallerville and Cogbottom.
 - **Region:** Gnomerica.
 - **Factory Imports:** Frying Pan; Bucket; Mousetrap
-- **Factory Exports:** None
+- **Factory Exports:** Potato
 - **Non-Factory Imports:** seed corn
 - **Non-Factory Exports:** vegetables; fresh eggs
 - **About:** A patchwork of little farms and grain fields feeds the factory crews, and the farmers measure a good harvest by how many carts need extra wheels.  Friendly ogres handle harvests too tall for ordinary ladders.  Apprentices from Cogbottom learn here that potatoes cannot be ordered from the conveyor belt.  Each farmhouse keeps a brightly painted gear above the door so delivery drivers can tell two identical barns apart.
@@ -687,7 +689,7 @@
 - **Location:** Western fields near the bend in River's Belt.
 - **Region:** Gnohio.
 - **Factory Imports:** Jar
-- **Factory Exports:** None
+- **Factory Exports:** Wedge of Cheese
 - **Non-Factory Imports:** Scarecrow Parts; Hoe; canal water
 - **Non-Factory Exports:** grain; pickles
 - **About:** These riverbank farms and orchards grow nearly everything except what the farmers planned.  The name comes from someone shouting 'Ver, don't!' just as a magical seed bag burst open, and three families each claim it was their ancestor.  In spring the blossoms turn the old wagon lanes into tunnels of pale pink petals.
@@ -701,7 +703,7 @@
 - **Name:** Crossroads
 - **Location:** At the meeting of the western road, south marsh road, and central rail.
 - **Region:** Gnomerica.
-- **Factory Imports:** Cardboard Box; Clipboard; Teapot
+- **Factory Imports:** Cardboard Box; Clipboard; Teapot; Shopping Cart
 - **Factory Exports:** None
 - **Non-Factory Imports:** road gravel
 - **Non-Factory Exports:** coach wheels; printed travel notices
@@ -1029,7 +1031,7 @@
 - **Location:** Southeast flank of the Gnomish Heights, near Cogbend Hold.
 - **Region:** Gno Dao Cradle.
 - **Factory Imports:** Diamond Pickaxe; Wrench; Toolbox
-- **Factory Exports:** None
+- **Factory Exports:** Magnet; Hammer
 - **Non-Factory Imports:** timber supports
 - **Non-Factory Exports:** metal ore; gem dust
 - **About:** Bright ore veins run beside workshops carved into the mine walls, where dwarf smiths, gnome machinists, and patient golem lifters work side by side.  Old machines still move if turned by hand, and steam drills thump in rhythm with the hammers.  Apprentices can tell the hour by the smell of warm metal and lunch pies.
@@ -1153,8 +1155,8 @@
 - **Name:** Ogre's Hold
 - **Location:** Rocky northwestern pass beside the old bridge road.
 - **Region:** Gnufoundland.
-- **Factory Imports:** Frying Pan; Coat; Spoon
-- **Factory Exports:** None
+- **Factory Imports:** Frying Pan; Coat; Spoon; Fork and Knife
+- **Factory Exports:** Bowl
 - **Non-Factory Imports:** bridge boards
 - **Non-Factory Exports:** stone carvings; giant cooking pots
 - **About:** Huge stone steps and great vaulted kitchens mark a fortress built by generations of ogre families, for folk far taller than gnomes.  Today it is a mountain hostel where travelers of every size are welcome, and a smiling ogre chef named Nana Brum cooks enough supper to feed an entire valley.  The little side door was added as a courtesy to visiting gnomes.
@@ -1192,8 +1194,8 @@
 - **Name:** Cog'n'Barrel
 - **Location:** Market lane at the western end of Cogbottom.
 - **Region:** Gnomerica.
-- **Factory Imports:** Can o' Beans; Teapot; Chair
-- **Factory Exports:** None
+- **Factory Imports:** Can o' Beans; Teapot; Chair; Dartboard
+- **Factory Exports:** Pretzel
 - **Non-Factory Imports:** fresh ale
 - **Non-Factory Exports:** packed lunches; oak barrel hoops
 - **About:** Factory crews gather at this warm oak-and-brass public house after their shifts to trade stories.  The taps hiss, the lamps glow, the barrels are stronger than the furniture, and the owner can recognize a customer by the sound of their boots.  Gnome machinists share tables with ogre haulers, lamia bookkeepers, and fairy travelers, as long as everyone respects the house rule against stealing lunches.
@@ -1223,7 +1225,7 @@
 - **Location:** Main street of Brassin beside the metal workshops.
 - **Region:** Slanic.
 - **Factory Imports:** Saw; Clamp; Soap
-- **Factory Exports:** None
+- **Factory Exports:** Scissors
 - **Non-Factory Imports:** sandpaper
 - **Non-Factory Exports:** polished tools; wooden signs
 - **About:** Brassin's most orderly workshop repairs tools and teaches safe sharpening, safe machine use, and the art of leaving an argument outside the door.  Everyone must cool off before touching the grindstone.  The owner is a friendly minotaur whose enormous horns have never once scratched the low ceiling, an achievement he mentions at every opportunity.  Visitors come to repair their tools and occasionally their tempers.
@@ -1237,8 +1239,8 @@
 - **Name:** Bottoms Up
 - **Location:** Canal-side market in Gloopenstein.
 - **Region:** Slanic.
-- **Factory Imports:** Bathtub; Toilet Paper; Plunger
-- **Factory Exports:** None
+- **Factory Imports:** Bathtub; Toilet Paper; Plunger; Underpants
+- **Factory Exports:** Soap
 - **Non-Factory Imports:** clean linen
 - **Non-Factory Exports:** bath soaps; comedy postcards
 - **About:** A canal-side bathhouse and snack bar in Gloopenstein with a very unfortunate name, which the owners insist makes perfect sense once you see the upstairs pool.  The downstairs bakery keeps confusing new customers.  Fairies tend the small tubs, ogres look after the large ones, and a lamia lifeguard watches the twisting stairwell.  Everyone is welcome as long as they wash the mud off first.
@@ -1267,7 +1269,7 @@
 - **Name:** Snakes N Sliders
 - **Location:** Riverside family attraction beside Port Gnaru.
 - **Region:** Gnohio.
-- **Factory Imports:** Soap; Bucket; Boomerang
+- **Factory Imports:** Soap; Bucket; Boomerang; Pretzel
 - **Factory Exports:** None
 - **Non-Factory Imports:** slide wax
 - **Non-Factory Exports:** river postcards; woven mats
@@ -1282,7 +1284,7 @@
 - **Name:** Pretty Good Chances
 - **Location:** Roadside weather station east of Sockarillo.
 - **Region:** Gnafrica.
-- **Factory Imports:** Alarm Clock; Clipboard; Lightbulb
+- **Factory Imports:** Alarm Clock; Clipboard; Lightbulb; Magic 8-Ball
 - **Factory Exports:** None
 - **Non-Factory Imports:** weather flags
 - **Non-Factory Exports:** weather charts; printed travel guides
@@ -1297,8 +1299,8 @@
 - **Name:** Brokit Fixit
 - **Location:** Western roadside garage near Backwater Cog.
 - **Region:** Gnohio.
-- **Factory Imports:** Wrench; Hammer; Magnet
-- **Factory Exports:** None
+- **Factory Imports:** Wrench; Hammer; Magnet; Plug
+- **Factory Exports:** Shopping Cart
 - **Non-Factory Imports:** engine grease
 - **Non-Factory Exports:** patched wagons; spare wheel hubs
 - **About:** A roadside garage on Gnohio's back road that repairs almost anything with wheels, springs, or an unreasonable number of screws, and proudly tackles jobs no one else will touch.  Its name is both a warning and a promise.  The owner, a jolly goblin named Brokit, refuses to throw away a part until he has failed to find a use for it three separate times.  A lamia mechanic handles the delicate engine work.
@@ -1312,7 +1314,7 @@
 - **Name:** Bob's Hut
 - **Location:** Small clearing below Woods of the Elder.
 - **Region:** Gnomerica.
-- **Factory Imports:** Can o' Beans; Teapot; Chair
+- **Factory Imports:** Can o' Beans; Teapot; Chair; Bowl
 - **Factory Exports:** None
 - **Non-Factory Imports:** firewood
 - **Non-Factory Exports:** trail snacks; hand-drawn maps
@@ -1327,7 +1329,7 @@
 - **Name:** Stellar Review
 - **Location:** Sky-viewing platform above Sky Dream.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Stack of Books; Candle
+- **Factory Imports:** Stack of Books; Candle; Satellite Dish
 - **Factory Exports:** None
 - **Non-Factory Imports:** Telescope Parts; star charts
 - **Non-Factory Exports:** bound sky logs; meteor sketches
@@ -1342,7 +1344,7 @@
 - **Name:** Dice and Doodles
 - **Location:** Art-and-games shop in Cogington's market square.
 - **Region:** Gnomerica.
-- **Factory Imports:** Lucky Die; Crayon; Puzzle Piece
+- **Factory Imports:** Lucky Die; Crayon; Puzzle Piece; Scissors
 - **Factory Exports:** None
 - **Non-Factory Imports:** drawing paper
 - **Non-Factory Exports:** game boards; picture books
@@ -1445,8 +1447,8 @@ Places added while drawing the master map, beyond the original 100 names.
 - **Name:** Legipt
 - **Location:** South end of Slaanilok's main island, where the trade route leaves south for Eversummer.
 - **Region:** Slaanilok.
-- **Factory Imports:** None
-- **Factory Exports:** None
+- **Factory Imports:** Magic Wand; Candle
+- **Factory Exports:** Old Vase
 - **Non-Factory Imports:** None
 - **Non-Factory Exports:** None
 - **About:** A big, ancient lizard city built around a stepped pyramid older than anyone can remember.  Ferries leave its docks for Eversummer and the islands to the south.
@@ -1460,7 +1462,7 @@ Places added while drawing the master map, beyond the original 100 names.
 - **Name:** Monit-45
 - **Location:** Down in the palm woods of Slaanilok's main island, northeast of Legipt.
 - **Region:** Slaanilok.
-- **Factory Imports:** None
+- **Factory Imports:** Pet Rock; Potted Plant
 - **Factory Exports:** None
 - **Non-Factory Imports:** None
 - **Non-Factory Exports:** None
@@ -1549,7 +1551,7 @@ Places added while drawing the master map, beyond the original 100 names.
 - **Name:** Gassy Dog
 - **Location:** Southeast of Werewolf London on Gnufoundland, along the trail to the Frozen Fields.
 - **Region:** Gnufoundland.
-- **Factory Imports:** None
+- **Factory Imports:** Log; Poop Knife
 - **Factory Exports:** None
 - **Non-Factory Imports:** None
 - **Non-Factory Exports:** None
