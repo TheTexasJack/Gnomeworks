@@ -43,7 +43,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 ## Packing Line next steps (2026-11-04)
 
-1. **Lore pass** (Lore thread): canon review of the map v0.19 and gazetteer v0.18, the trade draft, Tiny Monsters assigned to regions (for stamps), our company's name, TNP Corp's story.
+1. ~~**Lore pass**~~ done 2026-11-15 (company is GRIP, trade merged, stamps decided).  Was: canon review of the map v0.19 and gazetteer v0.18, the trade draft, Tiny Monsters assigned to regions (for stamps), our company's name, TNP Corp's story.
 2. **Mechanics to settle:**
     - [ ] How much of a pile one package ships.
     - [x] What a failed shipment does: only the ticker lines move (Stonks is score only, 2026-11-15).

@@ -195,13 +195,13 @@ Settled the same day (Nathan picked each):
    - Fake trucks with picture tells: candy-cane mudflaps, a jingle on arrival, hoofprints, a plate reading N0RTH.  One tell early, two or three later.
    - Bad paperwork: items not in the catalog, snowflake stamps, shipping labels whose region doesn't match the order.
    - Picture tells first, so a 6-year-old can play without reading.
-5. **The stock ticker:** a screen with two lines, our company vs TNP Corp.  The second game's goal is keeping our line above theirs.  Getting fooled or missing orders pushes TNP up, clean shipments push ours up.
+5. **The stock ticker:** a screen with two lines, GRIP vs TNP Corp.  The second game's goal is keeping our line above theirs.  Getting fooled or missing orders pushes TNP up, clean shipments push ours up.
    - A scoreboard only: players never buy, sell, or bet on shares (the default no-gambling rule; Jarrett can override it, since the game is his).
    - TNP moves only while the player works shifts, so nobody comes back to a lost lead after being away.
    - Mistakes should be recoverable (a meter that clean shifts push back down), avoiding losses that stack forever.
 6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).
 
-**Waiting on Nathan and Mara:** the name of our company, the lore, and the region maps.  Regions feed the shipping labels (where stock goes) and the Tiny Monster info cards (where monsters live), so the shelf, the maps, and the dock share one world.
+**Done 2026-11-15:** our company is **GRIP** (Gnuma Gnuma Regional Independent Parcels), and the lore, map, and region stamps are in.  Formerly waiting on Nathan and Mara for these.  Regions feed the shipping labels (where stock goes) and the Tiny Monster info cards (where monsters live), so the shelf, the maps, and the dock share one world.
 
 **Earlier idea, replaced:** a truck every few minutes with a fixed number of boxes, paid per box in seconds of production.  Dropped once draining the shelf became the point.
 

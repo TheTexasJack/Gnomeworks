@@ -16,10 +16,10 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 - The player drags one item tile from the shelf into a box; one drag ships a big batch.
 - Reshaped 2026-11-03: shipping **drains** the shelf (that's the point; an empty shelf sends players back to the clicker).  Every item stops at 1.  Open and Close buttons on a shipping door.
 - Shipping earns **Stonks**, never cogs.  Stonks is a score only, the marker against TNP Corp; nothing in shipping costs anything (Nathan, 2026-11-15).  Stamps are a free shipping mechanic (right stamp for the right region).  Boxes and supplies are free, box-size upgrades are dropped, and the packing itself is the game: a match game inspired by Simon Says.  Complete the order to succeed; extra items do nothing, except on Gnonmoon.
-- Later layers, all drafts: orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of our company vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
+- Later layers, all drafts: orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of GRIP vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
 - **Shift flow decided (2026-11-15):** chain or button, door opens, a region's truck and driver arrive with 3 work orders, fakes can be dismissed, fill all three, report card.  See DESIGNS.md.
 - **Next:** decide whether Tiny Monsters, Number Twos, and Treasures ship, then the Stonks score per region and the build of layer 1.  Every junk item now has a buyer (gazetteer v0.25).
-- Waiting on Nathan and Mara for the company name, lore, and region maps (they feed shipping labels).
+- Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  Lore, the map, trade, and region stamps are done (2026-11-15); see lore/regions.md.
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.
 

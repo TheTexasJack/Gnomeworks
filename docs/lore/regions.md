@@ -52,4 +52,4 @@ Stamps carry no names.  Each region's stamp is one color and one simple symbol, 
 
 ## Regions
 
-Every region now has an entry in the [gazetteer](location-gazetteer-v0.26.md): a short **Preview** for young readers, an explorer's **Guide** in Alex's style, and **Notable Flora** and **Notable Fauna**.  The Gnomopedia region pages will read from those fields.  Alex's original write-ups are kept word for word in [alex-regions-v0.2.md](alex-regions-v0.2.md).
+Every region now has an entry in the [gazetteer](location-gazetteer-v0.27.md): a short **Preview** for young readers, an explorer's **Guide** in Alex's style, and **Notable Flora** and **Notable Fauna**.  The Gnomopedia region pages will read from those fields.  Alex's original write-ups are kept word for word in [alex-regions-v0.2.md](alex-regions-v0.2.md).

@@ -16,7 +16,7 @@ The Gnomopedia: a lore tab in the game, in the spirit of the Mass Effect codex (
 - **Hunt creatures:** Alex's idea.  Entries for the creatures the gnomes hunt to feed the Megagnome, and why (for example, why there are so many Banana Monsters).
 - **Regions:** each region's name and why it's called that, notes on its style, a picture, and its lore.  The Packing Line needs these for stamps, labels, and orders.
 - **Junk groups:** why the factory makes so much of each group.  The entry for Laundry & Clothing explains why gnomes make socks, without explaining what a sock is.
-- **The factory and the rivals:** our company, the machine, and TNP Corp.
+- **The factory and the rivals:** GRIP (our parcel company), the machine, and TNP Corp.
 
 ## Files
 
@@ -28,11 +28,11 @@ The Gnomopedia: a lore tab in the game, in the spirit of the Mass Effect codex (
 | [stamps/](stamps/region-stamps-v0.1.png) | Region stamp sheet v0.1, placeholders for Mara | Draft art, design approved |
 | [alex-regions-v0.2.md](alex-regions-v0.2.md) | Alex's original region write-ups, word for word | Both batches merged into gazetteer v0.25 |
 | [place-names.md](place-names.md) | Nathan's unsorted pool of map names (100 unique names) | Saved, waiting on classification |
-| [location-gazetteer-v0.26.md](location-gazetteer-v0.24.md) | 100 places plus Gnuma Gnuma (the main island), Innie Lake, Gnod Dam, Shen Shin, Tables Edge, Legipt, Monit-45, the Island of Gni, Gnaagh, Gnonmoon with its places, and Gassy Dog; trades at 50 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.26 review draft (trade draft merged, every junk item has a buyer), awaiting Nathan and Alex** |
+| [location-gazetteer-v0.27.md](location-gazetteer-v0.24.md) | 100 places plus Gnuma Gnuma (the main island), Innie Lake, Gnod Dam, Shen Shin, Tables Edge, Legipt, Monit-45, the Island of Gni, Gnaagh, Gnonmoon with its places, and Gassy Dog; trades at 50 cities, villages, shops, and producing mines, with full lore, flora and fauna | **v0.27 review draft (trade draft merged, every junk item has a buyer), awaiting Nathan and Alex** |
 | [map-geography-audit-v0.1.md](map-geography-audit-v0.1.md) | 50 named terrain-bearing sites, 20 geographic systems, 11 relationship chains, and placement clues for all 100 locations | **First-pass map planning, not canon** |
 | [world-map-v0.2.md](world-map-v0.2.md) | Master map Sections 1–2: coastline and geographic outline, proposed regional hierarchy for all 100 named entries, city/POI clusters and orphan landmarks | **Two sections drafted for review** |
 | [HANDOFF-lore-v0.1.md](HANDOFF-lore-v0.1.md) | Start here in a new lore thread: current files, next steps, decisions, and how Nathan works | **Current (2026-11-04)** |
-| [map/](map/README.md) | Gnomadica master map v0.28 (Gnuma Gnuma, Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region, Gnonmoon): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.28 draft map, awaiting canon review** |
+| [map/](map/README.md) | Gnomadica master map v0.29 (Gnuma Gnuma, Innie Lake, Gnod Dam, Shen Shin, Slaanilok lizard towns, the Gni region, Gnonmoon): SVG, zoomable viewer, and pin data for all 100 locations, built by `tools/map/build_map.py` | **v0.29 draft map, awaiting canon review** |
 | [trade-draft-v0.2.md](trade-draft-v0.2.md) | Proposed imports so every junk item has a destination, plus Factory Exports where the lore fits | **Merged into gazetteer v0.25 (2026-11-15)** |
 | [tiny-monsters.md](tiny-monsters.md) | The 11 Tiny Monster families, their 4 forms, and draft home regions | Regions drafted (2026-11-04), lore still open |
 | [hunt-creatures.md](hunt-creatures.md) | The 8 prey and the Banana Monster boss, named by Alex, with Dr. Quartz's field notes | **Alex's entries in (2026-11-04)** |

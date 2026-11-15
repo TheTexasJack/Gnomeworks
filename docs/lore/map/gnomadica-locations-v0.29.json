@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.28",
+ "version": "0.29",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -289,7 +289,7 @@
     "Non-Factory Imports": "coal",
     "Non-Factory Exports": "sealed machinery crates; packing labels",
     "About": "This noisy town is home to the Gnomeworks factory and its endlessly turning gears.  The machine makes useful tools, curious junk, and the occasional living Tiny Monster, whether anyone ordered them or not, which keeps the sorting crew very busy.  Brass carts rattle from the factory to Pulley Junction, and every neighbor knows the particular whistle that means a shipment of underpants has escaped quality control.  Shopkeepers price everything in both cogs and patience.",
-    "Major Facts": "The Packing Line ships from here.  Town inspectors once tried to catalog every strange item and ran out of forms before lunchtime.  The town's oldest argument is whether the giant machine is older than the building around it.  Its gear-keepers keep a ceremonial broom for sweeping runaway springs out of the streets.  On Founder's Crank Day, every household turns a small wooden cog to wish the factory another year of good fortune.  The council keeps a Lost and Found for orphaned socks, abandoned hats, and an alarming number of identical clipboards.",
+    "Major Facts": "The Packing Line ships from here, under the banner of GRIP, the factory's own parcel company: Gnuma Gnuma Regional Independent Parcels.  Town inspectors once tried to catalog every strange item and ran out of forms before lunchtime.  The town's oldest argument is whether the giant machine is older than the building around it.  Its gear-keepers keep a ceremonial broom for sweeping runaway springs out of the streets.  On Founder's Crank Day, every household turns a small wooden cog to wish the factory another year of good fortune.  The council keeps a Lost and Found for orphaned socks, abandoned hats, and an alarming number of identical clipboards.",
     "Flora": "Brassleaf oak, gearvine",
     "Tiny Monsters": "Hootgear, Cogsnake, Pebblem"
    },
@@ -2879,5 +2879,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.26.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.27.md"
 }

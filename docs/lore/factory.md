@@ -4,7 +4,7 @@ Our side: the gnome workshop that runs the machine, makes the junk, and ships it
 
 ## Known so far (2026-11-03)
 
-- **Our company's name:** open.  Nathan is workshopping it.  It goes on the stock ticker, the logo, the trucks, and The Daily Cog.
+- **Our company's name: GRIP, Gnuma Gnuma Regional Independent Parcels** (Nathan, 2026-11-15).  Gnomeworks is the factory and the name over the door; GRIP is its parcel company that runs the shipping dock.  GRIP goes on the trucks, the uniforms, the stock ticker (GRIP vs TNP), the logo, and The Daily Cog.  "Independent" is the point: a scrappy gnome outfit against a giant North Pole corporation.  Logo idea: a little gnome hand gripping a parcel or a gear crank.  Slogan ideas: "Get a GRIP."  "We've got a GRIP on it."
 - **The machine:** gnomes turn the gears, and every full turn of the big gear makes an item.  Most items are junk; rare ones are Tiny Monsters, Number Twos, and Legendary Treasures.
 - **The crew:** Tiny Gnome, Gnome Necromancer (and his skeleton crew), Warrior Gnome, Gnome Cloner, Matryoshka Gnome, Gnome Wizard ("It is not the cog that turns, but you").
 - **The Megagnome:** one per workshop.  He helps during events and eats what the other gnomes hunt for him.  He never hunts himself; he stays home being fat and lazy.  Possible dock role later (guarding against spies) is an open idea.

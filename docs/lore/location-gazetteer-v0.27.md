@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.26 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.27 Working Draft)
 
 
 ## How to read this draft
@@ -18,7 +18,7 @@
 - **Lore in v0.4** adds draft community histories, characters, connections, and fantasy traditions.  Humanoid species are people with ordinary jobs and different personalities; ancestry or appearance never determines someone's morality.
 - This is a place registry for future shipping, lore cards, and expeditions.  A place can serve several purposes even though it is filed under one primary category here.  Some entries may remain hidden from players until discovered.
 - **Bounties** is intentionally empty in every entry for future use.  These are story hooks only, with no quests or rewards built yet.
-- The factory company name, machine origin, and regional histories remain open.  This file is a working draft published on GitHub for Nathan and Alex to review.  Publication does not establish canon.
+- The factory's parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  The machine's origin remains open.  This file is a working draft published on GitHub for Nathan and Alex to review.  Publication does not establish canon.
 
 ## Proposed regional layout for the single map
 
@@ -182,7 +182,7 @@
 - **Non-Factory Imports:** coal
 - **Non-Factory Exports:** sealed machinery crates; packing labels
 - **About:** This noisy town is home to the Gnomeworks factory and its endlessly turning gears.  The machine makes useful tools, curious junk, and the occasional living Tiny Monster, whether anyone ordered them or not, which keeps the sorting crew very busy.  Brass carts rattle from the factory to Pulley Junction, and every neighbor knows the particular whistle that means a shipment of underpants has escaped quality control.  Shopkeepers price everything in both cogs and patience.
-- **Major Facts:** The Packing Line ships from here.  Town inspectors once tried to catalog every strange item and ran out of forms before lunchtime.  The town's oldest argument is whether the giant machine is older than the building around it.  Its gear-keepers keep a ceremonial broom for sweeping runaway springs out of the streets.  On Founder's Crank Day, every household turns a small wooden cog to wish the factory another year of good fortune.  The council keeps a Lost and Found for orphaned socks, abandoned hats, and an alarming number of identical clipboards.
+- **Major Facts:** The Packing Line ships from here, under the banner of GRIP, the factory's own parcel company: Gnuma Gnuma Regional Independent Parcels.  Town inspectors once tried to catalog every strange item and ran out of forms before lunchtime.  The town's oldest argument is whether the giant machine is older than the building around it.  Its gear-keepers keep a ceremonial broom for sweeping runaway springs out of the streets.  On Founder's Crank Day, every household turns a small wooden cog to wish the factory another year of good fortune.  The council keeps a Lost and Found for orphaned socks, abandoned hats, and an alarming number of identical clipboards.
 - **Flora:** Brassleaf oak, gearvine
 - **Tiny Monsters:** Hootgear, Cogsnake, Pebblem
 - **Bounties:**
