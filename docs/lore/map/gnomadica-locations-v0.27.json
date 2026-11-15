@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.26",
+ "version": "0.27",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -2014,7 +2014,7 @@
    "gazetteer": {
     "Location": "Southeast flank of the Gnomish Heights, near Cogbend Hold.",
     "Region": "Gno Dao Cradle.",
-    "Factory Imports": "Diamond Pickaxe; Wrench; Toolbox",
+    "Factory Imports": "Ladder; Wrench; Toolbox",
     "Factory Exports": "Magnet; Hammer",
     "Non-Factory Imports": "timber supports",
     "Non-Factory Exports": "metal ore; gem dust",
@@ -2879,5 +2879,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.25.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.26.md"
 }

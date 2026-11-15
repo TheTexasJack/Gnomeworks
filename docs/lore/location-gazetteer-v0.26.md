@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.25 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.26 Working Draft)
 
 
 ## How to read this draft
@@ -11,6 +11,7 @@
 - **Non-Factory Imports / Non-Factory Exports** list tangible, shippable goods outside the existing factory catalog, including fantasy objects.  Services, rumors, and activities are excluded.  These goods do not become new factory collectibles.
 - **None** means no trade item of that type has been proposed yet; the place may still trade it later.
 - **Everybody needs a bathroom.**  Every place with trade fields also buys any item from the Bathroom group (Toilet, Poop Knife, Plunger, Toilet Paper, Soap, Sponge, Toothbrush, Bucket, Bathtub, Lotion, Razor, Hair Pick), whether or not its own list names them.  The shipping game's destinations file applies this rule.
+- **Only junk ships for now.**  Factory Imports and Exports list junk items only.  Legendary Treasures never ship.  Tiny Monsters and Number Twos may ship later through special orders.
 - **Order sizes are ridiculous on purpose.**  A purchase order takes the whole pile, so an island town may well receive 1.7 million Poop Knives.  The gnomes ship it anyway.
 - **Flora** lists nearby plants.  **Tiny Monsters** lists the Tiny Monsters found nearby.  These habitats are suggestions for Nathan and Alex to approve.
 - **Region entries** also carry a **Preview** (one or two short, easy sentences for young readers), a **Guide** (the explorer's guide write-up, in Alex's style), and **Notable Flora** and **Notable Fauna** (wild plants and animals, separate from the Tiny Monsters).  The Guides for Gnomadica, Gnomerica, Gnohio, Gnafrica, Slanic, Gno Dao Cradle, Gnufoundland, and Slaanilok are Alex's, as are all Notable Flora and Fauna except Gnonmoon's.  The Guides for Shen Shin, Gni, and Gnonmoon, Gnonmoon's Notable Flora and Fauna, and every Preview are Claudia's drafts, awaiting approval.
@@ -1030,7 +1031,7 @@
 - **Name:** The Crafter's Mines
 - **Location:** Southeast flank of the Gnomish Heights, near Cogbend Hold.
 - **Region:** Gno Dao Cradle.
-- **Factory Imports:** Diamond Pickaxe; Wrench; Toolbox
+- **Factory Imports:** Ladder; Wrench; Toolbox
 - **Factory Exports:** Magnet; Hammer
 - **Non-Factory Imports:** timber supports
 - **Non-Factory Exports:** metal ore; gem dust

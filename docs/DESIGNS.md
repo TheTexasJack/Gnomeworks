@@ -204,6 +204,16 @@ Settled the same day (Nathan picked each):
 
 **Earlier idea, replaced:** a truck every few minutes with a fixed number of boxes, paid per box in seconds of production.  Dropped once draining the shelf became the point.
 
+## What ships, and future enhancements (Nathan, 2026-11-15)
+
+**Decided:** only the 96 junk items ship on the order board.  **Legendary Treasures never ship;** they are trophies and stay on the shelf.  (The Crafter's Mines' Diamond Pickaxe import was swapped for a Ladder in gazetteer v0.26.)  **Tiny Monsters and Number Twos** ship later, through special orders.
+
+**Future enhancement pass (later, not part of the Packing Line core):**
+
+- **Special orders:** rare requests for a specific Tiny Monster or Number Two.  Alex's canon (the factory's extra creatures end up in Gnomadica's forests) supports Tiny Monsters going back to their home region, perhaps through a sanctuary or Dr. Quartz.  This matters more once the Tiny Monsters get their unique pass (one design per monster).
+- **Number Twos chemistry game with the Gnome Cloner (Nathan's idea):** a small chemistry game that uses Number Twos as components.  The results ship to Gnomish Farms for Stonks.  This likely absorbs the proposal's Alchemy Cauldron, which already overlapped the Cloner.
+- **Tiny Monster breeding (Nathan's idea, after the unique pass):** a breeding game, with the Gnomish Farms supplying rare monster food for it.
+
 ## Tiny Monster info card
 
 **Decided:** tap a Tiny Monster on the shelf to open an info screen with the art big, its name, and lore.  No owned count (the tile shows it).

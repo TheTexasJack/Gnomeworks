@@ -88,7 +88,7 @@ Parked (2026-11-04): a later pass on the Tiny Monsters to make each one unique i
 Nathan's notes on the backlog (2026-11-03), all still Jarrett's call:
 
 - Many proposal items will likely be dropped or changed.
-- The Alchemy Cauldron overlaps the Clone game that already exists, so it is likely dropped or folded in.
+- The Alchemy Cauldron overlaps the Clone game that already exists, so it is likely dropped or folded in.  (2026-11-15: Nathan's Number Twos chemistry game with the Cloner would cover it.  See DESIGNS.md, What ships.)
 - Nathan will push for the Golem Pilot and Expeditions later (send-a-crew-out missions, as in FF14 ventures and STO duty officers).
 - Current focus: the lore, the region maps, and the Packing Line outline, since shipping closes the game loop.
 
