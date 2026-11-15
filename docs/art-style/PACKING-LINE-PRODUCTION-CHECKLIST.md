@@ -76,7 +76,7 @@
 
 ### Stamps, stickers, supplies
 
-- [ ] **14. Region stamps, ten.**  Repaint the [placeholder stamp sheet](../lore/stamps/region-stamps-v0.1.png).  Each uses one approved color and one symbol.  No region names or TNP/Christmas motifs.
+- [ ] **14. Region stamps, ten.  IN REVIEW (started 2026-11-15).**  Repaint the [placeholder stamp sheet](../lore/stamps/region-stamps-v0.1.png) in Gnomeworks Brasswood Cartoon: tactile embossed/stamped-paper look, chunky readable single silhouette, restrained upper-left highlights, warm ivory perforated postage edge, matching each approved region color and symbol.  One isolated, true-alpha stamp per region, no printed names, labels, Tiny Monsters, or TNP/Christmas motifs.  Approve individually before checking their sub-items; keep the parent unchecked until all ten are approved.
   - [ ] Gnomerica: brass gold gear.
   - [ ] Gnohio: field green wheat.
   - [ ] Gnafrica: terracotta cactus.
@@ -206,6 +206,7 @@ For every package, append a line when work starts or when a decision changes.  K
 | 11 | **Approved** | Lid/cooling hardware removed entirely from open cooler; front and blue corner trim match the closed master and were approved as well aligned. | Conversation source: `box_temp(2).png` with approved open lidless counterpart. | **2026-11-15** |
 | 12 | **Approved (~95% visual match)** | Final lidless open waterproof case accepted as good enough for gameplay; previous attempts with mismatched geometry and latches are rejected drafts.  No further generation required. | Conversation source: `box_water(3).png` and accepted final lidless rendering. | **2026-11-15** |
 | 13 | **Approved** | Nathan's GIMP open state keeps original front crate pixel work and adds a small angled lid peeking behind the rim. | Uploaded `box_wood_open.png` plus closed `box_wood.png`; GIMP open master is authoritative. | **2026-11-15** |
+| 14 | **In review** | Using Nathan's 10-icon sample sheet only as the color/symbol reference; re-render each stamp with ivory perforated edge and polished dimensional Gnomeworks finish.  Work starts with Gnomerica (gold gear).  All ten remain unchecked pending Nathan's approval. | User supplied `Stamps_Sample.png`; canonical colors and glyphs: `docs/lore/regions.md` | Pending |
 
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
