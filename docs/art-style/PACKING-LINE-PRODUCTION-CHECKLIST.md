@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **2 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **01 and 02 are approved:** all wide/portrait, day/night backdrops and their open/closed door states.  Nathan used GIMP to reconcile door geometry, concrete loading-bay wall/floor, and exact frame registration.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 03, independent pull chain.
+**Progress:** **3 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **01, 02 and 03 approved:** rooms, door states and draw chain.  Nathan used GIMP to reconcile door geometry, concrete loading-bay wall/floor, and exact frame registration.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next art priority by Nathan:** 05a supply drawer/menu, ahead of 04 order board and 05 map, which remain unchecked.  This is a production-order exception only; item numbering and scope are unchanged.
 
 ## Operating procedure
 
@@ -33,7 +33,7 @@
   - [x] Closed, night, landscape and portrait.
   - [x] Open, night, landscape and portrait.
   - [x] Door frame registration reconciled in GIMP in both layouts; truck remains a separate future asset.
-- [ ] **03. Pull chain.**  Isolated, swingable chain for the Open/Close action.
+- [x] **03. Pull chain.  Approved by Nathan 2026-11-15.**  Separate long brass-link draw chain with reddish wooden end handle; the ceiling connector was removed and the chain length approximately doubled in the approved revision.  Intended for swinging/pulling door control.  Final artwork: `long_brass_chain_with_wooden_pull_handle.png` (conversation asset; do not assume it has been integrated).
 - [ ] **04. Order board.**  Brass-trimmed board with room for three work orders.
   - [ ] Day.
   - [ ] Night, same frame geometry.
@@ -42,7 +42,7 @@
   - [ ] Night, same geography/geometry.
   - [ ] Space for town names rendered by code; compare against current master map before final approval.
 
-- [ ] **05a. Supply drawer.**  Pull-out panel from the left with its menu bar on the right edge and empty slot rows (4 boxes, bubble wrap and peanuts, 10 stickers, 10 stamps, other stuff).  The game fills the slots.
+- [ ] **05a. Supply drawer.  NEXT DESIGN PRIORITY (Nathan, 2026-11-15).**  Pull-out panel from the left with its menu bar on the right edge and empty slot rows (4 boxes, bubble wrap and peanuts, 10 stickers, 10 stamps, other stuff including bug spray, dog toy and Idol).  The game fills the slots as regions unlock; do not paint supplies or words permanently into the drawer.  Preserve clear packing bench in expanded state and show the computer/lunch behind the closed panel.  Build day and night variants; plan portrait placement without covering core interaction.  **No art approved yet.**
   - [ ] Day.
   - [ ] Night.
 - [ ] **05b. Conveyor belt.**  Where the junk arrives; tapping it opens the item menu.
@@ -200,6 +200,8 @@ For every package, append a line when work starts or when a decision changes.  K
 | --- | --- | --- | --- | --- |
 | 01 | **Approved: all 4 layouts/themes** | Original room concepts approved.  Nathan then cleaned out the shrub and fixed open/closed door states in GIMP.  **Use Nathan's final GIMP masters at implementation**, not earlier draft backdrop names recorded here.  Earlier note: wide day 1672 × 941 and wide night 1671 × 941 before final GIMP corrections; check final dimensions directly from Nathan's files.  Shrub remains a separate interactive asset under 19. | Finalized GIMP day/night × wide/portrait masters held by Nathan; actual final filenames to be recorded at handoff.  Earlier conceptual masters: `Gnomeworks_Shipping_Floor_Day.png`, `Gnomeworks_Shipping_Floor_Night(1).png`, `steampunk_packing_room_interface.png`, `nighttime_gnomeworks_packing_room.png`.  Art approval only, not integration authorization. | **2026-11-15** |
 | 02 | **Approved: all 8 states** | Nathan completed door opening and closing in GIMP for both layouts and themes.  Open state reveals concrete wall and floor, matching the closed-door frame without unintended room changes.  Truck rear is a separate future overlay, and no extra skyline needs to be painted. | Nathan's final GIMP source files: landscape/portrait × day/night × open/closed; filenames to be recorded upon handoff, not yet pushed into runtime. | **2026-11-15** |
+| 03 | **Approved** | Nathan approved the revised long brass-link draw chain with wooden handle, no ceiling connector, at roughly twice the initial length.  Isolated object; functional animation/integration remains Claudia's responsibility. | Conversation master: `long_brass_chain_with_wooden_pull_handle.png` (not pushed to runtime). | **2026-11-15** |
+| 05a | **Queued: next to design** | Production-order exception requested by Nathan; menu/drawer frame first so the later boxes, stamps, stickers and supplies have established slots.  Day/night and portrait usability require review before approval. | Pending | Pending |
 
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
