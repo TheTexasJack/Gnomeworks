@@ -1,8 +1,8 @@
 # Packing Line art production checklist
 
-**Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.2](PACKING-LINE-ASSETS-v0.2.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
+**Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** 0 of 40 numbered work packages approved (01 to 38, plus 15a and 15b).  Sub-checkboxes track parts of a package and do not count toward 40.  **Next:** 01, packing room backdrop, wide and tall.
+**Progress:** 0 of 45 numbered work packages approved (01 to 38, plus 05a to 05e, 15a and 15b).  Sub-checkboxes track parts of a package and do not count toward 45.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 01, packing room backdrop, wide and tall.
 
 ## Operating procedure
 
@@ -21,12 +21,12 @@
 
 ### The room
 
-- [ ] **01. Packing room backdrop, wide and tall.**  Angled shipping room, dock door on right, bench in foreground, space for map and order board, corner shrub and clear packing workspace.
+- [ ] **01. Packing room backdrop, wide and tall.**  Follows Nathan's sketch: the cabinet the supply drawer slides from on the left, back wall with blank frames (work orders, map, STONKS, report card and log hooks), bench in the middle, conveyor, roll-up dock door on the right, and the shrub by the door.  Clear packing workspace.
   - [ ] Wide daytime room (desktop, tablet, landscape phone).
   - [ ] Wide nighttime twin, identical geometry and placement.
   - [ ] Tall daytime room (portrait phone, same fixture roles).
   - [ ] Tall nighttime twin, identical geometry and placement to tall day.
-  - [ ] Corner shrub placement compatible with separately draggable shrub in 19.
+  - [ ] Shrub by the door, compatible with the separately draggable shrub in 19.
 - [ ] **02. Shipping door, closed and open.**  Roll-up door, fixed frame, view through open doorway shows only the backed-in truck rear.
   - [ ] Closed, day.
   - [ ] Open, day.
@@ -41,6 +41,16 @@
   - [ ] Day.
   - [ ] Night, same geography/geometry.
   - [ ] Space for town names rendered by code; compare against current master map before final approval.
+
+- [ ] **05a. Supply drawer.**  Pull-out panel from the left with its menu bar on the right edge and empty slot rows (4 boxes, bubble wrap and peanuts, 10 stickers, 10 stamps, other stuff).  The game fills the slots.
+  - [ ] Day.
+  - [ ] Night.
+- [ ] **05b. Conveyor belt.**  Where the junk arrives; tapping it opens the item menu.
+  - [ ] Day.
+  - [ ] Night.
+- [ ] **05c. Computer and lunch.**  Behind the drawer panel; the lunch holds the red herring (see 19).
+- [ ] **05d. Supply list.**  Pull-down reference below the bench, rolled and unrolled.
+- [ ] **05e. Report Card and Log hooks.**  Under STONKS, where the report card and shipping log hang.
 
 ### Paperwork
 
@@ -96,8 +106,8 @@
   - [ ] Red Herring sticker.
   - [ ] Shrubbery sticker.
 - [ ] **19. Gni secret alternate objects.**
-  - [ ] Actual red herring fish.
-  - [ ] Separate draggable shrub asset, matching the corner shrub in 01.
+  - [ ] Actual red herring fish (it lives in the lunch, 05c).
+  - [ ] Separate draggable shrub asset, matching the shrub by the door in 01.
 - [ ] **20. Bug spray.**  Used for Slaanilok and Gnufoundland.
   - [ ] Repellent can.
   - [ ] Separate spray cloud.

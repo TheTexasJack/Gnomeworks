@@ -166,7 +166,7 @@ Everything not listed has no tag.
 - **The dog guy's look (Nathan, 2026-11-04):** a kissy, lovable goof who blows kisses and floats hearts, especially over anything dog.  Classic cartoon gush, Tom and Jerry style.  His purchase order mark can be a paw print inside a heart.
 - **The shipment score is the core mechanic (Nathan, 2026-11-04):** a successful shipment sends our Stonks up.  A failed one sends our Stonks down and TNP Corp's Stonks up.
 
-**Packing Line asset list:** superseded by the tiered list in [art-style/PACKING-LINE-ASSETS-v0.2.md](art-style/PACKING-LINE-ASSETS-v0.2.md) (2026-11-15).  The older draft below is kept for history.
+**Packing Line asset list:** superseded by the tiered list in [art-style/PACKING-LINE-ASSETS-v0.3.md](art-style/PACKING-LINE-ASSETS-v0.3.md) (2026-11-15).  The older draft below is kept for history.
 
 **Older draft asset list (2026-11-04)**
 
@@ -196,6 +196,8 @@ Notes to settle when this is built (Claudia):
 5. Once done, the game does the math: each delivery succeeds or fails based on the complications in play.
 
 Settled the same day (Nathan picked each):
+
+- **The room (Nathan's sketch):** supplies live in a drawer that pulls out from the left; the junk comes from the conveyor belt (tap it and an item menu pops up); a pull-down supply list holds the rules and the Breakable, Soft, and Heavy chart; the Report Card and Log hang under STONKS.  Full layout in [art-style/PACKING-LINE-ASSETS-v0.3.md](art-style/PACKING-LINE-ASSETS-v0.3.md).
 
 - **One region per truck.**  Each region has its own truck and driver, and all three orders on a truck go to towns in that region.  The town line on each order is the reading challenge.
 - **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
