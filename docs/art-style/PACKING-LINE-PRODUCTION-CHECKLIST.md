@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **1 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **01 is fully approved:** wide day/night and portrait day/night.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 02, shipping door closed/open state artwork, matched to the approved backdrops.
+**Progress:** **2 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **01 and 02 are approved:** all wide/portrait, day/night backdrops and their open/closed door states.  Nathan used GIMP to reconcile door geometry, concrete loading-bay wall/floor, and exact frame registration.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)  **Next:** 03, independent pull chain.
 
 ## Operating procedure
 
@@ -27,12 +27,12 @@
   - [x] Tall daytime room (portrait phone, same fixture roles).  **Approved by Nathan 2026-11-15:** `steampunk_packing_room_interface.png`.
   - [x] Tall nighttime twin, matching portrait-day framing and fixture roles.  **Approved by Nathan 2026-11-15:** `nighttime_gnomeworks_packing_room.png`.
   - [x] Shrub placed by the door in all four approved backdrops.  Creating/validating the matching draggable copy remains a separate task under 19.
-- [ ] **02. Shipping door, closed and open.**  Roll-up door, fixed frame, view through open doorway shows only the backed-in truck rear.
-  - [ ] Closed, day.
-  - [ ] Open, day.
-  - [ ] Closed, night.
-  - [ ] Open, night.
-  - [ ] Door frame registration verified in both room layouts; truck remains a separate element.
+- [x] **02. Shipping door, closed and open.**  **Approved by Nathan 2026-11-15.**  All eight room states finished by Nathan in GIMP: landscape and portrait × day and night × closed/open.  The raised shutter reveals the same simple concrete loading-bay wall and floor; it is intentionally free of skyline or scenery.  Door hardware and room artwork match across state pairs.  Future truck rear will be a separate overlay.
+  - [x] Closed, day, landscape and portrait.
+  - [x] Open, day, landscape and portrait.
+  - [x] Closed, night, landscape and portrait.
+  - [x] Open, night, landscape and portrait.
+  - [x] Door frame registration reconciled in GIMP in both layouts; truck remains a separate future asset.
 - [ ] **03. Pull chain.**  Isolated, swingable chain for the Open/Close action.
 - [ ] **04. Order board.**  Brass-trimmed board with room for three work orders.
   - [ ] Day.
@@ -198,7 +198,8 @@ For every package, append a line when work starts or when a decision changes.  K
 
 | Package | Status | Review / GIMP corrections | Final reference / source | Nathan approval date |
 | --- | --- | --- | --- | --- |
-| 01 | **Approved: all 4** | Wide: Nathan composited existing banner imagery into the portholes and confirmed final day/night artwork.  Recessed door geometry is approved.  Technical handoff: wide day 1672 × 941 RGBA, night 1671 × 941 RGBA; reconcile one-pixel width at integration without changing the scene design.  Portrait day and portrait night approved as presented.  Separate draggable shrub is tracked under 19, and door opening overlays under 02.  Approval is visual, not authorization to integrate. | Wide: Nathan's `Gnomeworks_Shipping_Floor_Day.png` and `Gnomeworks_Shipping_Floor_Night(1).png`.  Portrait: `steampunk_packing_room_interface.png` and `nighttime_gnomeworks_packing_room.png`.  Source PNGs are in conversation/Nathan's custody, not uploaded to repository runtime assets. | **2026-11-15** |
+| 01 | **Approved: all 4 layouts/themes** | Original room concepts approved.  Nathan then cleaned out the shrub and fixed open/closed door states in GIMP.  **Use Nathan's final GIMP masters at implementation**, not earlier draft backdrop names recorded here.  Earlier note: wide day 1672 × 941 and wide night 1671 × 941 before final GIMP corrections; check final dimensions directly from Nathan's files.  Shrub remains a separate interactive asset under 19. | Finalized GIMP day/night × wide/portrait masters held by Nathan; actual final filenames to be recorded at handoff.  Earlier conceptual masters: `Gnomeworks_Shipping_Floor_Day.png`, `Gnomeworks_Shipping_Floor_Night(1).png`, `steampunk_packing_room_interface.png`, `nighttime_gnomeworks_packing_room.png`.  Art approval only, not integration authorization. | **2026-11-15** |
+| 02 | **Approved: all 8 states** | Nathan completed door opening and closing in GIMP for both layouts and themes.  Open state reveals concrete wall and floor, matching the closed-door frame without unintended room changes.  Truck rear is a separate future overlay, and no extra skyline needs to be painted. | Nathan's final GIMP source files: landscape/portrait × day/night × open/closed; filenames to be recorded upon handoff, not yet pushed into runtime. | **2026-11-15** |
 
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
