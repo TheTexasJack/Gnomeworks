@@ -17,7 +17,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 from places import PLACES, AREA_LABELS  # noqa: E402
 
-VERSION = '0.21'
+VERSION = '0.22'
 W, H = 1660, 1150
 OUT_DIR = os.path.join(ROOT, 'docs', 'lore', 'map')
 AUDIT = os.path.join(ROOT, 'docs', 'lore', 'map-geography-audit-v0.1.md')
@@ -760,6 +760,10 @@ def build():
     for reg, (x, y, rot, sz) in reg_lbl.items():
         col = shade(REGION_COLORS[reg], 0.45)
         text(x, y, reg.upper(), sz, fill=col, anchor='middle', weight='bold', ls=7, rot=rot, opacity=0.8)
+    # the main island's own name sits in the sea off its north coast
+    add('<g class="pin arealabel" data-id="gnuma-gnuma">')
+    text(800, 262, 'GNUMA GNUMA', 17, fill='#4a3b26', anchor='middle', weight='bold', ls=10, rot=-2, opacity=0.8)
+    add('</g>')
     # Gno Dao Cradle follows the arm
     add('<path id="cradlePath" d="M1158,390 L1340,228" fill="none"/>')
     add(f'<text font-size="15" font-weight="bold" letter-spacing="4" fill="{shade(REGION_COLORS["Gno Dao Cradle"], 0.45)}" opacity="0.8" '
@@ -1023,7 +1027,7 @@ def cartouche():
         add(f'<path d="{gear_path(gx, y + h / 2, 22)}" fill="#c9a24a" stroke="{C["coast"]}" stroke-width="1.2"/>')
         add(f'<circle cx="{gx}" cy="{y + h / 2}" r="7" fill="#f3e6c2" stroke="{C["coast"]}" stroke-width="1"/>')
     text(x + w / 2, y + 44, 'GNOMADICA', 30, weight='bold', anchor='middle', ls=8, halo=False)
-    text(x + w / 2, y + 64, 'Gnome Island and the Nearby Isles', 12.5, fill=C['ink2'], anchor='middle', style='italic', halo=False)
+    text(x + w / 2, y + 64, 'Gnuma Gnuma and the Nearby Isles', 12.5, fill=C['ink2'], anchor='middle', style='italic', halo=False)
     add(f'<line x1="{x + 70}" y1="{y + 74}" x2="{x + w - 70}" y2="{y + 74}" stroke="#a07c3c" stroke-width="0.8"/>')
     text(x + w / 2, y + 89, f'Master Map v{VERSION}  ·  working draft, awaiting canon review', 9.5, fill='#7a3b2a', anchor='middle', halo=False, ls=0.5)
     text(x + w / 2, y + 101, 'Charted for The Stoned Gnome · Gnomeworks', 8, fill=C['ink2'], anchor='middle', style='italic', halo=False)
@@ -1130,7 +1134,7 @@ if __name__ == '__main__':
         page=dict(width=W, height=H, units='svg', north='page top'),
         notes='Coordinates are draft pins on the SVG page.  Clue text is copied from map-geography-audit-v0.1.md.',
         regions={k: dict(color=v, x=(PLACES[k][0] if k in PLACES else 1445), y=(PLACES[k][1] if k in PLACES else 940)) for k, v in REGION_COLORS.items()},
-        islands=dict(M='Main island (Gnome Island)', A='Gnufoundland (proposed)', B='Shen Shin, its own region',
+        islands=dict(M='Main island: Gnuma Gnuma (named by Nathan 2026-11-15)', A='Gnufoundland (proposed)', B='Shen Shin, its own region',
                      C='Slaanilok (proposed)', D='Gnonmoon, its own region', E='Island of Gni, its own region: Eversummer and Castle Gnaagh (Nathan 2026-11-03)'),
         locations=recs,
         added_places=[dict(id='gnod-dam', name='Gnod Dam', type='landmark', region='Slanic', x=DAM[0], y=DAM[1], tier=1,
@@ -1143,6 +1147,9 @@ if __name__ == '__main__':
                   + [dict(id='zohee-bay', name='Zohee Bay', type='natural', region='Gnonmoon', x=236, y=940, tier=2,
                           clue='A deep bay cut into the northeast shore of Gnonmoon, with a town on its western shore.',
                           mentions='Gnonmoon', status='named by Nathan')]
+                  + [dict(id='gnuma-gnuma', name='Gnuma Gnuma', type='island', region='Gnomadica', x=800, y=262, tier=0,
+                          clue='The big main island (Island M), home to five regions.', mentions='Gnomerica; Gnohio; Gnafrica; Slanic; Gno Dao Cradle',
+                          status='named by Nathan')]
                   + [dict(id=slug(n), name=n, type='region', region=reg, x=x, y=y, tier=0, clue=c, mentions='', status='named by Nathan')
                      for n, reg, x, y, c in [('Shen Shin', 'Shen Shin', 1505, 210, 'The round-topped island in the northeast sea (Island B).'),
                                              ('Gnonmoon', 'Gnonmoon', 175, 930, 'The island west of Gnafrica (Island D).'),

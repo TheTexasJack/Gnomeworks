@@ -1,4 +1,4 @@
-# Gnomeworks: Location Gazetteer (v0.20 Working Draft)
+# Gnomeworks: Location Gazetteer (v0.21 Working Draft)
 
 
 ## How to read this draft
@@ -20,7 +20,8 @@
 
 | Area | Position | Role |
 | --- | --- | --- |
-| Gnomadica | Entire mapped area | Gnome Island plus nearby islands and waters |
+| Gnomadica | Entire mapped area | Gnuma Gnuma plus nearby islands and waters |
+| Gnuma Gnuma | The main island | Home of Gnomerica, Gnohio, Gnafrica, Slanic, and Gno Dao Cradle |
 | Gnomerica | Central main island | Gnomeworks factory and workshop towns |
 | Gnohio | West of main island | Rivers, farms, barges, and market roads |
 | Gno Dao Cradle | Northeast main island | Highlands, mines, ruins, and mountain paths |
@@ -41,14 +42,14 @@
 - V. Expedition sites, dungeons, and strongholds: **20 places**
 - VI. Businesses, markets, and attractions: **11 places**
 - VII. Curious objects and historic roadside POIs: **3 places**
-- VIII. Places added while mapping (outside the 100-name pool): **13 places**
+- VIII. Places added while mapping (outside the 100-name pool): **14 places**
 
 ## I. Major regions and the mapped area
 
 ### Gnomadica
 
 - **Name:** Gnomadica
-- **Location:** The whole chart: Gnome Island and the nearby isles, seas, and coast.
+- **Location:** The whole chart: Gnuma Gnuma and the nearby isles, seas, and coast.
 - **Region:** Greater mapped area (parent of all regions).
 - **About:** The busy little corner of the world where somebody always needs a sock.  From the brass-smoked chimneys of Cogbottom to the sea lanterns of Slaanilok, every district has a reason to send a parcel and a different reason to refuse one.  Gnomes, fairies, giants, lamia, and other neighbors share roads, ferries, arguments, and recipes; the customs office has yet to devise a form big enough for a giant's fingerprint.
 - **Major Facts:** Gnomadica is the ring of islands around a central mainland, and the Factory headquarters sits in Cogbottom.  The world beyond is vast and mysterious.  Sailors tell of friendly sea monsters that help ships across the ocean and merfolk who rescue crews caught in storms, and far-away lands tell of even stranger affairs.  The island-wide Postmaster's Bell rings whenever a packet travels outward from the Gnohio riverboats.  The first successful shipment was a single left sock, which the recipient immediately mailed back because it didn't match.  Old maps from different peoples give the same coastline different names, so surveyors trust the oldest landmarks over any one cartographer.
@@ -59,7 +60,7 @@
 ### Gnomerica
 
 - **Name:** Gnomerica
-- **Location:** Central Gnome Island, around the factory and main crossroads.
+- **Location:** Central Gnuma Gnuma, around the factory and main crossroads.
 - **Region:** Gnomadica, central industrial region.
 - **About:** Brass roofs, gear towers, and shouting shift foremen make this the busiest region, where odd ideas become even odder products.  Its towns are stitched together by the Central Rail, the Brass Road, and a surprising number of workers who swear their commute is downhill both ways.  Lamia engineers coil around broken steam pipes to reach awkward valves, while goblin bookkeepers keep honest ledgers and dishonest lunch schedules.
 - **Major Facts:** Cogbottom is its manufacturing heart.  Its foundries supply Cogsworth and Pulley Junction, while Gnomish Farms feeds the morning shift.  The old public clock has shown lunch time for years, and everyone agrees it is polite to obey.  The Great Lunch Whistle once blew for nine hours because a pebble jammed the valve; the workers voted to call it a public holiday.  The Council of Standard Cogs has argued over the proper tooth count for a hundred years and still uses three different standards on the same railway.
@@ -70,7 +71,7 @@
 ### Gnohio
 
 - **Name:** Gnohio
-- **Location:** West-central Gnome Island, along the broad rivers and rich farm country.
+- **Location:** West-central Gnuma Gnuma, along the broad rivers and rich farm country.
 - **Region:** Gnomadica, western river region.
 - **About:** Wide rivers, farms, and small bridges tie the western towns together, and locals claim every road leads downhill to a sandwich shop.  The region is named for General José Gnomanion Gnohio, a gnomish hero of the Republic of North Gnomerica Army during the Red Grass Revolution, and it grew around a river town beside his estate.  Families now visit Fort Gnomehagen's living-history grounds, the Confetti Reunion field, and the wonderfully solemn Museum of the World's Largest Piece of Confetti.  Gnome teachers insist the exhibit has deep cultural significance; the pupils mostly want to know whether it will fit through the door.
 - **Major Facts:** Late fashion model Anna Gnicole attended school in the original river town, which also hosts the annual Gen G'ers celebration.  The Gnomerica State Supported Living Center began as a prisoner-of-war compound during Field Marshal Candy Corn's Circus War with a faction from Fairy Fen.  Today it is a place of care and community.  The Confetti Reunion celebrates the families who made peace afterward.  River's Belt is the main waterway, and its pilots still insist an empty boat must carry one lucky decorative brick.
@@ -81,7 +82,7 @@
 ### Gnafrica
 
 - **Name:** Gnafrica
-- **Location:** Southwest peninsula of Gnome Island, beyond the dry ridge.
+- **Location:** Southwest peninsula of Gnuma Gnuma, beyond the dry ridge.
 - **Region:** Gnomadica, sunlands region.
 - **About:** Golden grasslands give way to windy dunes and warm red rocks, so travelers bring plenty of water and very patient hats.  The desert tracks are kept by gnome well-keepers, lamia caravan guides, and giants who can spot an oasis from miles away.  Sockarillo outfits travelers for the heat, while Flybar tests gliders in the hot wind.  Every village owns a communal shade cloth, and arguments about who folded it last can outlast a sandstorm.
 - **Major Facts:** The region holds the Windy Sands, two famous deserts, and two volcanoes said to have been named by rival surveyors who hated each other's poetry.  The Blue Stone Wellkeepers protect the safe watering places between the Windy Sands and the Desert of Desire, and every guide teaches visitors to spot a safe well by its blue-painted stones.  A traveling Magmander handler named Auntie Ember shows visitors how to cross volcanic ground without scorching their socks.  Guides from Grit Spit and Fellers still swear a third volcano exists, although their map marks it as 'probably lunch.'
@@ -92,7 +93,7 @@
 ### Gnufoundland
 
 - **Name:** Gnufoundland
-- **Location:** Cold island north of Gnome Island across the narrow sea.
+- **Location:** Cold island north of Gnuma Gnuma across the narrow sea.
 - **Region:** Gnomadica, northern island region.
 - **About:** Fog, cliffs, and long winters shape the northern communities, and every neighbor knows who borrowed the last warm scarf.  Weather comes in layers here: fog below, snow above, and gossip in the middle.  The docks of Gnyannis and Werewolf London are staffed by hearty fisherfolk, woolly-coated werewolves, and ogres who carry cargo as casually as a gnome carries a teacup.  New arrivals are offered soup before a shipping tariff.
 - **Major Facts:** The Frozen Fields cover much of the interior.  When the outer sea freezes, winter shipping travels by sheltered coves, and the bay at Gnyannis becomes a refuge for ferries.  The Long Lantern Pact requires every coastal town to keep a lamp lit for travelers during winter storms, and werewolf families coordinate the night watch.  A giant knitted mitten hangs in the council chamber to honor the rescue of twelve sailors from a drifting ice floe.  Nobody knows which hand it was meant for.
@@ -114,7 +115,7 @@
 ### Slanic
 
 - **Name:** Slanic
-- **Location:** Southern river delta and marsh coast of Gnome Island.
+- **Location:** Southern river delta and marsh coast of Gnuma Gnuma.
 - **Region:** Gnomadica, southern wetland region.
 - **About:** Reed villages on stilts sit above winding waterways where little lights blink after dark.  Most locals know the difference between friendly bubbles and running-away bubbles, and most can tell the hour by the color of the mist.  The markets sell waterproof papers, glowcap lanterns, and shoes designed to be retrieved by string.  Fairies from Fairy Fen share the waterways with frog-keepers, friendly slimes, and lamia botanists who can carry six baskets without needing a cart.
 - **Major Facts:** Fairy Fen and the Bog of Eternal Regret are here.  Ink-makers collect the dark pigment that Gloob leaves on the reeds, without disturbing the little slimes, and sell their finest bottles through Gloopenstein.  A centuries-old Reed Accord protects the fairy paths through Fairy Fen, including those of families who opposed Field Marshal Candy Corn's Circus War.  The flood council measures high water with a boot nailed to a post and takes it very seriously, although somebody keeps replacing the measuring boot with a larger one.  Mycelia's mushroom growers supply the region's famous midnight soup.
@@ -125,7 +126,7 @@
 ### Gno Dao Cradle
 
 - **Name:** Gno Dao Cradle
-- **Location:** Northeast highlands of Gnome Island, above the old mountain road.
+- **Location:** Northeast highlands of Gnuma Gnuma, above the old mountain road.
 - **Region:** Gnomadica, eastern mountain region.
 - **About:** Stone bridges, steep passes, and mountain workshops hanging from rock ledges fill the highlands, and the sound of hammering travels farther than conversation.  Even the goats wear bells so their owners can hear the complaints.  Goatfolk carry mail across the steepest paths; dwarven gemcutters, lamia archivists, and gnome mechanics work shoulder to shoulder beneath the mountain bells.  Every traveler earns a little brass pin after surviving the climb.
 - **Major Facts:** The Gnomish Heights shelter the Cradle.  Cogbend Hold guards the lower pass, while Twinshift keeps the freight lifts moving in two daily shifts.  A chain of ancient stone markers points toward the 6th Age Ruins, the Ancient Device, and a fourth place no surveyor has managed to find.  The Fortresses of Easy Defeat, Moderation, and Impossibility were once a single training route.  Local historians are forbidden to declare any mysterious machinery 'the first ever' without checking the basement first.
@@ -138,7 +139,7 @@
 ### Cogbottom
 
 - **Name:** Cogbottom
-- **Location:** Center of Gnome Island, where three roads meet.
+- **Location:** Center of Gnuma Gnuma, where three roads meet.
 - **Region:** Gnomerica.
 - **Factory Imports:** Socks; Banana; Clipboard
 - **Factory Exports:** None
@@ -1356,6 +1357,17 @@
 ## VIII. Places added while mapping
 
 Places added while drawing the master map, beyond the original 100 names.
+
+### Gnuma Gnuma
+
+- **Name:** Gnuma Gnuma
+- **Location:** The big main island in the middle of the chart.
+- **Region:** Gnomadica, the main island.  Five regions share it: Gnomerica, Gnohio, Gnafrica, Slanic, and Gno Dao Cradle.
+- **About:** The biggest island in Gnomadica, with farms in the west, desert in the southwest, marsh in the south, mountains in the northeast, and the busy factory towns in the middle.  The name is fun to say, so gnomes say it a lot.
+- **Major Facts:** Lots of folks call the whole island Gnomerica, after its busiest region.  The gnomes of Gnomerica never correct them.
+- **Flora:**
+- **Fauna:**
+- **Bounties:**
 
 ### Gnod Dam
 

@@ -102,7 +102,7 @@ const stage = document.getElementById('stage');
 const W = DATA.page.width, H = DATA.page.height;
 let vb = { x: 0, y: 0, w: W, h: H };
 const byId = {}; DATA.locations.concat(DATA.added_places || []).forEach(l => byId[l.id] = l);
-const TYPE = { region: 'Region', city: 'City or port', settlement: 'Village or settlement', natural: 'Natural landmark',
+const TYPE = { region: 'Region', island: 'Island', city: 'City or port', settlement: 'Village or settlement', natural: 'Natural landmark',
   expedition: 'Dungeon, mine, ruin or stronghold', business: 'Shop or attraction', poi: 'Roadside curiosity', landmark: 'Landmark (new)' };
 const ADDED = new Set((DATA.added_places || []).map(l => l.id));
 

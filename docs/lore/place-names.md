@@ -6,7 +6,7 @@ Status: **Working list, unclassified and not yet placed on the map.**  Nathan su
 
 - Preserve the spelling and wording of the names while we map.  A trailing sentence period on "Gno Dao Cradle" was omitted.
 - No regions, towns, landmarks, or points of interest are assigned yet.  Sorting comes next.
-- The one master map focuses on Gnome Island and the surrounding area.  The wider world, including the mythical North Pole, stays off-map for future expansion.
+- The one master map focuses on Gnuma Gnuma (the main island) and the surrounding area.  The wider world, including the mythical North Pole, stays off-map for future expansion.
 - "Defined Areas" and "Regions" were headings, not place names.  Repeated "Gnomadica" and "Cogbottom" entries were removed.
 - Total: **100 unique names**.  Earlier chat counts of 100 were in error; the source list had 100 lines, including two headings and two duplicate entries.  Six new names were added afterward, then Gnanada and South Ham'n'Gnome were dropped to finalize a 100-name pool.
 
