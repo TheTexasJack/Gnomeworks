@@ -31,4 +31,4 @@ Five to eight regions is a good range for kids.
 
 ## Regions
 
-Every region now has an entry in the [gazetteer](location-gazetteer-v0.23.md): a short **Preview** for young readers, an explorer's **Guide** in Alex's style, and **Notable Flora** and **Notable Fauna**.  The Gnomopedia region pages will read from those fields.  Alex's original write-ups are kept word for word in [alex-regions-v0.2.md](alex-regions-v0.2.md).
+Every region now has an entry in the [gazetteer](location-gazetteer-v0.24.md): a short **Preview** for young readers, an explorer's **Guide** in Alex's style, and **Notable Flora** and **Notable Fauna**.  The Gnomopedia region pages will read from those fields.  Alex's original write-ups are kept word for word in [alex-regions-v0.2.md](alex-regions-v0.2.md).

@@ -1,6 +1,6 @@
 {
  "map": "Gnomadica master map",
- "version": "0.24",
+ "version": "0.25",
  "status": "working draft, awaiting canon review",
  "page": {
   "width": 1660,
@@ -212,7 +212,7 @@
     "Preview": "Warm islands of lizard folk and frog folk.  They believe every story they hear, so be careful what you say!",
     "Guide": "The eastern island of the archipelago.  Monster folk of the reptilian and amphibian varieties call this isle home due to the more tropical climate.  Slaanilok is known as the home of legend and rumor, many unfounded and some true.  Sadly, the natives are none too helpful, as all legends and rumors are true to them.  The rumors of an unusually high number of dungeons on this isle are true, while the dungeons spreading like an illness are false.  Evidence of the \"City of Gold\" is not true, and the adventures launched to find this place have already hurt local communities.  So if you are feeling adventurous, respect the communities and environment.  WARNING: NATIVES BELIEVE ALL SUPERSTITIONS.  BE MINDFUL OF WHAT YOU SPEAK OF.",
     "About": "Boats are more common than carts in these cheerful island communities, and the ferries carry travelers, crates, and the occasional bewildered turtle.  Each island has its own ferry whistle and its own favorite explanation for why the sea is wet.  Lizard folk, lamia tide-readers, merfolk chandlers, gnomish net-menders, and cheerful turtle keepers bustle around warm harbors.  Visitors discover that the last boat of the day leaves precisely when the captain finishes supper.",
-    "Major Facts": "The Lantern Chain links its harbors to Port Gnasher by a line of signal lights, and the largest ports trade news the same way.  The first lantern keeper was a mermaid who wrote warnings on waterproof paper and charged by the vowel.  Ferries from Legipt carry the warm-season trade south to Eversummer, while older sea roads pass the flooded chambers of Dungeon of the Deep.  Islanders quietly disagree over whether the ancient bells beneath the water are musical instruments or doorbells, and all of them agree a dry pair of socks is the height of luxury.",
+    "Major Facts": "The Lantern Chain links its harbors to Port Gnasher by a line of signal lights, and the largest ports trade news the same way.  The first lantern keeper was a mermaid who wrote warnings on waterproof paper and charged by the vowel.  Ferries from Legipt carry the warm-season trade south to Eversummer, while older sea roads pass the flooded chambers of Dungeon of the Deep.  Islanders quietly disagree over whether the ancient bells beneath the water are musical instruments or doorbells, and all of them agree a dry pair of socks is the height of luxury.  The warm, wet islands buzz with bugs, and the natives believe every bug carries a little bad luck.  Nothing comes ashore without a good spray of bug repellent first, and that goes double for packages.",
     "Flora": "Saltgrass, mangroves",
     "Tiny Monsters": "Jellybub, Shroomtle, Bloomlet",
     "Notable Flora": "Drago Palm, Stink Rose, Striped Mum",
@@ -3024,5 +3024,5 @@
    "status": "placed by Nathan, name open"
   }
  ],
- "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.23.md"
+ "gazetteer_url": "https://github.com/TheTexasJack/Gnomeworks/blob/main/docs/lore/location-gazetteer-v0.24.md"
 }
