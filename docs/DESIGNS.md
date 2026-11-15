@@ -157,9 +157,24 @@ Notes to settle when this is built (Claudia):
 - Open: how much of a pile one successful package ships, now that box sizes no longer set it (for example a fixed share of the stack, or all of it down to the display copy).  Settled 2026-11-15: there are no spendable Stonks, so a failure only moves the ticker lines.  The ticker notes still call for recoverable mistakes and no losses that stack forever.
 - The rune tracing game needs to work with a finger on phones as well as a mouse.
 
-**Purchase orders and the order board (Claudia's DRAFT, 2026-11-15, not yet approved)**
+**A shift on the Packing Line (Nathan, 2026-11-15, decided)**
 
-- **Order board (the player's choice):** 3 purchase orders are up at a time, each from a random trading place in an unlocked region.  The player picks one to pack.
+1. The player enters the shipping lane and pulls a chain or presses a button.  The shipping door opens.
+2. A truck slides in through the door with its shipping agent (the driver), and three work orders appear on the order board.
+3. The truck, the driver, or both can be fake (TNP Corp).  The game gives plenty of clues about the work orders and the truck, and a way to dismiss them.  When a fake is dismissed, another driver comes in to finish the work orders.
+4. The player fills **all three** work orders and hands them all to the driver.
+5. Once done, the game does the math: each delivery succeeds or fails based on the complications in play.
+
+Settled the same day (Nathan picked each):
+
+- **One region per truck.**  Each region has its own truck and driver, and all three orders on a truck go to towns in that region.  The town line on each order is the reading challenge.
+- **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
+- **Both fake mistakes move the ticker.**  Handing orders to a fake sends those orders to TNP (our line down, theirs up).  Dismissing a real driver is a small dip with a grumpy shipping log line, and the replacement driver still comes in.
+- **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
+
+**Purchase orders and the order board (approved 2026-11-15; details are Claudia's draft)**
+
+- **Order board:** a truck brings 3 work orders, each from a trading place in an unlocked region.  The player fills all three.
 - **What an order asks for (the randomizer):** items are drawn only from that place's Factory Imports (plus any Bathroom item, since every place buys those), and only from piles with more than 1 on the shelf, so every order can be packed.  Gnomerica orders ask for 1 item; later regions ask for 2 or 3; Gnonmoon must be exact.
 - **Packing:** dragging a shelf tile onto the box puts the whole pile in, down to the display copy.  The label happily reads "1,700,000 Poop Knives."
 - **Rotation:** a pile just shipped sits at 1, so orders skip it until it grows back.
