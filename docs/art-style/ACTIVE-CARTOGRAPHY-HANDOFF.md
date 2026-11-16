@@ -1,8 +1,8 @@
 # ACTIVE HANDOFF: Gnomadica full map illustration
 
 **Updated:** 2026-11-15
-**Status:** IN PROGRESS, exact approved sign not yet integrated into complete Gnomadica SVG
-**Goal:** Produce the actual *full map* with the already-approved carved oak/brass sign at the top, remove two tiny explanatory notes below the KEY, preserve every approved terrain/label element, and send the complete map proof for Nathan's visual review.
+**Status:** COMMITTED / REVIEW PENDING: v18 complete map and exact sign PNG exist on GitHub; visual placement approval and mobile QA pending
+**Goal:** Review the actual *full v18 map*, which integrates the approved carved oak/brass sign and removes the two explanatory KEY notes while preserving earlier approved terrain/labels. Obtain Nathan's actual map placement verdict.
 
 ## Source of truth
 
@@ -10,18 +10,20 @@
 - Canonical source, DO NOT MODIFY: `docs/lore/map/gnomadica-map-v0.29.svg`, `tools/map/build_map.py` and the source location JSON.
 - Rejected sign/map proof: `docs/art-style/proofs/gnomadica-v029-brasswood-cartouche-v17.svg`; its sign tracing flattened the design. Do not reuse the v17 cartouche.
 - Approved sign source: **the exact original rendered PNG** `a_high_detail_colorful_fantasy_steampunk_carved.png` (approx 2172×724, transparent), or its identical `gnomadica_approved_sign_exact_v2.svg` self-contained raster-in-SVG wrapper, provided within chat. Nathan explicitly approved this appearance and hybrid SVG and does **not** want more standalone sign previews.
-- Approved sign source **NOT YET BACKED UP TO GITHUB** at time of this checkpoint. Source must be committed with the full map, or the deliverable is not crash-resistant.
+- **Approved sign source now backed up to GitHub:** `docs/art-style/proofs/gnomadica-approved-sign-original-v18.png` (900×300 lossless RGBA, 402,239 bytes, Git blob `001801c9d45c4269582912ae8f2275005d1b5484`), derived from Nathan-approved exact sign source. This smaller lossless PNG preserves the approved appearance at the intended 368×123 map size.
 - Approved sign intended map coordinates: approximately x=576, y=26, width=368, height=122.7 SVG units (map viewBox 1660×1150). Inspect actual result, not merely a crop.
 - User explicitly asked to delete only the two small KEY footnotes: `Region colors are soft washes. No borders are drawn yet.` and `No scale bar yet: the main island is hundreds of miles across.` Keep `KEY` and the essential 12 legend entries.
 - 05-F full-screen map package is still **open**; prior approvals are not package approval.
 
-## Current task and next action
+## Completed v18 integration and immediate next action
 
-1. Retrieve the complete GitHub v16 file as data (GitHub blob SHA `770f5abcc61a6eb96f9daee2e13c609ee8ce00bb` verified readable through GitHub connector, despite local Python container network DNS restrictions).
-2. Integrate the **exact approved sign** (embedded losslessly or link to an actual checked-in asset; do not re-typeset/redraw), replacing the old cartouche group. Remove only two explanatory KEY notes.
-3. Commit versioned full proof as `docs/art-style/proofs/gnomadica-v029-approved-sign-v18.svg` and any necessary sign image dependencies to GitHub, leaving v16 and v17 intact.
-4. QA: all 44 dunes, 760 trees, 299 hills, 116 mountains, 34 crystals, 53 palms, source anchors, towns, route/river shapes, and 12 KEY entries intact. Check XML and rendering, label/sign overlap, and reasonable size.
-5. **Present the complete v18 map** (not just the sign fragment), with its proof link. Await Nathan's placement verdict. Later: package QA and mobile performance testing.
+1. **DONE:** Read complete v16 directly from GitHub blob `770f5abcc61a6eb96f9daee2e13c609ee8ce00bb`.
+2. **DONE:** Commit lossless approved-sign PNG to `docs/art-style/proofs/gnomadica-approved-sign-original-v18.png`. PNG commit `3824e1d27d2f682976c83160adf372caf6f7c36f`.
+3. **DONE:** Commit complete v18 SVG at `docs/art-style/proofs/gnomadica-v029-approved-sign-v18.svg`, which references the checked-in PNG in the **same directory** via both SVG `href` and `xlink:href`; map proof commit `36217b0dd1fbad320fd24d86f8f6805e46cde7b3`. Both GitHub paths verified in main tree, PNG 402,239 bytes and map SVG 1,573,266 bytes.
+4. **DONE (structural QA):** All 1,903 `<use>` elements, 44 dune anchors, 645 original source anchors, and 201 v15 forest-infill anchors preserved. Original 138 `<text>` elements become 134 through deliberate removal of old 2-line cartouche text and 2 tiny KEY footnotes. All 12 meaningful KEY labels remain; no SVG scripts or event handlers introduced. v16 and rejected v17 proofs remain untouched.
+5. **NEXT:** Show Nathan the **entire v18 map** for visual sign placement review, not the sign on its own. This version references a separate checked-in PNG so download or deploy *both* neighboring files together. Do not claim that the integrated map has already been visually approved.
+6. **AFTER APPROVAL:** Complete wide/portrait visual QA, performance/mobile testing, consider self-contained packaging for offline use, and only then mark full 05-F package approved. Never modify Lore master.
+
 
 ## Decisions / guardrails
 
@@ -36,3 +38,4 @@
 | Date | Status | Action / evidence |
 | --- | --- | --- |
 | 2026-11-15 | IN PROGRESS | Recorded source, approvals, constraints and exact next actions before continuing the full-map v18 integration. |
+| 2026-11-15 | COMMITTED / REVIEW PENDING | v18 complete map and lossless approved sign PNG committed separately; validated Git tree presence and terrain/key counts. Await full-map visual review. |
