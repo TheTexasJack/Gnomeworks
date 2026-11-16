@@ -1,4 +1,4 @@
-# Art masters (v0.1)
+# Art masters (v0.2)
 
 Full-size, approved source art, kept here as the backup.  **The game never loads anything from this folder.**  Claudia makes the small WebP copies in `assets/` from these with `tools/art.py` when a piece is integrated.
 
@@ -10,14 +10,18 @@ Rules:
 
 ## Packing Line
 
+Uploaded by Nathan 2026-11-15 and sorted by Claudia.
+
 | Folder | Files |
 | --- | --- |
-| `packing-line/01-room/` | `room_wide_day.png`, `room_wide_night.png`, `room_tall_day.png`, `room_tall_night.png` |
-| `packing-line/02-door/` | `door_wide_day_closed.png`, `door_wide_day_open.png`, `door_wide_night_closed.png`, `door_wide_night_open.png`, and the same four with `tall` |
+| `packing-line/01-02-room-door/` | The room with its door, as eight full backdrops: `room_{wide,tall}_{day,night}_{closed,open}.png`.  Wide is 1671x941, tall is 941x1672.  The porthole skies are baked in; the shrub is separated (see 19). |
 | `packing-line/03-chain/` | `chain.png` |
+| `packing-line/05-wall-map/` | `map_icon.png`, the framed map picture that opens the full map |
 | `packing-line/05a-supply-drawer/` | `supply_drawer.png` |
-| `packing-line/10-13-boxes/` | `box_plain_open.png`, `box_plain_closed.png`, `box_temp_open.png`, `box_temp_closed.png`, `box_water_open.png`, `box_water_closed.png`, `crate_open.png`, `crate_closed.png` |
-| `packing-line/19-gni/` | `shrub.png` (the separated shrub), later `red_herring.png` |
+| `packing-line/05c-desk/` | `computer.png`, `lamp.png`, `mug.png`, `stool.png` (the desk props, separated) |
+| `packing-line/10-13-boxes/` | `box_{plain,temp,water,wood}_{closed,open}.png` |
+| `packing-line/14-stamps/` | `stamps_regional.png`, the ten region stamps on one sheet |
+| `packing-line/19-gni/` | `shrub.png`, `red_herring.png` |
 
 New packages get a new folder with the same `NN-name` pattern.
 
