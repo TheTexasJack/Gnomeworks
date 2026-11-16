@@ -19,7 +19,8 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 - Later layers, all drafts: orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of GRIP vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
 - **Shift flow decided (2026-11-15):** chain or button, door opens, a region's truck and driver arrive with 3 work orders, fakes can be dismissed, fill all three, report card.  See DESIGNS.md.
 - **Mara's asset list:** [art-style/PACKING-LINE-ASSETS-v0.3.md](art-style/PACKING-LINE-ASSETS-v0.3.md), three tiers, handed to Mara 2026-11-15 (her checklist will land on GitHub).
-- **Next:** decide whether Tiny Monsters, Number Twos, and Treasures ship, then the Stonks score per region and the build of layer 1.  Every junk item now has a buyer (gazetteer v0.25).
+- **Next (as of 2026-11-15 night):** Nathan's verdict on Mara's v18 map sign ([art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md)); fold Mara's approved map stamps into `tools/map/build_map.py` so the generated map carries her art; the rest of the Packing Line assets; then the build of layer 1.  Only junk ships (decided); every junk item has a buyer.  Approved Packing Line masters are in `art-masters/`.
+- **Heavy coding can move to Claude Code on Nathan's machine.**  Repo rules for it are in `CLAUDE.md` at the root.
 - Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  Lore, the map, trade, and region stamps are done (2026-11-15); see lore/regions.md.
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.
@@ -31,7 +32,7 @@ Expect side requests from Jarrett and his 6-year-old daughter too (she asked for
 
 ## How Nathan likes to work
 
-- **Small steps, approval at each.**  Build, show screenshots or a short video, wait for "push."  Use a branch for anything he should see first; small straight fixes can go straight to `main`.  He's said he doesn't need downloadable test builds: a mockup screenshot is enough.
+- **Small steps, approval at each.**  Build, show screenshots or a short video, wait for "push."  Commit straight to `main` (no branches).  He's said he doesn't need downloadable test builds: a mockup screenshot is enough.
 - **Every change:** bump `GW.VERSION` in `js/config.js`, `node tools/stamp.js`, a `CHANGELOG.md` entry, `node tools/smoke-test.js` (with `NODE_PATH=$(npm root -g)` in the cloud session), commit, push.  Keep the docs current as you go.
 - **Ideas are drafts** until he approves them.  He wants honest pushback and his words followed exactly.  Don't ask him follow-up questions at the end of replies.
 - **Repo writing:** two spaces after periods, no em dashes, no "not X, it's Y" phrasing.
