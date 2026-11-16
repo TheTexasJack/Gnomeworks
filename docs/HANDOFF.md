@@ -25,6 +25,24 @@ Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.
 
+## Session of 2026-11-15 (for the next session)
+
+- **Lore:** Alex's region write-ups merged; every region has a kid Preview, an explorer's Guide, and Notable Flora and Fauna.  The main island is **Gnuma Gnuma**.  Gazetteer v0.27, map v0.29 (the generated one).
+- **Packing Line design:** shift flow, order board, label/stamp reading challenge, no clock, closing early leaves ❌, correct-supplies rule (Breakable, Soft, Heavy), four box types, only junk ships, stamps (color + symbol), company **GRIP**.  All in DESIGNS.md.
+- **Art:** Mara's checklist ([art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md](art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md)) had 8 of 45 packages approved.  Nathan's approved masters are in `art-masters/packing-line/` (rooms with doors, chain, map icon, supply drawer, desk props, boxes, stamps, shrub, red herring).  The room layout follows Nathan's sketch (`art-style/references/packing-room-sketch-v2.jpg`); supplies sit in a drawer that ducks away while dragging; the conveyor opens the item menu.
+- **Map art:** Mara's v18 map proof is committed and waiting on Nathan's sign verdict.  Read [art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md).  Her proofs are hand-edited copies of the generated map, so they drift whenever the gazetteer changes.  Plan: fold her approved stamps (mountains, crystals, hills, trees, dunes, sign) into `tools/map/build_map.py`.
+- **Code:** draft.69 added the landscape phone layout.
+- **New workflow (set up 2026-11-16):** heavy coding moves to Claude Code on Nathan's machine.  Chat designs and reviews; Claude Code builds from work orders in [requests/](requests/README.md).  Rules for it are in `CLAUDE.md` at the root.
+- **ChatGPT chats die without warning** when image-heavy.  Mara works one package per chat, and Nathan saves every approved image to `art-masters/` right away.
+
+**Tomorrow, in order:**
+
+1. Set up Claude Code: clone, check `CLAUDE.md`, try a first small work order.
+2. Nathan's verdict on the v18 map sign.
+3. Work order: fold Mara's map stamps into the map builder.
+4. The rest of the Packing Line assets with Mara (Tier 1 first).
+5. Work order: Packing Line layer 1 (one Gnomerica truck, three orders, packing, stamps, report card, GRIP line on the ticker).
+
 ## Waiting on others
 
 - **Nathan:** the hat lip fix in GIMP, **before December 1** (keep canvas sizes).
