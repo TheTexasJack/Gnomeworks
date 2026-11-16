@@ -25,6 +25,13 @@
 6. **AFTER APPROVAL:** Complete wide/portrait visual QA, performance/mobile testing, consider self-contained packaging for offline use, and only then mark full 05-F package approved. Never modify Lore master.
 
 
+## Preferred review deliverable, standalone v18
+
+- **Preferred single-file proof:** `docs/art-style/proofs/gnomadica-v029-approved-sign-v18-standalone.svg`, committed and optimized in GitHub commit `594b8bda0d32586d2d6f7df6b9a32c46dc932fc7` (2,109,514 bytes, blob `d25c3a3a0b5823af88b20d368d37b7c635ed5f8b`).
+- This version includes the exact approved PNG **embedded once** as a data URI, so it renders without separate adjacent files and is easier to review/download.
+- Post-commit structural verification PASSED: 1,903 `<use>`, 134 `<text>`, 44 dune anchors, 645 source anchors, 201 forest-infill anchors, one inline PNG and all 12 useful KEY entries; two unwanted KEY footnotes removed, no external image `href`, SVG scripts, JavaScript URLs, or event handlers.
+- The separate PNG dependency and linked compact SVG also remain committed for optimization, source recovery and possible future runtime use. **No visual verdict from Nathan on the full v18 map yet.** Next: present standalone map for review before package/mobile QA.
+
 ## Decisions / guardrails
 
 - Eight dune vectors and v16 placement: approved. Woods of the Elder 201-tree infill: approved.
@@ -39,3 +46,4 @@
 | --- | --- | --- |
 | 2026-11-15 | IN PROGRESS | Recorded source, approvals, constraints and exact next actions before continuing the full-map v18 integration. |
 | 2026-11-15 | COMMITTED / REVIEW PENDING | v18 complete map and lossless approved sign PNG committed separately; validated Git tree presence and terrain/key counts. Await full-map visual review. |
+| 2026-11-15 | COMMITTED / REVIEW PENDING | Optimized self-contained v18 SVG also committed and verified; preferred review artifact. |
