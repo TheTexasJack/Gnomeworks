@@ -1,0 +1,38 @@
+# Work order: first run check on Beast (v0.1)
+
+**Status:** Draft
+**Written by:** Claudia, 2026-11-16.  **Approved by:** (waiting on Nathan)
+
+## Goal
+
+Prove Claude Code on Beast can run the repo's tools and that they give the same results as the cloud session.  Nothing in the game changes.  This is the test lap of the work-order loop.
+
+## Read first
+
+- `CLAUDE.md` at the repo root.
+- `docs/ENVIRONMENT.md` (Tools used to build it, Commands).
+- `docs/requests/README.md`.
+
+## Do
+
+1. `git pull` in `~/GW/Gnomeworks`.
+2. Report the versions of: Node, Python 3, numpy, Pillow, scipy, OpenCV (`cv2`), and whether Playwright with Chromium is installed.  One line each.  If something is missing, list it and **stop before installing anything**: Nathan decides how it gets installed.
+3. If Node and Playwright are present: run `node tools/smoke-test.js` and report pass or fail, with any errors word for word.
+4. If Python, numpy, and cv2 are present: run `python3 tools/map/build_map.py`, then `git status --short`.  The map builder is seeded, so on the cloud session it rebuilds `docs/lore/map/gnomadica-map-v0.29.svg` and its JSON byte for byte (checked 2026-11-16 with numpy 2.5.3).  Report whether `git status` comes back clean.  If files changed, report `git diff --stat` and run `git checkout -- docs/lore/map/` to put them back.  Do not commit any rebuilt map.
+5. Fill in the Result section below, set Status to Done, commit only this file, and push.
+
+## Do not
+
+- Install, upgrade, or remove any package.
+- Use sudo.
+- Change any file other than this work order.
+- Bump `GW.VERSION` (no game code changes, so no version bump or changelog line).
+
+## Done when
+
+- Every tool version is listed.
+- The smoke test result and the map rebuild result are recorded (or marked "skipped: missing X").
+- This file is pushed with Status: Done.
+
+## Result (filled in by Claude Code)
+
