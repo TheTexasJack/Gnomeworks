@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="568 12 384 145" width="1152" height="435">
+<title>Gnomadica approved sign: SVG vector interpretation v1</title>
+<g id="cartouche" data-art-pass="v17-brasswood-gnomadica">
+<defs>
+<linearGradient id="gw17-wood" x2="0" y2="1"><stop stop-color="#a76331"/><stop offset=".45" stop-color="#7b3b1b"/><stop offset="1" stop-color="#4b230f"/></linearGradient>
+<linearGradient id="gw17-brass" x2=".23" y2="1"><stop stop-color="#fff4ac"/><stop offset=".25" stop-color="#f4bd36"/><stop offset=".57" stop-color="#a7660a"/><stop offset="1" stop-color="#f5c552"/></linearGradient>
+<linearGradient id="gw17-type" x2="0" y2="1"><stop stop-color="#fff3b0"/><stop offset=".40" stop-color="#ffd04d"/><stop offset=".72" stop-color="#b27610"/><stop offset="1" stop-color="#efbd47"/></linearGradient>
+<linearGradient id="gw17-plate" x2="0" y2="1"><stop stop-color="#fff1b1"/><stop offset=".6" stop-color="#efbd4a"/><stop offset="1" stop-color="#ac6815"/></linearGradient>
+</defs>
+<g transform="translate(580 27) scale(.4)">
+<path d="M35,72 Q50,59 72,49 L260,50 Q329,51 357,29 Q384,4 414,17 Q450,-9 486,17 Q520,4 543,29 Q571,51 640,50 L828,49 Q850,59 865,72 L890,115 Q905,146 874,169 L837,193 L822,227 Q786,238 724,228 L543,231 Q522,247 487,243 Q450,263 413,243 Q379,247 357,231 L176,228 Q114,238 78,227 L63,193 L26,169 Q-5,146 10,115 Z" fill="url(#gw17-wood)" stroke="#3d1d0b" stroke-width="20" stroke-linejoin="round"/>
+<path d="M35,72 Q50,59 72,49 L260,50 Q329,51 357,29 Q384,4 414,17 Q450,-9 486,17 Q520,4 543,29 Q571,51 640,50 L828,49 Q850,59 865,72 L890,115 Q905,146 874,169 L837,193 L822,227 Q786,238 724,228 L543,231 Q522,247 487,243 Q450,263 413,243 Q379,247 357,231 L176,228 Q114,238 78,227 L63,193 L26,169 Q-5,146 10,115 Z" fill="none" stroke="url(#gw17-brass)" stroke-width="16" stroke-linejoin="round"/>
+<path d="M45,84 Q65,64 110,65 L280,65 Q352,62 380,35 M520,35 Q548,62 620,65 L790,65 Q835,64 855,84 M100,211 Q170,225 350,215 M550,215 Q730,225 800,211" fill="none" stroke="#ffeba2" stroke-width="4" opacity=".88"/>
+<g fill="none" stroke="#e6a868" opacity=".27" stroke-linecap="round"><path d="M110,90 C205,72 242,105 325,80" stroke-width="4"/><path d="M575,80 C668,105 735,72 798,92" stroke-width="4"/><path d="M110,176 Q171,158 251,178" stroke-width="3"/><path d="M652,175 Q735,154 800,178" stroke-width="3"/></g>
+<path d="M75.0,103.0 L80.3,96.4 L85.5,97.7 L87.3,105.9 L90.9,108.2 L99.0,106.0 L102.5,110.0 L99.1,117.7 L100.7,121.7 L108.6,124.7 L109.0,130.0 L101.7,134.2 L100.7,138.3 L105.3,145.4 L102.5,150.0 L94.1,149.1 L90.9,151.8 L90.4,160.3 L85.5,162.3 L79.2,156.7 L75.0,157.0 L69.7,163.6 L64.5,162.3 L62.7,154.1 L59.1,151.8 L51.0,154.0 L47.5,150.0 L50.9,142.3 L49.3,138.3 L41.4,135.3 L41.0,130.0 L48.3,125.8 L49.3,121.7 L44.7,114.6 L47.5,110.0 L55.9,110.9 L59.1,108.2 L59.6,99.7 L64.5,97.7 L70.8,103.3 Z" fill="url(#gw17-brass)" stroke="#653506" stroke-width="6"/>
+<circle cx="75" cy="130" r="17" fill="url(#gw17-plate)" stroke="#73420b" stroke-width="5"/><circle cx="75" cy="130" r="8" fill="#e5a72f" stroke="#fff0a6" stroke-width="2"/>
+<path d="M825.0,103.0 L830.3,96.4 L835.5,97.7 L837.3,105.9 L840.9,108.2 L849.0,106.0 L852.5,110.0 L849.1,117.7 L850.7,121.7 L858.6,124.7 L859.0,130.0 L851.7,134.2 L850.7,138.3 L855.3,145.4 L852.5,150.0 L844.1,149.1 L840.9,151.8 L840.4,160.3 L835.5,162.3 L829.2,156.7 L825.0,157.0 L819.7,163.6 L814.5,162.3 L812.7,154.1 L809.1,151.8 L801.0,154.0 L797.5,150.0 L800.9,142.3 L799.3,138.3 L791.4,135.3 L791.0,130.0 L798.3,125.8 L799.3,121.7 L794.7,114.6 L797.5,110.0 L805.9,110.9 L809.1,108.2 L809.6,99.7 L814.5,97.7 L820.8,103.3 Z" fill="url(#gw17-brass)" stroke="#653506" stroke-width="6"/>
+<circle cx="825" cy="130" r="17" fill="url(#gw17-plate)" stroke="#73420b" stroke-width="5"/><circle cx="825" cy="130" r="8" fill="#e5a72f" stroke="#fff0a6" stroke-width="2"/>
+<path d="M450.0,0.0 L455.3,-5.5 L460.3,-3.9 L461.7,3.5 L464.8,6.2 L472.4,6.0 L474.9,10.7 L470.6,16.9 L471.0,21.0 L476.5,26.3 L474.9,31.3 L467.5,32.7 L464.8,35.8 L465.0,43.4 L460.3,45.9 L454.1,41.6 L450.0,42.0 L444.7,47.5 L439.7,45.9 L438.3,38.5 L435.2,35.8 L427.6,36.0 L425.1,31.3 L429.4,25.1 L429.0,21.0 L423.5,15.7 L425.1,10.7 L432.5,9.3 L435.2,6.2 L435.0,-1.4 L439.7,-3.9 L445.9,0.4 Z" fill="url(#gw17-brass)" stroke="#653506" stroke-width="5"/>
+<circle cx="450" cy="21" r="12" fill="url(#gw17-plate)" stroke="#73420b" stroke-width="4"/>
+<path d="M310,58 Q355,45 379,26 Q390,18 402,38 Q377,35 358,55 Z M590,58 Q545,45 521,26 Q510,18 498,38 Q523,35 542,55 Z" fill="url(#gw17-brass)" stroke="#6b3706" stroke-width="3"/>
+<g fill="url(#gw17-plate)" stroke="#73420b" stroke-width="3"><circle cx="45" cy="88" r="10"/><circle cx="855" cy="88" r="10"/><circle cx="108" cy="204" r="8"/><circle cx="792" cy="204" r="8"/><circle cx="450" cy="239" r="9"/></g>
+<text x="450" y="145" font-family="Georgia,serif" font-size="97" font-weight="bold" letter-spacing="2" text-anchor="middle" fill="#2d1708" stroke="#2d1708" stroke-width="7" stroke-linejoin="round" paint-order="stroke">GNOMADICA</text>
+<text x="450" y="140" font-family="Georgia,serif" font-size="97" font-weight="bold" letter-spacing="2" text-anchor="middle" fill="url(#gw17-type)" stroke="#653507" stroke-width="3" stroke-linejoin="round" paint-order="stroke">GNOMADICA</text>
+<rect x="186" y="165" width="528" height="52" rx="26" fill="url(#gw17-plate)" stroke="#79470c" stroke-width="7"/><rect x="195" y="171" width="510" height="40" rx="18" fill="none" stroke="#ffefad" stroke-width="2.5" opacity=".8"/>
+<circle cx="210" cy="191" r="7" fill="#c58a2a" stroke="#744207" stroke-width="2"/><circle cx="690" cy="191" r="7" fill="#c58a2a" stroke="#744207" stroke-width="2"/>
+<text x="450" y="200" font-family="Georgia,serif" font-size="28" font-style="italic" font-weight="bold" text-anchor="middle" fill="#48220f">Gnuma Gnuma and the nearby isles</text>
+</g></g>
+</svg>
