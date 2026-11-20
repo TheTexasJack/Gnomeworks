@@ -95,7 +95,7 @@ Mara's layout reference: [references/packing-room-sketch-v2.jpg](references/pack
 | # | Asset | Notes |
 | --- | --- | --- |
 | 27 | **TNP Corp logo** | Corporate North Pole.  The big guy is never shown or named. |
-| 28 | **Fake truck tells** | Overlays painted to fit the real trucks' three-quarter view: candy-cane mudflaps, hoofprints, jingle bells, a N0RTH plate, holly trim.  A fake truck is a real truck plus one to three tells, so no extra trucks are needed. |
+| 28 | **Fake truck tells** | Overlays painted to fit the real trucks' three-quarter view: candy-cane mudflaps, hoofprints, jingle bells, a N0RTH plate, holly trim.  A fake truck is a real truck plus one to three tells, so no extra trucks are needed.  (Superseded 2026-11-20: Nathan made ten full fake trucks, one per region.  Each is the region's truck painted green with its region art as torn posters taped on, in `art-masters/packing-line/28-fake-trucks/`.) |
 | 29 | **Elf imposters x10** | One for each region's driver, each fully painted (Nathan, 2026-11-15).  Keep the elf tells consistent across all ten (pointed ears, curled shoes, too tall for the height chart) so kids learn them once. |
 | 30 | **Height chart** | Painted on the dock wall, or a separate overlay on #1.  Gnomes are short; anyone past the line is an elf in a borrowed hat. |
 | 31 | **Fake paperwork** | Snowflake and holly stamps, and a candy-cane border for fake work orders. |

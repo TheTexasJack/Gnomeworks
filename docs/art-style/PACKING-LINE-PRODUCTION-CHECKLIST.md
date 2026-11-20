@@ -238,3 +238,25 @@ For every package, append a line when work starts or when a decision changes.  K
 **Preflight questions to resolve when reached:** The source list puts the dog toy in Gnonmoon's gift slot, while DESIGNS.md also calls for a dog toy/treat with Gnufoundland shipments.  Confirm reuse or separate treatment at package 21.  The master world map is still under review, so package 05's final geography must be checked against the accepted map.  The exact fixed lettering approach for stickers/brands/controls and the choice of package 32's control are brief-level decisions.  No silent changes to the supplied scope.
 
 **Out of scope for Mara's art checklist:** Sound for the dock door, chain, tape, stamp, horn, and TNP jingle.  Nathan and Alex handle those.
+
+## Saved to art-masters, 2026-11-20
+
+Nathan cleared everything he uploaded on 2026-11-19 and 2026-11-20 for GitHub (Nathan, 2026-11-20: "These are cleared to put on github along with anything else uploaded today").  Saved to `art-masters/packing-line/`.  Packages above stay unchecked until Nathan approves each one; "cleared for GitHub" is recorded here as his words.
+
+| Folder | Contents | Notes (Claudia, 2026-11-19 review) |
+| --- | --- | --- |
+| `07-address-label/` | Blank shipping label | Ready. |
+| `08-paw-mark/` | Paw-in-a-heart mark | Photo-real grunge paper and a lipstick kiss; off the cartoon style. |
+| `09-report-card/` | Three-row report card | "REPORT CARD" is lettered into the art; needs Nathan's call against the blank-surface default. |
+| `15-supplies/` | Bubble wrap roll, packing peanuts | Ready. |
+| `15b-hazard-stamps-unapproved/` | Hazard stamp sheet and its 19 single stamps | Same perforated shape and colors as the region stamps, so they would be confused with them.  Kept for reference; Breakable, Soft, and Heavy need a different shape, and there is no Soft icon. |
+| `20-bug-spray/` | Bug repellent can, spray mist cloud | Ready. |
+| `21-gnonmoon-gifts/` | Dog toy, idol gift (split from one sheet) | Ready. |
+| `22-runes/` | Six anti-demon runes (split), all lit | Tracing needs dim versions.  The A-in-a-circle reads as the anarchy symbol; the spiral and eye are hard to trace by finger. |
+| `23-grip-logo/` | Mara's shiny GRIP emblem, beside the approved v1.0 mark | Not approved; possible large "fancy" mark only. |
+| `24-trucks/` | Ten region trucks, three-quarter view | Gnomerica is the original red truck. |
+| `25-drivers/` | Ten drivers x three poses (waiting, happy, grumpy), split from Nathan's sheets | `NAMES.md` maps Mara's file names to regions.  Every set shares one baseline. |
+| `28-fake-trucks/` | Ten TNP fake trucks, green with taped-on region posters | Mara's file "Gnonomoon_Impostor_Truck" is the Shen Shin fake (waves and tassels); renamed by its art. |
+| `29-elf-imposters/` | Ten elf imposters x three poses | The Gnufoundland driver and elf lean on an icy post painted into the art (Nathan: keep for now, may swap later). |
+| `extras-unassigned/` | Two cloud poof frames | Not on the v0.3 list; purpose not logged yet. |
+
