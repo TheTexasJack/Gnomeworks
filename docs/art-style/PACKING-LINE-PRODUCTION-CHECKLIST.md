@@ -148,7 +148,7 @@
 ### Trucks, drivers, and GRIP
 
 - [x] **23. GRIP logo.  Approved by Nathan 2026-11-19.**  Nathan's design, drawn by Claudia as a one-color vector: a stylized hand (four finger lines) gripping a bracket box, with GRIP inside the box (draft G of v0.3, open top).  Master: `art-masters/packing-line/23-grip-logo/grip-mark-v1.0.svg` (lettering converted to outlines; recolor by changing the group's `color`), plus a 1040 px PNG.  Region truck colors come from code, so no repainting per region.  Mara's shiny gold GRIP emblem (box, lettering, arrow) is a separate candidate for a large "fancy" mark only and is not approved; it reads poorly at truck and ticker size.
-- [ ] **24. Ten real GRIP trucks.**  Rear view only, backed up to the open dock, framed by the door.  Region color and approved GRIP logo.  Confirm each from the same scene camera.
+- [ ] **24. Ten real GRIP trucks.**  Three-quarter view, rear doors facing the room; slides in from the right and backs up to the angled dock door, which frames it (Nathan, 2026-11-19).  First truck painted 2026-11-19, not yet approved.  Region color and approved GRIP logo.  Confirm each from the same scene camera.
   - [ ] Gnomerica.
   - [ ] Gnohio.
   - [ ] Gnafrica.

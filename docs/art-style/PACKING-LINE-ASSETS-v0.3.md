@@ -86,7 +86,7 @@ Mara's layout reference: [references/packing-room-sketch-v2.jpg](references/pack
 | # | Asset | Notes |
 | --- | --- | --- |
 | 23 | **GRIP logo** | A little gnome hand gripping a parcel or a gear crank.  Goes on trucks, uniforms, the ticker, and The Daily Cog. |
-| 24 | **Trucks x10** | **Rear view, backed up to the door,** framed only by the open doorway (Nathan, 2026-11-15).  Each in its region's color with the GRIP logo.  Gnomerica's truck comes first; the rest follow the unlock order. |
+| 24 | **Trucks x10** | **Three-quarter view with the rear doors facing the room;** it slides in from the right and backs up to the angled doorway, which frames it (Nathan, 2026-11-19; replaces the straight rear view of 2026-11-15).  First truck painted 2026-11-19.  Each in its region's color with the GRIP logo.  Gnomerica's truck comes first; the rest follow the unlock order. |
 | 25 | **Drivers x10** | One per region, from that region's people (for example a Gnomerica gnome, a Gni knight, a Slaanilok lizard folk driver, a Gnonmoon dog folk driver).  The driver slides in and stands beside the truck, leaning on it or standing next to it.  Poses: waiting, and happy or grumpy for the report card. |
 | 26 | **Stock ticker frame** | A brass ticker screen.  The game draws the GRIP and TNP lines inside it. |
 
@@ -95,7 +95,7 @@ Mara's layout reference: [references/packing-room-sketch-v2.jpg](references/pack
 | # | Asset | Notes |
 | --- | --- | --- |
 | 27 | **TNP Corp logo** | Corporate North Pole.  The big guy is never shown or named. |
-| 28 | **Fake truck tells** | Overlays painted to fit the real trucks' rear view: candy-cane mudflaps, hoofprints, jingle bells, a N0RTH plate, holly trim.  A fake truck is a real truck plus one to three tells, so no extra trucks are needed. |
+| 28 | **Fake truck tells** | Overlays painted to fit the real trucks' three-quarter view: candy-cane mudflaps, hoofprints, jingle bells, a N0RTH plate, holly trim.  A fake truck is a real truck plus one to three tells, so no extra trucks are needed. |
 | 29 | **Elf imposters x10** | One for each region's driver, each fully painted (Nathan, 2026-11-15).  Keep the elf tells consistent across all ten (pointed ears, curled shoes, too tall for the height chart) so kids learn them once. |
 | 30 | **Height chart** | Painted on the dock wall, or a separate overlay on #1.  Gnomes are short; anyone past the line is an elf in a borrowed hat. |
 | 31 | **Fake paperwork** | Snowflake and holly stamps, and a candy-cane border for fake work orders. |
@@ -118,7 +118,7 @@ Sounds for the door, the chain, tape, the stamp thunk, the truck horn, and TNP's
 
 ## Answered (2026-11-15)
 
-1. Trucks: rear view, backed up and framed by the open door; the driver slides in beside it.  The room is angled with the door on the right, and the door pulls up.
+1. Trucks: rear view, backed up and framed by the open door (updated 2026-11-19: three-quarter view, slides in from the right, rear doors facing the room); the driver slides in beside it.  The room is angled with the door on the right, and the door pulls up.
 2. Elf imposters: ten, one per region.
 3. Layouts: one wide room for desktop, tablet, and sideways phones; a tall room for upright phones.
 4. Supplies: bubble wrap and cornstarch peanuts, Breakable, Soft, and Heavy item tags, FRAGILE and HEAVY outside stickers, and a chart in the menu.  Rules drafted in DESIGNS.md.
