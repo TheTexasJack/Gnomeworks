@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **8 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), and 10–13 (four closed/open box pairs).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
+**Progress:** **9 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), 10–13 (four closed/open box pairs), and 23 (GRIP mark, 2026-11-19).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
 
 ## Operating procedure
 
@@ -147,7 +147,7 @@
 
 ### Trucks, drivers, and GRIP
 
-- [ ] **23. GRIP logo.**  Small gnome hand gripping a parcel or gear crank; reusable on trucks, uniforms, ticker and The Daily Cog.
+- [x] **23. GRIP logo.  Approved by Nathan 2026-11-19.**  Nathan's design, drawn by Claudia as a one-color vector: a stylized hand (four finger lines) gripping a bracket box, with GRIP inside the box (draft G of v0.3, open top).  Master: `art-masters/packing-line/23-grip-logo/grip-mark-v1.0.svg` (lettering converted to outlines; recolor by changing the group's `color`), plus a 1040 px PNG.  Region truck colors come from code, so no repainting per region.  Mara's shiny gold GRIP emblem (box, lettering, arrow) is a separate candidate for a large "fancy" mark only and is not approved; it reads poorly at truck and ticker size.
 - [ ] **24. Ten real GRIP trucks.**  Rear view only, backed up to the open dock, framed by the door.  Region color and approved GRIP logo.  Confirm each from the same scene camera.
   - [ ] Gnomerica.
   - [ ] Gnohio.
