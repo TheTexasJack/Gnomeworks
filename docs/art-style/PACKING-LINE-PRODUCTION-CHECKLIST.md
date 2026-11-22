@@ -80,7 +80,7 @@
 
 ### Paperwork
 
-- [ ] **06. Work order.**  Blank purchase-order slip with paper and brass clip/pin; live text overlays.
+- [ ] **06. Work order.**  Blank purchase-order slip with paper and brass clip/pin; live text overlays.  Blank parchment in the report card's paper style supplied by Nathan 2026-11-22: `art-masters/packing-line/06-work-order/blank_parchment.png` (white background) and `blank_parchment_alpha.png` (Claudia's true-alpha cutout of it).  Code draws the stripes, GRIP mark, text, region stamp and brass pin on top (mock v0.1, Claudia).  Not yet approved.
 - [ ] **07. Address label.**  Blank shipping label; destination text overlays.
 - [ ] **08. Paw-in-a-heart mark.**  Dog guy's distinctive Gnonmoon work-order mark, legible on a phone.
 - [ ] **09. Report card.**  Blank three-row sheet; success/failure marks and reasons reuse existing imagery.
