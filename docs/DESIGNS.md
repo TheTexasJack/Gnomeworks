@@ -211,8 +211,8 @@ Work orders and drivers are two separate calls.
 - **Any driver is sent away with the door chain.**  Closing the door sends the driver away.  There is no separate send-away control.
 - **A real (GRIP) driver** who leaves with all their work orders done is good.  Sent away without all their work orders: a Stonks hit (our line down).
 - **A fake (TNP) driver** sent away: a small hit to TNP (their line down).  Completing work orders for a fake driver is bad (our line down, theirs up).
-- Draft (Claudia, needs Nathan): stamping APPROVED on a real order and DENIED on a fake order are the correct calls; denying a real order counts as unfilled (❌), and approving a fake order counts as a TNP win.
-- **Open (needs Nathan):** closing the door used to end the shift.  After a fake driver is sent away, does a real driver arrive to finish the shift, or does the shift end there?
+- **Stamp scoring (Claudia's draft, approved by Nathan 2026-11-22):** stamping APPROVED on a real order and DENIED on a fake order are the correct calls; denying a real order counts as unfilled (❌), and approving a fake order counts as a TNP win.
+- **After a driver is sent away (Nathan, 2026-11-22):** the player can open the door again and gets a random driver again.  **No more than 2 TNP drivers in a row** (the limit lives in `js/config.js`).
 - **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
 - **The label is the reading challenge** (Cat Mail Co. style).  An order shows the town, and the player has to know which region that town is in to pick the right region stamp.  Players learn the map by shipping.
 - **No clock.**  A shift ends when the player closes the door: the truck leaves, the report card shows the score, and the next day starts.

@@ -52,7 +52,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] How a purchase order is read and filled: the order board, the randomizer, Gnomerica's 1-item orders, the correct supplies rule and item tags (approved 2026-11-22).  See DESIGNS.md.
     - [x] The "new thing to watch for" each region adds: the complications table in DESIGNS.md.
     - [x] Work orders and drivers: APPROVED or DENIED stamps on orders; the door chain sends any driver away (Nathan, 2026-11-22).
-    - [ ] Two open points on drivers (DESIGNS.md, "Work orders and drivers"): what each stamp call scores, and whether a real driver follows a sent-away fake.  Needed before TNP (Tier 2), not before layer 1.
+    - [x] Stamp scoring and what follows a sent-away driver: reopen the door for a random driver, no more than 2 TNP drivers in a row (Nathan, 2026-11-22).
     - [ ] Shipping log event logic, and throw-ins.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
     - [ ] Rune tracing that works with a finger on phones.
