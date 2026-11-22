@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-15, at v0.2.0-draft.69.
+Last updated 2026-11-22, at v0.2.0-draft.69.
 
 ## Where we are
 
@@ -35,29 +35,29 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 - [ ] Drop in the fixed hats and re-check every hat spot.
 - [x] Gear-framed shop badge for the Gnome Wizard (draft.62).
-- [ ] Packing Line, in Nathan's order: lore pass, then mechanics, then assets, then build.  See "Packing Line next steps" below.
+- [ ] Packing Line: lore, layer 1 mechanics, and art are done (2026-11-22).  The build runs through work orders on Claude Code.  See "Packing Line next steps" below.
 - [ ] Mid-to-late pacing pass.  Nathan's report (draft.68, 12.35 hours open): the Wizard makes 97% of production, items paid 28% of all cogs, shelf holds 7 to 12 billion of each junk item.
 - [ ] **Future step, before launch:** clean old item IDs out of saves.  Nathan's save still holds `shirt`, `chips`, `tcg_card`, `tiny_monster`, and `poop` from early versions.  They don't show or count anywhere, so it's harmless until then.  Do it as a save-schema bump in `js/state.js` (drop any item ID not in `CONFIG.items` on load), and run it before or with the repo move, since that resets saves anyway.
-- [ ] Themed buttons, when Mara's button art exists.
+- [ ] Themed buttons, when button art exists.
 - [ ] Once Jarrett picks: repo move, music system, then the chosen proposal items.
 
-## Packing Line next steps (2026-11-04)
+## Packing Line next steps (updated 2026-11-22)
 
-1. ~~**Lore pass**~~ done 2026-11-15 (company is GRIP, trade merged, stamps decided).  Was: canon review of the map v0.19 and gazetteer v0.18, the trade draft, Tiny Monsters assigned to regions (for stamps), our company's name, TNP Corp's story.
-2. **Mechanics to settle:**
-    - [ ] How much of a pile one package ships.
+1. ~~**Lore pass**~~ done 2026-11-15 (company is GRIP, trade merged, stamps decided).
+2. **Mechanics:**
+    - [x] How much of a pile one package ships: the whole pile, down to the display copy (approved 2026-11-22).
     - [x] What a failed shipment does: only the ticker lines move (Stonks is score only, 2026-11-15).
     - [x] What Stonks buy: nothing.  Stonks is the marker against TNP Corp, and stamps, boxes, and supplies are free (Nathan, 2026-11-15).
     - [x] Trade draft merged into gazetteer v0.25: every junk item has a buyer, and every trading place buys Bathroom items (2026-11-15).
-    - [ ] The match game's rules (Simon Says inspired) and how a purchase order is read.
-    - [ ] The "new thing to watch for" each region unlock adds.
+    - [x] How a purchase order is read and filled: the order board, the randomizer, Gnomerica's 1-item orders, the correct supplies rule and item tags (approved 2026-11-22).  See DESIGNS.md.
+    - [x] The "new thing to watch for" each region adds: the complications table in DESIGNS.md.
+    - [x] Work orders and drivers: APPROVED or DENIED stamps on orders; the door chain sends any driver away (Nathan, 2026-11-22).
+    - [ ] Two open points on drivers (DESIGNS.md, "Work orders and drivers"): what each stamp call scores, and whether a real driver follows a sent-away fake.  Needed before TNP (Tier 2), not before layer 1.
     - [ ] Shipping log event logic, and throw-ins.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
     - [ ] Rune tracing that works with a finger on phones.
-3. **Assets:** tiered list drafted in [art-style/PACKING-LINE-ASSETS-v0.3.md](art-style/PACKING-LINE-ASSETS-v0.3.md) (2026-11-15).  Handed to Mara 2026-11-15; her checklist will land on GitHub.  Nothing made before the mechanics are settled.
-4. **Build:** layer 1 core.
-
-The Claude doc "Gnomeworks Packing Line: Design and Asset Guide" is v0.1 and older than these decisions; DESIGNS.md is current.
+3. ~~**Assets**~~ done 2026-11-22: all 45 packages closed in [art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md](art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md), cleared for integration.
+4. **Build:** layer 1 core, as a work order for Claude Code, after its first-run check passes.
 
 ## Done draft.20 to draft.51
 

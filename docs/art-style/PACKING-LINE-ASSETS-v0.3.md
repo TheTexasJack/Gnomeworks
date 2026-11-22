@@ -1,8 +1,8 @@
 # Packing Line asset list, v0.3
 
-**Status: handed to Mara (Nathan, 2026-11-15).**  v0.2 added Nathan's answers on the truck view, imposters, layouts, and supplies.  v0.3 follows Nathan's room sketch: a supply drawer, a conveyor for the junk, and new props.  Mara is building a checklist to step through each asset; individual designs still go through Nathan's visual approval.  Every asset follows the [Art-Style Bible](../ART-STYLE-BIBLE.md) and gets its own brief from the [template](ASSET-BRIEF-TEMPLATE.md).  Final pixel sizes are set at build time; this list fixes **what** gets made and **in which order**.
+**Status (2026-11-22): all 45 packages closed.  The production checklist overrides this list wherever they differ:** several items here were changed, covered by existing art, or dropped after 2026-11-15 (for example 05b, 28, 30 to 36, 38).  Originally handed to Mara 2026-11-15.  v0.2 added Nathan's answers on the truck view, imposters, layouts, and supplies.  v0.3 follows Nathan's room sketch: a supply drawer, a conveyor for the junk, and new props.  Mara is building a checklist to step through each asset; individual designs still go through Nathan's visual approval.  Every asset follows the [Art-Style Bible](../ART-STYLE-BIBLE.md) and gets its own brief from the [template](ASSET-BRIEF-TEMPLATE.md).  Final pixel sizes are set at build time; this list fixes **what** gets made and **in which order**.
 
-**Production tracker:** [Packing Line art production checklist](PACKING-LINE-PRODUCTION-CHECKLIST.md).  Every item stays unchecked until Nathan approves the finished result, including any GIMP cleanup.  Visual approval does not authorize game integration.
+**Production tracker:** [Packing Line art production checklist](PACKING-LINE-PRODUCTION-CHECKLIST.md).  Every item stays unchecked until Nathan approves the finished result, including any GIMP cleanup.  **Integration authorized (Nathan, 2026-11-22):** approved Packing Line art is cleared for integration through work orders.
 
 The game design behind this list lives in [DESIGNS.md](../DESIGNS.md#packing-line).  Region stamps and colors are in [lore/regions.md](../lore/regions.md).
 

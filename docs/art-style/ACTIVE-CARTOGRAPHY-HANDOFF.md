@@ -1,7 +1,9 @@
 # ACTIVE HANDOFF: Gnomadica full map illustration
 
 **Updated:** 2026-11-15
-**Status:** COMMITTED / REVIEW PENDING: v18 complete map and exact sign PNG exist on GitHub; visual placement approval and mobile QA pending
+**Status (2026-11-22): PARKED as optional polish.**  Nathan closed the wall map package as covered: the approved small map icon on the wall, and the generated v0.29 map as the full map.  This Brasswood re-style (v18) no longer blocks anything.  Everything below is the record from 2026-11-15, kept in case the polish is picked up later.
+
+**Earlier status (2026-11-15):** COMMITTED / REVIEW PENDING: v18 complete map and exact sign PNG exist on GitHub; visual placement approval and mobile QA pending
 **Goal:** Review the actual *full v18 map*, which integrates the approved carved oak/brass sign and removes the two explanatory KEY notes while preserving earlier approved terrain/labels. Obtain Nathan's actual map placement verdict.
 
 ## Source of truth

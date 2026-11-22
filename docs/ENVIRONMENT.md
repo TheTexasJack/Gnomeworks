@@ -6,7 +6,7 @@
 | --- | --- |
 | Source code | GitHub repo `TheTexasJack/Gnomeworks`, branch `main` (the only branch) |
 | Live game | GitHub Pages, deployed automatically from `main` at the repo root.  Changes go live 1 to 10 minutes after a push. |
-| Art sources | Nathan's machine and his Mara (ChatGPT) chats.  Only the processed WebP files are committed. |
+| Art sources | Full-size approved masters in `art-masters/` (never loaded by the game).  Game copies are small WebP files in `assets/`, made with `tools/art.py`. |
 | Planning docs | The proposal for Jarrett lives in a Claude doc outside the repo.  Everything needed to build lives in this `docs/` folder. |
 
 The game is static files only.  There is no server, no database, no build step, and no package.json for the game itself.
@@ -38,6 +38,7 @@ Ctrl+Shift+R forces a fresh copy after a push.  On Android Chrome, clear "Cached
 | Tool | Used for | Install |
 | --- | --- | --- |
 | Python 3 + Pillow + numpy + scipy | `tools/art.py`, the art pipeline | `pip install pillow numpy scipy` |
+| Python 3 + numpy + OpenCV (`cv2`) | `tools/map/build_map.py`, the generated map | `pip install numpy opencv-python` |
 | Node 18+ + Playwright (Chromium) | `tools/smoke-test.js`, headless testing and screenshots | `npm install playwright` then `npx playwright install chromium` |
 | git | Everything else | |
 | GIMP | Hand fixes to art (Nathan) | |
@@ -79,8 +80,30 @@ Claudia works in an isolated cloud Linux container attached to this repo through
 - **Images Nathan attaches** arrive in `/mnt/user-data/uploads/`.  Process them from there into `assets/`; never commit the raw uploads.  Zips go to `/home/claude/incoming/<name>/` first.
 - **Sounds** (mp3) get trimmed and leveled with ffmpeg: `ffmpeg -i in.mp3 -af "silenceremove=start_periods=1:start_threshold=-40dB,loudnorm=I=-16:TP=-1.5" -ac 1 -b:a 64k assets/sfx/name.mp3`, then added to `SAMPLE_FILES` in `js/sfx.js`.  Samples only load over http, so test with `python3 -m http.server`; opened from disk the game uses the code-made fallbacks.
 - **The push warning** "This repository moved.  Please use the new location" is only GitHub noting the capital G in `Gnomeworks`.  Pushes succeed.
-- **Work on a branch for anything Nathan should see first** (`git checkout -b feature`), send screenshots or a short video (Playwright `recordVideo` plus ffmpeg), and fast-forward merge to `main` when he says push.  Small straight fixes can go straight to `main`.
+- **Commit straight to `main`** (Nathan's rule for all his repos, set November 2026).  No branches or pull requests.  For anything Nathan should see first, send screenshots or a short video (Playwright `recordVideo` plus ffmpeg) and push when he says push.
 - **Don't chain `pkill` into a command list**; it can end the shell with exit 144 and skip what follows.
+
+## Claude Code on Nathan's machine (Beast)
+
+Added 2026-11-22.  Claude Code is the builder: it runs on Nathan's Linux Mint desktop ("Beast") and builds from approved work orders in [requests/](requests/README.md).  The cloud Claude ("Claudia") designs and reviews in chat.  The recipe for a new project's setup lives in CommandCenter: `docs/CLAUDE-CODE-SETUP.md`.
+
+| Thing | Where |
+| --- | --- |
+| Fenced folder | `~/GW` (owner-only).  Claude Code is launched here and works only inside it. |
+| The repo clone | `~/GW/Gnomeworks` |
+| Rules it loads | `~/GW/CLAUDE.md` imports the repo's `CLAUDE.md` |
+| Permissions | `~/GW/.claude/settings.json` (Blocks 5 to 7 of the setup recipe; confirmed by the first-run work order): ask-first by default, skip-all-permissions mode off, deny rules for sudo, recursive deletes, force pushes, hard resets, the GitHub login token, SSH keys, and its own settings |
+| Launcher | "GW Claude Code" in the menu (`~/.local/bin/gw-claude-code`), outside the fence so Claude Code cannot edit it.  It refuses to run as root. |
+
+Rules for Claude Code on Beast:
+
+- **Start every job with `git pull`** in `~/GW/Gnomeworks`.  Claudia, Mara's uploads, and Nathan's web uploads push to this repo too.
+- **Work only from an approved work order** (Status: Approved) in `docs/requests/`.  Fill in its Result section, set its status, commit, and push.
+- **Commit straight to `main`.**  No branches or pull requests.
+- **Never install, upgrade, or remove packages on your own.**  If a tool is missing, stop and report it in the work order's Result; Nathan decides how it gets installed.  No `sudo`, ever.
+- **Use the local tools directly.**  `node tools/smoke-test.js` needs Playwright with Chromium installed locally (no `NODE_PATH` trick; that is only for the cloud session).  The map builder needs numpy and OpenCV.
+- **Never use files in a `not-for-game/` folder.**  Those are unapproved or retired art kept for reference.
+- **The push warning** about the repository having moved is only the capital G in `Gnomeworks`.  Pushes succeed.
 
 ## Repo layout
 
@@ -101,7 +124,8 @@ js/mega.js            the Megagnome
 js/hunt.js            the crossbow hunt
 js/main.js            input, game loop, shinies, pause, settings, wiring
 assets/               all art (see docs/ASSETS.md)
-tools/                art.py (art pipeline), smoke-test.js, stamp.js, inventory.js
+art-masters/          full-size approved art masters, never loaded by the game (packing-line/, postcards/)
+tools/                art.py (art pipeline), smoke-test.js, stamp.js, inventory.js, map/build_map.py
 docs/                 these docs
 CHANGELOG.md          every version, newest first
 README.md             short public readme

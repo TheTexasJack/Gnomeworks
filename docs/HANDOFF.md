@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Written 2026-11-03, version updated 2026-11-15 to **v0.2.0-draft.69**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.69**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -9,39 +9,33 @@ For a fresh session picking up Gnomeworks.  Written 2026-11-03, version updated 
 - **Events built:** shinies, Wild Magic, Clone Attack, the Megagnome and his crossbow hunt (with the Banana Monster boss).  How each works: [EVENTS.md](EVENTS.md).
 - **Real play data:** Nathan reached 20B cogs and 8.75M clicks a second in about two days of light play, with every gnome count between 50 and 92.  The 15% price climb keeps counts low on its own.  Playtesters reach the Megagnome in about 5 to 7 hours (2026-11-08, a measurement, not a target).
 
-## Next session: the Packing Line
+## Now: the Packing Line, ready to build
 
-Nathan's sorting mini-game.  Everything agreed so far is in [DESIGNS.md](DESIGNS.md#packing-line).  The short version:
+Nathan's shipping mini-game.  The design is in [DESIGNS.md](DESIGNS.md#packing-line); the art status is in [art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md](art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md).
 
-- The player drags one item tile from the shelf into a box; one drag ships a big batch.
-- Reshaped 2026-11-03: shipping **drains** the shelf (that's the point; an empty shelf sends players back to the clicker).  Every item stops at 1.  Open and Close buttons on a shipping door.
-- Shipping earns **Stonks**, never cogs.  Stonks is a score only, the marker against TNP Corp; nothing in shipping costs anything (Nathan, 2026-11-15).  Stamps are a free shipping mechanic (right stamp for the right region).  Boxes and supplies are free, box-size upgrades are dropped, and the packing itself is the game: a match game inspired by Simon Says.  Complete the order to succeed; extra items do nothing, except on Gnonmoon.
-- Later layers, all drafts: orders, the TNP Corp (The North Pole Corp) rival with Papers Please style fake trucks and elf spies, a stock ticker scoreboard of GRIP vs TNP, and The Daily Cog newspaper.  Full list in DESIGNS.md.
-- **Shift flow decided (2026-11-15):** chain or button, door opens, a region's truck and driver arrive with 3 work orders, fakes can be dismissed, fill all three, report card.  See DESIGNS.md.
-- **Mara's asset list:** [art-style/PACKING-LINE-ASSETS-v0.3.md](art-style/PACKING-LINE-ASSETS-v0.3.md), three tiers, handed to Mara 2026-11-15 (her checklist will land on GitHub).
-- **Next (as of 2026-11-15 night):** Nathan's verdict on Mara's v18 map sign ([art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md)); fold Mara's approved map stamps into `tools/map/build_map.py` so the generated map carries her art; the rest of the Packing Line assets; then the build of layer 1.  Only junk ships (decided); every junk item has a buyer.  Approved Packing Line masters are in `art-masters/`.
-- **Heavy coding can move to Claude Code on Nathan's machine.**  Repo rules for it are in `CLAUDE.md` at the root.
-- Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  Lore, the map, trade, and region stamps are done (2026-11-15); see lore/regions.md.
+- **Art: all 45 packages closed (2026-11-22),** approved, covered by existing art, or dropped by Nathan.  Masters are in `art-masters/packing-line/` and `art-masters/postcards/`.  **Approved art is cleared for integration through work orders (Nathan, 2026-11-22).**  Never use a `not-for-game/` folder.
+- **Logos and paperwork drawn by Claudia as vector (SVG):** the GRIP mark (23), the TNP logo (27), and the APPROVED and DENIED stamps (32).  The work order (06), supply list (05d), shipping log (36), and The Daily Cog (35) are Nathan's blank parchment with code-drawn text on top.
+- **Covered by the painted rooms:** the order board (the lower parchment frame), the STONKS ticker screen (code draws inside it), the conveyor (a button that opens the item menu; not animated), and the Report Card and Log clipboards.
+- **Layer 1 rules are approved (2026-11-22):** correct supplies (every box gets peanuts, Soft has no rule, one tag per item, the tag table), Gnomerica orders ask for 1 item because it is the first tier, one drag ships the whole pile down to the display copy, score by region difficulty, tap a slip to read it full size, recoverable ticker.
+- **Work orders and drivers are separate calls (Nathan, 2026-11-22):** each work order is stamped APPROVED or DENIED; any driver is sent away by closing the door with the chain.  Details and the two open points are in DESIGNS.md under "Work orders and drivers."  Fakes start after the first few shifts, so none of this blocks layer 1.
+- **The wall map** is the approved small icon, and the full map is the generated v0.29 map.  Mara's Brasswood re-style (v18) is parked as optional polish ([art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md)).
+
+## How the work flows now
+
+- **Claudia (cloud Claude, in chat)** designs and reviews with Nathan and writes work orders in [requests/](requests/README.md).
+- **Claude Code on Nathan's machine ("Beast")** builds from approved work orders and fills in each order's Result.  Setup and rules: [ENVIRONMENT.md](ENVIRONMENT.md#claude-code-on-nathans-machine-beast) and `CLAUDE.md` at the root.
+- **Mara** (Nathan's ChatGPT) made most of the art.  Her quality dropped around 2026-11-19, so new art leans on Nathan's GIMP work and Claudia's vector drawing.  ChatGPT chats die without warning when image-heavy.
+
+**Next, in order:**
+
+1. Finish Claude Code's setup on Beast: the permissions lockdown (Blocks 5 to 7 of CommandCenter's `docs/CLAUDE-CODE-SETUP.md`).
+2. Run the first-run work order ([requests/2026-11-16-first-run-check.md](requests/2026-11-16-first-run-check.md)) once Nathan approves it.
+3. Work order: Packing Line layer 1 (one Gnomerica truck, three orders, packing, stamps, report card, GRIP line on the ticker).
+4. Later and optional: fold Mara's approved map stamps into `tools/map/build_map.py`.
+
+Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  The rival is **TNP Corp** (The North Pole Corp).  Lore, the map (v0.29, gazetteer v0.27), trade, and region stamps are done; see lore/regions.md.
 
 Expect side requests from Jarrett and his 6-year-old daughter too (she asked for the Banana Monster).  Handle them as small steps between Packing Line steps.
-
-## Session of 2026-11-15 (for the next session)
-
-- **Lore:** Alex's region write-ups merged; every region has a kid Preview, an explorer's Guide, and Notable Flora and Fauna.  The main island is **Gnuma Gnuma**.  Gazetteer v0.27, map v0.29 (the generated one).
-- **Packing Line design:** shift flow, order board, label/stamp reading challenge, no clock, closing early leaves ❌, correct-supplies rule (Breakable, Soft, Heavy), four box types, only junk ships, stamps (color + symbol), company **GRIP**.  All in DESIGNS.md.
-- **Art:** Mara's checklist ([art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md](art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md)) had 8 of 45 packages approved.  Nathan's approved masters are in `art-masters/packing-line/` (rooms with doors, chain, map icon, supply drawer, desk props, boxes, stamps, shrub, red herring).  The room layout follows Nathan's sketch (`art-style/references/packing-room-sketch-v2.jpg`); supplies sit in a drawer that ducks away while dragging; the conveyor opens the item menu.
-- **Map art:** Mara's v18 map proof is committed and waiting on Nathan's sign verdict.  Read [art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md).  Her proofs are hand-edited copies of the generated map, so they drift whenever the gazetteer changes.  Plan: fold her approved stamps (mountains, crystals, hills, trees, dunes, sign) into `tools/map/build_map.py`.
-- **Code:** draft.69 added the landscape phone layout.
-- **New workflow (set up 2026-11-16):** heavy coding moves to Claude Code on Nathan's machine.  Chat designs and reviews; Claude Code builds from work orders in [requests/](requests/README.md).  Rules for it are in `CLAUDE.md` at the root.
-- **ChatGPT chats die without warning** when image-heavy.  Mara works one package per chat, and Nathan saves every approved image to `art-masters/` right away.
-
-**Tomorrow, in order:**
-
-1. Set up Claude Code: clone, check `CLAUDE.md`, try a first small work order.
-2. Nathan's verdict on the v18 map sign.
-3. Work order: fold Mara's map stamps into the map builder.
-4. The rest of the Packing Line assets with Mara (Tier 1 first).
-5. Work order: Packing Line layer 1 (one Gnomerica truck, three orders, packing, stamps, report card, GRIP line on the ticker).
 
 ## Waiting on others
 
@@ -50,11 +44,11 @@ Expect side requests from Jarrett and his 6-year-old daughter too (she asked for
 
 ## How Nathan likes to work
 
-- **Small steps, approval at each.**  Build, show screenshots or a short video, wait for "push."  Commit straight to `main` (no branches).  He's said he doesn't need downloadable test builds: a mockup screenshot is enough.
-- **Every change:** bump `GW.VERSION` in `js/config.js`, `node tools/stamp.js`, a `CHANGELOG.md` entry, `node tools/smoke-test.js` (with `NODE_PATH=$(npm root -g)` in the cloud session), commit, push.  Keep the docs current as you go.
+- **Small steps, approval at each.**  Build, show screenshots or a short video, wait for "push."  Commit straight to `main` (no branches or pull requests).  He's said he doesn't need downloadable test builds: a mockup screenshot is enough.
+- **Every change:** bump `GW.VERSION` in `js/config.js`, `node tools/stamp.js`, a `CHANGELOG.md` entry, `node tools/smoke-test.js` (add `NODE_PATH=$(npm root -g)` only in the cloud session), commit, push.  Keep the docs current as you go.
 - **Ideas are drafts** until he approves them.  He wants honest pushback and his words followed exactly.  Don't ask him follow-up questions at the end of replies.
 - **Repo writing:** two spaces after periods, no em dashes, no "not X, it's Y" phrasing.
-- **Mara** is his ChatGPT and makes the art.  He often fixes art himself in GIMP.  **Alex Gore** (his daughter) records voices.
+- **Mara** is his ChatGPT and made most of the art.  He often fixes art himself in GIMP, and Claudia draws logos and simple shapes as vector art.  **Alex Gore** (his daughter) records voices.
 - **Standing game rules:** no gambling mechanics unless Jarrett (the owner) directly asks for one, real taps only for anything rare, kid-friendly (cartoon splats are fine for this D&D crowd), phone first, every number in `js/config.js`.
 - He plays on Linux Mint; Jarrett plays on desktop; testers use phones (one Android has reduced motion on).
 

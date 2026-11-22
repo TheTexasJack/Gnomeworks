@@ -65,7 +65,7 @@ The event clicker.  Discussed 2026-11-02.
 
 Nathan's sorting game, first mini-game in line.  Discussed 2026-11-02, reshaped 2026-11-03.
 
-The full working guide (build layers, difficulty ramp, asset list for Mara, lore inputs, mechanics to borrow) is the Claude doc "Gnomeworks Packing Line: Design and Asset Guide": https://claude.ai/artifact/Krkzpd61ihTKBBCCgLMdWT
+An early Claude doc ("Gnomeworks Packing Line: Design and Asset Guide", v0.1) predates every decision below and is retired.  This file is the current design.
 
 The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line is where the stock goes out.  Emptying the shelf is the point.  An empty shelf sends the player back to the gear to click more.  A shipping game grows out of the clicker.
 
@@ -95,7 +95,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - **Shipping does not pay cogs.**  It earns **Stonks** (Nathan's pick, ties to the stock ticker; placeholder icon 📈).
 - **Stonks is a score, never spent (Nathan, 2026-11-15).**  Stonks is simply the marker that TNP Corp is measured against.  Nothing in shipping costs anything: stamps, boxes, stickers, and every other supply are free.  There is no Stonks shop.  This keeps the shipping game what it is: an organizer and a Simon Says variant.
 - Clone Attack on an emptied shelf stealing 1 sock is fine (and funny).
-- **Math before code** still holds: stamp prices and upgrade costs get a pass before building.
+- ~~Math before code: stamp prices and upgrade costs get a pass before building.~~  Retired 2026-11-15: nothing in shipping costs anything.
 
 **Math pass notes (2026-11-03, model at early, mid, and Nathan's day-2 numbers)**
 
@@ -104,7 +104,7 @@ The idea: the clicker is the farm, the shelf is the warehouse, the Packing Line 
 - Shipping limits itself: nothing ships faster than the machine makes it.  The first open of a full shelf is a big one-time payout, and after that each sell-off pays for whatever built up since.
 - ~~Box upgrades (Shoebox 10%, Crate 25%, Pallet 50%, Shipping Container 90%) as speed upgrades.~~  Dropped 2026-11-04 (Nathan): boxes cost nothing, and the challenge is the packing match.
 
-**Order of work (Nathan, 2026-11-04):** finish the lore pass, then nail down the full gameplay mechanics, then make assets, then build.  No Packing Line assets get made until the mechanics are settled.  First mechanics to settle: how much of a pile one package ships, what the Stonks shop sells (if anything), and what a failed shipment does to spendable Stonks versus the ticker line.  (2026-11-15: Stonks is score only and nothing is bought, so a failure just drops our line and lifts TNP's.  The pile question has a draft answer in Purchase orders below.)
+**Order of work (Nathan, 2026-11-04):** finish the lore pass, then nail down the full gameplay mechanics, then make assets, then build.  (Status 2026-11-22: lore, layer 1 mechanics, and all 45 art packages are done; the build is next.)  First mechanics to settle: how much of a pile one package ships, what the Stonks shop sells (if anything), and what a failed shipment does to spendable Stonks versus the ticker line.  (2026-11-15: Stonks is score only and nothing is bought, so a failure just drops our line and lifts TNP's.  The pile question has a draft answer in Purchase orders below.)
 
 **Shipping log (Nathan, 2026-11-04, decided; build after the core)**
 
@@ -128,19 +128,19 @@ Each region unlock adds one complication, and they stack.  Some apply to every p
 | Gnufoundland | Water-resistant box, bug spray, and a complimentary dog toy or treat | Gnufoundland packages |
 | Gnonmoon | Temperature-controlled box, a complimentary Idol gift, and an anti-demon rune traced onto the box (a simple shape-tracing game, easy with a mouse, like a Korean letter) | Gnonmoon packages |
 
-**Correct supplies: Gnomerica's rule (Nathan, 2026-11-15; Claudia's details are DRAFT)**
+**Correct supplies: Gnomerica's rule (Nathan, 2026-11-15; Claudia's details approved by Nathan 2026-11-22)**
 
 Every junk item gets a packing tag: **Breakable**, **Soft**, **Heavy**, or none.  A chart in the menu explains the three, and each item tile shows its icon.
 
 - **Breakables go on top**, and a box with a breakable needs **bubble wrap**.  (Nathan)
-- **Packing peanuts** (the cornstarch kind) fill the box.  (Nathan)  Draft: every box gets peanuts.
+- **Packing peanuts** (the cornstarch kind) fill the box.  (Nathan)  Every box gets peanuts (approved 2026-11-22).
 - **Heavy goes in first.**  Putting a heavy item in last earns an ❌.  (Nathan)
 - **Outside stickers:** a **FRAGILE** sticker on any box holding a breakable, a **HEAVY** sticker on any box holding something heavy.  (Nathan)
-- Draft: **Soft** items have no rule.  They are safe anywhere, so the chart tells players they never need to worry about them.
-- Draft: each item carries one tag only.  A Toilet is Heavy.
+- **Soft** items have no rule (approved 2026-11-22).  They are safe anywhere, so the chart tells players they never need to worry about them.
+- Each item carries one tag only.  A Toilet is Heavy (approved 2026-11-22).
 - ~~Draft ramp over Gnomerica's first few days.~~  Not needed (Nathan, 2026-11-15): the full rule set is fine from the start, since Elana already plays more complicated games.
 
-Draft tags (for Nathan to correct; the final list goes in `js/config.js`):
+Item tags (approved by Nathan 2026-11-22; the final list goes in `js/config.js`):
 
 | Group | Breakable | Heavy | Soft |
 | --- | --- | --- | --- |
@@ -191,8 +191,8 @@ Notes to settle when this is built (Claudia):
 
 1. The player enters the shipping lane and pulls a chain or presses a button.  The shipping door opens.
 2. A truck slides in through the door with its shipping agent (the driver), and three work orders appear on the order board.
-3. The truck, the driver, or both can be fake (TNP Corp).  The game gives plenty of clues about the work orders and the truck, and a way to dismiss them.  When a fake is dismissed, another driver comes in to finish the work orders.
-4. The player fills **all three** work orders and hands them all to the driver.
+3. The truck, the driver, or both can be fake (TNP Corp), and a work order can be fake.  The game gives plenty of clues.  Work orders and drivers are handled separately (Nathan, 2026-11-22; see Work orders and drivers below).
+4. The player approves or denies each work order, fills the approved ones, and hands them to the driver.
 5. Once done, the game does the math: each delivery succeeds or fails based on the complications in play.
 
 Settled the same day (Nathan picked each):
@@ -201,19 +201,31 @@ Settled the same day (Nathan picked each):
 
 - **One region per truck.**  Each region has its own truck and driver, and all three orders on a truck go to towns in that region.  The town line on each order is the reading challenge.
 - **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
-- **Both fake mistakes move the ticker.**  Handing orders to a fake sends those orders to TNP (our line down, theirs up).  Dismissing a real driver is a small dip with a grumpy shipping log line, and the replacement driver still comes in.
+- ~~Both fake mistakes move the ticker; dismissing a real driver is a small dip and a replacement driver comes in.~~  Replaced 2026-11-22 by the rules below.
+
+**Work orders and drivers (Nathan, 2026-11-22, decided)**
+
+Work orders and drivers are two separate calls.
+
+- **Work orders are approved or denied.**  Each slip on the order board gets the APPROVED or DENIED stamp (it starts big and lands with a BAM).  A fake work order is the normal slip with a glitter effect.
+- **Any driver is sent away with the door chain.**  Closing the door sends the driver away.  There is no separate send-away control.
+- **A real (GRIP) driver** who leaves with all their work orders done is good.  Sent away without all their work orders: a Stonks hit (our line down).
+- **A fake (TNP) driver** sent away: a small hit to TNP (their line down).  Completing work orders for a fake driver is bad (our line down, theirs up).
+- Draft (Claudia, needs Nathan): stamping APPROVED on a real order and DENIED on a fake order are the correct calls; denying a real order counts as unfilled (❌), and approving a fake order counts as a TNP win.
+- **Open (needs Nathan):** closing the door used to end the shift.  After a fake driver is sent away, does a real driver arrive to finish the shift, or does the shift end there?
 - **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
 - **The label is the reading challenge** (Cat Mail Co. style).  An order shows the town, and the player has to know which region that town is in to pick the right region stamp.  Players learn the map by shipping.
 - **No clock.**  A shift ends when the player closes the door: the truck leaves, the report card shows the score, and the next day starts.
 - **Closing early is allowed and costs.**  Any order not filled when the door closes is unfulfilled and gets a ❌ on the report card.  Opening and closing the door over and over just tanks our Stonks.
 
-**Purchase orders and the order board (approved 2026-11-15; details are Claudia's draft)**
+**Purchase orders and the order board (approved 2026-11-15; details approved by Nathan 2026-11-22)**
 
 - **Order board:** a truck brings 3 work orders, each from a trading place in an unlocked region.  The player fills all three.
-- **What an order asks for (the randomizer):** items are drawn only from that place's Factory Imports (plus any Bathroom item, since every place buys those), and only from piles with more than 1 on the shelf, so every order can be packed.  Gnomerica orders ask for 1 item; later regions ask for 2 or 3; Gnonmoon must be exact.
+- **What an order asks for (the randomizer):** items are drawn only from that place's Factory Imports (plus any Bathroom item, since every place buys those), and only from piles with more than 1 on the shelf, so every order can be packed.  Gnomerica orders ask for 1 item, because Gnomerica is the first tier (Nathan, 2026-11-22); later regions ask for 2 or 3; Gnonmoon must be exact.
 - **Packing:** dragging a shelf tile onto the box puts the whole pile in, down to the display copy.  The label happily reads "1,700,000 Poop Knives."
 - **Rotation:** a pile just shipped sits at 1, so orders skip it until it grows back.
 - **Score:** each correct order lifts our Stonks by an amount set by region difficulty, never by pile size.
+- **Reading a slip (approved 2026-11-22):** the order board shows the three slips small; tapping one opens it full size to read.  The region stamp corner stays visible at small size.
 
 **Ideas on the table (drafts, build in this order)**
 
@@ -222,15 +234,16 @@ Settled the same day (Nathan picked each):
 2. ~~**Stonks shop:**~~  Dropped 2026-11-15 (Nathan): Stonks is never spent, so there is no shop, Packing Gnome, faster belt, or wider door.
 3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
 4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:
-   - A height chart painted on the dock wall.  Gnomes are short.  A "gnome" past the line is a TNP elf in a borrowed hat.
-   - Fake trucks with picture tells: candy-cane mudflaps, a jingle on arrival, hoofprints, a plate reading N0RTH.  One tell early, two or three later.
-   - Bad paperwork: items not in the catalog, snowflake stamps, shipping labels whose region doesn't match the order.
+   - ~~A height chart on the dock wall~~ dropped 2026-11-22 (Nathan): the elf imposters are obvious without one (curly bell shoes, fake beard on a string, striped sleeves, a Santa hat peeking out).
+   - Fake trucks (decided 2026-11-20): each region's truck painted green with that region's art taped on as torn posters.  Gnomerica's fake is the crude first try on purpose (the red truck with green paint splotches and candy-cane wheels).  ~~Mudflaps, hoofprints, N0RTH plate~~ replaced.
+   - Fake paperwork (decided 2026-11-22): the normal work order with a glitter effect drawn by code.
    - Picture tells first, so a 6-year-old can play without reading.
 5. **The stock ticker:** a screen with two lines, GRIP vs TNP Corp.  The second game's goal is keeping our line above theirs.  Getting fooled or missing orders pushes TNP up, clean shipments push ours up.
    - A scoreboard only: players never buy, sell, or bet on shares (the default no-gambling rule; Jarrett can override it, since the game is his).
    - TNP moves only while the player works shifts, so nobody comes back to a lost lead after being away.
-   - Mistakes should be recoverable (a meter that clean shifts push back down), avoiding losses that stack forever.
-6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).
+   - Mistakes are recoverable (a meter that clean shifts push back down), avoiding losses that stack forever (approved by Nathan 2026-11-22).
+   - The ticker is drawn by code inside the STONKS screen painted in the room (Nathan, 2026-11-22).
+6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).  Masthead art approved 2026-11-22.  Claudia's draft of its jobs, in order: introduce a newly unlocked region's rule, recap the last shift as a headline, carry the GRIP vs TNP story.
 
 **Done 2026-11-15:** our company is **GRIP** (Gnuma Gnuma Regional Independent Parcels), and the lore, map, and region stamps are in.  Formerly waiting on Nathan and Mara for these.  Regions feed the shipping labels (where stock goes) and the Tiny Monster info cards (where monsters live), so the shelf, the maps, and the dock share one world.
 
