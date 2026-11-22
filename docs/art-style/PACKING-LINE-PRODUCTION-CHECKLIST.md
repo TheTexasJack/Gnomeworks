@@ -203,7 +203,7 @@
 - [x] **34. Cosmetic box variations.**  **Not now (Nathan, 2026-11-22): keep the base four boxes.**  Define which of the four boxes and how many versions during its brief; keep their functional shapes recognizable.
 - [ ] **35. The Daily Cog masthead.**  Newspaper brand for between-day presentation.  **Needs explaining before work starts (Nathan, 2026-11-22).**
 - [x] **36. Shipping log page.**  **Approved by Nathan 2026-11-22: uses the blank parchment from 06.**  Blank sheet accommodating ten lines of live story text.
-- [ ] **37. The dog guy.**  Lovable, kiss-blowing dog-folk recipient; compatible with the paw-in-heart mark in 08.  **Needs work (Nathan, 2026-11-22).**
+- [ ] **37. The dog guy.**  Lovable, kiss-blowing dog-folk recipient; compatible with the paw-in-heart mark in 08.  **Needs work (Nathan, 2026-11-22).**  **Two variants painted 2026-11-22 (selfie photos on Nathan's Gnonmoon postcard backgrounds): `37-dog-guy/peace_dog_1_zohee_bay.png` and `peace_dog_2_three_idols.png` (paw-print lapel pin; Claudia's pick).  No floating hearts or blown kisses on him (Nathan, 2026-11-22): the kiss on the paw-in-a-heart mark is enough, and he must not come off creepy.  Not yet approved.**
 - [ ] **38. Ten regional pictures.**  For the Gnomopedia and expedition-return story.
   - [ ] Gnomerica.
   - [ ] Gnohio.
