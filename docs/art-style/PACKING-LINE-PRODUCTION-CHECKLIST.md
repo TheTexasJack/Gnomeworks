@@ -128,7 +128,7 @@
 - [x] **17. Wireless tracker.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Used from Gno Dao Cradle onward.  Painted 2026-11-22 (Mara, Brasswood tag: teal with brass trim, gnome-in-gear emblem, signal arcs, green light, string hole); saved to `art-masters/packing-line/17-tracker/`.  Not yet approved.
 - [ ] **18. Gni stickers.**  **Red Herring sticker dropped (Nathan, 2026-11-22): the red herring object (19) does that job.  Shrubbery sticker still open.**
   - [x] Red Herring sticker: dropped (Nathan, 2026-11-22).
-  - [ ] Shrubbery sticker.  Stays in (Nathan, 2026-11-22): the shrub object is an additional item, separate from the sticker.  The red herring stays an object only.  Nathan is making it.
+  - [ ] Shrubbery sticker.  Stays in (Nathan, 2026-11-22): the shrub object is an additional item, separate from the sticker.  The red herring stays an object only.  Made by Nathan 2026-11-22: `art-masters/packing-line/18-gni-stickers/shrub_sticker.png` (die-cut sticker with a cream border).  Awaiting Nathan's approval.
 - [x] **19. Gni secret alternate objects.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**
   - [x] Actual red herring fish (it lives in the lunch, 05c).
   - [x] Separate draggable shrub asset, matching the shrub by the door in 01.
