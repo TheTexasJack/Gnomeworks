@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **13 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), 10–13 (four closed/open box pairs), 23 (GRIP mark, 2026-11-19), 15a and 16 (hazard stamp sheet, 2026-11-22), and 04 and 06 (order board and work order, 2026-11-22).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
+**Progress:** **14 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), 10–13 (four closed/open box pairs), 23 (GRIP mark, 2026-11-19), 15a and 16 (hazard stamp sheet, 2026-11-22), 04 and 06 (order board and work order, 2026-11-22), and 26 (ticker: painted screen plus code, 2026-11-22).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
 
 ## Operating procedure
 
@@ -168,7 +168,7 @@
   - [ ] Shen Shin driver.
   - [ ] Gnufoundland driver.
   - [ ] Gnonmoon driver.
-- [ ] **26. Stock ticker frame.**  Brass display, blank interior for GRIP and TNP lines drawn by code.
+- [x] **26. Stock ticker frame.  No separate art (Nathan, 2026-11-22).**  Brass display, blank interior for GRIP and TNP lines drawn by code.  The frame is the dark STONKS screen already painted into the approved rooms (01).  Everything inside it, including the Stonks growth, is drawn by code: Nathan's call, since the screen is black and code animates growth better than art.
 
 ## Tier 2: TNP Corp
 
