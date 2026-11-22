@@ -2,7 +2,7 @@
 
 **Working tracker, started 2026-11-15.**  Source of truth for scope and order: [Packing Line asset list v0.3](PACKING-LINE-ASSETS-v0.3.md).  The source list remains a design draft; this tracker records visual production and Nathan's individual approvals.  Use [the Art-Style Bible](../ART-STYLE-BIBLE.md), [frozen reference gallery](REFERENCE-GALLERY.md), [asset brief template](ASSET-BRIEF-TEMPLATE.md), [art pipeline](../ASSETS.md), [Packing Line design](../DESIGNS.md#packing-line), and [region stamp palette](../lore/regions.md#region-stamps-nathan-2026-11-15).
 
-**Progress:** **14 of 45 work packages approved** (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), 10–13 (four closed/open box pairs), 23 (GRIP mark, 2026-11-19), 15a and 16 (hazard stamp sheet, 2026-11-22), 04 and 06 (order board and work order, 2026-11-22), and 26 (ticker: painted screen plus code, 2026-11-22).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
+**Progress:** **36 of 45 work packages closed** (approved, covered by other art, or dropped by Nathan; see 2026-11-22 notes) (01 to 38, plus 05a to 05e, 15a and 15b).  **Approved:** 01 (four room layouts/themes), 02 (eight open/closed door states), 03 (draw chain), 05a (neutral blank supply menu master approved after Nathan's GIMP/rotation simplification), 10–13 (four closed/open box pairs), 23 (GRIP mark, 2026-11-19), 15a and 16 (hazard stamp sheet, 2026-11-22), 04 and 06 (order board and work order, 2026-11-22), and 26 (ticker: painted screen plus code, 2026-11-22).  Box masters and completed GIMP assets are in Nathan's custody/conversation; visual approval does not authorize game integration.  **Still pending:** 04 order board, 05 wall map, and other unmarked entries.  Nathan used GIMP to reconcile door geometry and to add a behind-the-rim lid on the wooden crate.  The shrub was separated from room art for future interactive reuse.  (Claudia, 2026-11-15: 05a to 05e and the 01 and 19 updates come from Nathan's room sketch in asset list v0.3; layout reference [references/packing-room-sketch-v2.jpg](references/packing-room-sketch-v2.jpg).)
 
 ## Operating procedure
 
@@ -74,16 +74,16 @@
 - [ ] **05b. Conveyor belt.**  Where the junk arrives; tapping it opens the item menu.
   - [ ] Day.
   - [ ] Night.
-- [ ] **05c. Computer and lunch.**  Behind the drawer panel; the lunch holds the red herring (see 19).
-- [ ] **05d. Supply list.**  Pull-down reference below the bench, rolled and unrolled.
+- [x] **05c. Computer and lunch.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Behind the drawer panel; the lunch holds the red herring (see 19).
+- [x] **05d. Supply list.**  **Approved by Nathan 2026-11-22: uses the blank parchment from 06.**  Pull-down reference below the bench, rolled and unrolled.
 - [ ] **05e. Report Card and Log hooks.**  Under STONKS, where the report card and shipping log hang.
 
 ### Paperwork
 
 - [x] **06. Work order.  Approved by Nathan 2026-11-22.**  Blank purchase-order slip with paper and brass clip/pin; live text overlays.  Blank parchment in the report card's paper style supplied by Nathan 2026-11-22: `art-masters/packing-line/06-work-order/blank_parchment.png` (white background) and `blank_parchment_alpha.png` (Claudia's true-alpha cutout of it).  Code draws the stripes, GRIP mark, text, region stamp and brass pin on top (mock v0.1, Claudia, approved with the slip: `06-work-order/work_order_mock_v0.1.png`).
-- [ ] **07. Address label.**  Blank shipping label; destination text overlays.
-- [ ] **08. Paw-in-a-heart mark.**  Dog guy's distinctive Gnonmoon work-order mark, legible on a phone.
-- [ ] **09. Report card.**  Blank three-row sheet; success/failure marks and reasons reuse existing imagery.
+- [x] **07. Address label.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Blank shipping label; destination text overlays.
+- [x] **08. Paw-in-a-heart mark.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Dog guy's distinctive Gnonmoon work-order mark, legible on a phone.
+- [x] **09. Report card.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Blank three-row sheet; success/failure marks and reasons reuse existing imagery.
 
 ### Boxes
 
@@ -102,108 +102,108 @@
 
 ### Stamps, stickers, supplies
 
-- [ ] **14. Region stamps, ten.  IN REVIEW (started 2026-11-15).**  Repaint the [placeholder stamp sheet](../lore/stamps/region-stamps-v0.1.png) in Gnomeworks Brasswood Cartoon: tactile embossed/stamped-paper look, chunky readable single silhouette, restrained upper-left highlights, warm ivory perforated postage edge, matching each approved region color and symbol.  One isolated, true-alpha stamp per region, no printed names, labels, Tiny Monsters, or TNP/Christmas motifs.  Approve individually before checking their sub-items; keep the parent unchecked until all ten are approved.
-  - [ ] Gnomerica: brass gold gear.
-  - [ ] Gnohio: field green wheat.
-  - [ ] Gnafrica: terracotta cactus.
-  - [ ] Slanic: marsh teal mushroom.
-  - [ ] Gno Dao Cradle: mountain purple mountains.
-  - [ ] Gni: plum knight's helm.
-  - [ ] Slaanilok: coral step pyramid.
-  - [ ] Shen Shin: wood brown table.
-  - [ ] Gnufoundland: ice blue mitten.
-  - [ ] Gnonmoon: night blue crescent moon.
-- [ ] **15. Packing supplies.**
-  - [ ] Bubble wrap.
-  - [ ] Cornstarch packing peanuts.
+- [x] **14. Region stamps, ten.  IN REVIEW (started 2026-11-15).**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Repaint the [placeholder stamp sheet](../lore/stamps/region-stamps-v0.1.png) in Gnomeworks Brasswood Cartoon: tactile embossed/stamped-paper look, chunky readable single silhouette, restrained upper-left highlights, warm ivory perforated postage edge, matching each approved region color and symbol.  One isolated, true-alpha stamp per region, no printed names, labels, Tiny Monsters, or TNP/Christmas motifs.  Approve individually before checking their sub-items; keep the parent unchecked until all ten are approved.
+  - [x] Gnomerica: brass gold gear.
+  - [x] Gnohio: field green wheat.
+  - [x] Gnafrica: terracotta cactus.
+  - [x] Slanic: marsh teal mushroom.
+  - [x] Gno Dao Cradle: mountain purple mountains.
+  - [x] Gni: plum knight's helm.
+  - [x] Slaanilok: coral step pyramid.
+  - [x] Shen Shin: wood brown table.
+  - [x] Gnufoundland: ice blue mitten.
+  - [x] Gnonmoon: night blue crescent moon.
+- [x] **15. Packing supplies.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**
+  - [x] Bubble wrap.
+  - [x] Cornstarch packing peanuts.
 - [x] **15a. Outside stickers.  Approved by Nathan 2026-11-22** (from the embossed hazard stamp sheet, `art-masters/packing-line/15-16-hazard-stamps/`).
   - [x] FRAGILE: `hazard-01-fragile.png` (broken glass).
   - [x] HEAVY: `hazard-02-heavy.png` (weight).
-- [ ] **15b. Item-category icons.**  For item tiles and the menu's explanation chart.
+- [x] **15b. Item-category icons.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  For item tiles and the menu's explanation chart.
   - [x] Breakable: `hazard-01-fragile.png` (approved 2026-11-22).
-  - [ ] Soft: candidate `hazard-09-handle-with-care.png` (hands holding a box; Claudia's suggestion, not yet confirmed).
+  - [x] Soft: `hazard-09-handle-with-care.png` (hands holding a box), approved 2026-11-22.
   - [x] Heavy: `hazard-02-heavy.png` (approved 2026-11-22).
 - [x] **16. Safety stickers.  Approved by Nathan 2026-11-22.**  Used from Gnohio onward, five to ten on a box.  The pool is the rest of the hazard stamp sheet, already split into single stamps in `art-masters/packing-line/15-16-hazard-stamps/`; extras are kept for other uses.  Nathan accepted that they share the region stamps' perforated shape (Claudia flagged possible mix-ups, 2026-11-22).
   - [x] Design A and up: the pool of single stamps.
-- [ ] **17. Wireless tracker.**  Used from Gno Dao Cradle onward.  Painted 2026-11-22 (Mara, Brasswood tag: teal with brass trim, gnome-in-gear emblem, signal arcs, green light, string hole); saved to `art-masters/packing-line/17-tracker/`.  Not yet approved.
-- [ ] **18. Gni stickers.**
-  - [ ] Red Herring sticker.
+- [x] **17. Wireless tracker.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Used from Gno Dao Cradle onward.  Painted 2026-11-22 (Mara, Brasswood tag: teal with brass trim, gnome-in-gear emblem, signal arcs, green light, string hole); saved to `art-masters/packing-line/17-tracker/`.  Not yet approved.
+- [ ] **18. Gni stickers.**  **Red Herring sticker dropped (Nathan, 2026-11-22): the red herring object (19) does that job.  Shrubbery sticker still open.**
+  - [x] Red Herring sticker: dropped (Nathan, 2026-11-22).
   - [ ] Shrubbery sticker.
-- [ ] **19. Gni secret alternate objects.**
-  - [ ] Actual red herring fish (it lives in the lunch, 05c).
-  - [ ] Separate draggable shrub asset, matching the shrub by the door in 01.
-- [ ] **20. Bug spray.**  Used for Slaanilok and Gnufoundland.
-  - [ ] Repellent can.
-  - [ ] Separate spray cloud.
-- [ ] **21. Gift-slot objects.**
-  - [ ] Dog toy.
-  - [ ] Idol gift.
-- [ ] **22. Anti-demon rune, Gnonmoon.**
-  - [ ] Simple tracing-guide shapes (quantity set in brief).
-  - [ ] Glowing completed version.
-  - [ ] No tracing behavior painted in; interaction belongs to code.
+- [x] **19. Gni secret alternate objects.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**
+  - [x] Actual red herring fish (it lives in the lunch, 05c).
+  - [x] Separate draggable shrub asset, matching the shrub by the door in 01.
+- [x] **20. Bug spray.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Used for Slaanilok and Gnufoundland.
+  - [x] Repellent can.
+  - [x] Separate spray cloud.
+- [x] **21. Gift-slot objects.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**
+  - [x] Dog toy.
+  - [x] Idol gift.
+- [x] **22. Anti-demon rune, Gnonmoon.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").  Dim tracing guides are made in code from the lit runes.**
+  - [x] Simple tracing-guide shapes (quantity set in brief).
+  - [x] Glowing completed version.
+  - [x] No tracing behavior painted in; interaction belongs to code.
 
 ### Trucks, drivers, and GRIP
 
 - [x] **23. GRIP logo.  Approved by Nathan 2026-11-19.**  Nathan's design, drawn by Claudia as a one-color vector: a stylized hand (four finger lines) gripping a bracket box, with GRIP inside the box (draft G of v0.3, open top).  Master: `art-masters/packing-line/23-grip-logo/grip-mark-v1.0.svg` (lettering converted to outlines; recolor by changing the group's `color`), plus a 1040 px PNG.  Region truck colors come from code, so no repainting per region.  Mara's shiny gold GRIP emblem (box, lettering, arrow) is a separate candidate for a large "fancy" mark only and is not approved; it reads poorly at truck and ticker size.
-- [ ] **24. Ten real GRIP trucks.**  Three-quarter view, rear doors facing the room; slides in from the right and backs up to the angled dock door, which frames it (Nathan, 2026-11-19).  First truck painted 2026-11-19, not yet approved.  Region color; no GRIP logo on trucks (only the back shows).  The GRIP mark goes on the work order (#6) instead (Nathan, 2026-11-20).  Confirm each from the same scene camera.
-  - [ ] Gnomerica.
-  - [ ] Gnohio.
-  - [ ] Gnafrica.
-  - [ ] Slanic.
-  - [ ] Gno Dao Cradle.
-  - [ ] Gni.
-  - [ ] Slaanilok.
-  - [ ] Shen Shin.
-  - [ ] Gnufoundland.
-  - [ ] Gnonmoon.
-- [ ] **25. Ten real regional drivers.**  A local person from each region.  Positioned beside the backed-in truck; waiting pose plus happy/grumpy report-card reaction as determined in each brief.  Maintain identity and registration within pose sets.
-  - [ ] Gnomerica driver.
-  - [ ] Gnohio driver.
-  - [ ] Gnafrica driver.
-  - [ ] Slanic driver.
-  - [ ] Gno Dao Cradle driver.
-  - [ ] Gni driver.
-  - [ ] Slaanilok driver.
-  - [ ] Shen Shin driver.
-  - [ ] Gnufoundland driver.
-  - [ ] Gnonmoon driver.
+- [x] **24. Ten real GRIP trucks.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Three-quarter view, rear doors facing the room; slides in from the right and backs up to the angled dock door, which frames it (Nathan, 2026-11-19).  First truck painted 2026-11-19, not yet approved.  Region color; no GRIP logo on trucks (only the back shows).  The GRIP mark goes on the work order (#6) instead (Nathan, 2026-11-20).  Confirm each from the same scene camera.
+  - [x] Gnomerica.
+  - [x] Gnohio.
+  - [x] Gnafrica.
+  - [x] Slanic.
+  - [x] Gno Dao Cradle.
+  - [x] Gni.
+  - [x] Slaanilok.
+  - [x] Shen Shin.
+  - [x] Gnufoundland.
+  - [x] Gnonmoon.
+- [x] **25. Ten real regional drivers.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  A local person from each region.  Positioned beside the backed-in truck; waiting pose plus happy/grumpy report-card reaction as determined in each brief.  Maintain identity and registration within pose sets.
+  - [x] Gnomerica driver.
+  - [x] Gnohio driver.
+  - [x] Gnafrica driver.
+  - [x] Slanic driver.
+  - [x] Gno Dao Cradle driver.
+  - [x] Gni driver.
+  - [x] Slaanilok driver.
+  - [x] Shen Shin driver.
+  - [x] Gnufoundland driver.
+  - [x] Gnonmoon driver.
 - [x] **26. Stock ticker frame.  No separate art (Nathan, 2026-11-22).**  Brass display, blank interior for GRIP and TNP lines drawn by code.  The frame is the dark STONKS screen already painted into the approved rooms (01).  Everything inside it, including the Stonks growth, is drawn by code: Nathan's call, since the screen is black and code animates growth better than art.
 
 ## Tier 2: TNP Corp
 
-- [ ] **27. TNP Corp logo.**  Corporate North Pole identity; its unnamed big boss remains unseen.
-- [ ] **28. Fake truck tells.**  Modular overlays fitting the real trucks' rear camera, one to three visible per fake.
-  - [ ] Candy-cane mudflaps.
-  - [ ] Hoofprints.
-  - [ ] Jingle bells.
-  - [ ] N0RTH plate.
-  - [ ] Holly trim.
-- [ ] **29. Ten fully painted elf imposters.**  One for each region's driver.  Consistent tells: pointed ears, curled shoes and excessive height.
-  - [ ] Gnomerica imposter.
-  - [ ] Gnohio imposter.
-  - [ ] Gnafrica imposter.
-  - [ ] Slanic imposter.
-  - [ ] Gno Dao Cradle imposter.
-  - [ ] Gni imposter.
-  - [ ] Slaanilok imposter.
-  - [ ] Shen Shin imposter.
-  - [ ] Gnufoundland imposter.
-  - [ ] Gnonmoon imposter.
-- [ ] **30. Height chart.**  Dock-wall painting or registered overlay; settle the treatment in its brief and check readability against real drivers.
-- [ ] **31. Fake paperwork details.**
-  - [ ] Snowflake stamp.
-  - [ ] Holly stamp.
-  - [ ] Candy-cane work-order border.
-- [ ] **32. Send-away control.**  Choose the approved form in the brief: large brass lever or REJECTED stamp.
+- [ ] **27. TNP Corp logo.**  Corporate North Pole identity; its unnamed big boss remains unseen.  **Needs work (Nathan, 2026-11-22).**
+- [x] **28. Fake truck tells.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Modular overlays fitting the real trucks' rear camera, one to three visible per fake.
+  - [x] Candy-cane mudflaps.
+  - [x] Hoofprints.
+  - [x] Jingle bells.
+  - [x] N0RTH plate.
+  - [x] Holly trim.
+- [x] **29. Ten fully painted elf imposters.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  One for each region's driver.  Consistent tells: pointed ears, curled shoes and excessive height.
+  - [x] Gnomerica imposter.
+  - [x] Gnohio imposter.
+  - [x] Gnafrica imposter.
+  - [x] Slanic imposter.
+  - [x] Gno Dao Cradle imposter.
+  - [x] Gni imposter.
+  - [x] Slaanilok imposter.
+  - [x] Shen Shin imposter.
+  - [x] Gnufoundland imposter.
+  - [x] Gnonmoon imposter.
+- [x] **30. Height chart.**  **Dropped by Nathan 2026-11-22: not needed; the imposters are obvious without a height measurement.**  Dock-wall painting or registered overlay; settle the treatment in its brief and check readability against real drivers.
+- [x] **31. Fake paperwork details.**  **No separate art (Nathan, 2026-11-22): a fake work order is the normal work order with a glitter effect drawn by code.**
+  - [x] Snowflake stamp.
+  - [x] Holly stamp.
+  - [x] Candy-cane work-order border.
+- [ ] **32. Send-away control.**  **Replaced by Nathan 2026-11-22: no send-away control.  The player denies the work order.  New art: an APPROVED sticker and a DENIED sticker that start large and slam down onto the order; two on-screen buttons trigger them (buttons drawn by code).  Stickers not yet made.**  Choose the approved form in the brief: large brass lever or REJECTED stamp.
 
 ## Tier 3: flavor and later
 
-- [ ] **33. Three to five throw-in objects.**  Define and approve the individual grabbables in its brief.  Rock is one example; shipping-log reactions are coded separately.
-- [ ] **34. Cosmetic box variations.**  Define which of the four boxes and how many versions during its brief; keep their functional shapes recognizable.
-- [ ] **35. The Daily Cog masthead.**  Newspaper brand for between-day presentation.
-- [ ] **36. Shipping log page.**  Blank sheet accommodating ten lines of live story text.
-- [ ] **37. The dog guy.**  Lovable, kiss-blowing dog-folk recipient; compatible with the paw-in-heart mark in 08.
+- [x] **33. Three to five throw-in objects.**  **Done (Nathan, 2026-11-22): the throw-ins are the desk props already approved (lamp, mug, stool and the like).**  Define and approve the individual grabbables in its brief.  Rock is one example; shipping-log reactions are coded separately.
+- [x] **34. Cosmetic box variations.**  **Not now (Nathan, 2026-11-22): keep the base four boxes.**  Define which of the four boxes and how many versions during its brief; keep their functional shapes recognizable.
+- [ ] **35. The Daily Cog masthead.**  Newspaper brand for between-day presentation.  **Needs explaining before work starts (Nathan, 2026-11-22).**
+- [x] **36. Shipping log page.**  **Approved by Nathan 2026-11-22: uses the blank parchment from 06.**  Blank sheet accommodating ten lines of live story text.
+- [ ] **37. The dog guy.**  Lovable, kiss-blowing dog-folk recipient; compatible with the paw-in-heart mark in 08.  **Needs work (Nathan, 2026-11-22).**
 - [ ] **38. Ten regional pictures.**  For the Gnomopedia and expedition-return story.
   - [ ] Gnomerica.
   - [ ] Gnohio.
