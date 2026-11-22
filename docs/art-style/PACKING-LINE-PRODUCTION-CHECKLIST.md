@@ -127,7 +127,7 @@
   - [ ] Design A.
   - [ ] Design B.
   - [ ] Optional third design if approved in the brief.
-- [ ] **17. Wireless tracker.**  Used from Gno Dao Cradle onward.
+- [ ] **17. Wireless tracker.**  Used from Gno Dao Cradle onward.  Painted 2026-11-22 (Mara, Brasswood tag: teal with brass trim, gnome-in-gear emblem, signal arcs, green light, string hole); saved to `art-masters/packing-line/17-tracker/`.  Not yet approved.
 - [ ] **18. Gni stickers.**
   - [ ] Red Herring sticker.
   - [ ] Shrubbery sticker.
