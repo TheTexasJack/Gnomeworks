@@ -85,7 +85,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1g (draft.87): the computer opens the supplies menu (stamps for now), the stamp tray is gone, and the belt and every tip follow the instructions setting.
     - [x] 1h (draft.88): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
     - [x] 1i (draft.89): tags shown (junk tiles, the "Packing rules" chart, the open box; never the slip), peanuts and bubble wrap, their scoring, and "main reason +N" on the report card.
-    - [ ] 1j (next): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
+    - [ ] 1j (draft): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
+    - [ ] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
     - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
