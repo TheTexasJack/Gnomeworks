@@ -88,6 +88,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1j (reviewed, draft.90): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
     - [x] 1k (draft.91): polish: the Packing rules chart minimizes with a code-drawn chevron, the rolling door, the view button answers after the chain, transparent pictures on the open box.
     - [ ] Supplies menu layout pass, when sprays and gifts arrive: the tiles already need a short scroll on a phone (1k Result: 341 px of tiles in a 208 px menu).  Options from Claude Code: put sections side by side, shorter supply tiles, or a taller supplies frame.
+        - Note for that pass (Nathan, 2026-11-23): the PACKING section heading stays pinned at the top while the menu scrolls, likely the item menu's sticky group headings carried over.  No action until the list grows and it can be tested fully.
+    - [ ] **Future enhancement (Nathan, 2026-11-23):** a real moving roll for the door.  The 1k wipe is fine for now, but the striped safety bar on the door's bottom edge stays put while the door is wiped away, which gives the trick away.  The bar (and ideally the slats) should travel up into the roller; likely needs the door as its own art layer.
     - [ ] 1l (approved): APPROVED or DENIED on every slip (stamp it, then pack it), glitter fakes on GRIP trucks from shift 4, and TNP's line on the STONKS screen.
     - [ ] 1m (approved, after 1l): elf imposters in their fake trucks, sending them away, and their placement pass.
     - [x] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.  Built in 1k (draft.91).
