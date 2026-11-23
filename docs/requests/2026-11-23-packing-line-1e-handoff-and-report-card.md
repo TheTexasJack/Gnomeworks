@@ -1,7 +1,7 @@
 # Work order: Packing Line 1e, hand-off, report card, and the GRIP line (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 **v0.2 (2026-11-23):** step 4a, the chain shows the player how to finish (from Nathan's phone test of draft.81: with all three boxes packed, it wasn't clear how to finish).

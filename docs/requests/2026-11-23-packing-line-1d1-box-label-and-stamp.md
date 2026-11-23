@@ -1,7 +1,7 @@
 # Work order: Packing Line 1d.1, the box label, a bold stamp, and the menu frame (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, from Nathan's test of draft.81.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, from Nathan's test of draft.81.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 **v0.2 (2026-11-23):** step 4a, the item menu sits on the approved supply drawer frame (05a) (Nathan: "yes on the junk menu").
@@ -29,7 +29,7 @@ Two fixes from Nathan's test of 1d.  The box no longer shows a count, and a pack
 2. **The label shows only the item's picture.**  No count, no name.  It shows while the box is open and filled, so the player can see what went in.
 3. **A closed box shows no label.**  Closing the box hides the label; opening it again shows it.  Boxes on the stack show no label.  The record for 1e keeps the item and exact count as now.
 4. **The stamp is bold and in front.**  Drop `mix-blend-mode: multiply` from `.box-mark` and draw the stamp at full opacity, above everything on the box and above the stack, the tray, and the driver.  It may cover anything.  Keep its tilt.  If it reads small, raise its width in `CONFIG.shipping` (`mark`), and say the number in the Result.
-4a. **The item menu sits on the supply drawer frame (05a).**  Make a game copy with `tools/art.py resize` and add it to `docs/ASSETS.md`.  The menu is a wide strip on the phone and a tall panel on desktop, and the frame is portrait, so draw it as a nine-slice (CSS `border-image`): the brass corners keep their shape, the wood sides stretch, and the parchment fills the middle.  The tiles sit on the parchment.  Keep the menu's place, size, scrolling, and drag exactly as now.  Day and Night use the same frame (Night may dim it as the slips do).  Name the slice numbers in `CONFIG.shipping` and the Result.
+4a. **The item menu sits on the supply drawer frame (05a).**  Make a game copy with `tools/art.py resize` and add it to `docs/ASSETS.md`.  The menu is a wide strip on the phone and a tall panel on desktop, and the frame is portrait, so draw it as a nine-slice (CSS `border-image`): the brass corners keep their shape, the wood sides stretch, and the parchment fills the middle.  The tiles sit on the parchment.  Keep the menu's place, size, scrolling, and drag exactly as now.  Day and Night use the same frame (Night may dim it as the slips do).  Name the slice numbers in `CONFIG.shipping` and the Result.  Nathan will check the phone menu for seams where the stretched wood sides meet the corners, so add a close-up screenshot of the phone menu's corners.
 5. Every number in `js/config.js`.  Bump `GW.VERSION` to the next draft number, run `node tools/stamp.js`, add a `CHANGELOG.md` entry, run `node tools/smoke-test.js`.
 6. **Screenshots** into `tools/out/` with `?ship=1&debug=1`, both layouts, Day and Night: an open filled box (picture only), a closed unstamped box (no label), a stamped box, the stack with two packed boxes, and the item menu open on its new frame.  List them in the Result.
 7. Fill in the Result, set Status to Done, commit, and push.

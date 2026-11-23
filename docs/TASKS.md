@@ -28,6 +28,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 ## Nathan
 
+- [ ] After 1d.1: review the item menu's new frame (05a) on the phone and check it for seams where the stretched sides meet the corners (Nathan, 2026-11-23).
+
 - [ ] Remove the inside-of-brim lip from the six hats in GIMP (keep the canvas size), then send them over.  **Before December 1** (the Santa hat shows the lip most).
 - [ ] Optional: on the Android phone, Settings, Accessibility, "Remove animations" is likely on.  Turning it off brings back the full bounce.
 
@@ -73,7 +75,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-1: the destinations data, `js/destinations.js` generated from the map's locations file by `tools/destinations.js` (draft.75, nothing on screen).
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
     - [x] 1c-2: three Gnomerica work orders on the order board, tap to read full size; on phones the board ends left of the parked truck (draft.79).
-    - [ ] 1d.1 (draft): the box label shows only the item's picture, a closed box shows none, and the stamp lands bold and on top (Nathan's test of draft.81).
+    - [ ] 1d.1 (approved): the box label shows only the item's picture, a closed box shows none, and the stamp lands bold and on top (Nathan's test of draft.81).
     - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the unused supply drawer frame (05a).  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [ ] **Future enhancement (Nathan, 2026-11-23):** leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Today leaving just resets the room.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
@@ -83,7 +85,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-3 (draft.80; approved v0.2, option A): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
     - [x] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  Built in 1d (draft.81), step 5a.
     - [x] 1d (draft.81; approved v0.3): pack and stamp.
-    - [ ] 1e (draft): hand-off, report card, GRIP line.  The last piece of the Wednesday demo cut (HANDOFF.md).
+    - [ ] 1e (approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
     - [ ] After the demo: 1f and 1g (drawer and supplies, the other boxes, Stonks polish).
 
