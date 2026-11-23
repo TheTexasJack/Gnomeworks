@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.78';
+GW.VERSION = '0.2.0-draft.79';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -139,7 +139,10 @@ GW.CONFIG = {
         truck: { h: 54.04, top: 22.14, xFrom: 93, xTo: 74.24 },
         driver: {
           h: 32, from: [86.5, 74], fromScale: 0.8, at: [86.5, 80]
-        }
+        },
+        // board = where the work orders pin, inside the lower left parchment frame (its parchment runs x 31.6 to
+        // 50.9, y 40.4 to 54.5, Day and Night): [x, y, w, h] in % of the room.
+        board: [32.3, 41.1, 17.9, 12.7]
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
@@ -160,7 +163,11 @@ GW.CONFIG = {
         // In front of the bench's right end, where the mock has him, at full size (the 1b.2 ratio).
         driver: {
           h: 23, from: [86, 65], fromScale: 0.8, at: [83.7, 85.1]
-        }
+        },
+        // board = inside the parchment frame under the STONKS screen (its parchment runs x 31.8 to 69.7, y 38.6 to
+        // 48.3).  The parked truck covers the frame from x 63.7, so the board ends at 62 and every slip, stamp
+        // corner included, sits clear of the truck (1c-2 addendum).
+        board: [32.4, 39.2, 29.6, 8.5]
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
@@ -183,6 +190,36 @@ GW.CONFIG = {
       img: 'assets/packing/chain.webp',
       pullPercent: 7,       // how far a tap pulls the chain down, as a share of its own height
       pullMs: 450           // the pull-down and bounce back
+    },
+    // Work orders (layer 1c-2).  When the driver finishes walking in, the board gets up to `count` orders.  Each
+    // picks a random place in `region` from GW.DESTINATIONS, then one item from that place's buys that the shelf
+    // holds more than `keep` of (the last one is the display copy and never ships).  Gnomerica orders ask for
+    // `perOrder` = 1 item (the first tier).  Every order asks for a different item; with repeatItems false, a
+    // board with fewer different items to ask for shows fewer slips (one drag ships a whole pile, so a repeated
+    // item could not be packed twice).  Orders last one trip: not saved, cleared when the door closes.
+    orders: {
+      region: 'gnomerica',
+      count: 3,
+      perOrder: 1,
+      keep: 1,
+      repeatItems: false,
+      emptyText: 'Nothing to ship yet.  Make more junk!'    // draft wording (Claudia), shown when no order can be made
+    },
+    // A work order slip: Nathan's parchment with live text on top, laid out from the approved mock
+    // (art-masters/packing-line/06-work-order/work_order_mock_v0.1.png).  aspect = the paper's width / height.
+    // On the board the slips sit side by side, `gap` apart (% of the board's width), as tall as the board allows.
+    // stamp = the region stamp's width as % of the slip's width: larger on the board so the stamp corner reads
+    // at small size, the mock's size when open.  openSize = an open slip's largest height and width (% of the room's).
+    // nightBrightness dims the paper to match the Night room's own parchment.
+    slip: {
+      paper: 'assets/packing/work_order_paper.webp',
+      grip: 'assets/packing/grip-mark-v1.0.svg',
+      stampImg: 'assets/packing/stamp_{region}.webp',   // {region} = the region's id
+      aspect: 566 / 800,
+      gap: 3,
+      stamp: { board: 27, open: 20 },
+      openSize: 92,
+      nightBrightness: 0.88
     }
   },
 

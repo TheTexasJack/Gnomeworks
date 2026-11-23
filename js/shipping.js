@@ -1,10 +1,13 @@
-/* The shipping room, the Packing Line's view (layers 1a and 1b): the room art, the door chain, and
-   Gnomerica's truck and driver.  Hidden from players while CONFIG.shipping.enabled is false; ?ship=1 in
+/* The shipping room, the Packing Line's view (layers 1a to 1c-2): the room art, the door chain,
+   Gnomerica's truck and driver, and the work orders on the order board.  Hidden from players while CONFIG.shipping.enabled is false; ?ship=1 in
    the address shows it for testing.  Nothing ships yet.  The door starts closed each time the view opens
    and is not saved.
    A trip: pulling the chain opens the door, the truck backs through the doorway into the room and settles, then the driver
    walks in a short way and waits, grumpy.  Pulling again sends him out, the truck drives off, and the door
-   shows closed. */
+   shows closed.
+   Work orders (1c-2): when the driver finishes walking in, up to three slips pin to the order board, each a
+   Gnomerica place asking for one item the shelf holds more than 1 of.  A tap opens a slip full size; any tap
+   or Escape closes it.  Orders are not saved, and closing the door clears them.  Nothing is packed yet. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -15,6 +18,7 @@ GW.ship = (function () {
   var trip = 'closed';            // 'closed' | 'arriving' | 'here' | 'leaving'
   var tripId = 0, anims = [];
   var box, closedImg, openImg, bay, truck, driver, driverImg, chain, roller, rollerClosed, rollerOpen, bounceTimer;
+  var board, viewer, orders = [], slipOpen = false;
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -26,6 +30,9 @@ GW.ship = (function () {
     box = document.getElementById('ship');
     closedImg = img('ship-room'); openImg = img('ship-room ship-open');
     box.appendChild(closedImg); box.appendChild(openImg);
+    // The order board sits on the back wall, so the truck and the driver draw in front of it.
+    board = U.el('div', 'ship-board');
+    box.appendChild(board);
     // The bay is clipped to the doorway, so the truck only shows through the opening, behind the frame.
     bay = U.el('div', 'ship-bay');
     truck = img('ship-truck', P.truck.img);
@@ -44,7 +51,7 @@ GW.ship = (function () {
       e.stopPropagation();
       if (!e.isTrusted || e.button > 0) return;     // a real tap only, like the gear
       e.preventDefault();
-      if (trip === 'arriving' || trip === 'leaving') return;   // one trip at a time
+      if (slipOpen || trip === 'arriving' || trip === 'leaving') return;   // one trip at a time
       pull();
     });
     box.appendChild(chain);
@@ -54,9 +61,130 @@ GW.ship = (function () {
     rollerClosed = img('ship-room'); rollerOpen = img('ship-room ship-open');
     roller.appendChild(rollerClosed); roller.appendChild(rollerOpen);
     box.appendChild(roller);
+    // An open slip covers the whole room, so the chain and everything else under it get no taps.
+    viewer = U.el('div', 'ship-slip-view');
+    viewer.hidden = true;
+    viewer.addEventListener('pointerdown', function (e) {
+      e.stopPropagation(); e.preventDefault();
+      closeSlip();
+    });
+    box.appendChild(viewer);
+    box.style.setProperty('--slip-night', P.slip.nightBrightness);
+    document.addEventListener('keydown', function (e) { if (slipOpen && e.key === 'Escape') { e.preventDefault(); closeSlip(); } });
     built = true;
     tallQuery.addEventListener('change', redraw);
   }
+
+  // ---------- work orders (all numbers in CONFIG.shipping.orders) ----------
+  function shuffled(list) {
+    var a = list.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  // One order from a random place that buys something the shelf can spare; a place with nothing to spare is
+  // passed over for another.  used = item ids already asked for on this board.
+  function pickOrder(places, used) {
+    var O = P.orders, shelf = GW.game.s.items || {}, list = shuffled(places);
+    for (var i = 0; i < list.length; i++) {
+      var ok = list[i].buys.filter(function (id) { return (shelf[id] || 0) > O.keep && !used[id] && GW.econ.itemDef(id); });
+      if (ok.length) return { place: list[i], item: GW.econ.itemDef(ok[Math.floor(Math.random() * ok.length)]), qty: O.perOrder };
+    }
+    return null;
+  }
+  function makeOrders() {
+    var O = P.orders, used = {}, list = [];
+    var places = GW.DESTINATIONS.places.filter(function (p) { return p.region === O.region; });
+    for (var k = 0; k < O.count; k++) {
+      var o = pickOrder(places, used) || (O.repeatItems ? pickOrder(places, {}) : null);
+      if (!o) break;
+      used[o.item.id] = true;
+      list.push(o);
+    }
+    return list;
+  }
+  function regionOf(id) {
+    var r = GW.DESTINATIONS.regions.filter(function (x) { return x.id === id; })[0];
+    return r || { id: id, name: id };
+  }
+
+  // ---------- the slips ----------
+  function div(cls, text) { return U.el('div', cls, text); }
+  // A slip: the parchment with live text over it.  order null makes the "nothing to ship" note.
+  function makeSlip(order, stampPct) {
+    var S = P.slip, el = div('ship-slip' + (order ? '' : ' slip-note'));
+    el.style.setProperty('--stamp', stampPct);
+    el.appendChild(img('slip-paper', S.paper));
+    el.appendChild(U.el('i', 'slip-pin'));
+    el.appendChild(U.el('i', 'slip-stripes slip-top'));
+    el.appendChild(U.el('i', 'slip-stripes slip-bottom'));
+    if (!order) { el.appendChild(div('slip-note-text', P.orders.emptyText)); return el; }
+    var region = regionOf(order.place.region);
+    el.appendChild(img('slip-grip', S.grip));
+    el.appendChild(div('slip-title', 'WORK ORDER'));
+    el.appendChild(U.el('i', 'slip-rule'));
+    var ship = div('slip-block slip-ship');
+    ship.appendChild(div('slip-label', 'SHIP TO'));
+    ship.appendChild(div('slip-town', order.place.name));
+    ship.appendChild(div('slip-region', region.name));
+    el.appendChild(ship);
+    var what = div('slip-block slip-what');
+    what.appendChild(div('slip-label', 'ITEM'));
+    var line = div('slip-item');
+    line.appendChild(U.el('span', '', order.item.name));
+    line.appendChild(GW.ui.itemIcon(order.item));
+    what.appendChild(line);
+    el.appendChild(what);
+    el.appendChild(img('slip-stamp', S.stampImg.replace('{region}', region.id)));
+    el.setAttribute('aria-label', 'Work order: ship ' + order.qty + ' ' + order.item.name + ' to ' + order.place.name + ', ' + region.name);
+    return el;
+  }
+
+  // The board shows the orders (or the note) while the driver waits, and nothing otherwise.
+  function showBoard() {
+    if (!built) return;
+    board.textContent = '';
+    if (trip !== 'here') return;
+    var list = orders.length ? orders : [null];
+    list.forEach(function (o) {
+      var el = makeSlip(o, P.slip.stamp.board);
+      el.addEventListener('pointerdown', function (e) {      // the note opens too, so it can be read on a phone
+        e.stopPropagation();
+        if (!e.isTrusted || e.button > 0 || slipOpen) return;   // a real tap only
+        e.preventDefault();
+        openSlip(o);
+      });
+      board.appendChild(el);
+    });
+  }
+  // Sizes the board and its slips for the layout: every slip the same size, as tall as the board allows
+  // with room for all three side by side.
+  function placeBoard(L, ratio) {
+    var b = L.board, S = P.slip, n = P.orders.count;
+    board.style.left = b[0] + '%'; board.style.top = b[1] + '%';
+    board.style.width = b[2] + '%'; board.style.height = b[3] + '%';
+    var boardRatio = b[2] * ratio / b[3];                        // the board's width / height on screen
+    var w = Math.min((100 - S.gap * (n - 1)) / n, 100 * S.aspect / boardRatio);   // % of the board's width
+    board.style.setProperty('--slip-w', w + '%');
+    board.style.setProperty('--slip-h', (w * boardRatio / S.aspect) + '%');
+    board.style.setProperty('--slip-gap', S.gap + '%');
+    // Open: as big as fits in openSize % of the room's height and of its width (the tall room is narrow).
+    var ow = Math.min(S.openSize * S.aspect / ratio, S.openSize);
+    viewer.style.setProperty('--slip-w', ow + '%');
+    viewer.style.setProperty('--slip-h', (ow * ratio / S.aspect) + '%');
+  }
+  function openSlip(order) {
+    viewer.textContent = '';
+    viewer.appendChild(makeSlip(order, P.slip.stamp.open));
+    viewer.hidden = false;
+    slipOpen = true;
+    GW.sfx.click();
+  }
+  function closeSlip() {
+    if (!slipOpen) return;
+    viewer.hidden = true; viewer.textContent = '';
+    slipOpen = false;
+  }
+  function clearOrders() { orders = []; closeSlip(); showBoard(); }
 
   // ---------- placing things (all positions in % of the room) ----------
   function polygon(points) { return 'polygon(' + points.map(function (p) { return p[0] + '% ' + p[1] + '%'; }).join(', ') + ')'; }
@@ -101,11 +229,13 @@ GW.ship = (function () {
     truck.style.height = L.truck.h + '%';
     truck.style.top = L.truck.top + '%';
     driver.style.height = L.driver.h + '%';
+    placeBoard(L, parseFloat(wh[0]) / parseFloat(wh[1]));
     // A layout change mid-trip skips to where the trip was heading.
-    if (trip === 'arriving') trip = 'here';
+    if (trip === 'arriving') { trip = 'here'; orders = makeOrders(); }
     if (trip === 'leaving') { trip = 'closed'; open = false; }
     stopAnims();
     settle();
+    showBoard();
   }
 
   // ---------- the trip ----------
@@ -155,7 +285,7 @@ GW.ship = (function () {
       },
       function () { return new Promise(function (r) { setTimeout(r, T.walkDelayMs); }); },
       function () { return walk(L.driver.from, L.driver.fromScale, L.driver.at, 1, true, false); },
-      function () { trip = 'here'; anims = []; }
+      function () { trip = 'here'; anims = []; orders = makeOrders(); showBoard(); }
     ]);
   }
 
@@ -163,6 +293,7 @@ GW.ship = (function () {
     var L = layout();
     stopAnims();
     trip = 'leaving';
+    clearOrders();                  // closing the door takes the orders with it
     steps([
       function () { return walk(L.driver.at, 1, L.driver.from, L.driver.fromScale, false, true); },
       function () {
@@ -185,13 +316,14 @@ GW.ship = (function () {
   // main.js calls this whenever the view changes.  Entering the room always starts with the door closed.
   function setActive(on) {
     if (on && !built) build();
-    if (on && !active) { stopAnims(); trip = 'closed'; open = false; redraw(true); }
-    if (!on && active) stopAnims();
+    if (on && !active) { stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); redraw(true); }
+    if (!on && active) { stopAnims(); closeSlip(); }
     active = on;
   }
 
   return {
     enabled: enabled, setActive: setActive, redraw: redraw,
-    isOpen: function () { return open; }, tripState: function () { return trip; }
+    isOpen: function () { return open; }, tripState: function () { return trip; },
+    orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; }
   };
 })();
