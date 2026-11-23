@@ -85,7 +85,9 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1g (draft.87): the computer opens the supplies menu (stamps for now), the stamp tray is gone, and the belt and every tip follow the instructions setting.
     - [x] 1h (draft.88): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
     - [x] 1i (draft.89): tags shown (junk tiles, the "Packing rules" chart, the open box; never the slip), peanuts and bubble wrap, their scoring, and "main reason +N" on the report card.
-    - [ ] 1j (approved): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
+    - [x] 1j (reviewed, draft.90): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
+    - [ ] 1k (draft): polish: the Packing rules chart minimizes with a code-drawn chevron, the rolling door, the view button answers after the chain, transparent pictures on the open box.
+    - [ ] Next big step after 1k: TNP fakes (APPROVED and DENIED, the glitter fake slip, elf imposters and fake trucks, TNP's line on the STONKS screen), 2 or 3 orders.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
     - [x] 1j (draft.90): FRAGILE and HEAVY stickers on the box face's upper left, "No FRAGILE" and "No HEAVY", and the chart hidden with instructions off.
