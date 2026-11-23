@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.6, the truck backs into the room (v0.2)
 
-**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
+**Status:** Reviewed and closed (desktop accepted; the phone restore was a misread, fixed in 1b.7)
 **Written by:** Claudia, 2026-11-22, from Nathan's GIMP mock.  **Approved by:** Nathan, 2026-11-22 ("1b.6 approved", v0.2).
 **Model:** Opus 5.5
 
