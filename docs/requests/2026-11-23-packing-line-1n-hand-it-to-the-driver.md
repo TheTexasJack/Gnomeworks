@@ -1,7 +1,7 @@
 # Work order: Packing Line 1n, hand the box to the driver (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 ## Goal
@@ -13,7 +13,7 @@ Today the region stamp also sends the box: the moment it lands, the box slides t
 - "Once a user places the location stamp, it's shipped.  We need a way for the user to apply all stamps and item and then send it."
 - "Let's drag the box to the driver.  He can put it on the ground."
 
-## Rules (Claudia's drafts)
+## Rules (Claudia's drafts, approved by Nathan 2026-11-23)
 
 - **Any order:** close the box, add stickers and the stamp in any order, reopen to fix something, then hand it over.
 - **Only a closed box can be handed over.**  An open box dropped on the driver springs back to the bench.
