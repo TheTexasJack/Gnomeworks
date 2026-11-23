@@ -6,10 +6,11 @@
    walks in a short way and waits, grumpy.  Pulling again sends him out, the truck drives off, and the door
    shows closed.
    Work orders (1c-2): when the driver finishes walking in, up to three slips pin to the order board, each a
-   Gnomerica place asking for one item the shelf holds more than 1 of.  A tap opens a slip full size; any tap
+   Gnomerica place asking for an item the shelf holds more than 1 of, at a count set by the item's packing tag (1h)
+   that the shelf can spare.  A tap opens a slip full size; any tap
    or Escape closes it.  Orders are not saved, and closing the door clears them.
    Packing (1d): a tap on the conveyor opens the item menu.  The active order (the leftmost unpacked one) has an
-   open box on the bench; dragging a tile onto it puts that pile in, down to the display copy.  A tap closes a
+   open box on the bench; dragging a tile onto it puts the order's count of that item in (or what the shelf can spare).  A tap closes a
    filled box (or opens a closed one again).  A tap on the computer opens the supplies menu (1g), on the same frame;
    dragging a region stamp from it onto the closed box stamps it, and a stamped box moves to the stack by the truck
    while the next order's box appears.  An open box shakes off a stamp.  Only one menu is open at a time.  The
@@ -18,8 +19,8 @@
    computer's screen glows while a closed box waits for its stamp, and the chain glows when the shift is ready.  All
    of them follow the instructions setting (the no-hints class on the page, css).
    The hand-off (1e): once every order has a stamped box, the chain glows and sways and a tag by its handle says to
-   pull it.  Pulling the chain with the driver in place scores each order (CONFIG.shipping.score), takes what shipped
-   off the shelf (down to the display copy), moves Stonks (saved, never below 0), and adds the shift to the history.
+   pull it.  Pulling the chain with the driver in place scores each order (CONFIG.shipping.score), takes each box's count
+   off the shelf (never below the display copy), moves Stonks (saved, never below 0), and adds the shift to the history.
    A perfect shift gets the driver's thumbs up before he leaves.  Once the door shows closed, the report card shows
    over the room; closing it ticks the GRIP line on the STONKS screen up to the new total.  A trip with no orders
    scores nothing and shows no card.
@@ -159,16 +160,26 @@ GW.ship = (function () {
     for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
+  // How many of an item an order asks for (1h): one of its packing tag's friendly numbers that the shelf can spare,
+  // or everything it can spare when none fit.  spare is always at least 1 here.
+  function pickCount(item, spare) {
+    var C = P.orders.counts, list = (C[item.pack || ''] || C['']).filter(function (n) { return n <= spare; });
+    return list.length ? list[Math.floor(Math.random() * list.length)] : spare;
+  }
   // One order from a random place that buys something the shelf can spare; a place with nothing to spare is
   // passed over for another.  used = item ids already asked for on this board.
   function pickOrder(places, used) {
     var O = P.orders, shelf = GW.game.s.items || {}, list = shuffled(places);
     for (var i = 0; i < list.length; i++) {
       var ok = list[i].buys.filter(function (id) { return (shelf[id] || 0) > O.keep && !used[id] && GW.econ.itemDef(id); });
-      if (ok.length) return { place: list[i], item: GW.econ.itemDef(ok[Math.floor(Math.random() * ok.length)]), qty: O.perOrder };
+      if (!ok.length) continue;
+      var item = GW.econ.itemDef(ok[Math.floor(Math.random() * ok.length)]);
+      return { place: list[i], item: item, qty: pickCount(item, shelf[item.id] - O.keep) };
     }
     return null;
   }
+  // "500 × Toilet Paper", for the slips and the report card.
+  function countName(qty, item) { return qty + ' ' + P.orders.countSign + ' ' + item.name; }
   function makeOrders() {
     var O = P.orders, used = {}, list = [];
     var places = GW.DESTINATIONS.places.filter(function (p) { return p.region === O.region; });
@@ -208,8 +219,12 @@ GW.ship = (function () {
     var what = div('slip-block slip-what');
     what.appendChild(div('slip-label', 'ITEM'));
     var line = div('slip-item');
-    line.appendChild(U.el('span', '', order.item.name));
-    line.appendChild(GW.ui.itemIcon(order.item));
+    // The item's name and picture never break apart: when the line is too narrow, the count takes the first line
+    // ("500 ×" / "Toilet Paper 🧻"), and fitSlips shrinks a name still too wide for its line.
+    var tail = U.el('span', 'slip-tail', order.item.name);
+    line.appendChild(U.el('span', '', order.qty + ' ' + P.orders.countSign + ' '));   // the space stays outside the tail, so the line can break there
+    tail.appendChild(GW.ui.itemIcon(order.item));
+    line.appendChild(tail);
     what.appendChild(line);
     el.appendChild(what);
     el.appendChild(img('slip-stamp', S.stampImg.replace('{region}', region.id)));
@@ -236,6 +251,22 @@ GW.ship = (function () {
       });
       board.appendChild(el);
     });
+    fitSlips(board);
+  }
+  // Each slip's ITEM line shrinks when its unbreakable piece (the item's name and picture) is wider than the line (CONFIG.shipping.slip.itemFont).  Sizes are in cqw, so the fit holds as the slip grows or shrinks.
+  function fitSlips(box) {
+    var F = P.slip.itemFont;
+    function fit() {
+      Array.prototype.forEach.call(box.querySelectorAll('.slip-item'), function (line) {
+        var tail = line.querySelector('.slip-tail'), size = F.size;
+        line.style.fontSize = size + 'cqw';
+        var need = Math.max(tail ? tail.offsetWidth : 0, line.scrollWidth), room = line.clientWidth;   // layout sizes, untouched by the pop-in's scale
+        if (need > room && room > 0) size = Math.max(F.min, size * room / need * P.card.fitSlack);
+        line.style.fontSize = size + 'cqw';
+      });
+    }
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   }
   // Sizes the board and its slips for the layout: every slip the same size, as tall as the board allows
   // with room for all three side by side.
@@ -260,6 +291,7 @@ GW.ship = (function () {
     viewer.textContent = '';
     viewer.appendChild(makeSlip(order, P.slip.stamp.open));
     viewer.hidden = false;
+    fitSlips(viewer);
     slipOpen = true;
     GW.sfx.click();
   }
@@ -344,12 +376,15 @@ GW.ship = (function () {
     if (boxState === 'open' && boxItem) { boxState = 'closed'; GW.sfx.click(); showBox(); }
     else if (boxState === 'closed') { boxState = 'open'; GW.sfx.click(); showBox(); }
   }
-  // Drop a pile in the open box: the whole pile down to the display copy.  A different item replaces the first.
+  // Drop an item in the open box: the active order's count of it (1h), right item or wrong, or everything the shelf
+  // can spare if it has fewer.  What the stamped boxes already hold of the same item is not spare.  A different
+  // item replaces the first.
   function fillBox(item) {
     if (boxState !== 'open') return;
-    var have = (GW.game.s.items || {})[item.id] || 0;
-    if (have <= P.orders.keep) return;
-    boxItem = item; boxCount = have - P.orders.keep;
+    var spare = ((GW.game.s.items || {})[item.id] || 0) - P.orders.keep, o = orders[activeIndex()];
+    packed.forEach(function (r) { if (r && r.item === item.id) spare -= r.count; });
+    if (spare <= 0 || !o) return;
+    boxItem = item; boxCount = Math.min(o.qty, spare);
     GW.sfx.drop(item.tier, true);
     showBox();
     if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2%) scaleY(.97)' }, { transform: 'translateY(0)' }],
@@ -460,7 +495,8 @@ GW.ship = (function () {
     });
     return { rows: rows, delta: delta, shipped: shipped, perfect: rows.every(function (r) { return r.ok; }) };
   }
-  // Into the save: the shelf loses what shipped (never below the display copy; a wrong item still shipped),
+  // Into the save: each shipped box takes its recorded count off the shelf (never below the display copy; a wrong
+  // item still shipped),
   // Stonks move (never below 0), and the new total joins the history.
   function applyShift(r) {
     var s = GW.game.s, keep = P.orders.keep, before = s.stonks || 0;
@@ -490,14 +526,14 @@ GW.ship = (function () {
       var words = div('card-words');
       words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
       words.appendChild(cardLine('town', o.place.name));
-      words.appendChild(cardLine('item', o.item.name));
+      words.appendChild(cardLine('item', countName(o.qty, o.item)));
       if (!row.ok) words.appendChild(cardLine('why', row.why.join(', ')));
       line.appendChild(words);
       var pic = div('card-pic');
       pic.style.left = Cd.pic[0] + '%'; pic.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
       pic.appendChild(GW.ui.itemIcon(o.item));
       line.appendChild(pic);
-      line.setAttribute('aria-label', o.place.name + ', ' + o.item.name + ': ' + (row.ok ? 'shipped' : row.why.join(', ')));
+      line.setAttribute('aria-label', o.place.name + ', ' + countName(o.qty, o.item) + ': ' + (row.ok ? 'shipped' : row.why.join(', ')));
       el.appendChild(line);
     });
     var c = r.change, total = div('card-total', 'Stonks this shift: ' + (c > 0 ? '+' : c < 0 ? '\u2212' : '') + Math.abs(c));

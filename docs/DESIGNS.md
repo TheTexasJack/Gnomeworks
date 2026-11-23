@@ -184,7 +184,7 @@ Notes to settle when this is built (Claudia):
 - Packages to regions without a special box use a plain cardboard box.
 - The shipping log itself stays flavor only.  Stonks carry the score.
 - ~~Open: Stonks is both the shipping currency and our line on the ticker.~~  Settled 2026-11-15: Stonks is only our line on the ticker.
-- Open: how much of a pile one successful package ships, now that box sizes no longer set it (for example a fixed share of the stack, or all of it down to the display copy).  Settled 2026-11-15: there are no spendable Stonks, so a failure only moves the ticker lines.  The ticker notes still call for recoverable mistakes and no losses that stack forever.
+- How much of a pile one package ships: settled 2026-11-23 (1h).  Each order asks for a count set by its item's packing tag, and shipping takes only that count off the shelf, never below the display copy (see "Purchase orders and the order board").  This replaced whole-pile shipping (2026-11-22), which emptied the shelf in one shift.  Settled 2026-11-15: there are no spendable Stonks, so a failure only moves the ticker lines.  The ticker notes still call for recoverable mistakes and no losses that stack forever.
 - The rune tracing game needs to work with a finger on phones as well as a mouse.
 
 **A shift on the Packing Line (Nathan, 2026-11-15, decided)**
@@ -252,8 +252,10 @@ Work orders and drivers are two separate calls.
 
 - **Order board:** a truck brings 3 work orders, each from a trading place in an unlocked region.  The player fills all three.
 - **What an order asks for (the randomizer):** items are drawn only from that place's Factory Imports (plus any Bathroom item, since every place buys those), and only from piles with more than 1 on the shelf, so every order can be packed.  Gnomerica orders ask for 1 item, because Gnomerica is the first tier (Nathan, 2026-11-22); later regions ask for 2 or 3; Gnonmoon must be exact.
-- **Packing:** dragging a shelf tile onto the box puts the whole pile in, down to the display copy.  The label happily reads "1,700,000 Poop Knives."
-- **Rotation:** a pile just shipped sits at 1, so orders skip it until it grows back.
+- **How many (1h, Nathan, 2026-11-23):** each order asks for a believable count of its item, set by the item's packing tag: Heavy 1 or 2; Breakable 2, 3, 4, 6, 10, 12, or 24; no tag 5, 10, 12, 20, 24, 25, 50, 75, 100, 125, or 150; Soft 25, 50, 100, 144, 200, 250, 300, or 500 (`CONFIG.shipping.orders.counts`).  Only numbers the shelf can spare (its count less the display copy) are picked; if none fit, the order asks for everything it can spare.  The slip and the report card show it as "500 × Toilet Paper".  "The numbers simply tell the story."  Supply and demand come much later.
+- **Packing:** dragging a shelf tile onto the box puts the order's count of that item in, the same drag as before with no number picker (Nathan, 2026-11-23).  A wrong item goes in at the same count, or everything the shelf can spare if it has fewer.  ~~The whole pile, down to the display copy~~ (2026-11-22, replaced by 1h).
+- **How much one package ships (1h, Nathan, 2026-11-23):** each shipped box takes its recorded count off the shelf, never below the display copy.  "Deduct it."
+- **Rotation:** a pile only drops by what was ordered, so the next shift can still be filled; a pile at 1 is skipped until it grows back.
 - **Score:** each correct order lifts our Stonks by an amount set by region difficulty, never by pile size.
 - **Reading a slip (approved 2026-11-22):** the order board shows the three slips small; tapping one opens it full size to read.  The region stamp corner stays visible at small size.
 

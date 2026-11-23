@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.87.
+Last updated 2026-11-23, at v0.2.0-draft.88.
 
 ## Where we are
 
@@ -47,7 +47,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 
 1. ~~**Lore pass**~~ done 2026-11-15 (company is GRIP, trade merged, stamps decided).
 2. **Mechanics:**
-    - [x] How much of a pile one package ships: the whole pile, down to the display copy (approved 2026-11-22).
+    - [x] How much of a pile one package ships: the order's count only, set by the item's packing tag (Nathan, 2026-11-23; built in 1h, draft.88).  Replaced the whole pile (2026-11-22).
     - [x] What a failed shipment does: only the ticker lines move (Stonks is score only, 2026-11-15).
     - [x] What Stonks buy: nothing.  Stonks is the marker against TNP Corp, and stamps, boxes, and supplies are free (Nathan, 2026-11-15).
     - [x] Trade draft merged into gazetteer v0.25: every junk item has a buyer, and every trading place buys Bathroom items (2026-11-15).
@@ -83,7 +83,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
     - [x] 1f (draft.86): the leave warning, and the GRIP line uses the whole screen.
     - [x] 1g (draft.87): the computer opens the supplies menu (stamps for now), the stamp tray is gone, and the belt and every tip follow the instructions setting.
-    - [ ] 1h (approved): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
+    - [x] 1h (draft.88): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
     - [ ] Small polish (1g review): junk dropped on a closed box should shake too, as supplies and stamps do.
     - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
@@ -97,7 +97,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1d (draft.81; approved v0.3): pack and stamp.
     - [x] 1e (draft.84; approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).  Draft calls for Nathan and Claudia to check are in the work order's Result (score amounts, the unstamped-box rule, the tag's spot over the driver).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
-    - [ ] Next after 1g: the rest of the supplies layer (item tags, peanuts, bubble wrap, FRAGILE and HEAVY on the box face), then the other boxes.
+    - [ ] Next: the rest of the supplies layer (item tags are in `CONFIG.items` since 1h, not shown yet; peanuts, bubble wrap, FRAGILE and HEAVY on the box face), then the other boxes.
 
 ## Done draft.20 to draft.51
 

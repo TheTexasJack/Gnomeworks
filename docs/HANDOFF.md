@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.87**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.88**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -16,7 +16,7 @@ Nathan's shipping mini-game.  The design is in [DESIGNS.md](DESIGNS.md#packing-l
 - **Art: all 45 packages closed (2026-11-22),** approved, covered by existing art, or dropped by Nathan.  Masters are in `art-masters/packing-line/` and `art-masters/postcards/`.  **Approved art is cleared for integration through work orders (Nathan, 2026-11-22).**  Never use a `not-for-game/` folder.
 - **Logos and paperwork drawn by Claudia as vector (SVG):** the GRIP mark (23), the TNP logo (27), and the APPROVED and DENIED stamps (32).  The work order (06), supply list (05d), shipping log (36), and The Daily Cog (35) are Nathan's blank parchment with code-drawn text on top.
 - **Covered by the painted rooms:** the order board (the lower parchment frame), the STONKS ticker screen (code draws inside it), the conveyor (a button that opens the item menu; not animated), and the Report Card and Log clipboards.
-- **Layer 1 rules are approved (2026-11-22):** correct supplies (every box gets peanuts, Soft has no rule, one tag per item, the tag table), Gnomerica orders ask for 1 item because it is the first tier, one drag ships the whole pile down to the display copy, score by region difficulty, tap a slip to read it full size, recoverable ticker.
+- **Layer 1 rules are approved (2026-11-22):** correct supplies (every box gets peanuts, Soft has no rule, one tag per item, the tag table), Gnomerica orders ask for 1 item because it is the first tier, ~~one drag ships the whole pile down to the display copy~~ each order asks for a count set by the item's packing tag and shipping deducts only that count (1h, Nathan, 2026-11-23), score by region difficulty, tap a slip to read it full size, recoverable ticker.
 - **Work orders and drivers are separate calls (Nathan, 2026-11-22):** each work order is stamped APPROVED or DENIED; any driver is sent away by closing the door with the chain.  Details and the two open points are in DESIGNS.md under "Work orders and drivers."  Fakes start after the first few shifts, so none of this blocks layer 1.
 - **The wall map** is the approved small icon, and the full map is the generated v0.29 map.  Mara's Brasswood re-style (v18) is parked as optional polish ([art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md)).
 
@@ -31,6 +31,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 5. **1e (done, draft.84):** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.  **1e.1 (done, draft.85):** the report card keeps the town, item, and reason on one line each, shrinking long names to fit.
 6. **1f (done, draft.86):** leaving the room mid-trip warns first (Stay or Send it off), a sent-off shift always shows its report card before the view switches, and the GRIP line fills the STONKS screen.
 7. **1g (done, draft.87):** the computer opens the supplies menu (Stamps for now; drag the stamp onto a closed box), the stamp tray is gone, the belt glows with a tag at the start of a trip, the computer glows while a box waits for its stamp, and every tip follows the instructions setting.
+8. **1h (done, draft.88):** each order asks for a count set by its item's packing tag ("500 × Toilet Paper", "2 × Toilet"), one drag packs that count, and shipping deducts only that count, so the next shift can still be filled.  The tags are in `CONFIG.items` (`pack`), not shown yet.
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 

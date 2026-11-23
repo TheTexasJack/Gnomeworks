@@ -1,6 +1,6 @@
 # Work order: Packing Line 1h, orders ask for a count (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("I agree with your assessment...  Deduct it").
 **Model:** Opus 5.5
 
@@ -55,3 +55,31 @@ Each work order asks for a believable count of its item, set by the item's packi
 
 ## Result (filled in by Claude Code)
 
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.88**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 17 minutes, from `git pull` at 12:05 to the Result at 12:22 (CST).  About 5 of those went to the slip layout (below).
+
+**What was built**
+
+- **Item tags.**  The 38 tagged junk items carry `pack: 'heavy' | 'breakable' | 'soft'` in `CONFIG.items`, exactly as the DESIGNS.md table lists them (13 Heavy, 12 Breakable, 13 Soft); the other junk items and the Tiny Monsters, Number Twos, and Treasures have none.  Nothing shows them.
+- **The count.**  `CONFIG.shipping.orders.perOrder` is now `orders.counts`, the four lists from this order (`''` is the no-tag list).  When an order is made, `pickCount()` picks at random from the tag's numbers no larger than the shelf count less the display copy; if none fit, the count is everything the shelf can spare.  The count is `order.qty`.
+- **Shown** on the slip's ITEM line and on the report card's item line as "500 × Toilet Paper" (`orders.countSign`), and in both screen-reader labels.  The menu tiles still show shelf counts.
+- **Packing.**  The same drag: the box takes the active order's count of the dropped item, right or wrong, or what the shelf can spare if it has fewer.  What earlier stamped boxes on the same trip already hold of that item is not counted as spare, so packing the same wrong item twice never records more than the shelf has.  The record keeps the item and that count.
+- **Shipping.**  Each shipped box takes its recorded count off the shelf, never below the display copy.  `applyShift()` already deducted the recorded count; the whole-pile part lived in packing (`fillBox`), which is what changed.
+- **Docs:** DESIGNS.md ("How much of a pile one package ships" is settled to the new rule, plus "How many", "Packing", and "Rotation" in "Purchase orders and the order board"), ARCHITECTURE.md, TASKS.md, HANDOFF.md, CHANGELOG.md.
+- **Smoke test:** two shifts in a row from a shelf of 40 of every junk item.  Each checks that every count fits its tag and the shelf, the slips and card rows show the counts, the record holds exactly the ordered counts, the menu tiles show shelf counts, and shipping takes exactly those counts off (and nothing else).  Then a shelf of only 3 Toilet Paper gets one order for 2.
+
+**A call to check: the slip's ITEM line.**  "500 × Toilet Paper" plus the picture does not fit on one line on any slip, so it wraps.  With plain wrapping the picture ended up alone on the second line, and keeping the picture with the last word split the name ("500 × Toilet / Paper").  So the item's name and picture stay together, and when they need the room the count sits on the line above ("500 ×" / "Toilet Paper 🧻"); short ones stay on one line ("2 × Toilet 🚽").  The worst case, "Fire Extinguisher" with its picture on a 360 px phone, was wider than the line and ran under the stamp, so the line now shrinks to fit (`CONFIG.shipping.slip.itemFont`, 6.4 down to a 4.6 cqw floor, measured the same way as the report card).  It needed about 5.6.  Before 1h, a long name could already wrap with its picture alone on the next line; that cannot happen now.
+
+**Measured.**  Report card at 360 px with the 1e.1 longest-name rows and 3-digit counts ("Grit Spit and Fellers", "150 × Fire Extinguisher", "Wrong item, Wrong stamp"): every line on one line, nothing cut.  "150 × Fire Extinguisher" shrinks a little to fit.  The slip at 360 px with "150 × Fire Extinguisher" at Pulley Junction (the item renamed in the test page only, since no Gnomerica place buys that item and a Heavy item never gets a 3-digit count): clear of the stamp.
+
+**Screenshots** in `tools/out/` (`?ship=1`, Day, 2x, not committed since `tools/out/` is ignored).  Shelf for these: 600 Toilet Paper, 600 Control Knobs, 600 Cardboard Boxes, 10 Toilets, the rest 0, with the random pick held high, so the board reads 500 Toilet Paper and 2 Toilets to Cogbottom, and 150 Control Knobs to Pulley Junction.  The debug button bar is hidden in the screenshots; on the phone it sits over the belt.
+
+- Board: `1h-desktop-day-board.png`, `1h-phone-day-board.png`, with `-board-zoom.png` crops
+- Full-size slip: `1h-desktop-day-slip-open.png`, `1h-phone-day-slip-open.png`
+- Report card: `1h-desktop-day-card.png`, `1h-phone-day-card.png`, with `-card-zoom.png` crops
+- Shelf before and after the shift (the Bathroom group): `1h-desktop-day-shelf-before.png` and `-shelf-after.png`, the same for `1h-phone-day-`.  Toilet Paper 600 to 100, Toilet 10 to 8.
+- 360 px: `1h-360-day-long-card.png` (and `-zoom`), `1h-360-day-slip-open-long.png`, `1h-360-day-slip-open.png`, `1h-360-day-board.png`
+
+Nothing was installed.  The menus, the stamp, the box face, the truck, the driver, the chain, and scoring are unchanged (a right item at any count is right).

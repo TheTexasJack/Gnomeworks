@@ -229,7 +229,8 @@ body {
 .ship-slip .slip-label { color: #b02c22; font: bold 3.7cqw/1.3 var(--font); letter-spacing: .03em; }
 .ship-slip .slip-town { font: bold 7.4cqw/1.1 var(--font); }
 .ship-slip .slip-region { font: bold 4.4cqw/1.3 var(--font); }
-.ship-slip .slip-item { font: bold 6.4cqw/1.1 var(--font); }
+.ship-slip .slip-item { font: bold 6.4cqw/1.1 var(--font); }   /* the size is set by fitSlips (CONFIG.shipping.slip.itemFont) */
+.ship-slip .slip-tail { white-space: nowrap; }
 .ship-slip .slip-item .item-icon { width: 1.15em; height: 1.15em; font-size: inherit; margin-left: .2em; vertical-align: -.22em; }
 .ship-slip .slip-stamp { right: 13.3%; top: 61.6cqh; width: calc(var(--stamp, 20) * 1cqw); height: auto; pointer-events: none; }
 .ship-slip .slip-note-text { left: 13%; right: 13%; top: 20cqh; bottom: 18cqh; display: flex; align-items: center; justify-content: center; text-align: center; font: bold 8.5cqw/1.3 var(--font); }
