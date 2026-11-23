@@ -88,3 +88,7 @@ The wide spot can be built as is whichever tall option is picked.  His walk (ste
 - `ship-1b4-tall-day-55pct-doorway.png` and `-feet.png`: tall, 55%, in the doorway.
 
 **Not done (waiting on the call above):** steps 2 and 4 in the game, removing `driverSpot`, the lean spots, and the leaning copy, the `docs/ASSETS.md` update, the version bump, stamp, changelog, smoke test, and the step 6 screenshots.  The truck, chain, door, and timings are untouched.
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 9f401aa and rendered it.  Desktop: the grumpy driver stands in the doorway in front of his truck, boots on the floor just in front of the sill, touching nothing.  Phone: he stands in front of the bench's right end with his boots below its front legs, so he reads as in front of it.  The depth rule works in both.
