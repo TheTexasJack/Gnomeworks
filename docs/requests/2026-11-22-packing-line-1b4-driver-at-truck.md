@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.4, the grumpy driver waits at his truck (v0.2)
 
-**Status:** Done (v0.2, built in v0.2.0-draft.74)
+**Status:** Reviewed and closed (Nathan: "this looks good.  leaning fixed with grumpy." 2026-11-22; built in v0.2.0-draft.74)
 **Written by:** Claudia, 2026-11-22.  v0.2 after the first run stopped at step 3 (see the Result below).  **Approved by:** Nathan, 2026-11-22 ("1b.4 approved"; v0.2 phone spot: "1b.4 phone option 1 approved").
 **Model:** Opus 5.5
 
