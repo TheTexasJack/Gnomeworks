@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.82.
+Last updated 2026-11-23, at v0.2.0-draft.83.
 
 ## Where we are
 
@@ -76,6 +76,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
     - [x] 1c-2: three Gnomerica work orders on the order board, tap to read full size; on phones the board ends left of the parked truck (draft.79).
     - [x] 1d.1 (draft.82): the box label shows only the item's picture, a closed box shows none, the stamp lands bold and on top, and the item menu sits on the supply drawer frame (05a) (Nathan's test of draft.81).
+    - [x] 1d.2 (draft.83): the region stamp sits small and straight in the box's upper right corner, the same gap from the top and the right (box face v0.3).
     - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] 1d.2 (approved): the region stamp lands small and straight in the box's upper right corner (box face mock v0.3).
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").

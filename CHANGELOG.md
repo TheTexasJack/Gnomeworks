@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.83 (2026-11-23)
+
+- Packing Line, step 1d.2 (still hidden behind `?ship=1`): the region stamp lands small and straight in the box's upper right corner, like postage, following the approved box face layout (mock v0.3).  Its top and right edges sit the same gap in from the top and right of the box's front face.  It is 10% of the box's width (was 44% of the canvas, tilted), with no tilt.  It still lands solid, on top of everything, with the thump.  Only the stamp moved; the shipping label and the other stickers come with later layers.
+
 ## v0.2.0-draft.82 (2026-11-23)
 
 - Packing Line, step 1d.1 (still hidden behind `?ship=1`), from Nathan's test of draft.81.  The box label shows only the item's picture, larger, with no count and no name, and only while the box is open and filled.  A closed box, a stamped box, and the boxes on the stack show no label, so a packed box looks like a plain shipped box.  The record for the hand-off still keeps the item and its exact count.  The stamp lands solid at full opacity (no more see-through blend), larger (44% of the box's canvas, was 30%), with a small shadow, and a stamped box draws in front of everything else on the bench, the stack, the tray, and the driver.  The item menu now sits on the approved supply drawer frame (05a): brass corners, wood sides, and the parchment behind the tiles, drawn as a nine-slice so the corners keep their shape on the wide phone strip and the tall desktop panel.  Night dims the frame as it does the slips.  The menu's place, size, scrolling, and dragging are unchanged.  New art: `assets/packing/menu_frame.webp`.

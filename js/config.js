@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.82';
+GW.VERSION = '0.2.0-draft.83';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -253,8 +253,11 @@ GW.CONFIG = {
       // On the box's front face, in % of its square canvas: label = [x center, y center, width] (the item's picture,
       // shown only while the box is open and filled), mark = the stamp once stamped [x center, y center, width,
       // tilt in degrees], drawn solid and on top of the box, the stack, the tray, and the driver.
+      // The mark sits in the postage corner (box face v0.3, docs/DESIGNS.md): the box art fills x 55 to 345 and
+      // y 53 to 346 of the 400 x 400 canvas, its front face runs 3 to 97% across and 21 to 97% down that art, and
+      // the stamp (10% of the box's width, straight) sits 4.5% of the box's width in from the face's top and right.
       label: [48, 69, 62],
-      mark: [60, 52, 44, -14],
+      mark: [77.2, 36.4, 7.25, 0],
       // The item menu's frame: the approved supply drawer (05a), drawn as a nine-slice so the brass corners keep
       // their shape, the wood sides stretch, and the parchment fills the middle.  slice = the corner size in the
       // game copy's pixels (512 x 768; 62 = 124 in the 1024 x 1536 master, the brass corner and the parchment's
