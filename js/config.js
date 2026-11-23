@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.75';
+GW.VERSION = '0.2.0-draft.76';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -101,9 +101,12 @@ GW.CONFIG = {
   // hitW = width of the invisible tap area around the thin chain (% of room width), so a finger can find it.
   // doorway = the opening just inside the door frame, [x %, y %] corners clockwise from top left; the truck
   // shows only inside it.  Traced from where the closed and open twins differ (both themes agree within 1%).
+  // Its left edge sits on the frame's inner edge (measured on the art, Day and Night), so no concrete shows
+  // between the frame and the truck; the two left corners sit on the traced top and floor lines.
   // truck: h = height (% of room height), top (% of room height), xFrom / xTo = its left edge (% of room width)
-  // before it slides in and where it stops.  top is set so the bumper rests on the doorway's floor line
-  // (its lowest point touches the line, nothing hangs below).
+  // before it slides in and where it stops.  xTo tucks the rear's left corner just behind the frame's inner
+  // edge.  top is set so the truck rests on the doorway's floor line (its lowest point touches the line,
+  // nothing hangs below).
   // driver: h (% of room height), from = [x of his center %, y of his feet %] at the doorway, fromScale = his
   // size there (farther away), at = [x %, y %] where his feet stand while he waits, full size (grumpy pose,
   // arms crossed).  Depth rule: whatever he stands in front of, his feet sit lower on screen than its floor
@@ -119,8 +122,8 @@ GW.CONFIG = {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
         chain: { x: 76.0, top: -12, h: 59, hitW: 4 },   // hangs from above the room's top edge so its handle clears the driver's cap
-        doorway: [[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]],
-        truck: { h: 55, top: 21.8, xFrom: 93, xTo: 80.5 },
+        doorway: [[80.3, 26.2], [92.2, 20.3], [92.4, 76.9], [80.3, 68.02]],
+        truck: { h: 55, top: 20.75, xFrom: 93, xTo: 79.1 },
         driver: {
           h: 32, from: [86.5, 74], fromScale: 0.8, at: [86.5, 80]
         }
@@ -128,8 +131,8 @@ GW.CONFIG = {
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
         chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
-        doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
-        truck: { h: 42.6, top: 26.2, xFrom: 95, xTo: 74.0 },
+        doorway: [[78.25, 29.19], [94.1, 24.8], [93.8, 67.1], [78.25, 62.5]],
+        truck: { h: 42.6, top: 26.6, xFrom: 95, xTo: 75.4 },
         driver: {
           h: 23, from: [86, 65], fromScale: 0.8, at: [87.5, 84]
         }

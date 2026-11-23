@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.76 (2026-11-22)
+
+- Packing Line, step 1b.5 (still hidden behind `?ship=1`), from Nathan's bug report: no more strip of bare concrete between the door frame and the parked truck.  The doorway outline's left edge now sits on the frame's inner edge in both layouts (measured on the Day and Night art), and the truck stops with its rear left corner tucked just behind the frame.  Its height is re-set so its lowest point still rests on the doorway's floor line.  Desktop shows the whole rear; on phones the opening is narrower than the rear, so the right door's outer edge and hinges stay behind the right side of the frame.  Sizes, the trip, the door, the chain, and the driver are unchanged.
+
 ## v0.2.0-draft.75 (2026-11-22)
 
 - Packing Line, step 1c-1 (data only, nothing on screen changes): `js/destinations.js` (`GW.DESTINATIONS`) lists the ten regions in unlock order with their stamp colors and symbols, and the 53 places that buy from the factory, each with the item ids it buys.  It is generated from the map's locations file by `node tools/destinations.js`, which takes item names from `js/config.js`, adds the whole Bathroom group to every place (everybody needs a bathroom), and reports any import name that matches no item (none today).  The page loads it right after config; nothing reads it yet.

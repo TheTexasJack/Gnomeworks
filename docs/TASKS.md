@@ -67,6 +67,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1b.2: the driver waits beside the bench with his elbow on it (Nathan's pick), and phone sizes match the wide room's proportions (draft.73).
     - [x] 1b.3 stopped at placement (no room at full size); 1b.4: the driver waits grumpy at full size, in the doorway in front of his truck on desktop and in front of the bench's right end on phones, by the depth rule (draft.74).
     - [ ] Later option (Nathan, 2026-11-22): replace the leaning poses with standing poses, which ends the leaning problem.
+    - [x] 1b.5: no gap beside the truck: the doorway outline's left edge sits on the frame's inner edge, and the truck's rear left corner tucks just behind it (draft.76).
     - [x] 1c-1: the destinations data, `js/destinations.js` generated from the map's locations file by `tools/destinations.js` (draft.75, nothing on screen).
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
     - [ ] 1c-2 to 1g: order board, drawer and boxes, packing, hand off and report card, Stonks.
