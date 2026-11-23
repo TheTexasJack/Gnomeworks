@@ -2,6 +2,7 @@
 
 **Status:** Approved
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (he started the run).
+**Model:** Opus 5.5
 
 ## Goal
 

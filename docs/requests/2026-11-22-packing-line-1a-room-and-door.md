@@ -2,6 +2,7 @@
 
 **Status:** Draft
 **Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Model:** Opus 5.5
 
 ## Goal
 
