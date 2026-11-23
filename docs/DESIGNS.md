@@ -248,6 +248,7 @@ Work orders and drivers are two separate calls.
 - **A real (GRIP) driver** who leaves with all their work orders done is good.  Sent away without all their work orders: a Stonks hit (our line down).
 - **A fake (TNP) driver** sent away: a small hit to TNP (their line down).  Completing work orders for a fake driver is bad (our line down, theirs up).
 - **Stamp scoring (Claudia's draft, approved by Nathan 2026-11-22):** stamping APPROVED on a real order and DENIED on a fake order are the correct calls; denying a real order counts as unfilled (❌), and approving a fake order counts as a TNP win.
+- **TNP build decisions (Nathan, 2026-11-23):** elves always arrive in their fake trucks (a trip is all GRIP or all TNP); every slip is stamped APPROVED or DENIED, then packed ("stamp it and pack it"); fakes start from shift 4; glitter slips appear only on real GRIP trucks, since the elf is his own tell; Stonks moves: approving a glitter slip lifts TNP, filling an elf's orders drops ours and lifts TNP, sending an elf away drops TNP a little, and other misses move ours only; an elf sent away gets a short report card ("TNP driver sent packing!").  Work orders 1l and 1m.
 - **After a driver is sent away (Nathan, 2026-11-22):** the player can open the door again and gets a random driver again.  **No more than 2 TNP drivers in a row** (the limit lives in `js/config.js`).
 - **A report card after the truck leaves,** Papers Please style.  Each order gets a ✅ or ❌ with a picture of why, so kids learn from their mistakes.
 - **The label is the reading challenge** (Cat Mail Co. style).  An order shows the town, and the player has to know which region that town is in to pick the right region stamp.  Players learn the map by shipping.
@@ -268,7 +269,7 @@ Work orders and drivers are two separate calls.
 **Ideas on the table (drafts, build in this order)**
 
 1. **Core:** Open and Close, drag to box, Stonks, stop at 1.
-   - **Stamps are a mechanic and cost nothing** (2026-11-15).  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  TNP fakes carry Christmas-looking stamps (snowflakes, holly).  A region's stamps arrive free when it unlocks.
+   - **Stamps are a mechanic and cost nothing** (2026-11-15).  Once regions exist, each region needs its own stamp, and a wrong stamp sends the box back.  ~~TNP fakes carry Christmas-looking stamps (snowflakes, holly).~~  Struck 2026-11-23: fakes are glitter only (decided 2026-11-22).  A region's stamps arrive free when it unlocks.
 2. ~~**Stonks shop:**~~  Dropped 2026-11-15 (Nathan): Stonks is never spent, so there is no shop, Packing Gnome, faster belt, or wider door.
 3. **Orders:** customers ask for specific items ("The Wizard Academy needs 2M Magic Wands", "The Banana Monster wants every banana you have").  Rewards found only here: order-only collectibles, stamp bonuses, maybe hats.  Gives the 96 junk items a purpose beyond counting.
 4. **TNP Corp (The North Pole Corp):** the rival, a corporate North Pole that runs itself while the big guy sleeps.  Santa is never named.  Papers Please style checks:

@@ -87,7 +87,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1i (draft.89): tags shown (junk tiles, the "Packing rules" chart, the open box; never the slip), peanuts and bubble wrap, their scoring, and "main reason +N" on the report card.
     - [x] 1j (reviewed, draft.90): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
     - [x] 1k (draft.91): polish: the Packing rules chart minimizes with a code-drawn chevron, the rolling door, the view button answers after the chain, transparent pictures on the open box.
-    - [ ] Next big step after 1k: TNP fakes (APPROVED and DENIED, the glitter fake slip, elf imposters and fake trucks, TNP's line on the STONKS screen), 2 or 3 orders.
+    - [ ] 1l (approved): APPROVED or DENIED on every slip (stamp it, then pack it), glitter fakes on GRIP trucks from shift 4, and TNP's line on the STONKS screen.
+    - [ ] 1m (approved, after 1l): elf imposters in their fake trucks, sending them away, and their placement pass.
     - [x] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.  Built in 1k (draft.91).
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
     - [x] 1j (draft.90): FRAGILE and HEAVY stickers on the box face's upper left, "No FRAGILE" and "No HEAVY", and the chart hidden with instructions off.
