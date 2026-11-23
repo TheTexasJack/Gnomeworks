@@ -34,7 +34,9 @@
    Leaving (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board shows the leave
    warning.  Stay (or a tap outside it, or Escape) changes nothing; Send it off runs the same hand-off as the chain,
    and main.js switches views once the report card closes.  Leaving while the truck is already leaving waits for
-   the card the same way, so a scored shift's card is never skipped. */
+   the card the same way, so a scored shift's card is never skipped.
+   Polish (1k): the "Packing rules" chart opens and minimizes from its heading bar, the door rolls up before the
+   truck and down after it, and a view button tapped while the leave waits for the card stays lit (main.js). */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -44,7 +46,7 @@ GW.ship = (function () {
   var built = false, active = false, open = false;
   var trip = 'closed';            // 'closed' | 'arriving' | 'here' | 'leaving'
   var tripId = 0, anims = [];
-  var box, closedImg, openImg, bay, truck, driver, driverImg, chain, roller, rollerClosed, rollerOpen, bounceTimer;
+  var box, closedImg, openImg, door, doorImg, bay, truck, driver, driverImg, chain, roller, rollerClosed, rollerOpen, bounceTimer;
   var board, viewer, orders = [], slipOpen = false;
   var K = P.pack, conveyor, computer, packLayer, boxEl = null, menus = {}, menuKind = null, stacked = [];
   var beltGlow, beltImg, beltTag, screenGlow, screenImg, beltTip = false;
@@ -52,7 +54,7 @@ GW.ship = (function () {
   // boxState: 'none' | 'open' | 'closed' | 'stamped'; boxIn = the inside supplies in the box (1i); boxOut = the
   // stickers on it (1j)
   var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
-  var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, afterCard = null;
+  var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, warnHeard = null, afterCard = null;
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -64,6 +66,11 @@ GW.ship = (function () {
     box = document.getElementById('ship');
     closedImg = img('ship-room'); openImg = img('ship-room ship-open');
     box.appendChild(closedImg); box.appendChild(openImg);
+    // The rolling door (1k): a copy of the closed room clipped to the doorway, over the open twin while the door
+    // rolls up or down.  Hidden the rest of the time.
+    door = U.el('div', 'ship-door'); doorImg = img('ship-room');
+    door.appendChild(doorImg); door.hidden = true;
+    box.appendChild(door);
     // The tips' glows (1g): the room art again, cut to the belt's and the screen's outlines, glowing.  They sit
     // just above the room, under everything else.
     beltGlow = makeGlow('ship-belt-glow'); beltImg = beltGlow.firstChild;
@@ -697,32 +704,34 @@ GW.ship = (function () {
     warnView.appendChild(warnPanel);
     box.appendChild(warnView);
   }
-  function openWarn(go) {
+  function openWarn(go, heard) {
     closeSlip(); closeMenu();
-    warnGo = go;
+    warnGo = go; warnHeard = heard;
     warnView.hidden = false; warnOpen = true;
     GW.sfx.click();
     warnStay.focus({ preventScroll: true });
   }
   function closeWarn() {
     if (!warnOpen) return;
-    warnView.hidden = true; warnOpen = false; warnGo = null;
+    warnView.hidden = true; warnOpen = false; warnGo = null; warnHeard = null;
   }
   // Send it off: the same hand-off as pulling the chain, then leave once the report card closes.
   function sendOff() {
-    var go = warnGo;
+    var go = warnGo, heard = warnHeard;
     closeWarn();
     if (trip !== 'here') return;
-    afterCard = go;
+    waitCard(go, heard);
     pull();
   }
+  // A leave that waits for the report card; heard tells main.js, which keeps the tapped view button lit (1k).
+  function waitCard(go, heard) { afterCard = go; if (heard) heard(); }
   // main.js asks before leaving the room for another view.  true = held here (go runs later, or never on Stay);
-  // false = leave now.
-  function holdLeave(go) {
+  // false = leave now.  heard (optional) runs once the leave is set to wait for the card.
+  function holdLeave(go, heard) {
     if (!active) return false;
-    if (trip === 'leaving') { afterCard = go; return true; }          // the chain is pulled: wait for the card
-    if (trip === 'closed' && pendingCard) { afterCard = go; showCard(pendingCard); return true; }
-    if (trip === 'here' && orders.length && !cardOpen) { openWarn(go); return true; }
+    if (trip === 'leaving') { waitCard(go, heard); return true; }          // the chain is pulled: wait for the card
+    if (trip === 'closed' && pendingCard) { waitCard(go, heard); showCard(pendingCard); return true; }
+    if (trip === 'here' && orders.length && !cardOpen) { openWarn(go, heard); return true; }
     return false;
   }
 
@@ -866,18 +875,49 @@ GW.ship = (function () {
     return [];
   }
   function supplyIcon(s) { var w = U.el('span', 'item-icon supply-icon'); w.appendChild(img('', s.img)); return w; }
-  // The "Packing rules" chart (1i), live text, one line per rule with its icon.
+  // The "Packing rules" chart (1i), live text, one line per rule with its icon.  Its heading bar opens or minimizes
+  // it (1k): open the first time it shows, minimized after that unless the player opens it, kept in this browser.
+  function rulesPref() { try { return localStorage.getItem(K.chart.storeKey); } catch (e) { return null; } }
+  function setRulesPref(v) { try { localStorage.setItem(K.chart.storeKey, v); } catch (e) {} }
   function makeChart() {
-    var Ch = K.chart, el = div('ship-rules');
-    el.appendChild(div('ship-rules-title', Ch.title));
+    var Ch = K.chart, el = div('ship-rules'), bar = U.el('button', 'ship-rules-head'), rows = div('ship-rules-rows');
+    bar.type = 'button';
+    bar.appendChild(U.el('span', 'ship-rules-title', Ch.title));
+    bar.appendChild(chevron());
+    bar.addEventListener('click', function (e) { if (e.detail === 0) toggleRules(el); });   // keys; taps go through menuUp
+    el.appendChild(bar);
+    el.appendChild(rows);
+    el.style.setProperty('--turn-ms', Ch.turnMs + 'ms');
+    el.style.setProperty('--bar-min', Ch.barMinPx + 'px');
+    var pref = rulesPref(), hints = !document.documentElement.classList.contains('no-hints');
+    if (pref === null && hints) setRulesPref('min');      // this first showing is open; later ones start minimized
+    setRulesOpen(el, pref === null || pref === 'open');
     Ch.rows.forEach(function (r) {
       var row = div('ship-rule'), sp = K.inside.filter(function (x) { return x.id === r.icon; })[0], tg = K.tags[r.icon];
       var pic = img('ship-rule-icon', sp ? sp.img : tg ? tg.img : '');
       row.appendChild(pic);
       row.appendChild(U.el('span', 'ship-rule-text', r.text));
-      el.appendChild(row);
+      rows.appendChild(row);
     });
     return el;
+  }
+  function setRulesOpen(el, on) {
+    el.classList.toggle('is-min', !on);
+    el.firstChild.setAttribute('aria-expanded', on ? 'true' : 'false');
+  }
+  function toggleRules(el) {
+    var on = el.classList.contains('is-min');
+    setRulesOpen(el, on);
+    setRulesPref(on ? 'open' : 'min');
+    GW.sfx.click();
+  }
+  // A thin chevron drawn in code (no font glyph): points down; the css turns it up while the chart is open.
+  function chevron() {
+    var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'), path = document.createElementNS(NS, 'path');
+    svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('class', 'ship-rules-chev'); svg.setAttribute('aria-hidden', 'true');
+    path.setAttribute('d', 'M6 9l6 6 6-6');
+    svg.appendChild(path);
+    return svg;
   }
   // The chart, then headed sections like the item menu's groups; an empty section is not shown.
   function fillSupplies(list) {
@@ -932,6 +972,7 @@ GW.ship = (function () {
     endDrag();
     var t = e.target.closest('.ship-tile');
     drag = { id: e.pointerId, m: m, x0: e.clientX, y0: e.clientY, scroll0: m.list.scrollTop, thing: tileThing(t, m), tile: t,
+      bar: e.target.closest('.ship-rules-head'),
       touch: e.pointerType !== 'mouse', mode: 'press', hold: null, ghost: null };
     if (drag.thing) t.classList.add('is-held');
     try { m.list.setPointerCapture(e.pointerId); } catch (err) {}
@@ -962,6 +1003,7 @@ GW.ship = (function () {
   // junk or an inside supply on a closed one).
   function menuUp(e) {
     if (!drag || e.pointerId !== drag.id) return;
+    if (drag.mode === 'press' && drag.bar) toggleRules(drag.bar.parentNode);   // a tap (not a scroll) on the chart's bar
     if (drag.mode === 'drag' && overBox(e.clientX, e.clientY)) {
       var th = drag.thing;
       if (!fits(th)) shakeBox();
@@ -1017,9 +1059,39 @@ GW.ship = (function () {
   function settle() {
     var L = layout(), here = trip === 'here';
     box.classList.toggle('is-open', open);
+    hideDoor();
     placeTruck(here ? L.truck.xTo : L.truck.xFrom);
     truck.style.visibility = here ? 'visible' : 'hidden';
     placeDriver(here ? L.driver.at : L.driver.from, here ? 1 : L.driver.fromScale, here);
+  }
+
+  // ---------- the rolling door (1k; numbers in CONFIG.shipping.trip) ----------
+  // The doorway grown by doorPad on every side, corners clockwise from top left.
+  function doorQuad(L) {
+    var q = L.doorway, d = T.doorPad;
+    return [[q[0][0] - d, q[0][1] - d], [q[1][0] + d, q[1][1] - d], [q[2][0] + d, q[2][1] + d], [q[3][0] - d, q[3][1] + d]];
+  }
+  // The closed door's clip with the door k of the way up (0 down, 1 up): its bottom edge climbs to its top edge.
+  function doorClip(L, k) {
+    var q = doorQuad(L);
+    function lerp(a, b) { return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]; }
+    return polygon([q[0], q[1], lerp(q[2], q[1]), lerp(q[3], q[0])]);
+  }
+  function hideDoor() {
+    door.getAnimations().forEach(function (a) { a.cancel(); });
+    door.hidden = true;
+  }
+  // Rolls the door up or down over the open twin, with its rattle.  Reduced motion: a short crossfade.
+  function rollDoor(up) {
+    var L = layout(), calm = calmQuery.matches, ms = calm ? T.doorCalmMs : up ? T.doorUpMs : T.doorDownMs;
+    hideDoor();
+    box.classList.add('is-open');
+    door.style.clipPath = doorClip(L, 0);
+    door.hidden = false;
+    GW.sfx.rattle(T.rattle, ms / 1000);
+    var frames = calm ? [{ opacity: 1 }, { opacity: 0 }] : [{ clipPath: doorClip(L, 0) }, { clipPath: doorClip(L, 1) }];
+    if (!up) frames.reverse();
+    return play(door, frames, { duration: ms, easing: 'ease-in-out', fill: 'forwards' });
   }
 
   // Both twins stay loaded and stacked, so opening is an instant swap with no jump.
@@ -1030,7 +1102,7 @@ GW.ship = (function () {
     var L = layout(), m = document.getElementById('machine'), wh = L.aspect.split('/');
     closedImg.src = GW.theme.img(L.closed);
     openImg.src = GW.theme.img(L.open);
-    rollerClosed.src = closedImg.src; rollerOpen.src = openImg.src;
+    rollerClosed.src = doorImg.src = closedImg.src; rollerOpen.src = openImg.src;
     beltImg.src = screenImg.src = closedImg.src;       // the belt and the computer look the same with the door open
     if (L === drawnLayout && force !== true) return;
     drawnLayout = L;
@@ -1095,9 +1167,11 @@ GW.ship = (function () {
     setPose(false);
     trip = 'arriving'; open = true;
     settle();
-    truck.style.visibility = 'visible';
     steps([
+      function () { return rollDoor(true); },            // the door rolls up first (1k)
       function () {
+        hideDoor();
+        truck.style.visibility = 'visible';
         placeTruck(L.truck.xTo);
         return play(truck, [{ left: L.truck.xFrom + '%' }, { left: L.truck.xTo + '%' }], { duration: T.truckInMs, easing: 'cubic-bezier(.2,.7,.3,1)' });
       },
@@ -1131,6 +1205,7 @@ GW.ship = (function () {
         return play(truck, [{ left: L.truck.xTo + '%' }, { left: L.truck.xFrom + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });
       },
       function () { truck.style.visibility = 'hidden'; return new Promise(function (r) { setTimeout(r, T.closeDelayMs); }); },
+      function () { return rollDoor(false); },           // then it rolls back down (1k)
       function () { open = false; trip = 'closed'; anims = []; settle(); if (pendingCard) showCard(pendingCard); }
     ]);
   }

@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.90.
+Last updated 2026-11-23, at v0.2.0-draft.91.
 
 ## Where we are
 
@@ -55,7 +55,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] The "new thing to watch for" each region adds: the complications table in DESIGNS.md.
     - [x] Work orders and drivers: APPROVED or DENIED stamps on orders; the door chain sends any driver away (Nathan, 2026-11-22).
     - [x] Stamp scoring and what follows a sent-away driver: reopen the door for a random driver, no more than 2 TNP drivers in a row (Nathan, 2026-11-22).
-    - [ ] **Future upgrade (Nathan, 2026-11-22):** the shipping door opens and closes smoothly, rolling up like a garage door, in place of the instant swap built in 1a.
+    - [x] **Future upgrade (Nathan, 2026-11-22):** the shipping door opens and closes smoothly, rolling up like a garage door, in place of the instant swap built in 1a.  Built in 1k (draft.91).
     - [x] ~~Replace the leaning poses with new standing art.~~  Settled without new art (Nathan, 2026-11-22): drivers always arrive grumpy, so the grumpy pose (arms crossed, standing) is the waiting pose.  See DESIGNS.md, "The driver's moods."
     - [x] ~~Before the Shipping view goes live: the view buttons wrap on a 390px phone, and the chain needs Space and Enter (1a review).~~  Closed (Nathan, 2026-11-23): the two-line view buttons are accepted.  The chain alone with keys would not make the room keyboard-playable (packing needs a drag), so it becomes a later full keyboard pass.
     - [ ] Later: a full keyboard pass for the Shipping view (chain, slips, menu, packing, stamping).
@@ -86,12 +86,12 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1h (draft.88): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
     - [x] 1i (draft.89): tags shown (junk tiles, the "Packing rules" chart, the open box; never the slip), peanuts and bubble wrap, their scoring, and "main reason +N" on the report card.
     - [x] 1j (reviewed, draft.90): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
-    - [ ] 1k (approved): polish: the Packing rules chart minimizes with a code-drawn chevron, the rolling door, the view button answers after the chain, transparent pictures on the open box.
+    - [x] 1k (draft.91): polish: the Packing rules chart minimizes with a code-drawn chevron, the rolling door, the view button answers after the chain, transparent pictures on the open box.
     - [ ] Next big step after 1k: TNP fakes (APPROVED and DENIED, the glitter fake slip, elf imposters and fake trucks, TNP's line on the STONKS screen), 2 or 3 orders.
-    - [ ] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.
+    - [x] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.  Built in 1k (draft.91).
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
     - [x] 1j (draft.90): FRAGILE and HEAVY stickers on the box face's upper left, "No FRAGILE" and "No HEAVY", and the chart hidden with instructions off.
-    - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
+    - [x] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.  Built in 1k (draft.91).
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [x] **Built in 1f (draft.86).**  Leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).

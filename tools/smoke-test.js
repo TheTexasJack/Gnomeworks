@@ -132,6 +132,7 @@ async function packCheck(page, errors) {
       if (await page.$$eval('.ship-menu-supplies .ship-menu-head', h => h.map(x => x.textContent).join()) !== 'Packing,Stickers,Stamps') fail('the supplies menu does not show Packing, Stickers, and Stamps');
       if (await page.$$eval('.ship-menu-supplies .ship-rules .ship-rule', r => r.length) !== 4) fail('the Packing rules chart does not show 4 rules');
       if (!await shown('.ship-menu-supplies .ship-rules')) fail('the chart is hidden with instructions on');
+      if (await page.evaluate(() => document.querySelector('.ship-rules').classList.contains('is-min'))) fail('the chart was minimized on its first showing in a fresh browser');
       await page.evaluate(() => document.documentElement.classList.add('no-hints'));
       if (await shown('.ship-menu-supplies .ship-rules')) fail('the chart showed with instructions off');
       await page.evaluate(() => document.documentElement.classList.remove('no-hints'));
@@ -287,6 +288,43 @@ async function packCheck(page, errors) {
 
 // Leaving mid-trip (1f): a view button shows the warning; Stay keeps the trip; Send it off scores the shift, shows
 // the card, and lands on the tapped view once the card closes.  Leaving after the chain is pulled waits for the card.
+// The polish (1k): after a reload the "Packing rules" chart starts minimized, its bar opens it with a code-drawn
+// chevron (no text), and the choice is kept; the door rolls up before the truck comes in and the trip completes.
+async function polishCheck(page, errors) {
+  const fail = m => errors.push('polish: ' + m);
+  const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  const isMin = () => page.evaluate(() => document.querySelector('.ship-menu-supplies .ship-rules').classList.contains('is-min'));
+  const openRoom = async () => {
+    await page.reload(); await page.waitForTimeout(400);
+    await page.click('[data-view="shipping"]'); await page.waitForTimeout(300);
+    await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : 40; }));
+  };
+  await openRoom();
+  let c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.waitForTimeout(150);
+  const rolling = await page.evaluate(() => { const d = document.querySelector('.ship-door'); return !d.hidden && d.getAnimations().length > 0 && getComputedStyle(document.querySelector('.ship-truck')).visibility === 'hidden'; });
+  if (!rolling) fail('the door did not roll up ahead of the truck');
+  try { await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 }); } catch (e) { fail('the trip did not arrive with the rolling door'); return; }
+  if (await page.evaluate(() => !document.querySelector('.ship-door').hidden)) fail('the rolled-up door still shows');
+  c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+  if (!await isMin()) fail('the chart was not minimized after a reload');
+  if (await page.evaluate(() => { const b = document.querySelector('.ship-rules-head'); return !b.querySelector('svg.ship-rules-chev') || b.textContent.trim() !== GW.CONFIG.shipping.pack.chart.title; })) fail('the chart bar is not its title and a drawn chevron');
+  c = await mid('.ship-rules-head'); await page.mouse.click(c.x, c.y);
+  if (await isMin() || await page.evaluate(() => document.querySelector('.ship-rules-head').getAttribute('aria-expanded')) !== 'true') fail('a tap on the bar did not open the chart');
+  await page.keyboard.press('Escape');
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);    // send him off unpacked: the door rolls down after the truck
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after the door rolled down'); return; }
+  if (await page.evaluate(() => GW.ship.isOpen() || !document.querySelector('.ship-door').hidden)) fail('the door did not end closed');
+  await page.keyboard.press('Escape');
+  await openRoom();
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
+  c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+  if (await isMin()) fail('the player\'s choice to open the chart was not kept');
+  c = await mid('.ship-rules-head'); await page.mouse.click(c.x, c.y);   // leave it minimized
+  console.log('polish: the chart (open first, minimized after a reload, kept when opened) and the rolling door ok');
+}
+
 async function leaveCheck(page, errors) {
   const fail = m => errors.push('leaving: ' + m);
   const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
@@ -394,6 +432,7 @@ async function leaveCheck(page, errors) {
 
     if (name === 'desktop') await restCheck(page, errors);
     if (name === 'desktop') await packCheck(page, errors);
+    if (name === 'desktop') await polishCheck(page, errors);
     if (name === 'desktop') await leaveCheck(page, errors);
 
     const version = await page.textContent('.footer');

@@ -274,6 +274,14 @@ GW.sfx = (function () {
     tone({ f: vary(o.f), to: o.to, dur: o.dur, vol: o.vol, type: 'triangle' });
     noise({ f: o.noiseHz, q: 0.9, dur: o.noiseDur, vol: o.noiseVol });
   }
+  // Packing Line (1k): the rolling door's rattle, a run of short ticks over a low rumble, for secs seconds.
+  // o = its numbers, from CONFIG.shipping.trip.rattle.
+  function rattle(o, secs) {
+    if (!ready() || !o || !secs || !limit('rattle', 2)) return;
+    var n = Math.max(1, Math.round(secs / o.every));
+    for (var i = 0; i < n; i++) noise({ f: vary(o.hz), q: o.q, dur: o.click, vol: o.vol * (0.7 + Math.random() * 0.3), at: i * o.every });
+    if (o.rumble) tone({ f: o.rumble.f, dur: secs, vol: o.rumble.vol, type: 'triangle', atk: 0.05 });
+  }
   // Until Alex records her "UGH!": a quick low grunt.
   function ugh(kind) {
     if (!ready()) return;
@@ -287,7 +295,7 @@ GW.sfx = (function () {
   }
 
   return {
-    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump, pat: pat,
+    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump, pat: pat, rattle: rattle,
     hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },

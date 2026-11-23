@@ -94,6 +94,9 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -2px 0 rgba(110,74,14,.5), 0 3px 0 #6e4a0e, 0 0 12px rgba(255,200,80,.35);
 }
 .btn.active::before, .btn.active::after { background: radial-gradient(circle at 35% 35%, #fffbe8, #a8741a 70%); }
+/* a view button tapped while the shipping room's leave waits for the report card (1k): pressed and lit until the switch */
+.view-toggle .btn.is-waiting { transform: translateY(2px); filter: brightness(1.18); border-color: var(--brass-light);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.55), 0 1px 0 #1e1206, 0 0 10px rgba(255,210,110,.55); }
 .btn.go { color: #0f2a0f; text-shadow: none; border-color: #c9f7c9; background: linear-gradient(180deg, #d8fbd8, #79c579 50%, #3f8a3f); box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 3px 0 #23521f, 0 0 12px rgba(120,220,120,.35); }
 .btn.danger { color: #fff; border-color: #c0392b; background: linear-gradient(180deg, #9c2a1d, #6a160d); }
 /* small pause and sound buttons, tucked on the first shop line next to "Gnomes" */
@@ -121,6 +124,9 @@ body {
 #ship .ship-room { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
 #ship .ship-open { visibility: hidden; }
 #ship.is-open .ship-open { visibility: visible; }
+/* the rolling door (1k): the closed room again, clipped (from js) to the doorway, over the open twin while it rolls */
+#ship .ship-door { position: absolute; inset: 0; pointer-events: none; }
+#ship .ship-door[hidden] { display: none; }
 /* the bay is clipped (clip-path set from CONFIG.shipping) to the doorway, or on desktop to everything but the right jamb and the header, so the frame stays in front of the truck */
 #ship .ship-bay { position: absolute; inset: 0; pointer-events: none; }
 /* the roller: the room art again, clipped to the roller's gear cap and drawn above the chain so the chain's top hides behind it */
@@ -255,16 +261,17 @@ body {
 #ship .ship-box.is-closed .box-open { visibility: hidden; }
 #ship .ship-box.drop-ok .box-art { filter: drop-shadow(0 0 1.2vmin #ffe08a) drop-shadow(0 0 2.5vmin rgba(255,200,80,.9)); }
 #ship .box-label { position: absolute; left: var(--label-x); top: var(--label-y); max-width: var(--label-w); transform: translate(-50%, -50%);
-  display: flex; align-items: center; justify-content: center; padding: 1.5cqw; border-radius: 2cqw; background: #fbf3df; border: .6cqw solid #8a5a2b;
-  box-shadow: 0 .6cqw 1cqw rgba(0,0,0,.3); pointer-events: none; }
+  display: flex; align-items: center; justify-content: center; padding: 1.5cqw; pointer-events: none; }
+/* the open box's pictures sit straight on the cardboard (1k) with a soft dark shadow, so they read Day and Night */
+#ship .box-label > * { filter: drop-shadow(0 .6cqw .7cqw rgba(0,0,0,.5)) drop-shadow(0 0 .35cqw rgba(0,0,0,.3)); }
 #ship .box-label[hidden], #ship .box-mark[hidden] { display: none; }
 #ship .box-label .item-icon { width: 22cqw; height: 22cqw; font-size: 19cqw; flex: none; }
 /* the inside supplies (1i): small pictures in the open box's opening (spots from CONFIG.shipping.pack.inside), and the
    item's packing tag beside its picture on the label */
 #ship .box-in { position: absolute; height: auto; transform: translate(-50%, -100%); pointer-events: none;
-  filter: drop-shadow(0 .5cqw .5cqw rgba(0,0,0,.4)); }
+  filter: drop-shadow(0 .6cqw .7cqw rgba(0,0,0,.5)) drop-shadow(0 0 .35cqw rgba(0,0,0,.3)); }
 #ship .box-in[hidden] { display: none; }
-#ship .box-label .box-tag { height: 19cqw; width: auto; margin-left: 1.5cqw; flex: none; filter: drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.35)); }
+#ship .box-label .box-tag { height: 19cqw; width: auto; margin-left: 1.5cqw; flex: none; }
 #ship .box-mark { position: absolute; left: var(--mark-x); top: var(--mark-y); width: var(--mark-w); height: auto;
   transform: translate(-50%, -50%) rotate(var(--mark-tilt)); pointer-events: none; opacity: 1; z-index: 1;
   filter: drop-shadow(0 .6cqw .5cqw rgba(0,0,0,.45)); }
@@ -295,9 +302,21 @@ body {
 #ship .ship-tile .tile-tag { position: absolute; top: 3px; right: 3px; height: 24px; width: auto; pointer-events: none;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.5)); }
 /* the "Packing rules" chart at the top of the supplies menu (1i): live text, one line per rule with its icon */
-#ship .ship-rules { margin: 2px 2px 8px; padding: 6px 8px 7px; border-radius: 6px; background: rgba(255, 248, 228, .72);
+#ship .ship-rules { margin: 2px 2px 8px; padding: 0 8px; border-radius: 6px; background: rgba(255, 248, 228, .72);
   border: 1px solid rgba(110, 60, 20, .45); font-family: var(--font); color: #3a2414; }
-#ship .ship-rules-title { font-weight: bold; font-size: .95rem; margin-bottom: 4px; color: #4a2a10; }
+/* its heading bar is the tap target (1k): the title, and a thin chevron at the right end that points down while
+   the chart is minimized and turns up while it is open */
+#ship .ship-rules-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
+  min-height: var(--bar-min, 40px); padding: 0; margin: 0; border: 0; background: none; font: inherit; color: inherit;
+  cursor: pointer; text-align: left; -webkit-tap-highlight-color: transparent; }
+#ship .ship-rules-head:focus-visible { outline: 2px solid #8a5a2b; outline-offset: 1px; border-radius: 4px; }
+#ship .ship-rules-title { font-weight: bold; font-size: .95rem; color: #4a2a10; }
+#ship .ship-rules-chev { width: 20px; height: 20px; flex: none; fill: none; stroke: #4a2a10; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round; transform: rotate(180deg); transition: transform var(--turn-ms, 200ms) ease; }
+#ship .ship-rules.is-min .ship-rules-chev { transform: rotate(0deg); }
+#ship .ship-rules-rows { padding: 0 0 7px; }
+#ship .ship-rules.is-min .ship-rules-rows { display: none; }
+@media (prefers-reduced-motion: reduce) { #ship .ship-rules-chev { transition: none; } }
 #ship .ship-rule { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: .85rem; line-height: 1.2; }
 #ship .ship-rule-icon { width: 30px; height: 26px; object-fit: contain; flex: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
 /* the chart follows the instructions setting (1j): hidden with instructions off; the rules stay the same */

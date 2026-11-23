@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.90';
+GW.VERSION = '0.2.0-draft.91';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -229,7 +229,17 @@ GW.CONFIG = {
       stepMs: 280,          // one step of his walking bob
       bob: 3,               // how high each step lifts him, as a share of his height (%)
       truckOutMs: 1300,     // the truck sliding away
-      closeDelayMs: 200     // after the truck is gone, then the door shows closed
+      closeDelayMs: 200,    // after the truck is gone, then the door rolls down
+      // The rolling door (1k): the closed door rolls up into the roller before the truck backs in, and back down
+      // after it is gone.  A copy of the closed room, clipped to the doorway grown by doorPad % on every side (the
+      // twins match outside it), shrinks upward over the open twin.  Reduced motion: a doorCalmMs crossfade.
+      doorUpMs: 700,
+      doorDownMs: 700,
+      doorPad: 2,
+      doorCalmMs: 250,
+      // The door's rattle while it rolls: a short noise tick every `every` seconds (bandpass hz, q), each `click`
+      // seconds long at `vol`, over a low rumble tone (f, vol).  It plays for as long as the door moves.
+      rattle: { every: 0.05, hz: 1500, q: 2.5, click: 0.025, vol: 0.07, rumble: { f: 85, vol: 0.05 } }
     },
     chain: {
       img: 'assets/packing/chain.webp',
@@ -337,8 +347,14 @@ GW.CONFIG = {
       // The "Packing rules" chart at the top of the supplies menu (1i): one line per rule, its icon (an inside
       // supply's id or a tag's id) and its words.  Draft wording (Claudia).  Shown only while "Show instructions"
       // is on (1j); the rules stay the same either way.
+      // A tap on its heading bar opens or minimizes it (1k): open the first time it shows, minimized from then on
+      // unless the player opens it.  The choice is kept in this browser under storeKey.  turnMs = the chevron's turn.
+      // barMinPx = the bar's height, big enough for a finger.
       chart: {
         title: 'Packing rules',
+        storeKey: 'gnomeworks.rules',
+        turnMs: 200,
+        barMinPx: 40,
         rows: [
           { icon: 'peanuts', text: 'Every box: packing peanuts.' },
           { icon: 'breakable', text: 'Breakable: bubble wrap and a FRAGILE sticker.' },

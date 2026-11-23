@@ -1,6 +1,6 @@
 # Work order: Packing Line 1k, polish: rules toggle, rolling door, and two small fixes (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
@@ -52,3 +52,33 @@ Four polish items on Beta 1, all small, all things a player sees every shift.  S
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.91**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 17 minutes, from `git pull` at 13:20 to the Result at 13:37 (CST).
+
+**What was built**
+
+- **The Packing rules toggle.**  The chart's heading is now one button across its full width (40 px tall, `chart.barMinPx`): the title on the left, a thin chevron on the right drawn as inline SVG (a 2 px stroke, round ends, the same shape as Claude.ai's expand chevrons).  It points down while minimized and turns up while open over 200 ms (`chart.turnMs`; no turn with reduced motion).  A tap toggles it, a finger that scrolls from the bar still scrolls, and Enter or Space work on it.  The first time the chart shows (with instructions on) it is open and `gnomeworks.rules` is set to `min`, so every later showing starts minimized; a tap stores `open` or `min`, and that choice wins from then on, reloads included.  Instructions off still hides the whole chart.
+- **The rolling door.**  A copy of the closed room, clipped to the doorway grown by 2% on every side, sits over the open twin while the door moves.  I diffed the closed and open twins in both themes and layouts: with 2% padding nothing outside the clip differs, so the swap at either end shows no seam.  The clip's bottom edge climbs to its top edge along the doorway's slanted sides (`doorUpMs`, `doorDownMs`, 700 each).  The trip waits for it: the truck becomes visible only once the door is up, and on leaving the door rolls down after `closeDelayMs`, then the report card shows.  Reduced motion: a 250 ms crossfade (`doorCalmMs`).  The roller twins still draw in front of the chain.
+- **The rattle.**  The sound system could make one, so `GW.sfx.rattle()` plays a run of short bandpassed noise ticks over a low rumble for as long as the door moves; its numbers are in `CONFIG.shipping.trip.rattle`.
+- **The view button answers.**  `holdLeave(go, heard)` calls `heard` whenever a leave is set to wait for the report card (after the chain, or after Send it off).  `main.js` then gives the tapped button `.is-waiting`: the pressed look (down 2 px, inset shadow) plus a brighter face, a light brass border, and a soft glow.  It clears when the view switches, or when Shipping is tapped again to stay.
+- **Transparent pictures on the open box.**  The cream card, border, and box shadow behind the item and tag are gone.  The item, tag, and supply pictures all carry the same shadow (a soft dark drop shadow plus a faint dark rim).
+- **Docs:** CHANGELOG, ARCHITECTURE, DESIGNS, TASKS (the garage-door upgrade, the transparent pictures, and the view-button polish marked built), HANDOFF.
+- **Smoke test:** a new `polishCheck` (desktop): after a reload the door is rolling with the truck still hidden right after the pull, the trip arrives, and the door layer is gone; the chart is minimized, its bar is the title plus the SVG chevron, a tap opens it (`aria-expanded` true); sending the driver off ends with the door closed and the card up; after another reload the chart starts open, because the player chose open.  `packCheck` now checks that the chart is open on its first showing in a fresh browser.
+
+**Calls to check**
+
+1. **Minimized, the five supply tiles still don't all fit without scrolling.**  I measured the supplies menu with the chart minimized.  On a 1400x900 desktop the list is 310 px tall and needs 353 (Stamps is cut off by 43 px).  On a 390x844 phone it is 208 px tall and needs 341.  Even with the chart hidden entirely (instructions off), the three sections need 301 px, which just fits on that desktop and is 93 px too tall on the phone.  A slim bar can't close that gap, so I left the menu's layout alone.  Ways to make the tiles fit: put the sections side by side (Packing and Stickers on one row), make the supply tiles shorter, or give the supplies menu a taller frame.  Each one changes the menu, so it needs a work order.
+2. **The door is a wipe, not moving slats.**  As the order says, the clip shrinks upward; the slats themselves don't slide up into the roller.  At 700 ms it reads as a roll in the frames and the video.  If Nathan wants the slats to travel, the door needs its own art layer.
+3. **The rattle is code-made.**  It is a placeholder like the stamp's thump.  A recorded rattle could replace it later.
+
+**Proof** in `tools/out/` (`?ship=1`, Day, 2x, not committed).  `wide` is 1400 x 900 and `tall` is 390 x 844.
+
+- Supplies menu with the chart open (first showing) and minimized: `1k-<wide|tall>-day-supplies-chart-open.png`, `-supplies-chart-min.png`; after a reload: `-supplies-after-reload.png`.
+- Chevron close-ups: `1k-<wide|tall>-day-chevron-open.png` (up) and `-chevron-min.png` (down); the whole bar open: `-chart-bar-open.png`.
+- The door mid-roll, three frames each way: `1k-<wide|tall>-day-door-up-<25|50|75>.png` and `-door-down-<25|50|75>.png` (the animation paused at 25, 50, and 75%).
+- The pressed view button (The Machine): while the truck leaves, `1k-<wide|tall>-day-button-waiting-trip.png`; with the report card up, `-button-waiting-card.png`.
+- The open box with a Teapot, peanuts, and bubble wrap on bare cardboard: `1k-<wide|tall>-<day|night>-open-box.png` (close-up) and `-open-box-room.png`.
+- Video: Playwright's video works on Beast.  `1k-<wide|tall>-day-door-roll.webm` records that layout's whole proof run, which includes the door rolling up twice and down twice (the still frames pause it for a moment each).
+
+Nothing was installed.  The rules, scoring, counts, stickers, stamp, menus' places, the truck, and the driver are unchanged.

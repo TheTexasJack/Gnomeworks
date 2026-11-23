@@ -349,9 +349,13 @@ window.GW = window.GW || {};
     U.$all('.view-toggle button').forEach(function (b) {
       var on = b.dataset.view === s.view;
       b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.classList.remove('is-waiting');
     });
     fitRails();
     machine.setAttribute('aria-label', LABELS[s.view]);
+  }
+  function lightWait(btn) {
+    U.$all('.view-toggle button').forEach(function (b) { b.classList.toggle('is-waiting', b === btn); });
   }
   U.$all('.view-toggle button').forEach(function (b) {
     if (!viewOn(b.dataset.view)) return;
@@ -360,8 +364,9 @@ window.GW = window.GW || {};
       var v = b.dataset.view;
       // Leaving the shipping room mid-trip asks first, and a scored shift shows its report card before the switch (1f).
       if (s.view === 'shipping' && GW.ship.enabled()) {
-        if (v === 'shipping') { GW.ship.stay(); return; }
-        if (GW.ship.holdLeave(function () { goView(v); })) return;
+        if (v === 'shipping') { GW.ship.stay(); lightWait(null); return; }
+        // A leave waiting for the report card keeps the tapped button lit in its pressed style (1k).
+        if (GW.ship.holdLeave(function () { goView(v); }, function () { lightWait(b); })) return;
       }
       goView(v);
     });

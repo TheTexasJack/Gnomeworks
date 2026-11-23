@@ -136,6 +136,8 @@ Every junk item gets a packing tag: **Breakable**, **Soft**, **Heavy**, or none.
 
 **Built in 1j (draft.90):** the outside of the box.  The supplies menu's Stickers section (between Packing and Stamps) holds FRAGILE and HEAVY, free and unlimited, which go on a closed box only, before its stamp; an open box shakes them off, and a second drop changes nothing.  They sit in the box face's upper left per v0.3 (8.5% of the box's width, 2% gap, FRAGILE first, tops level with the stamp; one sticker takes the first slot), solid and on top, with a soft pat.  They show only while the box is closed; reopening keeps them.  Scoring: "No FRAGILE" for a Breakable item without it, "No HEAVY" for a Heavy item without it, following the item in the box; extras do nothing.  Main-reason order: Not packed, Wrong item, No peanuts, No bubble wrap, No FRAGILE, No HEAVY, No stamp, Wrong stamp.  The "Packing rules" chart shows only while "Show instructions" is on (Claudia's draft from 1i's call 1, approved by Nathan 2026-11-23); the rules stay the same either way.
 
+**Built in 1k (draft.91):** the chart's heading bar opens and minimizes it, with a code-drawn chevron (down while minimized, up while open); it is open the first time it shows and minimized after that unless the player opens it, remembered per browser.  The shipping door rolls up before the truck and down after it (a crossfade with reduced motion), with a rattle.
+
 - **Breakables go on top**, and a box with a breakable needs **bubble wrap**.  (Nathan)
 - **Packing peanuts** (the cornstarch kind) fill the box.  (Nathan)  Every box gets peanuts (approved 2026-11-22).
 - **Heavy goes in first.**  Putting a heavy item in last earns an ❌.  (Nathan)
