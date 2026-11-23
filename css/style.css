@@ -203,6 +203,8 @@ body {
 .ship-card .card-why.card-note { color: #2e8b3a; }
 /* the elf sent packing (1m): one green line, and the elf standing in the picture frame */
 .ship-card .card-line.card-note { color: #2e8b3a; }
+/* "TNP driver sent packing!" may take two lines instead of shrinking (1n): it is the card's only row */
+.ship-card .card-line.card-wrap { white-space: normal; text-overflow: clip; text-wrap: balance; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .ship-card .card-pic .card-elf { height: 92%; width: auto; }
 /* the GRIP line inside the STONKS screen painted on the back wall; cqh = 1% of the glass's height */
 #ship .ship-stonks { position: absolute; container-type: size; pointer-events: none; color: var(--ticker, #46f06a);
@@ -386,6 +388,22 @@ body {
 @keyframes tipPulse { from { opacity: .55; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { #ship .ship-glow { animation: none; opacity: .9; } }
 #ship .ship-belt-tag { right: auto; }
+/* handing the box to the driver (1n): the dragged box follows the pointer above the room's other pieces; the driver
+   glows softly while a closed box waits on the bench (breathing, steady with reduced motion) and brighter while the
+   box is over him; his tag sits above his head */
+#ship .ship-box.is-dragged { z-index: 3; cursor: grabbing; }
+#ship .ship-box.is-dragged .box-art { filter: drop-shadow(0 1.6vmin 1.2vmin rgba(0,0,0,.45)); }
+#ship .ship-driver.is-hand img { animation: driverAsk var(--tip-pulse, 1600ms) ease-in-out infinite alternate; }
+#ship .ship-driver.is-hand.is-target img { animation: none; filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 14px #ffb703); }
+@keyframes driverAsk {
+  from { filter: drop-shadow(0 0 1px #fffbe0) drop-shadow(0 0 3px rgba(255,211,77,.5)) drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
+  to { filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 10px rgba(255,183,3,.8)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #ship .ship-driver.is-hand img { animation: none; filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 5px #ffd34d) drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
+}
+.no-hints #ship .ship-driver.is-hand img { animation: none; filter: drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
+#ship .ship-hand-tag span { padding: 3cqw 4cqw; font-size: 9.5cqw; }
 #ship .ship-belt-tag span { padding: 2.6cqw 3.4cqw; font-size: 7.6cqw; }
 .no-hints #ship .ship-tip { display: none !important; }
 .no-hints .ship-chain.is-ready { animation: none; }

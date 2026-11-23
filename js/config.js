@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.93';
+GW.VERSION = '0.2.0-draft.94';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -165,6 +165,9 @@ GW.CONFIG = {
         // right edge, y of its center, width].  stonks = the STONKS screen's black glass [x, y, w, h], measured from
         // the Day room (x 855 to 1169, y 155 to 301 of 1600 x 901; the Night twin lines up), inset for its round corners.
         finishTag: [91.6, 66, 9],
+        // handTag = the "Hand it to the driver!" tag (1n), above the driver's head: [x of its center, y of its center,
+        // width].
+        handTag: [85.5, 41.5, 14],
         stonks: [54.2, 18.6, 18.2, 13.6]
       },
       tall: {
@@ -204,6 +207,7 @@ GW.CONFIG = {
         menu: [2, 1, 96, 37],
         // Hand-off (1e), as in the wide room.  stonks: the glass runs x 282 to 630, y 414 to 571 of 900 x 1599.
         finishTag: [93.2, 60.5, 19],
+        handTag: [79, 58.5, 34],
         stonks: [32.6, 26.6, 36.2, 8.5]
       }
     },
@@ -368,7 +372,7 @@ GW.CONFIG = {
         { id: 'peanuts', name: 'Packing Peanuts', img: 'assets/packing/supply_peanuts.webp', spot: [37, 33, 26] },
         { id: 'bubble', name: 'Bubble Wrap', img: 'assets/packing/supply_bubble_wrap.webp', spot: [63, 33, 32] }
       ],
-      // The outside stickers (1j), the Stickers section: free and unlimited, dragged onto a closed box before its stamp
+      // The outside stickers (1j), the Stickers section: free and unlimited, dragged onto a closed box before or after its stamp (1n)
       // (an open box shakes them off).  Adding one twice changes nothing.  `need` = the packing tag whose item needs
       // it (scored as `reason`); on any other item it does nothing.  They sit in the box face's upper left (box face
       // v0.3, docs/DESIGNS.md), side by side in menu order, FRAGILE first; a box with one sticker uses the first slot.
@@ -439,8 +443,10 @@ GW.CONFIG = {
       dropPad: 12,
       stampMs: 260,         // the stamp coming down
       thumpMs: 220,         // the box's little jolt as it lands
-      setAsideDelayMs: 450, // stamped, then it moves to the stack
-      slideMs: 650,         // the box sliding to the stack
+      slideMs: 650,         // the box sliding from the driver to the stack
+      // Handing the box to the driver (1n): a closed box dragged onto him (his picture's outline grown by padX % of
+      // its width and padY % of its height on each side) goes to the stack; anywhere else it springs back over backMs.
+      hand: { padX: 25, padY: 8, backMs: 320 },
       nextMs: 300           // the next order's box appearing
     },
     // Scoring a hand-off (1e).  Each order with the ordered item, the right supplies inside (1i: packing peanuts in
@@ -480,15 +486,16 @@ GW.CONFIG = {
       order: ['approvedFake', 'missedFake', 'deniedReal', 'notApproved', 'notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
       more: ' +{n}'
     },
-    // When every order has a stamped box, the chain glows and sways gently and a brass tag by its handle shows
+    // When every order's box is handed to the driver (1n), the chain glows and sways gently and a brass tag by its handle shows
     // `text` until it is pulled (draft wording, Claudia).  swayDeg = how far it swings each way, swayMs = one swing.
     // Reduced motion: the glow and the tag, no sway.
     finish: { text: 'Pull to ship!', swayDeg: 1.6, swayMs: 1400 },
     // The room's other tips (1g), draft wording (Claudia).  belt = the tag beside the glowing belt at the start of a
-    // trip.  pulseMs = one breath of the belt's and the computer's glow (none with reduced motion).  setting = the
+    // trip (hand = the driver's tag, draft wording, Claudia, 1n).  pulseMs = one breath of the belt's, the computer's, and the driver's glow (none with reduced motion).  setting = the
     // instructions setting's label while the Packing Line shows (every tip in the room follows it).
     tips: {
       belt: 'Tap the belt to fill the box!',
+      hand: 'Hand it to the driver!',      // the tag near the driver while a closed box sits on the bench (1n)
       pulseMs: 1600,
       setting: 'Show instructions (the big signs during events, and the Packing Line\'s tips)'
     },

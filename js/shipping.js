@@ -12,19 +12,18 @@
    Packing (1d): a tap on the conveyor opens the item menu.  The active order (the leftmost unpacked one) has an
    open box on the bench; dragging a tile onto it puts the order's count of that item in (or what the shelf can spare).  A tap closes a
    filled box (or opens a closed one again).  A tap on the computer opens the supplies menu (1g), on the same frame;
-   dragging a region stamp from it onto the closed box stamps it, and a stamped box moves to the stack by the truck
-   while the next order's box appears.  An open box shakes off a stamp; a closed box shakes off junk and inside
-   supplies.  Only one menu is open at a time.  The record of what was packed is GW.ship.packed().
+   dragging a region stamp from it onto the closed box stamps it.  An open box shakes off a stamp; a closed box shakes
+   off junk and inside supplies.  Only one menu is open at a time.  The record of what was packed is GW.ship.packed().
    Inside supplies (1i): the supplies menu opens with the "Packing rules" chart, then a Packing section (packing
    peanuts and bubble wrap) that goes into the open box.  Each junk tile shows its packing tag's icon, and the open
    box shows the item's picture with its tag beside it and the supplies in its opening.  Scoring wants peanuts in
    every box and bubble wrap around a Breakable item.
-   Outside stickers (1j): the Stickers section (FRAGILE, HEAVY) goes on a closed box before its stamp, in the box
-   face's upper left; scoring wants FRAGILE on a Breakable item and HEAVY on a Heavy one.
+   Outside stickers (1j): the Stickers section (FRAGILE, HEAVY) goes on a closed box, before or after its stamp (1n),
+   in the box face's upper left; scoring wants FRAGILE on a Breakable item and HEAVY on a Heavy one.
    The room's tips (1g): the belt glows with a tag at the start of each trip until the item menu first opens, the
    computer's screen glows while a closed box waits for its stamp, and the chain glows when the shift is ready.  All
    of them follow the instructions setting (the no-hints class on the page, css).
-   The hand-off (1e): once every order has a stamped box, the chain glows and sways and a tag by its handle says to
+   The hand-off (1e): once every order has a box handed to the driver (1n), the chain glows and sways and a tag by its handle says to
    pull it.  Pulling the chain with the driver in place scores each order (CONFIG.shipping.score), takes each box's count
    off the shelf (never below the display copy), moves Stonks (saved, never below 0), and adds the shift to the history.
    A perfect shift gets the driver's thumbs up before he leaves.  Once the door shows closed, the report card shows
@@ -47,7 +46,10 @@
    than maxTnpInRow in a row): the elf imposter in his fake truck, placed by the real pair's numbers, with no glitter
    slips.  Pulling the chain with nothing handed over sends him packing (TNP down, a short card); each packed box
    handed to him moves ours down and TNP up, and he goes happy.  A real order never stamped is "Not approved", a small
-   hit. */
+   hit.
+   Hand it to the driver (1n): the stamp is only a mark, so marks go on in any order and the box stays on the bench.
+   A closed box dragged onto the driver (his outline, padded) goes to the stack at his feet and the next order's box
+   comes out; dropped anywhere else, or open, it springs back.  A tag near the driver and a glow on him say so. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -65,11 +67,14 @@ GW.ship = (function () {
   var verdicts = [], boxFor = -1, slipIndex = -1;
   // verdicts[i] = 'approved' | 'denied' | undefined, the stamp on order i (1l); boxFor = the order the bench box
   // belongs to (-1 with no box); slipIndex = the order open full size (-1 for none or the note)
-  // boxState: 'none' | 'open' | 'closed' | 'stamped'; boxIn = the inside supplies in the box (1i); boxOut = the
+  // boxState: 'none' | 'open' | 'closed'; boxIn = the inside supplies in the box (1i); boxOut = the
   // stickers on it (1j)
   var screenEl, screenLines = [], tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, warnHeard = null, afterCard = null;
   var tnpTrip = false;            // this trip is TNP's: the elf in his fake truck (1m)
+  var boxStamp = null, boxDrag = null, handTag;
+  // boxStamp = the region stamp on the bench box, or null (1n: a mark like the stickers); boxDrag = the box being
+  // pressed or dragged; handTag = the "Hand it to the driver!" tag
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -141,6 +146,11 @@ GW.ship = (function () {
     beltTag.appendChild(U.el('span', '', P.tips.belt));
     beltTag.hidden = true;
     box.appendChild(beltTag);
+    // The driver's tag (1n), shown with his glow while a closed box sits on the bench.
+    handTag = div('ship-finish ship-hand-tag ship-tip');
+    handTag.appendChild(U.el('span', '', P.tips.hand));
+    handTag.hidden = true;
+    box.appendChild(handTag);
     chain.style.setProperty('--sway', P.finish.swayDeg + 'deg');
     chain.style.setProperty('--sway-ms', P.finish.swayMs + 'ms');
     // An open slip covers the whole room, so the chain and everything else under it get no taps.
@@ -403,7 +413,7 @@ GW.ship = (function () {
     slipOpen = false; slipIndex = -1;
   }
   // The APPROVED and DENIED buttons, each drawn from its stamp's art.  A real tap stamps; keys work through click.
-  // Once the order's box is packed (or being stamped) the buttons are locked.
+  // Once the order's box is handed over the buttons are locked.
   function stampButtons(i) {
     var row = div('slip-stamp-row');
     ['approved', 'denied'].forEach(function (v) {
@@ -423,7 +433,7 @@ GW.ship = (function () {
     showStampButtons(row, i);
     return row;
   }
-  function locked(i) { return !!packed[i] || (i === boxFor && boxState === 'stamped'); }
+  function locked(i) { return !!packed[i]; }
   function showStampButtons(row, i) {
     Array.prototype.forEach.call(row.children, function (b) {
       var on = verdicts[i] === b.dataset.verdict;
@@ -471,9 +481,10 @@ GW.ship = (function () {
   // shelf), an empty box moves to the leftmost APPROVED order, and with no box one appears for that order.
   function syncBox() {
     if (trip !== 'here') return;
-    if (boxEl && boxState !== 'stamped' && verdicts[boxFor] !== 'approved') {
+    if (boxEl && verdicts[boxFor] !== 'approved') {
+      endBoxDrag(false);
       boxEl.remove(); boxEl = null; boxFor = -1;
-      boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
+      boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {}; boxStamp = null;
     }
     if (boxEl && boxState === 'open' && !boxItem && !insideList().length && activeIndex() >= 0) boxFor = activeIndex();
     nextBox();
@@ -524,7 +535,7 @@ GW.ship = (function () {
   function boxPart(cls) { return boxEl && boxEl.querySelector('.' + cls); }
   function showBox() {
     if (!boxEl) return;
-    boxEl.classList.toggle('is-closed', boxState === 'closed' || boxState === 'stamped');
+    boxEl.classList.toggle('is-closed', boxState === 'closed');
     var label = boxPart('box-label');
     label.textContent = '';
     label.hidden = !boxItem || boxState !== 'open';
@@ -538,7 +549,7 @@ GW.ship = (function () {
       pic.hidden = boxState !== 'open' || !boxIn[pic.dataset.supply];
     });
     // The stickers show only on the closed box, side by side in menu order from the first slot (1j).
-    var closed = boxState === 'closed' || boxState === 'stamped', slots = K.stickers.slots, k = 0;
+    var closed = boxState === 'closed', slots = K.stickers.slots, k = 0;
     K.stickers.list.forEach(function (st) {
       var pic = boxEl.querySelector('.box-sticker[data-sticker="' + st.id + '"]');
       pic.hidden = !closed || !boxOut[st.id];
@@ -547,10 +558,16 @@ GW.ship = (function () {
       pic.style.left = sl[0] + '%'; pic.style.top = sl[1] + '%';
     });
     boxEl.classList.toggle('is-stickered', closed && k > 0);
+    // The region stamp (1n) shows like the stickers: only while the box is closed, kept when it is reopened.
+    var mark = boxPart('box-mark');
+    if (boxStamp) mark.src = P.slip.stampImg.replace('{region}', boxStamp);
+    mark.hidden = !closed || !boxStamp;
+    boxEl.classList.toggle('is-stamped', closed && !!boxStamp);
     updateReady();
   }
   function resetPack() {
-    packed = []; verdicts = []; boxFor = -1; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
+    endBoxDrag(false);
+    packed = []; verdicts = []; boxFor = -1; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {}; boxStamp = null;
     if (boxEl) { boxEl.remove(); boxEl = null; }
     stacked.forEach(function (el) { el.remove(); }); stacked = [];
   }
@@ -559,15 +576,14 @@ GW.ship = (function () {
     if (boxEl || trip !== 'here' || activeIndex() < 0) return;
     var L = layout();
     boxFor = activeIndex();
-    boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {}; boxOut = {};
+    boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {}; boxOut = {}; boxStamp = null;
     boxEl = makeBox();
     setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
-    boxEl.addEventListener('pointerdown', function (e) {
-      e.stopPropagation();
-      if (!e.isTrusted || e.button > 0) return;
-      e.preventDefault();
-      tapBox();
-    });
+    boxEl.addEventListener('pointerdown', boxDown);       // a tap opens or closes it; a drag hands it over (1n)
+    boxEl.addEventListener('pointermove', boxMove);
+    boxEl.addEventListener('pointerup', boxUp);
+    boxEl.addEventListener('pointercancel', function () { endBoxDrag(true); });
+    boxEl.addEventListener('lostpointercapture', function () { if (boxDrag && boxDrag.mode !== 'drag') endBoxDrag(false); });
     packLayer.appendChild(boxEl);
     showBox();
     if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
@@ -578,7 +594,7 @@ GW.ship = (function () {
     else if (boxState === 'closed') { boxState = 'open'; GW.sfx.click(); showBox(); }
   }
   // Drop an item in the open box: the active order's count of it (1h), right item or wrong, or everything the shelf
-  // can spare if it has fewer.  What the stamped boxes already hold of the same item is not spare.  A different
+  // can spare if it has fewer.  What the handed-over boxes already hold of the same item is not spare.  A different
   // item replaces the first.
   function fillBox(item) {
     if (boxState !== 'open') return;
@@ -626,16 +642,14 @@ GW.ship = (function () {
     i.alt = t.name; i.title = t.name;
     return i;
   }
+  // The region stamp onto the closed box (1n: only a mark; the box stays on the bench).  It comes down and lands with
+  // its thump.  A different region's stamp replaces it; the same one again changes nothing.
   function stampBox(rid) {
-    if (boxState !== 'closed') return;
-    var i = boxFor, el = boxEl, calm = calmQuery.matches;
-    boxState = 'stamped';
-    updateReady();
-    el.classList.add('is-stamped');
-    var mark = boxPart('box-mark');
-    mark.src = P.slip.stampImg.replace('{region}', rid);
-    mark.hidden = false;
-    var turn = 'translate(-50%, -50%) rotate(' + K.mark[3] + 'deg) ';
+    if (boxState !== 'closed' || boxStamp === rid) return;
+    var el = boxEl, calm = calmQuery.matches;
+    boxStamp = rid;
+    showBox();
+    var mark = boxPart('box-mark'), turn = 'translate(-50%, -50%) rotate(' + K.mark[3] + 'deg) ';
     var down = calm ? Promise.resolve() : mark.animate([{ transform: turn + 'scale(2.2)', opacity: 0 }, { transform: turn + 'scale(1)', opacity: 1 }],
       { duration: K.stampMs, easing: 'ease-in' }).finished;
     var id = tripId;
@@ -644,21 +658,88 @@ GW.ship = (function () {
       GW.sfx.thump();
       if (!calm) el.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2.5%) scaleY(.96)' }, { transform: 'translateY(0)' }],
         { duration: K.thumpMs, easing: 'ease-out' });
-      // The record for 1e: the item, its count at packing time, the inside supplies (1i), the stickers (1j), and
-      // the stamp used.
-      packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: rid };
-      showBoard();
-      return new Promise(function (r) { setTimeout(r, K.setAsideDelayMs); });
-    }).then(function () {
-      if (id !== tripId || el !== boxEl) return;
-      var L = layout(), spot = stackSpot(L, stacked.length), from = { left: el.style.left, top: el.style.top, height: el.style.height };
-      setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
-      el.classList.add('is-stacked');
-      stacked.push(el);
-      boxEl = null; boxFor = -1; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {};
-      if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%' }], { duration: K.slideMs, easing: 'ease-in-out' });
-      nextBox();
     }).catch(function () {});
+  }
+
+  // ---------- handing the box to the driver (1n; numbers in CONFIG.shipping.pack.hand) ----------
+  // The box drags like a menu tile: a mouse picks it up after slopPx, a finger after holdMs held still or a move past
+  // slopPx.  A press that never becomes a drag is a tap (it closes or reopens the box).  While dragged the box itself
+  // follows the pointer.
+  function boxDown(e) {
+    e.stopPropagation();
+    if (!e.isTrusted || e.button > 0 || !e.isPrimary || boxDrag || trip !== 'here') return;
+    e.preventDefault();
+    var d = boxDrag = { id: e.pointerId, el: boxEl, x0: e.clientX, y0: e.clientY, touch: e.pointerType !== 'mouse', mode: 'press', hold: null };
+    try { boxEl.setPointerCapture(e.pointerId); } catch (err) {}
+    if (d.touch) d.hold = setTimeout(function () { if (boxDrag === d && d.mode === 'press') liftBox(d.x0, d.y0); }, K.holdMs);
+  }
+  function boxMove(e) {
+    var d = boxDrag;
+    if (!d || e.pointerId !== d.id) return;
+    if (d.mode === 'press' && (Math.abs(e.clientX - d.x0) > K.slopPx || Math.abs(e.clientY - d.y0) > K.slopPx)) liftBox(e.clientX, e.clientY);
+    if (d.mode === 'drag') moveBox(e.clientX, e.clientY);
+  }
+  function boxUp(e) {
+    var d = boxDrag;
+    if (!d || e.pointerId !== d.id) return;
+    if (d.mode === 'press') { endBoxDrag(false); tapBox(); return; }
+    if (boxState === 'closed' && overDriver(e.clientX, e.clientY)) handOver();
+    else endBoxDrag(true);
+  }
+  function liftBox(x, y) {
+    var d = boxDrag;
+    clearTimeout(d.hold);
+    d.mode = 'drag';
+    d.el.classList.add('is-dragged');
+    GW.sfx.click();
+    moveBox(x, y);
+  }
+  function moveBox(x, y) {
+    var d = boxDrag;
+    d.dx = x - d.x0; d.dy = y - d.y0;
+    d.el.style.translate = d.dx + 'px ' + d.dy + 'px';
+    driver.classList.toggle('is-target', boxState === 'closed' && overDriver(x, y));
+  }
+  // The driver's drop area: his picture's outline grown by hand.pad % of its size on each side, so a finger finds him
+  // even where the box or the stack covers part of him.
+  function overDriver(x, y) {
+    if (trip !== 'here') return false;
+    var r = driverImg.getBoundingClientRect(), H = K.hand, px = r.width * H.padX / 100, py = r.height * H.padY / 100;
+    return r.width > 0 && x >= r.left - px && x <= r.right + px && y >= r.top - py && y <= r.bottom + py;
+  }
+  // Ends a press or drag.  back = slide the box back to the bench from where it was dragged (none with reduced motion).
+  function endBoxDrag(back) {
+    var d = boxDrag;
+    if (!d) return;
+    boxDrag = null;
+    clearTimeout(d.hold);
+    driver.classList.remove('is-target');
+    try { if (d.el.hasPointerCapture(d.id)) d.el.releasePointerCapture(d.id); } catch (err) {}
+    if (d.mode !== 'drag') return;
+    d.el.classList.remove('is-dragged');
+    d.el.style.translate = '';
+    if (back && !calmQuery.matches && d.el.isConnected) {
+      d.el.animate([{ translate: d.dx + 'px ' + d.dy + 'px' }, { translate: '0px 0px' }], { duration: K.hand.backMs, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+    }
+  }
+  // Dropped on the driver: the record for the hand-off (the item, its count at packing time, the inside supplies
+  // (1i), the stickers (1j), and the stamp, or null), and he puts the box on the ground: it slides from where it was
+  // dropped to its spot in the stack.  The next APPROVED order's box comes out.
+  function handOver() {
+    var d = boxDrag, el = boxEl, i = boxFor, calm = calmQuery.matches;
+    var from = { left: el.style.left, top: el.style.top, height: el.style.height, translate: d.dx + 'px ' + d.dy + 'px' };
+    endBoxDrag(false);
+    packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: boxStamp };
+    var L = layout(), spot = stackSpot(L, stacked.length);
+    setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
+    el.classList.add('is-stacked');
+    stacked.push(el);
+    boxEl = null; boxFor = -1; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {}; boxStamp = null;
+    GW.sfx.thump();
+    if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%', translate: '0px 0px' }], { duration: K.slideMs, easing: 'ease-in-out' });
+    showBoard();
+    nextBox();
+    updateReady();
   }
   // A shake when something is dropped on the wrong side of the box (a sticker or stamp on an open box; junk or an
   // inside supply on a closed one).
@@ -682,25 +763,32 @@ GW.ship = (function () {
     screenImg.style.clipPath = polygon(L.computer.screen);
     var t = L.beltTag;
     beltTag.style.left = t[0] + '%'; beltTag.style.top = t[1] + '%'; beltTag.style.width = t[2] + '%';
+    var t2 = L.handTag;
+    handTag.style.left = (t2[0] - t2[2] / 2) + '%'; handTag.style.top = t2[1] + '%'; handTag.style.width = t2[2] + '%';
+    endBoxDrag(false);
     if (boxEl) setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
     stacked.forEach(function (el, k) { var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt); });
   }
 
   // ---------- the hand-off (layer 1e; numbers in CONFIG.shipping.score, .finish, .card, and .ticker) ----------
-  // Ready to ship (1l): every order stamped, and every APPROVED one packed.
+  // Ready to ship (1l): every order stamped, and every APPROVED one packed (1n: handed to the driver).
   function allPacked() {
     return trip === 'here' && orders.length > 0 && orders.every(function (o, i) { return verdicts[i] === 'denied' || (verdicts[i] === 'approved' && !!packed[i]); });
   }
   // The room's tips.  The chain shows how to finish: glow and sway (css; no sway with reduced motion) and the tag.
   // The belt glows with its tag from the trip's first box until the item menu first opens (1g), and the computer's
-  // screen glows while a closed box waits for its stamp.  With instructions off, css hides them all.
+  // screen glows while a closed box waits for its stamp.  While a closed box sits on the bench, the driver glows and
+  // his tag says to hand it over (1n).  With instructions off, css hides them all.
   function updateReady() {
     var on = allPacked();
     chain.classList.toggle('is-ready', on);
     tag.hidden = !on;
     var belt = beltTip && trip === 'here' && !!boxEl;
     beltGlow.hidden = beltTag.hidden = !belt;
-    screenGlow.hidden = !(trip === 'here' && boxEl && boxState === 'closed');
+    screenGlow.hidden = !(trip === 'here' && boxEl && boxState === 'closed' && !boxStamp);
+    var hand = trip === 'here' && !!boxEl && boxState === 'closed';
+    handTag.hidden = !hand;
+    driver.classList.toggle('is-hand', hand);
   }
   function makeGlow(cls) {
     var g = div('ship-glow ship-tip ' + cls);
@@ -732,12 +820,12 @@ GW.ship = (function () {
   }
   // A truck's left edge for the real truck's x (% of the room's width), with the fake truck's sideways fit.
   function truckX(L, x) { var f = tnpTrip ? P.tnp.truck.fit : null; return x + (f ? f.dx * L.truck.h / 100 / roomRatio(L) : 0); }
-  // One row per order.  The box still on the bench counts when it is closed with an item in it (it ships with no
-  // stamp); an open or empty box is not packed and does not ship.  The stamp calls come first (1l): a fake is scored
+  // One row per order.  The box still on the bench counts when it is closed with an item in it (it ships as it is,
+  // with its stamp if it has one, 1n); an open or empty box is not packed and does not ship.  The stamp calls come first (1l): a fake is scored
   // by its stamp alone, and a real order DENIED or unstamped never reaches the box checks.
   function scoreShift() {
     var Sc = P.score, R = Sc.reasons, Fk = Sc.fake, rows = [], delta = 0, tnp = 0, shipped = [], a = boxFor;
-    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: null } : null;
+    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: boxStamp } : null;
     if (tnpTrip) return scoreTnp(bench);
     orders.forEach(function (o, i) {
       var v = verdicts[i], rec = v === 'approved' ? packed[i] || (i === a ? bench : null) : null, miss = {}, note = null;
@@ -831,7 +919,7 @@ GW.ship = (function () {
       words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
       if (!o) {                                  // the elf sent packing (1m): one line, and the elf in the picture frame
         line.classList.add('is-sent');
-        words.appendChild(cardLine('town', row.note)).classList.add('card-note');
+        words.appendChild(cardLine('town', row.note)).classList.add('card-note', 'card-wrap');   // it may take two lines (1n)
         line.appendChild(words);
         var elf = div('card-pic');
         elf.style.left = Cd.pic[0] + '%'; elf.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
@@ -1261,7 +1349,7 @@ GW.ship = (function () {
     }
     endDrag();
   }
-  // An open box takes junk and inside supplies; a closed, unstamped box takes outside marks (stickers and stamps).
+  // An open box takes junk and inside supplies; a closed box takes outside marks (stickers and stamps, in any order, 1n).
   function fits(th) { return th.side === 'inside' ? boxState === 'open' : boxState === 'closed'; }
   function startDrag(x, y) {
     drag.mode = 'drag';
@@ -1475,7 +1563,7 @@ GW.ship = (function () {
       stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
       cancelAnimationFrame(tickAnim); var now = saved(); shown = now.values; drawTicker(now.values, now.hists);
     }
-    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); closeWarn(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
+    if (!on && active) { stopAnims(); endBoxDrag(false); closeSlip(); closeMenu(); closeWarn(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
     // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
     // scrolled into view as it opens.  Desktop is left as it is.
@@ -1506,9 +1594,11 @@ GW.ship = (function () {
     // Test hook (1e.1): shows a report card for a made-up result ({ rows: [{ order, ok, why }], change }),
     // without scoring or saving, so screenshots can try the longest names.
     testCard: function (r) { if (built) showCard(r); },
-    // What was packed, for the hand-off (1e): one entry per order, null until stamped.
+    // What was packed, for the hand-off (1e): one entry per order, null until handed to the driver (1n).
     packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, inside: r.inside.slice(), outside: r.outside.slice(), stamp: r.stamp }; }); },
     // What is in the box on the bench (1i): its state, item, inside supplies, and stickers (1j).
-    bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList(), outside: outsideList() }; }
+    bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList(), outside: outsideList(), stamp: boxStamp }; },
+    // Whether the box on the bench is being dragged (1n).
+    dragging: function () { return !!(boxDrag && boxDrag.mode === 'drag'); }
   };
 })();

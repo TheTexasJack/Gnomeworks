@@ -91,6 +91,7 @@ async function packCheck(page, errors) {
     await page.mouse.up();
   };
   const stamp = (i, v) => stampSlip(page, i, v);
+  const hand = () => handToDriver(page);
   const bench = () => page.evaluate(() => !!document.querySelector('.ship-box:not(.is-stacked)'));
   const SHELF = 40;                                                   // an ordinary shelf: 40 of every junk item
   await page.goto(URL + '?debug=1&ship=1');
@@ -214,6 +215,13 @@ async function packCheck(page, errors) {
       if (!await shown('.ship-screen-glow')) fail('the computer did not glow beside a closed box');
       c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
       if (await page.evaluate(() => GW.ship.menuKind()) !== 'supplies') { fail('the computer did not open the supplies menu'); return; }
+      // Stamp first, then FRAGILE (1n): the Breakable box gets its stamp before its sticker, and the box stays put.
+      const stampFirst = shift === 1 && o.pack === 'breakable';
+      if (stampFirst) {
+        await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
+        await page.waitForTimeout(500);
+        if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp + ':' + GW.ship.packed().filter(Boolean).length) !== 'closed:gnomerica:' + orders.indexOf(o)) fail('the stamp sent the box or did not land: ' + await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp));
+      }
       if (shift === 1) {                                                  // the right stickers outside (1j)
         const st = o.pack === 'breakable' ? 'fragile' : o.pack === 'heavy' ? 'heavy' : '';
         if (st) {
@@ -230,9 +238,41 @@ async function packCheck(page, errors) {
         c = await mid('.supply-tile[data-supply="stamp:gnomerica"]'); await page.mouse.click(c.x, c.y);   // a tap on the tile alone does nothing
         if (await page.evaluate(() => GW.ship.boxState()) !== 'closed' || !await page.evaluate(() => GW.ship.menuOpen())) fail('a tap on the stamp tile did something');
       }
-      await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
-      await page.waitForFunction(() => GW.ship.boxState() !== 'stamped' && GW.ship.boxState() !== 'closed', null, { timeout: 4000 });
+      if (!stampFirst) await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
       await page.keyboard.press('Escape');
+      await page.waitForTimeout(400);
+      if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp) !== 'closed:gnomerica') fail(tag + 'the stamped box left the bench before it was handed over');
+      if (await page.evaluate(() => !document.querySelector('.ship-box:not(.is-stacked) .box-mark').hidden) !== true) fail('the stamp does not show on the closed box');
+      if (!await shown('.ship-hand-tag') || !await page.evaluate(() => document.querySelector('.ship-driver').classList.contains('is-hand'))) fail('the driver tip did not show beside a closed box');
+      if (shift === 1 && o === orders[0]) {
+        await page.evaluate(() => document.documentElement.classList.add('no-hints'));
+        if (await shown('.ship-hand-tag')) fail('the driver tip showed with instructions off');
+        await page.evaluate(() => document.documentElement.classList.remove('no-hints'));
+        // A tap on a closed, stamped box still reopens it; the stamp hides and is kept.  An open box dropped on the
+        // driver springs back.
+        c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
+        if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp + ':' + document.querySelector('.ship-box:not(.is-stacked) .box-mark').hidden) !== 'open:gnomerica:true') fail('a tap did not reopen the stamped box');
+        if (await shown('.ship-hand-tag')) fail('the driver tip showed beside an open box');
+        const at = await page.locator('.ship-box:not(.is-stacked)').boundingBox();
+        await hand();
+        await page.waitForTimeout(500);
+        const back = await page.locator('.ship-box:not(.is-stacked)').boundingBox();
+        if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.packed().filter(Boolean).length) !== 'open:0') fail('an open box dropped on the driver was taken');
+        if (Math.abs(back.x - at.x) > 2 || Math.abs(back.y - at.y) > 2) fail('the open box did not spring back to the bench');
+        c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
+        if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp) !== 'closed:gnomerica') fail('closing again lost the stamp');
+        // A closed box dropped short of the driver springs back too.
+        const bx = await mid('.ship-box:not(.is-stacked)');
+        await page.mouse.move(bx.x, bx.y); await page.mouse.down();
+        for (let i = 1; i <= 6; i++) await page.mouse.move(bx.x, bx.y - i * 12);
+        await page.mouse.up();
+        await page.waitForTimeout(500);
+        if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.packed().filter(Boolean).length) !== 'closed:0') fail('a closed box dropped away from the driver was taken');
+      }
+      const n0 = await page.evaluate(() => GW.ship.packed().filter(Boolean).length);
+      await hand();
+      try { await page.waitForFunction(n => GW.ship.packed().filter(Boolean).length === n + 1, n0, { timeout: 2000 }); } catch (e) { fail(tag + 'a closed box dropped on the driver was not handed over'); }
+      await page.waitForTimeout(700);
     }
     const rec = await page.evaluate(() => GW.ship.packed());
     const inside = o => shift === 2 ? '' : o.pack === 'breakable' ? 'peanuts,bubble' : 'peanuts';
@@ -290,12 +330,13 @@ async function packCheck(page, errors) {
   c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
   c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
   await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
-  await page.waitForFunction(() => GW.ship.packed()[0], null, { timeout: 4000 });
   await page.keyboard.press('Escape');
-  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.waitForTimeout(400);
+  if (await page.evaluate(() => GW.ship.boxState() + ':' + !GW.ship.packed()[0]) !== 'closed:true') fail('the Toilet box left the bench when stamped');
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);   // the closed box left on the bench ships as it is (1n)
   try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after the Toilet shift'); return; }
   const heavyWhy = await page.$$eval('.ship-card .card-why', els => els.map(e => e.textContent).join('|'));
-  if (heavyWhy !== 'No HEAVY') fail(`a Toilet without its HEAVY sticker reads "${heavyWhy}", expected "No HEAVY"`);
+  if (heavyWhy !== 'No HEAVY') fail(`a Toilet left on the bench without its HEAVY sticker reads "${heavyWhy}", expected "No HEAVY"`);
   await page.keyboard.press('Escape');
   const notApproved = await page.evaluate(() => GW.CONFIG.shipping.score.notApproved.ours);   // the small shift went off unstamped (1m)
   const want = stonks0 + 3 * right - 3 * wrong + notApproved - wrong;
@@ -316,6 +357,15 @@ async function packCheck(page, errors) {
   await page.waitForTimeout(400);
   if (await page.evaluate(() => GW.game.s.stonks + ',' + JSON.stringify(GW.game.s.stonksHistory)) !== '0,[]') fail('an old save did not load with Stonks at 0');
   console.log(`packing: two shifts (a Breakable, a Heavy, and a Soft, then an ordinary shelf of ${SHELF} each) (${shipped.join('; ')}), then 2 tp from 3, then a Toilet with no HEAVY; Stonks ${want}`);
+}
+
+// Drags the box on the bench onto the driver with the mouse and lets go (1n).
+async function handToDriver(page) {
+  const a = await page.locator('.ship-box:not(.is-stacked)').boundingBox(), d = await page.locator('.ship-driver img').boundingBox();
+  const x0 = a.x + a.width / 2, y0 = a.y + a.height / 2, x1 = d.x + d.width / 2, y1 = d.y + d.height * 0.45;
+  await page.mouse.move(x0, y0); await page.mouse.down();
+  for (let i = 1; i <= 10; i++) await page.mouse.move(x0 + (x1 - x0) * i / 10, y0 + (y1 - y0) * i / 10);
+  await page.mouse.up();
 }
 
 // Opens order i's slip full size, taps its APPROVED or DENIED button, and closes the slip (1l).
