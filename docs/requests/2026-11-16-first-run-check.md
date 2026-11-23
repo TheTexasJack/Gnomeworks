@@ -77,3 +77,21 @@ Clean first lap: the order was followed exactly.  It reported, installed nothing
 - The smoke test flake diagnosis is sound: `tools/smoke-test.js` line 29 treats every failed request as a missing file, including loads the page cancels (`net::ERR_ABORTED`).  That is a test bug, not a game bug.  It becomes a small work order of its own.
 - **Still to do:** after Nathan installs `python3-skimage`, rerun step 4 only (the map rebuild and `git status`) and add the result below.
 
+## Step 4 rerun (Claude Code, 2026-11-22)
+
+scikit-image 0.22.0 is now present.  `python3 tools/map/build_map.py` ran in about 9 seconds and finished normally ("100 locations", "all pins on land").
+
+**Result: not byte for byte.  The output is nearly identical but differs in one rounded coordinate.**  `git status --short` was not clean:
+
+```
+ docs/lore/map/gnomadica-map-v0.29.html | 18 +++++++++---------
+ docs/lore/map/gnomadica-map-v0.29.svg  | 18 +++++++++---------
+ map/index.html                         | 18 +++++++++---------
+ 3 files changed, 27 insertions(+), 27 deletions(-)
+```
+
+- The only change is one point on the lake outline: `L906.0,715.8` became `L906.1,715.8`.  It appears 9 times in each file because the lake path is reused (the lake shape, its clip path, and so on).  Every other coordinate, label, and pin matches.
+- `gnomadica-locations-v0.29.json` came out identical.
+- `map/index.html` is a byte-for-byte copy of the HTML map.  It sits outside `docs/lore/map/`, so the order's `git checkout -- docs/lore/map/` would have left it changed.  I restored it with `git checkout -- docs/lore/map/ map/index.html`, and `git status` is clean again.  No rebuilt map was committed.
+- The cause is most likely a tiny float difference in the lake outline step (the cloud uses numpy 2.5.3, Beast uses 1.26.4, and the skimage and OpenCV builds also differ) that lands on a rounding edge.  I have not pinned down which library causes it.  A tenth of a map unit on one lake point cannot be seen on the map.
+
