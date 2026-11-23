@@ -6,7 +6,7 @@ A gnome-themed browser clicker game Nathan is building for Jarrett's shop, The S
 
 ## Rules
 
-- **Work orders:** on Nathan's machine, build only from an approved work order in [docs/requests/](docs/requests/README.md), and fill in its Result.  Never install packages or use sudo; report what's missing instead.  Setup and rules for that machine: [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
+- **Work orders:** on Nathan's machine (as the `gwcode` user in `/srv/GW/Gnomeworks`), build only from an approved work order in [docs/requests/](docs/requests/README.md), and fill in its Result.  Never install packages or use sudo; report what's missing instead.  Setup and rules for that machine: [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md).
 - **Small steps, approval at each.**  Show Nathan a screenshot or short video before anything big goes live.
 - **Commit straight to `main`.**  No branches or pull requests.  Pull before starting: other sessions (the cloud Claude, Mara) push to this repo too.
 - **Every code change:** bump `GW.VERSION` in `js/config.js`, run `node tools/stamp.js`, add a `CHANGELOG.md` entry, run `node tools/smoke-test.js`, then commit and push.  Keep the docs current.

@@ -1,7 +1,7 @@
-# Work order: first run check on Beast (v0.1)
+# Work order: first run check on Beast (v0.2)
 
 **Status:** Draft
-**Written by:** Claudia, 2026-11-16.  **Approved by:** (waiting on Nathan)
+**Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** (waiting on Nathan)
 
 ## Goal
 
@@ -15,10 +15,10 @@ Prove Claude Code on Beast can run the repo's tools and that they give the same 
 
 ## Do
 
-1. `git pull` in `~/GW/Gnomeworks`.
-2. Report the versions of: Node, Python 3, numpy, Pillow, scipy, OpenCV (`cv2`), and whether Playwright with Chromium is installed.  One line each.  If something is missing, list it and **stop before installing anything**: Nathan decides how it gets installed.
+1. `git pull` in `/srv/GW/Gnomeworks`.  Report `whoami` (it should be `gwcode`).
+2. Report the versions of: Node, Python 3, numpy, Pillow, scipy, OpenCV (`cv2`), and whether Playwright with Chromium is installed.  One line each.  Nathan installed all of these on 2026-11-22 (Node 24, Playwright, numpy 1.26.4, OpenCV 4.6.0), so expect them present.  If something is missing anyway, list it and **stop before installing anything**: Nathan installs it system-wide.
 3. If Node and Playwright are present: run `node tools/smoke-test.js` and report pass or fail, with any errors word for word.
-4. If Python, numpy, and cv2 are present: run `python3 tools/map/build_map.py`, then `git status --short`.  The map builder is seeded, so on the cloud session it rebuilds `docs/lore/map/gnomadica-map-v0.29.svg` and its JSON byte for byte (checked 2026-11-16 with numpy 2.5.3).  Report whether `git status` comes back clean.  If files changed, report `git diff --stat` and run `git checkout -- docs/lore/map/` to put them back.  Do not commit any rebuilt map.
+4. If Python, numpy, and cv2 are present: run `python3 tools/map/build_map.py`, then `git status --short`.  The map builder is seeded, so on the cloud session it rebuilds `docs/lore/map/gnomadica-map-v0.29.svg` and its JSON byte for byte (checked 2026-11-16 with numpy 2.5.3).  Beast has numpy 1.26.4, so a mismatch here is possible and is a finding to report, not a failure to fix.  Report whether `git status` comes back clean.  If files changed, report `git diff --stat` and run `git checkout -- docs/lore/map/` to put them back.  Do not commit any rebuilt map.
 5. Fill in the Result section below, set Status to Done, commit only this file, and push.
 
 ## Do not

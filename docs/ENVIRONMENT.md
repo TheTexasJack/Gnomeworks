@@ -85,25 +85,30 @@ Claudia works in an isolated cloud Linux container attached to this repo through
 
 ## Claude Code on Nathan's machine (Beast)
 
-Added 2026-11-22.  Claude Code is the builder: it runs on Nathan's Linux Mint desktop ("Beast") and builds from approved work orders in [requests/](requests/README.md).  The cloud Claude ("Claudia") designs and reviews in chat.  The recipe for a new project's setup lives in CommandCenter: `docs/CLAUDE-CODE-SETUP.md`.
+Set up 2026-11-22 (hard-stop setup v1.2, walls verified the same day).  Claude Code is the builder: it runs on Nathan's Linux Mint 22.3 desktop ("Beast") as its own Linux user, **gwcode**, and builds from approved work orders in [requests/](requests/README.md).  The cloud Claude ("Claudia") designs and reviews in chat.  The recipe for a new project lives in CommandCenter: `docs/CLAUDE-CODE-SETUP.md`.
 
 | Thing | Where |
 | --- | --- |
-| Fenced folder | `~/GW` (owner-only).  Claude Code is launched here and works only inside it. |
-| The repo clone | `~/GW/Gnomeworks` |
-| Rules it loads | `~/GW/CLAUDE.md` imports the repo's `CLAUDE.md` |
-| Permissions | `~/GW/.claude/settings.json` (Blocks 5 to 7 of the setup recipe; confirmed by the first-run work order): ask-first by default, skip-all-permissions mode off, deny rules for sudo, recursive deletes, force pushes, hard resets, the GitHub login token, SSH keys, and its own settings |
-| Launcher | "GW Claude Code" in the menu (`~/.local/bin/gw-claude-code`), outside the fence so Claude Code cannot edit it.  It refuses to run as root. |
+| The user | `gwcode`: no password, not in the sudo group.  Linux refuses it sudo, Nathan's home folder, and root-owned files. |
+| Project folder | `/srv/GW` (owner gwcode, group gwshare, mode 2770).  Nathan reaches it as `~/GW`, a symlink. |
+| The repo clone | `/srv/GW/Gnomeworks` |
+| Rules it loads | `/srv/GW/CLAUDE.md` imports the repo's `CLAUDE.md` |
+| GitHub access | A fine-grained token in gwcode's `~/.git-credentials` that can read and write `TheTexasJack/Gnomeworks` only.  A GitHub ruleset on `main` blocks force pushes and branch deletion. |
+| Permission rules | `/etc/claude-code/managed-settings.json`, owned by root (gwcode can read it, never change it).  Ask-first by default, skip-all mode off, claude.ai connectors off, deny rules for sudo, su, `rm -rf`, force push, hard reset, and the credential and SSH files.  It applies to every Claude Code on Beast. |
+| MCP | Only the built-in `easel` chart tool (reads no files).  claude.ai connectors are disabled. |
+| Launcher | "GW Claude Code" in the menu (`/home/nathan1/.local/bin/gw-claude-code` v2.0), outside gwcode's reach.  It shows the Claudia reminder and runs Claude Code as gwcode in `/srv/GW`. |
+| Tools | Node 24 LTS (NodeSource apt), Playwright installed globally (`NODE_PATH` set in gwcode's `~/.profile`), Chromium in gwcode's own cache, Python 3.12 with numpy 1.26.4, scipy, Pillow, and OpenCV 4.6.0 from Mint's packages.  All system-wide, installed by Nathan. |
 
 Rules for Claude Code on Beast:
 
-- **Start every job with `git pull`** in `~/GW/Gnomeworks`.  Claudia, Mara's uploads, and Nathan's web uploads push to this repo too.
+- **Start every job with `git pull`** in `/srv/GW/Gnomeworks`.  Claudia, Mara's uploads, and Nathan's web uploads push to this repo too.
 - **Work only from an approved work order** (Status: Approved) in `docs/requests/`.  Fill in its Result section, set its status, commit, and push.
 - **Commit straight to `main`.**  No branches or pull requests.
-- **Never install, upgrade, or remove packages on your own.**  If a tool is missing, stop and report it in the work order's Result; Nathan decides how it gets installed.  No `sudo`, ever.
-- **Use the local tools directly.**  `node tools/smoke-test.js` needs Playwright with Chromium installed locally (no `NODE_PATH` trick; that is only for the cloud session).  The map builder needs numpy and OpenCV.
+- **Never install, upgrade, or remove packages.**  If a tool is missing, stop and report it in the work order's Result; Nathan installs it system-wide.  gwcode has no sudo, so it could not anyway.
+- **Use the local tools directly.**  `node tools/smoke-test.js` finds Playwright through `NODE_PATH`, which gwcode's login already sets.
 - **Never use files in a `not-for-game/` folder.**  Those are unapproved or retired art kept for reference.
 - **The push warning** about the repository having moved is only the capital G in `Gnomeworks`.  Pushes succeed.
+- **numpy differs from the cloud** (1.26 on Beast, 2.x in the cloud session).  Code that uses numpy's random numbers, like the map builder, may not give byte-identical output on both.  The first-run work order checks this.
 
 ## Repo layout
 

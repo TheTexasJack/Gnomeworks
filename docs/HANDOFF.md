@@ -28,7 +28,7 @@ Nathan's shipping mini-game.  The design is in [DESIGNS.md](DESIGNS.md#packing-l
 
 **Next, in order:**
 
-1. Finish Claude Code's setup on Beast: the permissions lockdown (Blocks 5 to 7 of CommandCenter's `docs/CLAUDE-CODE-SETUP.md`).
+1. ~~Finish Claude Code's setup on Beast.~~  Done 2026-11-22: Claude Code runs as its own `gwcode` user behind Linux walls Nathan tested himself, with root-owned permission rules.  See [ENVIRONMENT.md](ENVIRONMENT.md#claude-code-on-nathans-machine-beast).
 2. Run the first-run work order ([requests/2026-11-16-first-run-check.md](requests/2026-11-16-first-run-check.md)) once Nathan approves it.
 3. Work order: Packing Line layer 1 (one Gnomerica truck, three orders, packing, stamps, report card, GRIP line on the ticker).
 4. Later and optional: fold Mara's approved map stamps into `tools/map/build_map.py`.
