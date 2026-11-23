@@ -1,6 +1,6 @@
 # Shipping log lines (v0.1, Claudia's draft, 2026-11-23)
 
-**Status:** Draft, awaiting Nathan's approval.  Written in plain, short sentences so Elana can read them (Jarrett's ask for the lore).  Gnomerica only for layer 1; each new region adds its own road lines.
+**Status:** Approved by Nathan, 2026-11-23.  Written in plain, short sentences so Elana can read them (Jarrett's ask for the lore).  Gnomerica only for layer 1; each new region adds its own road lines.
 
 Every shipped box gets its own log: about 8 entries with a clock time, picked at random from these lines.  Flavor only, it changes nothing in the game (DESIGNS, "Shipping log," 2026-11-04).  Gnomerica facts come from the gazetteer (v0.27): the Brass Road, the Central Rail, the old public clock, the Great Lunch Whistle, Cogbottom, Gnomish Farms, lamia engineers, goblin bookkeepers, brassleaf oaks, Smog Ants, Barking Mimics, and the Hootgear, Cogsnake, and Pebblem.
 

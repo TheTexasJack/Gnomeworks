@@ -1,7 +1,7 @@
 # Work order: Packing Line 1o, the shipping label, a smooth drop, and the shipping log (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (the order and the log lines).
 **Model:** Opus 5.5
 
 ## Goal
