@@ -20,6 +20,17 @@ Nathan's shipping mini-game.  The design is in [DESIGNS.md](DESIGNS.md#packing-l
 - **Work orders and drivers are separate calls (Nathan, 2026-11-22):** each work order is stamped APPROVED or DENIED; any driver is sent away by closing the door with the chain.  Details and the two open points are in DESIGNS.md under "Work orders and drivers."  Fakes start after the first few shifts, so none of this blocks layer 1.
 - **The wall map** is the approved small icon, and the full map is the generated v0.29 map.  Mara's Brasswood re-style (v18) is parked as optional polish ([art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md](art-style/ACTIVE-CARTOGRAPHY-HANDOFF.md)).
 
+## Wednesday demo target (Nathan, 2026-11-23)
+
+Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026-11-25, so the basic loop must be playable on the live site with `?ship=1` by then.  The demo cut (Claudia's draft, approved by Nathan 2026-11-23):
+
+1. **1b (done):** the room, the door and chain, the truck backed into the room, the grumpy driver.
+2. **1c-2 (approved):** three work orders on the board, tap to read.
+3. **1d:** tap the conveyor for the item menu, drag the ordered item into a cardboard box, close it, stamp it.
+4. **1e:** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.
+
+After Thanksgiving: the supplies rules (peanuts, bubble wrap, FRAGILE and HEAVY), the other three box types, APPROVED and DENIED, and the garage-door roll.
+
 ## How the work flows now
 
 - **Claudia (cloud Claude, in chat)** designs and reviews with Nathan and writes work orders in [requests/](requests/README.md).
