@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.74 (2026-11-22)
+
+- Packing Line, step 1b.4 (still hidden behind `?ship=1`): the driver now waits grumpy (arms crossed, standing), at full size.  On desktop he stands centered in the doorway, just in front of the sill, in front of his truck, clear of the bench, the chain, and the conveyor.  On phones he stands in front of the packing bench's right end, his feet lower than the bench's front legs so he reads as in front of it.  He still walks in from the doorway after the truck settles and back out before it leaves, with the same timings.  `shipping.driverSpot` and the lean spots are gone: each layout has one `driver.at`.  The leaning copy `driver_gnomerica_waiting.webp` is removed (its master stays in `art-masters/`).
+
 ## v0.2.0-draft.73 (2026-11-22)
 
 - Packing Line, step 1b.2 (still hidden behind `?ship=1`), from Nathan's review: the driver waits beside the right end of the packing bench with his elbow on its top, in both layouts (`shipping.driverSpot` is now `'bench'`).  The mirrored phone pose is gone.  On phones, the truck and driver are sized to match the desktop room's proportions: the truck is 1.12 times the doorway's height in both (now 76% of draft.72's phone size), and the driver is 2.01 times the bench's height in both (72%).  The desktop chain now hangs from above the top of the room, so its handle sits just above the driver's cap instead of in front of him.  The desktop truck, the trip, and the door are unchanged.

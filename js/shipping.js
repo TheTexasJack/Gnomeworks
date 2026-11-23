@@ -3,7 +3,8 @@
    the address shows it for testing.  Nothing ships yet.  The door starts closed each time the view opens
    and is not saved.
    A trip: pulling the chain opens the door, the truck backs into the doorway and settles, then the driver
-   walks in and waits.  Pulling again sends him out, the truck drives off, and the door shows closed. */
+   walks in a short way and waits, grumpy.  Pulling again sends him out, the truck drives off, and the door
+   shows closed. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -52,9 +53,8 @@ GW.ship = (function () {
   }
 
   // ---------- placing things (all positions in % of the room) ----------
-  // He stands at his feet point.  A spot missing from a layout falls back to the bench.
+  // He stands at his feet point.
   function driverTransform(scale) { return 'translate(-50%, -100%) scale(' + scale + ')'; }
-  function spot(L) { return L.driver.spots[P.driverSpot] || L.driver.spots.bench; }
   function placeTruck(x) { truck.style.left = x + '%'; }
   function placeDriver(xy, scale, shown) {
     driver.style.left = xy[0] + '%'; driver.style.top = xy[1] + '%';
@@ -67,8 +67,7 @@ GW.ship = (function () {
     box.classList.toggle('is-open', open);
     placeTruck(here ? L.truck.xTo : L.truck.xFrom);
     truck.style.visibility = here ? 'visible' : 'hidden';
-    var sp = spot(L);
-    placeDriver(here ? sp.at : L.driver.from, here ? 1 : L.driver.fromScale, here);
+    placeDriver(here ? L.driver.at : L.driver.from, here ? 1 : L.driver.fromScale, here);
   }
 
   // Both twins stay loaded and stacked, so opening is an instant swap with no jump.
@@ -144,7 +143,7 @@ GW.ship = (function () {
           { transform: 'translateY(-' + (T.settle * 0.3) + '%)', offset: 0.7 }, { transform: 'translateY(0)' }], { duration: T.settleMs, easing: 'ease-out' });
       },
       function () { return new Promise(function (r) { setTimeout(r, T.walkDelayMs); }); },
-      function () { var sp = spot(L); return walk(L.driver.from, L.driver.fromScale, sp.at, 1, true, false); },
+      function () { return walk(L.driver.from, L.driver.fromScale, L.driver.at, 1, true, false); },
       function () { trip = 'here'; anims = []; }
     ]);
   }
@@ -154,7 +153,7 @@ GW.ship = (function () {
     stopAnims();
     trip = 'leaving';
     steps([
-      function () { var sp = spot(L); return walk(sp.at, 1, L.driver.from, L.driver.fromScale, false, true); },
+      function () { return walk(L.driver.at, 1, L.driver.from, L.driver.fromScale, false, true); },
       function () {
         placeTruck(L.truck.xFrom);
         return play(truck, [{ left: L.truck.xTo + '%' }, { left: L.truck.xFrom + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });

@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.73';
+GW.VERSION = '0.2.0-draft.74';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -105,17 +105,16 @@ GW.CONFIG = {
   // before it slides in and where it stops.  top is set so the bumper rests on the doorway's floor line
   // (its lowest point touches the line, nothing hangs below).
   // driver: h (% of room height), from = [x of his center %, y of his feet %] at the doorway, fromScale = his
-  // size there (farther away), spots = where he stands and leans, one per driverSpot choice: at = [x %, y %].
+  // size there (farther away), at = [x %, y %] where his feet stand while he waits, full size (grumpy pose,
+  // arms crossed).  Depth rule: whatever he stands in front of, his feet sit lower on screen than its floor
+  // contact.  Wide: centered on the doorway just in front of the sill, clear of the bench, chain, and conveyor.
+  // Tall: in front of the bench's right end, feet 3.3% lower than its front legs (Nathan, 2026-11-22).
   // Sizes on phones match the wide room's proportions: truck height / doorway height = 1.121 in both,
   // driver height / bench height = 2.01 in both (bench = front top edge to the foot of the legs).
   shipping: {
     enabled: false,
     testParam: 'ship',                      // ?ship=1 shows the view for testing
     tallQuery: '(max-width: 720px)',        // same breakpoint as the Shop Floor
-    // Where the driver waits: 'bench' (beside the right end of the packing bench, elbow on its top;
-    // Nathan's pick, 2026-11-22).  'truck' (leaning on the truck's rear bumper) exists only in the wide room;
-    // anywhere it's missing he goes to the bench.
-    driverSpot: 'bench',
     layouts: {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
@@ -123,8 +122,7 @@ GW.CONFIG = {
         doorway: [[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]],
         truck: { h: 55, top: 21.8, xFrom: 93, xTo: 80.5 },
         driver: {
-          h: 32, from: [86.5, 74], fromScale: 0.8,
-          spots: { bench: { at: [73, 79.5] }, truck: { at: [91.5, 82] } }
+          h: 32, from: [86.5, 74], fromScale: 0.8, at: [86.5, 80]
         }
       },
       tall: {
@@ -133,14 +131,13 @@ GW.CONFIG = {
         doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
         truck: { h: 42.6, top: 26.2, xFrom: 95, xTo: 74.0 },
         driver: {
-          h: 23, from: [86, 65], fromScale: 0.8,
-          spots: { bench: { at: [87, 81.5] } }
+          h: 23, from: [86, 65], fromScale: 0.8, at: [87.5, 84]
         }
       }
     },
-    // Layer 1 has one region: Gnomerica's truck and driver (waiting pose).
+    // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
     truck: { img: 'assets/packing/truck_gnomerica.webp' },
-    driver: { img: 'assets/packing/driver_gnomerica_waiting.webp' },
+    driver: { img: 'assets/packing/driver_gnomerica_grumpy.webp' },
     // A trip: the door opens, the truck backs in and settles, then the driver walks in.  Closing reverses it,
     // and the door shows closed once the truck is gone.  Taps on the chain mid-trip are ignored.
     trip: {

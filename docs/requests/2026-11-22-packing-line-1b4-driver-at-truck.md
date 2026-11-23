@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.4, the grumpy driver waits at his truck (v0.2)
 
-**Status:** Approved
+**Status:** Done (v0.2, built in v0.2.0-draft.74)
 **Written by:** Claudia, 2026-11-22.  v0.2 after the first run stopped at step 3 (see the Result below).  **Approved by:** Nathan, 2026-11-22 ("1b.4 approved"; v0.2 phone spot: "1b.4 phone option 1 approved").
 **Model:** Opus 5.5
 
@@ -44,6 +44,24 @@ Overlap is fine when depth is right.  Whatever the driver stands in front of, hi
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+### Second run (v0.2): built
+
+Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Built in v0.2.0-draft.74**, still hidden behind `?ship=1`.
+
+- **Step 1:** pulled (df019e3).
+- **Step 2:** `CONFIG.shipping.driver.img` is now `assets/packing/driver_gnomerica_grumpy.webp`.  `driverSpot` and the lean spots are gone; each layout has one `driver.at`, and `spot()` is removed from `js/shipping.js`.  `assets/packing/driver_gnomerica_waiting.webp` is deleted (its master stays in `art-masters/packing-line/25-drivers/`).  Updated `docs/ASSETS.md`, `docs/ARCHITECTURE.md`, `docs/TASKS.md`, `docs/HANDOFF.md`, and the production checklist.
+- **Step 3:** full size in both layouts (32% and 23% of room height, unchanged from 1b.2).  Wide feet `[86.5, 80]`, tall feet `[87.5, 84]`.  Re-checked with his real silhouette against the traced room: wide overlaps nothing, boots below the sill; tall overlaps only the bench (allowed by v0.2), with his boots at 83.7% against the bench's front legs at 80.7%, clear of the chain and the conveyor (86.8%), and fully on screen (x 75.3 to 99.7%).  He is drawn in front of the truck, the doorway frame, and the bench.
+- **Step 4:** the walk is unchanged in code and timing: he fades in at the doorway (`from`, 0.8 scale) after the truck settles and walks to `at`, and walks back out before the truck leaves.  The wide walk is now short (6% of room height, down from the old bench spot across the room).  The tall walk runs from the doorway `[86, 65]` down to `[87.5, 84]`, about the same as the 1b.2 phone walk, since the approved phone spot sits in front of the bench.
+- **Step 5:** every number is in `js/config.js`.  `GW.VERSION` is `0.2.0-draft.74`, stamped (15 links), `CHANGELOG.md` entry added.  Smoke test: **All clear** (desktop and phone ok).
+- **Step 6, screenshots** (in `tools/out/` on Beast, `?ship=1`, truck and driver in place, 2x pixel density, no page errors):
+    - `ship-1b4-wide-day.png`, `ship-1b4-wide-night.png`
+    - `ship-1b4-tall-day.png`, `ship-1b4-tall-night.png`
+    - `ship-1b4-wide-day-feet.png`, `ship-1b4-tall-day-feet.png` (close crops of his feet, Day)
+
+Not built, per Do not: the happy reaction (1f) and anything from 1c on.  The truck, chain, and door are unchanged.
+
+### First run (v0.1): stopped at step 3
 
 Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Stopped at step 3, as the order says:** the wide room has a full-size spot that meets every rule, but the tall (phone) room does not.  I did not shrink him or change any game code, so the version stays **v0.2.0-draft.73**, nothing was stamped, and the smoke test was not run.  Steps 2 and 4 are not built either, since the game would otherwise load the grumpy pose at a spot that breaks the rules on phones.
 
