@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.71';
+GW.VERSION = '0.2.0-draft.72';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -102,26 +102,38 @@ GW.CONFIG = {
   // doorway = the opening just inside the door frame, [x %, y %] corners clockwise from top left; the truck
   // shows only inside it.  Traced from where the closed and open twins differ (both themes agree within 1%).
   // truck: h = height (% of room height), top (% of room height), xFrom / xTo = its left edge (% of room width)
-  // before it slides in and where it stops.  driver: h (% of room height), from / to = [x of his center %,
-  // y of his feet %] as he walks in from the doorway, fromScale = his size at the doorway (farther away).
+  // before it slides in and where it stops.  top is set so the bumper rests on the doorway's floor line
+  // (its lowest point touches the line, nothing hangs below).
+  // driver: h (% of room height), from = [x of his center %, y of his feet %] at the doorway, fromScale = his
+  // size there (farther away), spots = where he stands and leans, one per driverSpot choice: at = [x %, y %],
+  // flip = mirror him so he leans to the right (only where his usual lean-left pose has no room).
   shipping: {
     enabled: false,
     testParam: 'ship',                      // ?ship=1 shows the view for testing
     tallQuery: '(max-width: 720px)',        // same breakpoint as the Shop Floor
+    // Where the driver waits: 'truck' (leaning on the truck's rear corner in the doorway) or
+    // 'bench' (leaning on the right end of the packing bench).  Nathan picks from screenshots.
+    driverSpot: 'truck',
     layouts: {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
         chain: { x: 76.0, top: 5, h: 59, hitW: 4 },
         doorway: [[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]],
-        truck: { h: 60, top: 22.6, xFrom: 93, xTo: 80.5 },
-        driver: { h: 32, from: [86.5, 74], to: [87, 92], fromScale: 0.8 }
+        truck: { h: 55, top: 21.8, xFrom: 93, xTo: 80.5 },
+        driver: {
+          h: 32, from: [86.5, 74], fromScale: 0.8,
+          spots: { truck: { at: [91.5, 82] }, bench: { at: [68, 82] } }
+        }
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
         chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
         doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
-        truck: { h: 28, top: 41.5, xFrom: 95, xTo: 78 },
-        driver: { h: 16, from: [86, 65], to: [89, 85], fromScale: 0.8 }
+        truck: { h: 56, top: 14.1, xFrom: 95, xTo: 70.2 },
+        driver: {
+          h: 32, from: [86, 65], fromScale: 0.8,
+          spots: { truck: { at: [66, 82], flip: true }, bench: { at: [80, 86] } }
+        }
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (waiting pose).

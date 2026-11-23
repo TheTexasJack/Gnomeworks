@@ -52,11 +52,13 @@ GW.ship = (function () {
   }
 
   // ---------- placing things (all positions in % of the room) ----------
-  function driverTransform(scale) { return 'translate(-50%, -100%) scale(' + scale + ')'; }
+  // He stands at his feet point; flip mirrors him (scale -x) for spots where he leans the other way.
+  function driverTransform(scale, flip) { return 'translate(-50%, -100%) scale(' + (flip ? -scale : scale) + ', ' + scale + ')'; }
+  function spot(L) { return L.driver.spots[P.driverSpot] || L.driver.spots.truck; }
   function placeTruck(x) { truck.style.left = x + '%'; }
-  function placeDriver(xy, scale, shown) {
+  function placeDriver(xy, scale, shown, flip) {
     driver.style.left = xy[0] + '%'; driver.style.top = xy[1] + '%';
-    driver.style.transform = driverTransform(scale);
+    driver.style.transform = driverTransform(scale, flip);
     driver.style.opacity = shown ? '1' : '0';
   }
   // Puts everything where the current trip state says, with no motion.
@@ -65,7 +67,8 @@ GW.ship = (function () {
     box.classList.toggle('is-open', open);
     placeTruck(here ? L.truck.xTo : L.truck.xFrom);
     truck.style.visibility = here ? 'visible' : 'hidden';
-    placeDriver(here ? L.driver.to : L.driver.from, here ? 1 : L.driver.fromScale, here);
+    var sp = spot(L);
+    placeDriver(here ? sp.at : L.driver.from, here ? 1 : L.driver.fromScale, here, sp.flip);
   }
 
   // Both twins stay loaded and stacked, so opening is an instant swap with no jump.
@@ -108,14 +111,14 @@ GW.ship = (function () {
     list.forEach(function (fn) { p = p.then(function () { if (id === tripId) return fn(); }); });
     return p.catch(function () {});   // cancelled animations reject; that's fine
   }
-  function walk(fromXY, fromScale, toXY, toScale, fadeIn, fadeOut) {
+  function walk(fromXY, fromScale, toXY, toScale, fadeIn, fadeOut, flip) {
     var calm = calmQuery.matches;
-    var a = { left: fromXY[0] + '%', top: fromXY[1] + '%', transform: driverTransform(fromScale), opacity: fadeIn ? 0 : 1 };
+    var a = { left: fromXY[0] + '%', top: fromXY[1] + '%', transform: driverTransform(fromScale, flip), opacity: fadeIn ? 0 : 1 };
     var mid = { offset: 0.2, opacity: 1 };
     var nearEnd = { offset: 0.8, opacity: 1 };
-    var b = { left: toXY[0] + '%', top: toXY[1] + '%', transform: driverTransform(toScale), opacity: fadeOut ? 0 : 1 };
+    var b = { left: toXY[0] + '%', top: toXY[1] + '%', transform: driverTransform(toScale, flip), opacity: fadeOut ? 0 : 1 };
     var frames = fadeIn ? [a, mid, b] : fadeOut ? [a, nearEnd, b] : [a, b];
-    placeDriver(toXY, toScale, !fadeOut);
+    placeDriver(toXY, toScale, !fadeOut, flip);
     if (!calm) {
       var stepCount = Math.max(1, Math.round(T.walkMs / T.stepMs));
       play(driverImg, [{ transform: 'translateY(0)' }, { transform: 'translateY(-' + T.bob + '%)' }, { transform: 'translateY(0)' }],
@@ -141,7 +144,7 @@ GW.ship = (function () {
           { transform: 'translateY(-' + (T.settle * 0.3) + '%)', offset: 0.7 }, { transform: 'translateY(0)' }], { duration: T.settleMs, easing: 'ease-out' });
       },
       function () { return new Promise(function (r) { setTimeout(r, T.walkDelayMs); }); },
-      function () { return walk(L.driver.from, L.driver.fromScale, L.driver.to, 1, true, false); },
+      function () { var sp = spot(L); return walk(L.driver.from, L.driver.fromScale, sp.at, 1, true, false, sp.flip); },
       function () { trip = 'here'; anims = []; }
     ]);
   }
@@ -151,7 +154,7 @@ GW.ship = (function () {
     stopAnims();
     trip = 'leaving';
     steps([
-      function () { return walk(L.driver.to, 1, L.driver.from, L.driver.fromScale, false, true); },
+      function () { var sp = spot(L); return walk(sp.at, 1, L.driver.from, L.driver.fromScale, false, true, sp.flip); },
       function () {
         placeTruck(L.truck.xFrom);
         return play(truck, [{ left: L.truck.xTo + '%' }, { left: L.truck.xFrom + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });

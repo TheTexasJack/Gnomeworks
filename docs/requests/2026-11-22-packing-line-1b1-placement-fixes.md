@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.1, truck and driver placement fixes (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.  **Approved by:** Nathan, 2026-11-22 ("1b.1 approved").
 **Model:** Opus 5.5
 
@@ -47,4 +47,35 @@ Fix three things Nathan saw in 1b (draft.71): the truck sits too low, the driver
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.72**.  Still hidden: nothing shows without `?ship=1`.  Trip behavior, timing, and the door are unchanged; only numbers in `CONFIG.shipping` and the driver's spot and mirror code in `js/shipping.js` changed.
+
+**1. Truck on the floor line (both layouts).**  I measured the bottom edge of the truck picture column by column (alpha), then worked out each layout's `top` so the truck's lowest visible point touches the doorway's floor line and nothing sits below it.
+- **Wide:** shrunk a little, from 60% to 55% of the room's height (`h 55, top 21.8, xTo 80.5`).  At 60% the top of the truck would have been cut off by the top of the opening.  The floor line slopes, so the rear wheel touches it on the right, and the bumper sits slightly above it, with bay floor showing beneath.
+- **Tall:** `h 56, top 14.1, xTo 70.2`.  The rear-door seam is centred in the opening.
+
+**2. Phone sizes (tall).**  Truck `h` 28 to 56 and driver `h` 16 to 32.  Measured on a 390x844 phone: the truck went from 186 to 372 px tall and the driver from 106 to 212 px, exactly twice.  At this size the rear doors fill the opening and the top of the truck is clipped by it, the look the order expected.
+
+**3. `CONFIG.shipping.driverSpot`** (default `'truck'`).  Each layout has `driver.spots.truck` and `driver.spots.bench`, each with an `at` point (his feet).  Both spots put his forearm (measured at 4% to 20% of his width, 61% to 75% of his height above his feet) on the thing he leans on:
+- **Wide `truck`:** in front of the right part of the doorway, forearm on the truck's rear bumper and tail light.  The chain is not in the way, so it stays put.
+- **Wide `bench`:** forearm on the right end of the bench top.  The chain stays put and clear of him.
+- **Tall `bench`:** in front of the bench's right end, forearm on its top.  All of him fits on screen.
+- **Tall `truck`: needs Nathan's eye (a deviation).**  At twice the size the driver is about 40% of the room's width.  For him to lean left onto the truck, his centre would have to be at about 98% of the room width, which puts half of him off screen.  There is almost no wall right of the tall door frame, so moving the chain there doesn't help.  So this one spot has `flip: true`, which mirrors him: he stands left of the doorway and leans right, with his forearm on the truck's bumper corner.  His cap stays below the chain handle, so the chain doesn't move.  If mirroring isn't wanted, the options are: no `truck` spot on phones (use `bench` there), a smaller driver on phones, or new art leaning the other way.
+
+His walk in and out works from every spot.  The mirror holds through the whole walk, so he never turns around mid-step.
+
+**Checks.**
+- `node tools/smoke-test.js`: "All clear." (v0.2.0-draft.72).
+- The 1b trip check (scratch, not committed) passes again in all four layout and theme combinations: arrive, ignored mid-trip pulls, leave, reset on leaving the view, a second trip, and nothing without `?ship=1`.
+- **Truck inside the doorway:** comparing screenshots with and without the truck, at most 3 changed pixels fall outside the doorway outline, all within 0.42 px of its edge.
+- Both spots walk out cleanly in both layouts.
+
+**Screenshots for Nathan** (in `tools/out/` on Beast, all with `?ship=1`, truck and driver in place):
+- `ship-wide-day-truck.png`
+- `ship-wide-day-bench.png`
+- `ship-tall-day-truck.png` (mirrored driver)
+- `ship-tall-day-bench.png`
+- `ship-wide-night-bumper.png`: close crop of the bumper on the doorway floor line, wide Night
+
+**Docs updated:** `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/TASKS.md`.
 

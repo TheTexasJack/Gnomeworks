@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.71**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.72**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 

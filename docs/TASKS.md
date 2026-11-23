@@ -62,6 +62,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
 4. **Build:** layer 1 core, one work order per step (1a to 1g).
     - [x] 1a: the Shipping view, the room art, and the door chain (draft.70, hidden behind `?ship=1`).
     - [x] 1b: Gnomerica's truck backs into the doorway, the driver walks in and waits; closing sends them away (draft.71, hidden).
+    - [x] 1b.1: truck rests on the doorway floor line, both twice as big on phones, the driver leans on the truck or the bench (`shipping.driverSpot`, Nathan to pick) (draft.72).
     - [ ] 1c to 1g: order board, drawer and boxes, packing, hand off and report card, Stonks.
 
 ## Done draft.20 to draft.51
