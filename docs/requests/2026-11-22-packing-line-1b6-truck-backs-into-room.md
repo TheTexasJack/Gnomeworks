@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.6, the truck backs into the room (v0.2)
 
-**Status:** Done (built in v0.2.0-draft.77)
+**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-22, from Nathan's GIMP mock.  **Approved by:** Nathan, 2026-11-22 ("1b.6 approved", v0.2).
 **Model:** Opus 5.5
 
@@ -93,3 +93,8 @@ Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.77*
 **Docs updated:** `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/TASKS.md`, and the comments in `CONFIG.shipping`.  The 1b.5 sentence in ARCHITECTURE.md is removed, since 1b.5's numbers are gone (desktop uses `truckClip`, and the phone is back to draft.75).
 
 **Not done (per the order):** no change to the trip's timing or the door, nothing from 1c-2 on, nothing installed.
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 3177cb7 and rendered it.  Desktop matches Nathan's mock 1: the truck's rear sits in the room in front of the wall, only the right frame is in front, and there is no gap.  The chain hangs on the right in front of the wheel and comes out from behind the roller's gear.  The phone is back to draft.75.  Open for Nathan: the driver, at his 1b.4 spot, covers the lower half of the truck's right door and right tail light.
+
