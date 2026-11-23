@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.5, close the gap beside the truck (v0.1)
 
-**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
+**Status:** Reviewed and closed; not accepted by Nathan (2026-11-22), replaced by 1b.6
 **Written by:** Claudia, 2026-11-22, from Nathan's bug report.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
 
@@ -86,4 +86,6 @@ Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.76*
 ## Review (Claudia, 2026-11-22)
 
 Pulled 4034c31 and rendered close crops of both doorways.  The truck's rear-left corner now meets the frame with no concrete strip in either layout, the frame stays in front, and the wheels still sit on the floor line.  Re-deriving the height from the sloped floor and checking the method against the old values first was careful work.  On the phone about three quarters of the rear shows (the opening is narrower than the rear), with both seams and both handles visible; acceptable.
+
+Nathan, 2026-11-22: not right.  The phone position before 1b.5 was correct, and the desktop still shows a gap.  The real problem is that the cutout is only the doorway, so the truck can't back up into the room.  Replaced by 1b.6.
 
