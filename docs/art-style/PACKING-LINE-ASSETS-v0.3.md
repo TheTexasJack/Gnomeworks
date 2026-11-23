@@ -87,7 +87,7 @@ Mara's layout reference: [references/packing-room-sketch-v2.jpg](references/pack
 | --- | --- | --- |
 | 23 | **GRIP logo** | A little gnome hand gripping a parcel or a gear crank.  Goes on the work orders, uniforms, the ticker, and The Daily Cog (trucks dropped, Nathan, 2026-11-20). |
 | 24 | **Trucks x10** | **Three-quarter view with the rear doors facing the room;** it slides in from the right and backs up to the angled doorway, which frames it (Nathan, 2026-11-19; replaces the straight rear view of 2026-11-15).  First truck painted 2026-11-19.  Each in its region's color.  No GRIP logo on the trucks, since only the back shows through the door; the GRIP mark goes on the work order (#6) instead (Nathan, 2026-11-20).  Gnomerica's truck comes first; the rest follow the unlock order. |
-| 25 | **Drivers x10** | One per region, from that region's people (for example a Gnomerica gnome, a Gni knight, a Slaanilok lizard folk driver, a Gnonmoon dog folk driver).  The driver slides in and stands beside the truck, leaning on it or standing next to it.  Poses: waiting, and happy or grumpy for the report card. |
+| 25 | **Drivers x10** | One per region, from that region's people (for example a Gnomerica gnome, a Gni knight, a Slaanilok lizard folk driver, a Gnonmoon dog folk driver).  The driver slides in and stands beside the truck, leaning on it or standing next to it.  Poses: waiting, and happy or grumpy for the report card.  (Changed 2026-11-22, Nathan: drivers wait grumpy and turn happy on a good report card; the leaning waiting pose is retired.  See DESIGNS.md, "The driver's moods.") |
 | 26 | **Stock ticker frame** | A brass ticker screen.  The game draws the GRIP and TNP lines inside it. |
 
 ## Tier 2: TNP Corp

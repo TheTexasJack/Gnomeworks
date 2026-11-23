@@ -203,6 +203,14 @@ Settled the same day (Nathan picked each):
 - **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
 - ~~Both fake mistakes move the ticker; dismissing a real driver is a small dip and a replacement driver comes in.~~  Replaced 2026-11-22 by the rules below.
 
+**The driver's moods (Nathan, 2026-11-22, decided)**
+
+- **Drivers always show up grumpy.**  The grumpy pose (arms crossed, standing) is how every driver waits while the player packs.  "A grumpy driver?  there is something real about that."
+- **A successful delivery turns him around:** on a good report card he gives a thumbs up (the happy pose), smiles, and drives away.
+- **No negative reaction.**  A bad report card shows no new pose; he stays grumpy and leaves.
+- **The leaning pose is retired,** so the driver can stand wherever he fits.  It solved the lean problems found in 1b to 1b.2 (leaning on air, a foot in the bench).
+- Draft (Claudia, needs Nathan): the elf imposters follow the same rule (grumpy while waiting, happy on success).
+
 **Work orders and drivers (Nathan, 2026-11-22, decided)**
 
 Work orders and drivers are two separate calls.
