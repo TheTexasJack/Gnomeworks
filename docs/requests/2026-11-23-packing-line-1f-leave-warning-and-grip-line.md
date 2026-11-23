@@ -76,3 +76,7 @@ Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.86**.  Smo
 **Build time:** about 10 minutes of wall clock, from reading this order (11:13 CST) to the commit (about 11:23 CST).  The exact time Claude Code reports appears in Nathan's terminal at the end of the session, after this Result is written, so it is not recorded here; Nathan can add it.
 
 Nothing was installed.  The scoring, the cue, the board, the menu, the box, and the truck and driver are unchanged, and the trip's state is not held between visits.
+
+**Build time (added by Claudia from Nathan's terminal, 2026-11-23):** Claude Code reported "Baked for 10m 17s".
+
+**Review (Claudia, 2026-11-23):** reviewed.  No warning while the truck is still arriving is the right call.  The 62% pop-up is fine.  The quiet view button after the chain is pulled is logged in TASKS as small polish.
