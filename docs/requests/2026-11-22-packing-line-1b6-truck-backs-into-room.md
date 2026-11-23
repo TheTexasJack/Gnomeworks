@@ -1,7 +1,7 @@
 # Work order: Packing Line 1b.6, the truck backs into the room (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22, from Nathan's GIMP mock.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22, from Nathan's GIMP mock.  **Approved by:** Nathan, 2026-11-22 ("1b.6 approved", v0.2).
 **Model:** Opus 5.5
 
 ## Goal
