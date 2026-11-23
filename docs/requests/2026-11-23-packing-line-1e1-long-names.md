@@ -1,7 +1,7 @@
 # Work order: Packing Line 1e.1, the report card fits the longest names (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, from Nathan's phone test of draft.84.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, from Nathan's phone test of draft.84.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 ## Goal
