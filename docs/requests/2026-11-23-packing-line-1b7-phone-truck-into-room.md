@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.7, the phone room matches Nathan's mock (v0.1)
 
-**Status:** Done
+**Status:** Reviewed (Claudia, 2026-11-23); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-23, from Nathan's phone mock.  **Approved by:** Nathan, 2026-11-23 ("1b.7 approved").
 **Model:** Opus 5.5
 
@@ -87,3 +87,8 @@ Built 2026-11-23 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.78*
 **Docs updated:** `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/TASKS.md`, and the comments in `CONFIG.shipping`.
 
 **Not done (per the order):** no change to desktop, the trip's timing, or the door; nothing from 1c-2 on; nothing installed.
+
+## Review (Claudia, 2026-11-23)
+
+Pulled aa8ef30 and rendered the phone beside Nathan's mock at the same size.  The truck, chain, and driver match the mock's placement; the driver is slightly smaller than the mock (23% against about 25% of the room height) because he keeps the 1b.2 ratio.
+
