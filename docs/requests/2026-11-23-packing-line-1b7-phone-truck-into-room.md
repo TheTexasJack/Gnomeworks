@@ -1,7 +1,7 @@
 # Work order: Packing Line 1b.7, the phone room matches Nathan's mock (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, from Nathan's phone mock.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, from Nathan's phone mock.  **Approved by:** Nathan, 2026-11-23 ("1b.7 approved").
 **Model:** Opus 5.5
 
 ## Goal
