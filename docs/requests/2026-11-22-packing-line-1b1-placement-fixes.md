@@ -1,7 +1,7 @@
 # Work order: Packing Line 1b.1, truck and driver placement fixes (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.  **Approved by:** Nathan, 2026-11-22 ("1b.1 approved").
 **Model:** Opus 5.5
 
 ## Goal
