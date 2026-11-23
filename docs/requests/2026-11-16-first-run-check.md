@@ -1,7 +1,7 @@
 # Work order: first run check on Beast (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** Nathan, 2026-11-22.
 
 ## Goal
 
