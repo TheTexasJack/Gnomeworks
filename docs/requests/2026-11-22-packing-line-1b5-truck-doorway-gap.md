@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.5, close the gap beside the truck (v0.1)
 
-**Status:** Done (built in v0.2.0-draft.76)
+**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-22, from Nathan's bug report.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
 
@@ -82,3 +82,8 @@ Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.76*
 **Docs updated:** `CHANGELOG.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/TASKS.md`, and the comments on `doorway` and `truck` in `js/config.js`.
 
 **Not done (per the order):** truck size, the trip's timing, the door, the chain, and the driver's spot are unchanged; nothing from 1c-2 on.
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 4034c31 and rendered close crops of both doorways.  The truck's rear-left corner now meets the frame with no concrete strip in either layout, the frame stays in front, and the wheels still sit on the floor line.  Re-deriving the height from the sloped floor and checking the method against the old values first was careful work.  On the phone about three quarters of the rear shows (the opening is narrower than the rear), with both seams and both handles visible; acceptable.
+
