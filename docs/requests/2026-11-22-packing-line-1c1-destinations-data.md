@@ -1,7 +1,7 @@
 # Work order: Packing Line 1c-1, the destinations data (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1c-1 approved").
 **Model:** Opus 5.5
 
 ## Goal
