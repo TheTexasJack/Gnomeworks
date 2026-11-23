@@ -1,10 +1,11 @@
-# Work order: Packing Line 1d, pack and stamp (v0.2)
+# Work order: Packing Line 1d, pack and stamp (v0.3)
 
 **Status:** Draft
 **Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** (waiting on Nathan)
 **Model:** Opus 5.5
 
 **v0.2 (2026-11-23):** the box and the stack have the stage and may cover the driver (Nathan); the count note in step 6 follows 1c-3.
+**v0.3 (2026-11-23):** step 5a, the phone screen holds still in the room (Nathan).
 
 ## Goal
 
@@ -26,6 +27,11 @@ The player packs each work order: tap the conveyor to open the item menu, drag t
 3. **The active order.**  Orders are packed one at a time, left to right.  The slip being packed gets a small highlight on the board; packed slips get a check mark.  The box on the bench belongs to the active order.
 4. **The box.**  An open cardboard box sits on the packing bench (its place and size per layout in `CONFIG.shipping.layouts.<layout>.box`).  **The box has the stage (Nathan, 2026-11-23):** the driver is flavor behind the game's flow, so the box, its label, the stamp tray, and the stack of packed boxes draw in front of him and may cover him.  Place them for the player's hands first.  Do not move the truck or the driver to make room.
 5. **The item menu.**  A trusted tap on the painted conveyor opens a menu of junk items, styled like the game's shelf tiles (emoji, name, count).  Items with more than 1 on the shelf can be dragged; items at 1 or 0 show greyed out.  It closes with a tap outside it or Escape.  Make it scroll and readable on a 390px phone.
+5a. **The phone screen holds still (Nathan, 2026-11-23).**  In the tall layout the Shipping view is all dragging and tapping, so the page must not scroll, bounce, zoom, or swipe away under the player's hands:
+    - No page scroll or pull-to-refresh bounce while the room is showing (`touch-action` and `overscroll-behavior` on the room, or locking the page's scroll while the view is open).  The item menu still scrolls inside itself.
+    - **The view swipe is off inside the room** (`main.js` swipes between views on touch, so a sideways drag while packing would flip to the Machine).  The view buttons still leave the room.
+    - No double-tap zoom on the room.
+    - Desktop is fine as it is (Nathan); do not change it.
 6. **Packing.**  Drag a tile from the menu onto the open box: the box takes that item (the whole pile, down to the display copy, per DESIGNS.md) and shows a small label with the item's emoji and the count it will ship.  One item per box (Gnomerica orders ask for one).  Dropping a different item replaces the first.  The menu stays open so the player can change their mind; dragging works with a mouse and a finger.
 7. **Close and stamp.**  A tap on a filled open box closes it (swap to the closed picture).  Then a small stamp tray beside the box shows the region stamps the player has (layer 1: Gnomerica's only).  Tap the stamp to stamp the closed box: the stamp lands on the box with a short thump.  A tap on a closed, unstamped box opens it again.
 8. **Done with a box.**  A stamped box slides to a stack by the truck's rear (its place per layout in `CONFIG.shipping.layouts.<layout>.stack`; on the phone that is the floor at the bench's right end, in front of the driver), and the next order's empty box appears.  When all orders are packed, no new box appears.
@@ -45,6 +51,7 @@ The player packs each work order: tap the conveyor to open the item menu, drag t
 
 - In both layouts, each of the three orders can be packed: item in, box closed, stamped, set aside, next box out.
 - The item menu works with mouse and finger, and greys out items at 1 or 0.
+- On a phone, dragging and tapping in the room never scrolls the page, bounces it, or swipes to another view.
 - The record of what was packed exists for 1e.
 - The smoke test passes and the screenshots exist.
 
