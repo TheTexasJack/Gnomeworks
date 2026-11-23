@@ -69,8 +69,12 @@ async function restCheck(page, errors) {
 // every tip.  Inside supplies (1i): every junk tile with a packing tag shows its icon, the supplies menu opens with
 // the 4-line chart, the first shift is perfect (peanuts in every box, bubble wrap around Breakables, peanuts added
 // twice change nothing, peanuts and junk dropped on a closed box only shake it), and the second leaves every box
-// without supplies, so each row reads "No peanuts" (plus "+1" for a Breakable).
-// Last, a shelf with only 3 Toilet Paper gets one order for the 2 it can spare.
+// without supplies, so each row reads "No peanuts" (plus "+N" for the rest).  Outside stickers (1j): the supplies menu
+// shows Packing, Stickers, Stamps; the chart hides with instructions off; a sticker on an open box only shakes it;
+// shift 1 adds FRAGILE to Breakables and HEAVY to Heavies (one added twice changes nothing) and each lands in the
+// first slot; shift 2 adds none, so a Breakable reads "No peanuts +3" and a Heavy "No peanuts +2".
+// Then a shelf with only 3 Toilet Paper gets one order for the 2 it can spare, and a shelf with only Toilets gets
+// one order that, packed with peanuts and stamped but no HEAVY sticker, reads "No HEAVY".
 async function packCheck(page, errors) {
   const fail = m => errors.push('packing: ' + m);
   const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
@@ -92,14 +96,24 @@ async function packCheck(page, errors) {
   const right = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.right);
   const wrong = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.wrong);
   let c, shipped = [];
+  // Shift 1 draws from one Breakable, one Heavy, and one Soft item that Gnomerica buys (the rest of the shelf waits),
+  // so the stickers are always tried; shift 2 gets the whole ordinary shelf back, with shift 1's piles as shipped.
+  const trio = await page.evaluate(() => {
+    const buys = new Set(), pick = t => GW.CONFIG.items.find(it => it.pack === t && buys.has(it.id)).id;
+    GW.DESTINATIONS.places.filter(p => p.region === 'gnomerica').forEach(p => p.buys.forEach(id => buys.add(id)));
+    return [pick('breakable'), pick('heavy'), pick('soft')];
+  });
+  await page.evaluate(t => GW.CONFIG.items.forEach(it => { if (!t.includes(it.id)) GW.game.s.items[it.id] = 0; }), trio);
   for (let shift = 1; shift <= 2; shift++) {
     const tag = `shift ${shift}: `;
+    if (shift === 2) await page.evaluate(([t, n]) => GW.CONFIG.items.forEach(it => { if (!t.includes(it.id) && it.group !== 'monsters') GW.game.s.items[it.id] = n; }), [trio, SHELF]);
     c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
     await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
     const orders = await page.evaluate(() => GW.ship.orders().map(o => ({ id: o.item.id, qty: o.qty, pack: o.item.pack || '' })));
     const shelf = await page.evaluate(() => JSON.stringify(GW.game.s.items));
     const before = await page.evaluate(() => Object.assign({}, GW.game.s.items));
     if (orders.length !== 3) fail(tag + `only ${orders.length} orders from an ordinary shelf`);
+    if (shift === 1 && orders.map(o => o.id).sort().join() !== trio.slice().sort().join()) fail(tag + `orders ${orders.map(o => o.id)} from a shelf of ${trio}`);
     const counts = await page.evaluate(() => GW.CONFIG.shipping.orders.counts);
     orders.forEach(o => {
       const spare = before[o.id] - 1, fits = counts[o.pack].filter(n => n <= spare);
@@ -115,10 +129,18 @@ async function packCheck(page, errors) {
       // A stamp dropped on the open, empty box does nothing.
       c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
       if (await page.evaluate(() => GW.ship.menuKind()) !== 'supplies') { fail('the computer did not open the supplies menu'); return; }
-      if (await page.$$eval('.ship-menu-supplies .ship-menu-head', h => h.map(x => x.textContent).join()) !== 'Packing,Stamps') fail('the supplies menu does not show Packing and Stamps');
+      if (await page.$$eval('.ship-menu-supplies .ship-menu-head', h => h.map(x => x.textContent).join()) !== 'Packing,Stickers,Stamps') fail('the supplies menu does not show Packing, Stickers, and Stamps');
       if (await page.$$eval('.ship-menu-supplies .ship-rules .ship-rule', r => r.length) !== 4) fail('the Packing rules chart does not show 4 rules');
+      if (!await shown('.ship-menu-supplies .ship-rules')) fail('the chart is hidden with instructions on');
+      await page.evaluate(() => document.documentElement.classList.add('no-hints'));
+      if (await shown('.ship-menu-supplies .ship-rules')) fail('the chart showed with instructions off');
+      await page.evaluate(() => document.documentElement.classList.remove('no-hints'));
       await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
       if (await page.evaluate(() => GW.ship.boxState()) !== 'open') fail('a stamp changed an open box');
+      await dragTo('.supply-tile[data-supply="sticker:heavy"]', '.ship-box:not(.is-stacked)');
+      const shookOpen = await page.evaluate(() => document.querySelector('.ship-box:not(.is-stacked) .box-body').getAnimations().length > 0);
+      if (!shookOpen) fail('a sticker dropped on an open box did not shake it');
+      if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().outside.join()) !== 'open:') fail('a sticker changed an open box');
       // The conveyor's uncovered end switches menus straight from the supplies menu.
       const cv = await page.locator('.ship-conveyor').boundingBox();
       await page.mouse.click(cv.x + cv.width * 0.92, cv.y + cv.height * 0.5);
@@ -131,8 +153,8 @@ async function packCheck(page, errors) {
       if (await shown('.ship-belt-glow') || await shown('.ship-belt-tag')) fail('the belt tip stayed after the item menu opened');
       if (await page.isVisible('.ship-menu-supplies')) fail('two menus open at once');
       if (await page.textContent(`.ship-tile[data-item="${o.id}"]`).then(t => !t.includes(String(before[o.id])))) fail(tag + `the ${o.id} tile does not show the shelf count ${before[o.id]}`);
-      if (shift === 1 && o === orders[0]) {                                // every tagged tile shows its tag, untagged ones none
-        const bad = await page.$$eval('.ship-menu-items .ship-tile', ts => ts.filter(t => !!t.querySelector('.tile-tag') !== !!(GW.econ.itemDef(t.dataset.item) || {}).pack).map(t => t.dataset.item));
+      if (shift === 1 && o === orders[0]) {                                // every known tagged tile shows its tag; untagged and "???" ones none
+        const bad = await page.$$eval('.ship-menu-items .ship-tile', ts => ts.filter(t => !!t.querySelector('.tile-tag') !== (t.querySelector('.tile-name').textContent !== '???' && !!(GW.econ.itemDef(t.dataset.item) || {}).pack)).map(t => t.dataset.item));
         if (bad.length) fail('tag icons wrong on tiles: ' + bad.join(', '));
       }
       await dragTo(`.ship-tile[data-item="${o.id}"]`, '.ship-box:not(.is-stacked)');
@@ -167,6 +189,17 @@ async function packCheck(page, errors) {
       if (!await shown('.ship-screen-glow')) fail('the computer did not glow beside a closed box');
       c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
       if (await page.evaluate(() => GW.ship.menuKind()) !== 'supplies') { fail('the computer did not open the supplies menu'); return; }
+      if (shift === 1) {                                                  // the right stickers outside (1j)
+        const st = o.pack === 'breakable' ? 'fragile' : o.pack === 'heavy' ? 'heavy' : '';
+        if (st) {
+          await dragTo(`.supply-tile[data-supply="sticker:${st}"]`, '.ship-box:not(.is-stacked)');
+          await dragTo(`.supply-tile[data-supply="sticker:${st}"]`, '.ship-box:not(.is-stacked)');
+        }
+        if (await page.evaluate(() => GW.ship.bench().outside.join()) !== st) fail(tag + `${o.id} box has stickers "${await page.evaluate(() => GW.ship.bench().outside.join())}", expected "${st}"`);
+        const pics = await page.$$eval('.ship-box:not(.is-stacked) .box-sticker:not([hidden])', p => p.map(x => x.dataset.sticker + '@' + x.style.left));
+        const slot = await page.evaluate(() => GW.CONFIG.shipping.pack.stickers.slots[0][0] + '%');
+        if (pics.join() !== (st ? st + '@' + slot : '')) fail(tag + `the box shows stickers "${pics.join()}"`);
+      }
       if (shift === 1 && o === orders[0]) {
         await page.locator('.supply-tile[data-supply="stamp:gnomerica"]').scrollIntoViewIfNeeded();
         c = await mid('.supply-tile[data-supply="stamp:gnomerica"]'); await page.mouse.click(c.x, c.y);   // a tap on the tile alone does nothing
@@ -178,7 +211,8 @@ async function packCheck(page, errors) {
     }
     const rec = await page.evaluate(() => GW.ship.packed());
     const inside = o => shift === 2 ? '' : o.pack === 'breakable' ? 'peanuts,bubble' : 'peanuts';
-    if (rec.length !== orders.length || rec.some((r, i) => !r || r.item !== orders[i].id || r.count !== orders[i].qty || r.stamp !== 'gnomerica' || r.inside.join() !== inside(orders[i]))) fail(tag + 'record wrong: ' + JSON.stringify(rec));
+    const outside = o => shift === 2 ? '' : o.pack === 'breakable' ? 'fragile' : o.pack === 'heavy' ? 'heavy' : '';
+    if (rec.length !== orders.length || rec.some((r, i) => !r || r.item !== orders[i].id || r.count !== orders[i].qty || r.stamp !== 'gnomerica' || r.inside.join() !== inside(orders[i]) || r.outside.join() !== outside(orders[i]))) fail(tag + 'record wrong: ' + JSON.stringify(rec));
     if (await page.$('.ship-box:not(.is-stacked)')) fail('a box appeared after every order was packed');
     if (await page.evaluate(() => JSON.stringify(GW.game.s.items)) !== shelf) fail(tag + 'the shelf changed while packing');
     if (!await page.evaluate(() => document.querySelector('.ship-chain').classList.contains('is-ready') && !document.querySelector('.ship-finish').hidden)) fail('the chain did not show how to finish');
@@ -189,14 +223,14 @@ async function packCheck(page, errors) {
     const moved = Object.keys(after).filter(id => after[id] !== before[id]);
     orders.forEach(o => { if (after[o.id] !== before[o.id] - o.qty) fail(tag + `${o.id} went ${before[o.id]} to ${after[o.id]}, ordered ${o.qty}`); });
     if (moved.length !== orders.length) fail(tag + 'shipping changed other piles: ' + moved.join(', '));
-    const want = stonks0 + orders.length * right - (shift === 2 ? orders.length * wrong : 0);   // shift 2 has no supplies: every row wrong
+    const want = stonks0 + 3 * right - (shift === 2 ? orders.length * wrong : 0);   // shift 1 all right; shift 2 has no supplies: every row wrong
     if (await page.evaluate(() => GW.game.s.stonks) !== want) fail(tag + 'Stonks did not rise to ' + want);
     try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail(tag + 'no report card after the door closed'); return; }
     const rights = await page.$$eval('.ship-card .card-row.is-right', r => r.length);
     if (rights !== (shift === 1 ? orders.length : 0)) fail(tag + `report card shows ${rights} right of ${orders.length}`);
     if (shift === 2) {
       const whys = await page.$$eval('.ship-card .card-why', els => els.map(e => e.textContent));
-      const exp = orders.map(o => 'No peanuts' + (o.pack === 'breakable' ? ' +1' : ''));
+      const exp = orders.map(o => 'No peanuts' + (o.pack === 'breakable' ? ' +3' : o.pack === 'heavy' ? ' +2' : ''));
       if (whys.join('|') !== exp.join('|')) fail(tag + `the card reads "${whys.join(' | ')}", expected "${exp.join(' | ')}"`);
     }
     const items = await page.$$eval('.ship-card .card-item', els => els.map(e => e.textContent));
@@ -217,18 +251,38 @@ async function packCheck(page, errors) {
   try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after the small shift'); return; }
   await page.keyboard.press('Escape');
   if (await page.evaluate(() => GW.game.s.items.tp) !== 3) fail('an unpacked order took Toilet Paper off the shelf');
-  const want = stonks0 + 3 * right - 3 * wrong - wrong;
+  // A Heavy box with peanuts and its stamp but no HEAVY sticker (1j): "No HEAVY".
+  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.id === 'toilet' ? 40 : 0; }));
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
+  c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
+  await dragTo('.ship-tile[data-item="toilet"]', '.ship-box:not(.is-stacked)');
+  await page.keyboard.press('Escape');
+  c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+  await dragTo('.supply-tile[data-supply="supply:peanuts"]', '.ship-box:not(.is-stacked)');
+  await page.keyboard.press('Escape');
+  c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
+  c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+  await dragTo('.supply-tile[data-supply="stamp:gnomerica"]', '.ship-box:not(.is-stacked)');
+  await page.waitForFunction(() => GW.ship.packed()[0], null, { timeout: 4000 });
+  await page.keyboard.press('Escape');
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after the Toilet shift'); return; }
+  const heavyWhy = await page.$$eval('.ship-card .card-why', els => els.map(e => e.textContent).join('|'));
+  if (heavyWhy !== 'No HEAVY') fail(`a Toilet without its HEAVY sticker reads "${heavyWhy}", expected "No HEAVY"`);
+  await page.keyboard.press('Escape');
+  const want = stonks0 + 3 * right - 3 * wrong - wrong - wrong;
   await page.waitForTimeout(400);
   await page.reload();
   await page.waitForTimeout(400);
-  if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.stonksHistory.length) !== want + ',3') fail('Stonks were not saved');
+  if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.stonksHistory.length) !== want + ',4') fail('Stonks were not saved');
   // An old save with no Stonks loads at 0.
   await page.evaluate(() => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); delete o.stonks; delete o.stonksHistory;
     GW.state.save = () => false; localStorage.setItem(k, JSON.stringify(o)); });
   await page.reload();
   await page.waitForTimeout(400);
   if (await page.evaluate(() => GW.game.s.stonks + ',' + JSON.stringify(GW.game.s.stonksHistory)) !== '0,[]') fail('an old save did not load with Stonks at 0');
-  console.log(`packing: two shifts from a shelf of ${SHELF} each (${shipped.join('; ')}), then 2 tp from 3; Stonks ${want}`);
+  console.log(`packing: two shifts (a Breakable, a Heavy, and a Soft, then an ordinary shelf of ${SHELF} each) (${shipped.join('; ')}), then 2 tp from 3, then a Toilet with no HEAVY; Stonks ${want}`);
 }
 
 // Leaving mid-trip (1f): a view button shows the warning; Stay keeps the trip; Send it off scores the shift, shows

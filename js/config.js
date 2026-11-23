@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.89';
+GW.VERSION = '0.2.0-draft.90';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -282,14 +282,17 @@ GW.CONFIG = {
     // with more than orders.keep on the shelf onto the open box puts the order's count of that item in (1h), or
     // everything the shelf can spare if it has fewer.
     // A tap on the computer opens the supplies menu (1g): `supplies.sections` in order, each with a heading, an
-    // empty one not shown, under the "Packing rules" chart (1i).  Layer 1 has Packing (the `inside` supplies, 1i)
-    // and Stamps (the `stamps` below).  Dragging a stamp onto a closed box stamps it; an inside supply goes into the
-    // open box.  Anything dropped on the wrong side (a stamp on an open box, junk or an inside supply on a closed
-    // one) only shakes the box (`shake`).  menuLabel and supplies.label name the two menus for screen readers.
+    // empty one not shown, under the "Packing rules" chart (1i), which shows only while "Show instructions" is on
+    // (1j).  Layer 1 has Packing (the `inside` supplies, 1i), Stickers (the `stickers`, 1j), and Stamps (the
+    // `stamps` below).  Dragging a sticker or a stamp onto a closed box puts it on; an inside supply goes into the
+    // open box.  Anything dropped on the wrong side (a sticker or stamp on an open box, junk or an inside supply on
+    // a closed one) only shakes the box (`shake`).  menuLabel and supplies.label name the two menus for screen
+    // readers.
     // Nothing ships and the shelf does not change until the hand-off (1e).
     pack: {
       menuLabel: 'Junk from the conveyor',
-      supplies: { label: 'Supplies from the computer', sections: [{ id: 'packing', name: 'Packing' }, { id: 'stamps', name: 'Stamps' }] },
+      supplies: { label: 'Supplies from the computer', sections: [{ id: 'packing', name: 'Packing' },
+        { id: 'stickers', name: 'Stickers' }, { id: 'stamps', name: 'Stamps' }] },
       // The packing tags (1i): each junk item's `pack` in CONFIG.items, shown as its icon (the approved 15b art, the
       // same pictures as the FRAGILE and HEAVY stickers) in a corner of its tile in the item menu, in the chart, and
       // beside the item's picture on the open box.  Never on the work order slip: reading the order is the challenge.
@@ -306,8 +309,34 @@ GW.CONFIG = {
         { id: 'peanuts', name: 'Packing Peanuts', img: 'assets/packing/supply_peanuts.webp', spot: [37, 33, 26] },
         { id: 'bubble', name: 'Bubble Wrap', img: 'assets/packing/supply_bubble_wrap.webp', spot: [63, 33, 32] }
       ],
+      // The outside stickers (1j), the Stickers section: free and unlimited, dragged onto a closed box before its stamp
+      // (an open box shakes them off).  Adding one twice changes nothing.  `need` = the packing tag whose item needs
+      // it (scored as `reason`); on any other item it does nothing.  They sit in the box face's upper left (box face
+      // v0.3, docs/DESIGNS.md), side by side in menu order, FRAGILE first; a box with one sticker uses the first slot.
+      // slots = [x center, y top] in % of the box's square canvas, width = each sticker's width there, tilt in
+      // degrees.  The rule: the face (3 to 97% across, 21 to 97% down the box art at x 55 to 345, y 53 to 346 of the
+      // 400 x 400 canvas) gets the stamp's gap (4.5% of the box's width, 13 px) from its top and left; each sticker
+      // is 8.5% of the box's width (24.6 px) with a 2% gap (5.8 px) between them, so the first's left edge is at
+      // 76.8 px and its center 89.1 px (22.3%), the second's center 119.5 px (29.9%), and both tops at 127.6 px
+      // (31.9%), level with the stamp's top.  The art is cropped tight like the mock's, so FRAGILE draws 34 px tall
+      // and HEAVY 35.  Drawn solid and on top like the stamp.  pressMs = the sticker pressing on, then the box's
+      // small `jolt` (% of its height) and the pat, a softer sound than the stamp's thump: `pat` = its tone (Hz,
+      // falling to `to`), length (s), and loudness, and a short noise (`noiseHz`, `noiseDur`, `noiseVol`).
+      stickers: {
+        list: [
+          { id: 'fragile', name: 'FRAGILE', img: 'assets/packing/sticker_fragile.webp', need: 'breakable', reason: 'noFragile' },
+          { id: 'heavy', name: 'HEAVY', img: 'assets/packing/sticker_heavy.webp', need: 'heavy', reason: 'noHeavy' }
+        ],
+        slots: [[22.3, 31.9], [29.9, 31.9]],
+        width: 6.16,
+        tilt: 0,
+        pressMs: 180,
+        jolt: 1,
+        pat: { f: 260, to: 190, dur: 0.07, vol: 0.12, noiseHz: 1800, noiseDur: 0.05, noiseVol: 0.08 }
+      },
       // The "Packing rules" chart at the top of the supplies menu (1i): one line per rule, its icon (an inside
-      // supply's id or a tag's id) and its words.  Draft wording (Claudia).  FRAGILE and HEAVY stickers come in 1j.
+      // supply's id or a tag's id) and its words.  Draft wording (Claudia).  Shown only while "Show instructions"
+      // is on (1j); the rules stay the same either way.
       chart: {
         title: 'Packing rules',
         rows: [
@@ -350,7 +379,8 @@ GW.CONFIG = {
       nextMs: 300           // the next order's box appearing
     },
     // Scoring a hand-off (1e).  Each order with the ordered item, the right supplies inside (1i: packing peanuts in
-    // every box, bubble wrap around a Breakable item; extras do nothing), and the right region stamp is right and adds
+    // every box, bubble wrap around a Breakable item), the right stickers outside (1j: FRAGILE on a Breakable item,
+    // HEAVY on a Heavy one; extras do nothing), and the right region stamp is right and adds
     // `right` Stonks for its region (set by region difficulty, never by pile size); any other order subtracts
     // `wrong`.  Stonks never go below 0.  Draft amounts (Claude Code, 1e); Gnomerica is the first, easiest region.
     // reasons = the report card's words for each kind of miss.  A closed box with an item ships even without a
@@ -358,10 +388,10 @@ GW.CONFIG = {
     score: {
       regions: { gnomerica: { right: 10, wrong: 3 } },
       reasons: { item: 'Wrong item', noStamp: 'No stamp', wrongStamp: 'Wrong stamp', notPacked: 'Not packed',
-        noPeanuts: 'No peanuts', noBubble: 'No bubble wrap' },
+        noPeanuts: 'No peanuts', noBubble: 'No bubble wrap', noFragile: 'No FRAGILE', noHeavy: 'No HEAVY' },
       // The report card shows a row's main reason, the first of these that applies, then `more` for the rest
       // ("No peanuts +1", draft, Claudia).  {n} = how many more.  The screen-reader label lists them all.
-      order: ['notPacked', 'item', 'noPeanuts', 'noBubble', 'noStamp', 'wrongStamp'],
+      order: ['notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
       more: ' +{n}'
     },
     // When every order has a stamped box, the chain glows and sways gently and a brass tag by its handle shows

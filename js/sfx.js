@@ -267,6 +267,13 @@ GW.sfx = (function () {
     tone({ f: vary(120), to: 60, dur: 0.16, vol: 0.28, type: 'triangle' });
     noise({ f: 350, q: 0.9, dur: 0.08, vol: 0.18 });
   }
+  // Packing Line (1j): a sticker patted onto a box, softer than the stamp's thump.  o = its numbers, from
+  // CONFIG.shipping.pack.stickers.pat.
+  function pat(o) {
+    if (!ready() || !o || !limit('pat', 6)) return;
+    tone({ f: vary(o.f), to: o.to, dur: o.dur, vol: o.vol, type: 'triangle' });
+    noise({ f: o.noiseHz, q: 0.9, dur: o.noiseDur, vol: o.noiseVol });
+  }
   // Until Alex records her "UGH!": a quick low grunt.
   function ugh(kind) {
     if (!ready()) return;
@@ -280,7 +287,7 @@ GW.sfx = (function () {
   }
 
   return {
-    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump,
+    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump, pat: pat,
     hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },

@@ -116,7 +116,7 @@
 - [x] **15. Packing supplies.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  **In the game since draft.89 (work order 1i):** `assets/packing/supply_peanuts.webp`, `supply_bubble_wrap.webp`.
   - [x] Bubble wrap.
   - [x] Cornstarch packing peanuts.
-- [x] **15a. Outside stickers.  Approved by Nathan 2026-11-22** (from the embossed hazard stamp sheet, `art-masters/packing-line/15-16-hazard-stamps/`).
+- [x] **15a. Outside stickers.  Approved by Nathan 2026-11-22** (from the embossed hazard stamp sheet, `art-masters/packing-line/15-16-hazard-stamps/`).  **In the game since draft.90 (work order 1j):** `assets/packing/sticker_fragile.webp`, `sticker_heavy.webp` (the box face and the Stickers tiles).
   - [x] FRAGILE: `hazard-01-fragile.png` (broken glass).
   - [x] HEAVY: `hazard-02-heavy.png` (weight).
 - [x] **15b. Item-category icons.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  For item tiles and the menu's explanation chart.  **In the game since draft.89 (work order 1i):** `assets/packing/tag_breakable.webp`, `tag_heavy.webp`, `tag_soft.webp`.

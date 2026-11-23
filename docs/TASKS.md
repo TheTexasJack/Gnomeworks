@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.88.
+Last updated 2026-11-23, at v0.2.0-draft.90.
 
 ## Where we are
 
@@ -88,6 +88,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] 1j (approved): FRAGILE and HEAVY stickers on the closed box (box face v0.3, upper left), and their scoring.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
+    - [x] 1j (draft.90): FRAGILE and HEAVY stickers on the box face's upper left, "No FRAGILE" and "No HEAVY", and the chart hidden with instructions off.
     - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
@@ -100,7 +101,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1d (draft.81; approved v0.3): pack and stamp.
     - [x] 1e (draft.84; approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).  Draft calls for Nathan and Claudia to check are in the work order's Result (score amounts, the unstamped-box rule, the tag's spot over the driver).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
-    - [ ] Next: the rest of the supplies layer (FRAGILE and HEAVY on the box face, 1j; tags, peanuts, and bubble wrap are built in 1i), then the other boxes.
+    - [ ] Next: the other boxes (Gnomerica's supplies layer is complete with 1j).
 
 ## Done draft.20 to draft.51
 

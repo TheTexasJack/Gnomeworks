@@ -19,6 +19,9 @@
    peanuts and bubble wrap) that goes into the open box.  Each junk tile shows its packing tag's icon, and the open
    box shows the item's picture with its tag beside it and the supplies in its opening.  Scoring wants peanuts in
    every box and bubble wrap around a Breakable item.
+   Outside stickers (1j): the Stickers section (FRAGILE, HEAVY) goes on a closed box before its stamp, in the box
+   face's upper left; scoring wants FRAGILE on a Breakable item and HEAVY on a Heavy one.  The chart shows only while
+   the instructions setting is on (css).
    The room's tips (1g): the belt glows with a tag at the start of each trip until the item menu first opens, the
    computer's screen glows while a closed box waits for its stamp, and the chain glows when the shift is ready.  All
    of them follow the instructions setting (the no-hints class on the page, css).
@@ -45,7 +48,9 @@ GW.ship = (function () {
   var board, viewer, orders = [], slipOpen = false;
   var K = P.pack, conveyor, computer, packLayer, boxEl = null, menus = {}, menuKind = null, stacked = [];
   var beltGlow, beltImg, beltTag, screenGlow, screenImg, beltTip = false;
-  var packed = [], boxItem = null, boxCount = 0, boxState = 'none', boxIn = {};   // boxIn = the inside supplies in the box (1i)   // boxState: 'none' | 'open' | 'closed' | 'stamped'
+  var packed = [], boxItem = null, boxCount = 0, boxState = 'none', boxIn = {}, boxOut = {};
+  // boxState: 'none' | 'open' | 'closed' | 'stamped'; boxIn = the inside supplies in the box (1i); boxOut = the
+  // stickers on it (1j)
   var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, afterCard = null;
 
@@ -338,6 +343,14 @@ GW.ship = (function () {
       body.appendChild(pic);
     });
     body.appendChild(label);
+    // The outside stickers (1j), placed in their slots by showBox.
+    var St = K.stickers;
+    St.list.forEach(function (st) {
+      var pic = img('box-sticker', st.img);
+      pic.dataset.sticker = st.id; pic.hidden = true; pic.alt = st.name;
+      body.appendChild(pic);
+    });
+    el.style.setProperty('--sticker-w', St.width + '%'); el.style.setProperty('--sticker-tilt', St.tilt + 'deg');
     var mark = img('box-mark'); mark.hidden = true;
     body.appendChild(mark);
     el.appendChild(body);
@@ -363,10 +376,20 @@ GW.ship = (function () {
     Array.prototype.forEach.call(boxEl.querySelectorAll('.box-in'), function (pic) {
       pic.hidden = boxState !== 'open' || !boxIn[pic.dataset.supply];
     });
+    // The stickers show only on the closed box, side by side in menu order from the first slot (1j).
+    var closed = boxState === 'closed' || boxState === 'stamped', slots = K.stickers.slots, k = 0;
+    K.stickers.list.forEach(function (st) {
+      var pic = boxEl.querySelector('.box-sticker[data-sticker="' + st.id + '"]');
+      pic.hidden = !closed || !boxOut[st.id];
+      if (!boxOut[st.id]) return;
+      var sl = slots[Math.min(k++, slots.length - 1)];
+      pic.style.left = sl[0] + '%'; pic.style.top = sl[1] + '%';
+    });
+    boxEl.classList.toggle('is-stickered', closed && k > 0);
     updateReady();
   }
   function resetPack() {
-    packed = []; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {};
+    packed = []; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
     if (boxEl) { boxEl.remove(); boxEl = null; }
     stacked.forEach(function (el) { el.remove(); }); stacked = [];
   }
@@ -374,7 +397,7 @@ GW.ship = (function () {
   function nextBox() {
     if (boxEl || trip !== 'here' || activeIndex() < 0) return;
     var L = layout();
-    boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {};
+    boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {}; boxOut = {};
     boxEl = makeBox();
     setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
     boxEl.addEventListener('pointerdown', function (e) {
@@ -415,6 +438,22 @@ GW.ship = (function () {
     if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(1.5%) scaleY(.98)' }, { transform: 'translateY(0)' }],
       { duration: K.thumpMs, easing: 'ease-out' });
   }
+  // A sticker onto the closed box (1j): it presses on, the box jolts a little, and a soft pat.  Adding one twice
+  // changes nothing.
+  function addSticker(id) {
+    if (boxState !== 'closed' || boxOut[id]) return;
+    var St = K.stickers, calm = calmQuery.matches;
+    boxOut[id] = true;
+    showBox();
+    var pic = boxEl.querySelector('.box-sticker[data-sticker="' + id + '"]'), turn = 'translate(-50%, 0) rotate(' + St.tilt + 'deg) ';
+    GW.sfx.pat(St.pat);
+    if (calm) return;
+    pic.animate([{ transform: turn + 'scale(1.5)', opacity: 0 }, { transform: turn + 'scale(1)', opacity: 1 }], { duration: St.pressMs, easing: 'ease-out' });
+    boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(' + St.jolt + '%) scaleY(' + (1 - St.jolt / 100) + ')' }, { transform: 'translateY(0)' }],
+      { duration: K.thumpMs, easing: 'ease-out' });
+  }
+  // The stickers on the box, in menu order (1j).
+  function outsideList() { return K.stickers.list.filter(function (st) { return boxOut[st.id]; }).map(function (st) { return st.id; }); }
   // The inside supplies in the box, in menu order.
   function insideList() { return K.inside.filter(function (sp) { return boxIn[sp.id]; }).map(function (sp) { return sp.id; }); }
   // A packing tag's icon for an item (1i), or null when the item has no tag.
@@ -443,8 +482,9 @@ GW.ship = (function () {
       GW.sfx.thump();
       if (!calm) el.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2.5%) scaleY(.96)' }, { transform: 'translateY(0)' }],
         { duration: K.thumpMs, easing: 'ease-out' });
-      // The record for 1e: the item, its count at packing time, the inside supplies (1i), and the stamp used.
-      packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), stamp: rid };
+      // The record for 1e: the item, its count at packing time, the inside supplies (1i), the stickers (1j), and
+      // the stamp used.
+      packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: rid };
       showBoard();
       return new Promise(function (r) { setTimeout(r, K.setAsideDelayMs); });
     }).then(function () {
@@ -453,13 +493,13 @@ GW.ship = (function () {
       setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
       el.classList.add('is-stacked');
       stacked.push(el);
-      boxEl = null; boxItem = null; boxState = 'none'; boxIn = {};
+      boxEl = null; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {};
       if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%' }], { duration: K.slideMs, easing: 'ease-in-out' });
       nextBox();
     }).catch(function () {});
   }
-  // A shake when something is dropped on the wrong side of the box (a stamp on an open box; junk or an inside
-  // supply on a closed one).
+  // A shake when something is dropped on the wrong side of the box (a sticker or stamp on an open box; junk or an
+  // inside supply on a closed one).
   function shakeBox() {
     if (!boxEl) return;
     var Sh = K.shake, calm = calmQuery.matches, d = calm ? Sh.calmPct : Sh.pct, n = calm ? Sh.calmTimes : Sh.times, frames = [{ transform: 'translateX(0)' }];
@@ -515,16 +555,18 @@ GW.ship = (function () {
   // stamp); an open or empty box is not packed and does not ship.
   function scoreShift() {
     var Sc = P.score, R = Sc.reasons, rows = [], delta = 0, shipped = [], a = activeIndex();
-    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), stamp: null } : null;
+    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: null } : null;
     orders.forEach(function (o, i) {
       var rec = packed[i] || (i === a ? bench : null), miss = {};
       if (!rec) miss.notPacked = true;
       else {
-        // The supplies follow what is in the box: bubble wrap only matters around a Breakable item (1i).
-        var def = GW.econ.itemDef(rec.item), inside = rec.inside || [];
+        // The supplies follow what is in the box: bubble wrap only matters around a Breakable item (1i), and each
+        // sticker only on an item with its tag (1j: FRAGILE on a Breakable, HEAVY on a Heavy).
+        var def = GW.econ.itemDef(rec.item), inside = rec.inside || [], outside = rec.outside || [];
         if (rec.item !== o.item.id) miss.item = true;
         if (inside.indexOf('peanuts') < 0) miss.noPeanuts = true;
         if (def && def.pack === 'breakable' && inside.indexOf('bubble') < 0) miss.noBubble = true;
+        K.stickers.list.forEach(function (st) { if (def && def.pack === st.need && outside.indexOf(st.id) < 0) miss[st.reason] = true; });
         if (!rec.stamp) miss.noStamp = true;
         else if (rec.stamp !== o.place.region) miss.wrongStamp = true;
         shipped.push(rec);
@@ -809,11 +851,14 @@ GW.ship = (function () {
       });
     });
   }
-  // The supplies the player has, by section (layer 1: the inside supplies and the region stamps).  side = which box
-  // takes it: 'outside' marks go on a closed box, 'inside' supplies in an open one.
+  // The supplies the player has, by section (layer 1: the inside supplies, the stickers, and the region stamps).
+  // side = which box takes it: 'outside' marks go on a closed box, 'inside' supplies in an open one.
   function supplies(sid) {
     if (sid === 'packing') return K.inside.map(function (sp) {
       return { kind: 'supply', side: 'inside', id: sp.id, name: sp.name, img: sp.img };
+    });
+    if (sid === 'stickers') return K.stickers.list.map(function (st) {
+      return { kind: 'sticker', side: 'outside', id: st.id, name: st.name, img: st.img };
     });
     if (sid === 'stamps') return K.stamps.map(function (rid) {
       return { kind: 'stamp', side: 'outside', id: rid, name: regionOf(rid).name, img: P.slip.stampImg.replace('{region}', rid) };
@@ -922,11 +967,12 @@ GW.ship = (function () {
       if (!fits(th)) shakeBox();
       else if (th.kind === 'item') fillBox(th.item);
       else if (th.kind === 'supply') addSupply(th.id);
+      else if (th.kind === 'sticker') addSticker(th.id);
       else stampBox(th.id);
     }
     endDrag();
   }
-  // An open box takes junk and inside supplies; a closed, unstamped box takes outside marks.
+  // An open box takes junk and inside supplies; a closed, unstamped box takes outside marks (stickers and stamps).
   function fits(th) { return th.side === 'inside' ? boxState === 'open' : boxState === 'closed'; }
   function startDrag(x, y) {
     drag.mode = 'drag';
@@ -1133,8 +1179,8 @@ GW.ship = (function () {
     // without scoring or saving, so screenshots can try the longest names.
     testCard: function (r) { if (built) showCard(r); },
     // What was packed, for the hand-off (1e): one entry per order, null until stamped.
-    packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, inside: r.inside.slice(), stamp: r.stamp }; }); },
-    // What is in the box on the bench (1i): its state, item, and inside supplies.
-    bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList() }; }
+    packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, inside: r.inside.slice(), outside: r.outside.slice(), stamp: r.stamp }; }); },
+    // What is in the box on the bench (1i): its state, item, inside supplies, and stickers (1j).
+    bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList(), outside: outsideList() }; }
   };
 })();
