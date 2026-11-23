@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.2, driver at the bench and phone scale (v0.1)
 
-**Status:** Done
+**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.1.  **Approved by:** Nathan, 2026-11-22 ("1b.2 approved").
 **Model:** Opus 5.5
 
@@ -87,3 +87,7 @@ Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.73*
 
 **Not done (per the order):** standing poses (Nathan's future option, logged in TASKS.md), anything from 1c on.
 
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 50a2218 and rendered it.  In both layouts the driver now stands beside the bench's right end with his forearm on its corner, so he reads as leaning on it.  The measured phone scale (truck 76%, driver 72% of draft.72) came out right next to Nathan's 75% guess.  Raising the chain so its handle clears the driver's cap was a sound call; the chain now runs off the top of the room as if from the ceiling.
