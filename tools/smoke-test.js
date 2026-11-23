@@ -100,6 +100,9 @@ async function packCheck(page, errors) {
   await page.waitForTimeout(300);
   await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 0; GW.CONFIG.shipping.fakes.elfChance = 0; });   // no glitter fakes or elves in these shifts
   await page.evaluate(n => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : n; }), SHELF);   // in the room, where counts hold still
+  await page.evaluate(() => { GW.game.s.lastShift = null; });
+  for (const k of ['card', 'log']) { const p = await mid('.ship-clip-' + k); await page.mouse.click(p.x, p.y); }
+  if (await page.evaluate(() => GW.ship.cardOpen() || GW.ship.logMode() !== null)) fail('a clipboard opened something before the first shift');
   const stonks0 = await page.evaluate(() => GW.game.s.stonks);
   const right = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.right);
   const wrong = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.wrong);
@@ -112,12 +115,16 @@ async function packCheck(page, errors) {
     return [pick('breakable'), pick('heavy'), pick('soft')];
   });
   await page.evaluate(t => GW.CONFIG.items.forEach(it => { if (!t.includes(it.id)) GW.game.s.items[it.id] = 0; }), trio);
+  // Shift 1's towns all get the work order's long name (1o), so the label's shrink is tried; shift 2 has the real ones.
+  const realNames = await page.evaluate(() => GW.DESTINATIONS.places.map(p => p.name));
+  await page.evaluate(() => GW.DESTINATIONS.places.forEach(p => { if (p.region === 'gnomerica') p.name = 'Grit Spit and Fellers'; }));
   for (let shift = 1; shift <= 2; shift++) {
     const tag = `shift ${shift}: `;
+    if (shift === 2) await page.evaluate(names => GW.DESTINATIONS.places.forEach((p, i) => { p.name = names[i]; }), realNames);
     if (shift === 2) await page.evaluate(([t, n]) => GW.CONFIG.items.forEach(it => { if (!t.includes(it.id) && it.group !== 'monsters') GW.game.s.items[it.id] = n; }), [trio, SHELF]);
     c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
     await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
-    const orders = await page.evaluate(() => GW.ship.orders().map(o => ({ id: o.item.id, qty: o.qty, pack: o.item.pack || '' })));
+    const orders = await page.evaluate(() => GW.ship.orders().map(o => ({ id: o.item.id, qty: o.qty, pack: o.item.pack || '', town: o.place.name })));
     const shelf = await page.evaluate(() => JSON.stringify(GW.game.s.items));
     const before = await page.evaluate(() => Object.assign({}, GW.game.s.items));
     if (orders.length !== 3) fail(tag + `only ${orders.length} orders from an ordinary shelf`);
@@ -200,6 +207,13 @@ async function packCheck(page, errors) {
       await page.mouse.click(b.x, b.y);                                     // close the box
       if (await page.evaluate(() => GW.ship.boxState()) !== 'closed') { fail('the filled box did not close'); return; }
       if (await page.$$eval('.ship-box:not(.is-stacked) .box-in:not([hidden]), .ship-box:not(.is-stacked) .box-label:not([hidden])', p => p.length)) fail('a closed box shows what is inside');
+      // The shipping label (1o): on as the box closes, with the order's town, region, and "via GRIP".
+      const addr = await page.evaluate(() => { const a = document.querySelector('.ship-box:not(.is-stacked) .box-addr'); return getComputedStyle(a).visibility + '|' + [...a.querySelectorAll('.addr-line')].map(l => l.textContent).join('|'); });
+      if (addr !== 'visible|' + o.town + '|Gnomerica|via GRIP') fail(tag + 'the closed box\'s label reads "' + addr + '", expected ' + o.town);
+      const fit = await page.evaluate(() => { const l = document.querySelector('.ship-box:not(.is-stacked) .addr-town'); return [l.scrollWidth <= l.clientWidth, parseFloat(l.style.fontSize)]; });
+      const full = await page.evaluate(() => GW.CONFIG.shipping.pack.addr.font[0]);
+      if (!fit[0]) fail(tag + `the town "${o.town}" overflows its label line`);
+      if (shift === 1 && !(fit[1] < full)) fail('"Grit Spit and Fellers" did not shrink on the label (' + fit[1] + 'cqw)');
       if (shift === 1 && o === orders[0]) {                                // junk and peanuts on a closed box only shake it
         const was = await page.evaluate(() => JSON.stringify(GW.ship.bench()));
         c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
@@ -252,6 +266,7 @@ async function packCheck(page, errors) {
         // driver springs back.
         c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
         if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.bench().stamp + ':' + document.querySelector('.ship-box:not(.is-stacked) .box-mark').hidden) !== 'open:gnomerica:true') fail('a tap did not reopen the stamped box');
+        if (await page.evaluate(() => getComputedStyle(document.querySelector('.ship-box:not(.is-stacked) .box-addr')).visibility) !== 'hidden') fail('the label showed on an open box');
         if (await shown('.ship-hand-tag')) fail('the driver tip showed beside an open box');
         const at = await page.locator('.ship-box:not(.is-stacked)').boundingBox();
         await hand();
@@ -270,10 +285,34 @@ async function packCheck(page, errors) {
         if (await page.evaluate(() => GW.ship.boxState() + ':' + GW.ship.packed().filter(Boolean).length) !== 'closed:0') fail('a closed box dropped away from the driver was taken');
       }
       const n0 = await page.evaluate(() => GW.ship.packed().filter(Boolean).length);
+      const watch = shift === 1 && o === orders[0];
+      if (watch) await page.evaluate(() => {             // the drop's path (1o), sampled every frame for 1.2 s
+        window.__drop = []; const t1 = performance.now() + 1200;
+        (function f() { const b = document.querySelector('.ship-box.is-stacked'); if (b) { const r = b.getBoundingClientRect(); window.__drop.push([r.left + r.width / 2, r.bottom]); } if (performance.now() < t1) requestAnimationFrame(f); })();
+      });
       await hand();
       try { await page.waitForFunction(n => GW.ship.packed().filter(Boolean).length === n + 1, n0, { timeout: 2000 }); } catch (e) { fail(tag + 'a closed box dropped on the driver was not handed over'); }
-      await page.waitForTimeout(700);
+      await page.waitForTimeout(watch ? 1300 : 700);
+      if (watch) {
+        // One smooth arc: x never turns back, y turns at most once (up, then down), it ends on its stack spot, and
+        // nothing is still moving.  The settle squashes the box's picture, never its place.
+        const d = await page.evaluate(() => {
+          const el = document.querySelector('.ship-box.is-stacked'), S = GW.CONFIG.shipping.layouts[matchMedia(GW.CONFIG.shipping.tallQuery).matches ? 'tall' : 'wide'].stack;
+          const wh = GW.CONFIG.shipping.layouts[matchMedia(GW.CONFIG.shipping.tallQuery).matches ? 'tall' : 'wide'].aspect.split('/'), sp = S.spots[0];
+          const x = S.x + sp[0] * S.h / (parseFloat(wh[0]) / parseFloat(wh[1]));
+          return { pts: window.__drop, left: parseFloat(el.style.left), top: parseFloat(el.style.top), x, y: S.y + sp[1] * S.h, moving: el.getAnimations({ subtree: true }).length };
+        });
+        const turns = k => { let n = 0, dir = 0; for (let i = 1; i < d.pts.length; i++) { const v = d.pts[i][k] - d.pts[i - 1][k]; if (Math.abs(v) < 0.3) continue; const sg = Math.sign(v); if (dir && sg !== dir) n++; dir = sg; } return n; };
+        if (d.pts.length < 10) fail('the drop was not seen (' + d.pts.length + ' frames)');
+        if (turns(0) > 0 || turns(1) > 1) fail(`the drop wiggles: x turns ${turns(0)} times, y ${turns(1)}`);
+        if (Math.abs(d.left - d.x) > 0.01 || Math.abs(d.top - d.y) > 0.01) fail(`the drop ended at ${d.left}, ${d.top}, not its stack spot ${d.x}, ${d.y}`);
+        if (d.moving) fail('the box was still moving after the drop');
+        const last = d.pts[d.pts.length - 1], still = await page.evaluate(() => { const r = document.querySelector('.ship-box.is-stacked').getBoundingClientRect(); return [r.left + r.width / 2, r.bottom]; });
+        if (Math.abs(still[0] - last[0]) > 0.5 || Math.abs(still[1] - last[1]) > 0.5) fail('the stacked box moved after the drop ended');
+      }
     }
+    const towns = await page.$$eval('.ship-box.is-stacked .addr-town', t => t.map(x => x.textContent + ':' + getComputedStyle(x.closest('.box-addr')).visibility));
+    if (towns.join() !== orders.map(o => o.town + ':visible').join()) fail(tag + 'the stacked boxes\' labels read ' + towns.join());
     const rec = await page.evaluate(() => GW.ship.packed());
     const inside = o => shift === 2 ? '' : o.pack === 'breakable' ? 'peanuts,bubble' : 'peanuts';
     const outside = o => shift === 2 ? '' : o.pack === 'breakable' ? 'fragile' : o.pack === 'heavy' ? 'heavy' : '';
@@ -302,6 +341,7 @@ async function packCheck(page, errors) {
     if (orders.some((o, i) => !items[i] || !items[i].startsWith(o.qty + ' × '))) fail(tag + 'a report card row does not show its count: ' + items.join(' | '));
     await page.keyboard.press('Escape');
     if (await page.evaluate(() => GW.ship.cardOpen())) fail('Escape did not close the report card');
+    if (shift === 1) await clipCheck(page, fail, orders);
     await page.waitForTimeout(1200);
     if (await page.textContent('.stonks-num') !== String(want)) fail(tag + 'the STONKS screen did not move to ' + want);
     shipped.push(orders.map(o => o.qty + ' ' + o.id).join(', '));
@@ -341,14 +381,25 @@ async function packCheck(page, errors) {
   const notApproved = await page.evaluate(() => GW.CONFIG.shipping.score.notApproved.ours);   // the small shift went off unstamped (1m)
   const want = stonks0 + 3 * right - 3 * wrong + notApproved - wrong;
   await page.waitForTimeout(400);
+  const kept = await page.evaluate(() => JSON.stringify(GW.game.s.lastShift));
+  const shownLog = await openLogRow(page, 0);
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
   await page.reload();
   await page.waitForTimeout(400);
+  if (await page.evaluate(() => JSON.stringify(GW.game.s.lastShift)) !== kept) fail('the last shift was not saved as it was');
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  if (await openLogRow(page, 0) !== shownLog || !shownLog) fail('the log read differently after a reload');
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+  await page.click('[data-view="machine"]');
+  await page.waitForTimeout(300);
   if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.stonksHistory.length) !== want + ',4') fail('Stonks were not saved');
   if (await page.evaluate(() => GW.game.s.tnpHistory.length + ',' + GW.game.s.shifts) !== '4,4') fail('the TNP history or the shift count was not saved');
   // A save from before 1l loads with TNP at 0 and its shifts counted from its history.
-  await page.evaluate(() => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); delete o.tnp; delete o.tnpHistory; delete o.shifts;
+  await page.evaluate(() => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); delete o.tnp; delete o.tnpHistory; delete o.shifts; delete o.lastShift;
     GW.state.save = () => false; localStorage.setItem(k, JSON.stringify(o)); location.reload(); });
   await page.waitForTimeout(600);
+  if (await page.evaluate(() => GW.game.s.lastShift) !== null) fail('a pre-1o save did not load with lastShift null');
   if (await page.evaluate(() => GW.game.s.tnp + ',' + JSON.stringify(GW.game.s.tnpHistory) + ',' + GW.game.s.shifts) !== '0,[],4') fail('a pre-1l save did not load with TNP 0 and 4 shifts: ' + await page.evaluate(() => GW.game.s.tnp + ',' + JSON.stringify(GW.game.s.tnpHistory) + ',' + GW.game.s.shifts));
   // An old save with no Stonks loads at 0.
   await page.evaluate(() => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); delete o.stonks; delete o.stonksHistory;
@@ -357,6 +408,74 @@ async function packCheck(page, errors) {
   await page.waitForTimeout(400);
   if (await page.evaluate(() => GW.game.s.stonks + ',' + JSON.stringify(GW.game.s.stonksHistory)) !== '0,[]') fail('an old save did not load with Stonks at 0');
   console.log(`packing: two shifts (a Breakable, a Heavy, and a Soft, then an ordinary shelf of ${SHELF} each) (${shipped.join('; ')}), then 2 tp from 3, then a Toilet with no HEAVY; Stonks ${want}`);
+}
+
+// The shipping log (1o): the end line a saved row's log must finish with (docs/lore/shipping-log-v0.1.md).
+function logEndOk(L, x, tnp) {
+  const last = x.log[x.log.length - 1][1], fill = t => t.split('{town}').join(x.town);
+  if (tnp) return last === L.tnp.end;
+  if (x.ok) return L.end.right.map(fill).includes(last);
+  return last === fill(x.why.includes('Wrong item') ? L.end.item : x.why.includes('No stamp') ? L.end.noStamp : L.end.other);
+}
+// Every saved log: starts with the start line at 08:00, ends with its result's end line, has 7 to 9 lines with times
+// that climb, and every middle line is a road or packing line from the config.  Returns a problem or ''.
+async function logProblem(page, tnp) {
+  return page.evaluate(([tnp, endSrc]) => {
+    const logEndOk = eval('(' + endSrc + ')'), L = GW.CONFIG.shipping.log, S = GW.game.s.lastShift;
+    if (!S) return 'no lastShift saved';
+    for (const x of S.rows) {
+      if (!x.log) continue;
+      const f = t => t.split('{town}').join(x.town).split('{count}').join(String(x.qty)).split('{item}').join((GW.econ.itemDef(x.item) || {}).name);
+      const mids = new Set((tnp ? L.tnp.road : L.road[x.region].concat(L.road.any)).concat(L.packing.map(p => f(p.text))));
+      if (x.log[0][0] !== '08:00' || x.log[0][1] !== L.start) return x.town + ': does not start with the start line';
+      if (!logEndOk(L, x, tnp)) return x.town + ': ends with "' + x.log[x.log.length - 1][1] + '"';
+      if (x.log.length < 7 || x.log.length > 9) return x.town + ': ' + x.log.length + ' lines';
+      if (x.log.some((e, k) => k && e[0] <= x.log[k - 1][0])) return x.town + ': the times do not climb';
+      const bad = x.log.slice(1, -1).filter(e => !mids.has(e[1]));
+      if (bad.length) return x.town + ': a line not from the config: ' + bad[0][1];
+    }
+    return '';
+  }, [tnp, logEndOk.toString()]);
+}
+
+// After a shift (1o): the left clipboard reopens the report card (same rows, nothing scored), the right one opens the
+// Shipping Log with one row per shipped box, a tap opens a box's log, and Escape steps back, then closes.
+async function clipCheck(page, fail, orders) {
+  const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  const s0 = await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.shifts);
+  let c = await mid('.ship-clip-card'); await page.mouse.click(c.x, c.y);
+  if (!await page.evaluate(() => GW.ship.cardOpen())) { fail('the Report Card clipboard did not open the card'); return; }
+  const towns = await page.$$eval('.ship-card .card-town', t => t.map(x => x.textContent));
+  if (towns.join() !== orders.map(o => o.town).join()) fail('the reopened card reads ' + towns.join());
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.shifts) !== s0) fail('reopening the card scored again');
+  c = await mid('.ship-clip-log'); await page.mouse.click(c.x, c.y);
+  if (await page.evaluate(() => GW.ship.logMode()) !== 'list') { fail('the Log clipboard did not open the Shipping Log'); return; }
+  const rows = await page.$$eval('.ship-log .log-row .log-town', t => t.map(x => x.textContent));
+  if (rows.join() !== orders.map(o => o.town).join()) fail('the Shipping Log lists ' + rows.join());
+  c = await mid('.ship-log .log-row'); await page.mouse.click(c.x, c.y);
+  if (await page.evaluate(() => GW.ship.logMode()) !== 0) fail('a tap on a row did not open its log');
+  const lines = await page.$$eval('.ship-log .log-entry', e => e.map(x => x.textContent));
+  const saved = await page.evaluate(() => GW.game.s.lastShift.rows[0].log.map(e => e[0] + e[1]));
+  if (lines.join('|') !== saved.join('|')) fail('the box\'s page does not show its saved log');
+  const p = await logProblem(page, false);
+  if (p) fail('log: ' + p);
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.ship.logMode()) !== 'list') fail('Escape did not step back to the list');
+  c = await mid('.ship-log .log-row'); await page.mouse.click(c.x, c.y);
+  const v = await page.locator('.ship-log-view').boundingBox();
+  await page.mouse.click(v.x + 6, v.y + 6);                             // a tap anywhere on the room steps back too
+  if (await page.evaluate(() => GW.ship.logMode()) !== 'list') fail('a tap did not step back to the list');
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.ship.logMode()) !== null) fail('Escape did not close the Shipping Log');
+}
+// Opens the Shipping Log from its clipboard and row k's log; returns the page's lines ('' if it did not open).
+async function openLogRow(page, k) {
+  const mid = async loc => { const b = await loc.boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  let c = await mid(page.locator('.ship-clip-log')); await page.mouse.click(c.x, c.y);
+  if (!await page.$('.ship-log .log-row')) return '';
+  c = await mid(page.locator('.ship-log .log-row').nth(k)); await page.mouse.click(c.x, c.y);
+  return (await page.$$eval('.ship-log .log-entry', e => e.map(x => x.textContent))).join('|');
 }
 
 // Drags the box on the bench onto the driver with the mouse and lets go (1n).
@@ -522,6 +641,18 @@ async function elfCheck(page, errors, name) {
   if (card[0] !== 'x:' + Sc.reasons.shippedTnp || card.slice(1).some(r => r !== 'ok:' + Sc.kept)) fail('the filled card reads ' + card.join(' | '));
   if (s2.stonks !== s1.stonks + Sc.elf.shipped.ours || s2.tnp !== s1.tnp + Sc.elf.shipped.tnp) fail(`filled: ${JSON.stringify(s1)} -> ${JSON.stringify(s2)}`);
   if (await page.evaluate(i => GW.game.s.items[i], id) !== n0 - qty) fail('the shelf did not drop for the box shipped to TNP');
+  // The elf's box has a TNP log (1o): only it has one (the kept orders have none), built from TNP's lines.
+  const tnpLogs = await page.evaluate(() => GW.game.s.lastShift.rows.map(x => !!x.log).join());
+  if (tnpLogs !== ['true'].concat(card.slice(1).map(() => 'false')).join()) fail('the TNP shift\'s logs: ' + tnpLogs);
+  const tp = await logProblem(page, true);
+  if (tp) fail('TNP log: ' + tp);
+  if (name === 'desktop' || name === 'phone') {
+    const lines = await openLogRow(page, 0);
+    if (!lines.endsWith(await page.evaluate(() => GW.CONFIG.shipping.log.tnp.end))) fail('the TNP box\'s page does not end with the North Pole: ' + lines);
+    if (process.env.SHOTS) await page.screenshot({ path: path.join(OUT, `1o-${name === 'desktop' ? 'wide' : 'tall'}-day-log-tnp.png`) });
+    await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+    if (await page.evaluate(() => GW.ship.logMode()) !== null) fail('the TNP log did not close');
+  }
   // 3: GRIP's, sent away unstamped (glitter off again: the elf's boards had none at a 100% chance).
   await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 0; });
   await arrive();

@@ -32,6 +32,7 @@ GW.state = (function () {
       tnpHistory: [],       // TNP at the end of each recent shift, oldest first, like stonksHistory
       shifts: 0,            // completed hand-offs (scored shifts); glitter fakes start from CONFIG.shipping.fakes.startShift
       tnpRow: 0,            // TNP trips in a row (1m), never more than CONFIG.shipping.fakes.maxTnpInRow
+      lastShift: null,      // the last scored shift (1o): its report card rows and each shipped box's log, for the clipboards; null before the first
       mega: { owned: false, food: 0, nextHunt: 0, hunts: 0, kills: 0, bossKills: 0, trophyPity: 0, eaten: 0 },
       stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }
     };

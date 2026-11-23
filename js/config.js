@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.94';
+GW.VERSION = '0.2.0-draft.95';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -168,7 +168,11 @@ GW.CONFIG = {
         // handTag = the "Hand it to the driver!" tag (1n), above the driver's head: [x of its center, y of its center,
         // width].
         handTag: [85.5, 41.5, 14],
-        stonks: [54.2, 18.6, 18.2, 13.6]
+        stonks: [54.2, 18.6, 18.2, 13.6],
+        // clips = the two clipboards painted under STONKS (1o), tap areas [x, y, w, h] in % of the room, measured from
+        // the Day room (left x 868 to 1005, right 1036 to 1173, both y 331 to 499 of 1600 x 901): card = the left one
+        // (the last report card), log = the right one (the Shipping Log).
+        clips: { card: [54.2, 36.7, 8.6, 18.7], log: [64.75, 36.7, 8.55, 18.7] }
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
@@ -208,7 +212,10 @@ GW.CONFIG = {
         // Hand-off (1e), as in the wide room.  stonks: the glass runs x 282 to 630, y 414 to 571 of 900 x 1599.
         finishTag: [93.2, 60.5, 19],
         handTag: [79, 58.5, 34],
-        stonks: [32.6, 26.6, 36.2, 8.5]
+        stonks: [32.6, 26.6, 36.2, 8.5],
+        // The clipboards (1o): left x 311 to 454, right 487 to 631, both y 789 to 963 of 900 x 1599.  The parked truck
+        // covers the right one's right edge; a tap on the part that shows opens it.
+        clips: { card: [34.6, 49.3, 15.8, 10.9], log: [54.1, 49.3, 16.0, 10.9] }
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
@@ -430,6 +437,28 @@ GW.CONFIG = {
       // the stamp (10% of the box's width, straight) sits 4.5% of the box's width in from the face's top and right.
       label: [48, 69, 62],
       mark: [77.2, 36.4, 7.25, 0],
+      // The shipping label (1o): the approved address label (07) goes on every box as it closes (the printer prints
+      // it; no drag) and shows whenever the box is closed (on the bench, in the hand, on the stack), drawn above the
+      // box and below the stickers and the stamp.  place = [x center, y center, width] in % of the box's square
+      // canvas, from the box face mock v0.3 (tools/mocks/box_face_mock.py: the label is 50% of the box's width,
+      // centered across the box and 56% down it): the box art runs x 55 to 345 and y 53 to 346 of 400 x 400, so its
+      // center is 200 px (50%), 53 + 0.56 x 293 = 217.1 px (54.3%), and its width 145 px (36.25%).  The game copy
+      // is cropped tight like the mock's, so the mock's fractions hold.  Its three ruled lines carry live text in
+      // --font: the town, the region, and `via`.  lines = each line's y in % of the label's height (measured on the
+      // game copy: 40.0, 54.9, 70.7), the text's bottom sitting on it; left and right = where the text may run, in %
+      // of the label's width (the lines run 29.2 to 92.5; the mock starts the text at 31).  font = each line's size
+      // in cqw of the label's width (the mock's 16%, 10%, and 8.5% of the label's height); a town too long for its
+      // line shrinks to fit, never below `min` (same unit).
+      addr: {
+        img: 'assets/packing/address_label.webp',
+        place: [50, 54.3, 36.25],
+        lines: [40.0, 54.9, 70.7],
+        left: 31,
+        right: 91.5,
+        font: [8.6, 5.4, 4.6],
+        min: 3.6,
+        via: 'via GRIP'
+      },
       // The item menu's frame: the approved supply drawer (05a), drawn as a nine-slice so the brass corners keep
       // their shape, the wood sides stretch, and the parchment fills the middle.  slice = the corner size in the
       // game copy's pixels (512 x 768; 62 = 124 in the 1024 x 1536 master, the brass corner and the parchment's
@@ -443,10 +472,14 @@ GW.CONFIG = {
       dropPad: 12,
       stampMs: 260,         // the stamp coming down
       thumpMs: 220,         // the box's little jolt as it lands
-      slideMs: 650,         // the box sliding from the driver to the stack
       // Handing the box to the driver (1n): a closed box dragged onto him (his picture's outline grown by padX % of
       // its width and padY % of its height on each side) goes to the stack; anywhere else it springs back over backMs.
-      hand: { padX: 25, padY: 8, backMs: 320 },
+      // drop (1o): the driver sets it on the stack in one eased arc over `ms`: it rises `rise` of the box's height
+      // (%) at the top of the arc, then comes down, growing or shrinking to its stack size and turning to its tilt on
+      // the way.  It lands with one small settle (`settleMs`, squashing `settle` % of its height) and the thump, and
+      // stops.  Reduced motion: a straight slide over `calmMs`, no settle.  `frames` = how many points draw the arc.
+      hand: { padX: 25, padY: 8, backMs: 320,
+        drop: { ms: 560, rise: 22, settleMs: 200, settle: 3.5, calmMs: 300, frames: 32 } },
       nextMs: 300           // the next order's box appearing
     },
     // Scoring a hand-off (1e).  Each order with the ordered item, the right supplies inside (1i: packing peanuts in
@@ -520,6 +553,95 @@ GW.CONFIG = {
       // The bottom line (1l, draft wording): {ours} and {tnp} = each line's change this shift ("+5", "−3", "0").
       totalText: 'Stonks this shift: {ours}   TNP: {tnp}',
       fitSlack: 0.97        // shrink to this share of the exact fit, so rounding never leaves a sliver cut off
+    },
+    // The clipboards under STONKS (1o): the left one opens the last shift's report card again (nothing is scored),
+    // the right one the Shipping Log.  Before the first shift neither does anything.  The last shift's rows and logs
+    // are saved (the save's lastShift; only the last shift, so the save stays small).
+    // The Shipping Log: the blank parchment from the work order (06, approved as the log page, checklist 36) with live
+    // text, sized like an open slip (`openSize` % of the room, `aspect` the paper's width / height).  It lists each
+    // box shipped last shift (town, count and item, its ✔ or ✘); a tap on one opens its log.  A tap or Escape steps
+    // back, then closes.  title = the list's heading; empty = the list's line when no box shipped (draft wording,
+    // Claude Code).  font = the page's text size in cqw of its width, shrunk to fit the page, never below fontMin.
+    // Each box's log is made once, at the hand-off, and saved, so reopening shows the same lines.
+    log: {
+      title: 'Shipping Log',
+      empty: 'No boxes shipped last shift.',
+      aspect: 566 / 800,
+      openSize: 92,
+      font: 4.6,
+      fontMin: 2.6,
+      // How a log is built (docs/lore/shipping-log-v0.1.md, approved by Nathan 2026-11-23; copied exactly, change
+      // them there first): the start line, then `roadCount` (min, max) road lines from the region's and the general
+      // lines (no repeats), then `packCount` (min, max) packing lines whose condition is true, shuffled together,
+      // then the end line for the box's result.  Times start at `startMin` (minutes after midnight, 08:00) and step
+      // `stepMin` (min, max) minutes per line, rounded to `stepRound`.  {town} = the order's town, {item} its item,
+      // {count} its count.  An elf's box (TNP) swaps the road lines for `tnp.road` and always ends with `tnp.end`.
+      // A packed fake (Approved a fake) ships on GRIP's truck, so it gets a GRIP log ending with `end.other`.
+      roadCount: [4, 5],
+      packCount: [1, 2],
+      startMin: 480,
+      stepMin: [10, 50],
+      stepRound: 5,
+      start: 'Loaded onto the truck at the Gnomeworks dock.',
+      road: {
+        gnomerica: [
+          'Rolled down the Brass Road.  The brass roofs were extra shiny today.',
+          'Stopped for the old public clock.  It said lunch time.  It always says lunch time.',
+          'Crossed the Central Rail.  A train waved.  The driver waved back.',
+          'A Smog Ant marched across the road.  Everyone waited politely.',
+          'A Barking Mimic pretended to be a mailbox.  Nobody fell for it this time.',
+          'A Hootgear rode on the truck roof for three miles.',
+          'A Cogsnake curled up in the spare tire.  It got a free ride.',
+          'Picked a Pebblem out of a wheel.  It looked a little sad about it.',
+          'The Great Lunch Whistle blew.  The driver ate a sandwich.',
+          'Drove past Gnomish Farms.  It smelled like breakfast.',
+          'Got stuck in Cogbottom behind a parade of gears.',
+          'A lamia engineer waved from the top of a steam pipe.',
+          'A goblin bookkeeper counted the boxes twice.  Same number both times!',
+          'The road went downhill.  Then it went downhill again.  The workers say it always does.',
+          'Brassleaf oaks lined the road.  Their leaves jingled in the wind.'
+        ],
+        any: [
+          'Flat tire!  Fixed in four minutes.  A new record.',
+          'Took a shortcut.  It was longer.  Shortcuts usually are.',
+          'Rain.  The driver turned on the wipers and hummed.',
+          'Stopped for gas.  And a snack.  Mostly the snack.',
+          'A goat stood in the road.  The goat won.',
+          'The radio played the same song four times.  The driver sang along all four times.'
+        ]
+      },
+      // Packing lines, each used only when its `when` is true for the box: peanuts / noPeanuts (in the box or not),
+      // bubble (bubble wrap in it), fragile / heavy (the sticker on it), heavyBare (a Heavy item with no HEAVY
+      // sticker), soft (a Soft item), many (the order's count is `manyAt` or more).
+      manyAt: 100,
+      packing: [
+        { when: 'peanuts', text: 'Hit a big bump.  The packing peanuts kept everything snug.' },
+        { when: 'noPeanuts', text: 'Hit a big bump.  Something inside went CLUNK.' },
+        { when: 'bubble', text: 'The driver heard a tiny pop.  Just the bubble wrap.  Phew.' },
+        { when: 'fragile', text: 'The driver saw the FRAGILE sticker and drove extra slow.' },
+        { when: 'heavy', text: 'Two gnomes lifted the HEAVY box together.  Teamwork!' },
+        { when: 'heavyBare', text: 'Someone tried to lift the box with one hand.  Ouch.' },
+        { when: 'soft', text: 'The box was very squishy.  The driver used it as a pillow at a red light.' },
+        { when: 'many', text: '{count} of them?  {town} must really need {item}.' }
+      ],
+      // End lines by the box's result: right (one of the two, at random), item (Wrong item), noStamp (No stamp), and
+      // other (any other miss).
+      end: {
+        right: ['Delivered to {town}.  They said thank you!', 'Delivered to {town}.  A kid there did a happy dance.'],
+        item: 'Delivered to {town}.  They opened it and looked very confused.',
+        noStamp: '{town}\'s post office sent it back to check the stamp.  It got there late.',
+        other: 'Delivered to {town}.  A little bumped, but it got there.'
+      },
+      tnp: {
+        road: [
+          'The truck turned north.  Gnomerica is not north.',
+          'The driver\'s beard fell off at a stop sign.  He put it back on.',
+          'Jingle bells were heard from the truck.',
+          'Someone in the truck kept humming a holiday song.  Very suspicious.',
+          'Last seen heading somewhere with a lot of snow.'
+        ],
+        end: 'Delivered to... the North Pole?  Uh oh.'
+      }
     },
     // The STONKS screen: two lines of the last `history` shift totals, GRIP (our Stonks, `color`) and TNP (`tnp`,
     // in TNP red from its logo, 1l), each labeled with its number, on one shared scale.  Both move when the report

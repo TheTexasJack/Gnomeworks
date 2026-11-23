@@ -49,7 +49,11 @@
    hit.
    Hand it to the driver (1n): the stamp is only a mark, so marks go on in any order and the box stays on the bench.
    A closed box dragged onto the driver (his outline, padded) goes to the stack at his feet and the next order's box
-   comes out; dropped anywhere else, or open, it springs back.  A tag near the driver and a glow on him say so. */
+   comes out; dropped anywhere else, or open, it springs back.  A tag near the driver and a glow on him say so.
+   The label, the drop, and the log (1o): every closed box wears its shipping label (the town, the region, and "via
+   GRIP") in the middle of its face.  The driver sets a handed-over box on the stack in one eased arc with one small
+   settle.  The two clipboards under STONKS open the last shift's report card again and the Shipping Log, a page per
+   shipped box with its log, made once at the hand-off and saved with the card's rows (the save's lastShift). */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -73,6 +77,8 @@ GW.ship = (function () {
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, warnHeard = null, afterCard = null;
   var tnpTrip = false;            // this trip is TNP's: the elf in his fake truck (1m)
   var boxStamp = null, boxDrag = null, handTag;
+  var clips = {}, logView, logMode = null;
+  // clips = the clipboards' tap areas (1o); logMode = what the Shipping Log shows: null (closed), 'list', or a row's index
   // boxStamp = the region stamp on the bench box, or null (1n: a mark like the stickers); boxDrag = the box being
   // pressed or dragged; handTag = the "Hand it to the driver!" tag
 
@@ -98,6 +104,10 @@ GW.ship = (function () {
     // The order board sits on the back wall, so the truck and the driver draw in front of it.
     board = U.el('div', 'ship-board');
     box.appendChild(board);
+    // The clipboards under STONKS (1o): the left one reopens the last report card, the right one the Shipping Log.
+    // They sit under the truck, the driver, and the box, so those keep their taps.
+    clips.card = clipButton('card', openLastCard);
+    clips.log = clipButton('log', function () { openLog(); });
     buildScreen();
     // The bay is clipped to the doorway, so the truck only shows through the opening, behind the frame.
     bay = U.el('div', 'ship-bay');
@@ -171,6 +181,16 @@ GW.ship = (function () {
       closeCard();
     });
     box.appendChild(cardView);
+    // The Shipping Log (1o) covers the room the same way.  A tap on a box's row opens its log; any other tap (or
+    // Escape) steps back, then closes.
+    logView = U.el('div', 'ship-log-view');
+    logView.hidden = true;
+    logView.addEventListener('pointerdown', function (e) {
+      e.stopPropagation(); e.preventDefault();
+      var row = logMode === 'list' && e.target.closest('.log-row');
+      if (row) showLogBox(+row.dataset.row); else logBack();
+    });
+    box.appendChild(logView);
     buildWarn();
     box.style.setProperty('--slip-night', P.slip.nightBrightness);
     box.style.setProperty('--tip-pulse', P.tips.pulseMs + 'ms');
@@ -178,6 +198,7 @@ GW.ship = (function () {
       if (e.key !== 'Escape') return;
       if (warnOpen) { e.preventDefault(); closeWarn(); }
       else if (cardOpen) { e.preventDefault(); closeCard(); }
+      else if (logMode !== null) { e.preventDefault(); logBack(); }
       else if (slipOpen) { e.preventDefault(); closeSlip(); } else if (menuKind) { e.preventDefault(); closeMenu(); }
     });
     // A tap outside the open menu closes it.  Inside the room that tap does nothing else.
@@ -392,6 +413,10 @@ GW.ship = (function () {
     var Cd = P.card, cw = Math.min(Cd.openSize * Cd.aspect / ratio, Cd.openSize);
     cardView.style.setProperty('--card-w', cw + '%');
     cardView.style.setProperty('--card-h', (cw * ratio / Cd.aspect) + '%');
+    var Lg = P.log, lw = Math.min(Lg.openSize * Lg.aspect / ratio, Lg.openSize);
+    logView.style.setProperty('--log-w', lw + '%');
+    logView.style.setProperty('--log-h', (lw * ratio / Lg.aspect) + '%');
+    if (logMode !== null) fitLog();
   }
   // i = the order to open full size, or -1 for the note.  An order's slip has the two stamp buttons under it (1l).
   function openSlip(i) {
@@ -515,6 +540,19 @@ GW.ship = (function () {
       body.appendChild(pic);
     });
     body.appendChild(label);
+    // The shipping label (1o), above the box and below the stickers and the stamp: shown while the box is closed (css).
+    var A = K.addr, addr = div('box-addr');
+    addr.appendChild(img('addr-paper', A.img));
+    ['town', 'region', 'via'].forEach(function (k, n) {
+      var line = div('addr-line addr-' + k);
+      line.dataset.n = n;
+      line.style.bottom = (100 - A.lines[n]) + '%';
+      line.style.left = A.left + '%'; line.style.width = (A.right - A.left) + '%';
+      line.style.fontSize = A.font[n] + 'cqw';
+      addr.appendChild(line);
+    });
+    addr.style.left = A.place[0] + '%'; addr.style.top = A.place[1] + '%'; addr.style.width = A.place[2] + '%';
+    body.appendChild(addr);
     // The outside stickers (1j), placed in their slots by showBox.
     var St = K.stickers;
     St.list.forEach(function (st) {
@@ -563,7 +601,31 @@ GW.ship = (function () {
     if (boxStamp) mark.src = P.slip.stampImg.replace('{region}', boxStamp);
     mark.hidden = !closed || !boxStamp;
     boxEl.classList.toggle('is-stamped', closed && !!boxStamp);
+    addrText(boxEl, orders[boxFor]);
     updateReady();
+  }
+  // The shipping label's three lines for order o (1o): the town, the region, and "via GRIP".  A line too long for
+  // the label shrinks its own text to fit (sizes in cqw of the label, so the fit holds as the box grows or shrinks).
+  function addrText(el, o) {
+    var A = K.addr, lines = el.querySelectorAll('.addr-line');
+    if (!o) return;
+    var words = [o.place.name, regionOf(o.place.region).name, A.via];
+    if (el.dataset.addr === words.join('|')) return;
+    el.dataset.addr = words.join('|');
+    Array.prototype.forEach.call(lines, function (line, n) { line.textContent = words[n]; });
+    el.querySelector('.box-addr').setAttribute('aria-label', words.join(', '));
+    fitAddr(el);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitAddr(el); });
+  }
+  function fitAddr(el) {
+    var A = K.addr;
+    Array.prototype.forEach.call(el.querySelectorAll('.addr-line'), function (line) {
+      var size = A.font[+line.dataset.n];
+      line.style.fontSize = size + 'cqw';
+      var need = line.scrollWidth, room = line.clientWidth;
+      if (need > room && room > 0) size = Math.max(A.min, size * room / need * P.card.fitSlack);
+      line.style.fontSize = size + 'cqw';
+    });
   }
   function resetPack() {
     endBoxDrag(false);
@@ -726,8 +788,8 @@ GW.ship = (function () {
   // (1i), the stickers (1j), and the stamp, or null), and he puts the box on the ground: it slides from where it was
   // dropped to its spot in the stack.  The next APPROVED order's box comes out.
   function handOver() {
-    var d = boxDrag, el = boxEl, i = boxFor, calm = calmQuery.matches;
-    var from = { left: el.style.left, top: el.style.top, height: el.style.height, translate: d.dx + 'px ' + d.dy + 'px' };
+    var d = boxDrag, el = boxEl, i = boxFor, r = box.getBoundingClientRect();
+    var from = { x: parseFloat(el.style.left) + d.dx / r.width * 100, y: parseFloat(el.style.top) + d.dy / r.height * 100, h: parseFloat(el.style.height), tilt: 0 };
     endBoxDrag(false);
     packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: boxStamp };
     var L = layout(), spot = stackSpot(L, stacked.length);
@@ -735,11 +797,28 @@ GW.ship = (function () {
     el.classList.add('is-stacked');
     stacked.push(el);
     boxEl = null; boxFor = -1; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {}; boxStamp = null;
-    GW.sfx.thump();
-    if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%', translate: '0px 0px' }], { duration: K.slideMs, easing: 'ease-in-out' });
+    dropBox(el, from, spot);
     showBoard();
     nextBox();
     updateReady();
+  }
+  // The driver sets the box on the stack (1o): one eased arc from where it was dropped (a short rise, then down), its
+  // size and tilt changing on the way, then one small settle and the thump, and it stops.  The arc is drawn as many
+  // points on one linear animation, so nothing eases twice.  Reduced motion: a straight slide, the thump, no settle.
+  function dropBox(el, from, to) {
+    var Dp = K.hand.drop, calm = calmQuery.matches, frames = [], n = calm ? 1 : Dp.frames, rise = calm ? 0 : from.h * Dp.rise / 100;
+    for (var k = 0; k <= n; k++) {
+      var t = k / n, e = calm ? t : 0.5 - Math.cos(Math.PI * t) / 2;     // ease in and out
+      frames.push({ left: (from.x + (to.x - from.x) * e) + '%', top: (from.y + (to.y - from.y) * e - rise * Math.sin(Math.PI * e)) + '%',
+        height: (from.h + (to.h - from.h) * e) + '%', transform: 'translate(-50%, -100%) rotate(' + (from.tilt + (to.tilt - from.tilt) * e) + 'deg)' });
+    }
+    var id = tripId, a = el.animate(frames, { duration: calm ? Dp.calmMs : Dp.ms, easing: calm ? 'ease-out' : 'linear' });
+    a.finished.then(function () {
+      if (id !== tripId || !el.isConnected) return;
+      GW.sfx.thump();
+      if (!calm) el.firstChild.animate([{ transform: 'none' }, { transform: 'translateY(' + Dp.settle / 2 + '%) scaleY(' + (1 - Dp.settle / 100) + ')', offset: 0.35 },
+        { transform: 'none' }], { duration: Dp.settleMs, easing: 'ease-out' });
+    }).catch(function () {});
   }
   // A shake when something is dropped on the wrong side of the box (a sticker or stamp on an open box; junk or an
   // inside supply on a closed one).
@@ -767,7 +846,11 @@ GW.ship = (function () {
     handTag.style.left = (t2[0] - t2[2] / 2) + '%'; handTag.style.top = t2[1] + '%'; handTag.style.width = t2[2] + '%';
     endBoxDrag(false);
     if (boxEl) setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
-    stacked.forEach(function (el, k) { var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt); });
+    stacked.forEach(function (el, k) {
+      el.getAnimations().forEach(function (a) { a.cancel(); });          // a drop in flight lands at once
+      var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt);
+    });
+    setRect(clips.card, L.clips.card); setRect(clips.log, L.clips.log);
   }
 
   // ---------- the hand-off (layer 1e; numbers in CONFIG.shipping.score, .finish, .card, and .ticker) ----------
@@ -781,6 +864,7 @@ GW.ship = (function () {
   // his tag says to hand it over (1n).  With instructions off, css hides them all.
   function updateReady() {
     var on = allPacked();
+    box.classList.toggle('has-last-shift', !!lastShift());      // the clipboards answer taps (1o)
     chain.classList.toggle('is-ready', on);
     tag.hidden = !on;
     var belt = beltTip && trip === 'here' && !!boxEl;
@@ -836,7 +920,7 @@ GW.ship = (function () {
         if (rec) shipped.push(rec);              // a packed fake's box still goes on the truck
         delta += Fk[call].ours; tnp += Fk[call].tnp;
         var fw = Sc.order.filter(function (k) { return miss[k]; }).map(function (k) { return R[k]; });
-        rows.push({ order: o, ok: !fw.length, why: fw, note: note });
+        rows.push({ order: o, ok: !fw.length, why: fw, note: note, rec: rec });
         return;
       }
       if (v === 'denied') miss.deniedReal = true;
@@ -858,7 +942,7 @@ GW.ship = (function () {
       var pts = Sc.regions[o.place.region] || Sc.regions[P.orders.region];
       if (miss.notApproved) { delta += Sc.notApproved.ours; tnp += Sc.notApproved.tnp; }
       else delta += why.length ? -pts.wrong : pts.right;
-      rows.push({ order: o, ok: !why.length, why: why, note: null });
+      rows.push({ order: o, ok: !why.length, why: why, note: null, rec: rec });
     });
     var perfect = rows.every(function (r) { return r.ok; });
     if (perfect) tnp += Sc.perfectTnp;           // clean shifts push TNP back down
@@ -873,7 +957,7 @@ GW.ship = (function () {
       if (rec) {
         shipped.push(rec);
         delta += E.shipped.ours; tnp += E.shipped.tnp;
-        rows.push({ order: o, ok: false, why: [Sc.reasons.shippedTnp], note: null });
+        rows.push({ order: o, ok: false, why: [Sc.reasons.shippedTnp], note: null, rec: rec });
       } else rows.push({ order: o, ok: true, why: [], note: Sc.kept });
     });
     if (!shipped.length) {
@@ -899,6 +983,7 @@ GW.ship = (function () {
     r.tnpChange = s.tnp - tnp0;
     s.tnpHistory = (s.tnpHistory || []).concat([s.tnp]).slice(-P.ticker.history);
     s.shifts = (s.shifts || 0) + 1;
+    s.lastShift = keepShift(r);
     GW.ui.buildShelf(s);
     GW.state.save(s);
   }
@@ -994,6 +1079,153 @@ GW.ship = (function () {
     afterCard = null;
     if (go) go();
   }
+
+  // ---------- the clipboards and the Shipping Log (1o; words and numbers in CONFIG.shipping.log) ----------
+  // What the save keeps of a scored shift: the report card's rows (as plain words and ids) and each shipped box's log,
+  // made here, once, so reopening shows the same lines.
+  function keepShift(r) {
+    return { tnp: !!r.tnp, sentAway: !!r.sentAway, change: r.change || 0, tnpChange: r.tnpChange || 0, rows: r.rows.map(function (row) {
+      var o = row.order;
+      return { town: o ? o.place.name : null, region: o ? o.place.region : null, item: o ? o.item.id : null, qty: o ? o.qty : 0,
+        ok: row.ok, why: row.why.slice(), note: row.note || null, log: o && row.rec ? makeLog(row, r.tnp) : null };
+    }) };
+  }
+  function pickN(list, n) { return shuffled(list).slice(0, n); }
+  function between(r) { return r[0] + Math.floor(Math.random() * (r[1] - r[0] + 1)); }
+  // One box's log, built as docs/lore/shipping-log-v0.1.md says: the start, road lines and packing lines shuffled
+  // together, then the end line for its result, each with a clock time.  Returns [[time, line], ...].
+  function makeLog(row, tnp) {
+    var Lg = P.log, o = row.order, rec = row.rec, def = GW.econ.itemDef(rec.item) || {}, inside = rec.inside || [], outside = rec.outside || [];
+    var road = tnp ? Lg.tnp.road : (Lg.road[o.place.region] || []).concat(Lg.road.any);
+    var on = { peanuts: inside.indexOf('peanuts') >= 0, noPeanuts: inside.indexOf('peanuts') < 0, bubble: inside.indexOf('bubble') >= 0,
+      fragile: outside.indexOf('fragile') >= 0, heavy: outside.indexOf('heavy') >= 0, heavyBare: def.pack === 'heavy' && outside.indexOf('heavy') < 0,
+      soft: def.pack === 'soft', many: o.qty >= Lg.manyAt };
+    var packing = Lg.packing.filter(function (p) { return on[p.when]; }).map(function (p) { return p.text; });
+    var middle = shuffled(pickN(road, between(Lg.roadCount)).concat(pickN(packing, between(Lg.packCount))));
+    var R = P.score.reasons, why = row.why, end = tnp ? Lg.tnp.end : row.ok ? Lg.end.right[Math.floor(Math.random() * Lg.end.right.length)]
+      : why.indexOf(R.item) >= 0 ? Lg.end.item : why.indexOf(R.noStamp) >= 0 ? Lg.end.noStamp : Lg.end.other;
+    var t = Lg.startMin;
+    return [Lg.start].concat(middle, [end]).map(function (line, k) {
+      if (k) t += Math.round(between(Lg.stepMin) / Lg.stepRound) * Lg.stepRound;
+      var h = Math.floor(t / 60) % 24, m = t % 60;
+      return [(h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m,
+        line.split('{town}').join(o.place.name).split('{item}').join(o.item.name).split('{count}').join(String(o.qty))];
+    });
+  }
+  // A saved row back as the report card's row: the order's place and item, or null for the sent-packing line.
+  function savedOrder(x) {
+    if (!x.town) return null;
+    return { place: { name: x.town, region: x.region }, qty: x.qty, item: GW.econ.itemDef(x.item) || { id: x.item, name: x.item, emoji: '\ud83d\udce6' } };
+  }
+  function lastShift() { return GW.game.s.lastShift || null; }
+  // An invisible tap area over a painted clipboard.  A real tap only; nothing happens before the first shift, or
+  // while something else covers the room or the truck is leaving.
+  function clipButton(kind, go) {
+    var b = U.el('div', 'ship-clip ship-clip-' + kind);
+    b.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted || e.button > 0) return;
+      e.preventDefault();
+      if (!lastShift() || slipOpen || cardOpen || warnOpen || logMode !== null || boxDrag || trip === 'leaving') return;
+      go();
+    });
+    box.appendChild(b);
+    return b;
+  }
+  // The left clipboard: the last shift's report card again, from the save.  Nothing is scored.
+  function openLastCard() {
+    var L = lastShift();
+    if (!L) return;
+    showCard({ rows: L.rows.map(function (x) { return { order: savedOrder(x), ok: x.ok, why: x.why, note: x.note }; }), change: L.change, tnpChange: L.tnpChange });
+  }
+  // The right clipboard: the Shipping Log, opened on its list.
+  function openLog() {
+    if (!lastShift()) return;
+    logMode = 'list';
+    drawLog();
+    logView.hidden = false;
+    GW.sfx.click();
+  }
+  // A tap or Escape: from a box's log back to the list, from the list closed.
+  function logBack() {
+    if (logMode === null) return;
+    if (logMode !== 'list') { logMode = 'list'; drawLog(); GW.sfx.click(); return; }
+    logMode = null;
+    logView.hidden = true; logView.textContent = '';
+  }
+  function showLogBox(k) {
+    var x = lastShift() && lastShift().rows[k];
+    if (!x || !x.log) return;
+    logMode = k;
+    drawLog();
+    GW.sfx.click();
+  }
+  // The page: the work order's parchment with its stripes and live text.  The list shows each shipped box (its mark,
+  // town, and count and item); a box's page shows its town, its line, and its log, a clock time beside each entry.
+  function drawLog() {
+    var Lg = P.log, L = lastShift(), page = div('ship-log'), body = div('log-body');
+    logView.textContent = '';
+    page.appendChild(img('slip-paper', P.slip.paper));
+    page.appendChild(U.el('i', 'slip-stripes slip-top'));
+    page.appendChild(U.el('i', 'slip-stripes slip-bottom'));
+    page.setAttribute('role', 'dialog');
+    function head(title, x) {
+      body.appendChild(div('log-title', title));
+      if (x) {
+        var sub = div('log-sub ' + (x.ok ? 'is-right' : 'is-wrong'));
+        sub.appendChild(U.el('span', 'log-mark', x.ok ? '\u2714' : '\u2718'));
+        sub.appendChild(U.el('span', '', countName(x.qty, savedOrder(x).item)));
+        body.appendChild(sub);
+      }
+      body.appendChild(U.el('i', 'log-rule'));
+    }
+    if (logMode === 'list') {
+      head(Lg.title);
+      var list = div('log-list'), n = 0;
+      L.rows.forEach(function (x, k) {
+        if (!x.log) return;
+        n++;
+        var row = div('log-row ' + (x.ok ? 'is-right' : 'is-wrong')), words = div('log-words');
+        row.dataset.row = k;
+        row.appendChild(div('log-mark', x.ok ? '\u2714' : '\u2718'));
+        words.appendChild(div('log-town', x.town));
+        words.appendChild(div('log-item', countName(x.qty, savedOrder(x).item)));
+        row.appendChild(words);
+        row.appendChild(div('log-go', '\u203a'));
+        row.setAttribute('aria-label', x.town + ', ' + countName(x.qty, savedOrder(x).item) + (x.ok ? ', right' : ', ' + x.why.join(', ')));
+        list.appendChild(row);
+      });
+      if (!n) list.appendChild(div('log-empty', Lg.empty));
+      body.appendChild(list);
+      page.setAttribute('aria-label', Lg.title);
+    } else {
+      var x = L.rows[logMode], entries = div('log-entries');
+      head(x.town, x);
+      x.log.forEach(function (e) {
+        var line = div('log-entry');
+        line.appendChild(U.el('span', 'log-time', e[0]));
+        line.appendChild(U.el('span', 'log-text', e[1]));
+        entries.appendChild(line);
+      });
+      body.appendChild(entries);
+      page.setAttribute('aria-label', Lg.title + ': ' + x.town);
+    }
+    page.appendChild(body);
+    logView.appendChild(page);
+    fitLog();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (logMode !== null) fitLog(); });
+  }
+  // The page's text shrinks until it fits the paper, never below fontMin (sizes in cqw of the page).
+  function fitLog() {
+    var Lg = P.log, body = logView.querySelector('.log-body'), size = Lg.font;
+    if (!body) return;
+    body.style.fontSize = size + 'cqw';
+    while (body.scrollHeight > body.clientHeight + 1 && size > Lg.fontMin) {
+      size = Math.max(Lg.fontMin, size * 0.94);
+      body.style.fontSize = size + 'cqw';
+    }
+  }
+  function closeLog() { logMode = null; if (logView) { logView.hidden = true; logView.textContent = ''; } }
 
   // ---------- leaving mid-trip (1f; words and sizes in CONFIG.shipping.leave) ----------
   function buildWarn() {
@@ -1563,7 +1795,7 @@ GW.ship = (function () {
       stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
       cancelAnimationFrame(tickAnim); var now = saved(); shown = now.values; drawTicker(now.values, now.hists);
     }
-    if (!on && active) { stopAnims(); endBoxDrag(false); closeSlip(); closeMenu(); closeWarn(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
+    if (!on && active) { stopAnims(); endBoxDrag(false); closeSlip(); closeMenu(); closeWarn(); closeLog(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
     // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
     // scrolled into view as it opens.  Desktop is left as it is.
@@ -1599,6 +1831,8 @@ GW.ship = (function () {
     // What is in the box on the bench (1i): its state, item, inside supplies, and stickers (1j).
     bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList(), outside: outsideList(), stamp: boxStamp }; },
     // Whether the box on the bench is being dragged (1n).
-    dragging: function () { return !!(boxDrag && boxDrag.mode === 'drag'); }
+    dragging: function () { return !!(boxDrag && boxDrag.mode === 'drag'); },
+    // The clipboards (1o): what the Shipping Log shows (null closed, 'list', or a row's index).
+    logMode: function () { return logMode; }
   };
 })();

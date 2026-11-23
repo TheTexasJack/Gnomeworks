@@ -160,6 +160,40 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 6px rgba(255,200,80,.8), 0 .4vmin .6vmin rgba(0,0,0,.45); }
 #ship .ship-finish span { display: block; padding: 5cqw 6cqw; font: bold 13cqw/1.15 var(--font); white-space: nowrap; }
 #ship .ship-finish[hidden] { display: none; }
+/* the clipboards under STONKS (1o): invisible tap areas over the painted clipboards, live once a shift is saved */
+#ship .ship-clip { position: absolute; }
+#ship.has-last-shift .ship-clip { cursor: pointer; }
+/* the Shipping Log (1o): the work order's parchment (06) with live text, over the room like the report card; sizes
+   from CONFIG.shipping.log, cqw = 1% of the page's width */
+#ship .ship-log-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
+#ship .ship-log-view[hidden] { display: none; }
+.ship-log { position: relative; flex: none; width: var(--log-w); height: var(--log-h); container-type: size; font-family: var(--font); color: #3a2414;
+  user-select: none; -webkit-user-select: none; filter: drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.night #ship .ship-log { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.ship-log > * { position: absolute; }
+.ship-log .slip-paper { inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ship-log .slip-stripes { left: 10.5%; right: 10.8%; height: 2.7cqh; background: repeating-linear-gradient(60deg, #b0282a 0 2.6cqw, transparent 2.6cqw 4.2cqw); }
+.ship-log .slip-top { top: 9cqh; }
+.ship-log .slip-bottom { top: 88.5cqh; }
+.ship-log .log-body { left: 12.5%; right: 12.5%; top: 13.5cqh; bottom: 13cqh; display: flex; flex-direction: column; overflow: hidden; font-weight: bold; line-height: 1.25; }
+.ship-log .log-title { text-align: center; font-size: 1.55em; line-height: 1.1; letter-spacing: .02em; overflow-wrap: anywhere; }
+.ship-log .log-sub { display: flex; justify-content: center; align-items: baseline; gap: .35em; margin-top: .25em; color: #5a3a22; font-size: 1em; text-align: center; }
+.ship-log .log-rule { display: block; flex: none; height: .35cqh; margin: .5em 0 .6em; background: #b8342a; }
+.ship-log .log-mark { font-weight: bold; }
+.ship-log .is-right .log-mark { color: #2e8b3a; }
+.ship-log .is-wrong .log-mark { color: #b8262a; }
+.ship-log .log-list { display: flex; flex-direction: column; gap: .5em; }
+.ship-log .log-row { display: flex; align-items: center; gap: .6em; padding: .45em .5em; border-radius: .4em; background: rgba(120, 70, 30, .1); border: 1px solid rgba(110, 60, 20, .3); }
+.ship-log .log-row .log-mark { flex: none; width: 1.2em; text-align: center; font-size: 1.5em; }
+.ship-log .log-words { flex: 1 1 auto; min-width: 0; }
+.ship-log .log-town { font-size: 1.15em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ship-log .log-item { color: #5a3a22; font-size: .9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ship-log .log-go { flex: none; font-size: 1.8em; line-height: 1; color: #8a5a30; }
+.ship-log .log-empty { text-align: center; color: #5a3a22; margin-top: 1em; }
+.ship-log .log-entries { display: flex; flex-direction: column; gap: .4em; }
+.ship-log .log-entry { display: flex; gap: .55em; align-items: baseline; }
+.ship-log .log-time { flex: none; color: #b02c22; font-variant-numeric: tabular-nums; }
+.ship-log .log-text { flex: 1 1 auto; min-width: 0; color: #3a2414; font-weight: normal; }
 /* the report card over the room: the paper (09) with live rows; sizes from CONFIG.shipping.card, cqw = 1% of the card */
 #ship .ship-card-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-card-view[hidden] { display: none; }
@@ -333,6 +367,18 @@ body {
 #ship .box-sticker { position: absolute; width: var(--sticker-w); height: auto; transform: translate(-50%, 0) rotate(var(--sticker-tilt));
   transform-origin: 50% 0; pointer-events: none; opacity: 1; z-index: 1; filter: drop-shadow(0 .5cqw .4cqw rgba(0,0,0,.4)); }
 #ship .box-sticker[hidden] { display: none; }
+/* the shipping label (1o): the address label (07) in the middle of the face, above the box and below the stickers and
+   the stamp, shown only while the box is closed (place, lines, and sizes from CONFIG.shipping.pack.addr; cqw = 1% of
+   the label's width).  Each line's bottom sits on its ruled line. */
+#ship .box-addr { position: absolute; transform: translate(-50%, -50%); container-type: inline-size; pointer-events: none; visibility: hidden;
+  filter: drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.35)); }
+#ship .ship-box.is-closed .box-addr { visibility: visible; }
+.night #ship .box-addr { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .4cqw .4cqw rgba(0,0,0,.45)); }
+#ship .box-addr .addr-paper { display: block; width: 100%; height: auto; user-select: none; }
+#ship .box-addr .addr-line { position: absolute; line-height: 1; white-space: nowrap; overflow: hidden; font-family: var(--font); }
+#ship .box-addr .addr-town { font-weight: bold; color: #321e14; }
+#ship .box-addr .addr-region { color: #463223; }
+#ship .box-addr .addr-via { color: #6e553c; }
 /* a stamped or stickered box draws above the open box, the stack, and the driver, so its marks are always in front */
 #ship .ship-box.is-stamped, #ship .ship-box.is-stickered { z-index: 3; }
 /* the two menus (the item menu 1d, the supplies menu 1g): shelf-style tiles, scrolling inside themselves */
