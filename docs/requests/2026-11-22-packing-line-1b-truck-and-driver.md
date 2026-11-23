@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b, Gnomerica's truck and driver arrive (v0.2)
 
-**Status:** Done
+**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b approved").
 **Model:** Opus 5.5
 
@@ -92,3 +92,9 @@ Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.71*
 
 **Still open from 1a's review:** the three view buttons wrap on a 390px phone, and the chain ignores Space and Enter.
 
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 3dd07f1 and rendered it in the cloud session: wide Day mid-arrival and in place, wide Night, tall Day and Night.  The truck sits inside the doorway behind the frame in every state, and the driver walks in and waits.  The new `art.py resize` command is the right fix (every older command trims to content, which would break shared baselines).
+
+One art note for Nathan: the waiting pose leans to his right on something, but he stands in open floor in front of the door frame, so he leans on air.  Placement is a config number if Nathan wants him nearer the truck or frame.
