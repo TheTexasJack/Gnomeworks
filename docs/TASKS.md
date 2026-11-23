@@ -73,6 +73,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-1: the destinations data, `js/destinations.js` generated from the map's locations file by `tools/destinations.js` (draft.75, nothing on screen).
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
     - [x] 1c-2: three Gnomerica work orders on the order board, tap to read full size; on phones the board ends left of the parked truck (draft.79).
+    - [ ] **Future enhancement (Nathan, 2026-11-23):** on the phone, fill the empty right end of the order board (right of the three slips, from about 62%) with a small filler pinned to the board, made knowing the parked truck covers part of it.  The slips stay their current size.
     - [ ] **Open (Claudia's 1c-2 review, 2026-11-23):** about 77% of the items Gnomerica places can ask for are Bathroom items, since every place buys all 12 of them on top of its few Factory Imports, and the randomizer picks evenly from the combined list.  So most orders ask for Bathroom junk.  Nathan to decide after the demo whether to weight orders toward Factory Imports.
     - [ ] 1c-3 (approved v0.2, option A): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
     - [ ] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  In 1d v0.3, step 5a.
