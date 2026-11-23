@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.95';
+GW.VERSION = '0.2.0-draft.96';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -172,7 +172,10 @@ GW.CONFIG = {
         // clips = the two clipboards painted under STONKS (1o), tap areas [x, y, w, h] in % of the room, measured from
         // the Day room (left x 868 to 1005, right 1036 to 1173, both y 331 to 499 of 1600 x 901): card = the left one
         // (the last report card), log = the right one (the Shipping Log).
-        clips: { card: [54.2, 36.7, 8.6, 18.7], log: [64.75, 36.7, 8.55, 18.7] }
+        clips: { card: [54.2, 36.7, 8.6, 18.7], log: [64.75, 36.7, 8.55, 18.7] },
+        // paper = each clipboard's paper below its brass clip (1p), [x, y, w, h] in % of the room, where its face
+        // draws: measured from the room art (left x 878 to 994, right 1046 to 1162, both y 375 to 488 of 1600 x 901).
+        paper: { card: [54.87, 41.62, 7.32, 12.65], log: [65.38, 41.62, 7.32, 12.65] }
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
@@ -215,7 +218,9 @@ GW.CONFIG = {
         stonks: [32.6, 26.6, 36.2, 8.5],
         // The clipboards (1o): left x 311 to 454, right 487 to 631, both y 789 to 963 of 900 x 1599.  The parked truck
         // covers the right one's right edge; a tap on the part that shows opens it.
-        clips: { card: [34.6, 49.3, 15.8, 10.9], log: [54.1, 49.3, 16.0, 10.9] }
+        clips: { card: [34.6, 49.3, 15.8, 10.9], log: [54.1, 49.3, 16.0, 10.9] },
+        // The clipboards' paper (1p): left x 322 to 443, right 497 to 620, both y 834 to 953 of 900 x 1599.
+        paper: { card: [35.78, 52.16, 13.55, 7.5], log: [55.22, 52.16, 13.78, 7.5] }
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
@@ -576,7 +581,8 @@ GW.CONFIG = {
       // then the end line for the box's result.  Times start at `startMin` (minutes after midnight, 08:00) and step
       // `stepMin` (min, max) minutes per line, rounded to `stepRound`.  {town} = the order's town, {item} its item,
       // {count} its count.  An elf's box (TNP) swaps the road lines for `tnp.road` and always ends with `tnp.end`.
-      // A packed fake (Approved a fake) ships on GRIP's truck, so it gets a GRIP log ending with `end.other`.
+      // A packed fake (Approved a fake) ships on GRIP's truck, so it gets a GRIP log with one of `fake.road` and
+      // `fake.end` (1p).
       roadCount: [4, 5],
       packCount: [1, 2],
       startMin: 480,
@@ -641,7 +647,45 @@ GW.CONFIG = {
           'Last seen heading somewhere with a lot of snow.'
         ],
         end: 'Delivered to... the North Pole?  Uh oh.'
+      },
+      // An approved fake (lore doc v0.2, approved by Nathan 2026-11-23): a glitter order APPROVED and packed ships on
+      // GRIP's truck, so its log is built as usual, plus one of `fake.road` in the middle (at random), and always
+      // ends with `fake.end`.
+      fake: {
+        road: [
+          'The address had glitter on it.  Hmm.',
+          'The driver checked the map twice.  The road to {town} looked a little too sparkly.'
+        ],
+        end: 'Delivered to {town}.  But nobody there ordered it!  A gnome in a jingly hat took it.'
       }
+    },
+    // The clipboards' faces (1p): drawn in code on each clipboard's painted paper (layouts.<layout>.paper), so each
+    // says what it is at a glance.  Draft design, Claudia and Claude Code.  The left one is a tiny report card: its
+    // title on two lines, then `rows` little rows, each a box with the last shift's ✔ (green) or ✘ (red) for that
+    // row (empty boxes before the first shift, or past the shift's rows) and a short line.  The right one is the
+    // Shipping Log: its title on two lines, a small red truck drawn in code (the address label's truck), and `lines`
+    // ruled lines.  Sizes are in % of the paper's width (cqw) or height (cqh): pad = the paper's inside margin
+    // [top, sides] (cqh, cqw); title = the title's size (cqw) and its line height; box = a row's box (cqw), mark =
+    // its ✔ or ✘ (cqw), rowH = each row's height (cqh), rowGap = space above the rows (cqh), lineW = a row's line
+    // as a share of what is left of the row (%); truck = the truck's width (cqw) and the space above it (cqh);
+    // rule = the space between ruled lines (cqh).  Night dims them with the room, as the slips.
+    // glow: after a shift both clipboards glow softly (breathing over pulseMs, steady with reduced motion) until
+    // each is opened once; it follows "Show instructions."  The save's lastShift.unread remembers which still glow.
+    clipFace: {
+      card: { title: ['REPORT', 'CARD'] },
+      log: { title: ['SHIPPING', 'LOG'] },
+      pad: [5, 7],
+      title: [16.5, 0.98],
+      rows: 3,
+      rowGap: 4,
+      rowH: 17,
+      box: 14,
+      mark: 13,
+      lineW: 84,
+      truck: [46, 3],
+      lines: 3,
+      rule: 8.5,
+      glow: { pulseMs: 2000 }
     },
     // The STONKS screen: two lines of the last `history` shift totals, GRIP (our Stonks, `color`) and TNP (`tnp`,
     // in TNP red from its logo, 1l), each labeled with its number, on one shared scale.  Both move when the report

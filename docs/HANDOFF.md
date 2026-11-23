@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.95**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.96**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -39,6 +39,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 13. **1m (done, draft.93):** from shift 4 some trips are TNP trips, the elf imposter in Gnomerica's fake truck (25%, never more than 2 in a row).  Sending him away drops TNP; filling his orders drops ours and lifts TNP, and he goes happy.  An unstamped real order is now "Not approved", a small hit.
 14. **1n (done, draft.94):** the region stamp is only a mark, so stickers and the stamp go on in any order.  The player hands a closed box over by dragging it to the driver, who sets it on the stack; an open box, or one dropped elsewhere, springs back.  A "Hand it to the driver!" tag and a glow on the driver show while a closed box waits.
 15. **1o (done, draft.95):** every closed box wears its shipping label (town, region, "via GRIP") per box face v0.3; the driver sets a box on the stack in one smooth arc with a single settle; the Report Card clipboard reopens the last card and the Log clipboard opens the Shipping Log, a short funny log per shipped box (lines from `docs/lore/shipping-log-v0.1.md`), saved with the last shift.
+16. **1p (done, draft.96):** the two clipboards wear faces drawn in code (REPORT CARD with the last shift's ✔ and ✘, SHIPPING LOG with a red truck and ruled lines), both glow after a shift until opened, and an approved fake's box gets its own log lines and end (lore v0.2).
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 

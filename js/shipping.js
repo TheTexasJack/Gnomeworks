@@ -53,7 +53,10 @@
    The label, the drop, and the log (1o): every closed box wears its shipping label (the town, the region, and "via
    GRIP") in the middle of its face.  The driver sets a handed-over box on the stack in one eased arc with one small
    settle.  The two clipboards under STONKS open the last shift's report card again and the Shipping Log, a page per
-   shipped box with its log, made once at the hand-off and saved with the card's rows (the save's lastShift). */
+   shipped box with its log, made once at the hand-off and saved with the card's rows (the save's lastShift).
+   The clipboards' faces (1p): each painted clipboard wears a face drawn in code, a tiny report card with the last
+   shift's marks on the left and SHIPPING LOG with a red truck on the right.  After a shift both glow softly until
+   each is opened (a tip).  An approved fake's box gets its own log line and end. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -78,6 +81,7 @@ GW.ship = (function () {
   var tnpTrip = false;            // this trip is TNP's: the elf in his fake truck (1m)
   var boxStamp = null, boxDrag = null, handTag;
   var clips = {}, logView, logMode = null;
+  var faces = {}, clipGlows = {}, faceKey = null;   // the clipboards' faces and their news glows (1p)
   // clips = the clipboards' tap areas (1o); logMode = what the Shipping Log shows: null (closed), 'list', or a row's index
   // boxStamp = the region stamp on the bench box, or null (1n: a mark like the stickers); boxDrag = the box being
   // pressed or dragged; handTag = the "Hand it to the driver!" tag
@@ -106,6 +110,14 @@ GW.ship = (function () {
     box.appendChild(board);
     // The clipboards under STONKS (1o): the left one reopens the last report card, the right one the Shipping Log.
     // They sit under the truck, the driver, and the box, so those keep their taps.
+    // Each clipboard's news glow, then its face drawn on its paper (1p), under the tap areas.
+    ['card', 'log'].forEach(function (k) {
+      clipGlows[k] = makeGlow('ship-clip-glow ship-clip-glow-' + k);
+      faces[k] = div('ship-clip-face clip-face-' + k);
+      faces[k].setAttribute('aria-hidden', 'true');
+      box.appendChild(faces[k]);
+    });
+    box.style.setProperty('--clip-pulse', P.clipFace.glow.pulseMs + 'ms');
     clips.card = clipButton('card', openLastCard);
     clips.log = clipButton('log', function () { openLog(); });
     buildScreen();
@@ -851,6 +863,11 @@ GW.ship = (function () {
       var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt);
     });
     setRect(clips.card, L.clips.card); setRect(clips.log, L.clips.log);
+    ['card', 'log'].forEach(function (k) {                // the faces on the paper, the glows on the whole clipboard (1p)
+      setRect(faces[k], L.paper[k]);
+      var r = L.clips[k];
+      clipGlows[k].style.clipPath = polygon([[r[0], r[1]], [r[0] + r[2], r[1]], [r[0] + r[2], r[1] + r[3]], [r[0], r[1] + r[3]]]);
+    });
   }
 
   // ---------- the hand-off (layer 1e; numbers in CONFIG.shipping.score, .finish, .card, and .ticker) ----------
@@ -865,6 +882,7 @@ GW.ship = (function () {
   function updateReady() {
     var on = allPacked();
     box.classList.toggle('has-last-shift', !!lastShift());      // the clipboards answer taps (1o)
+    drawFaces();
     chain.classList.toggle('is-ready', on);
     tag.hidden = !on;
     var belt = beltTip && trip === 'here' && !!boxEl;
@@ -984,6 +1002,7 @@ GW.ship = (function () {
     s.tnpHistory = (s.tnpHistory || []).concat([s.tnp]).slice(-P.ticker.history);
     s.shifts = (s.shifts || 0) + 1;
     s.lastShift = keepShift(r);
+    drawFaces();                                 // the card's face shows the new marks, and both glow (1p)
     GW.ui.buildShelf(s);
     GW.state.save(s);
   }
@@ -1084,16 +1103,18 @@ GW.ship = (function () {
   // What the save keeps of a scored shift: the report card's rows (as plain words and ids) and each shipped box's log,
   // made here, once, so reopening shows the same lines.
   function keepShift(r) {
-    return { tnp: !!r.tnp, sentAway: !!r.sentAway, change: r.change || 0, tnpChange: r.tnpChange || 0, rows: r.rows.map(function (row) {
+    // unread (1p): the clipboards glow until each is opened once.
+    return { tnp: !!r.tnp, sentAway: !!r.sentAway, change: r.change || 0, tnpChange: r.tnpChange || 0, unread: { card: true, log: true }, rows: r.rows.map(function (row) {
       var o = row.order;
       return { town: o ? o.place.name : null, region: o ? o.place.region : null, item: o ? o.item.id : null, qty: o ? o.qty : 0,
-        ok: row.ok, why: row.why.slice(), note: row.note || null, log: o && row.rec ? makeLog(row, r.tnp) : null };
+        ok: row.ok, why: row.why.slice(), note: row.note || null, fake: !!(o && o.fake), log: o && row.rec ? makeLog(row, r.tnp) : null };
     }) };
   }
   function pickN(list, n) { return shuffled(list).slice(0, n); }
   function between(r) { return r[0] + Math.floor(Math.random() * (r[1] - r[0] + 1)); }
   // One box's log, built as docs/lore/shipping-log-v0.1.md says: the start, road lines and packing lines shuffled
-  // together, then the end line for its result, each with a clock time.  Returns [[time, line], ...].
+  // together, then the end line for its result, each with a clock time.  An approved fake on GRIP's truck (1p, lore
+  // v0.2) also gets one of its own lines in the middle and always its own end.  Returns [[time, line], ...].
   function makeLog(row, tnp) {
     var Lg = P.log, o = row.order, rec = row.rec, def = GW.econ.itemDef(rec.item) || {}, inside = rec.inside || [], outside = rec.outside || [];
     var road = tnp ? Lg.tnp.road : (Lg.road[o.place.region] || []).concat(Lg.road.any);
@@ -1102,7 +1123,9 @@ GW.ship = (function () {
       soft: def.pack === 'soft', many: o.qty >= Lg.manyAt };
     var packing = Lg.packing.filter(function (p) { return on[p.when]; }).map(function (p) { return p.text; });
     var middle = shuffled(pickN(road, between(Lg.roadCount)).concat(pickN(packing, between(Lg.packCount))));
-    var R = P.score.reasons, why = row.why, end = tnp ? Lg.tnp.end : row.ok ? Lg.end.right[Math.floor(Math.random() * Lg.end.right.length)]
+    var fake = !tnp && !!o.fake;
+    if (fake) middle.splice(Math.floor(middle.length / 2), 0, Lg.fake.road[Math.floor(Math.random() * Lg.fake.road.length)]);
+    var R = P.score.reasons, why = row.why, end = tnp ? Lg.tnp.end : fake ? Lg.fake.end : row.ok ? Lg.end.right[Math.floor(Math.random() * Lg.end.right.length)]
       : why.indexOf(R.item) >= 0 ? Lg.end.item : why.indexOf(R.noStamp) >= 0 ? Lg.end.noStamp : Lg.end.other;
     var t = Lg.startMin;
     return [Lg.start].concat(middle, [end]).map(function (line, k) {
@@ -1136,15 +1159,92 @@ GW.ship = (function () {
   function openLastCard() {
     var L = lastShift();
     if (!L) return;
+    markRead('card');
     showCard({ rows: L.rows.map(function (x) { return { order: savedOrder(x), ok: x.ok, why: x.why, note: x.note }; }), change: L.change, tnpChange: L.tnpChange });
   }
   // The right clipboard: the Shipping Log, opened on its list.
   function openLog() {
     if (!lastShift()) return;
+    markRead('log');
     logMode = 'list';
     drawLog();
     logView.hidden = false;
     GW.sfx.click();
+  }
+  // A clipboard opened (1p): its news glow stops, and the save remembers it.
+  function markRead(k) {
+    var L = lastShift();
+    if (!L || !L.unread || !L.unread[k]) return;
+    L.unread[k] = false;
+    drawFaces();
+    GW.state.save(GW.game.s);
+  }
+  // The clipboards' faces (1p; sizes and words in CONFIG.shipping.clipFace).  The card's marks follow the last
+  // shift's rows; the glows show while lastShift.unread says so (css hides them with instructions off).  Drawn again
+  // only when something they show changes.
+  function drawFaces() {
+    if (!faces.card) return;
+    var F = P.clipFace, L = lastShift(), rows = L ? L.rows : [], u = (L && L.unread) || {};
+    clipGlows.card.hidden = !u.card; clipGlows.log.hidden = !u.log;
+    var marks = [];
+    for (var k = 0; k < F.rows; k++) marks.push(rows[k] ? (rows[k].ok ? 'ok' : 'x') : '');
+    var key = marks.join();
+    if (key === faceKey) return;
+    faceKey = key;
+    var inner = {};                                      // the face is the size container; its inside takes the padding
+    ['card', 'log'].forEach(function (kind) {
+      var el = inner[kind] = div('face-in');
+      faces[kind].textContent = '';
+      faces[kind].appendChild(el);
+      el.style.padding = F.pad[0] + 'cqh ' + F.pad[1] + 'cqw 0';
+      var t = div('face-title');
+      t.style.font = 'bold ' + F.title[0] + 'cqw/' + F.title[1] + ' var(--font)';
+      F[kind].title.forEach(function (w) { t.appendChild(div('', w)); });
+      el.appendChild(t);
+    });
+    var list = div('face-rows');
+    list.style.marginTop = F.rowGap + 'cqh';
+    marks.forEach(function (m) {
+      var row = div('face-row' + (m === 'ok' ? ' is-right' : m === 'x' ? ' is-wrong' : ''));
+      row.style.height = F.rowH + 'cqh';
+      var b = div('face-box', m === 'ok' ? '\u2714' : m === 'x' ? '\u2718' : '');
+      b.style.width = b.style.height = F.box + 'cqw';
+      b.style.fontSize = F.mark + 'cqw';
+      var line = U.el('i', 'face-line');
+      line.style.width = F.lineW + '%';
+      row.appendChild(b); row.appendChild(div('face-line-room')).appendChild(line);
+      list.appendChild(row);
+    });
+    inner.card.appendChild(list);
+    var truck = faceTruck();
+    truck.style.width = F.truck[0] + 'cqw'; truck.style.marginTop = F.truck[1] + 'cqh';
+    inner.log.appendChild(truck);
+    for (var n = 0; n < F.lines; n++) {
+      var rule = U.el('i', 'face-rule');
+      rule.style.marginTop = F.rule + 'cqh';
+      inner.log.appendChild(rule);
+    }
+  }
+  // The address label's red truck, drawn in code (1p): speed lines, the box, the cab with its window, two wheels.
+  function faceTruck() {
+    var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 64 32'); svg.setAttribute('class', 'face-truck');
+    var parts = [
+      ['rect', { x: 0, y: 8, width: 10, height: 2.6, rx: 1.3 }], ['rect', { x: 3, y: 13.5, width: 8, height: 2.6, rx: 1.3 }],
+      ['rect', { x: 0, y: 19, width: 10, height: 2.6, rx: 1.3 }],
+      ['rect', { x: 14, y: 3, width: 29, height: 20, rx: 1.6 }],
+      ['path', { d: 'M45 9 h9.5 l7 7.5 v8.5 h-16.5 z' }],
+      ['path', { d: 'M47.5 11.5 h6 l4.6 5 h-10.6 z', 'class': 'face-truck-glass' }],
+      ['rect', { x: 14, y: 23, width: 48, height: 2.5, rx: 1 }],
+      ['circle', { cx: 23, cy: 26, r: 4.6 }], ['circle', { cx: 23, cy: 26, r: 1.7, 'class': 'face-truck-glass' }],
+      ['circle', { cx: 53, cy: 26, r: 4.6 }], ['circle', { cx: 53, cy: 26, r: 1.7, 'class': 'face-truck-glass' }]
+    ];
+    parts.forEach(function (p) {
+      var e = document.createElementNS(NS, p[0]);
+      Object.keys(p[1]).forEach(function (a) { e.setAttribute(a, p[1][a]); });
+      svg.appendChild(e);
+    });
+    return svg;
   }
   // A tap or Escape: from a box's log back to the list, from the list closed.
   function logBack() {
@@ -1671,6 +1771,7 @@ GW.ship = (function () {
     openImg.src = GW.theme.img(L.open);
     rollerClosed.src = doorImg.src = closedImg.src; rollerOpen.src = openImg.src;
     beltImg.src = screenImg.src = closedImg.src;       // the belt and the computer look the same with the door open
+    clipGlows.card.firstChild.src = clipGlows.log.firstChild.src = closedImg.src;
     if (L === drawnLayout && force !== true) return;
     drawnLayout = L;
     m.style.setProperty('--ship-aspect', L.aspect);
@@ -1833,6 +1934,8 @@ GW.ship = (function () {
     // Whether the box on the bench is being dragged (1n).
     dragging: function () { return !!(boxDrag && boxDrag.mode === 'drag'); },
     // The clipboards (1o): what the Shipping Log shows (null closed, 'list', or a row's index).
-    logMode: function () { return logMode; }
+    logMode: function () { return logMode; },
+    // The clipboards' news glows (1p): whether each one's glow is on (true while the save says it is unread).
+    clipGlow: function (k) { return !!clipGlows[k] && !clipGlows[k].hidden; }
   };
 })();

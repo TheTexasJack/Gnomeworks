@@ -129,6 +129,7 @@ async function packCheck(page, errors) {
     const before = await page.evaluate(() => Object.assign({}, GW.game.s.items));
     if (orders.length !== 3) fail(tag + `only ${orders.length} orders from an ordinary shelf`);
     if (shift === 1 && orders.map(o => o.id).sort().join() !== trio.slice().sort().join()) fail(tag + `orders ${orders.map(o => o.id)} from a shelf of ${trio}`);
+    if (shift === 1) { const fp = await faceProblem(page, [false, false]); if (fp) fail('before the first shift, clipboard faces: ' + fp); }   // empty boxes, no glow (1p)
     const counts = await page.evaluate(() => GW.CONFIG.shipping.orders.counts);
     orders.forEach(o => {
       const spare = before[o.id] - 1, fits = counts[o.pack].filter(n => n <= spare);
@@ -341,6 +342,8 @@ async function packCheck(page, errors) {
     if (orders.some((o, i) => !items[i] || !items[i].startsWith(o.qty + ' × '))) fail(tag + 'a report card row does not show its count: ' + items.join(' | '));
     await page.keyboard.press('Escape');
     if (await page.evaluate(() => GW.ship.cardOpen())) fail('Escape did not close the report card');
+    const fp = await faceProblem(page, [true, true]);                  // the new marks, and both glow (1p)
+    if (fp) fail(tag + 'clipboard faces: ' + fp);
     if (shift === 1) await clipCheck(page, fail, orders);
     await page.waitForTimeout(1200);
     if (await page.textContent('.stonks-num') !== String(want)) fail(tag + 'the STONKS screen did not move to ' + want);
@@ -381,9 +384,9 @@ async function packCheck(page, errors) {
   const notApproved = await page.evaluate(() => GW.CONFIG.shipping.score.notApproved.ours);   // the small shift went off unstamped (1m)
   const want = stonks0 + 3 * right - 3 * wrong + notApproved - wrong;
   await page.waitForTimeout(400);
-  const kept = await page.evaluate(() => JSON.stringify(GW.game.s.lastShift));
   const shownLog = await openLogRow(page, 0);
   await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+  const kept = await page.evaluate(() => JSON.stringify(GW.game.s.lastShift));   // after the log is opened (1p: its glow is off)
   await page.reload();
   await page.waitForTimeout(400);
   if (await page.evaluate(() => JSON.stringify(GW.game.s.lastShift)) !== kept) fail('the last shift was not saved as it was');
@@ -410,10 +413,36 @@ async function packCheck(page, errors) {
   console.log(`packing: two shifts (a Breakable, a Heavy, and a Soft, then an ordinary shelf of ${SHELF} each) (${shipped.join('; ')}), then 2 tp from 3, then a Toilet with no HEAVY; Stonks ${want}`);
 }
 
-// The shipping log (1o): the end line a saved row's log must finish with (docs/lore/shipping-log-v0.1.md).
+// The clipboards' faces (1p): each face's title, the card face's marks ('ok', 'x', or '' for an empty box), the log
+// face's truck and ruled lines, and whether each news glow shows.  faceProblem compares them with the save's last
+// shift (empty boxes before the first) and returns a problem or ''.
+async function faceProblem(page, glows) {
+  return page.evaluate(glows => {
+    const F = GW.CONFIG.shipping.clipFace, L = GW.game.s.lastShift, q = s => document.querySelector(s);
+    const shown = el => !!el && !el.hidden && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().width > 0;
+    const card = q('.clip-face-card'), log = q('.clip-face-log');
+    if (!shown(card) || !shown(log)) return 'a face does not show';
+    const t = el => [...el.querySelectorAll('.face-title > div')].map(d => d.textContent).join(' ');
+    if (t(card) !== F.card.title.join(' ') || t(log) !== F.log.title.join(' ')) return 'the titles read "' + t(card) + '" and "' + t(log) + '"';
+    if (parseFloat(getComputedStyle(card.querySelector('.face-title')).fontSize) < 6) return 'the title is under 6 px';
+    const marks = [...card.querySelectorAll('.face-row')].map(r => r.classList.contains('is-right') ? 'ok' : r.classList.contains('is-wrong') ? 'x' : '');
+    const boxes = [...card.querySelectorAll('.face-box')].map(b => b.textContent);
+    const want = [...Array(F.rows)].map((_, k) => L && L.rows[k] ? (L.rows[k].ok ? 'ok' : 'x') : '');
+    if (marks.join() !== want.join()) return 'the card face shows ' + marks.join() + ', the last shift ' + want.join();
+    if (boxes.join() !== want.map(m => m === 'ok' ? '\u2714' : m === 'x' ? '\u2718' : '').join()) return 'the card face\'s boxes read ' + boxes.join();
+    if (!shown(log.querySelector('svg.face-truck')) || log.querySelectorAll('.face-rule').length !== F.lines) return 'the log face has no truck or not ' + F.lines + ' lines';
+    const g = ['card', 'log'].map(k => shown(q('.ship-clip-glow-' + k)));
+    if (glows && g.join() !== glows.join()) return 'the glows show ' + g.join() + ', expected ' + glows.join();
+    return '';
+  }, glows || null);
+}
+
+// The shipping log (1o): the end line a saved row's log must finish with (docs/lore/shipping-log-v0.1.md).  An
+// approved fake's box (1p) always ends with its own line.
 function logEndOk(L, x, tnp) {
   const last = x.log[x.log.length - 1][1], fill = t => t.split('{town}').join(x.town);
   if (tnp) return last === L.tnp.end;
+  if (x.fake) return last === fill(L.fake.end);
   if (x.ok) return L.end.right.map(fill).includes(last);
   return last === fill(x.why.includes('Wrong item') ? L.end.item : x.why.includes('No stamp') ? L.end.noStamp : L.end.other);
 }
@@ -426,10 +455,11 @@ async function logProblem(page, tnp) {
     for (const x of S.rows) {
       if (!x.log) continue;
       const f = t => t.split('{town}').join(x.town).split('{count}').join(String(x.qty)).split('{item}').join((GW.econ.itemDef(x.item) || {}).name);
-      const mids = new Set((tnp ? L.tnp.road : L.road[x.region].concat(L.road.any)).concat(L.packing.map(p => f(p.text))));
+      const mids = new Set((tnp ? L.tnp.road : L.road[x.region].concat(L.road.any)).concat(L.packing.map(p => f(p.text)), x.fake ? L.fake.road.map(f) : []));
       if (x.log[0][0] !== '08:00' || x.log[0][1] !== L.start) return x.town + ': does not start with the start line';
       if (!logEndOk(L, x, tnp)) return x.town + ': ends with "' + x.log[x.log.length - 1][1] + '"';
-      if (x.log.length < 7 || x.log.length > 9) return x.town + ': ' + x.log.length + ' lines';
+      const more = x.fake && !tnp ? 1 : 0;                                 // an approved fake's own line (1p)
+      if (x.log.length < 7 + more || x.log.length > 9 + more) return x.town + ': ' + x.log.length + ' lines';
       if (x.log.some((e, k) => k && e[0] <= x.log[k - 1][0])) return x.town + ': the times do not climb';
       const bad = x.log.slice(1, -1).filter(e => !mids.has(e[1]));
       if (bad.length) return x.town + ': a line not from the config: ' + bad[0][1];
@@ -443,12 +473,19 @@ async function logProblem(page, tnp) {
 async function clipCheck(page, fail, orders) {
   const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
   const s0 = await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.shifts);
+  // The news glows (1p): off with instructions off, on again with them on; each stops once its clipboard opens.
+  await page.evaluate(() => document.documentElement.classList.add('no-hints'));
+  let fp = await faceProblem(page, [false, false]);
+  if (fp) fail('instructions off: ' + fp);
+  await page.evaluate(() => document.documentElement.classList.remove('no-hints'));
   let c = await mid('.ship-clip-card'); await page.mouse.click(c.x, c.y);
   if (!await page.evaluate(() => GW.ship.cardOpen())) { fail('the Report Card clipboard did not open the card'); return; }
   const towns = await page.$$eval('.ship-card .card-town', t => t.map(x => x.textContent));
   if (towns.join() !== orders.map(o => o.town).join()) fail('the reopened card reads ' + towns.join());
   await page.keyboard.press('Escape');
   if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.shifts) !== s0) fail('reopening the card scored again');
+  fp = await faceProblem(page, [false, true]);
+  if (fp) fail('after opening the card: ' + fp);
   c = await mid('.ship-clip-log'); await page.mouse.click(c.x, c.y);
   if (await page.evaluate(() => GW.ship.logMode()) !== 'list') { fail('the Log clipboard did not open the Shipping Log'); return; }
   const rows = await page.$$eval('.ship-log .log-row .log-town', t => t.map(x => x.textContent));
@@ -468,6 +505,10 @@ async function clipCheck(page, fail, orders) {
   if (await page.evaluate(() => GW.ship.logMode()) !== 'list') fail('a tap did not step back to the list');
   await page.keyboard.press('Escape');
   if (await page.evaluate(() => GW.ship.logMode()) !== null) fail('Escape did not close the Shipping Log');
+  fp = await faceProblem(page, [false, false]);
+  if (fp) fail('after opening both: ' + fp);
+  const kept = await page.evaluate(() => JSON.stringify(GW.game.s.lastShift.unread));
+  if (kept !== '{"card":false,"log":false}') fail('the save does not remember both clipboards opened: ' + kept);
 }
 // Opens the Shipping Log from its clipboard and row k's log; returns the page's lines ('' if it did not open).
 async function openLogRow(page, k) {
@@ -553,11 +594,34 @@ async function fakeCheck(page, errors) {
   const k2 = f.indexOf(true);
   for (let i = 0; i < f.length; i++) await stampSlip(page, i, i === k2 ? 'approved' : 'denied');
   if (await page.evaluate(() => GW.ship.activeOrder()) !== k2) fail('the APPROVED fake did not get the box');
+  // Packed and handed over (1p), so it ships on GRIP's truck with its own log.
+  const fid = await page.evaluate(k => GW.ship.orders()[k].item.id, k2);
+  let fc = await mid('.ship-conveyor'); await page.mouse.click(fc.x, fc.y);
+  await page.locator(`.ship-menu-items .ship-tile[data-item="${fid}"]`).scrollIntoViewIfNeeded();
+  const fa = await mid(`.ship-menu-items .ship-tile[data-item="${fid}"]`), fb = await mid('.ship-box:not(.is-stacked)');
+  await page.mouse.move(fa.x, fa.y); await page.mouse.down();
+  for (let i = 1; i <= 8; i++) await page.mouse.move(fa.x + (fb.x - fa.x) * i / 8, fa.y + (fb.y - fa.y) * i / 8);
+  await page.mouse.up();
+  await page.keyboard.press('Escape');
+  fc = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(fc.x, fc.y);
+  await handToDriver(page);
+  await page.waitForTimeout(900);
+  if (!await page.evaluate(k => !!GW.ship.packed()[k], k2)) fail('the APPROVED fake\'s box was not handed over');
   card = await ship('B');
   const s2 = await s();
   if (card && card.rows[k2] !== 'x:Approved a fake') fail(`an APPROVED fake reads "${card.rows[k2]}"`);
   if (card && card.rows.filter((r, i) => i !== k2).some(r => r !== 'x:Denied a real order')) fail('DENIED real orders read ' + card.rows.join(' | '));
   if (s2.tnp !== s1.tnp + 10) fail(`approved a fake: TNP ${s1.tnp} -> ${s2.tnp}`);
+  // An approved fake's log (1p, lore v0.2): GRIP's lines, one of its own lines in the middle, and its own end.
+  const fx = await page.evaluate(k => GW.game.s.lastShift.rows[k], k2), FL = await page.evaluate(() => GW.CONFIG.shipping.log);
+  if (!fx || !fx.log || !fx.fake) fail('the approved fake\'s box has no log');
+  else {
+    const fill = t => t.split('{town}').join(fx.town), own = fx.log.map(e => e[1]).map((l, k) => FL.fake.road.map(fill).includes(l) ? k : -1).filter(k => k >= 0);
+    if (fx.log[fx.log.length - 1][1] !== fill(FL.fake.end)) fail('the approved fake\'s log ends with "' + fx.log[fx.log.length - 1][1] + '"');
+    if (own.length !== 1 || own[0] === 0 || own[0] === fx.log.length - 1) fail('the approved fake\'s log has its own line at ' + own.join());
+    const lp = await logProblem(page, false);
+    if (lp) fail('log: ' + lp);
+  }
   // C: one order, a fake, DENIED: a perfect shift.
   f = await trip('socks');
   if (f.join() !== 'true') { fail('the one-order board is ' + f.join()); return; }
@@ -617,6 +681,8 @@ async function elfCheck(page, errors, name) {
   let s1 = await s();
   if (card && card.join() !== 'ok:' + Sc.sentPacking) fail('the sent-away card reads ' + card.join(' | '));
   if (s1.tnp !== s0.tnp + Sc.elf.sentAway.tnp || s1.stonks !== s0.stonks + Sc.elf.sentAway.ours) fail(`sent away: ${JSON.stringify(s0)} -> ${JSON.stringify(s1)}`);
+  const fp = await faceProblem(page, [true, true]);                     // the faces in this layout (1p): one ✔, two empty
+  if (fp) fail('clipboard faces: ' + fp);
   // 2: one box handed to the elf.
   await arrive();
   if (!await page.evaluate(() => GW.ship.tnpTrip())) fail('the second forced trip was not TNP');

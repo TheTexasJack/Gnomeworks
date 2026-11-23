@@ -163,6 +163,31 @@ body {
 /* the clipboards under STONKS (1o): invisible tap areas over the painted clipboards, live once a shift is saved */
 #ship .ship-clip { position: absolute; }
 #ship.has-last-shift .ship-clip { cursor: pointer; }
+/* the clipboards' faces (1p): drawn in code on each painted paper so it says what it is (sizes from
+   CONFIG.shipping.clipFace; cqw and cqh = 1% of the paper).  Night dims them with the room, as the slips.  After a
+   shift each clipboard glows softly (the room art cut to its outline, breathing; steady with reduced motion) until
+   it is opened; it is a tip, so instructions off hides it. */
+#ship .ship-clip-face { position: absolute; container-type: size; pointer-events: none; color: #2e1a0c; font-family: var(--font);
+  user-select: none; -webkit-user-select: none; }
+#ship .ship-clip-face .face-in { position: absolute; inset: 0; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+.night #ship .ship-clip-face { filter: brightness(var(--slip-night, .88)); }
+#ship .ship-clip-face .face-title { text-align: center; letter-spacing: .02em; white-space: nowrap; }
+#ship .ship-clip-face .face-rows { align-self: stretch; }
+#ship .ship-clip-face .face-row { display: flex; align-items: center; }
+#ship .ship-clip-face .face-box { flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+  border: max(1px, .9cqw) solid #4a2e18; border-radius: 1cqw; background: rgba(255, 250, 235, .55); font-weight: bold; line-height: 1; padding-top: .1em; }
+#ship .ship-clip-face .is-right .face-box { color: #2e8b3a; }
+#ship .ship-clip-face .is-wrong .face-box { color: #b8262a; }
+#ship .ship-clip-face .face-line-room { flex: 1; display: flex; justify-content: flex-end; }
+#ship .ship-clip-face .face-line { display: block; height: max(1px, 1.6cqw); border-radius: 1cqw; background: #7a5a3e; }
+#ship .ship-clip-face .face-truck { display: block; height: auto; fill: #c8281c; }
+#ship .ship-clip-face .face-truck-glass { fill: #f6dcae; }
+#ship .ship-clip-face .face-rule { display: block; align-self: stretch; height: max(1px, 1.3cqw); background: #8a2a22; }
+#ship .ship-glow.ship-clip-glow { animation-name: clipPulse; animation-duration: var(--clip-pulse, 2000ms);
+  filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 12px rgba(255, 183, 3, .8)); }
+#ship .ship-glow.ship-clip-glow .ship-room { filter: brightness(1.25) saturate(1.1); }
+@keyframes clipPulse { from { opacity: .35; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #ship .ship-glow.ship-clip-glow { animation: none; opacity: .85; } }
 /* the Shipping Log (1o): the work order's parchment (06) with live text, over the room like the report card; sizes
    from CONFIG.shipping.log, cqw = 1% of the page's width */
 #ship .ship-log-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
