@@ -1,7 +1,7 @@
-# Work order: Packing Line 1b.4, the grumpy driver waits at his truck (v0.1)
+# Work order: Packing Line 1b.4, the grumpy driver waits at his truck (v0.2)
 
-**Status:** Stopped at step 3 (the tall layout has no full-size spot); waiting on Nathan
-**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.4 approved").
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  v0.2 after the first run stopped at step 3 (see the Result below).  **Approved by:** Nathan, 2026-11-22 ("1b.4 approved").
 **Model:** Opus 5.5
 
 ## Goal
@@ -23,7 +23,10 @@ Overlap is fine when depth is right.  Whatever the driver stands in front of, hi
 
 1. `git pull` in `/srv/GW/Gnomeworks`.
 2. **The waiting pose is grumpy.**  Load `assets/packing/driver_gnomerica_grumpy.webp` (made in 1b.3) as the waiting pose.  Remove `driverSpot`, the lean spots, and the unused leaning copy `assets/packing/driver_gnomerica_waiting.webp` (its master stays in `art-masters/`); update `docs/ASSETS.md`.
-3. **Where he stands.**  In both layouts, at the 1b.2 size (2.01 times the bench height), standing in the doorway in front of his truck, his feet on the sill or the room floor just in front of it, following the depth rule.  He is drawn in front of the truck and the doorway frame.  He must not overlap the bench or the chain, and he stays fully on screen.
+3. **Where he stands (v0.2, from the first run's measurements).**
+    - **Wide room:** full size, feet at `[86.5, 80]`: centered on the doorway, just in front of the sill, clear of the bench, the chain, and the conveyor, in front of the truck.  (Found by the first run.)
+    - **Tall room:** full size, feet at `[87.5, 84]`: in front of the bench's right end, his feet 3.3% lower than the bench's front legs, so by the depth rule he stands in front of it.  Overlapping the bench is allowed here (Nathan, 2026-11-22, option 1).  He must stay fully on screen and clear of the chain.
+    - The original v0.1 text follows for the record:    In both layouts, at the 1b.2 size (2.01 times the bench height), standing in the doorway in front of his truck, his feet on the sill or the room floor just in front of it, following the depth rule.  He is drawn in front of the truck and the doorway frame.  He must not overlap the bench or the chain, and he stays fully on screen.
 4. **His walk.**  He still walks in from the doorway after the truck settles, now only a short way, and walks back out before the truck leaves.  Keep the timings.
 5. Every number in `js/config.js`.  Bump `GW.VERSION` to `0.2.0-draft.74`, run `node tools/stamp.js`, add a `CHANGELOG.md` entry, run `node tools/smoke-test.js`.
 6. **Screenshots** into `tools/out/` with `?ship=1`, truck and driver in place: wide Day, wide Night, tall Day, tall Night, plus close crops of his feet in each layout (Day).  List them in the Result.
