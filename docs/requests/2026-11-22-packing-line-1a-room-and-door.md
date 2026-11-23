@@ -1,7 +1,7 @@
 # Work order: Packing Line 1a, the shipping room and door (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (keep it hidden behind `?ship=1`).
 **Model:** Opus 5.5
 
 ## Goal
