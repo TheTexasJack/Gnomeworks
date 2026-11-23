@@ -235,7 +235,7 @@ body {
 .ship-slip .slip-note-text { left: 13%; right: 13%; top: 20cqh; bottom: 18cqh; display: flex; align-items: center; justify-content: center; text-align: center; font: bold 8.5cqw/1.3 var(--font); }
 #ship .ship-slip-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-slip-view[hidden] { display: none; }
-/* packing (1d): the active slip glows, packed slips get a check.  The box, the stamp tray, and the stack draw in
+/* packing (1d): the active slip glows, packed slips get a check.  The box and the stack draw in
    front of the driver; places and sizes come from CONFIG.shipping.layouts.<layout> and .pack. */
 #ship .ship-board .ship-slip.is-active { transform: translateY(-4%) scale(1.06); filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 2px #ffd34d) drop-shadow(0 0 5px #ffb703); }
 .night #ship .ship-board .ship-slip.is-active { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 2px #ffd34d) drop-shadow(0 0 5px #ffb703); }
@@ -261,16 +261,9 @@ body {
 #ship .box-mark { position: absolute; left: var(--mark-x); top: var(--mark-y); width: var(--mark-w); height: auto;
   transform: translate(-50%, -50%) rotate(var(--mark-tilt)); pointer-events: none; opacity: 1; z-index: 1;
   filter: drop-shadow(0 .6cqw .5cqw rgba(0,0,0,.45)); }
-/* a stamped box draws above the open box, the stack, the tray, and the driver, so its stamp is always in front */
+/* a stamped box draws above the open box, the stack, and the driver, so its stamp is always in front */
 #ship .ship-box.is-stamped { z-index: 3; }
-#ship .ship-tray { position: absolute; transform: translate(-50%, -100%); display: flex; justify-content: center; gap: 4%; padding: 1.2% 1.5%;
-  border-radius: 8px; background: linear-gradient(180deg, #5a3618, #3a2210); border: 2px solid var(--brass-dark);
-  box-shadow: inset 0 0 0 1px var(--brass), 0 .6vmin .8vmin rgba(0,0,0,.45); pointer-events: auto; }
-#ship .ship-tray[hidden] { display: none; }
-#ship .tray-stamp { flex: 1 1 0; min-width: 0; padding: 0; border: 0; background: none; cursor: pointer; }
-#ship .tray-stamp img { display: block; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 .3vmin .3vmin rgba(0,0,0,.5)); }
-#ship .tray-stamp:hover img { filter: brightness(1.12) drop-shadow(0 .3vmin .3vmin rgba(0,0,0,.5)); }
-/* the item menu: shelf-style tiles, scrolling inside itself */
+/* the two menus (the item menu 1d, the supplies menu 1g): shelf-style tiles, scrolling inside themselves */
 #ship .ship-menu { position: absolute; display: flex; flex-direction: column; isolation: isolate; z-index: 4;
   padding: calc(var(--frame-w, 24px) * .78) calc(var(--frame-w, 24px) * .92); filter: drop-shadow(0 6px 10px rgba(0,0,0,.55)); }
 /* the supply drawer frame (05a) as a nine-slice; its source and slice come from CONFIG.shipping.pack.menuFrame */
@@ -284,6 +277,28 @@ body {
 #ship .ship-tile { cursor: grab; user-select: none; -webkit-user-select: none; }
 #ship .ship-tile.is-off { opacity: .35; filter: grayscale(1); cursor: default; }
 #ship .ship-tile.is-lifted { opacity: .45; }
+#ship .ship-tile.is-held { transform: translateY(-3px) scale(1.06); box-shadow: 0 0 0 2px #ffd34d, 0 4px 8px rgba(0,0,0,.35); }
+#ship .supply-tile { border-color: var(--brass-dark); }
+.supply-icon { display: inline-flex; align-items: center; justify-content: center; }
+.supply-icon img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.45)); }
+/* the computer (1g): an invisible tap area over the painted one */
+#ship .ship-computer { position: absolute; cursor: pointer; }
+/* the room's tips (1g): the belt and the computer's screen glow like the ready chain: the room art again, cut to
+   their outlines and brightened, with a gold glow that breathes (steady with reduced motion).  The belt's tag
+   shares the chain tag's brass look.  With instructions off (the no-hints class), no tip shows. */
+#ship .ship-glow { position: absolute; inset: 0; pointer-events: none;
+  filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 5px #ffd34d) drop-shadow(0 0 12px #ffb703);
+  animation: tipPulse var(--tip-pulse, 1600ms) ease-in-out infinite alternate; }
+#ship .ship-glow .ship-room { filter: brightness(1.35) saturate(1.15); }
+#ship .ship-screen-glow .ship-room { filter: brightness(1.45) saturate(1.3); }
+#ship .ship-glow[hidden] { display: none; }
+@keyframes tipPulse { from { opacity: .55; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { #ship .ship-glow { animation: none; opacity: .9; } }
+#ship .ship-belt-tag { right: auto; }
+#ship .ship-belt-tag span { padding: 2.6cqw 3.4cqw; font-size: 7.6cqw; }
+.no-hints #ship .ship-tip { display: none !important; }
+.no-hints .ship-chain.is-ready { animation: none; }
+.no-hints .ship-chain.is-ready img { filter: drop-shadow(.3vmin .5vmin .4vmin rgba(0,0,0,.45)); }
 .ship-ghost { position: fixed; z-index: 1000; pointer-events: none; transform: translate(-50%, -50%) scale(1.1); filter: drop-shadow(0 6px 6px rgba(0,0,0,.5)); }
 .ship-ghost.touch { transform: translate(-50%, -115%) scale(1.25); }   /* above the finger, so it shows */
 .ship-ghost .item-icon { width: 56px; height: 56px; font-size: 2.6rem; }

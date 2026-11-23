@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.86';
+GW.VERSION = '0.2.0-draft.87';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -145,14 +145,20 @@ GW.CONFIG = {
         board: [32.3, 41.1, 17.9, 12.7],
         // Packing (1d), all in % of the room.  conveyor = the painted belt's tap area [x, y, w, h].  box = the open box
         // on the bench: x is its center, y the bottom of its square canvas (the art's own shadow margin sits below the
-        // box), h its height.  It stands right of the order board, clear of the slips.  tray = the stamp tray beside
-        // it on the bench (x center, y bottom, w width).  stack = where packed boxes go, on the floor at the truck's
-        // rear (x, y, h as for box), and spots = each packed box's place in the stack, in box widths and heights
-        // from (x, y), with a small tilt in degrees.  menu = the item menu [x, y, w, h]: the wide room is short, so it
-        // covers the left half (the desk and the board) and leaves the box, the tray, and the stack in view.
+        // box), h its height.  It stands right of the order board, clear of the slips.  stack = where packed boxes go,
+        // on the floor at the truck's rear (x, y, h as for box), and spots = each packed box's place in the stack, in
+        // box widths and heights from (x, y), with a small tilt in degrees.  menu = where both menus open [x, y, w, h]:
+        // the wide room is short, so it covers the left half (the desk and the board) and leaves the box and the
+        // stack in view.
+        // The room's tips (1g): belt = the painted belt's outline (it glows at the start of a trip), beltTag = its tag
+        // [x of its left edge, y of its center, width].  computer = the painted computer on the desk: hit = its tap
+        // area [x, y, w, h] (the monitor and the keyboard, measured from the Day room: x 197 to 341, y 419 to 540 of
+        // 1600 x 901), screen = the green glass's outline, which glows while a closed box waits for its stamp.
         conveyor: [0, 84, 84, 16],
+        belt: [[0, 84.1], [77.5, 84.1], [80.6, 84.7], [82.8, 86.4], [84.1, 89.2], [84.6, 92.5], [84.6, 100], [0, 100]],
+        beltTag: [2, 80.4, 27],
+        computer: { hit: [12.3, 46.4, 9.1, 13.6], screen: [[15.1, 48.1], [19.8, 48.1], [19.9, 54.7], [15.0, 54.7]] },
         box: { x: 57, y: 66.4, h: 24 },
-        tray: { x: 67.6, y: 63.4, w: 6.2 },
         stack: { x: 77.6, y: 84, h: 16, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
         menu: [1, 2, 50, 95],
         // Hand-off (1e), in % of the room.  finishTag = the "Pull to ship!" tag beside the chain's handle: [x of its
@@ -185,12 +191,15 @@ GW.CONFIG = {
         // 48.3).  The parked truck covers the frame from x 63.7, so the board ends at 62 and every slip, stamp
         // corner included, sits clear of the truck (1c-2 addendum).
         board: [32.4, 39.2, 29.6, 8.5],
-        // Packing (1d), as in the wide room.  The box sits on the bench left of center, the tray beside it, and the
-        // stack on the floor at the bench's right end, in front of the driver (the box has the stage).  The menu
-        // covers the top of the room, so the board and the box stay in view under it.
+        // Packing (1d), as in the wide room.  The box sits on the bench left of center, and the stack on the floor at
+        // the bench's right end, in front of the driver (the box has the stage).  The menus cover the top of the room,
+        // so the board and the box stay in view under them.  The tips and the computer (1g) as in the wide room; the
+        // computer runs x 44 to 183, y 770 to 897 of 900 x 1599.
         conveyor: [0, 87, 100, 13],
+        belt: [[0, 87.3], [86, 87.3], [91.5, 87.7], [95.5, 89], [98.5, 91.5], [100, 94], [100, 100], [0, 100]],
+        beltTag: [3, 83.6, 62],
+        computer: { hit: [4.9, 48.1, 15.4, 8.1], screen: [[9.4, 49.3], [18.0, 49.3], [18.0, 53.1], [9.4, 53.1]] },
         box: { x: 38, y: 71.4, h: 17 },
-        tray: { x: 63.5, y: 69.6, w: 15 },
         stack: { x: 78, y: 92, h: 11.5, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
         menu: [2, 1, 96, 37],
         // Hand-off (1e), as in the wide room.  stonks: the glass runs x 282 to 630, y 414 to 571 of 900 x 1599.
@@ -260,15 +269,24 @@ GW.CONFIG = {
     // Packing (layer 1d).  Orders are packed one at a time, left to right; the box on the bench belongs to the
     // active order.  A tap on the conveyor opens the item menu (the junk `groups`, in shelf order).  Dragging a tile
     // with more than orders.keep on the shelf onto the open box puts the whole pile in, down to the display copy.
+    // A tap on the computer opens the supplies menu (1g): `supplies.sections` in order, each with a heading, an
+    // empty one not shown.  Layer 1 has only Stamps (the `stamps` below).  Dragging a stamp onto a closed box
+    // stamps it; dropped on an open box it only shakes the box (`shake`).  menuLabel and supplies.label name the
+    // two menus for screen readers.
     // Nothing ships and the shelf does not change until the hand-off (1e).
     pack: {
+      menuLabel: 'Junk from the conveyor',
+      supplies: { label: 'Supplies from the computer', sections: [{ id: 'stamps', name: 'Stamps' }] },
+      // The box shaking off something meant for the other side: `times` swings `pct` % of its width each way over
+      // `ms`.  Reduced motion: one small swing (calmPct, calmTimes).
+      shake: { pct: 4, times: 3, ms: 420, calmPct: 1.5, calmTimes: 1 },
       groups: ['laundry', 'bathroom', 'office', 'workshop', 'kitchen', 'toys', 'inventions', 'random'],
       stamps: ['gnomerica'],              // the region stamps the player has (layer 1: Gnomerica's only)
       boxOpen: 'assets/packing/box_plain_open.webp',
       boxClosed: 'assets/packing/box_plain_closed.webp',
       // On the box's front face, in % of its square canvas: label = [x center, y center, width] (the item's picture,
       // shown only while the box is open and filled), mark = the stamp once stamped [x center, y center, width,
-      // tilt in degrees], drawn solid and on top of the box, the stack, the tray, and the driver.
+      // tilt in degrees], drawn solid and on top of the box, the stack, and the driver.
       // The mark sits in the postage corner (box face v0.3, docs/DESIGNS.md): the box art fills x 55 to 345 and
       // y 53 to 346 of the 400 x 400 canvas, its front face runs 3 to 97% across and 21 to 97% down that art, and
       // the stamp (10% of the box's width, straight) sits 4.5% of the box's width in from the face's top and right.
@@ -304,6 +322,14 @@ GW.CONFIG = {
     // `text` until it is pulled (draft wording, Claudia).  swayDeg = how far it swings each way, swayMs = one swing.
     // Reduced motion: the glow and the tag, no sway.
     finish: { text: 'Pull to ship!', swayDeg: 1.6, swayMs: 1400 },
+    // The room's other tips (1g), draft wording (Claudia).  belt = the tag beside the glowing belt at the start of a
+    // trip.  pulseMs = one breath of the belt's and the computer's glow (none with reduced motion).  setting = the
+    // instructions setting's label while the Packing Line shows (every tip in the room follows it).
+    tips: {
+      belt: 'Tap the belt to fill the box!',
+      pulseMs: 1600,
+      setting: 'Show instructions (the big signs during events, and the Packing Line\'s tips)'
+    },
     // The report card (09), shown over the room once the door has closed.  aspect = the paper's width / height;
     // openSize = its largest height and width (% of the room's), as for an open slip.  Places on the card, in %
     // of the card, measured from the master (1199 x 1312): rows = each row's top and bottom, box = the tick box's

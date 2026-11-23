@@ -60,8 +60,10 @@ async function restCheck(page, errors) {
   console.log(`resting: rate ${Math.round(rate)}/s, room ${secs.toFixed(1)}s paid ${Math.round(paid)}, reload ${secs2.toFixed(1)}s paid ${Math.round(paid2)}`);
 }
 
-// Packing (1d): open the door, drag each order's item from the conveyor menu into the box, close it, stamp it.
-// The record must match the orders, the shelf must not change, and closing the door clears it all.
+// Packing (1d, 1g): open the door, drag each order's item from the conveyor menu into the box, close it, and drag the
+// stamp from the computer's supplies menu onto it.  The record must match the orders, the shelf must not change,
+// and closing the door clears it all.  On the way: the belt's tip shows until the item menu opens, the computer
+// glows while a closed box waits, a stamp dropped on an open box only shakes it, and instructions off hides every tip.
 async function packCheck(page, errors) {
   const fail = m => errors.push('packing: ' + m);
   const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
@@ -74,19 +76,47 @@ async function packCheck(page, errors) {
   await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
   const orders = await page.evaluate(() => GW.ship.orders().map(o => o.item.id));
   const shelf = await page.evaluate(() => JSON.stringify(GW.game.s.items));
-  for (const id of orders) {
-    c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
-    if (!await page.evaluate(() => GW.ship.menuOpen())) { fail('the conveyor did not open the menu'); return; }
-    await page.locator(`.ship-tile[data-item="${id}"]`).scrollIntoViewIfNeeded();
-    const a = await mid(`.ship-tile[data-item="${id}"]`), b = await mid('.ship-box:not(.is-stacked)');
+  const shown = sel => page.evaluate(q => { const el = document.querySelector(q); return !!el && !el.hidden && getComputedStyle(el).display !== 'none'; }, sel);
+  const dragTo = async (from, to) => {
+    await page.locator(from).scrollIntoViewIfNeeded();
+    const a = await mid(from), b = await mid(to);
     await page.mouse.move(a.x, a.y); await page.mouse.down();
     for (let i = 1; i <= 8; i++) await page.mouse.move(a.x + (b.x - a.x) * i / 8, a.y + (b.y - a.y) * i / 8);
     await page.mouse.up();
+  };
+  if (!await shown('.ship-belt-glow') || !await shown('.ship-belt-tag')) fail('the belt tip did not show at the start of the trip');
+  await page.evaluate(() => document.documentElement.classList.add('no-hints'));
+  if (await shown('.ship-belt-glow') || await shown('.ship-belt-tag')) fail('the belt tip showed with instructions off');
+  await page.evaluate(() => document.documentElement.classList.remove('no-hints'));
+  // A stamp dropped on the open, empty box does nothing.
+  c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+  if (await page.evaluate(() => GW.ship.menuKind()) !== 'supplies') { fail('the computer did not open the supplies menu'); return; }
+  if (await page.$$eval('.ship-menu-supplies .ship-menu-head', h => h.map(x => x.textContent).join()) !== 'Stamps') fail('the supplies menu does not show just Stamps');
+  await dragTo('.supply-tile', '.ship-box:not(.is-stacked)');
+  if (await page.evaluate(() => GW.ship.boxState()) !== 'open') fail('a stamp changed an open box');
+  // The conveyor's uncovered end switches menus straight from the supplies menu.
+  const cv = await page.locator('.ship-conveyor').boundingBox();
+  await page.mouse.click(cv.x + cv.width * 0.92, cv.y + cv.height * 0.5);
+  if (await page.evaluate(() => GW.ship.menuKind()) !== 'items') fail('the conveyor did not switch from the supplies menu');
+  await page.keyboard.press('Escape');
+  for (const id of orders) {
+    c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
+    if (await page.evaluate(() => GW.ship.menuKind()) !== 'items') { fail('the conveyor did not open the item menu'); return; }
+    if (await shown('.ship-belt-glow') || await shown('.ship-belt-tag')) fail('the belt tip stayed after the item menu opened');
+    if (await page.isVisible('.ship-menu-supplies')) fail('two menus open at once');
+    await dragTo(`.ship-tile[data-item="${id}"]`, '.ship-box:not(.is-stacked)');
     await page.keyboard.press('Escape');
+    const b = await mid('.ship-box:not(.is-stacked)');
     await page.mouse.click(b.x, b.y);                                     // close the box
     if (await page.evaluate(() => GW.ship.boxState()) !== 'closed') { fail('the filled box did not close'); return; }
-    c = await mid('.tray-stamp'); await page.mouse.click(c.x, c.y);
-    await page.waitForFunction(() => GW.ship.boxState() !== 'stamped', null, { timeout: 4000 });
+    if (!await shown('.ship-screen-glow')) fail('the computer did not glow beside a closed box');
+    c = await mid('.ship-computer'); await page.mouse.click(c.x, c.y);
+    if (await page.evaluate(() => GW.ship.menuKind()) !== 'supplies') { fail('the computer did not open the supplies menu'); return; }
+    c = await mid('.supply-tile'); await page.mouse.click(c.x, c.y);   // a tap on the tile alone does nothing
+    if (await page.evaluate(() => GW.ship.boxState()) !== 'closed' || !await page.evaluate(() => GW.ship.menuOpen())) fail('a tap on the stamp tile did something');
+    await dragTo('.supply-tile', '.ship-box:not(.is-stacked)');
+    await page.waitForFunction(() => GW.ship.boxState() !== 'stamped' && GW.ship.boxState() !== 'closed', null, { timeout: 4000 });
+    await page.keyboard.press('Escape');
   }
   const rec = await page.evaluate(() => GW.ship.packed());
   if (rec.length !== orders.length || rec.some((r, i) => !r || r.item !== orders[i] || r.count !== 4999 || r.stamp !== 'gnomerica')) fail('record wrong: ' + JSON.stringify(rec));

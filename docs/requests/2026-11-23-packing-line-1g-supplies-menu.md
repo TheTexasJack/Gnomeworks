@@ -1,6 +1,6 @@
 # Work order: Packing Line 1g, the supplies menu and the room's tips (v0.2)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("your rules are ok"; the belt cue and the tips setting are his additions).
 
 **v0.2 (2026-11-23):** step 6a, the belt glows at the start with a note, and every cue in the room follows the instructions setting (Nathan).
@@ -62,4 +62,39 @@ The first step of the supplies layer.  The computer on the left desk becomes the
 - The smoke test passes, packing with both menus, and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.87**.  Smoke test: all clear, desktop and phone.
+
+**What was built**
+
+- **Step 2, the button.**  `.ship-computer`, an invisible tap area over the painted monitor and keyboard, measured from the room art: wide x 12.3 to 21.4%, y 46.4 to 60% (the order's estimate was close); tall x 4.9 to 20.3%, y 48.1 to 56.2% (higher than the order's estimate of y 53 to 61, which landed on the desk top).  In `CONFIG.shipping.layouts.<layout>.computer.hit`.  A trusted tap opens the supplies menu whenever the room shows, as the conveyor does.
+- **Step 3, the menu.**  The item menu's code now builds both menus (`buildMenu(kind)`): the same place, size, 05a frame, scrolling, and finger and mouse drag.  Opening one closes the other.  A tap on the other menu's button switches straight to it (the tap-outside handler lets the two buttons through); a tap on the open menu's own button closes it, as a tap on the conveyor did before.  Layer 1 shows one section, **Stamps**, with Gnomerica's stamp; empty sections are skipped (`pack.supplies.sections`).
+- **Step 4, stamping.**  Dragging the stamp onto a closed box calls the same `stampBox()` the tray used, so the spot, the solid mark, the thump, the set-aside, and the next box are unchanged.  The box glows as a drop target only when the drop would work.  A tap outside the menu, or Escape, closes it.  A pressed tile lifts slightly (`is-held`) to show it is picked up; a tap with no drag does nothing else.
+- **Step 5, the wrong side.**  A stamp dropped on an open box gives it a shake: 3 swings of 4% of its width over 420 ms (`pack.shake`).
+- **Step 6, the computer's cue.**  The screen glass glows while the box on the bench is closed and unstamped.
+- **Step 6a, the tips.**  At the start of each trip, once the first empty box is on the bench, the belt glows and a brass tag left of the box reads **"Tap the belt to fill the box!"** (Claudia's draft wording, unchanged).  Both go away the first time the item menu opens on that trip.  The belt and screen glows are the room art again, cut to the belt's and the glass's outlines, brightened, with the chain's gold glow, breathing over 1.6 s (`tips.pulseMs`).  Every tip (belt glow and tag, screen glow, chain glow and sway, "Pull to ship!") carries `.ship-tip` and is hidden by the `no-hints` class; with instructions off the room plays the same.  The label reads "Show instructions (the big signs during events, and the Packing Line's tips)" (Claudia's draft wording).  Reduced motion: the glows hold steady at 90%, and the chain stays as before (glow, no sway).
+- **Step 7.**  The stamp tray, its config (`layouts.<layout>.tray`), its CSS, and its code are gone.  Nothing else about the box changed.
+- **Step 8.**  Every word and number is in `js/config.js` (`pack.menuLabel`, `pack.supplies`, `pack.shake`, `tips`, and the `belt`, `beltTag`, and `computer` entries per layout).  `GW.VERSION` 0.2.0-draft.87, stamped, CHANGELOG entry, ARCHITECTURE, DESIGNS, TASKS, and HANDOFF updated.  The smoke test's packing run now checks the belt tip at the start and its hiding with instructions off, a stamp dropped on an open box leaving it open, the conveyor switching straight from the supplies menu, the belt tip going away once the item menu opens, the computer glowing beside a closed box, a tap on the stamp tile doing nothing, and every order stamped by dragging from the supplies menu.
+
+**Calls to check**
+
+1. **The setting's label** changes only while the Packing Line shows (`?ship=1` or `shipping.enabled`).  For everyone else it keeps the old wording, so the label does not name a feature players cannot see yet.  The label's text now sits in a `<span id="hintsLabel">` in `index.html`; the new wording is in `CONFIG.shipping.tips.setting`.
+2. **Junk dropped on a closed box** still does nothing, with no shake.  The rules give the shake to an outside mark on an open box and to an inside *supply* on a closed one; junk is not a supply, and the order says not to change the item menu's behavior.  One line in `menuUp()` if Nathan wants junk to shake too.
+3. **Reduced motion and the shake:** one small swing (1.5%) in place of no motion, so a tester with reduced motion on still sees the stamp was refused.
+4. **In the wide room the open menu covers the conveyor's left half**, as the item menu always has.  The belt's right part (x 51 to 84%) stays tappable, so the switch works from either menu.  The menu covers the computer in the wide room too, so going from the item menu to the supplies menu there takes a tap outside first (or Escape), then the computer.  On the phone both buttons stay in view.
+5. **The pressed-tile lift (`is-held`)** applies to both menus, since the rule covers both; it is the only change a player could see in the item menu.
+
+**Screenshots** in `tools/out/` (`?ship=1`, Day, 2x; not committed).  `wide` is 1400 x 900, `tall` is 390 x 844.  The glow shots were taken with reduced motion so the glow is caught steady.
+
+- `1g-<wide|tall>-day-belt-tip.png`: the belt glowing with its tag at the start of a trip.
+- `1g-<wide|tall>-day-instructions-off.png`: the same moment with instructions off.
+- `1g-<wide|tall>-day-computer-glow.png`: the computer glowing beside a closed box.
+- `1g-<wide|tall>-day-supplies-menu.png`: the supplies menu open.
+- `1g-<wide|tall>-day-stamp-drag.png`: the stamp mid-drag over the box (full page).
+- `1g-<wide|tall>-day-stamped.png`: the stamped box.
+- `1g-<wide|tall>-day-shake-open-box.png`: a stamp dropped on an open box, caught mid-shake.
+
+**Build time:** about 10 minutes of wall clock, from reading this order (11:43 CST) to the final smoke test (11:53 CST); the commit follows.  The exact time Claude Code reports appears in Nathan's terminal at the end of the session.
+
+Nothing was installed.  The item menu's behavior (apart from the pressed-tile lift), the board, scoring, the truck, the driver, the chain, and the door are unchanged.
 

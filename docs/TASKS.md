@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.86.
+Last updated 2026-11-23, at v0.2.0-draft.87.
 
 ## Where we are
 
@@ -78,11 +78,11 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-2: three Gnomerica work orders on the order board, tap to read full size; on phones the board ends left of the parked truck (draft.79).
     - [x] 1d.1 (draft.82): the box label shows only the item's picture, a closed box shows none, the stamp lands bold and on top, and the item menu sits on the supply drawer frame (05a) (Nathan's test of draft.81).
     - [x] 1d.2 (draft.83): the region stamp sits small and straight in the box's upper right corner, the same gap from the top and the right (box face v0.3).
-    - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
+    - [x] **Built in 1g (draft.87) (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
     - [x] 1f (draft.86): the leave warning, and the GRIP line uses the whole screen.
-    - [ ] 1g (approved v0.2): the computer opens the supplies menu (stamps for now), and the belt and every tip follow the instructions setting.
+    - [x] 1g (draft.87): the computer opens the supplies menu (stamps for now), the stamp tray is gone, and the belt and every tip follow the instructions setting.
     - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").

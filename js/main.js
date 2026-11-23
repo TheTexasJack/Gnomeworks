@@ -480,6 +480,8 @@ window.GW = window.GW || {};
   function applyHints(on) { document.documentElement.classList.toggle('no-hints', !on); }
   var hintsPref = true; try { hintsPref = localStorage.getItem('gnomeworks.hints') !== 'off'; } catch (e) {}
   hintsOn.checked = hintsPref; applyHints(hintsPref);
+  // While the Packing Line shows, the label covers the room's tips too (they follow this setting, 1g).
+  if (GW.ship.enabled()) document.getElementById('hintsLabel').textContent = C.shipping.tips.setting;
   hintsOn.addEventListener('change', function () {
     try { localStorage.setItem('gnomeworks.hints', hintsOn.checked ? 'on' : 'off'); } catch (e) {}
     applyHints(hintsOn.checked); SFX.click();
