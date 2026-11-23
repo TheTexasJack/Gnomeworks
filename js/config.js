@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.70';
+GW.VERSION = '0.2.0-draft.71';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -99,6 +99,11 @@ GW.CONFIG = {
   // Each layout has the closed room, its open twin (same size, only the door differs), and the chain:
   // x = the chain's center (% of room width), top (% of room height), h = chain height (% of room height),
   // hitW = width of the invisible tap area around the thin chain (% of room width), so a finger can find it.
+  // doorway = the opening just inside the door frame, [x %, y %] corners clockwise from top left; the truck
+  // shows only inside it.  Traced from where the closed and open twins differ (both themes agree within 1%).
+  // truck: h = height (% of room height), top (% of room height), xFrom / xTo = its left edge (% of room width)
+  // before it slides in and where it stops.  driver: h (% of room height), from / to = [x of his center %,
+  // y of his feet %] as he walks in from the doorway, fromScale = his size at the doorway (farther away).
   shipping: {
     enabled: false,
     testParam: 'ship',                      // ?ship=1 shows the view for testing
@@ -106,12 +111,34 @@ GW.CONFIG = {
     layouts: {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
-        chain: { x: 76.0, top: 5, h: 59, hitW: 4 }
+        chain: { x: 76.0, top: 5, h: 59, hitW: 4 },
+        doorway: [[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]],
+        truck: { h: 60, top: 22.6, xFrom: 93, xTo: 80.5 },
+        driver: { h: 32, from: [86.5, 74], to: [87, 92], fromScale: 0.8 }
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
-        chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 }
+        chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
+        doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
+        truck: { h: 28, top: 41.5, xFrom: 95, xTo: 78 },
+        driver: { h: 16, from: [86, 65], to: [89, 85], fromScale: 0.8 }
       }
+    },
+    // Layer 1 has one region: Gnomerica's truck and driver (waiting pose).
+    truck: { img: 'assets/packing/truck_gnomerica.webp' },
+    driver: { img: 'assets/packing/driver_gnomerica_waiting.webp' },
+    // A trip: the door opens, the truck backs in and settles, then the driver walks in.  Closing reverses it,
+    // and the door shows closed once the truck is gone.  Taps on the chain mid-trip are ignored.
+    trip: {
+      truckInMs: 1600,      // the truck sliding in from the right
+      settleMs: 450,        // the small settle bounce when it stops
+      settle: 1.2,          // how far it dips, as a share of its height (%)
+      walkDelayMs: 150,     // pause between the truck stopping and the driver setting off
+      walkMs: 1400,         // the driver walking in (and out)
+      stepMs: 280,          // one step of his walking bob
+      bob: 3,               // how high each step lifts him, as a share of his height (%)
+      truckOutMs: 1300,     // the truck sliding away
+      closeDelayMs: 200     // after the truck is gone, then the door shows closed
     },
     chain: {
       img: 'assets/packing/chain.webp',

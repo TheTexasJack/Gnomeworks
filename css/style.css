@@ -121,6 +121,11 @@ body {
 #ship .ship-room { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
 #ship .ship-open { visibility: hidden; }
 #ship.is-open .ship-open { visibility: visible; }
+/* the bay is clipped to the doorway (clip-path set from CONFIG.shipping), so the truck shows only through the opening */
+#ship .ship-bay { position: absolute; inset: 0; pointer-events: none; }
+#ship .ship-truck { position: absolute; width: auto; user-select: none; visibility: hidden; }
+#ship .ship-driver { position: absolute; transform-origin: 50% 100%; pointer-events: none; opacity: 0; }
+#ship .ship-driver img { display: block; height: 100%; width: auto; user-select: none; filter: drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
 .ship-chain { position: absolute; transform: translateX(-50%); display: flex; justify-content: center; cursor: pointer; touch-action: none; }
 .ship-chain img { display: block; height: 100%; width: auto; flex: none;user-select: none; pointer-events: none; filter: drop-shadow(.3vmin .5vmin .4vmin rgba(0,0,0,.45)); }
 .ship-chain.pull img { animation: chainPull var(--pull-ms, 450ms) ease-out; }

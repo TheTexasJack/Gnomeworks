@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b, Gnomerica's truck and driver arrive (v0.2)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b approved").
 **Model:** Opus 5.5
 
@@ -42,4 +42,53 @@ When the door opens, Gnomerica's truck slides in from the right and backs up to 
 - The smoke test passes, and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-22 by Claude Code (Opus 5.5) on Beast.  Version **v0.2.0-draft.71**.  Still hidden: nothing shows without `?ship=1`.
+
+**Art (`assets/packing/`).**
+
+| File | Size | Weight | Made with |
+| --- | --- | --- | --- |
+| `truck_gnomerica.webp` | 971x560 | 160 KB | `art.py resize --height 560` |
+| `driver_gnomerica_waiting.webp` | 278x400 | 37 KB | `art.py resize --height 400` |
+
+`art.py` had no command that keeps a canvas as drawn (`sheet` and `fit` both crop to the content), so I added `art.py resize`: it scales the whole picture with the same WebP settings and crops nothing.  The driver's three Gnomerica canvases are 723 to 724 px tall with the feet on one baseline.  When the happy and grumpy poses are resized to the same height (400), they'll line up with this one.  Both files are in `docs/ASSETS.md`, and `resize` is in its command table.
+
+**The doorway (step 3).**  The raw closed/open difference was patchy, because the door and the concrete have similar colours in places.  So I took its filled outer shape and fitted exactly four corners to it.  Day and night came out within 1% of each other in both layouts.  I then nudged each corner slightly inward so the frame always stays in front.  Stored as `CONFIG.shipping.layouts.<layout>.doorway`:
+- Wide: `[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]`
+- Tall: `[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]`
+
+**Code.**
+- `js/shipping.js` now runs a trip with four states (`closed`, `arriving`, `here`, `leaving`, readable through `GW.ship.tripState()`).
+- The truck sits in `.ship-bay`, a full-room layer clipped to the doorway outline with `clip-path`.  The driver and the chain sit above it.  1a's door swap is unchanged: the open twin shows the moment the chain is pulled, and the closed twin returns after the truck has gone.
+- Motion uses the Web Animations API.  If the view is left mid-trip, it resets to closed.  If the layout switches mid-trip, it skips to where the trip was heading.
+- Reduced motion keeps the truck slide and the driver's walk, but drops the settle bounce and the step bob.
+- New in `CONFIG.shipping`: `doorway`, `truck` (`h`, `top`, `xFrom`, `xTo`), and `driver` (`h`, `from`, `to`, `fromScale`) for each layout, plus the image paths and a `trip` block with every timing and bounce size.
+- Arrival takes about 3.6 seconds from the pull to the driver standing still (truck 1.6 s, settle 0.45 s, a 0.15 s pause, walk 1.4 s).  Leaving takes about 2.9 seconds.
+
+**Placement calls (all numbers in config, easy to change):**
+- **Truck size:** in the wide room the truck's rear doors fill the opening.  The tall opening is narrow, so the truck there is sized to fit its rear doors across the opening, which leaves some concrete showing above it.
+- **Driver's standing spot:** he waits in front of the lower left of the doorway, clear of the chain so it stays easy to tap.  In the tall room he stands beside the end of the bench.  He fades in over the first fifth of his walk while growing from 0.8 to full size, so he seems to come out of the bay.  He walks out the same way.
+
+**Checks.**
+- `node tools/smoke-test.js`: "All clear." (v0.2.0-draft.71).
+- A scratch Playwright check (not committed) passed every item in all four layout and theme combinations with `?ship=1`:
+    - The room starts closed, and a chain pull starts the arrival.
+    - A second pull mid-arrival is ignored, and the trip still reaches `here`.
+    - Tapping the driver changes nothing and doesn't crank the machine.
+    - A pull sends them away; a pull mid-leaving is ignored; the trip ends closed with the truck and driver hidden.
+    - Leaving the view mid-trip resets it, and a second trip works.
+- The same check without `?ship=1` passed: the button stays hidden and the room is never built.
+- **Truck never outside the doorway:** I compared screenshots of the room with and without the truck (driver and chain hidden).  Outside the doorway outline, the only changed pixels are along its edges, at most 0.7 px from the line (edge smoothing).  The truck covers 12,000 pixels inside the doorway in the wide room and 7,000 in the tall room.
+
+**Screenshots for Nathan** (in `tools/out/` on Beast, all with `?ship=1`; wide = 1400x900, tall = 390x844):
+- `ship-wide-day-here.png`: truck and driver in place
+- `ship-wide-night-here.png`: the same at night
+- `ship-tall-day-here.png`: the same on a phone
+- `ship-wide-day-arriving.png`: mid-arrival, the truck sliding in behind the frame
+- Bonus: `ship-tall-night-here.png`
+
+**Not built (per the order):** work orders, drawer, items, stamps, report card, Stonks, the happy and grumpy poses, other regions, fakes.
+
+**Still open from 1a's review:** the three view buttons wrap on a 390px phone, and the chain ignores Space and Enter.
 

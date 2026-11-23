@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.70**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.71**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -30,7 +30,7 @@ Nathan's shipping mini-game.  The design is in [DESIGNS.md](DESIGNS.md#packing-l
 
 1. ~~Finish Claude Code's setup on Beast.~~  Done 2026-11-22: Claude Code runs as its own `gwcode` user behind Linux walls Nathan tested himself, with root-owned permission rules.  See [ENVIRONMENT.md](ENVIRONMENT.md#claude-code-on-nathans-machine-beast).
 2. ~~Run the first-run work order.~~  Done 2026-11-22 ([requests/2026-11-16-first-run-check.md](requests/2026-11-16-first-run-check.md)).
-3. Packing Line layer 1, one work order per step (1a to 1g, listed in [requests/2026-11-22-packing-line-1a-room-and-door.md](requests/2026-11-22-packing-line-1a-room-and-door.md)).  **1a is built (draft.70):** the Shipping view, the room, and the door chain, hidden from players behind `?ship=1` (`CONFIG.shipping.enabled` is false).  Next: 1b, the truck and driver.
+3. Packing Line layer 1, one work order per step (1a to 1g, listed in [requests/2026-11-22-packing-line-1a-room-and-door.md](requests/2026-11-22-packing-line-1a-room-and-door.md)).  **1a and 1b are built (draft.70, draft.71):** the Shipping view, the room, the door chain, and Gnomerica's truck and driver arriving and leaving, hidden from players behind `?ship=1` (`CONFIG.shipping.enabled` is false).  Next: 1c, the work orders on the order board.
 4. Later and optional: fold Mara's approved map stamps into `tools/map/build_map.py`.
 
 Our parcel company is **GRIP** (Gnuma Gnuma Regional Independent Parcels).  The rival is **TNP Corp** (The North Pole Corp).  Lore, the map (v0.29, gazetteer v0.27), trade, and region stamps are done; see lore/regions.md.

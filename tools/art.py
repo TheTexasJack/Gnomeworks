@@ -12,6 +12,8 @@ Commands
   pair    Cut a static/action pair (left half / right half) with one shared crop,
           so the two frames line up for the squish-and-boing swap.
   fit     Crop one picture to its content, pad it square, resize, save.
+  resize  Resize a whole picture without cropping, so its canvas stays as drawn
+          (poses that share a baseline, or room twins that must line up).
   cutout  Remove a solid black or white background (when an image comes back
           without transparency), then save as PNG for the other commands.
   gear    Count a gear's teeth and find its tooth phase (for js/gears.js).
@@ -23,6 +25,7 @@ Examples
   python3 tools/art.py pair incoming/tiny.png --names tiny_static tiny_action --out assets/crew
   python3 tools/art.py cutout incoming/badges.png --color black --out incoming/badges_clear.png
   python3 tools/art.py gear incoming/gear_brass_05.png
+  python3 tools/art.py resize art-masters/packing-line/25-drivers/driver-gnomerica-waiting.png --height 400 --out assets/packing/driver_gnomerica_waiting.webp
 """
 import argparse
 import math
@@ -145,6 +148,15 @@ def cmd_fit(args):
     save_webp(img.resize((args.size, args.size), Image.LANCZOS), args.out)
 
 
+def cmd_resize(args):
+    img = Image.fromarray(load(args.file))
+    if args.height:
+        w, h = round(img.width * args.height / img.height), args.height
+    else:
+        w, h = args.width, round(img.height * args.width / img.width)
+    save_webp(img.resize((w, h), Image.LANCZOS), args.out)
+
+
 def cmd_cutout(args):
     im = Image.open(args.file).convert('RGBA')
     a = np.array(im)
@@ -214,6 +226,12 @@ def main():
     f.add_argument('file'); f.add_argument('--out', required=True)
     f.add_argument('--size', type=int, default=256); f.add_argument('--pad', type=float, default=0.06)
     f.set_defaults(fn=cmd_fit)
+
+    r = sub.add_parser('resize')
+    r.add_argument('file'); r.add_argument('--out', required=True)
+    rs = r.add_mutually_exclusive_group(required=True)
+    rs.add_argument('--width', type=int); rs.add_argument('--height', type=int)
+    r.set_defaults(fn=cmd_resize)
 
     k = sub.add_parser('cutout')
     k.add_argument('file'); k.add_argument('--out', required=True)
