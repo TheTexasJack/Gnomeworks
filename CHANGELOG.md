@@ -4,6 +4,7 @@ Every change gets a new version number.  Newest at the top.
 
 ## v0.2.0-draft.69 (2026-11-15)
 
+- Smoke test: cancelled image loads no longer count as missing files.
 - Phones held sideways get their own layout (Nathan's bug: in landscape the machine was tiny and the clipboard list had almost no room).  The banner slims to a thin strip, the machine fills the height with the next-item gauge and crew beside it, the Shop Floor sizes to fit with its bar underneath, and the clipboard drops its clip and nameplate so the list gets the space.  Applies to any landscape screen 540px tall or less; the numbers live in `layout` in config.
 
 ## v0.2.0-draft.68 (2026-11-08)

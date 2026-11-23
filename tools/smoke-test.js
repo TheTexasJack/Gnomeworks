@@ -26,7 +26,11 @@ fs.mkdirSync(OUT, { recursive: true });
     const page = await ctx.newPage();
     page.on('pageerror', e => errors.push(`${name} page error: ${e.message}`));
     page.on('console', m => { if (m.type() === 'error') errors.push(`${name} console: ${m.text()}`); });
-    page.on('requestfailed', r => errors.push(`${name} missing file: ${r.url()}`));
+    page.on('requestfailed', r => {
+      const why = (r.failure() && r.failure().errorText) || 'unknown';
+      if (why === 'net::ERR_ABORTED') return;  // the page cancelled the load (image removed before it finished); the file exists
+      errors.push(`${name} missing file: ${r.url()} [${why}]`);
+    });
 
     await page.goto(URL + '?debug=1');
     await page.waitForTimeout(500);
