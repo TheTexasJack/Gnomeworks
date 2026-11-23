@@ -38,7 +38,7 @@ Ctrl+Shift+R forces a fresh copy after a push.  On Android Chrome, clear "Cached
 | Tool | Used for | Install |
 | --- | --- | --- |
 | Python 3 + Pillow + numpy + scipy | `tools/art.py`, the art pipeline | `pip install pillow numpy scipy` |
-| Python 3 + numpy + OpenCV (`cv2`) | `tools/map/build_map.py`, the generated map | `pip install numpy opencv-python` |
+| Python 3 + numpy + OpenCV (`cv2`) + scikit-image (`skimage`) | `tools/map/build_map.py`, the generated map | Beast: `sudo apt install python3-numpy python3-opencv python3-skimage`.  Elsewhere: `pip install numpy opencv-python scikit-image` |
 | Node 18+ + Playwright (Chromium) | `tools/smoke-test.js`, headless testing and screenshots | `npm install playwright` then `npx playwright install chromium` |
 | git | Everything else | |
 | GIMP | Hand fixes to art (Nathan) | |
@@ -97,7 +97,7 @@ Set up 2026-11-22 (hard-stop setup v1.2, walls verified the same day).  Claude C
 | Permission rules | `/etc/claude-code/managed-settings.json`, owned by root (gwcode can read it, never change it).  Ask-first by default, skip-all mode off, claude.ai connectors off, deny rules for sudo, su, `rm -rf`, force push, hard reset, and the credential and SSH files.  It applies to every Claude Code on Beast. |
 | MCP | Only the built-in `easel` chart tool (reads no files).  claude.ai connectors are disabled. |
 | Launcher | "GW Claude Code" in the menu (`/home/nathan1/.local/bin/gw-claude-code` v2.0), outside gwcode's reach.  It shows the Claudia reminder and runs Claude Code as gwcode in `/srv/GW`. |
-| Tools | Node 24 LTS (NodeSource apt), Playwright installed globally (`NODE_PATH` set in gwcode's `~/.profile`), Chromium in gwcode's own cache, Python 3.12 with numpy 1.26.4, scipy, Pillow, and OpenCV 4.6.0 from Mint's packages.  All system-wide, installed by Nathan. |
+| Tools | Node 24 LTS (NodeSource apt), Playwright installed globally (`NODE_PATH` set in gwcode's `~/.profile`), Chromium in gwcode's own cache, Python 3.12 with numpy 1.26.4, scipy 1.11.4, Pillow 10.2.0, OpenCV 4.6.0, and scikit-image from Mint's packages (versions from the first-run check, 2026-11-22).  All system-wide, installed by Nathan. |
 
 Rules for Claude Code on Beast:
 

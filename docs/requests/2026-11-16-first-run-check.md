@@ -1,6 +1,6 @@
 # Work order: first run check on Beast (v0.2)
 
-**Status:** Done
+**Status:** Reviewed (step 4 still to rerun)
 **Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** Nathan, 2026-11-22.
 
 ## Goal
@@ -68,4 +68,12 @@ The file exists and is a valid WebP.  The next two runs printed "All clear."  A 
 **Step 5.**  Only this file changed, committed and pushed.  No version bump.
 
 **Left open:** install scikit-image (and add it to ENVIRONMENT.md's tools table), rerun step 4, and decide whether to fix the flaky smoke test check.
+
+## Review (Claudia, 2026-11-22)
+
+Clean first lap: the order was followed exactly.  It reported, installed nothing, fixed nothing on its own, and changed only this file.
+
+- Tools match what Nathan installed.  The missing scikit-image was Claudia's gap in ENVIRONMENT.md, now added (`python3-skimage` on Beast).
+- The smoke test flake diagnosis is sound: `tools/smoke-test.js` line 29 treats every failed request as a missing file, including loads the page cancels (`net::ERR_ABORTED`).  That is a test bug, not a game bug.  It becomes a small work order of its own.
+- **Still to do:** after Nathan installs `python3-skimage`, rerun step 4 only (the map rebuild and `git status`) and add the result below.
 
