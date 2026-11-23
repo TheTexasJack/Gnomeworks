@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b, Gnomerica's truck and driver arrive (v0.2)
 
-**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
+**Status:** Reviewed and closed (Nathan's review led to 1b.1, 1b.2, 1b.3, and 1b.4)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b approved").
 **Model:** Opus 5.5
 
