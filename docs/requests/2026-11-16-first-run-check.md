@@ -1,6 +1,6 @@
 # Work order: first run check on Beast (v0.2)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** Nathan, 2026-11-22.
 
 ## Goal
@@ -35,4 +35,37 @@ Prove Claude Code on Beast can run the repo's tools and that they give the same 
 - This file is pushed with Status: Done.
 
 ## Result (filled in by Claude Code)
+
+Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.
+
+**Step 1.**  `git pull` brought in 5 changed files (CLAUDE.md, ENVIRONMENT.md, HANDOFF.md, this order).  `whoami`: `gwcode`.
+
+**Step 2, tool versions:**
+
+- Node: v24.22.3
+- Python 3: 3.12.3
+- numpy: 1.26.4
+- Pillow: 10.2.0
+- scipy: 1.11.4
+- OpenCV (`cv2`): 4.6.0
+- Playwright: 1.65.1, installed globally (`NODE_PATH=/usr/lib/node_modules`), with Chromium at `~/.cache/ms-playwright/chromium-1255/` (present and runs).
+- **Missing: scikit-image (`skimage`).**  `tools/map/build_map.py` needs it (line 179, `from skimage.measure import find_contours`), and ENVIRONMENT.md does not list it.  On Mint the system package is likely `python3-skimage`.  Not installed, per this order.
+
+**Step 3, smoke test: passes, with an intermittent failure.**  The first run failed with this, word for word:
+
+```
+desktop: ok  taps=27  items=4694  Gnomeworks v0.2.0-draft.69 · made for The Stoned Gnome
+phone: ok  taps=30  items=4473  Gnomeworks v0.2.0-draft.69 · made for The Stoned Gnome
+
+PROBLEMS:
+phone missing file: file:///srv/GW/Gnomeworks/assets/monsters/golem_glowing.webp
+```
+
+The file exists and is a valid WebP.  The next two runs printed "All clear."  A scratch copy of the test that also logs Playwright's failure reason failed 1 run in 5, on a different file: `desktop missing file: .../assets/monsters/owl_goopy.webp [net::ERR_ABORTED]`.  `ERR_ABORTED` means the browser cancelled the load, most likely because an item image was removed from the page before it finished loading.  So the test's `requestfailed` check also catches cancelled loads, which makes it flaky (about 1 run in 4 here).  It may not show in the cloud session if loads finish faster there.  A possible fix for a later order: skip `net::ERR_ABORTED` in that check, or report it separately.  Nothing in the repo was changed.
+
+**Step 4, map rebuild: skipped: missing scikit-image.**  `python3 tools/map/build_map.py` stopped at `ModuleNotFoundError: No module named 'skimage'` before writing anything.  `git status --short` came back clean, so nothing needed putting back.  Once `skimage` is installed, this step can be run again to do the numpy 1.26 vs 2.x byte-for-byte comparison.
+
+**Step 5.**  Only this file changed, committed and pushed.  No version bump.
+
+**Left open:** install scikit-image (and add it to ENVIRONMENT.md's tools table), rerun step 4, and decide whether to fix the flaky smoke test check.
 
