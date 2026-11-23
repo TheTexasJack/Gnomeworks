@@ -9,6 +9,8 @@ Nathan and the cloud Claude ("Claudia") design and review in chat.  Claude Code,
 3. Claude Code builds it, following [CLAUDE.md](../../CLAUDE.md), then fills in the **Result** section of the same file, commits, and pushes.
 4. Back in chat, Claudia pulls and reviews the work against the order.  Fixes become a new order or an addendum.
 
+**Handing an order over (Nathan, 2026-11-23):** Claudia ends her reply with the order's name, "is Approved and pushed ✅", then "`/clear`, then:" and a code block holding `git pull, then do the work order docs/requests/<file>.md`.  Full format in [HANDOFF.md](../HANDOFF.md#handing-a-work-order-to-nathan-his-format-2026-11-23).
+
 **Model choice (Nathan, 2026-11-22):** Claude Code runs on Opus 5.5 by default.  Fable 5.2 is available but uses far more of the plan, so each order names the model it needs, and Fable is saved for hard problems (tricky bugs, performance, anything Opus has already missed once).
 
 Only one builder works on a set of files at a time.  Always pull before starting.

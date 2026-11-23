@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.96**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.96**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -46,6 +46,26 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 **Beta 1 (Nathan, 2026-11-23):** the Packing Line behind `?ship=1` is called **Beta 1**.  The demo loop was done Monday morning, ahead of schedule, so work keeps going; pushes to Beta 1 are fine.  **Production post-mortem when Beta 1 is done (Nathan):** a post-mortem with every statistic we can get on how it was made: work orders, review rounds, commits, coding and build times, draft versions, and the delays between steps, from the work orders, git, and the chats.  The game is in a post-beta, pre-1.0 stage (Nathan, 2026-11-23).  Each Result records its build time from 1f on (the earlier ones are in the chat and the commit times).
 
 After Thanksgiving: the other three box types.  (The supplies rules, the garage-door roll, and APPROVED and DENIED are built: 1i, 1j, 1k, 1l.)
+
+## Start here next thread (Claudia, 2026-11-23, end of day)
+
+- **Beta 1 is a full loop** at draft.96: read the slip, stamp it APPROVED or DENIED, pack it (count, peanuts, bubble wrap, FRAGILE, HEAVY, region stamp, label), hand it to the driver, catch the elves, watch GRIP vs TNP, read the report card and shipping log.  16 work orders on 2026-11-23 (1c-2 to 1p), all reviewed.
+- **Small fix for the next order (1p review):** the Report Card clipboard should not glow after the card has just popped up on its own; treat the automatic card as opened, so only the Log glows after a shift.
+- **Next, in order:** (1) a design talk on Region 2, Gnohio: how it unlocks (how many good shifts, and whether the expedition idea comes now or later), safety stickers, its truck and driver placement pass, and the label as a reading challenge; (2) the Daily Cog, a self-contained build to run while Gnohio is discussed; (3) the parked list in TASKS.
+- **How Claudia reviews:** pull, run `NODE_PATH=$(npm root -g) node tools/smoke-test.js`, and take her own screenshots with Playwright in the cloud session (Claude Code's `tools/out/` stays on Beast and is not committed).  Stress-test text with the longest names (town "Grit Spit and Fellers", item "Fire Extinguisher").
+
+## Handing a work order to Nathan (his format, 2026-11-23)
+
+When an order is approved and pushed, end the reply with this, exactly, so he can paste it into Claude Code:
+
+    <order> is Approved and pushed ✅
+    `/clear`, then:
+
+    ```
+    git pull, then do the work order docs/requests/<file>.md
+    ```
+
+Nathan runs it, then pastes Claude Code's Result and his own test notes back into the chat.  Claudia reviews, rules on the order's "calls for Nathan" with her pick for each, and writes the next order.  Orders are Draft until Nathan approves; write his approval into the order (Status and "Approved by") before handing it over.  Claudia may push docs while Claude Code builds, but only new files or files the build won't touch, since both push to `main`.
 
 ## How the work flows now
 
