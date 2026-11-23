@@ -83,6 +83,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
     - [x] 1f (draft.86): the leave warning, and the GRIP line uses the whole screen.
     - [x] 1g (draft.87): the computer opens the supplies menu (stamps for now), the stamp tray is gone, and the belt and every tip follow the instructions setting.
+    - [ ] 1h (approved): orders ask for a count set by the item's tag (Heavy 1 or 2, Soft up to 500), one drag packs that count, and shipping deducts only that count (Nathan, 2026-11-23).  Replaces whole-pile shipping, which emptied the shelf in one shift.
+    - [ ] Small polish (1g review): junk dropped on a closed box should shake too, as supplies and stamps do.
     - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
