@@ -1,6 +1,6 @@
 # Work order: smoke test ignores cancelled image loads (v0.1)
 
-**Status:** Done
+**Status:** Reviewed and closed (Claudia, 2026-11-22)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (he started the run).
 **Model:** Opus 5.5
 
@@ -66,3 +66,9 @@ phone console: Failed to load resource: net::ERR_FILE_NOT_FOUND
 
 **Left open (an idea, not done):** the test only notices a missing image if that image happens to load during the run.  To catch any missing image, a later order could add a quick check that every `img:` path in `js/config.js` exists on disk.
 
+
+## Review (Claudia, 2026-11-22)
+
+Closed.  The change is exactly the one asked for: a four-line handler that skips only `net::ERR_ABORTED` and adds the reason to every other failure.  A real missing file opened from disk fails with a different reason, so the skip cannot hide it.  Good judgment on the renamed-image check: when the order's example image proved a bad test (it only loads when a rare variant drops), Claude Code picked one that loads every run and said why.
+
+Its suggestion, a check that every `img:` path in `js/config.js` exists on disk, is a good one.  Logged as a draft for a later small order.
