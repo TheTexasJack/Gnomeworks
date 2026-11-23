@@ -57,7 +57,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] Stamp scoring and what follows a sent-away driver: reopen the door for a random driver, no more than 2 TNP drivers in a row (Nathan, 2026-11-22).
     - [ ] **Future upgrade (Nathan, 2026-11-22):** the shipping door opens and closes smoothly, rolling up like a garage door, in place of the instant swap built in 1a.
     - [x] ~~Replace the leaning poses with new standing art.~~  Settled without new art (Nathan, 2026-11-22): drivers always arrive grumpy, so the grumpy pose (arms crossed, standing) is the waiting pose.  See DESIGNS.md, "The driver's moods."
-    - [ ] Before the Shipping view goes live: the view buttons wrap on a 390px phone, and the chain needs Space and Enter (1a review).
+    - [x] ~~Before the Shipping view goes live: the view buttons wrap on a 390px phone, and the chain needs Space and Enter (1a review).~~  Closed (Nathan, 2026-11-23): the two-line view buttons are accepted.  The chain alone with keys would not make the room keyboard-playable (packing needs a drag), so it becomes a later full keyboard pass.
+    - [ ] Later: a full keyboard pass for the Shipping view (chain, slips, menu, packing, stamping).
     - [ ] Shipping log event logic, and throw-ins.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
     - [ ] Rune tracing that works with a finger on phones.
@@ -80,8 +81,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
-    - [ ] 1f (draft): the leave warning, and the GRIP line uses the whole screen.
-    - [ ] **Measure production statistics when Beta 1 is done (Nathan, 2026-11-23).**  See HANDOFF.
+    - [ ] 1f (approved): the leave warning, and the GRIP line uses the whole screen.
+    - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [ ] **Future enhancement (Nathan, 2026-11-23):** leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Today leaving just resets the room.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
     - [ ] **Future enhancement (Nathan, 2026-11-23):** hold the trip's state (the truck, driver, orders, and packed boxes) until the player ends the day, for experience and consistency.  **Order (Nathan, 2026-11-23):** the warning comes first and states what leaving does today; holding the state is the later change, and the warning retires with it.

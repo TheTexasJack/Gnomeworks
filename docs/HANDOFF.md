@@ -32,7 +32,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 
-**Beta 1 (Nathan, 2026-11-23):** the Packing Line behind `?ship=1` is called **Beta 1**.  The demo loop was done Monday morning, ahead of schedule, so work keeps going; pushes to Beta 1 are fine.  **Measure production statistics when Beta 1 is done (Nathan):** from the work orders and git, count the orders, review rounds, commits, draft versions, and the time each build took.  Each Result records its build time from 1f on (the earlier ones are in the chat and the commit times).
+**Beta 1 (Nathan, 2026-11-23):** the Packing Line behind `?ship=1` is called **Beta 1**.  The demo loop was done Monday morning, ahead of schedule, so work keeps going; pushes to Beta 1 are fine.  **Production post-mortem when Beta 1 is done (Nathan):** a post-mortem with every statistic we can get on how it was made: work orders, review rounds, commits, coding and build times, draft versions, and the delays between steps, from the work orders, git, and the chats.  The game is in a post-beta, pre-1.0 stage (Nathan, 2026-11-23).  Each Result records its build time from 1f on (the earlier ones are in the chat and the commit times).
 
 After Thanksgiving: the supplies rules (peanuts, bubble wrap, FRAGILE and HEAVY), the other three box types, APPROVED and DENIED, and the garage-door roll.
 

@@ -1,7 +1,7 @@
 # Work order: Packing Line 1f, the leave warning and a full GRIP line (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, for Beta 1.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, for Beta 1.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 ## Goal
