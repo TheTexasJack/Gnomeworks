@@ -274,6 +274,13 @@ GW.sfx = (function () {
     tone({ f: vary(o.f), to: o.to, dur: o.dur, vol: o.vol, type: 'triangle' });
     noise({ f: o.noiseHz, q: 0.9, dur: o.noiseDur, vol: o.noiseVol });
   }
+  // Packing Line (1l): the APPROVED or DENIED stamp landing on a work order, a heavier BAM than the box's thump.
+  // o = its numbers, from CONFIG.shipping.approval.bam.
+  function bam(o) {
+    if (!ready() || !o || !limit('bam', 6)) return;
+    tone({ f: vary(o.f), to: o.to, dur: o.dur, vol: o.vol, type: 'triangle' });
+    noise({ f: o.noiseHz, q: 0.8, dur: o.noiseDur, vol: o.noiseVol });
+  }
   // Packing Line (1k): the rolling door's rattle, a run of short ticks over a low rumble, for secs seconds.
   // o = its numbers, from CONFIG.shipping.trip.rattle.
   function rattle(o, secs) {
@@ -295,7 +302,7 @@ GW.sfx = (function () {
   }
 
   return {
-    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump, pat: pat, rattle: rattle,
+    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump, pat: pat, bam: bam, rattle: rattle,
     hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },

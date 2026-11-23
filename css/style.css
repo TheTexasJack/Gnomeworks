@@ -198,18 +198,25 @@ body {
 .ship-card .card-pic { justify-content: center; }
 .ship-card .card-pic .item-icon { width: 12cqw; height: 12cqw; font-size: 10cqw; }
 .ship-card .card-total { left: 0; right: 0; transform: translateY(-50%); text-align: center; font: bold 5.4cqw/1 var(--font); }
+/* the bottom line shows both lines' changes (1l): its spacing holds, and it shrinks to fit (fitCard) inside the paper */
+.ship-card .card-line.card-total { box-sizing: border-box; padding: 0 9%; white-space: pre; }
+.ship-card .card-why.card-note { color: #2e8b3a; }
 /* the GRIP line inside the STONKS screen painted on the back wall; cqh = 1% of the glass's height */
 #ship .ship-stonks { position: absolute; container-type: size; pointer-events: none; color: var(--ticker, #46f06a);
   font-family: var(--font); text-shadow: 0 0 1.5cqh var(--ticker, #46f06a); }
 #ship .stonks-top { position: absolute; left: 4%; right: 4%; top: 6%; height: 28%; display: flex; align-items: baseline; justify-content: space-between; }
-#ship .stonks-label { font: bold 22cqh/1 var(--font); letter-spacing: .08em; }
-#ship .stonks-num { font: bold 24cqh/1 var(--font); }
+/* two teams (1l): GRIP on the left, TNP on the right, each its label and number in its own color */
+#ship .stonks-team { display: flex; align-items: baseline; gap: 5cqh; color: var(--ticker); text-shadow: 0 0 1.5cqh var(--ticker); }
+#ship .stonks-team.is-tnp { text-shadow: 0 0 1cqh #ff5a5f, 0 0 2.5cqh var(--ticker); }
+#ship .stonks-label { font: bold 17cqh/1 var(--font); letter-spacing: .06em; }
+#ship .stonks-num { font: bold 20cqh/1 var(--font); }
 #ship .ship-stonks.is-ticking .stonks-num { animation: stonksTick .9s ease-out; }
 @keyframes stonksTick { 0% { transform: scale(1); } 30% { transform: scale(1.18); } 100% { transform: scale(1); } }
 #ship .stonks-chart { position: absolute; left: 5%; right: 5%; top: 42%; bottom: 10%;
   background: repeating-linear-gradient(0deg, rgba(70,240,106,.12) 0 1px, transparent 1px 25%); }
 #ship .stonks-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 #ship .stonks-chart polyline { fill: none; stroke: var(--ticker, #46f06a); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 2px var(--ticker, #46f06a)); }
+#ship .stonks-chart polyline.is-tnp { filter: drop-shadow(0 0 1px #ff5a5f) drop-shadow(0 0 2px var(--ticker)); }
 #ship .stonks-dot { position: absolute; width: 7cqh; height: 7cqh; border-radius: 50%; background: var(--ticker, #46f06a); transform: translate(-50%, -50%); box-shadow: 0 0 2cqh var(--ticker, #46f06a); }
 #ship .stonks-dot[hidden] { display: none; }
 /* work orders (1c-2): slips pinned side by side on the order board (sizes set from CONFIG.shipping.slip), and one
@@ -242,8 +249,49 @@ body {
 .ship-slip .slip-note-text { left: 13%; right: 13%; top: 20cqh; bottom: 18cqh; display: flex; align-items: center; justify-content: center; text-align: center; font: bold 8.5cqw/1.3 var(--font); }
 #ship .ship-slip-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-slip-view[hidden] { display: none; }
+/* APPROVED or DENIED (1l): the open slip with its two stamp buttons in a row under it.  Sizes from
+   CONFIG.shipping.approval.buttons (set in shipping.js); the note opens alone. */
+#ship .slip-open { display: flex; flex-direction: column; align-items: center; justify-content: space-between; flex: none;
+  width: var(--open-w); height: var(--slip-h); }
+#ship .slip-open.has-stamps { height: var(--open-h); }
+#ship .slip-open .ship-slip { width: 100%; height: 100%; }
+#ship .slip-open.has-stamps .ship-slip { height: var(--slip-share); }
+#ship .slip-stamp-row { display: flex; gap: 4%; width: 100%; height: var(--row-share); flex: none; cursor: default; }
+#ship .slip-stamp-btn { flex: 1 1 0; min-width: 0; height: 100%; padding: 2% 3%; display: flex; align-items: center; justify-content: center;
+  border: 2px solid #8a5a2b; border-radius: 10px; background: #f6e3bd; box-shadow: 0 4px 0 #6a4320, 0 6px 10px rgba(0,0,0,.35);
+  cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+#ship .slip-stamp-btn img { display: block; max-width: 100%; max-height: 100%; pointer-events: none; }
+#ship .slip-stamp-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #6a4320, 0 2px 4px rgba(0,0,0,.35); }
+#ship .slip-stamp-btn.is-on { background: #fff6dc; border-color: #ffb703; box-shadow: 0 0 0 3px #ffd34d, 0 4px 0 #6a4320, 0 0 14px rgba(255,183,3,.8); }
+#ship .slip-stamp-btn:disabled { cursor: default; opacity: .55; }
+#ship .slip-stamp-btn.is-on:disabled { opacity: 1; }
+#ship .slip-stamp-btn:focus-visible { outline: 3px solid #ffb703; outline-offset: 2px; }
+.night #ship .slip-stamp-btn { filter: brightness(var(--slip-night, .88)); }
+/* the stamp on the slip, solid, on top of the text (place from CONFIG.shipping.approval) */
+.ship-slip .slip-verdict { height: auto; transform: translate(-50%, -50%); pointer-events: none; }
+/* a glitter fake (1l): a pastel shimmer over the paper and code-drawn sparkles, under the text.  They twinkle, each
+   on its own delay; with reduced motion they hold still. */
+.ship-slip .slip-glitter { inset: 3% 5%; pointer-events: none; overflow: hidden; border-radius: 4%; }
+.ship-slip .glitter-sheen { position: absolute; inset: 0;
+  background: linear-gradient(125deg, rgba(255,154,213,.42), rgba(155,231,255,.4) 30%, rgba(255,246,170,.42) 55%, rgba(201,167,255,.42) 80%, rgba(255,154,213,.4)),
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,.55) 0 .9cqw, transparent 1.1cqw) 0 0 / 9cqw 9cqw,
+    radial-gradient(circle at 70% 60%, rgba(255,211,77,.6) 0 .8cqw, transparent 1cqw) 0 0 / 11cqw 11cqw; }
+.ship-slip .glitter-star { position: absolute; height: auto; aspect-ratio: 1; transform: translate(-50%, -50%) rotate(var(--turn, 0deg));
+  filter: drop-shadow(0 0 1cqw rgba(255,255,255,.95)) drop-shadow(0 0 .6cqw rgba(120,60,0,.6));
+  animation: twinkle var(--twinkle-ms, 1600ms) ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: .35; scale: .55; } }
+@media (prefers-reduced-motion: reduce) { .ship-slip .glitter-star { animation: none; } }
 /* packing (1d): the active slip glows, packed slips get a check.  The box and the stack draw in
    front of the driver; places and sizes come from CONFIG.shipping.layouts.<layout> and .pack. */
+/* an unstamped slip on the board glows softly (1l), a tip: off with "Show instructions" */
+#ship .ship-board .ship-slip.is-unstamped { animation: slipAsk var(--tip-pulse, 1600ms) ease-in-out infinite alternate; }
+.night #ship .ship-board .ship-slip.is-unstamped { animation-name: slipAskNight; }
+@keyframes slipAsk { from { filter: drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.45)); } to { filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4) drop-shadow(0 0 7px rgba(255,236,170,.9)); } }
+@keyframes slipAskNight { from { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.5)); } to { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4) drop-shadow(0 0 7px rgba(255,236,170,.9)); } }
+@media (prefers-reduced-motion: reduce) { #ship .ship-board .ship-slip.is-unstamped { animation: none; filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); }
+  .night #ship .ship-board .ship-slip.is-unstamped { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); } }
+.no-hints #ship .ship-board .ship-slip.is-unstamped { animation: none; filter: drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.45)); }
+.night.no-hints #ship .ship-board .ship-slip.is-unstamped { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.5)); }
 #ship .ship-board .ship-slip.is-active { transform: translateY(-4%) scale(1.06); filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 2px #ffd34d) drop-shadow(0 0 5px #ffb703); }
 .night #ship .ship-board .ship-slip.is-active { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 2px #ffd34d) drop-shadow(0 0 5px #ffb703); }
 .ship-slip .slip-check { left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-8deg); font: bold 46cqw/1 var(--font); font-style: normal;
@@ -301,7 +349,7 @@ body {
 /* a junk tile's packing tag (1i), in its top right corner */
 #ship .ship-tile .tile-tag { position: absolute; top: 3px; right: 3px; height: 24px; width: auto; pointer-events: none;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.5)); }
-/* the "Packing rules" chart at the top of the supplies menu (1i): live text, one line per rule with its icon */
+/* the "Packing Rules" bar at the top of the supplies menu (1i): live text, one line per rule with its icon */
 #ship .ship-rules { margin: 2px 2px 8px; padding: 0 8px; border-radius: 6px; background: rgba(255, 248, 228, .72);
   border: 1px solid rgba(110, 60, 20, .45); font-family: var(--font); color: #3a2414; }
 /* its heading bar is the tap target (1k): the title, and a thin chevron at the right end that points down while
@@ -319,8 +367,6 @@ body {
 @media (prefers-reduced-motion: reduce) { #ship .ship-rules-chev { transition: none; } }
 #ship .ship-rule { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: .85rem; line-height: 1.2; }
 #ship .ship-rule-icon { width: 30px; height: 26px; object-fit: contain; flex: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
-/* the chart follows the instructions setting (1j): hidden with instructions off; the rules stay the same */
-.no-hints #ship .ship-rules { display: none; }
 .supply-icon { display: inline-flex; align-items: center; justify-content: center; }
 .supply-icon img { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.45)); }
 /* the computer (1g): an invisible tap area over the painted one */

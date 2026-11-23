@@ -20,8 +20,7 @@
    box shows the item's picture with its tag beside it and the supplies in its opening.  Scoring wants peanuts in
    every box and bubble wrap around a Breakable item.
    Outside stickers (1j): the Stickers section (FRAGILE, HEAVY) goes on a closed box before its stamp, in the box
-   face's upper left; scoring wants FRAGILE on a Breakable item and HEAVY on a Heavy one.  The chart shows only while
-   the instructions setting is on (css).
+   face's upper left; scoring wants FRAGILE on a Breakable item and HEAVY on a Heavy one.
    The room's tips (1g): the belt glows with a tag at the start of each trip until the item menu first opens, the
    computer's screen glows while a closed box waits for its stamp, and the chain glows when the shift is ready.  All
    of them follow the instructions setting (the no-hints class on the page, css).
@@ -36,7 +35,14 @@
    and main.js switches views once the report card closes.  Leaving while the truck is already leaving waits for
    the card the same way, so a scored shift's card is never skipped.
    Polish (1k): the "Packing rules" chart opens and minimizes from its heading bar, the door rolls up before the
-   truck and down after it, and a view button tapped while the leave waits for the card stays lit (main.js). */
+   truck and down after it, and a view button tapped while the leave waits for the card stays lit (main.js).
+   APPROVED or DENIED (1l): the full-size slip has the two stamp buttons under it, and a tap slams that stamp onto the
+   slip with a BAM; the board's small slip shows it too.  A stamp can change until its order's box is packed.  The
+   box on the bench belongs to the leftmost APPROVED order not yet packed (an empty box moves to a newly approved
+   order further left; a box with an item stays with its order), so nothing is packed before it is stamped, and a
+   DENIED order gets no box.  Unstamped slips glow softly (a tip).  From CONFIG.shipping.fakes.startShift, a board
+   can carry one glitter fake, which should be DENIED.  Scoring adds the stamp calls, and TNP's line (saved as tnp
+   and tnpHistory) joins GRIP's on the STONKS screen.  The "Packing Rules" bar always shows. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -51,9 +57,12 @@ GW.ship = (function () {
   var K = P.pack, conveyor, computer, packLayer, boxEl = null, menus = {}, menuKind = null, stacked = [];
   var beltGlow, beltImg, beltTag, screenGlow, screenImg, beltTip = false;
   var packed = [], boxItem = null, boxCount = 0, boxState = 'none', boxIn = {}, boxOut = {};
+  var verdicts = [], boxFor = -1, slipIndex = -1;
+  // verdicts[i] = 'approved' | 'denied' | undefined, the stamp on order i (1l); boxFor = the order the bench box
+  // belongs to (-1 with no box); slipIndex = the order open full size (-1 for none or the note)
   // boxState: 'none' | 'open' | 'closed' | 'stamped'; boxIn = the inside supplies in the box (1i); boxOut = the
   // stickers on it (1j)
-  var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
+  var screenEl, screenLines = [], tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, warnHeard = null, afterCard = null;
 
   function enabled() {
@@ -205,6 +214,26 @@ GW.ship = (function () {
       used[o.item.id] = true;
       list.push(o);
     }
+    addFakes(list);
+    return list;
+  }
+  // Glitter fakes (1l): from the player's startShift-th shift on, up to perBoard of the board's orders become fakes,
+  // each with its own chance.  A fake is made like any order, so it reads as a normal order from a real town.
+  function fakesOn() { return (GW.game.s.shifts || 0) + 1 >= P.fakes.startShift; }
+  function addFakes(list) {
+    var F = P.fakes;
+    if (!fakesOn()) return;
+    var spots = shuffled(list.map(function (o, i) { return i; })).slice(0, F.perBoard);
+    spots.forEach(function (i) { if (Math.random() < F.chance) { list[i].fake = true; list[i].glitter = sparkles(); } });
+  }
+  // A fake's sparkles, made once per order so they hold still as the board redraws: x, y (% of the slip), size
+  // (% of its width), color, the twinkle's delay (a share of twinkleMs), and a small turn.
+  function sparkles() {
+    var F = P.fakes, list = [];
+    for (var k = 0; k < F.stars; k++) {
+      list.push({ x: 8 + Math.random() * 84, y: 6 + Math.random() * 88, size: F.size[0] + Math.random() * (F.size[1] - F.size[0]),
+        color: F.colors[k % F.colors.length], delay: Math.random(), turn: Math.round(Math.random() * 40 - 20) });
+    }
     return list;
   }
   function regionOf(id) {
@@ -214,11 +243,13 @@ GW.ship = (function () {
 
   // ---------- the slips ----------
   function div(cls, text) { return U.el('div', cls, text); }
-  // A slip: the parchment with live text over it.  order null makes the "nothing to ship" note.
-  function makeSlip(order, stampPct) {
-    var S = P.slip, el = div('ship-slip' + (order ? '' : ' slip-note'));
+  // A slip: the parchment with live text over it.  order null makes the "nothing to ship" note.  verdict = its
+  // APPROVED or DENIED stamp (1l), if any.  A fake's glitter sits over the paper, under the text.
+  function makeSlip(order, stampPct, verdict) {
+    var S = P.slip, el = div('ship-slip' + (order ? '' : ' slip-note') + (order && order.fake ? ' is-fake' : ''));
     el.style.setProperty('--stamp', stampPct);
     el.appendChild(img('slip-paper', S.paper));
+    if (order && order.fake) el.appendChild(makeGlitter(order.glitter || []));
     el.appendChild(U.el('i', 'slip-pin'));
     el.appendChild(U.el('i', 'slip-stripes slip-top'));
     el.appendChild(U.el('i', 'slip-stripes slip-bottom'));
@@ -244,8 +275,36 @@ GW.ship = (function () {
     what.appendChild(line);
     el.appendChild(what);
     el.appendChild(img('slip-stamp', S.stampImg.replace('{region}', region.id)));
-    el.setAttribute('aria-label', 'Work order: ship ' + order.qty + ' ' + order.item.name + ' to ' + order.place.name + ', ' + region.name);
+    if (verdict) el.appendChild(verdictMark(verdict));
+    el.setAttribute('aria-label', 'Work order: ship ' + order.qty + ' ' + order.item.name + ' to ' + order.place.name + ', ' + region.name +
+      (verdict ? ', ' + verdict.toUpperCase() : ''));
     return el;
+  }
+  // The APPROVED or DENIED stamp on a slip, placed as in the approved mock (CONFIG.shipping.approval).
+  function verdictMark(v) {
+    var A = P.approval[v], m = img('slip-verdict', A.img);
+    m.dataset.verdict = v;
+    m.style.left = A.place[0] + '%'; m.style.top = A.place[1] + '%'; m.style.width = A.place[2] + '%';
+    return m;
+  }
+  // The glitter (1l): a pastel shimmer over the paper and four-point sparkles drawn in code.  Each twinkles on its
+  // own delay; the css holds them still with reduced motion.
+  function makeGlitter(stars) {
+    var NS = 'http://www.w3.org/2000/svg', g = div('slip-glitter');
+    g.style.setProperty('--twinkle-ms', P.fakes.twinkleMs + 'ms');
+    g.appendChild(U.el('i', 'glitter-sheen'));
+    stars.forEach(function (st) {
+      var svg = document.createElementNS(NS, 'svg'), path = document.createElementNS(NS, 'path');
+      svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('class', 'glitter-star'); svg.setAttribute('aria-hidden', 'true');
+      path.setAttribute('d', 'M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z');
+      path.setAttribute('fill', st.color);
+      svg.appendChild(path);
+      svg.style.left = st.x + '%'; svg.style.top = st.y + '%'; svg.style.width = st.size + 'cqw';
+      svg.style.setProperty('--turn', st.turn + 'deg');
+      svg.style.animationDelay = (-st.delay * P.fakes.twinkleMs) + 'ms';
+      g.appendChild(svg);
+    });
+    return g;
   }
 
   // The board shows the orders (or the note) while the driver waits, and nothing otherwise.
@@ -256,14 +315,15 @@ GW.ship = (function () {
     if (trip !== 'here') return;
     var list = orders.length ? orders : [null];
     list.forEach(function (o, i) {
-      var el = makeSlip(o, P.slip.stamp.board);
+      var el = makeSlip(o, P.slip.stamp.board, o && verdicts[i]);
       if (o && packed[i]) { el.classList.add('is-packed'); el.appendChild(U.el('i', 'slip-check', '\u2714')); }
-      else if (o && i === activeIndex()) el.classList.add('is-active');
+      else if (o && i === boxFor) el.classList.add('is-active');
+      else if (o && !verdicts[i]) el.classList.add('is-unstamped');     // the soft glow, a tip (css)
       el.addEventListener('pointerdown', function (e) {      // the note opens too, so it can be read on a phone
         e.stopPropagation();
         if (!e.isTrusted || e.button > 0 || slipOpen) return;   // a real tap only
         e.preventDefault();
-        openSlip(o);
+        openSlip(o ? i : -1);
       });
       board.appendChild(el);
     });
@@ -295,17 +355,29 @@ GW.ship = (function () {
     board.style.setProperty('--slip-w', w + '%');
     board.style.setProperty('--slip-h', (w * boardRatio / S.aspect) + '%');
     board.style.setProperty('--slip-gap', S.gap + '%');
-    // Open: as big as fits in openSize % of the room's height and of its width (the tall room is narrow).
-    var ow = Math.min(S.openSize * S.aspect / ratio, S.openSize);
+    // Open: as big as fits in openSize % of the room's height and of its width (the tall room is narrow), with the
+    // stamp buttons' row under it (1l): the slip and the row share the height.
+    var B = P.approval.buttons, k = 1 + (B.h + B.gap) / 100;
+    var ow = Math.min(S.openSize * S.aspect / ratio / k, S.openSize), oh = ow * ratio / S.aspect;
+    viewer.style.setProperty('--open-w', ow + '%');
+    viewer.style.setProperty('--open-h', (oh * k) + '%');
+    viewer.style.setProperty('--slip-share', (100 / k) + '%');
+    viewer.style.setProperty('--row-share', (100 * B.h / 100 / k) + '%');
     viewer.style.setProperty('--slip-w', ow + '%');
-    viewer.style.setProperty('--slip-h', (ow * ratio / S.aspect) + '%');
+    viewer.style.setProperty('--slip-h', oh + '%');
     var Cd = P.card, cw = Math.min(Cd.openSize * Cd.aspect / ratio, Cd.openSize);
     cardView.style.setProperty('--card-w', cw + '%');
     cardView.style.setProperty('--card-h', (cw * ratio / Cd.aspect) + '%');
   }
-  function openSlip(order) {
+  // i = the order to open full size, or -1 for the note.  An order's slip has the two stamp buttons under it (1l).
+  function openSlip(i) {
+    var o = i >= 0 ? orders[i] : null;
     viewer.textContent = '';
-    viewer.appendChild(makeSlip(order, P.slip.stamp.open));
+    slipIndex = o ? i : -1;
+    var wrap = div('slip-open' + (o ? ' has-stamps' : ''));
+    wrap.appendChild(makeSlip(o, P.slip.stamp.open, o && verdicts[i]));
+    if (o) wrap.appendChild(stampButtons(i));
+    viewer.appendChild(wrap);
     viewer.hidden = false;
     fitSlips(viewer);
     slipOpen = true;
@@ -314,16 +386,84 @@ GW.ship = (function () {
   function closeSlip() {
     if (!slipOpen) return;
     viewer.hidden = true; viewer.textContent = '';
-    slipOpen = false;
+    slipOpen = false; slipIndex = -1;
+  }
+  // The APPROVED and DENIED buttons, each drawn from its stamp's art.  A real tap stamps; keys work through click.
+  // Once the order's box is packed (or being stamped) the buttons are locked.
+  function stampButtons(i) {
+    var row = div('slip-stamp-row');
+    ['approved', 'denied'].forEach(function (v) {
+      var A = P.approval[v], b = U.el('button', 'slip-stamp-btn');
+      b.type = 'button'; b.dataset.verdict = v;
+      b.setAttribute('aria-label', A.label);
+      b.appendChild(img('', A.img));
+      b.addEventListener('pointerdown', function (e) {
+        e.stopPropagation(); e.preventDefault();         // the slip view's own tap would close it
+        if (!e.isTrusted || e.button > 0) return;
+        stampSlip(i, v);
+      });
+      b.addEventListener('click', function (e) { e.stopPropagation(); if (e.detail === 0 && e.isTrusted) stampSlip(i, v); });
+      row.appendChild(b);
+    });
+    row.addEventListener('pointerdown', function (e) { e.stopPropagation(); e.preventDefault(); });   // the gap between them
+    showStampButtons(row, i);
+    return row;
+  }
+  function locked(i) { return !!packed[i] || (i === boxFor && boxState === 'stamped'); }
+  function showStampButtons(row, i) {
+    Array.prototype.forEach.call(row.children, function (b) {
+      var on = verdicts[i] === b.dataset.verdict;
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.disabled = locked(i);
+    });
+  }
+  // Stamps order i APPROVED or DENIED: the stamp starts big and lands with a BAM, the slip jolts, and the board and
+  // the bench follow.  The same stamp again does nothing.
+  function stampSlip(i, v) {
+    if (i < 0 || !orders[i] || locked(i) || verdicts[i] === v) return;
+    verdicts[i] = v;
+    var Bm = P.approval.bam, calm = calmQuery.matches, slip = viewer.querySelector('.ship-slip');
+    if (slip) {
+      var old = slip.querySelector('.slip-verdict');
+      if (old) old.remove();
+      var m = verdictMark(v);
+      slip.appendChild(m);
+      slip.setAttribute('aria-label', slip.getAttribute('aria-label').replace(/, (APPROVED|DENIED)$/, '') + ', ' + v.toUpperCase());
+      var turn = 'translate(-50%, -50%) ';
+      var down = calm ? Promise.resolve() : m.animate([{ transform: turn + 'scale(' + Bm.scale + ')', opacity: 0 }, { transform: turn + 'scale(1)', opacity: 1 }],
+        { duration: Bm.ms, easing: 'ease-in' }).finished;
+      down.then(function () {
+        GW.sfx.bam(Bm);
+        if (!calm && slip.isConnected) slip.animate([{ transform: 'scale(1)' }, { transform: 'scale(' + (1 - Bm.jolt / 100) + ')' }, { transform: 'scale(1)' }],
+          { duration: P.pack.thumpMs, easing: 'ease-out' });
+      }).catch(function () {});
+      var row = viewer.querySelector('.slip-stamp-row');
+      if (row) showStampButtons(row, i);
+    } else GW.sfx.bam(Bm);
+    syncBox();
   }
   function clearOrders() { orders = []; closeSlip(); resetPack(); showBoard(); }
   function newOrders() { orders = makeOrders(); beltTip = true; resetPack(); showBoard(); nextBox(); }
 
 
   // ---------- packing (layer 1d; all numbers in CONFIG.shipping.pack and layouts.<layout>) ----------
+  // The leftmost APPROVED order not yet packed (1l), or -1.
   function activeIndex() {
-    for (var i = 0; i < orders.length; i++) if (!packed[i]) return i;
+    for (var i = 0; i < orders.length; i++) if (verdicts[i] === 'approved' && !packed[i]) return i;
     return -1;
+  }
+  // The bench follows the stamps (1l): a box whose order is no longer APPROVED goes away (nothing in it ever left the
+  // shelf), an empty box moves to the leftmost APPROVED order, and with no box one appears for that order.
+  function syncBox() {
+    if (trip !== 'here') return;
+    if (boxEl && boxState !== 'stamped' && verdicts[boxFor] !== 'approved') {
+      boxEl.remove(); boxEl = null; boxFor = -1;
+      boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
+    }
+    if (boxEl && boxState === 'open' && !boxItem && !insideList().length && activeIndex() >= 0) boxFor = activeIndex();
+    nextBox();
+    showBoard();
   }
   function boxWidth(L, h) { return h / roomRatio(L); }     // a square canvas h % of the room's height, as % of its width
   function roomRatio(L) { var wh = L.aspect.split('/'); return parseFloat(wh[0]) / parseFloat(wh[1]); }
@@ -396,14 +536,15 @@ GW.ship = (function () {
     updateReady();
   }
   function resetPack() {
-    packed = []; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
+    packed = []; verdicts = []; boxFor = -1; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {}; boxOut = {};
     if (boxEl) { boxEl.remove(); boxEl = null; }
     stacked.forEach(function (el) { el.remove(); }); stacked = [];
   }
-  // The active order's empty box appears on the bench; with every order packed, none does.
+  // The active order's empty box appears on the bench; with no APPROVED order waiting, none does.
   function nextBox() {
     if (boxEl || trip !== 'here' || activeIndex() < 0) return;
     var L = layout();
+    boxFor = activeIndex();
     boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {}; boxOut = {};
     boxEl = makeBox();
     setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
@@ -427,7 +568,7 @@ GW.ship = (function () {
   // item replaces the first.
   function fillBox(item) {
     if (boxState !== 'open') return;
-    var spare = ((GW.game.s.items || {})[item.id] || 0) - P.orders.keep, o = orders[activeIndex()];
+    var spare = ((GW.game.s.items || {})[item.id] || 0) - P.orders.keep, o = orders[boxFor];
     packed.forEach(function (r) { if (r && r.item === item.id) spare -= r.count; });
     if (spare <= 0 || !o) return;
     boxItem = item; boxCount = Math.min(o.qty, spare);
@@ -473,7 +614,7 @@ GW.ship = (function () {
   }
   function stampBox(rid) {
     if (boxState !== 'closed') return;
-    var i = activeIndex(), el = boxEl, calm = calmQuery.matches;
+    var i = boxFor, el = boxEl, calm = calmQuery.matches;
     boxState = 'stamped';
     updateReady();
     el.classList.add('is-stamped');
@@ -500,7 +641,7 @@ GW.ship = (function () {
       setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
       el.classList.add('is-stacked');
       stacked.push(el);
-      boxEl = null; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {};
+      boxEl = null; boxFor = -1; boxItem = null; boxState = 'none'; boxIn = {}; boxOut = {};
       if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%' }], { duration: K.slideMs, easing: 'ease-in-out' });
       nextBox();
     }).catch(function () {});
@@ -532,8 +673,9 @@ GW.ship = (function () {
   }
 
   // ---------- the hand-off (layer 1e; numbers in CONFIG.shipping.score, .finish, .card, and .ticker) ----------
+  // Ready to ship (1l): every order stamped, and every APPROVED one packed.
   function allPacked() {
-    return trip === 'here' && orders.length > 0 && orders.every(function (o, i) { return !!packed[i]; });
+    return trip === 'here' && orders.length > 0 && orders.every(function (o, i) { return verdicts[i] === 'denied' || (verdicts[i] === 'approved' && !!packed[i]); });
   }
   // The room's tips.  The chain shows how to finish: glow and sway (css; no sway with reduced motion) and the tag.
   // The belt glows with its tag from the trip's first box until the item menu first opens (1g), and the computer's
@@ -559,13 +701,25 @@ GW.ship = (function () {
     driverImg.style.translate = happy ? H.shiftX + '% 0' : '';
   }
   // One row per order.  The box still on the bench counts when it is closed with an item in it (it ships with no
-  // stamp); an open or empty box is not packed and does not ship.
+  // stamp); an open or empty box is not packed and does not ship.  The stamp calls come first (1l): a fake is scored
+  // by its stamp alone, and a real order DENIED or unstamped never reaches the box checks.
   function scoreShift() {
-    var Sc = P.score, R = Sc.reasons, rows = [], delta = 0, shipped = [], a = activeIndex();
+    var Sc = P.score, R = Sc.reasons, Fk = Sc.fake, rows = [], delta = 0, tnp = 0, shipped = [], a = boxFor;
     var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: null } : null;
     orders.forEach(function (o, i) {
-      var rec = packed[i] || (i === a ? bench : null), miss = {};
-      if (!rec) miss.notPacked = true;
+      var v = verdicts[i], rec = v === 'approved' ? packed[i] || (i === a ? bench : null) : null, miss = {}, note = null;
+      if (o.fake) {
+        var call = v === 'denied' ? 'caught' : v === 'approved' ? 'approved' : 'missed';
+        if (call === 'caught') note = Sc.caught;
+        else miss[call === 'approved' ? 'approvedFake' : 'missedFake'] = true;
+        if (rec) shipped.push(rec);              // a packed fake's box still goes on the truck
+        delta += Fk[call].ours; tnp += Fk[call].tnp;
+        var fw = Sc.order.filter(function (k) { return miss[k]; }).map(function (k) { return R[k]; });
+        rows.push({ order: o, ok: !fw.length, why: fw, note: note });
+        return;
+      }
+      if (v === 'denied') miss.deniedReal = true;
+      else if (!rec) miss.notPacked = true;
       else {
         // The supplies follow what is in the box: bubble wrap only matters around a Breakable item (1i), and each
         // sticker only on an item with its tag (1j: FRAGILE on a Breakable, HEAVY on a Heavy).
@@ -581,9 +735,11 @@ GW.ship = (function () {
       var why = Sc.order.filter(function (k) { return miss[k]; }).map(function (k) { return R[k]; });   // main reason first
       var pts = Sc.regions[o.place.region] || Sc.regions[P.orders.region];
       delta += why.length ? -pts.wrong : pts.right;
-      rows.push({ order: o, ok: !why.length, why: why });
+      rows.push({ order: o, ok: !why.length, why: why, note: null });
     });
-    return { rows: rows, delta: delta, shipped: shipped, perfect: rows.every(function (r) { return r.ok; }) };
+    var perfect = rows.every(function (r) { return r.ok; });
+    if (perfect) tnp += Sc.perfectTnp;           // clean shifts push TNP back down
+    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: perfect };
   }
   // Into the save: each shipped box takes its recorded count off the shelf (never below the display copy; a wrong
   // item still shipped),
@@ -597,6 +753,11 @@ GW.ship = (function () {
     s.stonks = Math.max(0, before + r.delta);
     r.change = s.stonks - before;
     s.stonksHistory = (s.stonksHistory || []).concat([s.stonks]).slice(-P.ticker.history);
+    var tnp0 = s.tnp || 0;                       // TNP's line (1l), never below 0
+    s.tnp = Math.max(0, tnp0 + (r.tnpDelta || 0));
+    r.tnpChange = s.tnp - tnp0;
+    s.tnpHistory = (s.tnpHistory || []).concat([s.tnp]).slice(-P.ticker.history);
+    s.shifts = (s.shifts || 0) + 1;
     GW.ui.buildShelf(s);
     GW.state.save(s);
   }
@@ -618,21 +779,25 @@ GW.ship = (function () {
       words.appendChild(cardLine('town', o.place.name));
       words.appendChild(cardLine('item', countName(o.qty, o.item)));
       if (!row.ok) words.appendChild(cardLine('why', mainWhy(row.why)));
+      else if (row.note) words.appendChild(cardLine('why', row.note)).classList.add('card-note');   // "Caught a fake!" (1l)
       line.appendChild(words);
       var pic = div('card-pic');
       pic.style.left = Cd.pic[0] + '%'; pic.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
       pic.appendChild(GW.ui.itemIcon(o.item));
       line.appendChild(pic);
-      line.setAttribute('aria-label', o.place.name + ', ' + countName(o.qty, o.item) + ': ' + (row.ok ? 'shipped' : row.why.join(', ')));
+      line.setAttribute('aria-label', o.place.name + ', ' + countName(o.qty, o.item) + ': ' + (row.ok ? row.note || 'shipped' : row.why.join(', ')));
       el.appendChild(line);
     });
-    var c = r.change, total = div('card-total', 'Stonks this shift: ' + (c > 0 ? '+' : c < 0 ? '\u2212' : '') + Math.abs(c));
+    // The bottom line: both lines' changes (1l).
+    var total = cardLine('total', Cd.totalText.replace('{ours}', signed(r.change || 0)).replace('{tnp}', signed(r.tnpChange || 0)));
+    total.classList.add('card-total');
     total.style.top = Cd.total + '%';
     el.appendChild(total);
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Report card');
     return el;
   }
+  function signed(c) { return (c > 0 ? '+' : c < 0 ? '\u2212' : '') + Math.abs(c); }
   // A row's main reason and a count of the rest (1i): "No peanuts +1".
   function mainWhy(why) {
     return why[0] + (why.length > 1 ? P.score.more.replace('{n}', why.length - 1) : '');
@@ -735,55 +900,72 @@ GW.ship = (function () {
     return false;
   }
 
-  // The STONKS screen: GRIP, our Stonks, and a line of the last shifts' totals, drawn inside the painted glass.
+  // The STONKS screen: two labeled lines of the last shifts' totals, GRIP (our Stonks) and TNP (1l), drawn inside the
+  // painted glass on one scale.  screenLines[k] = { team, num, line, dot } for GRIP (0) and TNP (1).
   function buildScreen() {
-    var NS = 'http://www.w3.org/2000/svg';
+    var NS = 'http://www.w3.org/2000/svg', Tk = P.ticker;
     screenEl = div('ship-stonks');
-    screenEl.style.setProperty('--ticker', P.ticker.color);
-    var top = div('stonks-top');
-    top.appendChild(div('stonks-label', P.ticker.label));
-    screenNum = div('stonks-num', '0');
-    top.appendChild(screenNum);
-    screenEl.appendChild(top);
-    var chart = div('stonks-chart'), svg = document.createElementNS(NS, 'svg');
+    var top = div('stonks-top'), chart = div('stonks-chart'), svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.setAttribute('preserveAspectRatio', 'none');
-    screenLine = document.createElementNS(NS, 'polyline');
-    screenLine.setAttribute('vector-effect', 'non-scaling-stroke');
-    svg.appendChild(screenLine);
     chart.appendChild(svg);
-    screenDot = U.el('i', 'stonks-dot');
-    chart.appendChild(screenDot);
+    [{ label: Tk.label, color: Tk.color, cls: 'is-grip' }, { label: Tk.tnp.label, color: Tk.tnp.color, cls: 'is-tnp' }].forEach(function (t) {
+      var team = div('stonks-team ' + t.cls), num = div('stonks-num', '0'), line = document.createElementNS(NS, 'polyline'), dot = U.el('i', 'stonks-dot ' + t.cls);
+      team.style.setProperty('--ticker', t.color); dot.style.setProperty('--ticker', t.color);
+      team.appendChild(div('stonks-label', t.label));
+      team.appendChild(num);
+      top.appendChild(team);
+      line.setAttribute('vector-effect', 'non-scaling-stroke');
+      line.setAttribute('class', t.cls);
+      line.style.setProperty('--ticker', t.color);
+      svg.appendChild(line);
+      chart.appendChild(dot);
+      screenLines.push({ label: t.label, team: team, num: num, line: line, dot: dot });
+    });
+    screenEl.appendChild(top);
     screenEl.appendChild(chart);
     screenEl.setAttribute('aria-label', 'Stonks');
     box.appendChild(screenEl);
   }
-  // hist = the totals to plot, oldest first, spread across the glass's full width, first to last.  One shift
-  // draws a flat line across at its value, with the dot at its right end.
-  function drawTicker(value, hist) {
-    var max = Math.max(1, Math.max.apply(null, hist.concat([value]))) * 1.15;
-    screenNum.textContent = U.fmt(Math.round(value));
-    screenEl.setAttribute('aria-label', P.ticker.label + ' Stonks: ' + Math.round(value));
-    var row = hist.length === 1 ? [hist[0], hist[0]] : hist;
-    var pts = row.map(function (v, i) { return [i * 100 / (row.length - 1), 100 - v / max * 100]; });
-    screenLine.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
-    var last = pts[pts.length - 1];
-    screenDot.hidden = !last;
-    if (last) { screenDot.style.left = last[0] + '%'; screenDot.style.top = last[1] + '%'; }
+  // values = [GRIP, TNP] now; hists = their totals to plot, oldest first.  Both spread across the glass's full width,
+  // first to last, padded at the left with 0 to the longer one's length.  One shift draws a flat line across at its
+  // value, with the dot at its right end.
+  function drawTicker(values, hists) {
+    var n = Math.max(1, hists[0].length, hists[1].length), all = values.slice();
+    hists.forEach(function (h) { all = all.concat(h); });
+    var max = Math.max(1, Math.max.apply(null, all)) * 1.15, said = [];
+    screenLines.forEach(function (S, k) {
+      var h = hists[k], v = values[k];
+      S.num.textContent = U.fmt(Math.round(v));
+      said.push(S.label + ' ' + Math.round(v));
+      var row = h.length ? new Array(n - h.length).fill(0).concat(h) : [];
+      if (row.length === 1) row = [row[0], row[0]];
+      var pts = row.map(function (x, i) { return [i * 100 / (row.length - 1), 100 - x / max * 100]; });
+      S.line.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+      var last = pts[pts.length - 1];
+      S.dot.hidden = !last;
+      if (last) { S.dot.style.left = last[0] + '%'; S.dot.style.top = last[1] + '%'; }
+    });
+    screenEl.setAttribute('aria-label', 'Stonks: ' + said.join(', '));
   }
-  // Counts the number (and the newest point) up from what the screen shows to the saved total.
+  function saved() {
+    var s = GW.game.s;
+    return { values: [s.stonks || 0, s.tnp || 0], hists: [(s.stonksHistory || []).slice(), (s.tnpHistory || []).slice()] };
+  }
+  // Counts both numbers (and each line's newest point) from what the screen shows to the saved totals.
   function tickTo() {
-    var s = GW.game.s, to = s.stonks || 0, hist = (s.stonksHistory || []).slice(), from = shown === null ? to : shown;
+    var now = saved(), to = now.values, from = shown === null ? to : shown;
     cancelAnimationFrame(tickAnim);
     shown = to;
-    if (calmQuery.matches || from === to || !hist.length) { drawTicker(to, hist); return; }
+    var same = from[0] === to[0] && from[1] === to[1];
+    if (calmQuery.matches || same || !now.hists[0].length) { drawTicker(to, now.hists); return; }
     screenEl.classList.remove('is-ticking'); void screenEl.offsetWidth; screenEl.classList.add('is-ticking');
-    var t0 = performance.now(), prev = hist.length > 1 ? hist[hist.length - 2] : from;
-    function frame(now) {
-      var k = Math.min(1, (now - t0) / P.ticker.tickMs), e = 1 - Math.pow(1 - k, 3), h = hist.slice();
-      h[h.length - 1] = prev + (to - prev) * e;
-      drawTicker(from + (to - from) * e, h);
-      if (k < 1) tickAnim = requestAnimationFrame(frame);
+    var t0 = performance.now(), prev = now.hists.map(function (h, k) { return h.length > 1 ? h[h.length - 2] : from[k]; });
+    function frame(t) {
+      var p = Math.min(1, (t - t0) / P.ticker.tickMs), e = 1 - Math.pow(1 - p, 3);
+      var hs = now.hists.map(function (h, k) { h = h.slice(); if (h.length) h[h.length - 1] = prev[k] + (to[k] - prev[k]) * e; return h; });
+      drawTicker(to.map(function (v, k) { return from[k] + (v - from[k]) * e; }), hs);
+      if (p < 1) tickAnim = requestAnimationFrame(frame);
     }
     tickAnim = requestAnimationFrame(frame);
   }
@@ -875,7 +1057,7 @@ GW.ship = (function () {
     return [];
   }
   function supplyIcon(s) { var w = U.el('span', 'item-icon supply-icon'); w.appendChild(img('', s.img)); return w; }
-  // The "Packing rules" chart (1i), live text, one line per rule with its icon.  Its heading bar opens or minimizes
+  // The "Packing Rules" bar (1i), live text, one line per rule with its icon.  It always shows, first in the menu (1l).  Its heading bar opens or minimizes
   // it (1k): open the first time it shows, minimized after that unless the player opens it, kept in this browser.
   function rulesPref() { try { return localStorage.getItem(K.chart.storeKey); } catch (e) { return null; } }
   function setRulesPref(v) { try { localStorage.setItem(K.chart.storeKey, v); } catch (e) {} }
@@ -889,8 +1071,8 @@ GW.ship = (function () {
     el.appendChild(rows);
     el.style.setProperty('--turn-ms', Ch.turnMs + 'ms');
     el.style.setProperty('--bar-min', Ch.barMinPx + 'px');
-    var pref = rulesPref(), hints = !document.documentElement.classList.contains('no-hints');
-    if (pref === null && hints) setRulesPref('min');      // this first showing is open; later ones start minimized
+    var pref = rulesPref();
+    if (pref === null) setRulesPref('min');      // this first showing is open; later ones start minimized
     setRulesOpen(el, pref === null || pref === 'open');
     Ch.rows.forEach(function (r) {
       var row = div('ship-rule'), sp = K.inside.filter(function (x) { return x.id === r.icon; })[0], tg = K.tags[r.icon];
@@ -1228,7 +1410,7 @@ GW.ship = (function () {
     if (on && !built) build();
     if (on && !active) {
       stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
-      cancelAnimationFrame(tickAnim); shown = GW.game.s.stonks || 0; drawTicker(shown, (GW.game.s.stonksHistory || []).slice());
+      cancelAnimationFrame(tickAnim); var now = saved(); shown = now.values; drawTicker(now.values, now.hists);
     }
     if (!on && active) { stopAnims(); closeSlip(); closeMenu(); closeWarn(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
@@ -1246,7 +1428,11 @@ GW.ship = (function () {
     isOpen: function () { return open; }, tripState: function () { return trip; },
     orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; },
     menuOpen: function () { return !!menuKind; }, menuKind: function () { return menuKind; }, boxState: function () { return boxState; },
-    activeOrder: activeIndex, cardOpen: function () { return cardOpen; },
+    activeOrder: function () { return boxFor; }, cardOpen: function () { return cardOpen; },
+    // The stamps on the orders (1l): 'approved', 'denied', or null for each.
+    verdicts: function () { return orders.map(function (o, i) { return verdicts[i] || null; }); },
+    // Which orders are glitter fakes (1l), for tests and screenshots.
+    fakes: function () { return orders.map(function (o) { return !!o.fake; }); },
     holdLeave: holdLeave, warnOpen: function () { return warnOpen; },
     // Tapping Shipping again while a leave waits for the card stays in the room.
     stay: function () { closeWarn(); afterCard = null; },

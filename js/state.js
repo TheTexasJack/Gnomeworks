@@ -28,6 +28,9 @@ GW.state = (function () {
       bonusCogs: { items: 0, sprockets: 0 },
       stonks: 0,            // the Packing Line's score (never spent); changes only on a hand-off
       stonksHistory: [],    // Stonks at the end of each recent shift, oldest first (CONFIG.shipping.ticker.history)
+      tnp: 0,               // TNP Corp's line on the STONKS screen (1l); moves only on a hand-off, never below 0
+      tnpHistory: [],       // TNP at the end of each recent shift, oldest first, like stonksHistory
+      shifts: 0,            // completed hand-offs (scored shifts); glitter fakes start from CONFIG.shipping.fakes.startShift
       mega: { owned: false, food: 0, nextHunt: 0, hunts: 0, kills: 0, bossKills: 0, trophyPity: 0, eaten: 0 },
       stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }
     };
@@ -40,6 +43,8 @@ GW.state = (function () {
   // Fill any fields missing from older saves so new versions never crash on old data.
   function migrate(saved) {
     var base = fresh();
+    // Saves from before 1l count their shifts from the GRIP history (it keeps only the latest few, so this is a floor).
+    if (saved.shifts === undefined) saved.shifts = Array.isArray(saved.stonksHistory) ? saved.stonksHistory.length : 0;
     Object.keys(base).forEach(function (k) {
       if (saved[k] === undefined) saved[k] = base[k];
       else if (base[k] && typeof base[k] === 'object' && !Array.isArray(base[k])) {

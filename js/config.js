@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.91';
+GW.VERSION = '0.2.0-draft.92';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -267,6 +267,37 @@ GW.CONFIG = {
       repeatItems: false,
       emptyText: 'Nothing to ship yet.  Make more junk!'    // draft wording (Claudia), shown when no order can be made
     },
+    // APPROVED or DENIED (1l).  Every slip is stamped one or the other before it is packed ("Stamp it and pack it",
+    // Nathan, 2026-11-23).  The full-size slip has the two stamp buttons in a row under it (`buttons.h` = the row's
+    // height as % of the slip's height, `gap` = the space above it, same unit).  A tap slams that stamp onto the slip:
+    // it starts `bam.scale` times its size and lands over `bam.ms`, then the BAM (sound: a low tone `f` falling to `to`,
+    // `dur` s at `vol`, with a noise burst `noiseHz` for `noiseDur` s at `noiseVol`) and the slip's small `jolt` (% of
+    // its size).  The stamp sits where the approved mock has it
+    // (art-masters/packing-line/32-approve-deny-stamps/stamps-on-work-order-v1.0.png): place = [x center, y center,
+    // width] in % of the slip, measured from the mock (both stamps about 81.5% of the slip's width).  The small slip
+    // on the board shows it too.  A stamp can be changed until that order's box is packed.  Unstamped slips glow
+    // softly on the board (a tip, off with "Show instructions").  label = the buttons' names for screen readers.
+    approval: {
+      approved: { img: 'assets/packing/stamp-approved-v1.0.svg', place: [50, 57.9, 81.6], label: 'Stamp it APPROVED' },
+      denied: { img: 'assets/packing/stamp-denied-v1.0.svg', place: [50, 60.6, 81.4], label: 'Stamp it DENIED' },
+      buttons: { h: 14, gap: 2 },
+      bam: { scale: 2.6, ms: 240, jolt: 2.5, f: 150, to: 45, dur: 0.22, vol: 0.32, noiseHz: 600, noiseDur: 0.12, noiseVol: 0.24 }
+    },
+    // Glitter fakes (1l): TNP's fake work orders, the normal slip with a glitter effect drawn by code.  From the
+    // player's `startShift`th shift (counted in the save's `shifts`), each GRIP truck's board has a `chance` of
+    // carrying one glitter slip among its orders, never more than `perBoard`.  A fake asks for a normal-looking
+    // order from a real town (made the same way as a real one).  The glitter: a pastel shimmer over the paper,
+    // under the text, and `stars` four-point sparkles in `colors`, each `size` (min, max) in % of the slip's width,
+    // spread over the paper.  They twinkle (`twinkleMs`, each its own delay); with reduced motion they hold still.
+    fakes: {
+      startShift: 4,
+      chance: 0.3,
+      perBoard: 1,
+      stars: 14,
+      size: [11, 19],
+      colors: ['#fff6c2', '#ffd34d', '#ff9ad5', '#9be7ff', '#ffffff', '#c9a7ff'],
+      twinkleMs: 1600
+    },
     // A work order slip: Nathan's parchment with live text on top, laid out from the approved mock
     // (art-masters/packing-line/06-work-order/work_order_mock_v0.1.png).  aspect = the paper's width / height.
     // On the board the slips sit side by side, `gap` apart (% of the board's width), as tall as the board allows.
@@ -292,8 +323,7 @@ GW.CONFIG = {
     // with more than orders.keep on the shelf onto the open box puts the order's count of that item in (1h), or
     // everything the shelf can spare if it has fewer.
     // A tap on the computer opens the supplies menu (1g): `supplies.sections` in order, each with a heading, an
-    // empty one not shown, under the "Packing rules" chart (1i), which shows only while "Show instructions" is on
-    // (1j).  Layer 1 has Packing (the `inside` supplies, 1i), Stickers (the `stickers`, 1j), and Stamps (the
+    // empty one not shown, under the "Packing Rules" bar (1i), which always shows, first in the menu (1l).  Layer 1 has Packing (the `inside` supplies, 1i), Stickers (the `stickers`, 1j), and Stamps (the
     // `stamps` below).  Dragging a sticker or a stamp onto a closed box puts it on; an inside supply goes into the
     // open box.  Anything dropped on the wrong side (a sticker or stamp on an open box, junk or an inside supply on
     // a closed one) only shakes the box (`shake`).  menuLabel and supplies.label name the two menus for screen
@@ -344,14 +374,14 @@ GW.CONFIG = {
         jolt: 1,
         pat: { f: 260, to: 190, dur: 0.07, vol: 0.12, noiseHz: 1800, noiseDur: 0.05, noiseVol: 0.08 }
       },
-      // The "Packing rules" chart at the top of the supplies menu (1i): one line per rule, its icon (an inside
-      // supply's id or a tag's id) and its words.  Draft wording (Claudia).  Shown only while "Show instructions"
-      // is on (1j); the rules stay the same either way.
+      // The "Packing Rules" bar at the top of the supplies menu (1i): one line per rule, its icon (an inside
+      // supply's id or a tag's id) and its words.  Draft wording (Claudia).  It always shows, whatever the
+      // instructions setting (Nathan, 2026-11-23, 1l; this replaced 1j's hiding).
       // A tap on its heading bar opens or minimizes it (1k): open the first time it shows, minimized from then on
       // unless the player opens it.  The choice is kept in this browser under storeKey.  turnMs = the chevron's turn.
       // barMinPx = the bar's height, big enough for a finger.
       chart: {
-        title: 'Packing rules',
+        title: 'Packing Rules',
         storeKey: 'gnomeworks.rules',
         turnMs: 200,
         barMinPx: 40,
@@ -401,13 +431,23 @@ GW.CONFIG = {
     // `wrong`.  Stonks never go below 0.  Draft amounts (Claude Code, 1e); Gnomerica is the first, easiest region.
     // reasons = the report card's words for each kind of miss.  A closed box with an item ships even without a
     // stamp ("No stamp"); an open or empty box does not ship ("Not packed").
+    // The stamp calls (1l, approved 2026-11-22; draft amounts): a real order APPROVED and packed right scores as above.
+    // A real order DENIED is "Denied a real order", scored as unfilled (`wrong`).  A real order left unstamped is
+    // "Not packed".  A fake DENIED is right ("Caught a fake!", `caught`), a fake APPROVED is wrong whether packed or
+    // not ("Approved a fake", `approved`; a packed fake's box still ships), and a fake left unstamped is "Missed a
+    // fake" (`missed`).  `ours` moves our Stonks and `tnp` TNP's line.  A perfect shift also moves TNP by
+    // `perfectTnp` (clean shifts push TNP back down, so losses never stack forever).  Neither line goes below 0.
     score: {
       regions: { gnomerica: { right: 10, wrong: 3 } },
+      fake: { caught: { ours: 5, tnp: -5 }, approved: { ours: 0, tnp: 10 }, missed: { ours: 0, tnp: 5 } },
+      perfectTnp: -5,
       reasons: { item: 'Wrong item', noStamp: 'No stamp', wrongStamp: 'Wrong stamp', notPacked: 'Not packed',
-        noPeanuts: 'No peanuts', noBubble: 'No bubble wrap', noFragile: 'No FRAGILE', noHeavy: 'No HEAVY' },
+        noPeanuts: 'No peanuts', noBubble: 'No bubble wrap', noFragile: 'No FRAGILE', noHeavy: 'No HEAVY',
+        deniedReal: 'Denied a real order', approvedFake: 'Approved a fake', missedFake: 'Missed a fake' },
+      caught: 'Caught a fake!',          // a right row's line for a fake DENIED, in green
       // The report card shows a row's main reason, the first of these that applies, then `more` for the rest
       // ("No peanuts +1", draft, Claudia).  {n} = how many more.  The screen-reader label lists them all.
-      order: ['notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
+      order: ['approvedFake', 'missedFake', 'deniedReal', 'notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
       more: ' +{n}'
     },
     // When every order has a stamped box, the chain glows and sways gently and a brass tag by its handle shows
@@ -438,15 +478,18 @@ GW.CONFIG = {
       text: [22.4, 62],
       pic: [63.1, 92.0],
       total: 86.3,
-      font: { town: 5.2, item: 4.2, why: 4.2 },
-      fontMin: { town: 3.4, item: 3.2, why: 3.2 },
+      font: { town: 5.2, item: 4.2, why: 4.2, total: 5.4 },
+      fontMin: { town: 3.4, item: 3.2, why: 3.2, total: 3.4 },
+      // The bottom line (1l, draft wording): {ours} and {tnp} = each line's change this shift ("+5", "−3", "0").
+      totalText: 'Stonks this shift: {ours}   TNP: {tnp}',
       fitSlack: 0.97        // shrink to this share of the exact fit, so rounding never leaves a sliver cut off
     },
-    // The GRIP line on the STONKS screen: our Stonks and a line of the last `history` shift totals.  It moves
-    // when the report card closes, counting up over tickMs.
-    // The saved shifts spread across the glass's full width, first to last; a single shift draws a flat line
-    // across at its value, with the dot at its right end (1f).
-    ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a' },
+    // The STONKS screen: two lines of the last `history` shift totals, GRIP (our Stonks, `color`) and TNP (`tnp`,
+    // in TNP red from its logo, 1l), each labeled with its number, on one shared scale.  Both move when the report
+    // card closes, counting over tickMs.  The saved shifts spread across the glass's full width, first to last; a
+    // single shift draws a flat line across at its value, with the dot at its right end (1f).  A history shorter than
+    // the other (TNP's in a save from before 1l) starts at 0 on the left.
+    ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a', tnp: { label: 'TNP', color: '#b3202a' } },
     // The leave warning (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board
     // shows this over the room.  `go` runs the same hand-off as pulling the chain, and the view switches once the
     // report card closes.  Draft wording (Claudia).  width = the pop-up's width in % of the room, per layout;

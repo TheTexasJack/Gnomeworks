@@ -1,6 +1,6 @@
 # Work order: Packing Line 1l, APPROVED or DENIED, glitter fakes, and TNP's line (v0.2)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("Approve or deny every slip.  Stamp it and pack it.  Everything else approved.").
 **Model:** Opus 5.5
 
@@ -65,3 +65,35 @@ The first half of TNP Corp.  Every work order gets stamped APPROVED or DENIED be
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.92**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 25 minutes, from `git pull` at 13:55 to the Result at 14:20 (CST).
+
+**What was built**
+
+- **Art.**  `stamp-approved-v1.0.svg` and `stamp-denied-v1.0.svg` copied as is into `assets/packing/` and listed in `docs/ASSETS.md`.
+- **2a, the Packing Rules bar always shows.**  Titled "Packing Rules", first in the supplies menu, open the first time and minimized after (as 1k built it), with or without "Show instructions".  The `.no-hints #ship .ship-rules` rule is gone; DESIGNS and ARCHITECTURE updated.
+- **Stamping a slip.**  The open slip shares its space with a row of two buttons under it (`approval.buttons`: the row is 14% of the slip's height), each showing its stamp's art on a parchment-colored button.  A tap slams the stamp onto the slip: 2.6 times its size down to its place over 240 ms, then the BAM (`GW.sfx.bam`, a heavier code-made thump) and a 2.5% jolt of the slip.  Places measured from `stamps-on-work-order-v1.0.png`: APPROVED centered at 50%, 57.9% and 81.6% of the slip's width; DENIED at 50%, 60.6% and 81.4%.  The chosen button stays lit.  The board's slip shows the stamp.  Once the order's box is packed (or while its region stamp is landing) both buttons lock.  The slip stays open after a stamp; any tap off the buttons or Escape closes it, as before.
+- **Stamp it, then pack it.**  No box until an order is APPROVED.  The box belongs to the leftmost APPROVED order not yet packed (`GW.ship.activeOrder()`).  Changing an order to DENIED removes its box (nothing in it ever left the shelf).  Unstamped slips pulse with a soft cream glow (off with instructions).  The chain glows once every order is DENIED or APPROVED and packed.
+- **Glitter fakes.**  From shift 4, one roll per board at 30% picks one random order to be the fake.  It gets a pastel rainbow sheen with fine glitter dots and 14 four-point sparkles (11 to 19% of the slip's width, six colors), all drawn over the paper and under the text, so the text stays readable.  They twinkle unless reduced motion is on.  Sparkle positions are made once per order, so they hold still when the board redraws.
+- **Shifts, TNP, and scoring.**  The save gains `shifts`, `tnp`, and `tnpHistory`; `migrate()` fills `shifts` from `stonksHistory.length` (which keeps only 10, so it is a floor) and the other two with 0 and [].  Draft numbers, all in `CONFIG.shipping.score`: real DENIED = "Denied a real order", ours −3 (Gnomerica's `wrong`); fake DENIED = "Caught a fake!" (a ✔ row with the words in green), ours +5, TNP −5; fake APPROVED = "Approved a fake", TNP +10; fake unstamped = "Missed a fake", TNP +5; real unstamped = "Not packed", ours −3; perfect shift = TNP −5 more.  Neither line goes below 0.  Main-reason order starts Approved a fake, Missed a fake, Denied a real order, then the 1j order.
+- **TNP's line.**  The STONKS screen shows "GRIP n" on the left in green and "TNP n" on the right in `#b3202a` with a lighter red glow so it reads on the black glass, plus both lines and dots on one shared scale.  A history shorter than the other (TNP's in an old save) starts at 0 on the left.  Both count up when the card closes.  The card's bottom line is "Stonks this shift: +N   TNP: +N" (`card.totalText`), shrinking to fit like the rows.
+- **Docs:** CHANGELOG, ARCHITECTURE (save data and the room), DESIGNS (built), ASSETS, TASKS, HANDOFF.
+- **Smoke test:** every shift now stamps its orders first.  It checks that no box comes out before an approval, that the unstamped slips glow, that the open slip has two buttons, that DENIED gives no box and changing to APPROVED brings one, that the board's slip shows APPROVED, and that the bar shows with instructions off and comes first in the menu.  A new `fakeCheck` checks that no fakes come before shift 4 (at a 100% chance), and that a forced board has one glitter slip (board and full size).  It then scores "Caught a fake!" (TNP −5, ours +5 less the unpacked reals, the card's "TNP: −5"), "Approved a fake" with "Denied a real order" on the rest (TNP +10), a perfect one-order caught fake (TNP −10), and "Missed a fake" (TNP +5), and checks that the STONKS screen shows both numbers and two lines.  A pre-1l save loads with TNP 0, [] and 4 shifts.
+
+**Calls to check**
+
+1. **A packed fake's box ships.**  The order doesn't say whether an APPROVED fake that was packed takes items off the shelf.  I let it ship (the box went on the truck to TNP).  It's one line to change if Nathan wants the shelf spared.
+2. **An empty box follows the leftmost approval; a box with an item stays with its order.**  If the player approves the third slip, starts packing it, and then approves the first, the box stays with the third until it's packed, so their work isn't lost.  An empty box just moves to the first.  The box still always belongs to an APPROVED order.
+3. **A smoke test fix from before this order.**  The shift 2 check expected "No peanuts +3" for a Breakable and "+2" for a Heavy.  The real counts are +2 and +1 (it failed on my baseline run before any changes whenever shift 2 drew a tagged item).  Fixed.
+4. **The slip stays open after a stamp**, so the player sees it land.  Auto-closing after the BAM is an easy change if Nathan prefers it.
+
+**Proof** in `tools/out/` (`?ship=1`, Day, 2x, not committed).  `wide` is 1400 x 900 and `tall` is 390 x 844.
+
+- The full-size slip with its two buttons: `1l-<wide|tall>-day-slip-buttons.png`; mid-BAM (the animation paused at 55%): `-slip-bam.png`; landed: `-slip-approved.png`, `-slip-denied.png`; a glitter fake full size: `-slip-glitter.png`.
+- The bench with no box while nothing is approved: `1l-<wide|tall>-day-bench-empty.png`.
+- The board with one APPROVED (its box on the bench), one DENIED, and one glitter slip (unstamped, glowing): `1l-<wide|tall>-day-board.png` and close-up `-board-zoom.png`.
+- Report cards: "Caught a fake!" (with "Not packed" and "Denied a real order" rows): `-card-caught.png`; "Approved a fake": `-card-approved.png`; the third shift: `-card-shift3.png`.
+- The STONKS screen after three shifts (GRIP 19, 19, 18; TNP 0, 10, 5): `1l-<wide|tall>-day-stonks-3.png` and close-up `-stonks-3-zoom.png`.
+
+Nothing was installed.  Counts, supplies, stickers, the region stamp, the truck, and the driver are unchanged.  No elves, fake trucks, or region or Christmas stamps on fakes.
