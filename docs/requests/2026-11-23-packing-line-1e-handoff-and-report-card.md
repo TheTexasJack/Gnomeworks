@@ -1,8 +1,10 @@
-# Work order: Packing Line 1e, hand-off, report card, and the GRIP line (v0.1)
+# Work order: Packing Line 1e, hand-off, report card, and the GRIP line (v0.2)
 
 **Status:** Draft
 **Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** (waiting on Nathan)
 **Model:** Opus 5.5
+
+**v0.2 (2026-11-23):** step 4a, the chain shows the player how to finish (from Nathan's phone test of draft.81: with all three boxes packed, it wasn't clear how to finish).
 
 ## Goal
 
@@ -28,6 +30,7 @@ Close the loop.  Pulling the chain to close the door hands the packed boxes to t
     - If every order is ✅, the driver switches to the happy pose (thumbs up) for a moment; otherwise he stays grumpy (DESIGNS: no negative reaction).
     - Then the trip leaves as now: he walks out, the truck slides away, the door shows closed.
     - **Shipping removes stock:** for each finished box, the shelf count of its item drops by the packed amount, never below 1 (the display copy stays).  Wrong-item boxes still leave the shelf (they shipped).
+4a. **Show how to finish (Claudia's draft).**  The chain stays the only way to finish (DESIGNS: any driver is sent away with the door chain), with no extra button.  When every order has a stamped box, the chain glows and sways gently, and a small brass tag beside its handle reads "Pull to ship!" until it is pulled.  (Draft wording, Claudia; record it in the Result.)  Reduced motion: the glow and tag, no sway.  Numbers in `CONFIG.shipping`.
 5. **The report card.**  After the door closes, the report card shows over the room: one row per order with the town, the item asked for, ✅ or ❌, and the reason for a ❌, plus the Stonks gained or lost this shift.  The card's own lettering stays; rows are live text in `--font`.  A tap or Escape closes it.
 6. **The GRIP line.**  Inside the STONKS screen painted on the back wall (its rectangle per layout in config), draw in code: "GRIP" and the current Stonks number in green, and a small line chart of Stonks at the end of each recent shift (the last 10).  It updates when the report card closes, with a short tick-up.  No TNP line yet.
 7. **Save.**  Add `stonks` (a number) and `stonksHistory` (the last 10 shift totals) to the save, with `migrate()` filling them for old saves.  Stonks only changes on a hand-off, so nothing moves while the player is away.
