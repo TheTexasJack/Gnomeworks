@@ -1,7 +1,7 @@
 # Work order: Packing Line 1b.5, close the gap beside the truck (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22, from Nathan's bug report.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22, from Nathan's bug report.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
 
 ## Goal

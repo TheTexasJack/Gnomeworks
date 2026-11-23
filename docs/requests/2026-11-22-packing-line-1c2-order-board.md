@@ -1,7 +1,7 @@
 # Work order: Packing Line 1c-2, three work orders on the board (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
 
 ## Goal
