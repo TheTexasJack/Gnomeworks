@@ -113,13 +113,13 @@
   - [x] Shen Shin: wood brown table.
   - [x] Gnufoundland: ice blue mitten.
   - [x] Gnonmoon: night blue crescent moon.
-- [x] **15. Packing supplies.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**
+- [x] **15. Packing supplies.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  **In the game since draft.89 (work order 1i):** `assets/packing/supply_peanuts.webp`, `supply_bubble_wrap.webp`.
   - [x] Bubble wrap.
   - [x] Cornstarch packing peanuts.
 - [x] **15a. Outside stickers.  Approved by Nathan 2026-11-22** (from the embossed hazard stamp sheet, `art-masters/packing-line/15-16-hazard-stamps/`).
   - [x] FRAGILE: `hazard-01-fragile.png` (broken glass).
   - [x] HEAVY: `hazard-02-heavy.png` (weight).
-- [x] **15b. Item-category icons.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  For item tiles and the menu's explanation chart.
+- [x] **15b. Item-category icons.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  For item tiles and the menu's explanation chart.  **In the game since draft.89 (work order 1i):** `assets/packing/tag_breakable.webp`, `tag_heavy.webp`, `tag_soft.webp`.
   - [x] Breakable: `hazard-01-fragile.png` (approved 2026-11-22).
   - [x] Soft: `hazard-09-handle-with-care.png` (hands holding a box), approved 2026-11-22.
   - [x] Heavy: `hazard-02-heavy.png` (approved 2026-11-22).

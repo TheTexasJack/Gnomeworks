@@ -1,6 +1,6 @@
 # Work order: Packing Line 1i, tags shown, peanuts and bubble wrap (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (tag display: "Agreed" to the tile, the chart, and the open box; the slip stays clean).
 **Model:** Opus 5.5
 
@@ -68,3 +68,37 @@ The first half of Gnomerica's correct supplies rule: the inside of the box.  Pla
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.89**.  Smoke test: all clear, desktop and phone (run twice; the second run's no-supplies shift drew a Bowl and read "No peanuts +1").
+
+**Build time:** about 14 minutes, from `git pull` at 12:31 to the Result at 12:45 (CST).
+
+**What was built**
+
+- **Art.**  `assets/packing/supply_peanuts.webp` (256x256) and `supply_bubble_wrap.webp` (384x256) with `art.py resize --width`, whole canvas; `tag_breakable.webp` (70x96), `tag_heavy.webp` and `tag_soft.webp` (64x96) with `art.py resize --height 96`.  Added to `docs/ASSETS.md`, and the checklist's rows 15 and 15b note they are in the game.
+- **Tag icons on the junk tiles.**  A 24 px tag in each tagged tile's top right corner, clear of the item's picture on a 390 px phone; untagged and unknown ("???") tiles show none.
+- **The "Packing rules" chart** at the top of the supplies menu, live text in `--font` on a light parchment panel, one line per rule with its icon.  Wording exactly Claudia's draft: "Every box: packing peanuts." / "Breakable: bubble wrap and a FRAGILE sticker." / "Heavy: a HEAVY sticker." / "Soft: nothing to worry about!"  Title "Packing rules".  All in `CONFIG.shipping.pack.chart`.
+- **The Packing section** (Packing Peanuts, Bubble Wrap) sits above Stamps, in the order a box is packed.  Dragged like everything else; open box only; a second drop changes nothing; a new item dropped in keeps the supplies already there.
+- **The open box** shows the item's picture with its tag beside it on the label, and the peanuts and bubble wrap as small pictures sitting in the box's opening.  A closed box shows none of it.
+- **Junk dropped on a closed box shakes it** (the 1g polish), as do peanuts and bubble wrap.
+- **Record and scoring.**  Each record adds `inside` (`['peanuts', 'bubble']`, in menu order).  New reasons "No peanuts" and "No bubble wrap"; each a ❌ like the others.
+- **Report card:** the main reason, in the order Not packed, Wrong item, No peanuts, No bubble wrap, No stamp, Wrong stamp (`score.order`), then " +N" (`score.more`).  The row's screen-reader label still lists every reason.
+- **Docs:** CHANGELOG, ARCHITECTURE, DESIGNS (built), ASSETS, TASKS, HANDOFF, the production checklist.
+- **Smoke test:** shift 1 is perfect (peanuts in every box, bubble wrap around Breakables, peanuts added twice, junk and bubble wrap dropped on a closed box leave it unchanged and the junk shakes it); shift 2 packs no supplies and every row must read "No peanuts", plus " +1" for a Breakable, with the Stonks moving accordingly.  It also checks that every tagged tile has its icon and no untagged one does, the chart's 4 lines, the sections "Packing, Stamps", and that a closed box shows nothing inside.
+
+**Calls to check**
+
+1. **"No bubble wrap" follows the item in the box,** not the ordered one.  It only differs when the item is wrong too, and then "Wrong item" is the main reason anyway.
+2. **On the phone the chart fills most of the open supplies menu,** so the Packing and Stamps tiles are a short scroll below it (`1i-tall-day-supplies-menu.png`).  On desktop the Packing tiles show under the chart and Stamps needs a scroll.  If that's too much scrolling for every stamp, the chart could collapse to one line after the first trip, or the menu could open scrolled to the tiles; neither was built.
+3. **Supplies stay in a box when a different item replaces the first,** since the box itself was not emptied.
+4. **The longest card line at 360 px** with a 3-digit count and "+N": "Grit Spit and Fellers" / "150 × Fire Extinguisher" / "No bubble wrap +1" (and "Wrong item +3", "No peanuts +2").  Every line on one line, nothing cut; the reasons fit at full size.
+
+**Screenshots** in `tools/out/` (`?ship=1`, Day, 2x, not committed).  `wide` is 1400 x 900, `tall` is 390 x 844.  The shelf held only Breakables while the orders were made, so the first order is a Breakable.  The debug bar is hidden.
+
+- Junk menu with tag icons: `1i-<wide|tall>-day-junk-menu.png`, and `-junk-menu-breakable.png` scrolled to a Breakable.
+- Supplies menu with the chart: `1i-<wide|tall>-day-supplies-menu.png`.
+- Open Breakable box with its tag, peanuts, and bubble wrap: `1i-<wide|tall>-day-open-breakable-box.png`, with `-zoom` crops.
+- The shake, peanuts dropped on a closed box, caught mid-shake: `1i-<wide|tall>-day-shake-closed-box.png`.
+- Report card with "No peanuts +1": `1i-<wide|tall>-day-card.png`.
+- 360 px long-name card: `1i-360-day-long-card.png`.
+
+Nothing was installed.  No FRAGILE or HEAVY stickers, no tags on the slip, and the counts, stamp, box face, truck, driver, and chain are unchanged.

@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.88**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.89**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -31,7 +31,8 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 5. **1e (done, draft.84):** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.  **1e.1 (done, draft.85):** the report card keeps the town, item, and reason on one line each, shrinking long names to fit.
 6. **1f (done, draft.86):** leaving the room mid-trip warns first (Stay or Send it off), a sent-off shift always shows its report card before the view switches, and the GRIP line fills the STONKS screen.
 7. **1g (done, draft.87):** the computer opens the supplies menu (Stamps for now; drag the stamp onto a closed box), the stamp tray is gone, the belt glows with a tag at the start of a trip, the computer glows while a box waits for its stamp, and every tip follows the instructions setting.
-8. **1h (done, draft.88):** each order asks for a count set by its item's packing tag ("500 × Toilet Paper", "2 × Toilet"), one drag packs that count, and shipping deducts only that count, so the next shift can still be filled.  The tags are in `CONFIG.items` (`pack`), not shown yet.
+8. **1h (done, draft.88):** each order asks for a count set by its item's packing tag ("500 × Toilet Paper", "2 × Toilet"), one drag packs that count, and shipping deducts only that count, so the next shift can still be filled.  The tags are in `CONFIG.items` (`pack`).
+9. **1i (done, draft.89):** the tags show (junk tiles, the "Packing rules" chart at the top of the supplies menu, the open box; never the slip), packing peanuts and bubble wrap go into the open box from the supplies menu's Packing section, a missing one scores "No peanuts" or "No bubble wrap" (Breakables), and the report card shows each row's main reason and "+N".  Junk on a closed box shakes too.  Next is 1j, the FRAGILE and HEAVY stickers.
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 

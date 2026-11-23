@@ -13,8 +13,12 @@
    open box on the bench; dragging a tile onto it puts the order's count of that item in (or what the shelf can spare).  A tap closes a
    filled box (or opens a closed one again).  A tap on the computer opens the supplies menu (1g), on the same frame;
    dragging a region stamp from it onto the closed box stamps it, and a stamped box moves to the stack by the truck
-   while the next order's box appears.  An open box shakes off a stamp.  Only one menu is open at a time.  The
-   record of what was packed is GW.ship.packed().
+   while the next order's box appears.  An open box shakes off a stamp; a closed box shakes off junk and inside
+   supplies.  Only one menu is open at a time.  The record of what was packed is GW.ship.packed().
+   Inside supplies (1i): the supplies menu opens with the "Packing rules" chart, then a Packing section (packing
+   peanuts and bubble wrap) that goes into the open box.  Each junk tile shows its packing tag's icon, and the open
+   box shows the item's picture with its tag beside it and the supplies in its opening.  Scoring wants peanuts in
+   every box and bubble wrap around a Breakable item.
    The room's tips (1g): the belt glows with a tag at the start of each trip until the item menu first opens, the
    computer's screen glows while a closed box waits for its stamp, and the chain glows when the shift is ready.  All
    of them follow the instructions setting (the no-hints class on the page, css).
@@ -41,7 +45,7 @@ GW.ship = (function () {
   var board, viewer, orders = [], slipOpen = false;
   var K = P.pack, conveyor, computer, packLayer, boxEl = null, menus = {}, menuKind = null, stacked = [];
   var beltGlow, beltImg, beltTag, screenGlow, screenImg, beltTip = false;
-  var packed = [], boxItem = null, boxCount = 0, boxState = 'none';   // boxState: 'none' | 'open' | 'closed' | 'stamped'
+  var packed = [], boxItem = null, boxCount = 0, boxState = 'none', boxIn = {};   // boxIn = the inside supplies in the box (1i)   // boxState: 'none' | 'open' | 'closed' | 'stamped'
   var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, afterCard = null;
 
@@ -326,6 +330,13 @@ GW.ship = (function () {
     body.appendChild(img('box-art box-open', K.boxOpen));
     body.appendChild(img('box-art box-closed', K.boxClosed));
     var label = div('box-label'); label.hidden = true;
+    // The inside supplies (1i) sit in the open box's opening, each at its own spot.
+    K.inside.forEach(function (sp) {
+      var pic = img('box-in', sp.img);
+      pic.dataset.supply = sp.id; pic.hidden = true;
+      pic.style.left = sp.spot[0] + '%'; pic.style.top = sp.spot[1] + '%'; pic.style.width = sp.spot[2] + '%';
+      body.appendChild(pic);
+    });
     body.appendChild(label);
     var mark = img('box-mark'); mark.hidden = true;
     body.appendChild(mark);
@@ -345,12 +356,17 @@ GW.ship = (function () {
     label.hidden = !boxItem || boxState !== 'open';
     if (!label.hidden) {
       label.appendChild(GW.ui.itemIcon(boxItem));
-      label.setAttribute('aria-label', boxItem.name);
+      var t = tagIcon(boxItem, 'box-tag');          // the item's packing tag beside its picture (1i)
+      if (t) label.appendChild(t);
+      label.setAttribute('aria-label', boxItem.name + (t ? ', ' + K.tags[boxItem.pack].name : ''));
     }
+    Array.prototype.forEach.call(boxEl.querySelectorAll('.box-in'), function (pic) {
+      pic.hidden = boxState !== 'open' || !boxIn[pic.dataset.supply];
+    });
     updateReady();
   }
   function resetPack() {
-    packed = []; boxItem = null; boxCount = 0; boxState = 'none';
+    packed = []; boxItem = null; boxCount = 0; boxState = 'none'; boxIn = {};
     if (boxEl) { boxEl.remove(); boxEl = null; }
     stacked.forEach(function (el) { el.remove(); }); stacked = [];
   }
@@ -358,7 +374,7 @@ GW.ship = (function () {
   function nextBox() {
     if (boxEl || trip !== 'here' || activeIndex() < 0) return;
     var L = layout();
-    boxItem = null; boxCount = 0; boxState = 'open';
+    boxItem = null; boxCount = 0; boxState = 'open'; boxIn = {};
     boxEl = makeBox();
     setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
     boxEl.addEventListener('pointerdown', function (e) {
@@ -390,6 +406,25 @@ GW.ship = (function () {
     if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2%) scaleY(.97)' }, { transform: 'translateY(0)' }],
       { duration: K.thumpMs, easing: 'ease-out' });
   }
+  // An inside supply into the open box (1i).  Adding one twice changes nothing.
+  function addSupply(id) {
+    if (boxState !== 'open' || boxIn[id]) return;
+    boxIn[id] = true;
+    GW.sfx.drop('common', true);
+    showBox();
+    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(1.5%) scaleY(.98)' }, { transform: 'translateY(0)' }],
+      { duration: K.thumpMs, easing: 'ease-out' });
+  }
+  // The inside supplies in the box, in menu order.
+  function insideList() { return K.inside.filter(function (sp) { return boxIn[sp.id]; }).map(function (sp) { return sp.id; }); }
+  // A packing tag's icon for an item (1i), or null when the item has no tag.
+  function tagIcon(item, cls) {
+    var t = item && item.pack && K.tags[item.pack];
+    if (!t) return null;
+    var i = img(cls, t.img);
+    i.alt = t.name; i.title = t.name;
+    return i;
+  }
   function stampBox(rid) {
     if (boxState !== 'closed') return;
     var i = activeIndex(), el = boxEl, calm = calmQuery.matches;
@@ -408,8 +443,8 @@ GW.ship = (function () {
       GW.sfx.thump();
       if (!calm) el.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2.5%) scaleY(.96)' }, { transform: 'translateY(0)' }],
         { duration: K.thumpMs, easing: 'ease-out' });
-      // The record for 1e: the item, its count at packing time, and the stamp used.
-      packed[i] = { item: boxItem.id, count: boxCount, stamp: rid };
+      // The record for 1e: the item, its count at packing time, the inside supplies (1i), and the stamp used.
+      packed[i] = { item: boxItem.id, count: boxCount, inside: insideList(), stamp: rid };
       showBoard();
       return new Promise(function (r) { setTimeout(r, K.setAsideDelayMs); });
     }).then(function () {
@@ -418,12 +453,13 @@ GW.ship = (function () {
       setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
       el.classList.add('is-stacked');
       stacked.push(el);
-      boxEl = null; boxItem = null; boxState = 'none';
+      boxEl = null; boxItem = null; boxState = 'none'; boxIn = {};
       if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%' }], { duration: K.slideMs, easing: 'ease-in-out' });
       nextBox();
     }).catch(function () {});
   }
-  // A shake when something is dropped on the wrong side of the box (a stamp on an open box).
+  // A shake when something is dropped on the wrong side of the box (a stamp on an open box; junk or an inside
+  // supply on a closed one).
   function shakeBox() {
     if (!boxEl) return;
     var Sh = K.shake, calm = calmQuery.matches, d = calm ? Sh.calmPct : Sh.pct, n = calm ? Sh.calmTimes : Sh.times, frames = [{ transform: 'translateX(0)' }];
@@ -479,16 +515,21 @@ GW.ship = (function () {
   // stamp); an open or empty box is not packed and does not ship.
   function scoreShift() {
     var Sc = P.score, R = Sc.reasons, rows = [], delta = 0, shipped = [], a = activeIndex();
-    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, stamp: null } : null;
+    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), stamp: null } : null;
     orders.forEach(function (o, i) {
-      var rec = packed[i] || (i === a ? bench : null), why = [];
-      if (!rec) why.push(R.notPacked);
+      var rec = packed[i] || (i === a ? bench : null), miss = {};
+      if (!rec) miss.notPacked = true;
       else {
-        if (rec.item !== o.item.id) why.push(R.item);
-        if (!rec.stamp) why.push(R.noStamp);
-        else if (rec.stamp !== o.place.region) why.push(R.wrongStamp);
+        // The supplies follow what is in the box: bubble wrap only matters around a Breakable item (1i).
+        var def = GW.econ.itemDef(rec.item), inside = rec.inside || [];
+        if (rec.item !== o.item.id) miss.item = true;
+        if (inside.indexOf('peanuts') < 0) miss.noPeanuts = true;
+        if (def && def.pack === 'breakable' && inside.indexOf('bubble') < 0) miss.noBubble = true;
+        if (!rec.stamp) miss.noStamp = true;
+        else if (rec.stamp !== o.place.region) miss.wrongStamp = true;
         shipped.push(rec);
       }
+      var why = Sc.order.filter(function (k) { return miss[k]; }).map(function (k) { return R[k]; });   // main reason first
       var pts = Sc.regions[o.place.region] || Sc.regions[P.orders.region];
       delta += why.length ? -pts.wrong : pts.right;
       rows.push({ order: o, ok: !why.length, why: why });
@@ -527,7 +568,7 @@ GW.ship = (function () {
       words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
       words.appendChild(cardLine('town', o.place.name));
       words.appendChild(cardLine('item', countName(o.qty, o.item)));
-      if (!row.ok) words.appendChild(cardLine('why', row.why.join(', ')));
+      if (!row.ok) words.appendChild(cardLine('why', mainWhy(row.why)));
       line.appendChild(words);
       var pic = div('card-pic');
       pic.style.left = Cd.pic[0] + '%'; pic.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
@@ -542,6 +583,10 @@ GW.ship = (function () {
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Report card');
     return el;
+  }
+  // A row's main reason and a count of the rest (1i): "No peanuts +1".
+  function mainWhy(why) {
+    return why[0] + (why.length > 1 ? P.score.more.replace('{n}', why.length - 1) : '');
   }
   // One line of a card row at its full size; fitCard shrinks it once it is on screen.
   function cardLine(kind, text) {
@@ -758,22 +803,41 @@ GW.ship = (function () {
         t.appendChild(known ? GW.ui.itemIcon(item) : U.el('span', 'item-icon', '?'));
         t.appendChild(div('tile-name', known ? item.name : '???'));
         t.appendChild(div('tile-count', known ? '×' + U.fmt(n) : ''));
+        var tg = known && tagIcon(item, 'tile-tag');       // the item's packing tag in the tile's corner (1i)
+        if (tg) t.appendChild(tg);
         grid.appendChild(t);
       });
     });
   }
-  // The supplies the player has, by section (layer 1: the region stamps).  side = which box takes it: 'outside'
-  // marks go on a closed box, 'inside' supplies (later steps) in an open one.
+  // The supplies the player has, by section (layer 1: the inside supplies and the region stamps).  side = which box
+  // takes it: 'outside' marks go on a closed box, 'inside' supplies in an open one.
   function supplies(sid) {
+    if (sid === 'packing') return K.inside.map(function (sp) {
+      return { kind: 'supply', side: 'inside', id: sp.id, name: sp.name, img: sp.img };
+    });
     if (sid === 'stamps') return K.stamps.map(function (rid) {
       return { kind: 'stamp', side: 'outside', id: rid, name: regionOf(rid).name, img: P.slip.stampImg.replace('{region}', rid) };
     });
     return [];
   }
   function supplyIcon(s) { var w = U.el('span', 'item-icon supply-icon'); w.appendChild(img('', s.img)); return w; }
-  // Headed sections like the item menu's groups; an empty section is not shown.
+  // The "Packing rules" chart (1i), live text, one line per rule with its icon.
+  function makeChart() {
+    var Ch = K.chart, el = div('ship-rules');
+    el.appendChild(div('ship-rules-title', Ch.title));
+    Ch.rows.forEach(function (r) {
+      var row = div('ship-rule'), sp = K.inside.filter(function (x) { return x.id === r.icon; })[0], tg = K.tags[r.icon];
+      var pic = img('ship-rule-icon', sp ? sp.img : tg ? tg.img : '');
+      row.appendChild(pic);
+      row.appendChild(U.el('span', 'ship-rule-text', r.text));
+      el.appendChild(row);
+    });
+    return el;
+  }
+  // The chart, then headed sections like the item menu's groups; an empty section is not shown.
   function fillSupplies(list) {
     list.textContent = '';
+    list.appendChild(makeChart());
     K.supplies.sections.forEach(function (sec) {
       var things = supplies(sec.id);
       if (!things.length) return;
@@ -849,17 +913,20 @@ GW.ship = (function () {
     }
     if (drag.mode === 'drag') moveGhost(e.clientX, e.clientY);
   }
-  // The right side of the box takes it; a stamp (an outside mark) dropped on an open box only shakes it.
+  // The right side of the box takes it; anything dropped on the wrong side only shakes it (a stamp on an open box,
+  // junk or an inside supply on a closed one).
   function menuUp(e) {
     if (!drag || e.pointerId !== drag.id) return;
     if (drag.mode === 'drag' && overBox(e.clientX, e.clientY)) {
       var th = drag.thing;
-      if (fits(th)) { if (th.kind === 'item') fillBox(th.item); else stampBox(th.id); }
-      else if (th.side === 'outside' && boxState === 'open') shakeBox();
+      if (!fits(th)) shakeBox();
+      else if (th.kind === 'item') fillBox(th.item);
+      else if (th.kind === 'supply') addSupply(th.id);
+      else stampBox(th.id);
     }
     endDrag();
   }
-  // An open box takes junk (and, later, inside supplies); a closed, unstamped box takes outside marks.
+  // An open box takes junk and inside supplies; a closed, unstamped box takes outside marks.
   function fits(th) { return th.side === 'inside' ? boxState === 'open' : boxState === 'closed'; }
   function startDrag(x, y) {
     drag.mode = 'drag';
@@ -1066,6 +1133,8 @@ GW.ship = (function () {
     // without scoring or saving, so screenshots can try the longest names.
     testCard: function (r) { if (built) showCard(r); },
     // What was packed, for the hand-off (1e): one entry per order, null until stamped.
-    packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, stamp: r.stamp }; }); }
+    packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, inside: r.inside.slice(), stamp: r.stamp }; }); },
+    // What is in the box on the bench (1i): its state, item, and inside supplies.
+    bench: function () { return { state: boxState, item: boxItem && boxItem.id, inside: insideList() }; }
   };
 })();
