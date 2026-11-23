@@ -116,7 +116,7 @@ body {
 /* shipping room (Packing Line): closed and open twins stacked, the chain beside the door */
 .machine.ship-mode { aspect-ratio: var(--ship-aspect, 1600 / 901); max-width: none; }
 .machine.ship-mode #gearSvg { display: none; }
-#ship { position: absolute; inset: 0; display: none; overflow: hidden; }
+#ship { position: absolute; inset: 0; display: none; overflow: hidden; isolation: isolate; }
 .machine.ship-mode #ship { display: block; }
 #ship .ship-room { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; pointer-events: none; }
 #ship .ship-open { visibility: hidden; }
@@ -169,7 +169,7 @@ body {
 .ship-slip .slip-item .item-icon { width: 1.15em; height: 1.15em; font-size: inherit; margin-left: .2em; vertical-align: -.22em; }
 .ship-slip .slip-stamp { right: 13.3%; top: 61.6cqh; width: calc(var(--stamp, 20) * 1cqw); height: auto; pointer-events: none; }
 .ship-slip .slip-note-text { left: 13%; right: 13%; top: 20cqh; bottom: 18cqh; display: flex; align-items: center; justify-content: center; text-align: center; font: bold 8.5cqw/1.3 var(--font); }
-#ship .ship-slip-view { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
+#ship .ship-slip-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-slip-view[hidden] { display: none; }
 /* packing (1d): the active slip glows, packed slips get a check.  The box, the stamp tray, and the stack draw in
    front of the driver; places and sizes come from CONFIG.shipping.layouts.<layout> and .pack. */
@@ -190,13 +190,15 @@ body {
 #ship .ship-box.is-closed .box-open { visibility: hidden; }
 #ship .ship-box.drop-ok .box-art { filter: drop-shadow(0 0 1.2vmin #ffe08a) drop-shadow(0 0 2.5vmin rgba(255,200,80,.9)); }
 #ship .box-label { position: absolute; left: var(--label-x); top: var(--label-y); max-width: var(--label-w); transform: translate(-50%, -50%);
-  display: flex; align-items: center; gap: 2cqw; padding: 1.5cqw 3cqw; border-radius: 2cqw; background: #fbf3df; border: .6cqw solid #8a5a2b;
-  box-shadow: 0 .6cqw 1cqw rgba(0,0,0,.3); font: bold 11cqw/1 var(--font); color: #3a2414; white-space: nowrap; pointer-events: none; }
+  display: flex; align-items: center; justify-content: center; padding: 1.5cqw; border-radius: 2cqw; background: #fbf3df; border: .6cqw solid #8a5a2b;
+  box-shadow: 0 .6cqw 1cqw rgba(0,0,0,.3); pointer-events: none; }
 #ship .box-label[hidden], #ship .box-mark[hidden] { display: none; }
-#ship .box-label .item-icon { width: 14cqw; height: 14cqw; font-size: 12cqw; flex: none; }
-#ship .box-label .box-count { overflow: hidden; text-overflow: ellipsis; }
+#ship .box-label .item-icon { width: 22cqw; height: 22cqw; font-size: 19cqw; flex: none; }
 #ship .box-mark { position: absolute; left: var(--mark-x); top: var(--mark-y); width: var(--mark-w); height: auto;
-  transform: translate(-50%, -50%) rotate(var(--mark-tilt)); pointer-events: none; mix-blend-mode: multiply; }
+  transform: translate(-50%, -50%) rotate(var(--mark-tilt)); pointer-events: none; opacity: 1; z-index: 1;
+  filter: drop-shadow(0 .6cqw .5cqw rgba(0,0,0,.45)); }
+/* a stamped box draws above the open box, the stack, the tray, and the driver, so its stamp is always in front */
+#ship .ship-box.is-stamped { z-index: 3; }
 #ship .ship-tray { position: absolute; transform: translate(-50%, -100%); display: flex; justify-content: center; gap: 4%; padding: 1.2% 1.5%;
   border-radius: 8px; background: linear-gradient(180deg, #5a3618, #3a2210); border: 2px solid var(--brass-dark);
   box-shadow: inset 0 0 0 1px var(--brass), 0 .6vmin .8vmin rgba(0,0,0,.45); pointer-events: auto; }
@@ -205,11 +207,15 @@ body {
 #ship .tray-stamp img { display: block; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 .3vmin .3vmin rgba(0,0,0,.5)); }
 #ship .tray-stamp:hover img { filter: brightness(1.12) drop-shadow(0 .3vmin .3vmin rgba(0,0,0,.5)); }
 /* the item menu: shelf-style tiles, scrolling inside itself */
-#ship .ship-menu { position: absolute; display: flex; flex-direction: column; padding: 6px; border-radius: 10px;
-  background: rgba(30, 16, 6, .94); border: 3px solid var(--brass); box-shadow: inset 0 0 0 2px var(--brass-dark), 0 6px 16px rgba(0,0,0,.6); }
+#ship .ship-menu { position: absolute; display: flex; flex-direction: column; isolation: isolate; z-index: 4;
+  padding: calc(var(--frame-w, 24px) * .78) calc(var(--frame-w, 24px) * .92); filter: drop-shadow(0 6px 10px rgba(0,0,0,.55)); }
+/* the supply drawer frame (05a) as a nine-slice; its source and slice come from CONFIG.shipping.pack.menuFrame */
+#ship .ship-menu-frame { position: absolute; inset: 0; z-index: -1; pointer-events: none; border-style: solid; border-color: transparent;
+  border-width: var(--frame-w, 24px); border-image-width: var(--frame-w, 24px); }
+.night #ship .ship-menu-frame { filter: brightness(var(--slip-night, .88)); }
 #ship .ship-menu[hidden] { display: none; }
 #ship .ship-menu-list { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; touch-action: none; padding: 0 2px; }
-#ship .ship-menu-head { position: sticky; top: 0; z-index: 1; padding: 4px 4px 3px; font-weight: bold; font-size: .85rem; color: var(--brass-light); background: rgba(30, 16, 6, .97); }
+#ship .ship-menu-head { position: sticky; top: 0; z-index: 1; padding: 4px 4px 3px; font-weight: bold; font-size: .85rem; color: #4a2a10; background: #f1cf9c; border-bottom: 1px solid rgba(110, 60, 20, .35); }
 #ship .ship-menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; padding: 2px 2px 8px; }
 #ship .ship-tile { cursor: grab; user-select: none; -webkit-user-select: none; }
 #ship .ship-tile.is-off { opacity: .35; filter: grayscale(1); cursor: default; }

@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.81';
+GW.VERSION = '0.2.0-draft.82';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -250,10 +250,16 @@ GW.CONFIG = {
       stamps: ['gnomerica'],              // the region stamps the player has (layer 1: Gnomerica's only)
       boxOpen: 'assets/packing/box_plain_open.webp',
       boxClosed: 'assets/packing/box_plain_closed.webp',
-      // On the box's front face, in % of its square canvas: label = [x center, y center, width] (the item and the
-      // count it will ship), mark = the stamp once stamped [x center, y center, width, tilt in degrees].
+      // On the box's front face, in % of its square canvas: label = [x center, y center, width] (the item's picture,
+      // shown only while the box is open and filled), mark = the stamp once stamped [x center, y center, width,
+      // tilt in degrees], drawn solid and on top of the box, the stack, the tray, and the driver.
       label: [48, 69, 62],
-      mark: [64, 47, 30, -14],
+      mark: [60, 52, 44, -14],
+      // The item menu's frame: the approved supply drawer (05a), drawn as a nine-slice so the brass corners keep
+      // their shape, the wood sides stretch, and the parchment fills the middle.  slice = the corner size in the
+      // game copy's pixels (512 x 768; 62 = 124 in the 1024 x 1536 master, the brass corner and the parchment's
+      // round corner), border = how wide the frame draws on screen per layout, in px.
+      menuFrame: { img: 'assets/packing/menu_frame.webp', slice: 62, border: { wide: 34, tall: 24 } },
       // The menu on touch: a finger that holds still holdMs on a tile picks it up; one that moves slopPx first
       // scrolls the menu, and becomes a drag of the tile it pressed once it leaves the menu.  A mouse picks a tile
       // up after slopPx.  dropPad widens the box's drop area (% of its size on each side).

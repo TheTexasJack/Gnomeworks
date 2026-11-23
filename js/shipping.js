@@ -249,7 +249,8 @@ GW.ship = (function () {
     var S = L.stack, sp = S.spots[Math.min(k, S.spots.length - 1)];
     return { x: S.x + sp[0] * boxWidth(L, S.h), y: S.y + sp[1] * S.h, h: S.h, tilt: sp[2] };
   }
-  // A box: the open and closed pictures stacked (same canvas, so they swap with no jump), the label, and the stamp.
+  // A box: the open and closed pictures stacked (same canvas, so they swap with no jump), the label (the item's
+  // picture, only while the box is open and filled), and the stamp.
   function makeBox() {
     var el = div('ship-box'), body = div('box-body');
     body.appendChild(img('box-art box-open', K.boxOpen));
@@ -271,11 +272,10 @@ GW.ship = (function () {
     boxEl.classList.toggle('is-closed', boxState === 'closed' || boxState === 'stamped');
     var label = boxPart('box-label');
     label.textContent = '';
-    label.hidden = !boxItem;
-    if (boxItem) {
+    label.hidden = !boxItem || boxState !== 'open';
+    if (!label.hidden) {
       label.appendChild(GW.ui.itemIcon(boxItem));
-      label.appendChild(U.el('span', 'box-count', U.fmt(boxCount)));
-      label.setAttribute('aria-label', U.fmt(boxCount) + ' ' + boxItem.name);
+      label.setAttribute('aria-label', boxItem.name);
     }
     tray.hidden = boxState !== 'closed';
   }
@@ -323,6 +323,7 @@ GW.ship = (function () {
     var i = activeIndex(), el = boxEl, calm = calmQuery.matches;
     boxState = 'stamped';
     tray.hidden = true;
+    el.classList.add('is-stamped');
     var mark = boxPart('box-mark');
     mark.src = P.slip.stampImg.replace('{region}', rid);
     mark.hidden = false;
@@ -355,6 +356,7 @@ GW.ship = (function () {
     var c = L.conveyor, m = L.menu;
     conveyor.style.left = c[0] + '%'; conveyor.style.top = c[1] + '%'; conveyor.style.width = c[2] + '%'; conveyor.style.height = c[3] + '%';
     menu.style.left = m[0] + '%'; menu.style.top = m[1] + '%'; menu.style.width = m[2] + '%'; menu.style.height = m[3] + '%';
+    menu.style.setProperty('--frame-w', K.menuFrame.border[tallQuery.matches ? 'tall' : 'wide'] + 'px');   // the frame's drawn width
     tray.style.left = L.tray.x + '%'; tray.style.top = L.tray.y + '%'; tray.style.width = L.tray.w + '%';
     if (boxEl) setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
     stacked.forEach(function (el, k) { var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt); });
@@ -366,6 +368,12 @@ GW.ship = (function () {
     menu.hidden = true;
     menu.setAttribute('role', 'dialog');
     menu.setAttribute('aria-label', 'Junk from the conveyor');
+    // The frame (05a) sits behind the tiles as a nine-slice; Night dims the frame only, as it does the slips.
+    var frame = div('ship-menu-frame');
+    frame.style.borderImageSource = 'url("' + K.menuFrame.img + '")';
+    frame.style.borderImageSlice = K.menuFrame.slice + ' fill';
+    frame.style.borderImageRepeat = 'stretch';
+    menu.appendChild(frame);
     menuList = div('ship-menu-list');
     menu.appendChild(menuList);
     menuList.addEventListener('pointerdown', menuDown);

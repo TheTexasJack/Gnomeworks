@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.81.
+Last updated 2026-11-23, at v0.2.0-draft.82.
 
 ## Where we are
 
@@ -75,8 +75,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-1: the destinations data, `js/destinations.js` generated from the map's locations file by `tools/destinations.js` (draft.75, nothing on screen).
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
     - [x] 1c-2: three Gnomerica work orders on the order board, tap to read full size; on phones the board ends left of the parked truck (draft.79).
-    - [ ] 1d.1 (approved): the box label shows only the item's picture, a closed box shows none, and the stamp lands bold and on top (Nathan's test of draft.81).
-    - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the unused supply drawer frame (05a).  See DESIGNS.md, "One supplies menu for every tool."
+    - [x] 1d.1 (draft.82): the box label shows only the item's picture, a closed box shows none, the stamp lands bold and on top, and the item menu sits on the supply drawer frame (05a) (Nathan's test of draft.81).
+    - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [ ] **Future enhancement (Nathan, 2026-11-23):** leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Today leaving just resets the room.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
     - [ ] **Future enhancement (Nathan, 2026-11-23):** hold the trip's state (the truck, driver, orders, and packed boxes) until the player ends the day, for experience and consistency.  **Order (Nathan, 2026-11-23):** the warning comes first and states what leaving does today; holding the state is the later change, and the warning retires with it.
