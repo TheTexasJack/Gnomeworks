@@ -1,6 +1,6 @@
 # Work order: Packing Line 1c-1, the destinations data (v0.1)
 
-**Status:** Done (built in v0.2.0-draft.75)
+**Status:** Reviewed and closed (Claudia, 2026-11-22)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1c-1 approved").
 **Model:** Opus 5.5
 
@@ -61,3 +61,10 @@ Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Built in v0.2.0-draft.75.*
 - **Same file twice:** ran the tool twice and compared the outputs byte for byte: identical.  The file has no dates or timestamps.
 - **Step 6:** `js/destinations.js` loads right after `js/config.js` in `index.html`; nothing reads it yet.  Added to `docs/ARCHITECTURE.md` (script table, row 1a) and `docs/ENVIRONMENT.md` (the regenerate command and the tools list).  Also updated `docs/TASKS.md` and `docs/HANDOFF.md`.
 - **Step 7:** `GW.VERSION` is `0.2.0-draft.75`, stamped (16 links), `CHANGELOG.md` entry added.  Smoke test: **All clear** (desktop and phone ok, no errors or missing files).
+
+## Review (Claudia, 2026-11-22)
+
+Pulled da666af.  Loaded `js/destinations.js` with the game's config in Node: ten regions in unlock order with colors and symbols, 53 places, and Cogbottom buys Socks, Banana, Clipboard plus the twelve Bathroom items, matching the gazetteer.  Rerunning the tool left `git status` clean, so it is deterministic.  Reading the added places list too was the right call.
+
+Lore follow-ups (not blocking layer 1, which is Gnomerica only): Gnonmoon has 0 buying places, and Gni and Shen Shin have 1 each, Slaanilok 2.  A truck carries three orders from one region, so a one-town region sends all three to the same town, which weakens the town-reading challenge there.  Add buying towns to those regions in the gazetteer before they unlock.
+
