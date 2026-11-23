@@ -94,6 +94,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1m (draft.93): elf imposters in their fake trucks from shift 4 (25%, never more than 2 in a row), sending them away (TNP −5, "TNP driver sent packing!"), filling their orders (ours −3 and TNP +10 per box, "Shipped to TNP"), their placement pass, and "Not approved" (−1) for an unstamped real order.
     - [x] 1n (draft.94): the stamp stops sending the box, so marks go on in any order; the player drags the closed box to the driver, who sets it on the stack, and anything else springs back; a "Hand it to the driver!" tag and a glow on the driver; the sent-packing card line wraps (Nathan, 2026-11-23).
     - [x] 1o (draft.95): the shipping label on every closed box, a smooth drop at the driver, the Report Card and Log clipboards, and the shipping log (lines in docs/lore/shipping-log-v0.1.md, approved).
+    - [ ] 1p (draft): faces for the two clipboards (a tiny report card with the last shift's marks; SHIPPING LOG with a truck), a glow after each shift, and an approved fake's log lines (lore v0.2 draft).
     - [x] **Future enhancement (Nathan, 2026-11-23):** the item and supply pictures on the open box should sit on a transparent background, or at least not white.  Built in 1k (draft.91).
     - [x] Small polish, in 1i (1g review, draft.89): junk dropped on a closed box shakes too, as supplies and stamps do.
     - [x] 1j (draft.90): FRAGILE and HEAVY stickers on the box face's upper left, "No FRAGILE" and "No HEAVY", and the chart hidden with instructions off.
