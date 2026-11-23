@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.3, the driver waits grumpy (v0.1)
 
-**Status:** Approved
+**Status:** Stopped at step 4 (he doesn't fit at the 1b.2 size); waiting on Nathan's call
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.3 approved").
 **Model:** Opus 5.5
 
@@ -38,4 +38,30 @@ Drivers always show up grumpy (Nathan, 2026-11-22).  Swap the driver's waiting p
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Stopped at step 4, as the order says:** at the 1b.2 size (driver 2.01 times the bench height) the grumpy driver can't stand between the bench and the doorway in either layout without overlapping something.  I did not shrink him.  No game code changed, so the version stays **v0.2.0-draft.73** and nothing was stamped.
+
+**Done.**
+- **Step 1:** pulled (376ff25).
+- **Step 2, art:** `assets/packing/driver_gnomerica_grumpy.webp` (238x400, 35 KB) made with `tools/art.py resize --height 400` from `art-masters/packing-line/25-drivers/driver-gnomerica-grumpy.png`, the same height as the waiting copy (the masters are 723 and 724 px tall, so they share a baseline).  Added to `docs/ASSETS.md`.  The waiting copy stays in `assets/packing/` and is still what the game loads, since steps 3 and 4 are not built.
+
+**Why he doesn't fit (how I checked).**  I traced the bench, the doorway frame (both jambs and the sill), the chain, the conveyor, the right wall trim, and the doorway opening (the truck) from the room art as polygons, then slid his real silhouette (the alpha of the grumpy copy, not a box) over every feet position in steps of 0.25% and counted overlapping pixels.  The grumpy pose is narrower than the waiting one (238 vs 278 px wide) but he still needs more room than there is.
+
+| Layout | His size | Room he needs | Room there is | Closest full-size spot |
+| --- | --- | --- | --- | --- |
+| Wide | 32% of room height, 10.7% of room width | 10.7% wide | The bench ends at x 71.4% and the doorway's left jamb starts at 77.4%: a 6% gap.  Below the jamb (y 68%) the floor runs into the conveyor at 83.4%, too short for him. | Feet `[88, 70]`, standing **inside the doorway in front of the truck**, still touching the sill.  Nothing between the bench and the doorway comes close. |
+| Tall | 23% of room height, 24.3% of room width | 24.3% wide | The bench ends at x 75.7%; the room's right edge is 100%.  He fits sideways, but at 23% tall his head reaches the doorway's sill and left jamb foot, and his feet can't go lower without stepping onto the conveyor (top at 87.2%). | Feet `[83.5, 87.25]`: touches the doorway frame (the jamb foot and sill near his cap) and the bench's right corner (his ear). |
+
+**What would fit, for Nathan's call** (not built, measured only):
+- **Shrink him** to the largest size with a spot touching nothing, the truck included: wide **24%** of room height (75% of the 1b.2 size, 1.51 times the bench) with feet at `[75, 83.5]`; tall **19.5%** (85%, 1.70 times the bench) with feet at `[84, 86.75]`.  Phone and desktop would then no longer match each other's driver-to-bench ratio, unless both drop to the wide room's 75%.
+- **Let him overlap one thing.**  Standing in front of the bench's right end (as in 1b and 1b.1, which Nathan called "in front of it, not beside it"), or in the doorway in front of the truck.
+- **Stand somewhere else,** for example left of the bench or right of the doorway.  I did not search there, since the order names the floor between the bench and the doorway.
+
+**Mockups** (in `tools/out/` on Beast, `?ship=1`, truck and driver in place, Day; config changed only in the page for the picture):
+- `ship-1b3-wide-full-size-nearest.png`: wide, full size, the closest spot (inside the doorway).
+- `ship-1b3-wide-shrunk-75pct.png`: wide, shrunk to 24%, touching nothing.
+- `ship-1b3-tall-full-size-nearest.png`: tall, full size, the closest spot (cap at the jamb foot, ear at the bench corner).
+- `ship-1b3-tall-shrunk-85pct.png`: tall, shrunk to 19.5%, touching nothing.
+
+**Not done (waiting on the call above):** steps 3 and 4 (the grumpy pose in the game, removing `driverSpot` and the lean spots), the version bump, stamp, changelog, smoke test, and the step 7 screenshots.  The truck, chain, door, and trip timing are untouched.
 
