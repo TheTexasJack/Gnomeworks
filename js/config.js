@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.72';
+GW.VERSION = '0.2.0-draft.73';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -105,34 +105,36 @@ GW.CONFIG = {
   // before it slides in and where it stops.  top is set so the bumper rests on the doorway's floor line
   // (its lowest point touches the line, nothing hangs below).
   // driver: h (% of room height), from = [x of his center %, y of his feet %] at the doorway, fromScale = his
-  // size there (farther away), spots = where he stands and leans, one per driverSpot choice: at = [x %, y %],
-  // flip = mirror him so he leans to the right (only where his usual lean-left pose has no room).
+  // size there (farther away), spots = where he stands and leans, one per driverSpot choice: at = [x %, y %].
+  // Sizes on phones match the wide room's proportions: truck height / doorway height = 1.121 in both,
+  // driver height / bench height = 2.01 in both (bench = front top edge to the foot of the legs).
   shipping: {
     enabled: false,
     testParam: 'ship',                      // ?ship=1 shows the view for testing
     tallQuery: '(max-width: 720px)',        // same breakpoint as the Shop Floor
-    // Where the driver waits: 'truck' (leaning on the truck's rear corner in the doorway) or
-    // 'bench' (leaning on the right end of the packing bench).  Nathan picks from screenshots.
-    driverSpot: 'truck',
+    // Where the driver waits: 'bench' (beside the right end of the packing bench, elbow on its top;
+    // Nathan's pick, 2026-11-22).  'truck' (leaning on the truck's rear bumper) exists only in the wide room;
+    // anywhere it's missing he goes to the bench.
+    driverSpot: 'bench',
     layouts: {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
-        chain: { x: 76.0, top: 5, h: 59, hitW: 4 },
+        chain: { x: 76.0, top: -12, h: 59, hitW: 4 },   // hangs from above the room's top edge so its handle clears the driver's cap
         doorway: [[80.1, 26.3], [92.2, 20.3], [92.4, 76.9], [80.0, 67.8]],
         truck: { h: 55, top: 21.8, xFrom: 93, xTo: 80.5 },
         driver: {
           h: 32, from: [86.5, 74], fromScale: 0.8,
-          spots: { truck: { at: [91.5, 82] }, bench: { at: [68, 82] } }
+          spots: { bench: { at: [73, 79.5] }, truck: { at: [91.5, 82] } }
         }
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
         chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
         doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
-        truck: { h: 56, top: 14.1, xFrom: 95, xTo: 70.2 },
+        truck: { h: 42.6, top: 26.2, xFrom: 95, xTo: 74.0 },
         driver: {
-          h: 32, from: [86, 65], fromScale: 0.8,
-          spots: { truck: { at: [66, 82], flip: true }, bench: { at: [80, 86] } }
+          h: 23, from: [86, 65], fromScale: 0.8,
+          spots: { bench: { at: [87, 81.5] } }
         }
       }
     },

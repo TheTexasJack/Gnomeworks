@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.73 (2026-11-22)
+
+- Packing Line, step 1b.2 (still hidden behind `?ship=1`), from Nathan's review: the driver waits beside the right end of the packing bench with his elbow on its top, in both layouts (`shipping.driverSpot` is now `'bench'`).  The mirrored phone pose is gone.  On phones, the truck and driver are sized to match the desktop room's proportions: the truck is 1.12 times the doorway's height in both (now 76% of draft.72's phone size), and the driver is 2.01 times the bench's height in both (72%).  The desktop chain now hangs from above the top of the room, so its handle sits just above the driver's cap instead of in front of him.  The desktop truck, the trip, and the door are unchanged.
+
 ## v0.2.0-draft.72 (2026-11-22)
 
 - Packing Line, step 1b.1 (still hidden behind `?ship=1`), from Nathan's review: the truck now rests on the doorway's floor line, with its lowest point touching the line and nothing hanging below it (wide room: a little smaller, 55% of the room's height instead of 60%).  On phones the truck and the driver are twice as big.  The driver now leans on something, and `shipping.driverSpot` picks where: `'truck'` (the default; his forearm on the truck's rear bumper) or `'bench'` (on the right end of the packing bench).  On phones the `'truck'` spot mirrors him so he leans right onto the truck, because leaning left would put half of him off the screen.  Trip behavior and timing are unchanged.
