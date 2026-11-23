@@ -1,7 +1,7 @@
 # Work order: smoke test ignores cancelled image loads (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (he started the run).
 
 ## Goal
 
