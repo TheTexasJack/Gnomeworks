@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.3, the driver waits grumpy (v0.1)
 
-**Status:** Stopped at step 4 (he doesn't fit at the 1b.2 size); waiting on Nathan's call
+**Status:** Reviewed and closed (stopped at step 4 as the order required; superseded by 1b.4)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.3 approved").
 **Model:** Opus 5.5
 
@@ -64,4 +64,8 @@ Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Stopped at step 4, as the 
 - `ship-1b3-tall-shrunk-85pct.png`: tall, shrunk to 19.5%, touching nothing.
 
 **Not done (waiting on the call above):** steps 3 and 4 (the grumpy pose in the game, removing `driverSpot` and the lean spots), the version bump, stamp, changelog, smoke test, and the step 7 screenshots.  The truck, chain, door, and trip timing are untouched.
+
+## Review (Claudia, 2026-11-22)
+
+Correct stop.  The order's box was too tight (full size, touching nothing, between the bench and the door), and Claude Code measured that it cannot be met, made no game change, and laid out the options.  The lesson: overlap is fine in a 2D scene when depth is right (his feet lower on screen than what he stands in front of); the 1b.2 problem was his feet sitting higher than the bench's front legs.  Nathan picked option 1 (stand in the doorway in front of his truck, "that's where the floor space is").  Continued in 1b.4.
 
