@@ -30,6 +30,7 @@ Handy address flags:
 | --- | --- |
 | `?debug=1` | Testing bar: add 1K / 1M / 1B cogs, spawn a shiny, skip ahead an hour |
 | `?hat=witch` | Preview a hat (classic, valentine, clover, easter, witch, santa) |
+| `?ship=1` | Show the hidden Shipping view (the Packing Line, in progress) |
 
 Ctrl+Shift+R forces a fresh copy after a push.  On Android Chrome, clear "Cached images and files" (the save survives).
 
@@ -127,6 +128,7 @@ js/wild.js            Wild Magic event
 js/clones.js          Clone Attack event
 js/mega.js            the Megagnome
 js/hunt.js            the crossbow hunt
+js/shipping.js        the shipping room (Packing Line), hidden unless ?ship=1
 js/main.js            input, game loop, shinies, pause, settings, wiring
 assets/               all art (see docs/ASSETS.md)
 art-masters/          full-size approved art masters, never loaded by the game (packing-line/, postcards/)

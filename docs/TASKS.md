@@ -57,7 +57,9 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
     - [ ] Rune tracing that works with a finger on phones.
 3. ~~**Assets**~~ done 2026-11-22: all 45 packages closed in [art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md](art-style/PACKING-LINE-PRODUCTION-CHECKLIST.md), cleared for integration.
-4. **Build:** layer 1 core, as a work order for Claude Code, after its first-run check passes.
+4. **Build:** layer 1 core, one work order per step (1a to 1g).
+    - [x] 1a: the Shipping view, the room art, and the door chain (draft.70, hidden behind `?ship=1`).
+    - [ ] 1b to 1g: truck and driver, order board, drawer and boxes, packing, hand off and report card, Stonks.
 
 ## Done draft.20 to draft.51
 

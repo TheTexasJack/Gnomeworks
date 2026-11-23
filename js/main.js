@@ -6,6 +6,9 @@ window.GW = window.GW || {};
   var loaded = GW.state.load();
   var s = loaded.state;
   GW.game = { s: s };
+  // The shipping view is hidden until enabled (or ?ship=1): a saved 'shipping' view falls back to the Machine.
+  function viewOn(v) { return C.views.indexOf(v) >= 0 && (v !== 'shipping' || GW.ship.enabled()); }
+  if (!viewOn(s.view)) s.view = 'machine';
 
   // ---------- startup ----------
   G.build(document.getElementById('gearSvg'));
@@ -126,6 +129,7 @@ window.GW = window.GW || {};
 
   machine.addEventListener('pointerdown', function (e) {
     if (!e.isTrusted || e.button > 0) return;     // scripted or right clicks do nothing
+    if (s.view === 'shipping') return;            // the shipping room doesn't crank the machine
     if (e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt')) return;
     e.preventDefault();
     var now = performance.now();
@@ -134,7 +138,7 @@ window.GW = window.GW || {};
     doTap((e.clientX - box.left) / box.width * 100, (e.clientY - box.top) / box.height * 100 - 6);
   });
   machine.addEventListener('keydown', function (e) {
-    if (!e.isTrusted || e.repeat) return;
+    if (!e.isTrusted || e.repeat || s.view === 'shipping') return;
     if (e.key !== ' ' && e.key !== 'Enter') return;
     e.preventDefault();
     var now = performance.now();
@@ -262,6 +266,7 @@ window.GW = window.GW || {};
     G.update(display);
 
     drainPops(Math.min(dt, 1));
+    if (s.view === 'shipping') extraItems = 0;    // no hatch or belt in the shipping room
     if (extraItems >= 1 && Math.random() < dt * 2) {
       var m = s.view === 'floor' ? { x: 92, y: 104 } : G.hatchMouth();
       UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
@@ -297,23 +302,32 @@ window.GW = window.GW || {};
   function fitRails() {
     var colW = machineCol.clientWidth;
     var chrome = landQuery.matches ? C.layout.landscapeChrome : C.layout.machineChrome;
-    var machW = s.view === 'floor' ? colW : Math.min(colW, window.innerHeight - chrome);
+    var machW = s.view === 'floor' || s.view === 'shipping' ? colW : Math.min(colW, window.innerHeight - chrome);
     machineCol.classList.toggle('rails', (colW - machW) / 2 >= C.layout.railMinWidth);
   }
   window.addEventListener('resize', fitRails);
 
-  // ---------- view toggle: The Machine / Shop Floor ----------
+  // ---------- view toggle: The Machine / Shop Floor / Shipping ----------
+  var LABELS = {
+    machine: 'The machine.  Tap to turn the little gear.',
+    floor: 'The Shop Floor.  Tap anywhere to crank the machine.',
+    shipping: 'The shipping room.  Pull the chain to open or close the door.'
+  };
   function applyView() {
     var floor = s.view === 'floor';
     machine.classList.toggle('floor-mode', floor);
+    machine.classList.toggle('ship-mode', s.view === 'shipping');
+    if (GW.ship.enabled()) GW.ship.setActive(s.view === 'shipping');
     U.$all('.view-toggle button').forEach(function (b) {
       var on = b.dataset.view === s.view;
       b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     fitRails();
-    machine.setAttribute('aria-label', floor ? 'The Shop Floor.  Tap anywhere to crank the machine.' : 'The machine.  Tap to turn the little gear.');
+    machine.setAttribute('aria-label', LABELS[s.view]);
   }
   U.$all('.view-toggle button').forEach(function (b) {
+    if (!viewOn(b.dataset.view)) return;
+    b.hidden = false;
     b.addEventListener('click', function () { s.view = b.dataset.view; SFX.click(); applyView(); UI.updateFloor(s); });
   });
   applyView();
@@ -388,7 +402,7 @@ window.GW = window.GW || {};
     var dx = e.clientX - swipe.x, dy = e.clientY - swipe.y, quick = performance.now() - swipe.t <= C.swipe.maxMilliseconds;
     swipe = null;
     if (!quick || Math.abs(dx) < C.swipe.minPixels || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    var i = C.views.indexOf(s.view), next = C.views[i + (dx < 0 ? 1 : -1)];
+    var views = C.views.filter(viewOn), i = views.indexOf(s.view), next = views[i + (dx < 0 ? 1 : -1)];
     if (!next) return;
     s.view = next; SFX.click(); applyView(); UI.updateFloor(s);
   }, true);

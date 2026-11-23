@@ -2,7 +2,7 @@
 
 ## Big picture
 
-One HTML page, thirteen plain scripts, no framework, no build.  Every script adds one module to a single global object, `window.GW`, and the load order in `index.html` matters:
+One HTML page, fourteen plain scripts, no framework, no build.  Every script adds one module to a single global object, `window.GW`, and the load order in `index.html` matters:
 
 | Order | File | Module | Job |
 | --- | --- | --- | --- |
@@ -18,6 +18,7 @@ One HTML page, thirteen plain scripts, no framework, no build.  Every script add
 | 7c | `js/clones.js` | `GW.clones` | Clone Attack event |
 | 7d | `js/mega.js` | `GW.mega` | The Megagnome: shop row, food, poses, helping in events |
 | 7e | `js/hunt.js` | `GW.hunt` | The crossbow hunt mini-game |
+| 7f | `js/shipping.js` | `GW.ship` | The shipping room (Packing Line): room art, door chain.  Hidden unless enabled or `?ship=1` |
 | 8 | `js/main.js` | (runs once) | Loads the save, wires input, runs the game loop, shinies, pause, sound settings, autosave |
 
 The rule that keeps this sane: **economy reports, UI draws.**  `GW.econ` changes numbers and returns an `events` object (items made, items to animate, new discoveries).  `main.js` hands those events to `GW.ui` and `GW.sfx`.
@@ -37,7 +38,7 @@ The rule that keeps this sane: **economy reports, UI draws.**  `GW.econ` changes
 
 ## Input and anti-cheese
 
-- Taps come from `pointerdown` on the machine box (both views).  Events with `isTrusted === false` (scripted) are ignored.
+- Taps come from `pointerdown` on the machine box (Machine and Shop Floor views; the shipping room does not crank the machine).  Events with `isTrusted === false` (scripted) are ignored.
 - A token bucket caps taps at 20 a second.
 - Space or Enter on the focused machine also taps, and held-key repeats are ignored.
 - Shinies are claimed only by a trusted tap on the shiny itself.  No gnome or upgrade can claim one.
@@ -49,7 +50,7 @@ Stored in `localStorage` under `gnomeworks.save`, so a save belongs to one brows
 
 ```
 schema, season, createdAt, savedAt
-paused, view ('machine' | 'floor'), audio { fx, chatter, muted }
+paused, view ('machine' | 'floor' | 'shipping'; 'shipping' falls back to 'machine' on load while that view is hidden), audio { fx, chatter, muted }
 cogs, cogsSeen (lifetime, drives unlocks), bigAngle (0-360), itemsMade
 producers { id: count }, leveled { id: level }, oneTime { id: true }
 revealed { "kind:id": true }   shop rows stay visible once unlocked
@@ -86,11 +87,13 @@ stats { taps, playSeconds, popupsSeen, popupsClaimed, pity, legPity, bestCps, sp
 
 **Shinies:** every 45 to 120 seconds, staying 20 seconds.  A claim rolls Legendary at 9% (hot only), Super Rare at 45%, otherwise a Lucky Sprocket worth 60 seconds of production (minimum 50 taps).  Pity: a Super Rare or better by the 6th claim, a Legendary on a hot shiny by the 25th.  Picks favor items the player does not own yet (weight 3 versus 1).
 
-## The two views
+## The views
 
 **The Machine (`gears.js`).**  An SVG with a 1000 x 1000 viewBox.  The wall is Mara's painted machine (`assets/bg/machine_wall.webp`) with gear mounts painted in.  Four of Mara's gear images sit on those mounts: drive (8 teeth) to a compound gear (12 teeth with a 7 tooth pinion on its face) to the big gear (15 teeth).  Gear angles come from a meshing formula, so each gear's speed follows real tooth ratios, and each image has a measured `phase` so its teeth line up.  The hatch flap is the only drawn part; it swings open on each drop.
 
 **The Shop Floor (`ui.js`, `#floor` inside the machine box).**  A CSS container with Mara's three-level workshop as the background: `floor.webp` (16:9) on wide screens and `floor_tall.webp` on screens 720px wide or less.  `CONFIG.floor.layouts` holds each layout's 12 station slots (x %, feet line %), plate placement, belt rectangle, and a sprite scale.  Sizes use container query units (`cqh`, `cqw`) so everything scales with the box.  Each owned gnome type gets its station; empty ones show HELP WANTED.  Items ride the conveyor instead of popping from the hatch.
+
+**The shipping room (`shipping.js`, `#ship` inside the machine box).**  The Packing Line's room, built so far up to layer 1a (the room and the door).  Hidden from players: it exists only while `CONFIG.shipping.enabled` is true or the address has `?ship=1`; otherwise its button stays hidden, swipes skip it, and a saved `view: 'shipping'` loads as the Machine.  `room_wide` above 720px and `room_tall` at 720px and under, with Night twins through `GW.theme.img()`.  The closed room and its open twin are stacked `<img>`s, so the door swaps instantly with no jump.  The pull chain (`.ship-chain`) sits where `CONFIG.shipping.layouts.<wide|tall>.chain` puts it, with a wider invisible tap area (`hitW`).  A trusted tap toggles the door and bounces the chain.  The door starts closed each time the view opens and is not saved.  Taps elsewhere in the room do nothing, and items made while the room is showing skip the hatch pop (the shelf still flashes).
 
 **Squish and boing.**  Each station part is a wrapper holding the static image, the action image stacked on top (hidden), and optional extras (hat, weapon, slash).  On each beat the wrapper squashes, swaps to the action frame mid-squash (`.act` class), stretches, and settles.  Beat speed follows that gnome type's real click rate, between 2.2 and 0.45 seconds.  The warrior's weapon and the hat move between static and action positions through CSS variables.  Animations stop when paused or off the floor view.  Devices that ask for reduced motion get slower pose swaps with no squash, stretch, or shake.
 

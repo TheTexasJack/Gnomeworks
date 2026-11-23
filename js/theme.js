@@ -10,6 +10,10 @@ GW.theme = (function () {
     'assets/bg/machine_wall.webp': 'assets/bg/machine_wall_night.webp',
     'assets/bg/floor.webp': 'assets/bg/floor_night.webp',
     'assets/bg/floor_tall.webp': 'assets/bg/floor_tall_night.webp',
+    'assets/packing/room_wide.webp': 'assets/packing/room_wide_night.webp',
+    'assets/packing/room_wide_open.webp': 'assets/packing/room_wide_night_open.webp',
+    'assets/packing/room_tall.webp': 'assets/packing/room_tall_night.webp',
+    'assets/packing/room_tall_open.webp': 'assets/packing/room_tall_night_open.webp',
     'assets/crew/help_wanted.webp': 'assets/crew/help_wanted_night.webp',
     'assets/ui/title.webp': 'assets/ui/title_night.webp'
   };
@@ -24,6 +28,7 @@ GW.theme = (function () {
     var t = document.querySelector('.title img');
     if (t) t.src = img('assets/ui/title.webp');
     if (GW.ui && GW.ui.rebuildFloor && GW.game) GW.ui.rebuildFloor();
+    if (GW.ship) GW.ship.redraw();
   }
   function set(t) { try { localStorage.setItem(KEY, t); } catch (e) {} apply(); }
   if (dark && dark.addEventListener) dark.addEventListener('change', function () { if (setting() === 'auto') apply(); });

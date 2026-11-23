@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Gnomeworks: a gnome-powered clicker from The Stoned Gnome.">
   <title>Gnomeworks</title>
-  <link rel="stylesheet" href="css/style.css?v=0.2.0-draft.69">
+  <link rel="stylesheet" href="css/style.css?v=0.2.0-draft.70">
   <script>
     // Day / Night theme, set before anything draws so there's no flash.  'auto' follows the device.
     (function () {
@@ -35,10 +35,12 @@
         <div class="view-toggle" role="group" aria-label="View">
           <button type="button" data-view="machine" class="btn active">&#9881;&#65039; The Machine</button>
           <button type="button" data-view="floor" class="btn">&#128296; Shop Floor</button>
+          <button type="button" data-view="shipping" class="btn" hidden>&#128230; Shipping</button>
         </div>
         <div class="machine" id="machine" tabindex="0" role="button" aria-label="The machine.  Tap to turn the little gear.">
           <svg id="gearSvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"></svg>
           <div id="floor" aria-hidden="true"></div>
+          <div id="ship"></div>
           <div id="fx" aria-hidden="true"></div>
           <div id="edgeFlash" aria-hidden="true"></div>
           <div id="rareSlot"></div>
@@ -116,18 +118,19 @@
   </div>
   <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/config.js?v=0.2.0-draft.69"></script>
-  <script src="js/theme.js?v=0.2.0-draft.69"></script>
-  <script src="js/util.js?v=0.2.0-draft.69"></script>
-  <script src="js/sfx.js?v=0.2.0-draft.69"></script>
-  <script src="js/state.js?v=0.2.0-draft.69"></script>
-  <script src="js/economy.js?v=0.2.0-draft.69"></script>
-  <script src="js/gears.js?v=0.2.0-draft.69"></script>
-  <script src="js/ui.js?v=0.2.0-draft.69"></script>
-  <script src="js/wild.js?v=0.2.0-draft.69"></script>
-  <script src="js/clones.js?v=0.2.0-draft.69"></script>
-  <script src="js/mega.js?v=0.2.0-draft.69"></script>
-  <script src="js/hunt.js?v=0.2.0-draft.69"></script>
-  <script src="js/main.js?v=0.2.0-draft.69"></script>
+  <script src="js/config.js?v=0.2.0-draft.70"></script>
+  <script src="js/theme.js?v=0.2.0-draft.70"></script>
+  <script src="js/util.js?v=0.2.0-draft.70"></script>
+  <script src="js/sfx.js?v=0.2.0-draft.70"></script>
+  <script src="js/state.js?v=0.2.0-draft.70"></script>
+  <script src="js/economy.js?v=0.2.0-draft.70"></script>
+  <script src="js/gears.js?v=0.2.0-draft.70"></script>
+  <script src="js/ui.js?v=0.2.0-draft.70"></script>
+  <script src="js/wild.js?v=0.2.0-draft.70"></script>
+  <script src="js/clones.js?v=0.2.0-draft.70"></script>
+  <script src="js/mega.js?v=0.2.0-draft.70"></script>
+  <script src="js/hunt.js?v=0.2.0-draft.70"></script>
+  <script src="js/shipping.js?v=0.2.0-draft.70"></script>
+  <script src="js/main.js?v=0.2.0-draft.70"></script>
 </body>
 </html>

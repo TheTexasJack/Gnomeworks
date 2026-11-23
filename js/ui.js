@@ -571,6 +571,7 @@ GW.ui = (function () {
   function popItem(item) {
     flashShelf(item.id);
     if (GW.game.s.view === 'floor') { beltItem(item); return; }
+    if (GW.game.s.view === 'shipping') return;    // no hatch in the shipping room; the shelf still flashes
     var m = GW.gears.hatchMouth();
     var p = el('div', 'pop-item tier-' + item.tier);
     p.appendChild(itemIcon(item, true));

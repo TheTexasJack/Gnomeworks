@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.70 (2026-11-22)
+
+- Packing Line, step 1a: the Shipping view (hidden from players).  With `?ship=1` in the address, a third view button, "📦 Shipping", opens the shipping room: Mara's room as finished by Nathan, wide above 720px and tall below, Day and Night.  A real tap on the pull chain by the door rolls the door up (the open twin, lined up pixel for pixel), and the next tap closes it.  The chain bounces when pulled and makes a click.  The door starts closed each time the room opens.  Phones can swipe to it.  Taps in the room don't crank the machine.  Without `?ship=1` nothing changes: the button, the swipe, and a saved Shipping view all act as if the view does not exist (`shipping.enabled` in config turns it on for everyone).  Numbers live in `shipping` in config.
+
 ## v0.2.0-draft.69 (2026-11-15)
 
 - Smoke test: cancelled image loads no longer count as missing files.

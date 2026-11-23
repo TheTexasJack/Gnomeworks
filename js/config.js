@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.69';
+GW.VERSION = '0.2.0-draft.70';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -89,9 +89,36 @@ GW.CONFIG = {
   // Secret game report: tap the bolt next to the version on the Info tab this many times.
   secretTaps: 10,
 
-  // Views in swipe order (phones: swipe left for the next view, right for the previous).  Shipping joins later.
-  views: ['machine', 'floor'],
+  // Views in swipe order (phones: swipe left for the next view, right for the previous).
+  // 'shipping' counts only while shipping.enabled is true or the address has ?ship=1.
+  views: ['machine', 'floor', 'shipping'],
   swipe: { minPixels: 60, maxMilliseconds: 600 },   // how far and how fast a swipe must be
+
+  // The Packing Line's shipping room (layer 1a: the room and the door chain).  Hidden from players until
+  // Nathan says otherwise: while enabled is false, the view exists only with ?ship=1 in the address.
+  // Each layout has the closed room, its open twin (same size, only the door differs), and the chain:
+  // x = the chain's center (% of room width), top (% of room height), h = chain height (% of room height),
+  // hitW = width of the invisible tap area around the thin chain (% of room width), so a finger can find it.
+  shipping: {
+    enabled: false,
+    testParam: 'ship',                      // ?ship=1 shows the view for testing
+    tallQuery: '(max-width: 720px)',        // same breakpoint as the Shop Floor
+    layouts: {
+      wide: {
+        closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
+        chain: { x: 76.0, top: 5, h: 59, hitW: 4 }
+      },
+      tall: {
+        closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
+        chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 }
+      }
+    },
+    chain: {
+      img: 'assets/packing/chain.webp',
+      pullPercent: 7,       // how far a tap pulls the chain down, as a share of its own height
+      pullMs: 450           // the pull-down and bounce back
+    }
+  },
 
   tap: {
     maxTapsPerSecond: 12,       // human cap; extra taps are ignored (fast humans hold 6 to 10 a second)
