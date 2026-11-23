@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.84**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22; game version **v0.2.0-draft.85**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Where things stand
 
@@ -28,7 +28,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 2. **1c-2 (done, draft.79):** three work orders on the board, tap to read.
 3. **1c-3 (done, draft.80):** the factory rests while the player is in the Shipping view.  No shinies, events, or pop-ups in the room.
 4. **1d (done, draft.81):** tap the conveyor for the item menu, drag the ordered item into a cardboard box, close it, stamp it.  The phone screen holds still in the room.  **1d.1 (done, draft.82):** the label shows only the item's picture while the box is open, the stamp lands solid and on top, and the item menu sits on the supply drawer frame (05a).  **1d.2 (done, draft.83):** the stamp sits small and straight in the box's upper right corner, like postage (box face v0.3).
-5. **1e (done, draft.84):** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.
+5. **1e (done, draft.84):** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.  **1e.1 (done, draft.85):** the report card keeps the town, item, and reason on one line each, shrinking long names to fit.
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 

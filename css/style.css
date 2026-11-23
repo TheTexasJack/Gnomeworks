@@ -168,9 +168,10 @@ body {
 .ship-card .is-right .card-mark { color: #2e8b3a; }
 .ship-card .is-wrong .card-mark { color: #b8262a; }
 .ship-card .card-words { flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 1cqw; gap: .4cqh; }
-.ship-card .card-town { font: bold 5.2cqw/1.1 var(--font); }
-.ship-card .card-item { font: bold 4.2cqw/1.15 var(--font); color: #5a3a22; }
-.ship-card .card-why { font: bold 4.2cqw/1.15 var(--font); color: #b8262a; }
+/* one line each; sizes come from CONFIG.shipping.card.font (set in shipping.js), shrunk to fit there */
+.ship-card .card-line { width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-family: var(--font); line-height: 1.15; }
+.ship-card .card-item { color: #5a3a22; }
+.ship-card .card-why { color: #b8262a; }
 .ship-card .card-pic { justify-content: center; }
 .ship-card .card-pic .item-icon { width: 12cqw; height: 12cqw; font-size: 10cqw; }
 .ship-card .card-total { left: 0; right: 0; transform: translateY(-50%); text-align: center; font: bold 5.4cqw/1 var(--font); }

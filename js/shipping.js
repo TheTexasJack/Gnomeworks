@@ -454,9 +454,9 @@ GW.ship = (function () {
       line.appendChild(mark);
       var words = div('card-words');
       words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
-      words.appendChild(div('card-town', o.place.name));
-      words.appendChild(div('card-item', o.item.name));
-      if (!row.ok) words.appendChild(div('card-why', row.why.join(', ')));
+      words.appendChild(cardLine('town', o.place.name));
+      words.appendChild(cardLine('item', o.item.name));
+      if (!row.ok) words.appendChild(cardLine('why', row.why.join(', ')));
       line.appendChild(words);
       var pic = div('card-pic');
       pic.style.left = Cd.pic[0] + '%'; pic.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
@@ -472,12 +472,34 @@ GW.ship = (function () {
     el.setAttribute('aria-label', 'Report card');
     return el;
   }
+  // One line of a card row at its full size; fitCard shrinks it once it is on screen.
+  function cardLine(kind, text) {
+    var el = div('card-' + kind + ' card-line', text);
+    el.dataset.kind = kind;
+    el.title = text;
+    el.style.fontSize = P.card.font[kind] + 'cqw';
+    return el;
+  }
+  // Each line that is wider than its row shrinks its own text to fit, down to CONFIG.shipping.card.fontMin;
+  // past that the css ends it with "...".  Sizes are in cqw, so the fit holds as the card grows or shrinks.
+  function fitCard() {
+    var Cd = P.card;
+    Array.prototype.forEach.call(cardView.querySelectorAll('.card-line'), function (el) {
+      var k = el.dataset.kind, size = Cd.font[k];
+      el.style.fontSize = size + 'cqw';
+      var need = el.scrollWidth, room = el.clientWidth;
+      if (need > room && need > 0) size = Math.max(Cd.fontMin[k], size * room / need * Cd.fitSlack);
+      el.style.fontSize = size + 'cqw';
+    });
+  }
   function showCard(r) {
     pendingCard = null;
     cardView.textContent = '';
     cardView.appendChild(makeCard(r));
     cardView.hidden = false;
     cardOpen = true;
+    fitCard();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (cardOpen) fitCard(); });
     GW.sfx.click();
   }
   function closeCard() {
@@ -836,6 +858,9 @@ GW.ship = (function () {
     orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; },
     menuOpen: function () { return menuOpen; }, boxState: function () { return boxState; },
     activeOrder: activeIndex, cardOpen: function () { return cardOpen; },
+    // Test hook (1e.1): shows a report card for a made-up result ({ rows: [{ order, ok, why }], change }),
+    // without scoring or saving, so screenshots can try the longest names.
+    testCard: function (r) { if (built) showCard(r); },
     // What was packed, for the hand-off (1e): one entry per order, null until stamped.
     packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, stamp: r.stamp }; }); }
   };

@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.85 (2026-11-23)
+
+- Packing Line, step 1e.1 (still hidden behind `?ship=1`), from Nathan's phone test of draft.84: the report card fits the longest names.  In every row the town, the item, and the reason each stay on one line.  A line too long for its row shrinks its own text to fit, never below a floor in `CONFIG.shipping.card.fontMin`, and only past that ends with "...".  Nothing wraps, so the red reason is never pushed into the row's bottom rule.  Checked with "Grit Spit and Fellers", "Fire Extinguisher", and "Wrong stamp" on 360 and 390 px phones and on desktop, Day and Night.  A test hook, `GW.ship.testCard`, shows a card for made-up rows without scoring or saving.
+
 ## v0.2.0-draft.84 (2026-11-23)
 
 - Packing Line, step 1e (still hidden behind `?ship=1`): the hand-off, the report card, and the GRIP line.  When every order has a stamped box, the door chain glows and sways gently and a brass tag by its handle reads "Pull to ship!" (no sway with reduced motion).  Pulling the chain hands the boxes to the driver.  Each order is scored: right when the box holds the ordered item and carries the region stamp, wrong for a wrong item, a missing or wrong stamp, or no finished box.  Right orders add Stonks by region (Gnomerica 10), wrong ones take 3 off, and Stonks never drop below 0.  Everything that shipped leaves the shelf, down to the display copy, wrong items included.  After a perfect shift the driver gives a thumbs up before he leaves; otherwise he stays grumpy.  Once the door closes, the report card shows each order's town, the item, a check or a cross, the reason for a cross, and the Stonks for the shift; a tap or Escape closes it.  The STONKS screen on the back wall now shows GRIP, our Stonks, and a green line of the last 10 shifts, which ticks up when the report card closes.  Stonks and the shift history are saved; old saves start at 0.  New art: the happy driver and the report card.  The smoke test now finishes a whole shift.

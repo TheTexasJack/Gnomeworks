@@ -1,6 +1,6 @@
 # Work order: Packing Line 1e.1, the report card fits the longest names (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23, from Nathan's phone test of draft.84.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
@@ -43,3 +43,27 @@ On the report card, a long town name wraps to two lines and pushes the red reaso
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.85**.  Smoke test: all clear, desktop and phone.
+
+**What was built**
+
+- **One line each.**  The town, item, and reason are each one `.card-line` (`white-space: nowrap`, `overflow: hidden`, `text-overflow: ellipsis`).  When the card shows, `fitCard()` in `js/shipping.js` measures each line and, if it is wider than its row, shrinks that line's own font size (in cqw, so the fit holds at every card size) from `CONFIG.shipping.card.font` toward `card.fontMin`.  Past the floor the line ends with "...".  It runs again once fonts finish loading.  I measured each line rather than reusing the shelf's CSS `clamp()`: the shelf scales by tile width, which is the same for every name here, so it could not tell a long town from a short one.
+- **New numbers in `CONFIG.shipping.card`:** `font` (town 5.2, item 4.2, reason 4.2 cqw, the draft.84 sizes, moved out of the CSS), `fontMin` (town 3.4, item and reason 3.2), and `fitSlack` (0.97).
+- **Rows hold three lines with room to spare:** once nothing wraps, the three lines fill 70% to 84% of a row at every size, inside the row's rules.
+- **Test hook:** `GW.ship.testCard(r)` shows a report card for made-up rows, without scoring or saving.  No game data was renamed.
+
+**Measured with the longest names** (row 1: Grit Spit and Fellers, Fire Extinguisher, Wrong stamp; row 2: the same with "Wrong item, Wrong stamp"; row 3: Pulley Junction, a right row).  At 360 x 780, 390 x 844, and 1400 x 900, Day and Night: every line on one line, nothing cut, nothing touching a rule.  "Grit Spit and Fellers" shrinks to about 4.3 cqw (from 5.2), "Fire Extinguisher" and "Wrong stamp" fit at full size, and "Wrong item, Wrong stamp" shrinks to about 3.3 cqw, just above its 3.2 floor.  Normal Gnomerica names keep the draft.84 sizes.
+
+**Calls to check**
+
+1. **Two reasons on one row** are the tightest fit.  "Wrong item, Wrong stamp" is the longest pair and sits near the floor; "Wrong stamp" cannot happen yet in Gnomerica.  If a third reason is ever added, that line would end with "...".
+2. **The tick column keeps its size:** only the words shrink.
+
+**Screenshots** in `tools/out/` (`?ship=1`, 2x, not committed since `tools/out/` is ignored).  Each has a `-zoom.png` twin cropped to the card.
+
+- `1e1-360-day-long-card.png`, `1e1-360-night-long-card.png`
+- `1e1-390-day-long-card.png`, `1e1-390-night-long-card.png`
+- `1e1-1400-day-long-card.png`, `1e1-1400-night-long-card.png`
+- Normal Gnomerica card for comparison: `1e1-360-day-normal-card.png`, `1e1-390-day-normal-card.png`, `1e1-1400-day-normal-card.png`
+
+Nothing was installed.  The scoring, the card's art and lettering, the slips, and the rest of the room are unchanged.

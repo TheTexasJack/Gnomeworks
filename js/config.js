@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.84';
+GW.VERSION = '0.2.0-draft.85';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -308,7 +308,9 @@ GW.CONFIG = {
     // openSize = its largest height and width (% of the room's), as for an open slip.  Places on the card, in %
     // of the card, measured from the master (1199 x 1312): rows = each row's top and bottom, box = the tick box's
     // center x and width, text = the words' left and right, pic = the dashed picture frame's left and right,
-    // total = the band under the last row (its center y).
+    // total = the band under the last row (its center y).  font = each line's size in cqw (1% of the card's width):
+    // town, item, and reason each stay on one line, and a line too long for the row shrinks its own text to fit,
+    // never below its `fontMin`, and only past that ends with "..." (1e.1).  The three lines fill about 85% of a row.
     card: {
       img: 'assets/packing/report_card.webp',
       aspect: 822 / 900,
@@ -317,7 +319,10 @@ GW.CONFIG = {
       box: [13.6, 8.8],
       text: [22.4, 62],
       pic: [63.1, 92.0],
-      total: 86.3
+      total: 86.3,
+      font: { town: 5.2, item: 4.2, why: 4.2 },
+      fontMin: { town: 3.4, item: 3.2, why: 3.2 },
+      fitSlack: 0.97        // shrink to this share of the exact fit, so rounding never leaves a sliver cut off
     },
     // The GRIP line on the STONKS screen: our Stonks and a line of the last `history` shift totals.  It moves
     // when the report card closes, counting up over tickMs.
