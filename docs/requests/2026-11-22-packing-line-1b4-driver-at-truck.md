@@ -1,6 +1,6 @@
 # Work order: Packing Line 1b.4, the grumpy driver waits at his truck (v0.1)
 
-**Status:** Approved
+**Status:** Stopped at step 3 (the tall layout has no full-size spot); waiting on Nathan
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.4 approved").
 **Model:** Opus 5.5
 
@@ -42,3 +42,28 @@ Overlap is fine when depth is right.  Whatever the driver stands in front of, hi
 
 ## Result (filled in by Claude Code)
 
+Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Stopped at step 3, as the order says:** the wide room has a full-size spot that meets every rule, but the tall (phone) room does not.  I did not shrink him or change any game code, so the version stays **v0.2.0-draft.73**, nothing was stamped, and the smoke test was not run.  Steps 2 and 4 are not built either, since the game would otherwise load the grumpy pose at a spot that breaks the rules on phones.
+
+**How I checked.**  I traced the bench, the doorway sill (the frame's floor contact, both jambs), and the conveyor from the open room art in both layouts, placed the chain from its config and real picture, then slid the grumpy driver's real silhouette (the alpha of `driver_gnomerica_grumpy.webp`, 238x400) over every feet position in steps of 0.25% at each size from 100% down.  A spot passes when he overlaps no bench, chain, or conveyor pixel, stays fully on screen, and every boot column sits lower on screen than the sill at that column (the depth rule).  His boots span almost his full width (95%), which is what blocks the tall room.
+
+| Layout | Full size | Result |
+| --- | --- | --- |
+| Wide | 32% of room height, 10.7% of room width | **Fits.**  Feet `[86.5, 80]`, centered on the doorway, on the room floor just in front of the sill (the sill is at 73 to 76% under his boots).  He spans x 81.1 to 91.9% and y 48 to 80%: clear of the bench (ends at 71.4%), the chain (x 76%, ends at y 47%), and the conveyor (top 83.8%), and in front of the truck and the right jamb. |
+| Tall | 23% of room height, 24.3% of room width | **Does not fit.**  The bench's right end reaches x 85.9% at y 69 to 71% (its leg runs to 84% down to y 80.7%), and the sill runs from y 63% at the left jamb to 68% at the right jamb.  To stand on screen his center can be at most x 87.85%, which puts his left boot near x 76%, inside the bench at every height from the sill down to the bench's front legs.  Closest doorway spot, feet `[87.85, 71.5]`: his left boot and legs cover the bench's right corner. |
+
+**What would work in the tall room, for Nathan's call** (measured, not built):
+- **Stand in front of the bench's right end, full size,** feet `[87.5, 84]`.  His feet sit 3.3% lower than the bench's front legs (80.7%), so by the depth rule he reads as standing in front of it, clear of the conveyor (86.8%) and the chain.  He overlaps the bench, which step 3 forbids, so it needs a yes.  This is near the 1b.2 spot (`[87, 81.5]`) moved 2.5% lower, where Nathan saw his foot in the bench.
+- **Shrink him on phones only.**  Largest size with any clear spot: **70%** (16.1% of room height), feet `[91.5, 85.75]`, on the open floor right of the bench, well in front of the doorway.  Largest size with his feet within 3% of the sill (in the doorway): **55%** (12.65%), feet `[92.5, 70.5]`.  Either way phone and desktop would no longer share the driver-to-bench ratio of 2.01.
+- **Let him run off the right edge.**  Clearing the bench at the doorway needs his center near x 98%, which hides about half of him.  I don't recommend it.
+
+The wide spot can be built as is whichever tall option is picked.  His walk (step 4) would come in from `from` `[86.5, 74]` at 0.8 scale in both layouts, a short walk in the wide room (6% down) and a little longer for the tall options in front of the bench.
+
+**Mockups** (in `tools/out/` on Beast, `?ship=1`, truck and driver in place; config changed only in the page for the picture, `tools/out/` is not committed):
+- `ship-1b4-wide-day-full-size.png` and `ship-1b4-wide-day-full-size-feet.png`: wide, Day, the passing spot, with a crop of his feet.
+- `ship-1b4-wide-night-full-size.png`: wide, Night, the same spot.
+- `ship-1b4-tall-day-full-size-doorway.png` and `-feet.png`: tall, full size, the closest doorway spot (standing on the bench corner).
+- `ship-1b4-tall-day-full-size-front-of-bench.png` and `-feet.png`: tall, full size, in front of the bench's right end.
+- `ship-1b4-tall-day-70pct.png` and `-feet.png`: tall, 70%, clear of everything.
+- `ship-1b4-tall-day-55pct-doorway.png` and `-feet.png`: tall, 55%, in the doorway.
+
+**Not done (waiting on the call above):** steps 2 and 4 in the game, removing `driverSpot`, the lean spots, and the leaning copy, the `docs/ASSETS.md` update, the version bump, stamp, changelog, smoke test, and the step 6 screenshots.  The truck, chain, door, and timings are untouched.
