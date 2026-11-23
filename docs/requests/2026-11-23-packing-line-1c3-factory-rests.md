@@ -1,7 +1,7 @@
 # Work order: Packing Line 1c-3, the factory rests while shipping (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, from Nathan's direction the same day.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, from Nathan's direction the same day.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 ## Goal

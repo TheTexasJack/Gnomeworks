@@ -1,7 +1,7 @@
 # Work order: Packing Line 1d, pack and stamp (v0.3)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 **v0.2 (2026-11-23):** the box and the stack have the stage and may cover the driver (Nathan); the count note in step 6 follows 1c-3.

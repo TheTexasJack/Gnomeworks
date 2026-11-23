@@ -72,10 +72,10 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1b.7: the phone matches Nathan's phone mock: the truck backs into the room, the chain hangs right of the door from behind the roller's gear cap, and the driver stands in front of the bench's right end (draft.78).
     - [x] 1c-1: the destinations data, `js/destinations.js` generated from the map's locations file by `tools/destinations.js` (draft.75, nothing on screen).
     - [ ] Lore gap: no Gnonmoon place has Factory Imports, so Gnonmoon has no destinations yet (found by 1c-1).
-    - [ ] 1c-2 (approved, with a 2026-11-23 addendum waiting on Nathan): the order board.
-    - [ ] 1c-3 (draft v0.2, option A picked): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
+    - [ ] 1c-2 (approved, addendum approved 2026-11-23): the order board.
+    - [ ] 1c-3 (approved v0.2, option A): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
     - [ ] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  In 1d v0.3, step 5a.
-    - [ ] 1d (draft): pack and stamp.  1e (draft): hand-off, report card, GRIP line.  These four are the Wednesday demo cut (HANDOFF.md).
+    - [ ] 1d (approved v0.3): pack and stamp.  1e (draft): hand-off, report card, GRIP line.  These four are the Wednesday demo cut (HANDOFF.md).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
     - [ ] After the demo: 1f and 1g (drawer and supplies, the other boxes, Stonks polish).
 

@@ -4,7 +4,7 @@
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
 
-## Addendum (Claudia, 2026-11-23; waiting on Nathan's OK)
+## Addendum (Claudia, 2026-11-23; approved by Nathan, 2026-11-23)
 
 This order was written at draft.75.  Two things changed under it:
 
