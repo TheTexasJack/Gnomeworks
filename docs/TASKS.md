@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.84.
+Last updated 2026-11-23, at v0.2.0-draft.86.
 
 ## Where we are
 
@@ -81,10 +81,10 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
-    - [ ] 1f (approved): the leave warning, and the GRIP line uses the whole screen.
+    - [x] 1f (draft.86): the leave warning, and the GRIP line uses the whole screen.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
-    - [ ] **Future enhancement (Nathan, 2026-11-23):** leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Today leaving just resets the room.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
+    - [x] **Built in 1f (draft.86).**  Leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
     - [ ] **Future enhancement (Nathan, 2026-11-23):** hold the trip's state (the truck, driver, orders, and packed boxes) until the player ends the day, for experience and consistency.  **Order (Nathan, 2026-11-23):** the warning comes first and states what leaving does today; holding the state is the later change, and the warning retires with it.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** on the phone, fill the empty right end of the order board (right of the three slips, from about 62%) with a small filler pinned to the board, made knowing the parked truck covers part of it.  The slips stay their current size.
     - [ ] **Open (Claudia's 1c-2 review, 2026-11-23):** about 77% of the items Gnomerica places can ask for are Bathroom items, since every place buys all 12 of them on top of its few Factory Imports, and the randomizer picks evenly from the combined list.  So most orders ask for Bathroom junk.  Decided (Nathan, 2026-11-23): fine as is.  Future enhancement: a trade economy of what ships where, with supply and demand and a buying system (DESIGNS.md, "Trade economy").

@@ -157,6 +157,23 @@ body {
 /* the report card over the room: the paper (09) with live rows; sizes from CONFIG.shipping.card, cqw = 1% of the card */
 #ship .ship-card-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-card-view[hidden] { display: none; }
+/* the leave warning (1f): a small parchment pop-up in the slips' style, the slip paper as a nine-slice with the
+   slip's red stripes along the top.  Width and edge from CONFIG.shipping.leave. */
+#ship .ship-warn-view { position: absolute; inset: 0; z-index: 6; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); touch-action: none; }
+#ship .ship-warn-view[hidden] { display: none; }
+.ship-warn { position: relative; box-sizing: border-box; border-style: solid; border-image-repeat: stretch; container-type: inline-size;
+  font-family: var(--font); color: #3a2414; filter: drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.ship-warn .warn-body { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4cqw; padding: 2cqw 2cqw 3cqw; }
+.night #ship .ship-warn { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.ship-warn .slip-stripes { display: block; align-self: stretch; height: 2.4cqw; background: repeating-linear-gradient(60deg, #b0282a 0 2.6cqw, transparent 2.6cqw 4.2cqw); }
+.ship-warn .warn-title { font: bold 7.4cqw/1.15 var(--font); }
+.ship-warn .warn-text { font: bold 5cqw/1.3 var(--font); color: #5a3a22; text-wrap: balance; }
+.ship-warn .warn-buttons { display: flex; gap: 4cqw; justify-content: center; align-self: stretch; margin-top: 1cqw; }
+.ship-warn .warn-btn { flex: 1 1 0; max-width: 44cqw; font: bold 5.6cqw/1 var(--font); padding: 3.2cqw 2cqw; border-radius: 2.4cqw; cursor: pointer;
+  border: .6cqw solid #8a5a2b; color: #3a2414; background: #fbf3df; box-shadow: 0 .8cqw 0 #8a5a2b; touch-action: manipulation; }
+.ship-warn .warn-go { color: #fff; border-color: #7a1c16; background: #b02c22; box-shadow: 0 .8cqw 0 #6a160d; }
+.ship-warn .warn-btn:active { transform: translateY(.6cqw); box-shadow: 0 .2cqw 0 #6a160d; }
+.ship-warn .warn-btn:focus-visible { outline: .8cqw solid #ffb703; outline-offset: .6cqw; }
 .ship-card { position: relative; flex: none; width: var(--card-w); height: var(--card-h); container-type: size; font-family: var(--font); color: #3a2414;
   user-select: none; -webkit-user-select: none; filter: drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.55)); }
 .night #ship .ship-card { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }

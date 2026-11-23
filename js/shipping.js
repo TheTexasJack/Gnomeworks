@@ -17,7 +17,11 @@
    off the shelf (down to the display copy), moves Stonks (saved, never below 0), and adds the shift to the history.
    A perfect shift gets the driver's thumbs up before he leaves.  Once the door shows closed, the report card shows
    over the room; closing it ticks the GRIP line on the STONKS screen up to the new total.  A trip with no orders
-   scores nothing and shows no card. */
+   scores nothing and shows no card.
+   Leaving (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board shows the leave
+   warning.  Stay (or a tap outside it, or Escape) changes nothing; Send it off runs the same hand-off as the chain,
+   and main.js switches views once the report card closes.  Leaving while the truck is already leaving waits for
+   the card the same way, so a scored shift's card is never skipped. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -32,6 +36,7 @@ GW.ship = (function () {
   var K = P.pack, conveyor, packLayer, boxEl = null, tray, menu, menuList, menuOpen = false, stacked = [];
   var packed = [], boxItem = null, boxCount = 0, boxState = 'none';   // boxState: 'none' | 'open' | 'closed' | 'stamped'
   var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
+  var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, afterCard = null;
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -127,14 +132,21 @@ GW.ship = (function () {
       closeCard();
     });
     box.appendChild(cardView);
+    buildWarn();
     box.style.setProperty('--slip-night', P.slip.nightBrightness);
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
-      if (cardOpen) { e.preventDefault(); closeCard(); }
+      if (warnOpen) { e.preventDefault(); closeWarn(); }
+      else if (cardOpen) { e.preventDefault(); closeCard(); }
       else if (slipOpen) { e.preventDefault(); closeSlip(); } else if (menuOpen) { e.preventDefault(); closeMenu(); }
     });
     // A tap outside the open menu closes it.  Inside the room that tap does nothing else.
     document.addEventListener('pointerdown', function (e) {
+      if (warnOpen && !warnPanel.contains(e.target)) {          // a tap outside the warning is Stay
+        closeWarn();
+        if (box.contains(e.target)) { e.stopPropagation(); e.preventDefault(); }
+        return;
+      }
       if (!menuOpen || menu.contains(e.target)) return;
       closeMenu();
       if (box.contains(e.target)) { e.stopPropagation(); e.preventDefault(); }
@@ -507,6 +519,65 @@ GW.ship = (function () {
     cardView.hidden = true; cardView.textContent = '';
     cardOpen = false;
     tickTo();
+    var go = afterCard;                // a leave that waited for the card (1f)
+    afterCard = null;
+    if (go) go();
+  }
+
+  // ---------- leaving mid-trip (1f; words and sizes in CONFIG.shipping.leave) ----------
+  function buildWarn() {
+    var W = P.leave;
+    warnView = div('ship-warn-view');
+    warnView.hidden = true;
+    warnView.addEventListener('pointerdown', function (e) { e.stopPropagation(); });   // the room under it gets nothing
+    warnPanel = div('ship-warn');
+    warnPanel.setAttribute('role', 'alertdialog');
+    warnPanel.setAttribute('aria-label', W.title);
+    warnPanel.style.borderImageSource = 'url("' + P.slip.paper + '")';
+    warnPanel.style.borderImageSlice = W.slice + ' fill';
+    var body = div('warn-body');                // the panel is the size container, so its insides use cqw
+    body.appendChild(U.el('i', 'slip-stripes'));
+    body.appendChild(div('warn-title', W.title));
+    body.appendChild(div('warn-text', W.text));
+    var row = div('warn-buttons');
+    warnStay = U.el('button', 'warn-btn warn-stay', W.stay);
+    var go = U.el('button', 'warn-btn warn-go', W.go);
+    warnStay.type = go.type = 'button';
+    warnStay.addEventListener('click', function () { closeWarn(); });
+    go.addEventListener('click', function (e) { if (e.isTrusted) sendOff(); });
+    row.appendChild(warnStay); row.appendChild(go);
+    body.appendChild(row);
+    warnPanel.appendChild(body);
+    warnView.appendChild(warnPanel);
+    box.appendChild(warnView);
+  }
+  function openWarn(go) {
+    closeSlip(); closeMenu();
+    warnGo = go;
+    warnView.hidden = false; warnOpen = true;
+    GW.sfx.click();
+    warnStay.focus({ preventScroll: true });
+  }
+  function closeWarn() {
+    if (!warnOpen) return;
+    warnView.hidden = true; warnOpen = false; warnGo = null;
+  }
+  // Send it off: the same hand-off as pulling the chain, then leave once the report card closes.
+  function sendOff() {
+    var go = warnGo;
+    closeWarn();
+    if (trip !== 'here') return;
+    afterCard = go;
+    pull();
+  }
+  // main.js asks before leaving the room for another view.  true = held here (go runs later, or never on Stay);
+  // false = leave now.
+  function holdLeave(go) {
+    if (!active) return false;
+    if (trip === 'leaving') { afterCard = go; return true; }          // the chain is pulled: wait for the card
+    if (trip === 'closed' && pendingCard) { afterCard = go; showCard(pendingCard); return true; }
+    if (trip === 'here' && orders.length && !cardOpen) { openWarn(go); return true; }
+    return false;
   }
 
   // The STONKS screen: GRIP, our Stonks, and a line of the last shifts' totals, drawn inside the painted glass.
@@ -532,12 +603,14 @@ GW.ship = (function () {
     screenEl.setAttribute('aria-label', 'Stonks');
     box.appendChild(screenEl);
   }
-  // hist = the totals to plot, oldest first; each shift takes one of `history` even steps across the glass.
+  // hist = the totals to plot, oldest first, spread across the glass's full width, first to last.  One shift
+  // draws a flat line across at its value, with the dot at its right end.
   function drawTicker(value, hist) {
-    var n = P.ticker.history, max = Math.max(1, Math.max.apply(null, hist.concat([value]))) * 1.15;
+    var max = Math.max(1, Math.max.apply(null, hist.concat([value]))) * 1.15;
     screenNum.textContent = U.fmt(Math.round(value));
     screenEl.setAttribute('aria-label', P.ticker.label + ' Stonks: ' + Math.round(value));
-    var pts = hist.map(function (v, i) { return [i * 100 / (n - 1), 100 - v / max * 100]; });
+    var row = hist.length === 1 ? [hist[0], hist[0]] : hist;
+    var pts = row.map(function (v, i) { return [i * 100 / (row.length - 1), 100 - v / max * 100]; });
     screenLine.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
     var last = pts[pts.length - 1];
     screenDot.hidden = !last;
@@ -563,6 +636,9 @@ GW.ship = (function () {
     var st = L.stonks, t = L.finishTag;
     screenEl.style.left = st[0] + '%'; screenEl.style.top = st[1] + '%'; screenEl.style.width = st[2] + '%'; screenEl.style.height = st[3] + '%';
     tag.style.right = (100 - t[0]) + '%'; tag.style.top = t[1] + '%'; tag.style.width = t[2] + '%';
+    var k = tallQuery.matches ? 'tall' : 'wide';
+    warnPanel.style.width = P.leave.width[k] + '%';
+    warnPanel.style.borderWidth = P.leave.edge[k] + 'px';
   }
 
   // ---------- the item menu ----------
@@ -841,7 +917,7 @@ GW.ship = (function () {
       stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
       cancelAnimationFrame(tickAnim); shown = GW.game.s.stonks || 0; drawTicker(shown, (GW.game.s.stonksHistory || []).slice());
     }
-    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
+    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); closeWarn(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
     // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
     // scrolled into view as it opens.  Desktop is left as it is.
@@ -858,6 +934,9 @@ GW.ship = (function () {
     orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; },
     menuOpen: function () { return menuOpen; }, boxState: function () { return boxState; },
     activeOrder: activeIndex, cardOpen: function () { return cardOpen; },
+    holdLeave: holdLeave, warnOpen: function () { return warnOpen; },
+    // Tapping Shipping again while a leave waits for the card stays in the room.
+    stay: function () { closeWarn(); afterCard = null; },
     // Test hook (1e.1): shows a report card for a made-up result ({ rows: [{ order, ok, why }], change }),
     // without scoring or saving, so screenshots can try the longest names.
     testCard: function (r) { if (built) showCard(r); },

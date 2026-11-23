@@ -120,6 +120,58 @@ async function packCheck(page, errors) {
   console.log(`packing: ${orders.length} orders packed and shipped (${orders.join(', ')}), Stonks ${want}`);
 }
 
+// Leaving mid-trip (1f): a view button shows the warning; Stay keeps the trip; Send it off scores the shift, shows
+// the card, and lands on the tapped view once the card closes.  Leaving after the chain is pulled waits for the card.
+async function leaveCheck(page, errors) {
+  const fail = m => errors.push('leaving: ' + m);
+  const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  const open = async () => { const c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+    await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 }); };
+  await page.goto(URL + '?debug=1&ship=1');
+  await page.waitForTimeout(400);
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await page.click('[data-view="floor"]');
+  if (await page.evaluate(() => GW.ship.warnOpen() || GW.game.s.view !== 'floor')) fail('leaving with the door closed warned or did not leave');
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await open();
+  const orders = await page.evaluate(() => JSON.stringify(GW.ship.orders().map(o => o.item.id)));
+  const h0 = await page.evaluate(() => GW.game.s.stonksHistory.length);
+  await page.click('[data-view="floor"]');
+  if (!await page.evaluate(() => GW.ship.warnOpen())) { fail('no warning mid-trip'); return; }
+  if (await page.evaluate(() => GW.game.s.view) !== 'shipping') fail('the view switched under the warning');
+  await page.click('.warn-stay');
+  if (await page.evaluate(() => GW.ship.warnOpen() || GW.ship.tripState() !== 'here' || GW.game.s.view !== 'shipping')) fail('Stay changed something');
+  if (await page.evaluate(() => JSON.stringify(GW.ship.orders().map(o => o.item.id))) !== orders) fail('Stay changed the orders');
+  await page.click('[data-view="machine"]');
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.ship.warnOpen() || GW.game.s.view !== 'shipping')) fail('Escape did not close the warning');
+  await page.click('[data-view="floor"]');
+  await page.click('.warn-go');
+  if (await page.evaluate(() => GW.game.s.stonksHistory.length) !== h0 + 1) fail('Send it off did not score the shift');
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after Send it off'); return; }
+  const wrong = await page.$$eval('.ship-card .card-row.is-wrong', r => r.length);
+  if (wrong !== JSON.parse(orders).length) fail(`the card shows ${wrong} misses (expected every order Not packed)`);
+  if (await page.evaluate(() => GW.game.s.view) !== 'shipping') fail('the view switched before the card closed');
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.game.s.view) !== 'floor') fail('did not land on the Shop Floor after the card');
+  // After the pull: no warning, the trip finishes, the card shows, then the view switches.
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await open();
+  const c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.click('[data-view="machine"]');
+  if (await page.evaluate(() => GW.ship.warnOpen() || GW.game.s.view !== 'shipping')) fail('leaving after the pull warned or skipped the card');
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card when leaving after the pull'); return; }
+  await page.mouse.click(c.x, c.y);    // any tap closes the card
+  if (await page.evaluate(() => GW.game.s.view) !== 'machine') fail('did not land on the Machine after the card');
+  console.log('leaving: warning, Stay, Escape, Send it off, and leaving after the pull all ok');
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -177,6 +229,7 @@ async function packCheck(page, errors) {
 
     if (name === 'desktop') await restCheck(page, errors);
     if (name === 'desktop') await packCheck(page, errors);
+    if (name === 'desktop') await leaveCheck(page, errors);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

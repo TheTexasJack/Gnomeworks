@@ -1,6 +1,6 @@
 # Work order: Packing Line 1f, the leave warning and a full GRIP line (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23, for Beta 1.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
@@ -47,3 +47,32 @@ Two polish items on Beta 1 (the Packing Line behind `?ship=1`).  Leaving the roo
 
 ## Result (filled in by Claude Code)
 
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.86**.  Smoke test: all clear, desktop and phone, with the new leaving check.
+
+**What was built**
+
+- **Step 2, when the warning shows.**  `main.js` asks `GW.ship.holdLeave()` before switching away from Shipping.  The warning shows while the trip is `here` with orders on the board.  With the door closed, or a trip with no orders (the "Nothing to ship yet" note), the player leaves at once as before.
+- **Step 3, the warning.**  A parchment pop-up over the room: the slip paper drawn as a nine-slice, the slip's red stripes along the top, the title, the line under it, and two buttons.  Wording as drafted, in `CONFIG.shipping.leave`: title "Leave the Packing Line?", text "This ends the day and sends the truck off as it is.", buttons **Stay** and **Send it off**.  Stay, a tap outside the pop-up, or Escape closes it, and nothing changes (the orders, the packed boxes, and the trip stay as they were).  Opening it closes an open slip or the item menu first.  Night dims it like the slips.
+- **Step 4, Send it off.**  Calls the chain's own `pull()`, so the scoring, the driver, the truck, the shelf, and Stonks are exactly the chain's hand-off, and anything unfinished scores "Not packed" (a closed, unstamped box on the bench ships with "No stamp", as with the chain).  The report card shows in the room, and the view switches to the tapped one when it closes.
+- **Step 5, leaving during `leaving`.**  No warning; the tap is remembered, the trip finishes, the card shows, and the view switches when it closes.  Tapping Shipping again while a leave waits cancels it and stays in the room.
+- **Step 6, the GRIP line.**  The saved shifts spread across the chart's full width, first to last.  One shift draws a flat line across the whole chart at its value, with the dot at its right end.  The scale (highest value plus 15%) and the tick-up are unchanged.
+- **Step 7.**  Every word and number is in `CONFIG.shipping.leave` (and the GRIP note on `ticker`).  `GW.VERSION` is 0.2.0-draft.86, stamped, with a CHANGELOG entry.  ARCHITECTURE, DESIGNS (the warning, built), TASKS, and HANDOFF are updated.  New smoke check `leaveCheck`: leaving with the door closed does not warn; mid-trip a view button warns and does not switch; Stay keeps the trip and the orders; Escape closes it; Send it off adds the shift to the history, shows a card with every order "Not packed", keeps the view until the card closes, then lands on the Shop Floor; and leaving right after the pull shows no warning, waits for the card, then lands on the Machine.
+
+**Calls to check**
+
+1. **While the truck is arriving** (the door open, no orders on the board yet), leaving shows no warning and drops the trip as before.  Nothing has been asked for, so there is nothing to score; warning here would cost the player -3 per order they never saw.  If Nathan wants it to warn here too, it is one line in `holdLeave()`.
+2. **Leaving after the pull gives no visible sign** that the tap was heard until the card shows (a few seconds, while the truck leaves).  The card then shows and the switch follows its close.
+3. **Leaving while a report card is open** switches at once, closing the card, since the player is already looking at it.
+4. **The pop-up's width:** 62% of the room on desktop and 86% on the phone (`leave.width`).  The first try at 40% on desktop was too small to read in a 684 px wide room.
+5. **Three shifts of 4, 34, and 64** draw a straight line, since the steps are equal; the screenshots used those numbers (one shift sent off with one order packed, then two perfect shifts).
+
+**Screenshots** in `tools/out/` (`?ship=1`, Day, 2x; not committed, since `tools/out/` is ignored).  `wide` is 1400 x 900, `tall` is 390 x 844.
+
+- `1f-<wide|tall>-day-warning.png`: the warning over the room, one order packed.
+- `1f-<wide|tall>-day-card-after-send.png`: the report card after Send it off (one right, two "Not packed", +4), still in the room.
+- `1f-<wide|tall>-day-stonks-1.png`, `-2.png`, `-3.png`, each with a `-zoom.png` twin: the STONKS screen after 1, 2, and 3 shifts (4, 34, 64).
+
+**Build time:** about 10 minutes of wall clock, from reading this order (11:13 CST) to the commit (about 11:23 CST).  The exact time Claude Code reports appears in Nathan's terminal at the end of the session, after this Result is written, so it is not recorded here; Nathan can add it.
+
+Nothing was installed.  The scoring, the cue, the board, the menu, the box, and the truck and driver are unchanged, and the trip's state is not held between visits.

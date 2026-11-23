@@ -337,6 +337,7 @@ window.GW = window.GW || {};
     floor: 'The Shop Floor.  Tap anywhere to crank the machine.',
     shipping: 'The shipping room.  Pull the chain to open or close the door.'
   };
+  function goView(v) { s.view = v; SFX.click(); applyView(); UI.updateFloor(s); }
   function applyView() {
     var floor = s.view === 'floor';
     machine.classList.toggle('floor-mode', floor);
@@ -355,7 +356,15 @@ window.GW = window.GW || {};
   U.$all('.view-toggle button').forEach(function (b) {
     if (!viewOn(b.dataset.view)) return;
     b.hidden = false;
-    b.addEventListener('click', function () { s.view = b.dataset.view; SFX.click(); applyView(); UI.updateFloor(s); });
+    b.addEventListener('click', function () {
+      var v = b.dataset.view;
+      // Leaving the shipping room mid-trip asks first, and a scored shift shows its report card before the switch (1f).
+      if (s.view === 'shipping' && GW.ship.enabled()) {
+        if (v === 'shipping') { GW.ship.stay(); return; }
+        if (GW.ship.holdLeave(function () { goView(v); })) return;
+      }
+      goView(v);
+    });
   });
   applyView();
 

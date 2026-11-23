@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.86 (2026-11-23)
+
+- Packing Line, step 1f (still hidden behind `?ship=1`): the leave warning and a full GRIP line.  Tapping "The Machine" or "Shop Floor" while the driver waits with orders on the board shows a small parchment pop-up over the room, in the slips' style: "Leave the Packing Line?  This ends the day and sends the truck off as it is."  **Stay**, a tap outside it, or Escape closes it and nothing changes.  **Send it off** runs the same hand-off as pulling the chain (anything unfinished scores "Not packed"), the truck leaves, the report card shows in the room, and the view switches to the one tapped once the card closes.  With the door closed, or a trip with no orders, the player leaves as before.  Tapping a view button after the chain is pulled shows no warning: the trip finishes, the card shows, and the view switches when it closes, so a scored shift's card is never skipped.  The GRIP line now spreads the saved shifts across the STONKS screen's full width, first to last; a single shift is a flat line across at its value.  The smoke test now checks the warning, Stay, Escape, Send it off, and leaving after the pull.
+
 ## v0.2.0-draft.85 (2026-11-23)
 
 - Packing Line, step 1e.1 (still hidden behind `?ship=1`), from Nathan's phone test of draft.84: the report card fits the longest names.  In every row the town, the item, and the reason each stay on one line.  A line too long for its row shrinks its own text to fit, never below a floor in `CONFIG.shipping.card.fontMin`, and only past that ends with "...".  Nothing wraps, so the red reason is never pushed into the row's bottom rule.  Checked with "Grit Spit and Fellers", "Fire Extinguisher", and "Wrong stamp" on 360 and 390 px phones and on desktop, Day and Night.  A test hook, `GW.ship.testCard`, shows a card for made-up rows without scoring or saving.

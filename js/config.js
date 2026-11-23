@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.85';
+GW.VERSION = '0.2.0-draft.86';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -326,7 +326,22 @@ GW.CONFIG = {
     },
     // The GRIP line on the STONKS screen: our Stonks and a line of the last `history` shift totals.  It moves
     // when the report card closes, counting up over tickMs.
-    ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a' }
+    // The saved shifts spread across the glass's full width, first to last; a single shift draws a flat line
+    // across at its value, with the dot at its right end (1f).
+    ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a' },
+    // The leave warning (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board
+    // shows this over the room.  `go` runs the same hand-off as pulling the chain, and the view switches once the
+    // report card closes.  Draft wording (Claudia).  width = the pop-up's width in % of the room, per layout;
+    // slice = the parchment's edge in the slip paper's pixels (566 x 800), drawn `edge` px wide on screen.
+    leave: {
+      title: 'Leave the Packing Line?',
+      text: 'This ends the day and sends the truck off as it is.',
+      stay: 'Stay',
+      go: 'Send it off',
+      width: { wide: 62, tall: 86 },
+      slice: 60,
+      edge: { wide: 26, tall: 20 }
+    }
   },
 
   tap: {
