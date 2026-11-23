@@ -38,5 +38,5 @@ Anything out of scope.
 How we know it worked: tests, screenshots, numbers.
 
 ## Result (filled in by Claude Code)
-What was built, commits, version number, anything left open.
+What was built, commits, version number, how long the build took (the time Claude Code reports), anything left open.
 ```

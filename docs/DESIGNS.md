@@ -275,6 +275,8 @@ Work orders and drivers are two separate calls.
    - The ticker is drawn by code inside the STONKS screen painted in the room (Nathan, 2026-11-22).
 6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).  Masthead art approved 2026-11-22.  Claudia's draft of its jobs, in order: introduce a newly unlocked region's rule, recap the last shift as a headline, carry the GRIP vs TNP story.
 
+**Trade economy (Nathan, 2026-11-23, future enhancement):** the Bathroom-heavy orders are fine for now.  Later, build an economy of what ships where, with supply and demand on trades, and a buying system that leads into it (built together).  Standing rule: it stays trade, never speculation or betting (no gambling mechanics unless Jarrett asks).
+
 **Done 2026-11-15:** our company is **GRIP** (Gnuma Gnuma Regional Independent Parcels), and the lore, map, and region stamps are in.  Formerly waiting on Nathan and Mara for these.  Regions feed the shipping labels (where stock goes) and the Tiny Monster info cards (where monsters live), so the shelf, the maps, and the dock share one world.
 
 **Earlier idea, replaced:** a truck every few minutes with a fixed number of boxes, paid per box in seconds of production.  Dropped once draining the shelf became the point.
