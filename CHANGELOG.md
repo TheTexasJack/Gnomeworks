@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.78 (2026-11-23)
+
+- Packing Line, step 1b.7 (still hidden behind `?ship=1`), from Nathan's phone mock.  On phones the truck now backs through the doorway into the room, the same way as on desktop: its rear doors and bumper sit in front of the left door frame and the back wall, and only the header and the right side of the frame stay in front of it.  Its size and stopping place are measured from Nathan's mock.  The pull chain moved to the right of the doorway, hanging in front of the truck's wheel, and its top comes out from behind the roller's gear cap, so the spot where the chain meets the roller never moves when it is pulled.  The driver, at full size, stands in front of the bench's right end where the mock has him.  Desktop, the trip's timing, and the door are unchanged.
+
 ## v0.2.0-draft.77 (2026-11-22)
 
 - Packing Line, step 1b.6 (still hidden behind `?ship=1`), from Nathan's GIMP mocks.  On desktop the truck now backs through the doorway into the room: its rear doors and bumper sit in front of the left door frame and the back wall, and only the header and the right side of the frame stay in front of it.  Its size and stopping place are measured from Nathan's mock.  The pull chain moved to the right of the doorway, hanging in front of the truck's wheel, and its top comes out from behind the roller's gear cap, which is drawn in front of it, so the spot where the chain meets the roller never moves when it is pulled.  The driver keeps his spot, now standing in front of the parked truck.  On phones, the truck and doorway go back to their draft.75 placement.  The trip's timing and the door are unchanged.

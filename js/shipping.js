@@ -2,7 +2,7 @@
    Gnomerica's truck and driver.  Hidden from players while CONFIG.shipping.enabled is false; ?ship=1 in
    the address shows it for testing.  Nothing ships yet.  The door starts closed each time the view opens
    and is not saved.
-   A trip: pulling the chain opens the door, the truck backs into the doorway (on desktop, through it into the room) and settles, then the driver
+   A trip: pulling the chain opens the door, the truck backs through the doorway into the room and settles, then the driver
    walks in a short way and waits, grumpy.  Pulling again sends him out, the truck drives off, and the door
    shows closed. */
 window.GW = window.GW || {};

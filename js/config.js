@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.77';
+GW.VERSION = '0.2.0-draft.78';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -143,11 +143,23 @@ GW.CONFIG = {
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
-        chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
+        // The chain hangs right of the doorway, in front of the truck's wheel (Nathan's phone mock), centered on the
+        // hub of the roller's gear cap.  Its top end stays behind the cap through the whole pull and bounce:
+        // top 18.5 + 7% of h = 21.65 stays above the cap's bottom (22.2 at the chain), and the bounce (17.55)
+        // stays inside the roller outline (top 16.5).  Handle bottom at 63.5, as in the mock.
+        chain: { x: 95.0, top: 18.5, h: 45, hitW: 9 },
+        // roller = the outline of the roller's gear cap (and the dark housing above it), drawn again in front of the chain.
+        roller: [[90.42, 20.0], [91.1, 18.84], [92.2, 18.14], [92.6, 16.5], [96.73, 16.5], [96.73, 22.2], [95.56, 22.3],
+          [93.33, 22.5], [91.67, 22.33], [90.56, 21.26]],
         doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
-        truck: { h: 42.6, top: 26.2, xFrom: 95, xTo: 74.0 },
+        // The truck backs into the room (Nathan's phone mock): only the header (the opening's top line) and the right
+        // jamb (its inner edge, measured row by row Day and Night: 95.0 to 95.33) stay in front of it.
+        truckClip: [[-10, -10], [79.3, -10], [79.3, 28.9], [95.3, 24.47], [95.0, 110], [-10, 110]],
+        // Size and stopping place measured from Nathan's phone mock.
+        truck: { h: 28.48, top: 37.99, xFrom: 95, xTo: 63.7 },
+        // In front of the bench's right end, where the mock has him, at full size (the 1b.2 ratio).
         driver: {
-          h: 23, from: [86, 65], fromScale: 0.8, at: [87.5, 84]
+          h: 23, from: [86, 65], fromScale: 0.8, at: [83.7, 85.1]
         }
       }
     },
