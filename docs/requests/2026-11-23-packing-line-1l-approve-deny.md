@@ -1,8 +1,10 @@
-# Work order: Packing Line 1l, APPROVED or DENIED, glitter fakes, and TNP's line (v0.1)
+# Work order: Packing Line 1l, APPROVED or DENIED, glitter fakes, and TNP's line (v0.2)
 
 **Status:** Approved
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("Approve or deny every slip.  Stamp it and pack it.  Everything else approved.").
 **Model:** Opus 5.5
+
+**v0.2 (2026-11-23):** step 2a, the Packing Rules bar always shows (Nathan's test of draft.91).
 
 ## Goal
 
@@ -27,6 +29,7 @@ The first half of TNP Corp.  Every work order gets stamped APPROVED or DENIED be
 
 1. `git pull` in `/srv/GW/Gnomeworks`.
 2. **Art.**  Copy the two stamp SVGs into `assets/packing/` as is (they are vectors), and add them to `docs/ASSETS.md`.
+2a. **The Packing Rules bar always shows (Nathan, test of draft.91: "It should be at the top and say 'Packing Rules' with the downward chevron").**  The chart no longer hides with "Show instructions" off (this replaces 1j's step 6): the bar is always the first thing in the supplies menu, titled **Packing Rules**, minimized after the first time as 1k built it.  Remove the `.no-hints #ship .ship-rules` rule and update DESIGNS and ARCHITECTURE to match.
 3. **Stamping a slip.**  The full-size slip gets two stamp buttons along its bottom: APPROVED and DENIED, drawn from the art.  A tap slams the chosen stamp onto the slip: it starts big and lands with a BAM (sound and numbers in config), placed as in `stamps-on-work-order-v1.0.png`.  The small slip on the board shows it too.  The player can change a stamp until that order's box is packed (Claudia's draft, for kids who mis-tap).
 4. **Stamp it, then pack it.**  The box on the bench belongs to the leftmost order that is APPROVED and not yet packed.  With none, the bench has no box.  A DENIED order gets no box.  Unstamped slips glow softly on the board (a tip: off with "Show instructions," like the others).
 5. **Glitter fakes.**  From shift `CONFIG.shipping.fakes.startShift` (4), a GRIP truck's board has a `fakeChance` (draft 30%) of carrying one glitter slip among its orders, never more than one per board (draft).  The glitter is a code effect over the normal slip, readable on the small slip and plain on the full-size one.  Reduced motion: still sparkles, no twinkle.  A fake slip asks for a normal-looking order from a real town.
