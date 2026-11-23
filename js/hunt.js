@@ -18,7 +18,7 @@ GW.hunt = (function () {
   // ---------- open / close ----------
   function open() {
     var s = GW.game.s;
-    if (h || !s.mega.owned || s.paused) return;
+    if (h || !s.mega.owned || s.paused || GW.game.resting()) return;
     s.mega.nextHunt = Date.now() + M.huntCooldownSeconds * 1000;
     s.mega.hunts += 1;
     var box = U.el('div', 'hunt'); box.id = 'hunt';

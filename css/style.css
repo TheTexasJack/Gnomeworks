@@ -274,6 +274,9 @@ body.paused .crew-gnome, body.paused .tap-ring, body.paused .rare-popup { animat
 #gearSvg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 #fx, #rareSlot { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 #rareSlot > * { pointer-events: auto; }
+/* the factory rests in the Shipping view: anything frozen mid-event hides until the player leaves the room */
+body.resting #rareSlot, body.resting #edgeFlash, body.resting .clone-alert, body.resting .strike-sign, body.resting .hunt { visibility: hidden; }
+body.resting #rareSlot *, body.resting .hunt * { animation-play-state: paused !important; }
 
 .gear-bump { transform-box: fill-box; transform-origin: center; }
 .gear-bump.bump { animation: bump .16s ease-out; }

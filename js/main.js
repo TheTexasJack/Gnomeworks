@@ -9,6 +9,14 @@ window.GW = window.GW || {};
   // The shipping view is hidden until enabled (or ?ship=1): a saved 'shipping' view falls back to the Machine.
   function viewOn(v) { return C.views.indexOf(v) >= 0 && (v !== 'shipping' || GW.ship.enabled()); }
   if (!viewOn(s.view)) s.view = 'machine';
+  // The factory rests in the Shipping view (docs/EVENTS.md).  This is the one rule every producer, event,
+  // and pop-up checks, so nothing new can miss it.  Resting time counts as time away: restCheck() pays it
+  // once on leaving through E.offline(), and GW.state.save() folds any unpaid seconds into savedAt.
+  function resting() { return s.view === 'shipping'; }
+  var restSince = null;   // Date.now() when the current unpaused rest began
+  function restOwed() { return restSince === null ? 0 : Math.max(0, (Date.now() - restSince) / 1000); }
+  GW.game.resting = resting;
+  GW.game.restOwed = restOwed;
 
   // ---------- startup ----------
   G.build(document.getElementById('gearSvg'));
@@ -238,12 +246,14 @@ window.GW = window.GW || {};
   function frame(now) {
     var dt = (now - last) / 1000;
     last = now;
-    if (s.paused) {
-      // Frozen: push timers forward so nothing expires or spawns while paused.
+    if (s.paused || resting()) {
+      // Frozen (paused) or resting (Shipping view): push timers forward so nothing expires, spawns, or
+      // comes due.  No economy or event ticks; resting time is paid on leaving (restCheck).
       if (popup) popup.expires += dt * 1000;
       nextPopupAt += dt * 1000;
       GW.wild.shift(dt * 1000);
       GW.clones.shift(dt * 1000);
+      if (!s.paused && dt <= 5) s.stats.playSeconds += dt;   // packing is still playing
     } else if (dt > 5) {
       // Tab was asleep.  Catch up quietly instead of dumping thousands of pops.
       var off = E.offline(s, dt);
@@ -265,14 +275,16 @@ window.GW = window.GW || {};
     pending -= step; display = (display + step) % 360;
     G.update(display);
 
-    drainPops(Math.min(dt, 1));
-    if (s.view === 'shipping') extraItems = 0;    // no hatch or belt in the shipping room
-    if (extraItems >= 1 && Math.random() < dt * 2) {
-      var m = s.view === 'floor' ? { x: 92, y: 104 } : G.hatchMouth();
-      UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
-      extraItems = 0;
+    if (resting()) { popQueue.length = 0; extraItems = 0; }   // pops left over from before the room are dropped (the items are already on the shelf)
+    else {
+      drainPops(Math.min(dt, 1));
+      if (extraItems >= 1 && Math.random() < dt * 2) {
+        var m = s.view === 'floor' ? { x: 92, y: 104 } : G.hatchMouth();
+        UI.floatText(m.x - 8, m.y - 14, '+' + U.fmt(extraItems) + ' items', 'items');
+        extraItems = 0;
+      }
+      updatePopups(now);
     }
-    updatePopups(now);
     UI.animateFloor(now, s);
     UI.updateHeader(s);
 
@@ -307,6 +319,18 @@ window.GW = window.GW || {};
   }
   window.addEventListener('resize', fitRails);
 
+  // ---------- resting: start counting on entering the room, pay once on leaving it (or on pausing in it) ----------
+  function restCheck() {
+    var want = resting() && !s.paused;
+    if (want && restSince === null) restSince = Date.now();
+    else if (!want && restSince !== null) {
+      var off = E.offline(s, restOwed());
+      restSince = null;
+      if (off && off.items) shelfDirty = true;
+      GW.state.save(s);
+    }
+  }
+
   // ---------- view toggle: The Machine / Shop Floor / Shipping ----------
   var LABELS = {
     machine: 'The machine.  Tap to turn the little gear.',
@@ -318,6 +342,9 @@ window.GW = window.GW || {};
     machine.classList.toggle('floor-mode', floor);
     machine.classList.toggle('ship-mode', s.view === 'shipping');
     if (GW.ship.enabled()) GW.ship.setActive(s.view === 'shipping');
+    document.body.classList.toggle('resting', resting());   // hides anything frozen mid-event (css)
+    if (resting()) document.getElementById('toast').className = '';   // a factory message already showing goes too
+    restCheck();
     U.$all('.view-toggle button').forEach(function (b) {
       var on = b.dataset.view === s.view;
       b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -461,6 +488,7 @@ window.GW = window.GW || {};
   }
   function togglePause() {
     s.paused = !s.paused;
+    restCheck();
     applyPause();
     SFX.pause(s.paused);
     GW.state.save(s);

@@ -5,7 +5,7 @@ Everything that interrupts the normal tap-and-idle loop.  Built events are first
 ## Rules every event follows
 
 - **Real hands only.**  Anything that pays out checks `event.isTrusted`, so scripted clicks never count.
-- **The factory rests in the Shipping view (Nathan, 2026-11-23).**  No event, shiny, pop-up, or producer runs or shows in the room; timers are pushed forward as in pause, and the time is credited on leaving through the offline catch-up.  **Every future producer and event follows this rule.**
+- **The factory rests in the Shipping view (Nathan, 2026-11-23).**  No event, shiny, pop-up, or producer runs or shows in the room; timers are pushed forward as in pause, and the time is credited on leaving through the offline catch-up.  **Every future producer and event follows this rule:** it ticks from the normal branch of `frame()` in `main.js`, and anything that can start it from elsewhere checks `GW.game.resting()` (as `wild.start`, `clones.trigger`, and `hunt.open` do).  Built in draft.80; details in ARCHITECTURE.md.
 - **Pause freezes it.**  `main.js` calls each event's `shift(ms)` while paused, pushing every timer forward.
 - **Reduced motion.**  Devices that ask for less motion get still, glowing versions (no spinning, bobbing, or pulsing).
 - **No gambling.**  Events pay out for doing something, never for betting.  Jarrett owns the game and can ask for otherwise.

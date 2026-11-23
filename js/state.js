@@ -65,7 +65,10 @@ GW.state = (function () {
   }
 
   function save(s) {
-    s.savedAt = Date.now();
+    // Unpaid seconds the factory has rested in the Shipping view count as time away, so a close or reload
+    // in the room pays them once through the welcome-back catch-up (main.js restOwed).
+    var owed = GW.game && GW.game.restOwed ? GW.game.restOwed() : 0;
+    s.savedAt = Date.now() - owed * 1000;
     try { window.localStorage.setItem(C.saveKey, JSON.stringify(s)); return true; }
     catch (e) { return false; }
   }

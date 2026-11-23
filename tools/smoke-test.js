@@ -14,6 +14,52 @@ const URL = 'file://' + path.join(ROOT, 'index.html');
 const OUT = path.join(__dirname, 'out');
 fs.mkdirSync(OUT, { recursive: true });
 
+// The factory rests in the Shipping view (docs/EVENTS.md): counts hold still, nothing starts or expires,
+// a running event resumes on leaving, and the time is paid once, on leaving or on a reload in the room.
+const gnomeClicks = s => Object.keys(s.clicks).filter(k => k !== 'tap').reduce((n, k) => n + s.clicks[k], 0);
+async function restCheck(page, errors) {
+  const fail = m => errors.push('resting: ' + m);
+  await page.goto(URL + '?debug=1&ship=1');
+  await page.waitForTimeout(400);
+  await page.click('.debug-bar button:has-text("Wild: spin")');
+  await page.waitForTimeout(200);
+  await page.click('[data-view="shipping"]');
+  const rate = await page.evaluate(() => GW.econ.rates(GW.game.s).total);
+  const before = await page.evaluate(`(${gnomeClicks})(GW.game.s) + ',' + GW.game.s.cogs + ',' + GW.game.s.itemsMade`);
+  await page.click('.debug-bar button:has-text("Popup")');   // a shiny now due must not spawn in the room
+  await page.click('.debug-bar button:has-text("Clones")');
+  const t0 = Date.now();
+  await page.waitForTimeout(10500);                          // longer than Wild Magic lasts
+  const held = await page.evaluate(`(${gnomeClicks})(GW.game.s) + ',' + GW.game.s.cogs + ',' + GW.game.s.itemsMade`);
+  if (held !== before) fail(`counts changed in the room (${before} -> ${held})`);
+  if (await page.$('.rare-popup')) fail('a shiny spawned in the room');
+  if (await page.evaluate(() => GW.clones.isActive())) fail('a Clone Attack started in the room');
+  if (await page.isVisible('.wild-target')) fail('Wild Magic shows in the room');
+  const c0 = await page.evaluate(`(${gnomeClicks})(GW.game.s)`);
+  await page.click('[data-view="machine"]');
+  const secs = (Date.now() - t0) / 1000;
+  const paid = await page.evaluate(`(${gnomeClicks})(GW.game.s)`) - c0;
+  if (paid < rate * secs * 0.8 || paid > rate * secs * 1.2) fail(`leaving paid ${paid} clicks, expected about ${Math.round(rate * secs)}`);
+  if (!await page.evaluate(() => GW.wild.isActive())) fail('Wild Magic did not resume after the room');
+  if (await page.evaluate(() => GW.game.restOwed()) !== 0) fail('rest still owed after leaving');
+  await page.waitForTimeout(1000);
+  const ticking = await page.evaluate(`(${gnomeClicks})(GW.game.s)`) - c0 - paid;
+  if (ticking > rate * 2) fail(`paid twice: ${ticking} extra clicks a second after leaving`);
+  // Reload in the room: the rest is paid once, by the welcome-back catch-up.
+  await page.click('[data-view="shipping"]');
+  const r0 = await page.evaluate(`(${gnomeClicks})(GW.game.s)`), t1 = Date.now();
+  await page.waitForTimeout(6000);
+  await page.reload();
+  await page.waitForTimeout(400);
+  const secs2 = (Date.now() - t1) / 1000;
+  const paid2 = await page.evaluate(`(${gnomeClicks})(GW.game.s)`) - r0;
+  if (paid2 < rate * (secs2 - 1) * 0.8 || paid2 > rate * secs2 * 1.2) fail(`reload in the room paid ${paid2} clicks, expected about ${Math.round(rate * secs2)}`);
+  await page.click('[data-view="machine"]');
+  const r1 = await page.evaluate(`(${gnomeClicks})(GW.game.s)`);
+  if (r1 - r0 - paid2 > rate * 2) fail(`reload in the room was paid again on leaving (${r1 - r0 - paid2} clicks)`);
+  console.log(`resting: rate ${Math.round(rate)}/s, room ${secs.toFixed(1)}s paid ${Math.round(paid)}, reload ${secs2.toFixed(1)}s paid ${Math.round(paid2)}`);
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -68,6 +114,8 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.waitForTimeout(400);
     const after = await page.evaluate(() => GW.game.s.itemsMade);
     if (after < before) errors.push(`${name}: save did not survive reload (${before} -> ${after})`);
+
+    if (name === 'desktop') await restCheck(page, errors);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

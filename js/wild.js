@@ -21,7 +21,7 @@ GW.wild = (function () {
   function unlocked(s) { return !!s.oneTime.wiz_wild; }
 
   function start(s, forceStyle) {
-    if (active) return;
+    if (active || GW.game.resting()) return;   // the factory rests in the Shipping view
     var st = forceStyle || style();
     var box = document.getElementById('rareSlot');
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

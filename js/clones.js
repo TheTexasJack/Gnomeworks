@@ -19,7 +19,7 @@ GW.clones = (function () {
 
   // ---------- start: warn on the Machine view, or go straight to the floor ----------
   function trigger(s) {
-    if (active) return;
+    if (active || GW.game.resting()) return;   // the factory rests in the Shipping view
     active = { s: s, phase: 'waiting', waitEnds: performance.now() + K.waitForFloorSeconds * 1000, clones: [], count: K.count };
     if (s.view === 'floor') { launch(); return; }
     // Not watching the floor: the Megagnome deals with what he can before anyone escapes.
