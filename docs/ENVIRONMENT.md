@@ -108,7 +108,7 @@ Rules for Claude Code on Beast:
 - **Use the local tools directly.**  `node tools/smoke-test.js` finds Playwright through `NODE_PATH`, which gwcode's login already sets.
 - **Never use files in a `not-for-game/` folder.**  Those are unapproved or retired art kept for reference.
 - **The push warning** about the repository having moved is only the capital G in `Gnomeworks`.  Pushes succeed.
-- **numpy differs from the cloud** (1.26 on Beast, 2.x in the cloud session).  Code that uses numpy's random numbers, like the map builder, may not give byte-identical output on both.  The first-run work order checks this.
+- **numpy differs from the cloud** (1.26 on Beast, 2.x in the cloud session).  Checked 2026-11-22: the map builder on Beast differs from the cloud by one rounded lake point (906.0 vs 906.1), invisible on the map.  Rebuild and commit the map from Beast only.  The map has three copies: `docs/lore/map/gnomadica-map-v0.29.svg`, its `.html`, and `map/index.html`.
 
 ## Repo layout
 

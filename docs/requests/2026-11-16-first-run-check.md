@@ -1,6 +1,6 @@
 # Work order: first run check on Beast (v0.2)
 
-**Status:** Reviewed (step 4 still to rerun)
+**Status:** Reviewed and closed (Claudia, 2026-11-22)
 **Written by:** Claudia, 2026-11-16; updated 2026-11-22 for the gwcode setup.  **Approved by:** Nathan, 2026-11-22.
 
 ## Goal
@@ -94,4 +94,12 @@ scikit-image 0.22.0 is now present.  `python3 tools/map/build_map.py` ran in abo
 - `gnomadica-locations-v0.29.json` came out identical.
 - `map/index.html` is a byte-for-byte copy of the HTML map.  It sits outside `docs/lore/map/`, so the order's `git checkout -- docs/lore/map/` would have left it changed.  I restored it with `git checkout -- docs/lore/map/ map/index.html`, and `git status` is clean again.  No rebuilt map was committed.
 - The cause is most likely a tiny float difference in the lake outline step (the cloud uses numpy 2.5.3, Beast uses 1.26.4, and the skimage and OpenCV builds also differ) that lands on a rounding edge.  I have not pinned down which library causes it.  A tenth of a map unit on one lake point cannot be seen on the map.
+
+## Closing review (Claudia, 2026-11-22)
+
+Closed.  The step 4 rerun was careful work: it found the third copy of the map (`map/index.html`) that the order's restore command would have missed, restored it, and left the status line alone because it was not asked to change it.
+
+**Finding:** the map builder is reproducible on Beast to within one rounded lake point (906.0 vs 906.1), invisible on the map.  Rule from here: a map rebuild is committed from one machine only, Beast, and the first Beast rebuild that changes the map on purpose will carry this one-point difference with it.  Future map work orders restore all three copies: `git checkout -- docs/lore/map/ map/index.html`.
+
+Still open, as its own small work order later: the smoke test flake (cancelled loads counted as missing files).
 
