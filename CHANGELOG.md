@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.77 (2026-11-22)
+
+- Packing Line, step 1b.6 (still hidden behind `?ship=1`), from Nathan's GIMP mocks.  On desktop the truck now backs through the doorway into the room: its rear doors and bumper sit in front of the left door frame and the back wall, and only the header and the right side of the frame stay in front of it.  Its size and stopping place are measured from Nathan's mock.  The pull chain moved to the right of the doorway, hanging in front of the truck's wheel, and its top comes out from behind the roller's gear cap, which is drawn in front of it, so the spot where the chain meets the roller never moves when it is pulled.  The driver keeps his spot, now standing in front of the parked truck.  On phones, the truck and doorway go back to their draft.75 placement.  The trip's timing and the door are unchanged.
+
 ## v0.2.0-draft.76 (2026-11-22)
 
 - Packing Line, step 1b.5 (still hidden behind `?ship=1`), from Nathan's bug report: no more strip of bare concrete between the door frame and the parked truck.  The doorway outline's left edge now sits on the frame's inner edge in both layouts (measured on the Day and Night art), and the truck stops with its rear left corner tucked just behind the frame.  Its height is re-set so its lowest point still rests on the doorway's floor line.  Desktop shows the whole rear; on phones the opening is narrower than the rear, so the right door's outer edge and hinges stay behind the right side of the frame.  Sizes, the trip, the door, the chain, and the driver are unchanged.

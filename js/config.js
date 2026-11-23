@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.76';
+GW.VERSION = '0.2.0-draft.77';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -99,18 +99,19 @@ GW.CONFIG = {
   // Each layout has the closed room, its open twin (same size, only the door differs), and the chain:
   // x = the chain's center (% of room width), top (% of room height), h = chain height (% of room height),
   // hitW = width of the invisible tap area around the thin chain (% of room width), so a finger can find it.
-  // doorway = the opening just inside the door frame, [x %, y %] corners clockwise from top left; the truck
-  // shows only inside it.  Traced from where the closed and open twins differ (both themes agree within 1%).
-  // Its left edge sits on the frame's inner edge (measured on the art, Day and Night), so no concrete shows
-  // between the frame and the truck; the two left corners sit on the traced top and floor lines.
+  // doorway = the opening just inside the door frame, [x %, y %] corners clockwise from top left.  Traced from
+  // where the closed and open twins differ (both themes agree within 1%).  The truck shows only inside it,
+  // unless the layout has a truckClip (wide: the truck backs into the room).
+  // roller (optional) = an outline of the room art drawn again in front of the chain, so the chain's top hides
+  // behind it.
   // truck: h = height (% of room height), top (% of room height), xFrom / xTo = its left edge (% of room width)
-  // before it slides in and where it stops.  xTo tucks the rear's left corner just behind the frame's inner
-  // edge.  top is set so the truck rests on the doorway's floor line (its lowest point touches the line,
-  // nothing hangs below).
+  // before it slides in and where it stops.  Tall: top is set so the truck rests on the doorway's floor line
+  // (its lowest point touches the line, nothing hangs below).
   // driver: h (% of room height), from = [x of his center %, y of his feet %] at the doorway, fromScale = his
   // size there (farther away), at = [x %, y %] where his feet stand while he waits, full size (grumpy pose,
   // arms crossed).  Depth rule: whatever he stands in front of, his feet sit lower on screen than its floor
-  // contact.  Wide: centered on the doorway just in front of the sill, clear of the bench, chain, and conveyor.
+  // contact.  Wide: in front of the parked truck, feet 4% lower than its lowest point (76.0), clear of the bench,
+  // the chain (1.7% gap), and the conveyor.
   // Tall: in front of the bench's right end, feet 3.3% lower than its front legs (Nathan, 2026-11-22).
   // Sizes on phones match the wide room's proportions: truck height / doorway height = 1.121 in both,
   // driver height / bench height = 2.01 in both (bench = front top edge to the foot of the legs).
@@ -121,9 +122,21 @@ GW.CONFIG = {
     layouts: {
       wide: {
         closed: 'assets/packing/room_wide.webp', open: 'assets/packing/room_wide_open.webp', aspect: '1600 / 901',
-        chain: { x: 76.0, top: -12, h: 59, hitW: 4 },   // hangs from above the room's top edge so its handle clears the driver's cap
+        // The chain hangs right of the doorway, in front of the truck's wheel (Nathan's mock 2).  Its top end sits
+        // behind the roller's gear cap (roller, below) through the whole pull and bounce, so the spot where it
+        // meets the roller never moves: top 12.2 + 7% of h = 16.3 stays above the cap's bottom (16.9 at the
+        // chain), and 12.2 - 30% of the pull = 11.0 stays below its top (9).  Handle bottom at 70.
+        chain: { x: 93.45, top: 12.2, h: 57.8, hitW: 4 },
+        // roller = the outline of the roller's gear cap, drawn again in front of the chain.
+        roller: [[90.06, 11.65], [90.63, 9.99], [91.88, 9.1], [93.75, 8.88], [94.5, 9.1], [94.5, 16.87], [93.44, 17.54],
+          [91.56, 17.65], [90.5, 16.65], [90.06, 14.43]],
         doorway: [[80.3, 26.2], [92.2, 20.3], [92.4, 76.9], [80.3, 68.02]],
-        truck: { h: 55, top: 20.75, xFrom: 93, xTo: 79.1 },
+        // truckClip = where the truck may draw (replaces the doorway clip when present).  The truck backs into the
+        // room (Nathan's mock 1): it draws over the left jamb, the wall, and the floor, and only the header (the
+        // opening's top line) and the right jamb (its inner edge, measured Day and Night) stay in front of it.
+        truckClip: [[-10, -10], [80.3, -10], [80.3, 26.2], [93.2, 19.8], [93.0, 110], [-10, 110]],
+        // Size and stopping place measured from Nathan's mock 1 (both mocks agree to the pixel).
+        truck: { h: 54.04, top: 22.14, xFrom: 93, xTo: 74.24 },
         driver: {
           h: 32, from: [86.5, 74], fromScale: 0.8, at: [86.5, 80]
         }
@@ -131,8 +144,8 @@ GW.CONFIG = {
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
         chain: { x: 74.0, top: 6.5, h: 45.5, hitW: 9 },
-        doorway: [[78.25, 29.19], [94.1, 24.8], [93.8, 67.1], [78.25, 62.5]],
-        truck: { h: 42.6, top: 26.6, xFrom: 95, xTo: 75.4 },
+        doorway: [[79.3, 28.9], [94.1, 24.8], [93.8, 67.1], [78.6, 62.6]],
+        truck: { h: 42.6, top: 26.2, xFrom: 95, xTo: 74.0 },
         driver: {
           h: 23, from: [86, 65], fromScale: 0.8, at: [87.5, 84]
         }

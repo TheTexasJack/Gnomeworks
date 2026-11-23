@@ -2,7 +2,7 @@
    Gnomerica's truck and driver.  Hidden from players while CONFIG.shipping.enabled is false; ?ship=1 in
    the address shows it for testing.  Nothing ships yet.  The door starts closed each time the view opens
    and is not saved.
-   A trip: pulling the chain opens the door, the truck backs into the doorway and settles, then the driver
+   A trip: pulling the chain opens the door, the truck backs into the doorway (on desktop, through it into the room) and settles, then the driver
    walks in a short way and waits, grumpy.  Pulling again sends him out, the truck drives off, and the door
    shows closed. */
 window.GW = window.GW || {};
@@ -14,7 +14,7 @@ GW.ship = (function () {
   var built = false, active = false, open = false;
   var trip = 'closed';            // 'closed' | 'arriving' | 'here' | 'leaving'
   var tripId = 0, anims = [];
-  var box, closedImg, openImg, bay, truck, driver, driverImg, chain, bounceTimer;
+  var box, closedImg, openImg, bay, truck, driver, driverImg, chain, roller, rollerClosed, rollerOpen, bounceTimer;
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -48,11 +48,18 @@ GW.ship = (function () {
       pull();
     });
     box.appendChild(chain);
+    // The roller: the same room art again, cut to the roller's outline and drawn in front of the chain, so the
+    // chain's top end stays hidden behind it while the chain is pulled.  Its twins follow the door like the room's.
+    roller = U.el('div', 'ship-roller');
+    rollerClosed = img('ship-room'); rollerOpen = img('ship-room ship-open');
+    roller.appendChild(rollerClosed); roller.appendChild(rollerOpen);
+    box.appendChild(roller);
     built = true;
     tallQuery.addEventListener('change', redraw);
   }
 
   // ---------- placing things (all positions in % of the room) ----------
+  function polygon(points) { return 'polygon(' + points.map(function (p) { return p[0] + '% ' + p[1] + '%'; }).join(', ') + ')'; }
   // He stands at his feet point.
   function driverTransform(scale) { return 'translate(-50%, -100%) scale(' + scale + ')'; }
   function placeTruck(x) { truck.style.left = x + '%'; }
@@ -78,6 +85,7 @@ GW.ship = (function () {
     var L = layout(), m = document.getElementById('machine'), wh = L.aspect.split('/');
     closedImg.src = GW.theme.img(L.closed);
     openImg.src = GW.theme.img(L.open);
+    rollerClosed.src = closedImg.src; rollerOpen.src = openImg.src;
     if (L === drawnLayout && force !== true) return;
     drawnLayout = L;
     m.style.setProperty('--ship-aspect', L.aspect);
@@ -86,7 +94,10 @@ GW.ship = (function () {
     chain.style.top = L.chain.top + '%';
     chain.style.height = L.chain.h + '%';
     chain.style.width = L.chain.hitW + '%';
-    bay.style.clipPath = 'polygon(' + L.doorway.map(function (p) { return p[0] + '% ' + p[1] + '%'; }).join(', ') + ')';
+    // The truck shows inside the doorway, or inside truckClip where the layout has one (it backs into the room).
+    bay.style.clipPath = polygon(L.truckClip || L.doorway);
+    roller.style.display = L.roller ? '' : 'none';
+    if (L.roller) roller.style.clipPath = polygon(L.roller);
     truck.style.height = L.truck.h + '%';
     truck.style.top = L.truck.top + '%';
     driver.style.height = L.driver.h + '%';
