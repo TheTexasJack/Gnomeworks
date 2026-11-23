@@ -1,7 +1,7 @@
 # Work order: Packing Line 1j, FRAGILE and HEAVY stickers (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
 ## Goal
@@ -22,7 +22,7 @@ The second half of Gnomerica's correct supplies rule: the outside of the box.  A
 3. **Where they land (box face v0.3, upper left).**  Same gap from the top and the left as the region stamp has from the top and the right, at 8.5% of the box's width, side by side with a 2% gap, FRAGILE first.  On `assets/packing/box_plain_closed.webp` (400 x 400, box drawn at x 55 to 345, y 53 to 346) that works out to, in % of the canvas: first slot center `[22.3, 36.2]`, second slot `[29.9, 36.2]`, width `6.16`, no tilt (Claudia's math from the mock's numbers).  A box with only one sticker uses the first slot.  The tops line up with the region stamp's top.  Check against the mock and say the final numbers in the Result.
 4. **Solid and on top,** like the region stamp, with a softer pat than the stamp's thump (sound and numbers in config).
 5. **Scoring.**  New reasons: "No FRAGILE" (a Breakable item without it) and "No HEAVY" (a Heavy item without it).  They follow the item actually in the box, as 1i's bubble wrap rule does.  Extras do nothing (a HEAVY sticker on a sock is fine).  Main-reason order: Not packed, Wrong item, No peanuts, No bubble wrap, No FRAGILE, No HEAVY, No stamp, Wrong stamp.
-6. **The chart follows the instructions setting (Claudia's draft, from 1i's call 1).**  The "Packing rules" chart at the top of the supplies menu shows while "Show instructions" is on and hides when it is off, so players who know the rules get straight to the tiles.  The rules stay the same either way.
+6. **The chart follows the instructions setting (Claudia's draft from 1i's call 1, approved by Nathan).**  The "Packing rules" chart at the top of the supplies menu shows while "Show instructions" is on and hides when it is off, so players who know the rules get straight to the tiles.  The rules stay the same either way.
 7. Every number and word in `js/config.js`.  Bump `GW.VERSION` to the next draft number, run `node tools/stamp.js`, add a `CHANGELOG.md` entry, update `docs/ARCHITECTURE.md` and DESIGNS (built), and update `tools/smoke-test.js`: a perfect shift adds FRAGILE to Breakables and HEAVY to Heavies; a Heavy box without its sticker scores "No HEAVY."  Run it.
 8. **Screenshots** into `tools/out/`, both layouts, Day: the supplies menu with Stickers, a closed Breakable box with FRAGILE and the region stamp, a Heavy box with HEAVY, a close-up beside the mock's mid-game box, the supplies menu with instructions off, and a report card with "No HEAVY."  List them in the Result.
 9. In the Result, record how long the build took.
