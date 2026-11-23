@@ -209,7 +209,7 @@ Settled the same day (Nathan picked each):
 - **A successful delivery turns him around:** on a good report card he gives a thumbs up (the happy pose), smiles, and drives away.
 - **No negative reaction.**  A bad report card shows no new pose; he stays grumpy and leaves.
 - **The leaning pose is retired,** so the driver can stand wherever he fits.  It solved the lean problems found in 1b to 1b.2 (leaning on air, a foot in the bench).
-- Draft (Claudia, needs Nathan): the elf imposters follow the same rule (grumpy while waiting, happy on success).
+- The elf imposters follow the same rule: grumpy while waiting, happy on success (Claudia's draft, approved by Nathan 2026-11-22).
 
 **Work orders and drivers (Nathan, 2026-11-22, decided)**
 
