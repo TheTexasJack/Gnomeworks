@@ -173,13 +173,13 @@
 ## Tier 2: TNP Corp
 
 - [x] **27. TNP Corp logo.  Approved by Nathan 2026-11-22.**  Corporate North Pole identity; its unnamed big boss remains unseen.  Nathan's design, drawn by Claudia as vector: a gold bell tight against a leaning red TNP, then a two-line arrow (green over red) into a split green and red head, read as 🔔TNP⇒ (draft D2 of v0.6).  Master: `art-masters/packing-line/27-tnp-logo/tnp-logo-v1.0.svg` (transparent, lettering converted to outlines) plus a 1040 px PNG.  Fits the STONKS ticker as one line; the bell alone is the tiny version.
-- [x] **28. Fake truck tells.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  Modular overlays fitting the real trucks' rear camera, one to three visible per fake.
+- [x] **28. Fake truck tells.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").  **In the game (draft.93, 1m): Gnomerica's fake truck.****  Modular overlays fitting the real trucks' rear camera, one to three visible per fake.
   - [x] Candy-cane mudflaps.
   - [x] Hoofprints.
   - [x] Jingle bells.
   - [x] N0RTH plate.
   - [x] Holly trim.
-- [x] **29. Ten fully painted elf imposters.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").**  One for each region's driver.  Consistent tells: pointed ears, curled shoes and excessive height.
+- [x] **29. Ten fully painted elf imposters.**  **Approved by Nathan 2026-11-22 ("all the art so far is approved").  **In the game (draft.93, 1m): Gnomerica's elf, grumpy and happy.****  One for each region's driver.  Consistent tells: pointed ears, curled shoes and excessive height.
   - [x] Gnomerica imposter.
   - [x] Gnohio imposter.
   - [x] Gnafrica imposter.

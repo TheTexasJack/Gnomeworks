@@ -201,6 +201,9 @@ body {
 /* the bottom line shows both lines' changes (1l): its spacing holds, and it shrinks to fit (fitCard) inside the paper */
 .ship-card .card-line.card-total { box-sizing: border-box; padding: 0 9%; white-space: pre; }
 .ship-card .card-why.card-note { color: #2e8b3a; }
+/* the elf sent packing (1m): one green line, and the elf standing in the picture frame */
+.ship-card .card-line.card-note { color: #2e8b3a; }
+.ship-card .card-pic .card-elf { height: 92%; width: auto; }
 /* the GRIP line inside the STONKS screen painted on the back wall; cqh = 1% of the glass's height */
 #ship .ship-stonks { position: absolute; container-type: size; pointer-events: none; color: var(--ticker, #46f06a);
   font-family: var(--font); text-shadow: 0 0 1.5cqh var(--ticker, #46f06a); }

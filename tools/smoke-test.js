@@ -97,7 +97,7 @@ async function packCheck(page, errors) {
   await page.waitForTimeout(400);
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(300);
-  await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 0; });   // no glitter fakes in these shifts
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 0; GW.CONFIG.shipping.fakes.elfChance = 0; });   // no glitter fakes or elves in these shifts
   await page.evaluate(n => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : n; }), SHELF);   // in the room, where counts hold still
   const stonks0 = await page.evaluate(() => GW.game.s.stonks);
   const right = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.right);
@@ -297,7 +297,8 @@ async function packCheck(page, errors) {
   const heavyWhy = await page.$$eval('.ship-card .card-why', els => els.map(e => e.textContent).join('|'));
   if (heavyWhy !== 'No HEAVY') fail(`a Toilet without its HEAVY sticker reads "${heavyWhy}", expected "No HEAVY"`);
   await page.keyboard.press('Escape');
-  const want = stonks0 + 3 * right - 3 * wrong - wrong - wrong;
+  const notApproved = await page.evaluate(() => GW.CONFIG.shipping.score.notApproved.ours);   // the small shift went off unstamped (1m)
+  const want = stonks0 + 3 * right - 3 * wrong + notApproved - wrong;
   await page.waitForTimeout(400);
   await page.reload();
   await page.waitForTimeout(400);
@@ -354,7 +355,7 @@ async function fakeCheck(page, errors) {
   await page.waitForTimeout(400);
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(300);
-  await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 1; GW.game.s.shifts = 1; GW.game.s.tnp = 20; });
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 1; GW.CONFIG.shipping.fakes.elfChance = 0; GW.game.s.shifts = 1; GW.game.s.tnp = 20; });
   let f = await trip('all');
   if (f.some(x => x)) fail('a glitter fake came before shift 4');
   await ship('shift 2');
@@ -374,9 +375,9 @@ async function fakeCheck(page, errors) {
   let card = await ship('A');
   let s1 = await s();
   if (card && card.rows[k] !== 'ok:Caught a fake!') fail(`a DENIED fake reads "${card.rows[k]}"`);
-  if (card && card.rows.filter((r, i) => i !== k).some(r => r !== 'x:Not packed')) fail('unstamped real orders read ' + card.rows.join(' | '));
-  const wrongPts = await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.wrong);
-  if (s1.tnp !== s0.tnp - 5 || s1.stonks !== Math.max(0, s0.stonks + 5 - 2 * wrongPts) || s1.shifts !== s0.shifts + 1) fail(`caught: ${JSON.stringify(s0)} -> ${JSON.stringify(s1)}`);
+  if (card && card.rows.filter((r, i) => i !== k).some(r => r !== 'x:Not approved')) fail('unstamped real orders read ' + card.rows.join(' | '));
+  const naPts = await page.evaluate(() => GW.CONFIG.shipping.score.notApproved.ours);
+  if (s1.tnp !== s0.tnp - 5 || s1.stonks !== Math.max(0, s0.stonks + 5 + 2 * naPts) || s1.shifts !== s0.shifts + 1) fail(`caught: ${JSON.stringify(s0)} -> ${JSON.stringify(s1)}`);
   if (card && !card.total.includes('TNP: \u22125')) fail(`the card's bottom line reads "${card.total}"`);
   // B: the fake APPROVED, the real orders DENIED.
   f = await trip('all');
@@ -408,6 +409,88 @@ async function fakeCheck(page, errors) {
   console.log(`fakes: none before shift 4; caught, approved, perfect caught, and missed all scored; TNP ${s0.tnp} -> ${s1.tnp} -> ${s2.tnp} -> ${s3.tnp} -> ${s4.tnp}`);
 }
 
+// TNP trips (1m), run in both layouts: with every trip forced TNP from shift 4, the first is the elf in his fake truck
+// with no glitter (at a 100% glitter chance); sent away with nothing handed over, TNP drops by sentAway and the card is the one "sent packing"
+// row.  The second is TNP too: one packed box handed over moves ours down and TNP up per box, the elf goes happy, and
+// that row reads "Shipped to TNP" (the rest "Kept from TNP").  The third must be GRIP's (no more than 2 in a row):
+// sent away with nothing stamped, every row reads "Not approved" at notApproved each.  Then 60 rolls at a 100%
+// chance never give 3 TNP trips in a row, and none come before shift 4.
+async function elfCheck(page, errors, name) {
+  const fail = m => errors.push(`elves (${name}): ` + m);
+  const mid = async (sel, n = 0) => { const b = await page.locator(sel).nth(n).boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  const s = () => page.evaluate(() => ({ stonks: GW.game.s.stonks, tnp: GW.game.s.tnp }));
+  const Sc = await page.evaluate(() => GW.CONFIG.shipping.score);
+  const pull = async () => { const c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y); };
+  const arrive = async () => { await pull(); await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 }); };
+  const ship = async (tag) => {
+    await pull();
+    try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail(tag + ': no report card'); return null; }
+    const card = await page.evaluate(() => [...document.querySelectorAll('.ship-card .card-row')].map(r => (r.classList.contains('is-right') ? 'ok:' : 'x:') +
+      ((r.querySelector('.card-why') || r.querySelector('.card-note') || {}).textContent || '')));
+    await page.keyboard.press('Escape');
+    return card;
+  };
+  await page.goto(URL + '?ship=1');                 // no debug bar: on a phone it covers the conveyor
+  await page.waitForTimeout(400);
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => { const g = GW.game.s, F = GW.CONFIG.shipping.fakes; F.chance = 1; F.elfChance = 1; g.shifts = 3; g.tnpRow = 0; g.stonks = 40; g.tnp = 40;
+    GW.CONFIG.items.forEach(it => { g.items[it.id] = it.group === 'monsters' ? 0 : 400; }); });
+  // 1: sent packing.
+  let s0 = await s();
+  await arrive();
+  const look = await page.evaluate(() => ({ tnp: GW.ship.tnpTrip(), truck: document.querySelector('.ship-truck').getAttribute('src'), driver: document.querySelector('.ship-driver img').getAttribute('src'),
+    glitter: document.querySelectorAll('.ship-board .slip-glitter').length, P: GW.CONFIG.shipping.tnp }));
+  if (!look.tnp) { fail('a forced TNP trip did not come'); return; }
+  if (look.truck !== look.P.truck.img || look.driver !== look.P.driver.img) fail(`the TNP trip shows ${look.truck} and ${look.driver}`);
+  if (look.glitter) fail('an elf\'s slip has glitter');
+  let card = await ship('sent away');
+  let s1 = await s();
+  if (card && card.join() !== 'ok:' + Sc.sentPacking) fail('the sent-away card reads ' + card.join(' | '));
+  if (s1.tnp !== s0.tnp + Sc.elf.sentAway.tnp || s1.stonks !== s0.stonks + Sc.elf.sentAway.ours) fail(`sent away: ${JSON.stringify(s0)} -> ${JSON.stringify(s1)}`);
+  // 2: one box handed to the elf.
+  await arrive();
+  if (!await page.evaluate(() => GW.ship.tnpTrip())) fail('the second forced trip was not TNP');
+  await stampSlip(page, 0, 'approved');
+  const id = await page.evaluate(() => GW.ship.orders()[0].item.id), n0 = await page.evaluate(i => GW.game.s.items[i], id), qty = await page.evaluate(() => GW.ship.orders()[0].qty);
+  let c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
+  await page.locator(`.ship-menu-items .ship-tile[data-item="${id}"]`).scrollIntoViewIfNeeded();
+  const a = await mid(`.ship-menu-items .ship-tile[data-item="${id}"]`), b = await mid('.ship-box:not(.is-stacked)');
+  await page.mouse.move(a.x, a.y); await page.mouse.down();
+  for (let i = 1; i <= 8; i++) await page.mouse.move(a.x + (b.x - a.x) * i / 8, a.y + (b.y - a.y) * i / 8);
+  await page.mouse.up();
+  await page.keyboard.press('Escape');
+  c = await mid('.ship-box:not(.is-stacked)'); await page.mouse.click(c.x, c.y);
+  if (await page.evaluate(() => GW.ship.boxState()) !== 'closed') fail('the elf\'s box did not close');
+  await pull();
+  await page.waitForTimeout(250);
+  if (!await page.evaluate(h => document.querySelector('.ship-driver img').getAttribute('src') === h, look.P.driver.happy.img)) fail('the elf did not go happy');
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no card after filling'); return; }
+  card = await page.evaluate(() => [...document.querySelectorAll('.ship-card .card-row')].map(r => (r.classList.contains('is-right') ? 'ok:' : 'x:') + ((r.querySelector('.card-why') || {}).textContent || '')));
+  await page.keyboard.press('Escape');
+  const s2 = await s();
+  if (card[0] !== 'x:' + Sc.reasons.shippedTnp || card.slice(1).some(r => r !== 'ok:' + Sc.kept)) fail('the filled card reads ' + card.join(' | '));
+  if (s2.stonks !== s1.stonks + Sc.elf.shipped.ours || s2.tnp !== s1.tnp + Sc.elf.shipped.tnp) fail(`filled: ${JSON.stringify(s1)} -> ${JSON.stringify(s2)}`);
+  if (await page.evaluate(i => GW.game.s.items[i], id) !== n0 - qty) fail('the shelf did not drop for the box shipped to TNP');
+  // 3: GRIP's, sent away unstamped (glitter off again: the elf's boards had none at a 100% chance).
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.chance = 0; });
+  await arrive();
+  if (await page.evaluate(() => GW.ship.tnpTrip())) fail('a third TNP trip in a row');
+  const nOrders = await page.evaluate(() => GW.ship.orders().length);
+  card = await ship('unstamped GRIP');
+  const s3 = await s();
+  if (card && (card.length !== nOrders || card.some(r => r !== 'x:' + Sc.reasons.notApproved))) fail('the unstamped GRIP board reads ' + (card || []).join(' | '));
+  if (s3.stonks !== s2.stonks + nOrders * Sc.notApproved.ours || s3.tnp !== s2.tnp) fail(`not approved: ${JSON.stringify(s2)} -> ${JSON.stringify(s3)}`);
+  // Many rolls.
+  const rolls = await page.evaluate(() => { const g = GW.game.s, out = []; g.tnpRow = 0; for (let i = 0; i < 60; i++) out.push(GW.ship.testRoll() ? 'T' : 'G');
+    GW.CONFIG.shipping.fakes.elfChance = 0.5; for (let i = 0; i < 200; i++) out.push(GW.ship.testRoll() ? 'T' : 'G');
+    g.shifts = 0; GW.CONFIG.shipping.fakes.elfChance = 1; const early = GW.ship.testRoll(); g.tnpRow = 0; return { seq: out.join(''), early }; });
+  if (/TTT/.test(rolls.seq)) fail('3 TNP trips in a row: ' + rolls.seq);
+  if (!/TT/.test(rolls.seq)) fail('never 2 TNP trips in a row at a 100% chance');
+  if (rolls.early) fail('a TNP trip before shift 4');
+  console.log(`elves (${name}): sent packing (TNP ${s0.tnp} -> ${s1.tnp}), filled (ours ${s1.stonks} -> ${s2.stonks}, TNP ${s1.tnp} -> ${s2.tnp}), then GRIP Not approved x${nOrders}; 260 rolls, never 3 in a row`);
+}
+
 // Leaving mid-trip (1f): a view button shows the warning; Stay keeps the trip; Send it off scores the shift, shows
 // the card, and lands on the tapped view once the card closes.  Leaving after the chain is pulled waits for the card.
 // The polish (1k): after a reload the "Packing rules" chart starts minimized, its bar opens it with a code-drawn
@@ -419,7 +502,7 @@ async function polishCheck(page, errors) {
   const openRoom = async () => {
     await page.reload(); await page.waitForTimeout(400);
     await page.click('[data-view="shipping"]'); await page.waitForTimeout(300);
-    await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : 40; }));
+    await page.evaluate(() => { GW.CONFIG.shipping.fakes.elfChance = 0; GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : 40; }); });
   };
   await openRoom();
   let c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
@@ -456,12 +539,12 @@ async function leaveCheck(page, errors) {
   await page.waitForTimeout(400);
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(300);
-  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.elfChance = 0; GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }); });
   await page.click('[data-view="floor"]');
   if (await page.evaluate(() => GW.ship.warnOpen() || GW.game.s.view !== 'floor')) fail('leaving with the door closed warned or did not leave');
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(300);
-  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.elfChance = 0; GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }); });
   await open();
   const orders = await page.evaluate(() => JSON.stringify(GW.ship.orders().map(o => o.item.id)));
   const h0 = await page.evaluate(() => GW.game.s.stonksHistory.length);
@@ -479,14 +562,14 @@ async function leaveCheck(page, errors) {
   if (await page.evaluate(() => GW.game.s.stonksHistory.length) !== h0 + 1) fail('Send it off did not score the shift');
   try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after Send it off'); return; }
   const wrong = await page.$$eval('.ship-card .card-row.is-wrong', r => r.length);
-  if (wrong !== JSON.parse(orders).length) fail(`the card shows ${wrong} misses (expected every order Not packed)`);
+  if (wrong !== JSON.parse(orders).length) fail(`the card shows ${wrong} misses (expected every order Not approved)`);
   if (await page.evaluate(() => GW.game.s.view) !== 'shipping') fail('the view switched before the card closed');
   await page.keyboard.press('Escape');
   if (await page.evaluate(() => GW.game.s.view) !== 'floor') fail('did not land on the Shop Floor after the card');
   // After the pull: no warning, the trip finishes, the card shows, then the view switches.
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(300);
-  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.elfChance = 0; GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }); });
   await open();
   const c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
   await page.click('[data-view="machine"]');
@@ -557,6 +640,7 @@ async function leaveCheck(page, errors) {
     if (name === 'desktop') await polishCheck(page, errors);
     if (name === 'desktop') await leaveCheck(page, errors);
     if (name === 'desktop') await fakeCheck(page, errors);
+    await elfCheck(page, errors, name);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

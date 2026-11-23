@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.92';
+GW.VERSION = '0.2.0-draft.93';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -218,6 +218,21 @@ GW.CONFIG = {
       happy: { img: 'assets/packing/driver_gnomerica_happy.webp', shiftX: -3.33 },
       happyMs: 1300
     },
+    // TNP trips (1m): an elf imposter in his fake truck, always together (a trip is all GRIP or all TNP).  Layer 1 has
+    // Gnomerica's pair.  Placed by the real pair's numbers (layouts.<layout>.truck and .driver), so they back in, park,
+    // and stand where the real ones do.  truck.fit: the fake truck's art is the real truck's shape on a slightly
+    // different canvas (measured: 98.8% of their outlines match at this fit), so it draws `scale` times the real
+    // truck's height, moved dx and dy (% of the real truck's height) to line up with it.  driver.scale = the elf's
+    // height as a share of the real driver's (his hat tip reaches the driver's cap).  happy.shiftX as for the driver:
+    // the happy canvas is wider (the thumb), and its feet sit 4 px left of the grumpy pose's at 400 px tall.
+    tnp: {
+      truck: { img: 'assets/packing/truck_fake_gnomerica.webp', fit: { scale: 1.015, dx: -0.36, dy: 0.54 } },
+      driver: {
+        img: 'assets/packing/elf_gnomerica_grumpy.webp',
+        scale: 1,
+        happy: { img: 'assets/packing/elf_gnomerica_happy.webp', shiftX: 2.09 }
+      }
+    },
     // A trip: the door opens, the truck backs in and settles, then the driver walks in.  Closing reverses it,
     // and the door shows closed once the truck is gone.  Taps on the chain mid-trip are ignored.
     trip: {
@@ -289,9 +304,13 @@ GW.CONFIG = {
     // order from a real town (made the same way as a real one).  The glitter: a pastel shimmer over the paper,
     // under the text, and `stars` four-point sparkles in `colors`, each `size` (min, max) in % of the slip's width,
     // spread over the paper.  They twinkle (`twinkleMs`, each its own delay); with reduced motion they hold still.
+    // TNP trips (1m): from the same startShift, each trip has `elfChance` of being a TNP trip (the elf in his fake
+    // truck), never more than `maxTnpInRow` in a row (counted in the save's tnpRow).  An elf's slips have no glitter.
     fakes: {
       startShift: 4,
       chance: 0.3,
+      elfChance: 0.25,
+      maxTnpInRow: 2,
       perBoard: 1,
       stars: 14,
       size: [11, 19],
@@ -433,21 +452,32 @@ GW.CONFIG = {
     // stamp ("No stamp"); an open or empty box does not ship ("Not packed").
     // The stamp calls (1l, approved 2026-11-22; draft amounts): a real order APPROVED and packed right scores as above.
     // A real order DENIED is "Denied a real order", scored as unfilled (`wrong`).  A real order left unstamped is
-    // "Not packed".  A fake DENIED is right ("Caught a fake!", `caught`), a fake APPROVED is wrong whether packed or
+    // "Not approved" (1m, below).  A fake DENIED is right ("Caught a fake!", `caught`), a fake APPROVED is wrong whether packed or
     // not ("Approved a fake", `approved`; a packed fake's box still ships), and a fake left unstamped is "Missed a
     // fake" (`missed`).  `ours` moves our Stonks and `tnp` TNP's line.  A perfect shift also moves TNP by
     // `perfectTnp` (clean shifts push TNP back down, so losses never stack forever).  Neither line goes below 0.
+    // Not approved (1m v0.2, Nathan): a real order never stamped is "Not approved", a small hit (`notApproved`),
+    // so a GRIP driver sent away with nothing stamped costs only a little; one APPROVED but not packed stays "Not
+    // packed" (`wrong`).
+    // TNP trips (1m, draft amounts): `elf.sentAway` when the chain is pulled with nothing handed over (a short card,
+    // `sentPacking`, no rows); `elf.shipped` for each packed box handed to the elf ("Shipped to TNP"; the box ships, so
+    // the shelf drops).  An elf order not handed over reads `kept`, a right row.  perfectTnp is for GRIP trips only.
     score: {
       regions: { gnomerica: { right: 10, wrong: 3 } },
       fake: { caught: { ours: 5, tnp: -5 }, approved: { ours: 0, tnp: 10 }, missed: { ours: 0, tnp: 5 } },
+      notApproved: { ours: -1, tnp: 0 },
+      elf: { sentAway: { ours: 0, tnp: -5 }, shipped: { ours: -3, tnp: 10 } },
       perfectTnp: -5,
       reasons: { item: 'Wrong item', noStamp: 'No stamp', wrongStamp: 'Wrong stamp', notPacked: 'Not packed',
         noPeanuts: 'No peanuts', noBubble: 'No bubble wrap', noFragile: 'No FRAGILE', noHeavy: 'No HEAVY',
-        deniedReal: 'Denied a real order', approvedFake: 'Approved a fake', missedFake: 'Missed a fake' },
+        deniedReal: 'Denied a real order', approvedFake: 'Approved a fake', missedFake: 'Missed a fake',
+        notApproved: 'Not approved', shippedTnp: 'Shipped to TNP' },
       caught: 'Caught a fake!',          // a right row's line for a fake DENIED, in green
+      sentPacking: 'TNP driver sent packing!',   // the short card for an elf sent away (1m), in green, beside the elf
+      kept: 'Kept from TNP',             // a right row's line for an elf's order not handed over (1m), in green
       // The report card shows a row's main reason, the first of these that applies, then `more` for the rest
       // ("No peanuts +1", draft, Claudia).  {n} = how many more.  The screen-reader label lists them all.
-      order: ['approvedFake', 'missedFake', 'deniedReal', 'notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
+      order: ['approvedFake', 'missedFake', 'deniedReal', 'notApproved', 'notPacked', 'item', 'noPeanuts', 'noBubble', 'noFragile', 'noHeavy', 'noStamp', 'wrongStamp'],
       more: ' +{n}'
     },
     // When every order has a stamped box, the chain glows and sways gently and a brass tag by its handle shows

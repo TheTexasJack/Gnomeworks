@@ -42,7 +42,12 @@
    order further left; a box with an item stays with its order), so nothing is packed before it is stamped, and a
    DENIED order gets no box.  Unstamped slips glow softly (a tip).  From CONFIG.shipping.fakes.startShift, a board
    can carry one glitter fake, which should be DENIED.  Scoring adds the stamp calls, and TNP's line (saved as tnp
-   and tnpHistory) joins GRIP's on the STONKS screen.  The "Packing Rules" bar always shows. */
+   and tnpHistory) joins GRIP's on the STONKS screen.  The "Packing Rules" bar always shows.
+   TNP trips (1m): from the same shift, a trip can be a TNP trip instead (CONFIG.shipping.fakes.elfChance, never more
+   than maxTnpInRow in a row): the elf imposter in his fake truck, placed by the real pair's numbers, with no glitter
+   slips.  Pulling the chain with nothing handed over sends him packing (TNP down, a short card); each packed box
+   handed to him moves ours down and TNP up, and he goes happy.  A real order never stamped is "Not approved", a small
+   hit. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -64,6 +69,7 @@ GW.ship = (function () {
   // stickers on it (1j)
   var screenEl, screenLines = [], tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
   var warnView, warnPanel, warnStay, warnOpen = false, warnGo = null, warnHeard = null, afterCard = null;
+  var tnpTrip = false;            // this trip is TNP's: the elf in his fake truck (1m)
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -97,6 +103,7 @@ GW.ship = (function () {
     driverImg = img('', P.driver.img);
     driver.appendChild(driverImg);
     new Image().src = P.driver.happy.img;       // loaded ahead, so the thumbs up shows at once
+    [P.tnp.truck.img, P.tnp.driver.img, P.tnp.driver.happy.img].forEach(function (src) { new Image().src = src; });   // the elf's trip (1m)
     box.appendChild(driver);
     // Packing (1d): the box and the stack draw in front of the driver (the box has the stage).  The two menu
     // buttons: the conveyor opens the item menu, the computer the supplies menu (1g).  A tap on the open menu's
@@ -214,12 +221,19 @@ GW.ship = (function () {
       used[o.item.id] = true;
       list.push(o);
     }
-    addFakes(list);
+    if (!tnpTrip) addFakes(list);          // an elf's own slips have no glitter (1m)
     return list;
   }
   // Glitter fakes (1l): from the player's startShift-th shift on, up to perBoard of the board's orders become fakes,
   // each with its own chance.  A fake is made like any order, so it reads as a normal order from a real town.
   function fakesOn() { return (GW.game.s.shifts || 0) + 1 >= P.fakes.startShift; }
+  // TNP trips (1m): rolled as the door opens, from startShift on, never more than maxTnpInRow in a row (saved).
+  function rollTnp() {
+    var F = P.fakes, s = GW.game.s, row = s.tnpRow || 0;
+    var tnp = fakesOn() && row < F.maxTnpInRow && Math.random() < F.elfChance;
+    s.tnpRow = tnp ? row + 1 : 0;
+    return tnp;
+  }
   function addFakes(list) {
     var F = P.fakes;
     if (!fakesOn()) return;
@@ -696,16 +710,35 @@ GW.ship = (function () {
     return g;
   }
   function setPose(happy) {
-    var H = P.driver.happy;
-    driverImg.src = happy ? H.img : P.driver.img;
+    var D = tnpTrip ? P.tnp.driver : P.driver, H = D.happy;
+    driverImg.src = happy ? H.img : D.img;
     driverImg.style.translate = happy ? H.shiftX + '% 0' : '';
   }
+  // Which pair comes through the door (1m): Gnomerica's truck and driver, or the elf in his fake truck.
+  function setKind(tnp) {
+    tnpTrip = !!tnp;
+    truck.src = tnpTrip ? P.tnp.truck.img : P.truck.img;
+    truck.classList.toggle('is-fake', tnpTrip);
+    driver.classList.toggle('is-elf', tnpTrip);
+    sizePair(layout());
+    setPose(false);
+  }
+  // The truck's and driver's sizes: the real pair's numbers, with the fake truck's fit and the elf's scale (1m).
+  function sizePair(L) {
+    var f = tnpTrip ? P.tnp.truck.fit : null;
+    truck.style.height = L.truck.h * (f ? f.scale : 1) + '%';
+    truck.style.top = (L.truck.top + (f ? f.dy * L.truck.h / 100 : 0)) + '%';
+    driver.style.height = L.driver.h * (tnpTrip ? P.tnp.driver.scale : 1) + '%';
+  }
+  // A truck's left edge for the real truck's x (% of the room's width), with the fake truck's sideways fit.
+  function truckX(L, x) { var f = tnpTrip ? P.tnp.truck.fit : null; return x + (f ? f.dx * L.truck.h / 100 / roomRatio(L) : 0); }
   // One row per order.  The box still on the bench counts when it is closed with an item in it (it ships with no
   // stamp); an open or empty box is not packed and does not ship.  The stamp calls come first (1l): a fake is scored
   // by its stamp alone, and a real order DENIED or unstamped never reaches the box checks.
   function scoreShift() {
     var Sc = P.score, R = Sc.reasons, Fk = Sc.fake, rows = [], delta = 0, tnp = 0, shipped = [], a = boxFor;
     var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, inside: insideList(), outside: outsideList(), stamp: null } : null;
+    if (tnpTrip) return scoreTnp(bench);
     orders.forEach(function (o, i) {
       var v = verdicts[i], rec = v === 'approved' ? packed[i] || (i === a ? bench : null) : null, miss = {}, note = null;
       if (o.fake) {
@@ -719,6 +752,7 @@ GW.ship = (function () {
         return;
       }
       if (v === 'denied') miss.deniedReal = true;
+      else if (!v) miss.notApproved = true;        // never stamped: a small hit (1m v0.2)
       else if (!rec) miss.notPacked = true;
       else {
         // The supplies follow what is in the box: bubble wrap only matters around a Breakable item (1i), and each
@@ -734,12 +768,31 @@ GW.ship = (function () {
       }
       var why = Sc.order.filter(function (k) { return miss[k]; }).map(function (k) { return R[k]; });   // main reason first
       var pts = Sc.regions[o.place.region] || Sc.regions[P.orders.region];
-      delta += why.length ? -pts.wrong : pts.right;
+      if (miss.notApproved) { delta += Sc.notApproved.ours; tnp += Sc.notApproved.tnp; }
+      else delta += why.length ? -pts.wrong : pts.right;
       rows.push({ order: o, ok: !why.length, why: why, note: null });
     });
     var perfect = rows.every(function (r) { return r.ok; });
     if (perfect) tnp += Sc.perfectTnp;           // clean shifts push TNP back down
-    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: perfect };
+    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: perfect, happy: perfect };
+  }
+  // A TNP trip (1m): every packed box handed to the elf (a closed box on the bench with an item goes too, as on a GRIP
+  // trip) is "Shipped to TNP", and he goes happy.  With nothing handed over he is sent packing: the short card.
+  function scoreTnp(bench) {
+    var Sc = P.score, E = Sc.elf, rows = [], delta = 0, tnp = 0, shipped = [];
+    orders.forEach(function (o, i) {
+      var rec = verdicts[i] === 'approved' ? packed[i] || (i === boxFor ? bench : null) : null;
+      if (rec) {
+        shipped.push(rec);
+        delta += E.shipped.ours; tnp += E.shipped.tnp;
+        rows.push({ order: o, ok: false, why: [Sc.reasons.shippedTnp], note: null });
+      } else rows.push({ order: o, ok: true, why: [], note: Sc.kept });
+    });
+    if (!shipped.length) {
+      delta += E.sentAway.ours; tnp += E.sentAway.tnp;
+      rows = [{ order: null, ok: true, why: [], note: Sc.sentPacking }];
+    }
+    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: !shipped.length, happy: shipped.length > 0, tnp: true, sentAway: !shipped.length };
   }
   // Into the save: each shipped box takes its recorded count off the shelf (never below the display copy; a wrong
   // item still shipped),
@@ -776,6 +829,18 @@ GW.ship = (function () {
       line.appendChild(mark);
       var words = div('card-words');
       words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
+      if (!o) {                                  // the elf sent packing (1m): one line, and the elf in the picture frame
+        line.classList.add('is-sent');
+        words.appendChild(cardLine('town', row.note)).classList.add('card-note');
+        line.appendChild(words);
+        var elf = div('card-pic');
+        elf.style.left = Cd.pic[0] + '%'; elf.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
+        elf.appendChild(img('card-elf', P.tnp.driver.img));
+        line.appendChild(elf);
+        line.setAttribute('aria-label', row.note);
+        el.appendChild(line);
+        return;
+      }
       words.appendChild(cardLine('town', o.place.name));
       words.appendChild(cardLine('item', countName(o.qty, o.item)));
       if (!row.ok) words.appendChild(cardLine('why', mainWhy(row.why)));
@@ -1231,7 +1296,7 @@ GW.ship = (function () {
   function polygon(points) { return 'polygon(' + points.map(function (p) { return p[0] + '% ' + p[1] + '%'; }).join(', ') + ')'; }
   // He stands at his feet point.
   function driverTransform(scale) { return 'translate(-50%, -100%) scale(' + scale + ')'; }
-  function placeTruck(x) { truck.style.left = x + '%'; }
+  function placeTruck(x) { truck.style.left = truckX(layout(), x) + '%'; }
   function placeDriver(xy, scale, shown) {
     driver.style.left = xy[0] + '%'; driver.style.top = xy[1] + '%';
     driver.style.transform = driverTransform(scale);
@@ -1298,9 +1363,7 @@ GW.ship = (function () {
     bay.style.clipPath = polygon(L.truckClip || L.doorway);
     roller.style.display = L.roller ? '' : 'none';
     if (L.roller) roller.style.clipPath = polygon(L.roller);
-    truck.style.height = L.truck.h + '%';
-    truck.style.top = L.truck.top + '%';
-    driver.style.height = L.driver.h + '%';
+    sizePair(L);
     placeBoard(L, parseFloat(wh[0]) / parseFloat(wh[1]));
     // A layout change mid-trip skips to where the trip was heading.
     placePack(L);
@@ -1346,7 +1409,7 @@ GW.ship = (function () {
   function arrive() {
     var L = layout();
     stopAnims();
-    setPose(false);
+    setKind(rollTnp());                                  // GRIP or TNP, decided as the door opens (1m)
     trip = 'arriving'; open = true;
     settle();
     steps([
@@ -1355,7 +1418,7 @@ GW.ship = (function () {
         hideDoor();
         truck.style.visibility = 'visible';
         placeTruck(L.truck.xTo);
-        return play(truck, [{ left: L.truck.xFrom + '%' }, { left: L.truck.xTo + '%' }], { duration: T.truckInMs, easing: 'cubic-bezier(.2,.7,.3,1)' });
+        return play(truck, [{ left: truckX(L, L.truck.xFrom) + '%' }, { left: truckX(L, L.truck.xTo) + '%' }], { duration: T.truckInMs, easing: 'cubic-bezier(.2,.7,.3,1)' });
       },
       function () {
         if (calmQuery.matches) return;
@@ -1377,14 +1440,14 @@ GW.ship = (function () {
     clearOrders();                  // closing the door takes the orders with it
     steps([
       function () {
-        if (!r || !r.perfect) return;
+        if (!r || !r.happy) return;               // GRIP: a perfect shift; the elf: he got packages (1m)
         setPose(true);
         return new Promise(function (ok) { setTimeout(ok, P.driver.happyMs); });
       },
       function () { return walk(L.driver.at, 1, L.driver.from, L.driver.fromScale, false, true); },
       function () {
         placeTruck(L.truck.xFrom);
-        return play(truck, [{ left: L.truck.xTo + '%' }, { left: L.truck.xFrom + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });
+        return play(truck, [{ left: truckX(L, L.truck.xTo) + '%' }, { left: truckX(L, L.truck.xFrom) + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });
       },
       function () { truck.style.visibility = 'hidden'; return new Promise(function (r) { setTimeout(r, T.closeDelayMs); }); },
       function () { return rollDoor(false); },           // then it rolls back down (1k)
@@ -1433,6 +1496,10 @@ GW.ship = (function () {
     verdicts: function () { return orders.map(function (o, i) { return verdicts[i] || null; }); },
     // Which orders are glitter fakes (1l), for tests and screenshots.
     fakes: function () { return orders.map(function (o) { return !!o.fake; }); },
+    // Whether this trip is TNP's, the elf in his fake truck (1m).
+    tnpTrip: function () { return tnpTrip; },
+    // Test hook (1m): rolls the next trip's kind as the door would (and counts it in the save's tnpRow).
+    testRoll: function () { return rollTnp(); },
     holdLeave: holdLeave, warnOpen: function () { return warnOpen; },
     // Tapping Shipping again while a leave waits for the card stays in the room.
     stay: function () { closeWarn(); afterCard = null; },

@@ -1,6 +1,6 @@
 # Work order: Packing Line 1m, elf imposters and fake trucks (v0.2)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("Elves should always show up with their fake trucks...  everything else approved.").  **Build after 1l is reviewed.**
 **Model:** Opus 5.5
 
@@ -60,3 +60,36 @@ The second half of TNP Corp.  From shift 4, some trips are TNP trips: an elf imp
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.93**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 30 minutes, from `git pull` at 15:03 to the Result at 15:33 (CST).
+
+**What was built**
+
+- **Art.**  `truck_fake_gnomerica.webp` (986x568), `elf_gnomerica_grumpy.webp` (163x400), and `elf_gnomerica_happy.webp` (191x400) in `assets/packing/`, made with `art.py resize` (whole canvas), and listed in `docs/ASSETS.md`.  The elf copies are 400 px tall like the driver's.  Checklist items 28 and 29 note that Gnomerica's pair is in the game.
+- **Placement pass.**  The pair uses the real pair's numbers (`layouts.<layout>.truck` and `.driver`): the truck backs in under the same clip and parks at the same stop, and the elf stands on the driver's spot, his feet on the same line, in front of the truck (the depth rule holds).  **Two new config entries, because the art's canvases differ:** the fake truck master is 1652x952 against the real one's 1063x613, with the same truck drawn on it a little smaller.  I matched their outlines by search: at 1.015 times the real truck's height, moved 0.36% of that height left and 0.54% down, 98.8% of the outlines overlap.  That is `CONFIG.shipping.tnp.truck.fit` (`scale`, `dx`, `dy`), applied to every truck position and slide.  The game copy is 568 px tall (560 times 1.015), so both trucks draw at the same detail.  The elf's happy canvas is wider than his grumpy one and his feet sit 4 px further left, so `tnp.driver.happy.shiftX` is 2.09 (the driver's is −3.33).  `tnp.driver.scale` is 1: the elf's hat tip reaches the driver's cap, so the two read the same height; he is slimmer, so he looks a little smaller.  Easy to raise if Nathan wants the "excessive height" tell from checklist 29.
+- **TNP trips.**  The kind is rolled as the door opens (`rollTnp()`): from shift 4 (`fakes.startShift`), `fakes.elfChance` 25%, never more than `fakes.maxTnpInRow` 2 in a row.  The run is saved as `tnpRow` (new in the save; older saves get 0), so a reload can't reset it.  A TNP trip is all TNP: fake truck and elf, and his board never gets glitter, even at a 100% glitter chance.  His slips are stamped and packed like any slip.
+- **Sending him away.**  Pulling the chain with no box handed over: TNP −5 (`score.elf.sentAway`), and a short card with one green row, "TNP driver sent packing!" (`score.sentPacking`), with the elf in the picture frame.  He stays grumpy and leaves.  The next chain pull starts a new trip as before.
+- **Filling his orders.**  Each packed box handed over (and a closed box with an item still on the bench, which ships as on a GRIP trip): ours −3 and TNP +10 (`score.elf.shipped`), the row reads ❌ "Shipped to TNP", the shelf drops for it, and the elf goes happy before he leaves.  The sent-away −5 does not also apply, and `perfectTnp` is for GRIP trips only.
+- **The leave warning** runs the same `pull()`, so TNP trips score the same when sent off from it.
+- **7a, Not approved.**  A real order never stamped reads ❌ "Not approved", −1 (`score.notApproved`, with a `tnp` of 0).  Approved but not packed stays "Not packed", −3.  A GRIP driver sent away with nothing stamped costs −3 for a full board.  Main-reason order: Approved a fake, Missed a fake, Denied a real order, Not approved, Not packed, then the 1j order.
+- **Docs:** CHANGELOG, ARCHITECTURE (save data and the room), DESIGNS (built), ASSETS, TASKS, HANDOFF, the production checklist.
+- **Smoke test:** a new `elfCheck` runs in both layouts.  With every trip forced TNP from shift 4: the first trip has the fake truck, the elf, and no glitter, and sent away it moves TNP −5 and shows the one "sent packing" row.  The second is TNP again: one box handed over gives ours −3, TNP +10, "Shipped to TNP" with "Kept from TNP" on the rest, the happy elf, and the shelf down by the box's count.  The third must be GRIP's, and sent away unstamped every row reads "Not approved" (−1 each).  Then 260 rolls (60 at 100%, 200 at 50%) never give 3 TNP trips in a row, and none come before shift 4.  The other checks now turn elves off; the 1l check and the packing check expect "Not approved" (−1) for their unstamped real orders.
+
+**Calls to check**
+
+1. **"Kept from TNP"** is my draft wording (in config) for an elf's order that was not handed over, a ✔ row.  The order named only the ❌ line.
+2. **No rows on the sent-away card.**  The card shows the one green line and the elf, then the bottom line "Stonks this shift: 0   TNP: −5".  It doesn't list his orders.
+3. **A partly filled elf trip** gets only the per-box scoring, not the sent-away −5 as well.  The order reads that way ("with nothing handed over"); it's one line to change.
+4. **The elf's height** matches the driver's (see the placement pass).
+5. **The sent-packing line shrinks to fit** the row's text space beside the picture frame, so it is smaller than a town name, mostly on the phone.  It could span two lines if Nathan wants it bigger.
+
+**Proof** in `tools/out/` (`?ship=1`, Day, 2x, not committed).  `wide` is 1400 x 900 and `tall` is 390 x 844.
+
+- The real pair waiting: `1m-<wide|tall>-day-grip-waiting.png`; the elf and fake truck waiting, the same shift setup: `1m-<wide|tall>-day-elf-waiting.png`.  Side by side, they show the same parking spot and the same floor line.
+- The "sent packing" card: `1m-<wide|tall>-day-card-sent-packing.png`.
+- The happy elf after a filled trip: `1m-<wide|tall>-day-elf-happy.png`; its card: `-card-shipped-to-tnp.png`.
+- The STONKS screen after one of each (from 20 and 20: a GRIP board sent away unstamped, 17 and 20; the elf sent packing, 17 and 15; the elf filled, 14 and 25): `1m-<wide|tall>-day-stonks.png` and close-up `-stonks-zoom.png`.
+- The next trip, GRIP's (the third in a row can't be TNP), sent away unstamped: `1m-<wide|tall>-day-card-not-approved.png`.
+
+Nothing was installed.  No mixed trips, and no other regions' trucks, drivers, or elves.
