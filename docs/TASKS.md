@@ -82,6 +82,8 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").
     - [x] 1e.1 (draft.85): the report card fits the longest names (Nathan's phone test of draft.84): one line each, shrinking to fit.  The shipping label on boxes will need the same longest-name check when it is built.
     - [x] 1f (draft.86): the leave warning, and the GRIP line uses the whole screen.
+    - [ ] 1g (approved v0.2): the computer opens the supplies menu (stamps for now), and the belt and every tip follow the instructions setting.
+    - [ ] Small polish (1f review): after the chain is pulled, a tapped view button gives no sign it was heard until the report card shows.
     - [ ] **Production post-mortem when Beta 1 is done (Nathan, 2026-11-23):** every statistic we can get (work orders, reviews, commits, coding and build times, drafts, delays between steps).  See HANDOFF.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [x] **Built in 1f (draft.86).**  Leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
@@ -93,7 +95,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1d (draft.81; approved v0.3): pack and stamp.
     - [x] 1e (draft.84; approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).  Draft calls for Nathan and Claudia to check are in the work order's Result (score amounts, the unstamped-box rule, the tag's spot over the driver).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
-    - [ ] After the demo: 1f and 1g (drawer and supplies, the other boxes, Stonks polish).
+    - [ ] Next after 1g: the rest of the supplies layer (item tags, peanuts, bubble wrap, FRAGILE and HEAVY on the box face), then the other boxes.
 
 ## Done draft.20 to draft.51
 
