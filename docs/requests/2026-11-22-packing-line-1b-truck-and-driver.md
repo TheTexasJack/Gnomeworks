@@ -1,7 +1,7 @@
-# Work order: Packing Line 1b, Gnomerica's truck and driver arrive (v0.1)
+# Work order: Packing Line 1b, Gnomerica's truck and driver arrive (v0.2)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b approved").
 **Model:** Opus 5.5
 
 ## Goal
@@ -19,7 +19,7 @@ When the door opens, Gnomerica's truck slides in from the right and backs up to 
 
 1. `git pull` in `/srv/GW/Gnomeworks`.
 2. **Art.**  With `tools/art.py`, make WebP game copies in `assets/packing/` of `art-masters/packing-line/24-trucks/truck-gnomerica.png` and `art-masters/packing-line/25-drivers/driver-gnomerica-waiting.png`.  Keep the driver's canvas as is (all three of his poses share one baseline, and the happy and grumpy poses come later).  Size them for the wide room; the tall room scales them.  Add both to `docs/ASSETS.md`.
-3. **The doorway.**  The truck shows only inside the doorway, behind the door frame.  The doorway is exactly where the closed and open room twins differ (1a's Result says so), so derive a clip outline for each layout from that difference and store it in `CONFIG.shipping.layouts.<layout>.doorway` as a polygon in % of the room.  Clip the truck to it.
+3. **The doorway.**  The truck shows only inside the doorway, behind the door frame.  The doorway is exactly where the closed and open room twins differ (1a's Result says so), so use that difference as a guide, then trace a clean outline of the opening just inside the frame (the raw difference also catches some frame edge, as Claude Code found before starting), and store it in `CONFIG.shipping.layouts.<layout>.doorway` as a polygon in % of the room.  Clip the truck to it.
 4. **Arrival.**  When the door finishes opening (1a's swap is instant; the garage-door roll is a later upgrade), the truck slides in from the right edge of the doorway and stops backed up to it, rear doors facing the room, with a small settle bounce.  Then the driver walks in from the doorway to a standing spot inside the room beside the door and stops.  A light step bob while he walks is enough; no new art.  Positions, sizes, and timings for each layout live in `CONFIG.shipping`.
 5. **Leaving.**  Closing the door with the chain sends the driver back out through the doorway, then the truck slides away to the right, then the door shows closed.  Opening again brings them back in (layer 1 has only Gnomerica's truck and driver).
 6. **Taps.**  The truck and driver don't respond to taps yet.  A tap during arrival or leaving is ignored, so the chain cannot start a second trip halfway through one.
