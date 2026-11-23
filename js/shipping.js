@@ -7,7 +7,12 @@
    shows closed.
    Work orders (1c-2): when the driver finishes walking in, up to three slips pin to the order board, each a
    Gnomerica place asking for one item the shelf holds more than 1 of.  A tap opens a slip full size; any tap
-   or Escape closes it.  Orders are not saved, and closing the door clears them.  Nothing is packed yet. */
+   or Escape closes it.  Orders are not saved, and closing the door clears them.
+   Packing (1d): a tap on the conveyor opens the item menu.  The active order (the leftmost unpacked one) has an
+   open box on the bench; dragging a tile onto it puts that pile in, down to the display copy.  A tap closes a
+   filled box (or opens a closed one again), the stamp tray then offers the region stamps, and a stamped box moves
+   to the stack by the truck while the next order's box appears.  The record of what was packed (GW.ship.packed())
+   is for the hand-off (1e); nothing ships, nothing is saved, and closing the door clears it all. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -19,6 +24,8 @@ GW.ship = (function () {
   var tripId = 0, anims = [];
   var box, closedImg, openImg, bay, truck, driver, driverImg, chain, roller, rollerClosed, rollerOpen, bounceTimer;
   var board, viewer, orders = [], slipOpen = false;
+  var K = P.pack, conveyor, packLayer, boxEl = null, tray, menu, menuList, menuOpen = false, stacked = [];
+  var packed = [], boxItem = null, boxCount = 0, boxState = 'none';   // boxState: 'none' | 'open' | 'closed' | 'stamped'
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -42,6 +49,33 @@ GW.ship = (function () {
     driverImg = img('', P.driver.img);
     driver.appendChild(driverImg);
     box.appendChild(driver);
+    // Packing (1d): the box, the stamp tray, and the stack draw in front of the driver (the box has the stage).
+    conveyor = U.el('div', 'ship-conveyor');
+    conveyor.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted || e.button > 0 || slipOpen) return;
+      e.preventDefault();
+      openMenu();
+    });
+    box.appendChild(conveyor);
+    packLayer = U.el('div', 'ship-pack');
+    tray = U.el('div', 'ship-tray');
+    tray.hidden = true;
+    K.stamps.forEach(function (rid) {
+      var b = U.el('button', 'tray-stamp');
+      b.type = 'button';
+      b.setAttribute('aria-label', regionOf(rid).name + ' stamp');
+      b.appendChild(img('', P.slip.stampImg.replace('{region}', rid)));
+      b.addEventListener('pointerdown', function (e) {
+        e.stopPropagation();
+        if (!e.isTrusted || e.button > 0) return;
+        e.preventDefault();
+        stampBox(rid);
+      });
+      tray.appendChild(b);
+    });
+    packLayer.appendChild(tray);
+    box.appendChild(packLayer);
     chain = U.el('div', 'ship-chain');
     chain.setAttribute('aria-hidden', 'true');
     chain.appendChild(img('', P.chain.img));
@@ -62,6 +96,7 @@ GW.ship = (function () {
     roller.appendChild(rollerClosed); roller.appendChild(rollerOpen);
     box.appendChild(roller);
     // An open slip covers the whole room, so the chain and everything else under it get no taps.
+    buildMenu();
     viewer = U.el('div', 'ship-slip-view');
     viewer.hidden = true;
     viewer.addEventListener('pointerdown', function (e) {
@@ -70,7 +105,16 @@ GW.ship = (function () {
     });
     box.appendChild(viewer);
     box.style.setProperty('--slip-night', P.slip.nightBrightness);
-    document.addEventListener('keydown', function (e) { if (slipOpen && e.key === 'Escape') { e.preventDefault(); closeSlip(); } });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (slipOpen) { e.preventDefault(); closeSlip(); } else if (menuOpen) { e.preventDefault(); closeMenu(); }
+    });
+    // A tap outside the open menu closes it.  Inside the room that tap does nothing else.
+    document.addEventListener('pointerdown', function (e) {
+      if (!menuOpen || menu.contains(e.target)) return;
+      closeMenu();
+      if (box.contains(e.target)) { e.stopPropagation(); e.preventDefault(); }
+    }, true);
     built = true;
     tallQuery.addEventListener('change', redraw);
   }
@@ -145,8 +189,10 @@ GW.ship = (function () {
     board.textContent = '';
     if (trip !== 'here') return;
     var list = orders.length ? orders : [null];
-    list.forEach(function (o) {
+    list.forEach(function (o, i) {
       var el = makeSlip(o, P.slip.stamp.board);
+      if (o && packed[i]) { el.classList.add('is-packed'); el.appendChild(U.el('i', 'slip-check', '\u2714')); }
+      else if (o && i === activeIndex()) el.classList.add('is-active');
       el.addEventListener('pointerdown', function (e) {      // the note opens too, so it can be read on a phone
         e.stopPropagation();
         if (!e.isTrusted || e.button > 0 || slipOpen) return;   // a real tap only
@@ -184,7 +230,254 @@ GW.ship = (function () {
     viewer.hidden = true; viewer.textContent = '';
     slipOpen = false;
   }
-  function clearOrders() { orders = []; closeSlip(); showBoard(); }
+  function clearOrders() { orders = []; closeSlip(); resetPack(); showBoard(); }
+  function newOrders() { orders = makeOrders(); resetPack(); showBoard(); nextBox(); }
+
+
+  // ---------- packing (layer 1d; all numbers in CONFIG.shipping.pack and layouts.<layout>) ----------
+  function activeIndex() {
+    for (var i = 0; i < orders.length; i++) if (!packed[i]) return i;
+    return -1;
+  }
+  function boxWidth(L, h) { return h / roomRatio(L); }     // a square canvas h % of the room's height, as % of its width
+  function roomRatio(L) { var wh = L.aspect.split('/'); return parseFloat(wh[0]) / parseFloat(wh[1]); }
+  function setBoxPlace(el, x, y, h, tilt) {
+    el.style.left = x + '%'; el.style.top = y + '%'; el.style.height = h + '%';
+    el.style.setProperty('--tilt', (tilt || 0) + 'deg');
+  }
+  function stackSpot(L, k) {
+    var S = L.stack, sp = S.spots[Math.min(k, S.spots.length - 1)];
+    return { x: S.x + sp[0] * boxWidth(L, S.h), y: S.y + sp[1] * S.h, h: S.h, tilt: sp[2] };
+  }
+  // A box: the open and closed pictures stacked (same canvas, so they swap with no jump), the label, and the stamp.
+  function makeBox() {
+    var el = div('ship-box'), body = div('box-body');
+    body.appendChild(img('box-art box-open', K.boxOpen));
+    body.appendChild(img('box-art box-closed', K.boxClosed));
+    var label = div('box-label'); label.hidden = true;
+    body.appendChild(label);
+    var mark = img('box-mark'); mark.hidden = true;
+    body.appendChild(mark);
+    el.appendChild(body);
+    el.style.setProperty('--label-x', K.label[0] + '%'); el.style.setProperty('--label-y', K.label[1] + '%');
+    el.style.setProperty('--label-w', K.label[2] + '%');
+    el.style.setProperty('--mark-x', K.mark[0] + '%'); el.style.setProperty('--mark-y', K.mark[1] + '%');
+    el.style.setProperty('--mark-w', K.mark[2] + '%'); el.style.setProperty('--mark-tilt', K.mark[3] + 'deg');
+    return el;
+  }
+  function boxPart(cls) { return boxEl && boxEl.querySelector('.' + cls); }
+  function showBox() {
+    if (!boxEl) return;
+    boxEl.classList.toggle('is-closed', boxState === 'closed' || boxState === 'stamped');
+    var label = boxPart('box-label');
+    label.textContent = '';
+    label.hidden = !boxItem;
+    if (boxItem) {
+      label.appendChild(GW.ui.itemIcon(boxItem));
+      label.appendChild(U.el('span', 'box-count', U.fmt(boxCount)));
+      label.setAttribute('aria-label', U.fmt(boxCount) + ' ' + boxItem.name);
+    }
+    tray.hidden = boxState !== 'closed';
+  }
+  function resetPack() {
+    packed = []; boxItem = null; boxCount = 0; boxState = 'none';
+    if (boxEl) { boxEl.remove(); boxEl = null; }
+    stacked.forEach(function (el) { el.remove(); }); stacked = [];
+    if (tray) tray.hidden = true;
+  }
+  // The active order's empty box appears on the bench; with every order packed, none does.
+  function nextBox() {
+    if (boxEl || trip !== 'here' || activeIndex() < 0) return;
+    var L = layout();
+    boxItem = null; boxCount = 0; boxState = 'open';
+    boxEl = makeBox();
+    setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
+    boxEl.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted || e.button > 0) return;
+      e.preventDefault();
+      tapBox();
+    });
+    packLayer.insertBefore(boxEl, tray);
+    showBox();
+    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+      { duration: K.nextMs, easing: 'cubic-bezier(.3,1.4,.5,1)' });
+  }
+  function tapBox() {
+    if (boxState === 'open' && boxItem) { boxState = 'closed'; GW.sfx.click(); showBox(); }
+    else if (boxState === 'closed') { boxState = 'open'; GW.sfx.click(); showBox(); }
+  }
+  // Drop a pile in the open box: the whole pile down to the display copy.  A different item replaces the first.
+  function fillBox(item) {
+    if (boxState !== 'open') return;
+    var have = (GW.game.s.items || {})[item.id] || 0;
+    if (have <= P.orders.keep) return;
+    boxItem = item; boxCount = have - P.orders.keep;
+    GW.sfx.drop(item.tier, true);
+    showBox();
+    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2%) scaleY(.97)' }, { transform: 'translateY(0)' }],
+      { duration: K.thumpMs, easing: 'ease-out' });
+  }
+  function stampBox(rid) {
+    if (boxState !== 'closed') return;
+    var i = activeIndex(), el = boxEl, calm = calmQuery.matches;
+    boxState = 'stamped';
+    tray.hidden = true;
+    var mark = boxPart('box-mark');
+    mark.src = P.slip.stampImg.replace('{region}', rid);
+    mark.hidden = false;
+    var turn = 'translate(-50%, -50%) rotate(' + K.mark[3] + 'deg) ';
+    var down = calm ? Promise.resolve() : mark.animate([{ transform: turn + 'scale(2.2)', opacity: 0 }, { transform: turn + 'scale(1)', opacity: 1 }],
+      { duration: K.stampMs, easing: 'ease-in' }).finished;
+    var id = tripId;
+    down.then(function () {
+      if (id !== tripId || el !== boxEl) return;
+      GW.sfx.thump();
+      if (!calm) el.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2.5%) scaleY(.96)' }, { transform: 'translateY(0)' }],
+        { duration: K.thumpMs, easing: 'ease-out' });
+      // The record for 1e: the item, its count at packing time, and the stamp used.
+      packed[i] = { item: boxItem.id, count: boxCount, stamp: rid };
+      showBoard();
+      return new Promise(function (r) { setTimeout(r, K.setAsideDelayMs); });
+    }).then(function () {
+      if (id !== tripId || el !== boxEl) return;
+      var L = layout(), spot = stackSpot(L, stacked.length), from = { left: el.style.left, top: el.style.top, height: el.style.height };
+      setBoxPlace(el, spot.x, spot.y, spot.h, spot.tilt);
+      el.classList.add('is-stacked');
+      stacked.push(el);
+      boxEl = null; boxItem = null; boxState = 'none';
+      if (!calm) el.animate([from, { left: spot.x + '%', top: spot.y + '%', height: spot.h + '%' }], { duration: K.slideMs, easing: 'ease-in-out' });
+      nextBox();
+    }).catch(function () {});
+  }
+  // The stacked boxes, the box, the tray, the conveyor, and the menu, for the layout.
+  function placePack(L) {
+    var c = L.conveyor, m = L.menu;
+    conveyor.style.left = c[0] + '%'; conveyor.style.top = c[1] + '%'; conveyor.style.width = c[2] + '%'; conveyor.style.height = c[3] + '%';
+    menu.style.left = m[0] + '%'; menu.style.top = m[1] + '%'; menu.style.width = m[2] + '%'; menu.style.height = m[3] + '%';
+    tray.style.left = L.tray.x + '%'; tray.style.top = L.tray.y + '%'; tray.style.width = L.tray.w + '%';
+    if (boxEl) setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
+    stacked.forEach(function (el, k) { var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt); });
+  }
+
+  // ---------- the item menu ----------
+  function buildMenu() {
+    menu = div('ship-menu');
+    menu.hidden = true;
+    menu.setAttribute('role', 'dialog');
+    menu.setAttribute('aria-label', 'Junk from the conveyor');
+    menuList = div('ship-menu-list');
+    menu.appendChild(menuList);
+    menuList.addEventListener('pointerdown', menuDown);
+    menuList.addEventListener('pointermove', menuMove);
+    menuList.addEventListener('pointerup', menuUp);
+    menuList.addEventListener('pointercancel', function () { endDrag(); });
+    menuList.addEventListener('lostpointercapture', function () { if (drag && drag.mode !== 'drag') endDrag(); });
+    box.appendChild(menu);
+  }
+  // Tiles like the shelf's: icon, name, count.  Items with keep (1) or fewer are greyed out and can't be picked up.
+  function fillMenu() {
+    var shelf = GW.game.s.items || {};
+    menuList.textContent = '';
+    K.groups.forEach(function (gid) {
+      var g = C.groups.filter(function (x) { return x.id === gid; })[0];
+      var items = C.items.filter(function (it) { return it.group === gid; });
+      if (!g || !items.length) return;
+      menuList.appendChild(div('ship-menu-head', g.name));
+      var grid = div('ship-menu-grid');
+      items.forEach(function (item) {
+        var n = shelf[item.id] || 0, known = n > 0;
+        var t = div('shelf-tile ship-tile' + (known ? '' : ' unknown') + (n > P.orders.keep ? '' : ' is-off'));
+        t.dataset.item = item.id;
+        t.style.borderColor = C.tiers[item.tier].color;
+        t.appendChild(known ? GW.ui.itemIcon(item) : U.el('span', 'item-icon', '?'));
+        t.appendChild(div('tile-name', known ? item.name : '???'));
+        t.appendChild(div('tile-count', known ? '×' + U.fmt(n) : ''));
+        grid.appendChild(t);
+      });
+      menuList.appendChild(grid);
+    });
+  }
+  function openMenu() {
+    if (menuOpen) return;
+    fillMenu();
+    menu.hidden = false; menuOpen = true;
+    menuList.scrollTop = 0;
+    GW.sfx.click();
+  }
+  function closeMenu() {
+    endDrag();
+    if (!menuOpen) return;
+    menu.hidden = true; menuOpen = false;
+  }
+
+  // Dragging a tile: a mouse picks it up after a small move.  A finger scrolls the menu, unless it holds still
+  // on a tile (holdMs) or carries the tile out of the menu.  The picked-up tile follows the pointer as a ghost.
+  var drag = null;
+  function tileItem(t) { return t && !t.classList.contains('is-off') ? GW.econ.itemDef(t.dataset.item) : null; }
+  function menuDown(e) {
+    if (!e.isTrusted || e.button > 0 || !e.isPrimary) return;
+    e.preventDefault();
+    endDrag();
+    var t = e.target.closest('.ship-tile');
+    drag = { id: e.pointerId, x0: e.clientX, y0: e.clientY, scroll0: menuList.scrollTop, item: tileItem(t), tile: t,
+      touch: e.pointerType !== 'mouse', mode: 'press', hold: null, ghost: null };
+    try { menuList.setPointerCapture(e.pointerId); } catch (err) {}
+    if (drag.touch && drag.item) {
+      var d = drag;
+      d.hold = setTimeout(function () { if (drag === d && d.mode === 'press') startDrag(d.x0, d.y0); }, K.holdMs);
+    }
+  }
+  function outsideMenu(x, y) {
+    var r = menu.getBoundingClientRect();
+    return x < r.left || x > r.right || y < r.top || y > r.bottom;
+  }
+  function menuMove(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x0, dy = e.clientY - drag.y0, far = Math.abs(dx) > K.slopPx || Math.abs(dy) > K.slopPx;
+    if (drag.mode === 'press' && far) {
+      clearTimeout(drag.hold);
+      if (!drag.touch) { if (drag.item) startDrag(e.clientX, e.clientY); else drag.mode = 'none'; }
+      else drag.mode = 'scroll';
+    }
+    if (drag.mode === 'scroll') {
+      if (drag.item && outsideMenu(e.clientX, e.clientY)) { menuList.scrollTop = drag.scroll0; startDrag(e.clientX, e.clientY); }
+      else menuList.scrollTop = drag.scroll0 - dy;
+    }
+    if (drag.mode === 'drag') moveGhost(e.clientX, e.clientY);
+  }
+  function menuUp(e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (drag.mode === 'drag' && overBox(e.clientX, e.clientY)) fillBox(drag.item);
+    endDrag();
+  }
+  function startDrag(x, y) {
+    drag.mode = 'drag';
+    drag.tile.classList.add('is-lifted');
+    drag.ghost = U.el('div', 'ship-ghost' + (drag.touch ? ' touch' : ''));
+    drag.ghost.appendChild(GW.ui.itemIcon(drag.item, true));
+    document.body.appendChild(drag.ghost);
+    moveGhost(x, y);
+  }
+  function moveGhost(x, y) {
+    drag.ghost.style.left = x + 'px'; drag.ghost.style.top = y + 'px';
+    if (boxEl) boxEl.classList.toggle('drop-ok', overBox(x, y));
+  }
+  function overBox(x, y) {
+    if (!boxEl || boxState !== 'open') return false;
+    var r = boxEl.getBoundingClientRect(), padX = r.width * K.dropPad / 100, padY = r.height * K.dropPad / 100;
+    return x >= r.left - padX && x <= r.right + padX && y >= r.top - padY && y <= r.bottom + padY;
+  }
+  function endDrag() {
+    if (!drag) return;
+    clearTimeout(drag.hold);
+    if (drag.ghost) drag.ghost.remove();
+    if (drag.tile) drag.tile.classList.remove('is-lifted');
+    if (boxEl) boxEl.classList.remove('drop-ok');
+    var id = drag.id;
+    drag = null;
+    try { if (menuList.hasPointerCapture(id)) menuList.releasePointerCapture(id); } catch (err) {}
+  }
 
   // ---------- placing things (all positions in % of the room) ----------
   function polygon(points) { return 'polygon(' + points.map(function (p) { return p[0] + '% ' + p[1] + '%'; }).join(', ') + ')'; }
@@ -231,11 +524,13 @@ GW.ship = (function () {
     driver.style.height = L.driver.h + '%';
     placeBoard(L, parseFloat(wh[0]) / parseFloat(wh[1]));
     // A layout change mid-trip skips to where the trip was heading.
-    if (trip === 'arriving') { trip = 'here'; orders = makeOrders(); }
+    placePack(L);
+    var made = false;
+    if (trip === 'arriving') { trip = 'here'; made = true; }
     if (trip === 'leaving') { trip = 'closed'; open = false; }
     stopAnims();
     settle();
-    showBoard();
+    if (made) newOrders(); else showBoard();
   }
 
   // ---------- the trip ----------
@@ -285,7 +580,7 @@ GW.ship = (function () {
       },
       function () { return new Promise(function (r) { setTimeout(r, T.walkDelayMs); }); },
       function () { return walk(L.driver.from, L.driver.fromScale, L.driver.at, 1, true, false); },
-      function () { trip = 'here'; anims = []; orders = makeOrders(); showBoard(); }
+      function () { trip = 'here'; anims = []; newOrders(); }
     ]);
   }
 
@@ -316,14 +611,25 @@ GW.ship = (function () {
   // main.js calls this whenever the view changes.  Entering the room always starts with the door closed.
   function setActive(on) {
     if (on && !built) build();
-    if (on && !active) { stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); redraw(true); }
-    if (!on && active) { stopAnims(); closeSlip(); }
+    if (on && !active) { stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); redraw(true); }
+    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); }
+    document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
+    // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
+    // scrolled into view as it opens.  Desktop is left as it is.
+    if (on && tallQuery.matches) requestAnimationFrame(function () {
+      var r = box.getBoundingClientRect(), dy = r.bottom > window.innerHeight ? Math.min(r.bottom - window.innerHeight, r.top) : Math.min(r.top, 0);
+      if (dy) window.scrollBy(0, dy);
+    });
     active = on;
   }
 
   return {
     enabled: enabled, setActive: setActive, redraw: redraw,
     isOpen: function () { return open; }, tripState: function () { return trip; },
-    orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; }
+    orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; },
+    menuOpen: function () { return menuOpen; }, boxState: function () { return boxState; },
+    activeOrder: activeIndex,
+    // What was packed, for the hand-off (1e): one entry per order, null until stamped.
+    packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, stamp: r.stamp }; }); }
   };
 })();

@@ -1,6 +1,6 @@
 # Work order: Packing Line 1d, pack and stamp (v0.3)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23, for the Wednesday demo cut (HANDOFF.md).  **Approved by:** Nathan, 2026-11-23.
 **Model:** Opus 5.5
 
@@ -57,3 +57,47 @@ The player packs each work order: tap the conveyor to open the item menu, drag t
 
 ## Result (filled in by Claude Code)
 
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.81**.  Smoke test: all clear, desktop and phone, with a new packing check.
+
+**What was built**
+
+- `js/shipping.js`: the active order, the conveyor tap area, the item menu, dragging, the box (open, filled, closed, stamped), the stamp tray, the stack, and the record.  New read-outs for tests and 1e: `GW.ship.packed()`, `activeOrder()`, `boxState()`, `menuOpen()`.
+- `js/config.js`: per layout `conveyor`, `box`, `tray`, `stack`, and `menu`; and `shipping.pack` (the junk groups, the stamps the player has, the box art, the label and stamp places on the box, the touch hold and slop, the drop margin, and every timing).
+- `css/style.css`: the slip highlight and check, the box and its label and stamp, the tray, the menu (shelf tiles), the drag ghost, and the phone lock.
+- `js/sfx.js`: `thump()`, a short code-made thump for the stamp.  Filling a box plays the quiet item drop sound; closing and opening play the click.
+- `js/main.js`: the view swipe is skipped in the Shipping view.
+- `tools/smoke-test.js`: on desktop, packs all three orders by mouse and checks the record, that no fourth box appears, that the shelf is unchanged, and that closing the door clears it all.
+
+**How each step came out**
+
+- **Step 3.**  The active slip lifts a little and glows gold; packed slips get a green check.  Packing goes left to right.
+- **Step 4.**  Wide: the box stands on the bench right of the order board, clear of the slips, with the tray beside it.  Tall: the box stands on the bench left of center, the tray right of it.  The truck and the driver did not move.
+- **Step 5.**  The menu lists the 96 junk items (Laundry through Absolutely Random, shelf order, with group headings), as shelf tiles with the picture, name, and count.  Undiscovered items show as "???" like the shelf.  Items at 1 or 0 are grey and can't be picked up.  Tap outside or Escape closes it.
+- **Step 5a.**  `#ship` is `touch-action: none` (no pan, pinch, or double-tap zoom starts in the room), `overscroll-behavior: none` on the page while the view is open at 720px and under, and no view swipe in the room.  Checked with real touch events (Chrome DevTools touch input): a sideways and an upward drag on the room left the view on Shipping and the page where it was, and a finger swipe scrolled the menu 159 px with the page still.
+- **Step 6.**  The label shows the item's picture and the count in the game's short form ("707K"), so it fits the small box.  The record keeps the exact count.
+- **Step 7 and 8.**  As written.  The stamp comes down with the thump and the box jolts; the stamped box slides to the stack (two on the floor, one on top), and the next box pops in.
+- **Step 9.**  `GW.ship.packed()` returns, per order, `{ item, count, stamp }`, or null until stamped.  Nothing is saved.
+
+**Calls I made that Claudia should check**
+
+1. **The phone room scrolls into view.**  On a 390x844 phone the room's bottom, the conveyor, sat about 30 px below the fold (more with a browser's address bar), and with drags on the room no longer scrolling the page, the conveyor could only be reached by dragging the banner.  So on entering the Shipping view in the tall layout, the page scrolls just enough to show the whole room (31 px on 390x844; the view buttons stay on screen).  Desktop is untouched.
+2. **Dragging with a finger.**  The menu scrolls in code (it has to be `touch-action: none` so a tile can be dragged).  A finger that moves first scrolls the menu; a finger that holds still 220 ms on a tile picks it up; and a finger that scrolls out of the menu carries the tile it pressed, so a quick swipe from a tile down to the box works too.  The menu scroll has no momentum.  A mouse picks a tile up as soon as it moves 8 px, and the wheel scrolls.
+3. **Where the menu sits.**  Tall: over the top of the room, so the board and the box stay in view.  Wide: the room is short (about 390 px tall on a 1400 px screen), so a top strip showed only one row of tiles; the menu covers the left half instead (the desk and the board), leaving the box, tray, and stack in view.  The board is hidden while the desktop menu is open.
+4. **A tap outside the menu only closes it.**  In the room that tap does nothing else, so a tap on the box or the chain while the menu is open needs a second tap.  This stops a dismissing tap from closing a box by surprise.
+5. **The conveyor opens the menu any time,** door closed included (it can be browsed; with no box, a drop does nothing).
+6. **Any item can be packed.**  Nothing checks that the box matches its order yet (scoring is 1e).
+7. **`touch-action: none` on the room applies in every layout.**  It has no effect with a mouse, so desktop play is unchanged, and it keeps landscape phones (the wide layout) still too.  The page overscroll lock is phones only (720 px and under).
+8. **Night:** the box dims to 88% like the slips.  No night art, and the screenshots are Day as asked.
+9. **Not tried on a real phone.**  Touch was checked in headless Chromium with real touch events; iOS Safari in particular should get a try on Nathan's or a tester's phone before Wednesday.
+
+**Screenshots** in `tools/out/` (`?ship=1&debug=1`, Day, a shelf with 1,000 to 3.5M of most items and some at 1 or 0; not committed, `tools/out/` is ignored; the debug bar covers the bottom of the phone room):
+
+- `1d-wide-day-menu.png`, `1d-tall-day-menu.png`: the menu open (greyed tiles show the piles at 1).
+- `1d-wide-day-item-in-box.png`, `1d-tall-day-item-in-box.png`: an item in the box, the label showing, the menu still open.
+- `1d-wide-day-stamped.png`, `1d-tall-day-stamped.png`: the box closed and stamped, the first slip checked.
+- `1d-wide-day-two-packed.png`, `1d-tall-day-two-packed.png`: two boxes packed in the stack, the third closed with the stamp tray out.
+- `1d-wide-day-all-packed.png`, `1d-tall-day-all-packed.png` (extra): all three packed, no new box.
+
+**Checks run in the browser**, both layouts (mouse on desktop, touch on the phone): three orders packed in each; a greyed item dropped on the box does nothing; a wrong item then the right one replaces it; the menu stays open after a drop; a tap outside and Escape close it; a closed box reopens on a tap and closes again; the record matches the orders with the Gnomerica stamp; no box after the third; the shelf is unchanged; closing the door clears the record and every box; no console errors or missing files.
+
+Nothing was installed.  The truck, driver, chain, door, shelf counts, save data, and Stonks are unchanged.

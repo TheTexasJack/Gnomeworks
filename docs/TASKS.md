@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.80.
+Last updated 2026-11-23, at v0.2.0-draft.81.
 
 ## Where we are
 
@@ -78,8 +78,9 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [ ] **Future enhancement (Nathan, 2026-11-23):** on the phone, fill the empty right end of the order board (right of the three slips, from about 62%) with a small filler pinned to the board, made knowing the parked truck covers part of it.  The slips stay their current size.
     - [ ] **Open (Claudia's 1c-2 review, 2026-11-23):** about 77% of the items Gnomerica places can ask for are Bathroom items, since every place buys all 12 of them on top of its few Factory Imports, and the randomizer picks evenly from the combined list.  So most orders ask for Bathroom junk.  Nathan to decide after the demo whether to weight orders toward Factory Imports.
     - [x] 1c-3 (draft.80; approved v0.2, option A): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
-    - [ ] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  In 1d v0.3, step 5a.
-    - [ ] 1d (approved v0.3): pack and stamp.  1e (draft): hand-off, report card, GRIP line.  These four are the Wednesday demo cut (HANDOFF.md).
+    - [x] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  Built in 1d (draft.81), step 5a.
+    - [x] 1d (draft.81; approved v0.3): pack and stamp.
+    - [ ] 1e (draft): hand-off, report card, GRIP line.  The last piece of the Wednesday demo cut (HANDOFF.md).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
     - [ ] After the demo: 1f and 1g (drawer and supplies, the other boxes, Stonks polish).
 

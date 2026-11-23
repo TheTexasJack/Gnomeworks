@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.80';
+GW.VERSION = '0.2.0-draft.81';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -142,7 +142,19 @@ GW.CONFIG = {
         },
         // board = where the work orders pin, inside the lower left parchment frame (its parchment runs x 31.6 to
         // 50.9, y 40.4 to 54.5, Day and Night): [x, y, w, h] in % of the room.
-        board: [32.3, 41.1, 17.9, 12.7]
+        board: [32.3, 41.1, 17.9, 12.7],
+        // Packing (1d), all in % of the room.  conveyor = the painted belt's tap area [x, y, w, h].  box = the open box
+        // on the bench: x is its center, y the bottom of its square canvas (the art's own shadow margin sits below the
+        // box), h its height.  It stands right of the order board, clear of the slips.  tray = the stamp tray beside
+        // it on the bench (x center, y bottom, w width).  stack = where packed boxes go, on the floor at the truck's
+        // rear (x, y, h as for box), and spots = each packed box's place in the stack, in box widths and heights
+        // from (x, y), with a small tilt in degrees.  menu = the item menu [x, y, w, h]: the wide room is short, so it
+        // covers the left half (the desk and the board) and leaves the box, the tray, and the stack in view.
+        conveyor: [0, 84, 84, 16],
+        box: { x: 57, y: 66.4, h: 24 },
+        tray: { x: 67.6, y: 63.4, w: 6.2 },
+        stack: { x: 77.6, y: 84, h: 16, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
+        menu: [1, 2, 50, 95]
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
@@ -167,7 +179,15 @@ GW.CONFIG = {
         // board = inside the parchment frame under the STONKS screen (its parchment runs x 31.8 to 69.7, y 38.6 to
         // 48.3).  The parked truck covers the frame from x 63.7, so the board ends at 62 and every slip, stamp
         // corner included, sits clear of the truck (1c-2 addendum).
-        board: [32.4, 39.2, 29.6, 8.5]
+        board: [32.4, 39.2, 29.6, 8.5],
+        // Packing (1d), as in the wide room.  The box sits on the bench left of center, the tray beside it, and the
+        // stack on the floor at the bench's right end, in front of the driver (the box has the stage).  The menu
+        // covers the top of the room, so the board and the box stay in view under it.
+        conveyor: [0, 87, 100, 13],
+        box: { x: 38, y: 71.4, h: 17 },
+        tray: { x: 63.5, y: 69.6, w: 15 },
+        stack: { x: 78, y: 92, h: 11.5, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
+        menu: [2, 1, 96, 37]
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
@@ -220,6 +240,31 @@ GW.CONFIG = {
       stamp: { board: 27, open: 20 },
       openSize: 92,
       nightBrightness: 0.88
+    },
+    // Packing (layer 1d).  Orders are packed one at a time, left to right; the box on the bench belongs to the
+    // active order.  A tap on the conveyor opens the item menu (the junk `groups`, in shelf order).  Dragging a tile
+    // with more than orders.keep on the shelf onto the open box puts the whole pile in, down to the display copy.
+    // Nothing ships and the shelf does not change until the hand-off (1e).
+    pack: {
+      groups: ['laundry', 'bathroom', 'office', 'workshop', 'kitchen', 'toys', 'inventions', 'random'],
+      stamps: ['gnomerica'],              // the region stamps the player has (layer 1: Gnomerica's only)
+      boxOpen: 'assets/packing/box_plain_open.webp',
+      boxClosed: 'assets/packing/box_plain_closed.webp',
+      // On the box's front face, in % of its square canvas: label = [x center, y center, width] (the item and the
+      // count it will ship), mark = the stamp once stamped [x center, y center, width, tilt in degrees].
+      label: [48, 69, 62],
+      mark: [64, 47, 30, -14],
+      // The menu on touch: a finger that holds still holdMs on a tile picks it up; one that moves slopPx first
+      // scrolls the menu, and becomes a drag of the tile it pressed once it leaves the menu.  A mouse picks a tile
+      // up after slopPx.  dropPad widens the box's drop area (% of its size on each side).
+      holdMs: 220,
+      slopPx: 8,
+      dropPad: 12,
+      stampMs: 260,         // the stamp coming down
+      thumpMs: 220,         // the box's little jolt as it lands
+      setAsideDelayMs: 450, // stamped, then it moves to the stack
+      slideMs: 650,         // the box sliding to the stack
+      nextMs: 300           // the next order's box appearing
     }
   },
 

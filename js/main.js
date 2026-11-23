@@ -421,7 +421,8 @@ window.GW = window.GW || {};
   // Swipe between views on touch screens (see views and swipe in config).
   var swipe = null;
   machine.addEventListener('pointerdown', function (e) {
-    swipe = (e.pointerType === 'touch' && e.isPrimary && !e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt'))
+    // No swipe in the shipping room: packing is all dragging, so the view buttons are the way out.
+    swipe = (e.pointerType === 'touch' && e.isPrimary && s.view !== 'shipping' && !e.target.closest('.rare-popup, .wild-target, .clone, .clone-alert, .hunt'))
       ? { x: e.clientX, y: e.clientY, t: performance.now() } : null;
   }, true);
   machine.addEventListener('pointerup', function (e) {

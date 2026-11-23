@@ -60,6 +60,43 @@ async function restCheck(page, errors) {
   console.log(`resting: rate ${Math.round(rate)}/s, room ${secs.toFixed(1)}s paid ${Math.round(paid)}, reload ${secs2.toFixed(1)}s paid ${Math.round(paid2)}`);
 }
 
+// Packing (1d): open the door, drag each order's item from the conveyor menu into the box, close it, stamp it.
+// The record must match the orders, the shelf must not change, and closing the door clears it all.
+async function packCheck(page, errors) {
+  const fail = m => errors.push('packing: ' + m);
+  const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  await page.goto(URL + '?debug=1&ship=1');
+  await page.waitForTimeout(400);
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = 5000; }));   // in the room, where counts hold still
+  let c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 8000 });
+  const orders = await page.evaluate(() => GW.ship.orders().map(o => o.item.id));
+  const shelf = await page.evaluate(() => JSON.stringify(GW.game.s.items));
+  for (const id of orders) {
+    c = await mid('.ship-conveyor'); await page.mouse.click(c.x, c.y);
+    if (!await page.evaluate(() => GW.ship.menuOpen())) { fail('the conveyor did not open the menu'); return; }
+    await page.locator(`.ship-tile[data-item="${id}"]`).scrollIntoViewIfNeeded();
+    const a = await mid(`.ship-tile[data-item="${id}"]`), b = await mid('.ship-box:not(.is-stacked)');
+    await page.mouse.move(a.x, a.y); await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(a.x + (b.x - a.x) * i / 8, a.y + (b.y - a.y) * i / 8);
+    await page.mouse.up();
+    await page.keyboard.press('Escape');
+    await page.mouse.click(b.x, b.y);                                     // close the box
+    if (await page.evaluate(() => GW.ship.boxState()) !== 'closed') { fail('the filled box did not close'); return; }
+    c = await mid('.tray-stamp'); await page.mouse.click(c.x, c.y);
+    await page.waitForFunction(() => GW.ship.boxState() !== 'stamped', null, { timeout: 4000 });
+  }
+  const rec = await page.evaluate(() => GW.ship.packed());
+  if (rec.length !== orders.length || rec.some((r, i) => !r || r.item !== orders[i] || r.count !== 4999 || r.stamp !== 'gnomerica')) fail('record wrong: ' + JSON.stringify(rec));
+  if (await page.$('.ship-box:not(.is-stacked)')) fail('a box appeared after every order was packed');
+  if (await page.evaluate(() => JSON.stringify(GW.game.s.items)) !== shelf) fail('the shelf changed');
+  c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
+  if (await page.evaluate(() => GW.ship.packed().length + document.querySelectorAll('.ship-box').length)) fail('closing the door did not clear the packing');
+  console.log(`packing: ${orders.length} orders packed (${orders.join(', ')})`);
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -116,6 +153,7 @@ async function restCheck(page, errors) {
     if (after < before) errors.push(`${name}: save did not survive reload (${before} -> ${after})`);
 
     if (name === 'desktop') await restCheck(page, errors);
+    if (name === 'desktop') await packCheck(page, errors);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

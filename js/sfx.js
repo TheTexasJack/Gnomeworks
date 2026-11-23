@@ -261,6 +261,12 @@ GW.sfx = (function () {
     tone({ f: vary(220), to: 140, dur: 0.22, vol: 0.18, type: 'triangle' });
     noise({ f: 2400, to: 900, q: 3, dur: 0.12, vol: 0.12 });
   }
+  // Packing Line: a rubber stamp landing on a cardboard box.
+  function thump() {
+    if (!ready() || !limit('thump', 6)) return;
+    tone({ f: vary(120), to: 60, dur: 0.16, vol: 0.28, type: 'triangle' });
+    noise({ f: 350, q: 0.9, dur: 0.08, vol: 0.18 });
+  }
   // Until Alex records her "UGH!": a quick low grunt.
   function ugh(kind) {
     if (!ready()) return;
@@ -274,7 +280,7 @@ GW.sfx = (function () {
   }
 
   return {
-    yum: yum, burp: burp, twang: twang, ugh: ugh,
+    yum: yum, burp: burp, twang: twang, ugh: ugh, thump: thump,
     hehe: hehe, sploop: sploop,
     load: load, unlock: unlock, settings: function () { return settings; },
     set: function (k, v) { settings[k] = v; apply(); return settings; },
