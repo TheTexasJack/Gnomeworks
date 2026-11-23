@@ -1,6 +1,6 @@
 # Work order: Packing Line 1a, the shipping room and door (v0.1)
 
-**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
+**Status:** Reviewed and closed (Nathan: "This tests fine," 2026-11-22)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (keep it hidden behind `?ship=1`).
 **Model:** Opus 5.5
 
@@ -118,3 +118,5 @@ Good calls the order did not cover, all accepted as drafts for Nathan: no cranki
 Open, for before the view goes live (not blocking 1b):
 - The three view buttons wrap onto two lines on a 390px phone.
 - The chain ignores Space and Enter, so a keyboard player cannot open the door.
+
+Nathan, 2026-11-22: tests fine.  Future upgrade logged in TASKS.md: the door rolls up smoothly like a garage door.
