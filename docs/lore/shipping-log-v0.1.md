@@ -1,6 +1,6 @@
 # Shipping log lines (v0.2, Claudia's draft, 2026-11-23)
 
-**Status:** v0.1 approved by Nathan, 2026-11-23.  **v0.2 adds "An approved fake" (below), a draft awaiting Nathan.**  Written in plain, short sentences so Elana can read them (Jarrett's ask for the lore).  Gnomerica only for layer 1; each new region adds its own road lines.
+**Status:** v0.1 approved by Nathan, 2026-11-23.  **v0.2 adds "An approved fake" (below), approved by Nathan 2026-11-23.**  Written in plain, short sentences so Elana can read them (Jarrett's ask for the lore).  Gnomerica only for layer 1; each new region adds its own road lines.
 
 Every shipped box gets its own log: about 8 entries with a clock time, picked at random from these lines.  Flavor only, it changes nothing in the game (DESIGNS, "Shipping log," 2026-11-04).  Gnomerica facts come from the gazetteer (v0.27): the Brass Road, the Central Rail, the old public clock, the Great Lunch Whistle, Cogbottom, Gnomish Farms, lamia engineers, goblin bookkeepers, brassleaf oaks, Smog Ants, Barking Mimics, and the Hootgear, Cogsnake, and Pebblem.
 
@@ -79,7 +79,7 @@ The road lines are swapped for these, and the end is always the last line.
 - Last seen heading somewhere with a lot of snow.
 - **End:** Delivered to... the North Pole?  Uh oh.
 
-## An approved fake (v0.2 draft, from the 1o review)
+## An approved fake (v0.2, from the 1o review, approved)
 
 A glitter order the player approved and packed ships on GRIP's own truck, so it gets the normal road lines, plus one of these in the middle and this end.
 

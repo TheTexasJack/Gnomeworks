@@ -1,7 +1,7 @@
 # Work order: Packing Line 1p, faces for the two clipboards (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (with the lore v0.2 lines).
 **Model:** Opus 5.5
 
 ## Goal
@@ -25,7 +25,7 @@ The two clipboards under STONKS work, but their paper is blank, so nobody knows 
 3. **The Shipping Log clipboard (right)** shows the title **SHIPPING LOG** on two lines, a small truck drawn in code (in the style of the address label's red truck), and three ruled lines under it.
 4. **Readable at play size:** bold, high-contrast titles in `--font`, as large as the paper allows, on both layouts.  Night dims them with the room, as the slips do.  (Draft wording and design, Claudia; record the final sizes in the Result.)
 5. **A small cue for news:** after a shift, both clipboards give one soft glow until the player opens them, so they know a new card and log are waiting.  The glow follows "Show instructions."  Reduced motion: no pulse.
-6. **An approved fake's log** (lore doc v0.2, draft lines awaiting Nathan's approval with this order): the normal GRIP road lines, plus one of the two "approved fake" lines in the middle, and its own end line.
+6. **An approved fake's log** (lore doc v0.2, approved by Nathan 2026-11-23): the normal GRIP road lines, plus one of the two "approved fake" lines in the middle, and its own end line.
 7. Every number and word in `js/config.js`.  Bump `GW.VERSION` to the next draft number, run `node tools/stamp.js`, add a `CHANGELOG.md` entry, update `docs/ARCHITECTURE.md`, and update `tools/smoke-test.js`: both faces draw; the report card face shows the last shift's marks; the glow shows after a shift and stops once opened; an approved fake's log ends with its own end line.  Run it.
 8. **Screenshots** into `tools/out/`, both layouts, Day and Night: the clipboards before the first shift, after a mixed shift (glowing), and after opening; plus a close-up at phone size.  List them in the Result.
 9. In the Result, record how long the build took.
