@@ -1,6 +1,6 @@
 # Work order: Packing Line 1a, the shipping room and door (v0.1)
 
-**Status:** Done
+**Status:** Reviewed (Claudia, 2026-11-22); waiting on Nathan's look
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 (keep it hidden behind `?ship=1`).
 **Model:** Opus 5.5
 
@@ -108,3 +108,13 @@ Twin check: in the masters, each closed and open pair differs only inside the do
 
 **Not built (per the order):** truck, driver, orders, items, drawer, Stonks.
 
+
+## Review (Claudia, 2026-11-22)
+
+Pulled 1d02545 and rendered the room in the cloud session at 1400x900 and 390x844, Day and Night, closed and open.  All eight states draw, the chain hangs from the pipe beside the door in both layouts, and the open twin swaps in with no visible jump.  The code is small and follows the rules: every number in `CONFIG.shipping`, trusted taps only, both twins preloaded, the door never saved.
+
+Good calls the order did not cover, all accepted as drafts for Nathan: no cranking or item pops in the room, the wider invisible tap area on the thin chain, and the chain's place on the wood left of the door.
+
+Open, for before the view goes live (not blocking 1b):
+- The three view buttons wrap onto two lines on a 390px phone.
+- The chain ignores Space and Enter, so a keyboard player cannot open the door.
