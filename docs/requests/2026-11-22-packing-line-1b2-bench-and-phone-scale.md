@@ -1,7 +1,7 @@
 # Work order: Packing Line 1b.2, driver at the bench and phone scale (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.1.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-22, from Nathan's review of 1b.1.  **Approved by:** Nathan, 2026-11-22 ("1b.2 approved").
 **Model:** Opus 5.5
 
 ## Goal
