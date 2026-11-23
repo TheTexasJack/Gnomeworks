@@ -14,7 +14,7 @@ The first visible piece of the Packing Line: a third view, the shipping room, wi
 | --- | --- |
 | **1a (this order)** | The shipping view, the room art (wide and tall, day and night), the chain opening and closing the door |
 | 1b | Gnomerica's truck slides in from the right and backs up to the door; the driver walks in (waiting pose) |
-| 1c | Three work orders pinned on the order board, filled by the randomizer; tap one to read it full size |
+| 1c | Three work orders pinned on the order board, filled by the randomizer; tap one to read it full size.  Split 2026-11-22: **1c-1** the destinations data (no screen change), **1c-2** the board and slips |
 | 1d | The supply drawer, the four boxes, and the conveyor button that opens the item menu |
 | 1e | Packing: drag a shelf pile into the box, supplies (peanuts, bubble wrap, FRAGILE and HEAVY), the region stamp, APPROVED and DENIED |
 | 1f | Hand off and close the door: the truck leaves, the report card shows ✅ and ❌ with why |
