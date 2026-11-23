@@ -1,6 +1,6 @@
 # Work order: Packing Line 1c-1, the destinations data (v0.1)
 
-**Status:** Approved
+**Status:** Done (built in v0.2.0-draft.75)
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1c-1 approved").
 **Model:** Opus 5.5
 
@@ -46,3 +46,18 @@ Give the game the list of places that order from the factory, and what each one 
 
 ## Result (filled in by Claude Code)
 
+Run 2026-11-22 by Claude Code (Opus 5.5) on Beast.  **Built in v0.2.0-draft.75.**  Data only: nothing on screen changed.
+
+- **Step 1:** pulled (f40845c).
+- **Step 2, the generator:** `tools/destinations.js` loads `js/config.js` for the item names, reads `docs/lore/map/gnomadica-locations-v0.29.json`, and writes `js/destinations.js`.  It reads both lists in the file, `locations` (100) and `added_places` (28, the places added while mapping), since both carry the same gazetteer block; 4 of the 53 places come from `added_places` (Slaanilok 2, Shen Shin 1, Gnufoundland 1).
+- **Step 3, the file:** a generated-file header (do not edit, rerun the tool), the source file and map version 0.29, and `GW.DESTINATIONS` with `regions` (the ten in unlock order, each with `id`, `name`, stamp `color`, and `symbol` from `docs/lore/regions.md`) and `places` (`id`, `name`, `type`, `region` as a region id, `buys` as item ids).  Places are sorted by unlock order, then by their order in the source file.  `buys` lists the place's own imports in the gazetteer's order, then the Bathroom items it doesn't already name, in `CONFIG.items` order.
+- **Step 4, matching:** names match `CONFIG.items` names ignoring case, spaces, and punctuation.  No two items share a matching key.  The Bathroom group (`bathroom`, 12 items, the same 12 the gazetteer lists) is added to every place.
+- **Step 5, the report** (`node tools/destinations.js`):
+    - **Places per region (53 in all):** Gnomerica 15, Gnohio 11, Gnafrica 4, Slanic 9, Gno Dao Cradle 6, Gni 1, Slaanilok 2, Shen Shin 1, Gnufoundland 4, **Gnonmoon 0**.
+    - **Items per place (bathroom included):** smallest 13 (Farms of Verdon't, Springwater, Sleeping Dogs Hollar, Gloopenstein, Bottoms Up, Brassin, Slimes Akummin, Werewolf London, Gassy Dog), largest 18 (Tables Edge).  Gnomerica's 15 places buy 14 to 16 items each.
+    - **Unmatched names: none.**  Every Factory Imports name in the file matches a game item.
+    - Extra checks: every bought item is junk (no Legendary Treasures, Tiny Monsters, or Number Twos), and all 96 junk items are bought by at least one place.
+- **Lore gap for Nathan and Claudia (not changed, per Do not):** none of Gnonmoon's five places (Zohee Bay, Gnonmoon, Three Idols, Demon's Gutt, Gnonmoon 1) has Factory Imports, so Gnonmoon has no destinations.  It is the last region to unlock, so this blocks nothing in layer 1.  Added to `docs/TASKS.md`.
+- **Same file twice:** ran the tool twice and compared the outputs byte for byte: identical.  The file has no dates or timestamps.
+- **Step 6:** `js/destinations.js` loads right after `js/config.js` in `index.html`; nothing reads it yet.  Added to `docs/ARCHITECTURE.md` (script table, row 1a) and `docs/ENVIRONMENT.md` (the regenerate command and the tools list).  Also updated `docs/TASKS.md` and `docs/HANDOFF.md`.
+- **Step 7:** `GW.VERSION` is `0.2.0-draft.75`, stamped (16 links), `CHANGELOG.md` entry added.  Smoke test: **All clear** (desktop and phone ok, no errors or missing files).

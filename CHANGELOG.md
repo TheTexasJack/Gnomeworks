@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.75 (2026-11-22)
+
+- Packing Line, step 1c-1 (data only, nothing on screen changes): `js/destinations.js` (`GW.DESTINATIONS`) lists the ten regions in unlock order with their stamp colors and symbols, and the 53 places that buy from the factory, each with the item ids it buys.  It is generated from the map's locations file by `node tools/destinations.js`, which takes item names from `js/config.js`, adds the whole Bathroom group to every place (everybody needs a bathroom), and reports any import name that matches no item (none today).  The page loads it right after config; nothing reads it yet.
+
 ## v0.2.0-draft.74 (2026-11-22)
 
 - Packing Line, step 1b.4 (still hidden behind `?ship=1`): the driver now waits grumpy (arms crossed, standing), at full size.  On desktop he stands centered in the doorway, just in front of the sill, in front of his truck, clear of the bench, the chain, and the conveyor.  On phones he stands in front of the packing bench's right end, his feet lower than the bench's front legs so he reads as in front of it.  He still walks in from the doorway after the truck settles and back out before it leaves, with the same timings.  `shipping.driverSpot` and the lean spots are gone: each layout has one `driver.at`.  The leaning copy `driver_gnomerica_waiting.webp` is removed (its master stays in `art-masters/`).

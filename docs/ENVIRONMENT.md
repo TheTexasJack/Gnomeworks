@@ -61,6 +61,10 @@ node tools/smoke-test.js
 # Rebuild docs/INVENTORY.md after any item change
 node tools/inventory.js
 
+# Rebuild js/destinations.js (the Packing Line's places and what they buy) after any change to the map's
+# locations file or to item names.  It prints places per region and any import name that matches no item.
+node tools/destinations.js
+
 # Ship a change (after bumping GW.VERSION and adding a CHANGELOG line)
 node tools/stamp.js          # version stamps on every CSS and JS link; the smoke test fails without it
 git add -A
@@ -132,7 +136,7 @@ js/shipping.js        the shipping room (Packing Line), hidden unless ?ship=1
 js/main.js            input, game loop, shinies, pause, settings, wiring
 assets/               all art (see docs/ASSETS.md)
 art-masters/          full-size approved art masters, never loaded by the game (packing-line/, postcards/)
-tools/                art.py (art pipeline), smoke-test.js, stamp.js, inventory.js, map/build_map.py
+tools/                art.py (art pipeline), smoke-test.js, stamp.js, inventory.js, destinations.js, map/build_map.py
 docs/                 these docs
 CHANGELOG.md          every version, newest first
 README.md             short public readme
