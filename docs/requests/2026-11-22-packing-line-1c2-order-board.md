@@ -1,8 +1,15 @@
-# Work order: Packing Line 1c-2, three work orders on the board (v0.1)
+# Work order: Packing Line 1c-2, three work orders on the board (v0.2)
 
 **Status:** Approved
 **Written by:** Claudia, 2026-11-22.  **Approved by:** Nathan, 2026-11-22 ("1b.5 approved and 1c-2 too").
 **Model:** Opus 5.5
+
+## Addendum (Claudia, 2026-11-23; waiting on Nathan's OK)
+
+This order was written at draft.75.  Two things changed under it:
+
+1. **Version.**  In step 7, bump `GW.VERSION` to the next draft number (the game is at draft.78), in place of `0.2.0-draft.76`.
+2. **The phone board.**  Since 1b.7 the parked truck covers the lower right corner of the tall room's order board: the truck's left edge is at 63.7% of the room's width and the painted frame runs to about 72%.  The truck's placement is approved and does not move.  So the tall `board` rectangle ends left of the truck (about 62%), and all three slips, their stamp corners included, sit fully clear of it.  Check with the truck parked, Day and Night.  The wide room is not affected.
 
 ## Goal
 

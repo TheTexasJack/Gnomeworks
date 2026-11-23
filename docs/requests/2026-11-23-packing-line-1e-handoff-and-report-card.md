@@ -22,7 +22,7 @@ Close the loop.  Pulling the chain to close the door hands the packed boxes to t
 2. **Art.**  Game copies of the report card and the happy driver (`tools/art.py resize`, the happy pose at the same height as the grumpy copy so the baseline holds).  Add them to `docs/ASSETS.md`.
 3. **Scoring each order** (all amounts in `CONFIG.shipping.score`):
     - ✅ when the box holds the ordered item and carries the right region stamp.
-    - ❌ "Wrong item" when it holds another item; ❌ "No stamp" or "Wrong stamp" when the stamp is missing or wrong; ❌ "Not packed" when the order has no finished box (DESIGNS: closing early leaves it unfilled).
+    - ❌ "Wrong item" when it holds another item; ❌ "No stamp" or "Wrong stamp" when the stamp is missing or wrong (layer 1 has one stamp, so "Wrong stamp" cannot happen yet; build the check anyway); ❌ "Not packed" when the order has no finished box (DESIGNS: closing early leaves it unfilled).
     - Each ✅ adds Stonks set by region difficulty (Gnomerica's amount in config), never by pile size.  Each ❌ subtracts a smaller amount.  Stonks never goes below 0.
 4. **The hand-off.**  When the player pulls the chain to close with the driver in place:
     - If every order is ✅, the driver switches to the happy pose (thumbs up) for a moment; otherwise he stays grumpy (DESIGNS: no negative reaction).

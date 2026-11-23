@@ -203,6 +203,13 @@ Settled the same day (Nathan picked each):
 - **Fakes start after the first few shifts.**  Players learn the packing first.  Fakes start with one picture tell, and more tells come later.
 - ~~Both fake mistakes move the ticker; dismissing a real driver is a small dip and a replacement driver comes in.~~  Replaced 2026-11-22 by the rules below.
 
+**The room is only the Packing Line (Nathan, 2026-11-23, decided)**
+
+- **The factory rests while the player is in the Shipping view.**  No shinies, no Wild Magic, no Clone Attack alert, no hunt, no producer or special pop-ups.  "All factory work should stop when in the shipping lane, just as if a person is away.  The screen will fill up too much for what they are focused on."
+- **Open (Nathan to pick):** whether the time in the room is credited on leaving, like a returning player's catch-up, or is a hard stop like the pause button.  Work order 1c-3 drafts the first with a config switch for the second.
+- **The package has the stage.**  The driver is flavor behind the flow of the game, so the box and other packing pieces may cover him.
+- **Placement is tested per region.**  The Gnomerica truck and driver are approved on desktop and phone.  Later drivers are slightly taller and each truck has small differences, so each new pair gets its own placement pass.
+
 **The driver's moods (Nathan, 2026-11-22, decided)**
 
 - **Drivers always show up grumpy.**  The grumpy pose (arms crossed, standing) is how every driver waits while the player packs.  "A grumpy driver?  there is something real about that."

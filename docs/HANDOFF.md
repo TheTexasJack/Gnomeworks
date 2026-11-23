@@ -26,8 +26,11 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 
 1. **1b (done):** the room, the door and chain, the truck backed into the room, the grumpy driver.
 2. **1c-2 (approved):** three work orders on the board, tap to read.
-3. **1d:** tap the conveyor for the item menu, drag the ordered item into a cardboard box, close it, stamp it.
-4. **1e:** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.
+3. **1c-3 (draft, Nathan 2026-11-23):** the factory rests while the player is in the Shipping view.  No shinies, events, or pop-ups in the room.
+4. **1d:** tap the conveyor for the item menu, drag the ordered item into a cardboard box, close it, stamp it.
+5. **1e:** close the door to hand off, the driver reacts, the truck leaves, the report card, and the GRIP line on the STONKS screen.
+
+**Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 
 After Thanksgiving: the supplies rules (peanuts, bubble wrap, FRAGILE and HEAVY), the other three box types, APPROVED and DENIED, and the garage-door roll.
 
