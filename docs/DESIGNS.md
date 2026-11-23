@@ -209,7 +209,8 @@ Settled the same day (Nathan picked each):
 - **Counted as away (Nathan, 2026-11-23, option A):** time in the room is credited on leaving through the existing offline catch-up, so packing never costs production.
 - **Future producers stay out of the room too (Nathan, 2026-11-23).**  Every producer, event, and pop-up added later follows the same rest rule.
 - **The phone screen holds still in the room (Nathan, 2026-11-23):** no page scroll, bounce, zoom, or view swipe under the player's hands.  Desktop is fine.
-- **Leaving the room ends the day (Nathan, 2026-11-23, future enhancement):** tapping "The Machine" or "Shop Floor" mid-trip warns that this ends the day and sends off the current truck as is.
+- **Leaving the room ends the day (Nathan, 2026-11-23, future enhancement):** tapping "The Machine" or "Shop Floor" mid-trip warns that this ends the day and sends off the current truck as is, scored as a hand-off.
+- **Hold the trip until the day ends (Nathan, 2026-11-23, future enhancement):** the truck, driver, orders, and packed boxes wait for the player to come back.  Overlaps the warning above; Nathan to pick how they fit before either is built.
 - **The package has the stage.**  The driver is flavor behind the flow of the game, so the box and other packing pieces may cover him.
 - **Placement is tested per region.**  The Gnomerica truck and driver are approved on desktop and phone.  Later drivers are slightly taller and each truck has small differences, so each new pair gets its own placement pass.
 
