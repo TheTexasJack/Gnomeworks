@@ -54,7 +54,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] Work orders and drivers: APPROVED or DENIED stamps on orders; the door chain sends any driver away (Nathan, 2026-11-22).
     - [x] Stamp scoring and what follows a sent-away driver: reopen the door for a random driver, no more than 2 TNP drivers in a row (Nathan, 2026-11-22).
     - [ ] **Future upgrade (Nathan, 2026-11-22):** the shipping door opens and closes smoothly, rolling up like a garage door, in place of the instant swap built in 1a.
-    - [ ] **Future option (Nathan, 2026-11-22):** replace every driver's and elf's leaning pose with a standing pose, which removes the need for anything to lean on.
+    - [ ] **Decided direction (Nathan, 2026-11-22, after 1b.2):** replace every driver's and elf's leaning "waiting" pose with a plain standing pose, which removes the need for anything to lean on.  In 1b.2 the leaning driver's foot overlapped the bench on desktop and phone.  Needs new art: 20 standing poses (10 drivers, 10 elves) on the same canvas and baseline as their happy and grumpy poses.  Until then the waiting pose stays as built in 1b.2.
     - [ ] Before the Shipping view goes live: the view buttons wrap on a 390px phone, and the chain needs Space and Enter (1a review).
     - [ ] Shipping log event logic, and throw-ins.
     - [ ] Region to producer pairings (only Moonsmith from Gnonmoon is set).
