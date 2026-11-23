@@ -74,3 +74,5 @@ These were placed by eye from screenshots.  When art changes, re-check them with
 - Junk item art: Twemoji, CC-BY 4.0, credited in the game.
 - Music (planned): Nathan's Steammetal Studios tracks made on Suno's Pro plan, which carries commercial rights for songs made while subscribed.  Songs made on Suno's free plan are personal use only and must not ship.
 - Sound effects: synthesized in code, no outside rights involved.
+
+**Review mocks (never loaded by the game):** `docs/art-style/references/box-face-mock-v0.3.png`, the approved box face layout (Nathan, 2026-11-23), drawn from the masters by `tools/mocks/box_face_mock.py`.
