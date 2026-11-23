@@ -92,9 +92,32 @@ async function packCheck(page, errors) {
   if (rec.length !== orders.length || rec.some((r, i) => !r || r.item !== orders[i] || r.count !== 4999 || r.stamp !== 'gnomerica')) fail('record wrong: ' + JSON.stringify(rec));
   if (await page.$('.ship-box:not(.is-stacked)')) fail('a box appeared after every order was packed');
   if (await page.evaluate(() => JSON.stringify(GW.game.s.items)) !== shelf) fail('the shelf changed');
+  if (!await page.evaluate(() => document.querySelector('.ship-chain').classList.contains('is-ready') && !document.querySelector('.ship-finish').hidden)) fail('the chain did not show how to finish');
+  const stonks0 = await page.evaluate(() => GW.game.s.stonks);
   c = await mid('.ship-chain'); await page.mouse.click(c.x, c.y);
   if (await page.evaluate(() => GW.ship.packed().length + document.querySelectorAll('.ship-box').length)) fail('closing the door did not clear the packing');
-  console.log(`packing: ${orders.length} orders packed (${orders.join(', ')})`);
+  // The hand-off (1e): a perfect shift ships the piles down to 1, adds Stonks, and shows the report card once the door closes.
+  const left = await page.evaluate(ids => ids.map(id => GW.game.s.items[id]), orders);
+  if (left.some(n => n !== 1)) fail('shipping left the shelf at ' + left.join(', ') + ' (expected 1 each)');
+  const want = stonks0 + orders.length * await page.evaluate(() => GW.CONFIG.shipping.score.regions.gnomerica.right);
+  if (await page.evaluate(() => GW.game.s.stonks) !== want) fail('Stonks did not rise to ' + want);
+  try { await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 12000 }); } catch (e) { fail('no report card after the door closed'); return; }
+  const rights = await page.$$eval('.ship-card .card-row.is-right', r => r.length);
+  if (rights !== orders.length) fail(`report card shows ${rights} right of ${orders.length}`);
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.ship.cardOpen())) fail('Escape did not close the report card');
+  await page.waitForTimeout(1200);
+  if (await page.textContent('.stonks-num') !== String(want)) fail('the STONKS screen did not tick up to ' + want);
+  await page.reload();
+  await page.waitForTimeout(400);
+  if (await page.evaluate(() => GW.game.s.stonks + ',' + GW.game.s.stonksHistory.length) !== want + ',1') fail('Stonks were not saved');
+  // An old save with no Stonks loads at 0.
+  await page.evaluate(() => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); delete o.stonks; delete o.stonksHistory;
+    GW.state.save = () => false; localStorage.setItem(k, JSON.stringify(o)); });
+  await page.reload();
+  await page.waitForTimeout(400);
+  if (await page.evaluate(() => GW.game.s.stonks + ',' + JSON.stringify(GW.game.s.stonksHistory)) !== '0,[]') fail('an old save did not load with Stonks at 0');
+  console.log(`packing: ${orders.length} orders packed and shipped (${orders.join(', ')}), Stonks ${want}`);
 }
 
 (async () => {

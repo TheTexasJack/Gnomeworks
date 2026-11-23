@@ -142,6 +142,52 @@ body {
   .ship-chain.pull img { animation-name: chainPullCalm; }
   @keyframes chainPullCalm { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(calc(var(--pull, 7%) * 0.5)); } }
 }
+/* the hand-off (1e): with every order packed the chain glows and sways from its top (no sway with reduced motion),
+   and a brass tag by its handle says to pull it */
+.ship-chain.is-ready { transform-origin: 50% 0; animation: chainSway var(--sway-ms, 1400ms) ease-in-out infinite alternate; }
+.ship-chain.is-ready img { filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 4px #ffd34d) drop-shadow(0 0 9px #ffb703); }
+@keyframes chainSway { from { rotate: calc(var(--sway, 1.6deg) * -1); } to { rotate: var(--sway, 1.6deg); } }
+@media (prefers-reduced-motion: reduce) { .ship-chain.is-ready { animation: none; } }
+#ship .ship-finish { position: absolute; z-index: 3; transform: translateY(-50%); container-type: inline-size; pointer-events: none;
+  border-radius: 6px; text-align: center; color: #3a2210;
+  background: linear-gradient(180deg, #ffe7a3, #e0a93e 55%, #b97a22); border: 1px solid #6e4614;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 0 6px rgba(255,200,80,.8), 0 .4vmin .6vmin rgba(0,0,0,.45); }
+#ship .ship-finish span { display: block; padding: 5cqw 6cqw; font: bold 13cqw/1.15 var(--font); white-space: nowrap; }
+#ship .ship-finish[hidden] { display: none; }
+/* the report card over the room: the paper (09) with live rows; sizes from CONFIG.shipping.card, cqw = 1% of the card */
+#ship .ship-card-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
+#ship .ship-card-view[hidden] { display: none; }
+.ship-card { position: relative; flex: none; width: var(--card-w); height: var(--card-h); container-type: size; font-family: var(--font); color: #3a2414;
+  user-select: none; -webkit-user-select: none; filter: drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.55)); }
+.night #ship .ship-card { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.ship-card > * { position: absolute; }
+.ship-card .card-paper { inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.ship-card .card-row { left: 0; right: 0; }
+.ship-card .card-row > * { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; }
+.ship-card .card-mark { justify-content: center; font: bold 9cqw/1 var(--font); }
+.ship-card .is-right .card-mark { color: #2e8b3a; }
+.ship-card .is-wrong .card-mark { color: #b8262a; }
+.ship-card .card-words { flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 1cqw; gap: .4cqh; }
+.ship-card .card-town { font: bold 5.2cqw/1.1 var(--font); }
+.ship-card .card-item { font: bold 4.2cqw/1.15 var(--font); color: #5a3a22; }
+.ship-card .card-why { font: bold 4.2cqw/1.15 var(--font); color: #b8262a; }
+.ship-card .card-pic { justify-content: center; }
+.ship-card .card-pic .item-icon { width: 12cqw; height: 12cqw; font-size: 10cqw; }
+.ship-card .card-total { left: 0; right: 0; transform: translateY(-50%); text-align: center; font: bold 5.4cqw/1 var(--font); }
+/* the GRIP line inside the STONKS screen painted on the back wall; cqh = 1% of the glass's height */
+#ship .ship-stonks { position: absolute; container-type: size; pointer-events: none; color: var(--ticker, #46f06a);
+  font-family: var(--font); text-shadow: 0 0 1.5cqh var(--ticker, #46f06a); }
+#ship .stonks-top { position: absolute; left: 4%; right: 4%; top: 6%; height: 28%; display: flex; align-items: baseline; justify-content: space-between; }
+#ship .stonks-label { font: bold 22cqh/1 var(--font); letter-spacing: .08em; }
+#ship .stonks-num { font: bold 24cqh/1 var(--font); }
+#ship .ship-stonks.is-ticking .stonks-num { animation: stonksTick .9s ease-out; }
+@keyframes stonksTick { 0% { transform: scale(1); } 30% { transform: scale(1.18); } 100% { transform: scale(1); } }
+#ship .stonks-chart { position: absolute; left: 5%; right: 5%; top: 42%; bottom: 10%;
+  background: repeating-linear-gradient(0deg, rgba(70,240,106,.12) 0 1px, transparent 1px 25%); }
+#ship .stonks-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+#ship .stonks-chart polyline { fill: none; stroke: var(--ticker, #46f06a); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; filter: drop-shadow(0 0 2px var(--ticker, #46f06a)); }
+#ship .stonks-dot { position: absolute; width: 7cqh; height: 7cqh; border-radius: 50%; background: var(--ticker, #46f06a); transform: translate(-50%, -50%); box-shadow: 0 0 2cqh var(--ticker, #46f06a); }
+#ship .stonks-dot[hidden] { display: none; }
 /* work orders (1c-2): slips pinned side by side on the order board (sizes set from CONFIG.shipping.slip), and one
    open full size over the room.  Each slip is a size container, so its layout (from the approved mock) scales with it:
    cqw = 1% of the slip's width, cqh = 1% of its height. */

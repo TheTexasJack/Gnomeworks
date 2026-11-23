@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.83';
+GW.VERSION = '0.2.0-draft.84';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -154,7 +154,12 @@ GW.CONFIG = {
         box: { x: 57, y: 66.4, h: 24 },
         tray: { x: 67.6, y: 63.4, w: 6.2 },
         stack: { x: 77.6, y: 84, h: 16, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
-        menu: [1, 2, 50, 95]
+        menu: [1, 2, 50, 95],
+        // Hand-off (1e), in % of the room.  finishTag = the "Pull to ship!" tag beside the chain's handle: [x of its
+        // right edge, y of its center, width].  stonks = the STONKS screen's black glass [x, y, w, h], measured from
+        // the Day room (x 855 to 1169, y 155 to 301 of 1600 x 901; the Night twin lines up), inset for its round corners.
+        finishTag: [91.6, 66, 9],
+        stonks: [54.2, 18.6, 18.2, 13.6]
       },
       tall: {
         closed: 'assets/packing/room_tall.webp', open: 'assets/packing/room_tall_open.webp', aspect: '900 / 1599',
@@ -187,12 +192,23 @@ GW.CONFIG = {
         box: { x: 38, y: 71.4, h: 17 },
         tray: { x: 63.5, y: 69.6, w: 15 },
         stack: { x: 78, y: 92, h: 11.5, spots: [[-0.36, 0, -3], [0.36, 0, 2], [0, -0.66, -1]] },
-        menu: [2, 1, 96, 37]
+        menu: [2, 1, 96, 37],
+        // Hand-off (1e), as in the wide room.  stonks: the glass runs x 282 to 630, y 414 to 571 of 900 x 1599.
+        finishTag: [93.2, 60.5, 19],
+        stonks: [32.6, 26.6, 36.2, 8.5]
       }
     },
     // Layer 1 has one region: Gnomerica's truck and driver (he waits grumpy; drivers always arrive grumpy).
     truck: { img: 'assets/packing/truck_gnomerica.webp' },
-    driver: { img: 'assets/packing/driver_gnomerica_grumpy.webp' },
+    // happy = the thumbs-up pose for a perfect shift (1e), the same 400 px canvas height so the baseline holds.
+    // shiftX moves it sideways (% of its own width) so its feet stand where the grumpy pose's do: the happy
+    // canvas is wider (the thumb), and its feet sit 9 px right of its center.  happyMs = how long he beams
+    // before he walks out (he leaves smiling).
+    driver: {
+      img: 'assets/packing/driver_gnomerica_grumpy.webp',
+      happy: { img: 'assets/packing/driver_gnomerica_happy.webp', shiftX: -3.33 },
+      happyMs: 1300
+    },
     // A trip: the door opens, the truck backs in and settles, then the driver walks in.  Closing reverses it,
     // and the door shows closed once the truck is gone.  Taps on the chain mid-trip are ignored.
     trip: {
@@ -274,7 +290,38 @@ GW.CONFIG = {
       setAsideDelayMs: 450, // stamped, then it moves to the stack
       slideMs: 650,         // the box sliding to the stack
       nextMs: 300           // the next order's box appearing
-    }
+    },
+    // Scoring a hand-off (1e).  Each order with the ordered item and the right region stamp is right and adds
+    // `right` Stonks for its region (set by region difficulty, never by pile size); any other order subtracts
+    // `wrong`.  Stonks never go below 0.  Draft amounts (Claude Code, 1e); Gnomerica is the first, easiest region.
+    // reasons = the report card's words for each kind of miss.  A closed box with an item ships even without a
+    // stamp ("No stamp"); an open or empty box does not ship ("Not packed").
+    score: {
+      regions: { gnomerica: { right: 10, wrong: 3 } },
+      reasons: { item: 'Wrong item', noStamp: 'No stamp', wrongStamp: 'Wrong stamp', notPacked: 'Not packed' }
+    },
+    // When every order has a stamped box, the chain glows and sways gently and a brass tag by its handle shows
+    // `text` until it is pulled (draft wording, Claudia).  swayDeg = how far it swings each way, swayMs = one swing.
+    // Reduced motion: the glow and the tag, no sway.
+    finish: { text: 'Pull to ship!', swayDeg: 1.6, swayMs: 1400 },
+    // The report card (09), shown over the room once the door has closed.  aspect = the paper's width / height;
+    // openSize = its largest height and width (% of the room's), as for an open slip.  Places on the card, in %
+    // of the card, measured from the master (1199 x 1312): rows = each row's top and bottom, box = the tick box's
+    // center x and width, text = the words' left and right, pic = the dashed picture frame's left and right,
+    // total = the band under the last row (its center y).
+    card: {
+      img: 'assets/packing/report_card.webp',
+      aspect: 822 / 900,
+      openSize: 94,
+      rows: [[26.3, 44.4], [45.0, 63.6], [64.3, 82.5]],
+      box: [13.6, 8.8],
+      text: [22.4, 62],
+      pic: [63.1, 92.0],
+      total: 86.3
+    },
+    // The GRIP line on the STONKS screen: our Stonks and a line of the last `history` shift totals.  It moves
+    // when the report card closes, counting up over tickMs.
+    ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a' }
   },
 
   tap: {

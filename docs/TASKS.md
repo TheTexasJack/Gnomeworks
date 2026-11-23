@@ -1,6 +1,6 @@
 # Tasks and status
 
-Last updated 2026-11-23, at v0.2.0-draft.83.
+Last updated 2026-11-23, at v0.2.0-draft.84.
 
 ## Where we are
 
@@ -78,7 +78,6 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1d.1 (draft.82): the box label shows only the item's picture, a closed box shows none, the stamp lands bold and on top, and the item menu sits on the supply drawer frame (05a) (Nathan's test of draft.81).
     - [x] 1d.2 (draft.83): the region stamp sits small and straight in the box's upper right corner, the same gap from the top and the right (box face v0.3).
     - [ ] **Future, with the supplies rules (Nathan, 2026-11-23):** replace the stamp tray with one supplies menu (stamps, idols, sprays, stickers, and the rest) on the supply drawer frame (05a), which the item menu has used since 1d.1.  See DESIGNS.md, "One supplies menu for every tool."
-    - [ ] 1d.2 (approved): the region stamp lands small and straight in the box's upper right corner (box face mock v0.3).
     - [ ] Later layer: the shipping label on every box, in the middle (Nathan, 2026-11-23; DESIGNS.md, "The box face").
     - [ ] **Future enhancement (Nathan, 2026-11-23):** a box contents screen (tap a box to see everything in it), for when later regions ask for 2 or 3 items per order.  Layer 1 boxes hold one item.  With it, boxes take whatever the player adds: extras still complete the order with a small deduction, and a missing ordered item is still wrong (Nathan, 2026-11-23; DESIGNS.md, "What goes in a box").
     - [ ] **Future enhancement (Nathan, 2026-11-23):** leaving the Shipping view mid-trip (tapping "The Machine" or "Shop Floor") shows a warning first: leaving ends the day and sends off the current truck as is.  Today leaving just resets the room.  Confirming counts as a hand-off, so 1e's scoring applies (unfinished orders score "Not packed") (agreed, Nathan, 2026-11-23).
@@ -88,7 +87,7 @@ Nathan sent him the proposal ("Gnomeworks: Producers and Mini-Games Proposal v0.
     - [x] 1c-3 (draft.80; approved v0.2, option A): the factory rests while the player is in the Shipping view, credited on leaving through the existing catch-up.  Future producers stay out of the room too (Nathan, 2026-11-23).
     - [x] Phone screen lock in the Shipping view: no scroll, bounce, zoom, or view swipe (Nathan, 2026-11-23).  Built in 1d (draft.81), step 5a.
     - [x] 1d (draft.81; approved v0.3): pack and stamp.
-    - [ ] 1e (approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).
+    - [x] 1e (draft.84; approved v0.2): hand-off, report card, GRIP line, and the chain's "Pull to ship!" cue.  The last piece of the Wednesday demo cut (HANDOFF.md).  Draft calls for Nathan and Claudia to check are in the work order's Result (score amounts, the unstamped-box rule, the tag's spot over the driver).
     - [ ] Each new region's truck and driver gets its own placement pass on desktop and phone (Nathan, 2026-11-23).
     - [ ] After the demo: 1f and 1g (drawer and supplies, the other boxes, Stonks polish).
 

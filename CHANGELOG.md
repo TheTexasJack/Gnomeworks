@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.84 (2026-11-23)
+
+- Packing Line, step 1e (still hidden behind `?ship=1`): the hand-off, the report card, and the GRIP line.  When every order has a stamped box, the door chain glows and sways gently and a brass tag by its handle reads "Pull to ship!" (no sway with reduced motion).  Pulling the chain hands the boxes to the driver.  Each order is scored: right when the box holds the ordered item and carries the region stamp, wrong for a wrong item, a missing or wrong stamp, or no finished box.  Right orders add Stonks by region (Gnomerica 10), wrong ones take 3 off, and Stonks never drop below 0.  Everything that shipped leaves the shelf, down to the display copy, wrong items included.  After a perfect shift the driver gives a thumbs up before he leaves; otherwise he stays grumpy.  Once the door closes, the report card shows each order's town, the item, a check or a cross, the reason for a cross, and the Stonks for the shift; a tap or Escape closes it.  The STONKS screen on the back wall now shows GRIP, our Stonks, and a green line of the last 10 shifts, which ticks up when the report card closes.  Stonks and the shift history are saved; old saves start at 0.  New art: the happy driver and the report card.  The smoke test now finishes a whole shift.
+
 ## v0.2.0-draft.83 (2026-11-23)
 
 - Packing Line, step 1d.2 (still hidden behind `?ship=1`): the region stamp lands small and straight in the box's upper right corner, like postage, following the approved box face layout (mock v0.3).  Its top and right edges sit the same gap in from the top and right of the box's front face.  It is 10% of the box's width (was 44% of the canvas, tilted), with no tilt.  It still lands solid, on top of everything, with the thump.  Only the stamp moved; the shipping label and the other stickers come with later layers.

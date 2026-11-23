@@ -11,8 +11,13 @@
    Packing (1d): a tap on the conveyor opens the item menu.  The active order (the leftmost unpacked one) has an
    open box on the bench; dragging a tile onto it puts that pile in, down to the display copy.  A tap closes a
    filled box (or opens a closed one again), the stamp tray then offers the region stamps, and a stamped box moves
-   to the stack by the truck while the next order's box appears.  The record of what was packed (GW.ship.packed())
-   is for the hand-off (1e); nothing ships, nothing is saved, and closing the door clears it all. */
+   to the stack by the truck while the next order's box appears.  The record of what was packed is GW.ship.packed().
+   The hand-off (1e): once every order has a stamped box, the chain glows and sways and a tag by its handle says to
+   pull it.  Pulling the chain with the driver in place scores each order (CONFIG.shipping.score), takes what shipped
+   off the shelf (down to the display copy), moves Stonks (saved, never below 0), and adds the shift to the history.
+   A perfect shift gets the driver's thumbs up before he leaves.  Once the door shows closed, the report card shows
+   over the room; closing it ticks the GRIP line on the STONKS screen up to the new total.  A trip with no orders
+   scores nothing and shows no card. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -26,6 +31,7 @@ GW.ship = (function () {
   var board, viewer, orders = [], slipOpen = false;
   var K = P.pack, conveyor, packLayer, boxEl = null, tray, menu, menuList, menuOpen = false, stacked = [];
   var packed = [], boxItem = null, boxCount = 0, boxState = 'none';   // boxState: 'none' | 'open' | 'closed' | 'stamped'
+  var screenEl, screenNum, screenLine, screenDot, tag, cardView, cardOpen = false, pendingCard = null, shown = null, tickAnim = 0;
 
   function enabled() {
     return !!P.enabled || new RegExp('[?&]' + P.testParam + '=1(&|$)').test(window.location.search);
@@ -40,6 +46,7 @@ GW.ship = (function () {
     // The order board sits on the back wall, so the truck and the driver draw in front of it.
     board = U.el('div', 'ship-board');
     box.appendChild(board);
+    buildScreen();
     // The bay is clipped to the doorway, so the truck only shows through the opening, behind the frame.
     bay = U.el('div', 'ship-bay');
     truck = img('ship-truck', P.truck.img);
@@ -48,6 +55,7 @@ GW.ship = (function () {
     driver = U.el('div', 'ship-driver');
     driverImg = img('', P.driver.img);
     driver.appendChild(driverImg);
+    new Image().src = P.driver.happy.img;       // loaded ahead, so the thumbs up shows at once
     box.appendChild(driver);
     // Packing (1d): the box, the stamp tray, and the stack draw in front of the driver (the box has the stage).
     conveyor = U.el('div', 'ship-conveyor');
@@ -85,7 +93,7 @@ GW.ship = (function () {
       e.stopPropagation();
       if (!e.isTrusted || e.button > 0) return;     // a real tap only, like the gear
       e.preventDefault();
-      if (slipOpen || trip === 'arriving' || trip === 'leaving') return;   // one trip at a time
+      if (slipOpen || cardOpen || trip === 'arriving' || trip === 'leaving') return;   // one trip at a time
       pull();
     });
     box.appendChild(chain);
@@ -95,6 +103,13 @@ GW.ship = (function () {
     rollerClosed = img('ship-room'); rollerOpen = img('ship-room ship-open');
     roller.appendChild(rollerClosed); roller.appendChild(rollerOpen);
     box.appendChild(roller);
+    // The "Pull to ship!" tag by the chain's handle (1e), shown once every order is packed.
+    tag = div('ship-finish');
+    tag.appendChild(U.el('span', '', P.finish.text));
+    tag.hidden = true;
+    box.appendChild(tag);
+    chain.style.setProperty('--sway', P.finish.swayDeg + 'deg');
+    chain.style.setProperty('--sway-ms', P.finish.swayMs + 'ms');
     // An open slip covers the whole room, so the chain and everything else under it get no taps.
     buildMenu();
     viewer = U.el('div', 'ship-slip-view');
@@ -104,10 +119,19 @@ GW.ship = (function () {
       closeSlip();
     });
     box.appendChild(viewer);
+    // The report card covers the whole room too; any tap or Escape closes it.
+    cardView = U.el('div', 'ship-card-view');
+    cardView.hidden = true;
+    cardView.addEventListener('pointerdown', function (e) {
+      e.stopPropagation(); e.preventDefault();
+      closeCard();
+    });
+    box.appendChild(cardView);
     box.style.setProperty('--slip-night', P.slip.nightBrightness);
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
-      if (slipOpen) { e.preventDefault(); closeSlip(); } else if (menuOpen) { e.preventDefault(); closeMenu(); }
+      if (cardOpen) { e.preventDefault(); closeCard(); }
+      else if (slipOpen) { e.preventDefault(); closeSlip(); } else if (menuOpen) { e.preventDefault(); closeMenu(); }
     });
     // A tap outside the open menu closes it.  Inside the room that tap does nothing else.
     document.addEventListener('pointerdown', function (e) {
@@ -187,6 +211,7 @@ GW.ship = (function () {
   function showBoard() {
     if (!built) return;
     board.textContent = '';
+    updateReady();
     if (trip !== 'here') return;
     var list = orders.length ? orders : [null];
     list.forEach(function (o, i) {
@@ -217,6 +242,9 @@ GW.ship = (function () {
     var ow = Math.min(S.openSize * S.aspect / ratio, S.openSize);
     viewer.style.setProperty('--slip-w', ow + '%');
     viewer.style.setProperty('--slip-h', (ow * ratio / S.aspect) + '%');
+    var Cd = P.card, cw = Math.min(Cd.openSize * Cd.aspect / ratio, Cd.openSize);
+    cardView.style.setProperty('--card-w', cw + '%');
+    cardView.style.setProperty('--card-h', (cw * ratio / Cd.aspect) + '%');
   }
   function openSlip(order) {
     viewer.textContent = '';
@@ -360,6 +388,159 @@ GW.ship = (function () {
     tray.style.left = L.tray.x + '%'; tray.style.top = L.tray.y + '%'; tray.style.width = L.tray.w + '%';
     if (boxEl) setBoxPlace(boxEl, L.box.x, L.box.y, L.box.h, 0);
     stacked.forEach(function (el, k) { var sp = stackSpot(L, k); setBoxPlace(el, sp.x, sp.y, sp.h, sp.tilt); });
+  }
+
+  // ---------- the hand-off (layer 1e; numbers in CONFIG.shipping.score, .finish, .card, and .ticker) ----------
+  function allPacked() {
+    return trip === 'here' && orders.length > 0 && orders.every(function (o, i) { return !!packed[i]; });
+  }
+  // The chain shows how to finish: glow and sway (css; no sway with reduced motion) and the tag.
+  function updateReady() {
+    var on = allPacked();
+    chain.classList.toggle('is-ready', on);
+    tag.hidden = !on;
+  }
+  function setPose(happy) {
+    var H = P.driver.happy;
+    driverImg.src = happy ? H.img : P.driver.img;
+    driverImg.style.translate = happy ? H.shiftX + '% 0' : '';
+  }
+  // One row per order.  The box still on the bench counts when it is closed with an item in it (it ships with no
+  // stamp); an open or empty box is not packed and does not ship.
+  function scoreShift() {
+    var Sc = P.score, R = Sc.reasons, rows = [], delta = 0, shipped = [], a = activeIndex();
+    var bench = a >= 0 && boxState === 'closed' && boxItem ? { item: boxItem.id, count: boxCount, stamp: null } : null;
+    orders.forEach(function (o, i) {
+      var rec = packed[i] || (i === a ? bench : null), why = [];
+      if (!rec) why.push(R.notPacked);
+      else {
+        if (rec.item !== o.item.id) why.push(R.item);
+        if (!rec.stamp) why.push(R.noStamp);
+        else if (rec.stamp !== o.place.region) why.push(R.wrongStamp);
+        shipped.push(rec);
+      }
+      var pts = Sc.regions[o.place.region] || Sc.regions[P.orders.region];
+      delta += why.length ? -pts.wrong : pts.right;
+      rows.push({ order: o, ok: !why.length, why: why });
+    });
+    return { rows: rows, delta: delta, shipped: shipped, perfect: rows.every(function (r) { return r.ok; }) };
+  }
+  // Into the save: the shelf loses what shipped (never below the display copy; a wrong item still shipped),
+  // Stonks move (never below 0), and the new total joins the history.
+  function applyShift(r) {
+    var s = GW.game.s, keep = P.orders.keep, before = s.stonks || 0;
+    r.shipped.forEach(function (rec) {
+      var have = s.items[rec.item] || 0;
+      s.items[rec.item] = Math.max(Math.min(have, keep), have - rec.count);
+    });
+    s.stonks = Math.max(0, before + r.delta);
+    r.change = s.stonks - before;
+    s.stonksHistory = (s.stonksHistory || []).concat([s.stonks]).slice(-P.ticker.history);
+    GW.ui.buildShelf(s);
+    GW.state.save(s);
+  }
+
+  // The report card: the paper with live rows over it, laid out from CONFIG.shipping.card.
+  function makeCard(r) {
+    var Cd = P.card, el = div('ship-card');
+    el.appendChild(img('card-paper', Cd.img));
+    r.rows.forEach(function (row, k) {
+      var y = Cd.rows[k];
+      if (!y) return;
+      var o = row.order, line = div('card-row ' + (row.ok ? 'is-right' : 'is-wrong'));
+      line.style.top = y[0] + '%'; line.style.height = (y[1] - y[0]) + '%';
+      var mark = div('card-mark', row.ok ? '\u2714' : '\u2718');
+      mark.style.left = (Cd.box[0] - Cd.box[1] / 2) + '%'; mark.style.width = Cd.box[1] + '%';
+      line.appendChild(mark);
+      var words = div('card-words');
+      words.style.left = Cd.text[0] + '%'; words.style.width = (Cd.text[1] - Cd.text[0]) + '%';
+      words.appendChild(div('card-town', o.place.name));
+      words.appendChild(div('card-item', o.item.name));
+      if (!row.ok) words.appendChild(div('card-why', row.why.join(', ')));
+      line.appendChild(words);
+      var pic = div('card-pic');
+      pic.style.left = Cd.pic[0] + '%'; pic.style.width = (Cd.pic[1] - Cd.pic[0]) + '%';
+      pic.appendChild(GW.ui.itemIcon(o.item));
+      line.appendChild(pic);
+      line.setAttribute('aria-label', o.place.name + ', ' + o.item.name + ': ' + (row.ok ? 'shipped' : row.why.join(', ')));
+      el.appendChild(line);
+    });
+    var c = r.change, total = div('card-total', 'Stonks this shift: ' + (c > 0 ? '+' : c < 0 ? '\u2212' : '') + Math.abs(c));
+    total.style.top = Cd.total + '%';
+    el.appendChild(total);
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-label', 'Report card');
+    return el;
+  }
+  function showCard(r) {
+    pendingCard = null;
+    cardView.textContent = '';
+    cardView.appendChild(makeCard(r));
+    cardView.hidden = false;
+    cardOpen = true;
+    GW.sfx.click();
+  }
+  function closeCard() {
+    if (!cardOpen) return;
+    cardView.hidden = true; cardView.textContent = '';
+    cardOpen = false;
+    tickTo();
+  }
+
+  // The STONKS screen: GRIP, our Stonks, and a line of the last shifts' totals, drawn inside the painted glass.
+  function buildScreen() {
+    var NS = 'http://www.w3.org/2000/svg';
+    screenEl = div('ship-stonks');
+    screenEl.style.setProperty('--ticker', P.ticker.color);
+    var top = div('stonks-top');
+    top.appendChild(div('stonks-label', P.ticker.label));
+    screenNum = div('stonks-num', '0');
+    top.appendChild(screenNum);
+    screenEl.appendChild(top);
+    var chart = div('stonks-chart'), svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    screenLine = document.createElementNS(NS, 'polyline');
+    screenLine.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(screenLine);
+    chart.appendChild(svg);
+    screenDot = U.el('i', 'stonks-dot');
+    chart.appendChild(screenDot);
+    screenEl.appendChild(chart);
+    screenEl.setAttribute('aria-label', 'Stonks');
+    box.appendChild(screenEl);
+  }
+  // hist = the totals to plot, oldest first; each shift takes one of `history` even steps across the glass.
+  function drawTicker(value, hist) {
+    var n = P.ticker.history, max = Math.max(1, Math.max.apply(null, hist.concat([value]))) * 1.15;
+    screenNum.textContent = U.fmt(Math.round(value));
+    screenEl.setAttribute('aria-label', P.ticker.label + ' Stonks: ' + Math.round(value));
+    var pts = hist.map(function (v, i) { return [i * 100 / (n - 1), 100 - v / max * 100]; });
+    screenLine.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+    var last = pts[pts.length - 1];
+    screenDot.hidden = !last;
+    if (last) { screenDot.style.left = last[0] + '%'; screenDot.style.top = last[1] + '%'; }
+  }
+  // Counts the number (and the newest point) up from what the screen shows to the saved total.
+  function tickTo() {
+    var s = GW.game.s, to = s.stonks || 0, hist = (s.stonksHistory || []).slice(), from = shown === null ? to : shown;
+    cancelAnimationFrame(tickAnim);
+    shown = to;
+    if (calmQuery.matches || from === to || !hist.length) { drawTicker(to, hist); return; }
+    screenEl.classList.remove('is-ticking'); void screenEl.offsetWidth; screenEl.classList.add('is-ticking');
+    var t0 = performance.now(), prev = hist.length > 1 ? hist[hist.length - 2] : from;
+    function frame(now) {
+      var k = Math.min(1, (now - t0) / P.ticker.tickMs), e = 1 - Math.pow(1 - k, 3), h = hist.slice();
+      h[h.length - 1] = prev + (to - prev) * e;
+      drawTicker(from + (to - from) * e, h);
+      if (k < 1) tickAnim = requestAnimationFrame(frame);
+    }
+    tickAnim = requestAnimationFrame(frame);
+  }
+  function placeHandoff(L) {
+    var st = L.stonks, t = L.finishTag;
+    screenEl.style.left = st[0] + '%'; screenEl.style.top = st[1] + '%'; screenEl.style.width = st[2] + '%'; screenEl.style.height = st[3] + '%';
+    tag.style.right = (100 - t[0]) + '%'; tag.style.top = t[1] + '%'; tag.style.width = t[2] + '%';
   }
 
   // ---------- the item menu ----------
@@ -533,12 +714,14 @@ GW.ship = (function () {
     placeBoard(L, parseFloat(wh[0]) / parseFloat(wh[1]));
     // A layout change mid-trip skips to where the trip was heading.
     placePack(L);
+    placeHandoff(L);
     var made = false;
     if (trip === 'arriving') { trip = 'here'; made = true; }
     if (trip === 'leaving') { trip = 'closed'; open = false; }
     stopAnims();
     settle();
     if (made) newOrders(); else showBoard();
+    if (trip === 'closed' && pendingCard) showCard(pendingCard);
   }
 
   // ---------- the trip ----------
@@ -573,6 +756,7 @@ GW.ship = (function () {
   function arrive() {
     var L = layout();
     stopAnims();
+    setPose(false);
     trip = 'arriving'; open = true;
     settle();
     truck.style.visibility = 'visible';
@@ -592,19 +776,26 @@ GW.ship = (function () {
     ]);
   }
 
-  function leave() {
+  // r = the scored shift (null when there were no orders).  A perfect shift gets the thumbs up first.
+  function leave(r) {
     var L = layout();
     stopAnims();
     trip = 'leaving';
+    pendingCard = r;
     clearOrders();                  // closing the door takes the orders with it
     steps([
+      function () {
+        if (!r || !r.perfect) return;
+        setPose(true);
+        return new Promise(function (ok) { setTimeout(ok, P.driver.happyMs); });
+      },
       function () { return walk(L.driver.at, 1, L.driver.from, L.driver.fromScale, false, true); },
       function () {
         placeTruck(L.truck.xFrom);
         return play(truck, [{ left: L.truck.xTo + '%' }, { left: L.truck.xFrom + '%' }], { duration: T.truckOutMs, easing: 'cubic-bezier(.6,0,.8,.4)' });
       },
       function () { truck.style.visibility = 'hidden'; return new Promise(function (r) { setTimeout(r, T.closeDelayMs); }); },
-      function () { open = false; trip = 'closed'; anims = []; settle(); }
+      function () { open = false; trip = 'closed'; anims = []; settle(); if (pendingCard) showCard(pendingCard); }
     ]);
   }
 
@@ -613,14 +804,22 @@ GW.ship = (function () {
     clearTimeout(bounceTimer);
     bounceTimer = setTimeout(function () { chain.classList.remove('pull'); }, P.chain.pullMs);
     GW.sfx.click();
-    if (trip === 'closed') arrive(); else if (trip === 'here') leave();
+    if (trip === 'closed') arrive();
+    else if (trip === 'here') {
+      var r = orders.length ? scoreShift() : null;
+      if (r) applyShift(r);
+      leave(r);
+    }
   }
 
   // main.js calls this whenever the view changes.  Entering the room always starts with the door closed.
   function setActive(on) {
     if (on && !built) build();
-    if (on && !active) { stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); redraw(true); }
-    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); }
+    if (on && !active) {
+      stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
+      cancelAnimationFrame(tickAnim); shown = GW.game.s.stonks || 0; drawTicker(shown, (GW.game.s.stonksHistory || []).slice());
+    }
+    if (!on && active) { stopAnims(); closeSlip(); closeMenu(); pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
     // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
     // scrolled into view as it opens.  Desktop is left as it is.
@@ -636,7 +835,7 @@ GW.ship = (function () {
     isOpen: function () { return open; }, tripState: function () { return trip; },
     orders: function () { return orders.slice(); }, slipOpen: function () { return slipOpen; },
     menuOpen: function () { return menuOpen; }, boxState: function () { return boxState; },
-    activeOrder: activeIndex,
+    activeOrder: activeIndex, cardOpen: function () { return cardOpen; },
     // What was packed, for the hand-off (1e): one entry per order, null until stamped.
     packed: function () { return packed.map(function (r) { return r && { item: r.item, count: r.count, stamp: r.stamp }; }); }
   };
