@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Region map states for the Packing Line (v0.3 mock, Claudia, 2026-11-23: dark gray, from the stylized v18 map).
+"""Region map states for the Packing Line (v0.4, Claudia, 2026-11-23: dark gray, from the stylized v18 map; close-ups all one shape).
 
 Renders the master map with only the unlocked regions in color.  Locked
 regions turn gray and lose their place names, so nothing is spoiled.  Also
@@ -164,9 +164,12 @@ def main():
     half_w = max((max(xs) - min(xs)) / 2, (max(ys) - min(ys)) / 2 * 4 / 3) * 1.15
     half_h = half_w * 3 / 4
     box = [int(v * s) for v in (cx - half_w, cy - half_h, cx + half_w, cy + half_h)]
-    box = [max(0, box[0]), max(0, box[1]), min(w, box[2]), min(h, box[3])]
+    # Slide the box back inside the map (keeps every close-up the same shape).
+    dx = -box[0] if box[0] < 0 else min(0, w - box[2])
+    dy = -box[1] if box[1] < 0 else min(0, h - box[3])
+    box = [box[0] + dx, box[1] + dy, box[2] + dx, box[3] + dy]
     crop = Image.fromarray(close.clip(0, 255).astype(np.uint8)).crop(box)
-    crop = crop.resize((a.close, round(a.close * crop.height / crop.width)), Image.LANCZOS)
+    crop = crop.resize((a.close, a.close * 3 // 4), Image.LANCZOS)
     crop.save(os.path.join(a.out, f'closeup-{a.focus.lower().replace(" ", "-")}.webp'), quality=85, method=6)
     print('open:', ', '.join(unlocked))
     print('wrote', a.out)

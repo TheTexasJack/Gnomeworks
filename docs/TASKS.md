@@ -151,6 +151,8 @@ The Packing Line, the Tiny Monster info card, and the Rogue are written up in [D
 
 Answered 2026-11-03: shipped items leave the shelf, down to 1.
 
+- [ ] **Small polish (Calm motion review, 2026-11-23):** the older settings in the Info tab run into each other on one line (Claude Code gave the new Calm motion switch its own line and left the rest).  Give each setting its own line in a later polish pass.
+
 ## Known issues and accepted quirks
 
 | Issue | Status |
