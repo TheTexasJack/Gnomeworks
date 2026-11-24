@@ -1,7 +1,9 @@
 # ACTIVE HANDOFF: Gnomadica full map illustration
 
 **Updated:** 2026-11-15
-**Status (2026-11-22): PARKED as optional polish.**  Nathan closed the wall map package as covered: the approved small map icon on the wall, and the generated v0.29 map as the full map.  This Brasswood re-style (v18) no longer blocks anything.  Everything below is the record from 2026-11-15, kept in case the polish is picked up later.
+**Status (2026-11-23): IN USE.**  Nathan picked v18 as the source for the in-game map's region states (mocks v0.3, `docs/art-style/references/region-map/`): "This works.  And it looks better too."  The mocks show the whole v18 map with the sign in place, which he approved as the in-game look.  The plain v0.29 stays the canonical lore master.
+
+**Earlier status (2026-11-22): PARKED as optional polish.**  Nathan closed the wall map package as covered: the approved small map icon on the wall, and the generated v0.29 map as the full map.  This Brasswood re-style (v18) no longer blocks anything.  Everything below is the record from 2026-11-15, kept in case the polish is picked up later.
 
 **Earlier status (2026-11-15):** COMMITTED / REVIEW PENDING: v18 complete map and exact sign PNG exist on GitHub; visual placement approval and mobile QA pending
 **Goal:** Review the actual *full v18 map*, which integrates the approved carved oak/brass sign and removes the two explanatory KEY notes while preserving earlier approved terrain/labels. Obtain Nathan's actual map placement verdict.
