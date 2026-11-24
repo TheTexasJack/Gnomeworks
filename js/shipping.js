@@ -68,7 +68,6 @@ window.GW = window.GW || {};
 GW.ship = (function () {
   var C = GW.CONFIG, P = C.shipping, T = P.trip, U = GW.util;
   var tallQuery = window.matchMedia(P.tallQuery);
-  var calmQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var built = false, active = false, open = false;
   var trip = 'closed';            // 'closed' | 'arriving' | 'here' | 'leaving'
   var tripId = 0, anims = [];
@@ -508,7 +507,7 @@ GW.ship = (function () {
   function stampSlip(i, v) {
     if (i < 0 || !orders[i] || locked(i) || verdicts[i] === v) return;
     verdicts[i] = v;
-    var Bm = P.approval.bam, calm = calmQuery.matches, slip = viewer.querySelector('.ship-slip');
+    var Bm = P.approval.bam, calm = GW.calm(), slip = viewer.querySelector('.ship-slip');
     if (slip) {
       var old = slip.querySelector('.slip-verdict');
       if (old) old.remove();
@@ -689,7 +688,7 @@ GW.ship = (function () {
     packLayer.appendChild(boxEl);
     showBox();
     GW.tutorial.due('pack');                               // the tutorial (1q): the first box on the bench
-    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+    if (!GW.calm()) boxEl.firstChild.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
       { duration: K.nextMs, easing: 'cubic-bezier(.3,1.4,.5,1)' });
   }
   function tapBox() {
@@ -707,7 +706,7 @@ GW.ship = (function () {
     boxItem = item; boxCount = Math.min(o.qty, spare);
     GW.sfx.drop(item.tier, true);
     showBox();
-    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2%) scaleY(.97)' }, { transform: 'translateY(0)' }],
+    if (!GW.calm()) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(2%) scaleY(.97)' }, { transform: 'translateY(0)' }],
       { duration: K.thumpMs, easing: 'ease-out' });
   }
   // An inside supply into the open box (1i).  Adding one twice changes nothing.
@@ -716,14 +715,14 @@ GW.ship = (function () {
     boxIn[id] = true;
     GW.sfx.drop('common', true);
     showBox();
-    if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(1.5%) scaleY(.98)' }, { transform: 'translateY(0)' }],
+    if (!GW.calm()) boxEl.firstChild.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(1.5%) scaleY(.98)' }, { transform: 'translateY(0)' }],
       { duration: K.thumpMs, easing: 'ease-out' });
   }
   // A sticker onto the closed box (1j): it presses on, the box jolts a little, and a soft pat.  Adding one twice
   // changes nothing.
   function addSticker(id) {
     if (boxState !== 'closed' || boxOut[id]) return;
-    var St = K.stickers, calm = calmQuery.matches;
+    var St = K.stickers, calm = GW.calm();
     boxOut[id] = true;
     showBox();
     var pic = boxEl.querySelector('.box-sticker[data-sticker="' + id + '"]'), turn = 'translate(-50%, 0) rotate(' + St.tilt + 'deg) ';
@@ -749,7 +748,7 @@ GW.ship = (function () {
   // its thump.  A different region's stamp replaces it; the same one again changes nothing.
   function stampBox(rid) {
     if (boxState !== 'closed' || boxStamp === rid) return;
-    var el = boxEl, calm = calmQuery.matches;
+    var el = boxEl, calm = GW.calm();
     boxStamp = rid;
     showBox();
     var mark = boxPart('box-mark'), turn = 'translate(-50%, -50%) rotate(' + K.mark[3] + 'deg) ';
@@ -821,7 +820,7 @@ GW.ship = (function () {
     if (d.mode !== 'drag') return;
     d.el.classList.remove('is-dragged');
     d.el.style.translate = '';
-    if (back && !calmQuery.matches && d.el.isConnected) {
+    if (back && !GW.calm() && d.el.isConnected) {
       d.el.animate([{ translate: d.dx + 'px ' + d.dy + 'px' }, { translate: '0px 0px' }], { duration: K.hand.backMs, easing: 'cubic-bezier(.3,1.3,.5,1)' });
     }
   }
@@ -847,7 +846,7 @@ GW.ship = (function () {
   // size and tilt changing on the way, then one small settle and the thump, and it stops.  The arc is drawn as many
   // points on one linear animation, so nothing eases twice.  Reduced motion: a straight slide, the thump, no settle.
   function dropBox(el, from, to) {
-    var Dp = K.hand.drop, calm = calmQuery.matches, frames = [], n = calm ? 1 : Dp.frames, rise = calm ? 0 : from.h * Dp.rise / 100;
+    var Dp = K.hand.drop, calm = GW.calm(), frames = [], n = calm ? 1 : Dp.frames, rise = calm ? 0 : from.h * Dp.rise / 100;
     for (var k = 0; k <= n; k++) {
       var t = k / n, e = calm ? t : 0.5 - Math.cos(Math.PI * t) / 2;     // ease in and out
       frames.push({ left: (from.x + (to.x - from.x) * e) + '%', top: (from.y + (to.y - from.y) * e - rise * Math.sin(Math.PI * e)) + '%',
@@ -865,7 +864,7 @@ GW.ship = (function () {
   // inside supply on a closed one).
   function shakeBox() {
     if (!boxEl) return;
-    var Sh = K.shake, calm = calmQuery.matches, d = calm ? Sh.calmPct : Sh.pct, n = calm ? Sh.calmTimes : Sh.times, frames = [{ transform: 'translateX(0)' }];
+    var Sh = K.shake, calm = GW.calm(), d = calm ? Sh.calmPct : Sh.pct, n = calm ? Sh.calmTimes : Sh.times, frames = [{ transform: 'translateX(0)' }];
     for (var k = 0; k < n; k++) frames.push({ transform: 'translateX(-' + d + '%)' }, { transform: 'translateX(' + d + '%)' });
     frames.push({ transform: 'translateX(0)' });
     boxEl.firstChild.animate(frames, { duration: Sh.ms, easing: 'ease-in-out' });
@@ -1484,7 +1483,7 @@ GW.ship = (function () {
     cancelAnimationFrame(tickAnim);
     shown = to;
     var same = from[0] === to[0] && from[1] === to[1];
-    if (calmQuery.matches || same || !now.hists[0].length) { drawTicker(to, now.hists); return; }
+    if (GW.calm() || same || !now.hists[0].length) { drawTicker(to, now.hists); return; }
     screenEl.classList.remove('is-ticking'); void screenEl.offsetWidth; screenEl.classList.add('is-ticking');
     var t0 = performance.now(), prev = now.hists.map(function (h, k) { return h.length > 1 ? h[h.length - 2] : from[k]; });
     function frame(t) {
@@ -1791,7 +1790,7 @@ GW.ship = (function () {
   }
   // Rolls the door up or down over the open twin, with its rattle.  Reduced motion: a short crossfade.
   function rollDoor(up) {
-    var L = layout(), calm = calmQuery.matches, ms = calm ? T.doorCalmMs : up ? T.doorUpMs : T.doorDownMs;
+    var L = layout(), calm = GW.calm(), ms = calm ? T.doorCalmMs : up ? T.doorUpMs : T.doorDownMs;
     hideDoor();
     box.classList.add('is-open');
     door.style.clipPath = doorClip(L, 0);
@@ -1864,7 +1863,7 @@ GW.ship = (function () {
     return p.catch(function () {});   // cancelled animations reject; that's fine
   }
   function walk(fromXY, fromScale, toXY, toScale, fadeIn, fadeOut) {
-    var calm = calmQuery.matches;
+    var calm = GW.calm();
     var a = { left: fromXY[0] + '%', top: fromXY[1] + '%', transform: driverTransform(fromScale), opacity: fadeIn ? 0 : 1 };
     var mid = { offset: 0.2, opacity: 1 };
     var nearEnd = { offset: 0.8, opacity: 1 };
@@ -1894,7 +1893,7 @@ GW.ship = (function () {
         return play(truck, [{ left: truckX(L, L.truck.xFrom) + '%' }, { left: truckX(L, L.truck.xTo) + '%' }], { duration: T.truckInMs, easing: 'cubic-bezier(.2,.7,.3,1)' });
       },
       function () {
-        if (calmQuery.matches) return;
+        if (GW.calm()) return;
         return play(truck, [{ transform: 'translateY(0)' }, { transform: 'translateY(' + T.settle + '%)', offset: 0.35 },
           { transform: 'translateY(-' + (T.settle * 0.3) + '%)', offset: 0.7 }, { transform: 'translateY(0)' }], { duration: T.settleMs, easing: 'ease-out' });
       },

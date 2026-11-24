@@ -144,16 +144,18 @@ body {
   80% { transform: translateY(calc(var(--pull, 7%) * 0.12)); }
   100% { transform: translateY(0); }
 }
+@keyframes chainPullCalm { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(calc(var(--pull, 7%) * 0.5)); } }
 @media (prefers-reduced-motion: reduce) {
   .ship-chain.pull img { animation-name: chainPullCalm; }
-  @keyframes chainPullCalm { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(calc(var(--pull, 7%) * 0.5)); } }
 }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .ship-chain.pull img { animation-name: chainPullCalm; }
 /* the hand-off (1e): with every order packed the chain glows and sways from its top (no sway with reduced motion),
    and a brass tag by its handle says to pull it */
 .ship-chain.is-ready { transform-origin: 50% 0; animation: chainSway var(--sway-ms, 1400ms) ease-in-out infinite alternate; }
 .ship-chain.is-ready img { filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 4px #ffd34d) drop-shadow(0 0 9px #ffb703); }
 @keyframes chainSway { from { rotate: calc(var(--sway, 1.6deg) * -1); } to { rotate: var(--sway, 1.6deg); } }
 @media (prefers-reduced-motion: reduce) { .ship-chain.is-ready { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .ship-chain.is-ready { animation: none; }
 #ship .ship-finish { position: absolute; z-index: 3; transform: translateY(-50%); container-type: inline-size; pointer-events: none;
   border-radius: 6px; text-align: center; color: #3a2210;
   background: linear-gradient(180deg, #ffe7a3, #e0a93e 55%, #b97a22); border: 1px solid #6e4614;
@@ -188,6 +190,7 @@ body {
 #ship .ship-glow.ship-clip-glow .ship-room { filter: brightness(1.25) saturate(1.1); }
 @keyframes clipPulse { from { opacity: .35; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { #ship .ship-glow.ship-clip-glow { animation: none; opacity: .85; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-glow.ship-clip-glow { animation: none; opacity: .85; }
 /* the Shipping Log (1o): the work order's parchment (06) with live text, over the room like the report card; sizes
    from CONFIG.shipping.log, cqw = 1% of the page's width */
 #ship .ship-log-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
@@ -261,6 +264,7 @@ body {
   to { filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 12px rgba(255, 183, 3, .8)); } }
 .no-hints #ship .ship-book.is-new .ship-book-art { animation: none; filter: none; }
 @media (prefers-reduced-motion: reduce) { #ship .ship-book.is-new .ship-book-art { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-book.is-new .ship-book-art { animation: none; }
 /* the report card's good shift tag (1q): gold, over the bottom stripes */
 .ship-card .card-good { left: 50%; transform: translate(-50%, -50%); padding: .5em 1.1em; border-radius: .6em; white-space: nowrap;
   font-weight: bold; font-family: var(--font); line-height: 1.1; color: #1f5e27;
@@ -388,6 +392,7 @@ body {
   animation: twinkle var(--twinkle-ms, 1600ms) ease-in-out infinite; }
 @keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: .35; scale: .55; } }
 @media (prefers-reduced-motion: reduce) { .ship-slip .glitter-star { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .ship-slip .glitter-star { animation: none; }
 /* packing (1d): the active slip glows, packed slips get a check.  The box and the stack draw in
    front of the driver; places and sizes come from CONFIG.shipping.layouts.<layout> and .pack. */
 /* an unstamped slip on the board glows softly (1l), a tip: off with "Show instructions" */
@@ -397,6 +402,7 @@ body {
 @keyframes slipAskNight { from { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.5)); } to { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4) drop-shadow(0 0 7px rgba(255,236,170,.9)); } }
 @media (prefers-reduced-motion: reduce) { #ship .ship-board .ship-slip.is-unstamped { animation: none; filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); }
   .night #ship .ship-board .ship-slip.is-unstamped { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-board .ship-slip.is-unstamped { animation: none; filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); } :where(html.calm).night #ship .ship-board .ship-slip.is-unstamped { filter: brightness(var(--slip-night, .88)) drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 4px #fff3c4); }
 .no-hints #ship .ship-board .ship-slip.is-unstamped { animation: none; filter: drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.45)); }
 .night.no-hints #ship .ship-board .ship-slip.is-unstamped { filter: brightness(var(--slip-night, .88)) drop-shadow(0 .3vmin .35vmin rgba(0,0,0,.5)); }
 #ship .ship-board .ship-slip.is-active { transform: translateY(-4%) scale(1.06); filter: drop-shadow(0 0 1.5px #fffbe0) drop-shadow(0 0 2px #ffd34d) drop-shadow(0 0 5px #ffb703); }
@@ -484,6 +490,7 @@ body {
 #ship .ship-rules-rows { padding: 0 0 7px; }
 #ship .ship-rules.is-min .ship-rules-rows { display: none; }
 @media (prefers-reduced-motion: reduce) { #ship .ship-rules-chev { transition: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-rules-chev { transition: none; }
 #ship .ship-rule { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: .85rem; line-height: 1.2; }
 #ship .ship-rule-icon { width: 30px; height: 26px; object-fit: contain; flex: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
 .supply-icon { display: inline-flex; align-items: center; justify-content: center; }
@@ -501,6 +508,7 @@ body {
 #ship .ship-glow[hidden] { display: none; }
 @keyframes tipPulse { from { opacity: .55; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { #ship .ship-glow { animation: none; opacity: .9; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-glow { animation: none; opacity: .9; }
 #ship .ship-belt-tag { right: auto; }
 /* handing the box to the driver (1n): the dragged box follows the pointer above the room's other pieces; the driver
    glows softly while a closed box waits on the bench (breathing, steady with reduced motion) and brighter while the
@@ -516,6 +524,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   #ship .ship-driver.is-hand img { animation: none; filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 5px #ffd34d) drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
 }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) #ship .ship-driver.is-hand img { animation: none; filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 5px #ffd34d) drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
 .no-hints #ship .ship-driver.is-hand img { animation: none; filter: drop-shadow(0 .6vmin .5vmin rgba(0,0,0,.4)); }
 #ship .ship-hand-tag span { padding: 3cqw 4cqw; font-size: 9.5cqw; }
 #ship .ship-belt-tag span { padding: 2.6cqw 3.4cqw; font-size: 7.6cqw; }
@@ -551,6 +560,7 @@ body {
 .f-slash { position: absolute; left: -25%; top: 5%; width: 120% !important; height: auto; opacity: 0; filter: none !important; pointer-events: none; }
 .part.act > .f-slash { opacity: 1; animation: slash .3s ease-out forwards; }
 @media (prefers-reduced-motion: reduce) { .part.act > .f-slash { animation: none; opacity: .8; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .part.act > .f-slash { animation: none; opacity: .8; }
 @keyframes slash { from { opacity: 1; transform: scale(.8) rotate(-8deg); } to { opacity: 0; transform: scale(1.1) rotate(4deg); } }
 .station.hiring img { opacity: .92; }
 .plate {
@@ -874,6 +884,7 @@ details[open] > .shelf-sum::before { transform: rotate(90deg); }
 @media (prefers-reduced-motion: reduce) {
   .tap-ring, .crew-gnome, .rare-popup, #machine.robot-jam { animation: none !important; }
 }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .tap-ring, :where(html.calm) .crew-gnome, :where(html.calm) .rare-popup, :where(html.calm) #machine.robot-jam { animation: none !important; }
 
 /* ---------- right panel as a clipboard (Mara's art, assets/ui/clipboard.webp, 844x1080) ----------
    Border-image slices: top 281 (clip + paper header), sides 70 (wood rails), bottom 218 (nameplate).
@@ -987,6 +998,7 @@ body.paused .wild-target, body.paused .wild-target * { animation-play-state: pau
 #floor.dragging-clone .clone-arrow svg { filter: drop-shadow(0 0 1.2cqh rgba(150,255,90,1)) drop-shadow(0 0 3cqh rgba(150,255,90,.9)); }
 @keyframes arrowBob { from { transform: translate(-50%, -62%); } to { transform: translate(-50%, -38%); } }
 @media (prefers-reduced-motion: reduce) { .clone-arrow { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .clone-arrow { animation: none; }
 .part-vat.vat-ready > img { filter: drop-shadow(0 0 1.2cqh rgba(140,255,90,.95)) drop-shadow(0 0 2.5cqh rgba(140,255,90,.6)); }
 @keyframes cloneRun { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-4%) rotate(2deg); } }
 .clone.flip .clone-img { animation-name: cloneRunFlip; }
@@ -1003,6 +1015,7 @@ body.paused .clone-img { animation-play-state: paused; }
 .clone-alert img { width: 100%; height: auto; display: block; pointer-events: none; }
 @keyframes alertPulse { from { transform: translateX(-50%) scale(1); } to { transform: translateX(-50%) scale(1.06); } }
 @media (prefers-reduced-motion: reduce) { .clone-alert { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .clone-alert { animation: none; }
 
 .item-icon.pixel img { image-rendering: pixelated; image-rendering: crisp-edges; }
 
@@ -1083,6 +1096,7 @@ body.paused .clone-img { animation-play-state: paused; }
 @keyframes tickerUp { from { background-position: 0 0; } to { background-position: 0 -18px; } }
 body.paused .progress.ticker #nextBar { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .progress.ticker #nextBar { animation: none; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .progress.ticker #nextBar { animation: none; }
 
 /* ---------- Megagnome ---------- */
 .mega-row .mega-icon { position: relative; flex: none; align-self: center; }
@@ -1146,6 +1160,7 @@ body.paused .progress.ticker #nextBar { animation-play-state: paused; }
   background: rgba(30,15,4,.9); border: .5cqh solid var(--brass); color: #fff3c4; font-weight: bold; font-size: 5cqh; white-space: nowrap; }
 body.paused .hunt { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .boss-tag { animation: none; } .hunt-burst { animation-duration: .01s; } }
+/* the same under Calm motion (js/motion.js) */ :where(html.calm) .boss-tag { animation: none; } :where(html.calm) .hunt-burst { animation-duration: .01s; }
 @media (max-width: 720px) { .hunt-box { width: min(96cqw, 80cqh); aspect-ratio: 1 / 1; } .hunt-bow { width: 70cqw; } }
 
 /* ---------- phones held sideways (landscape, short screens) ----------

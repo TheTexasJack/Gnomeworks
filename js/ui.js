@@ -460,10 +460,9 @@ GW.ui = (function () {
 
   // ---------- squish and boing ----------
   var anims = {};
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   function animateFloor(now, s) {
     if (s.view !== 'floor' || s.paused) return;
-    var calm = reduceMotion.matches;   // device asks for less motion: frame swaps only, slower, no squash
+    var calm = GW.calm();   // calm motion (device or Info tab switch): frame swaps only, slower, no squash
     var r = E.rates(s), A = F.anim;
     Object.keys(anims).forEach(function (pid) {
       var a = anims[pid];
@@ -633,8 +632,8 @@ GW.ui = (function () {
     updateShop(s); updateCrew(s); updateHeader(s);
     var mn = $('#motionNote');
     if (mn) {
-      var sync = function () { mn.textContent = reduceMotion.matches ? 'Your device is set to reduce motion, so the Shop Floor gnomes switch poses gently instead of bouncing.' : ''; };
-      sync(); if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', sync);
+      var sync = function () { mn.textContent = GW.motion.deviceCalm() ? C.motion.deviceNote : ''; };
+      sync(); GW.motion.onChange(sync);
     }
     var hn = $('#hatNote');
     if (hn) hn.textContent = 'This month the gnomes are wearing: ' + currentHat().name + '.';

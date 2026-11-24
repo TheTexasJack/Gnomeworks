@@ -24,7 +24,7 @@ GW.wild = (function () {
     if (active || GW.game.resting()) return;   // the factory rests in the Shipping view
     var st = forceStyle || style();
     var box = document.getElementById('rareSlot');
-    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var calm = GW.calm();
     var pool = junk(), now = performance.now();
     active = { s: s, left: W.targets, caught: 0, ends: now + W.durationSeconds * 1000, els: [], style: st, megaAt: now + GW.CONFIG.mega.firstCrackSeconds * 1000 };
     var bonusIdx = st === 'storm' ? Math.floor(Math.random() * W.targets) : -1;

@@ -1,6 +1,6 @@
 // Gnomeworks smoke test.  Loads the game in a headless browser at desktop and
 // phone sizes, taps the machine, buys every gnome type, flips to the Shop Floor,
-// claims a shiny, reloads, and fails if anything logs an error or a file 404s.
+// claims a shiny, reloads, tries the Calm motion switch, and fails if anything logs an error or a file 404s.
 // Screenshots land in tools/out/.
 //
 // Needs: Node 18+ and Playwright with Chromium  (npm install playwright; npx playwright install chromium)
@@ -1042,6 +1042,113 @@ async function tutorialCheck(page, errors, name) {
   console.log(`tutorial (${name}): pages at their moments, once each, queue, real taps only, older saves, reset, bookshelf and its glow, good shift (not with an approved fake), glows ok (page ${fit.h} px tall)`);
 }
 
+// Calm motion (Info tab): the switch gives what a device set to reduce motion gives, with no reload, and is
+// remembered; a device that asks for less motion locks it on.  Desktop, its own context.  Screenshots of the Info tab.
+async function calmCheck(browser, errors) {
+  const fail = m => errors.push('calm motion: ' + m);
+  const ctx = await browser.newContext({ viewport: { width: 1400, height: 900 } });
+  const page = await ctx.newPage();
+  page.on('pageerror', e => fail('page error: ' + e.message));
+  await page.goto(URL + '?debug=1&ship=1');
+  await page.waitForTimeout(400);
+  await page.evaluate(() => {
+    GW.CONFIG.shipping.tutorial.pages.forEach(p => { GW.game.s.tutorial.seen[p.id] = true; });
+    const s = GW.game.s; s.cogs = 1e12; s.cogsSeen = 1e12;
+    GW.CONFIG.producers.forEach(p => { for (let i = 0; i < 12; i++) GW.econ.buy(s, 'producer', p.id); });
+    GW.econ.buy(s, 'oneTime', 'two_hands'); GW.econ.buy(s, 'oneTime', 'w_sword');
+    GW.state.save(s);
+  });
+  // Samples of the calm rules: the chain's sway, a slip's glitter, the shiny's pulse (test copies, off screen).
+  const sample = () => page.evaluate(() => {
+    let t = document.getElementById('calmSamples');
+    if (!t) {
+      t = document.createElement('div'); t.id = 'calmSamples'; t.style.cssText = 'position:fixed;left:-500px;top:0';
+      t.innerHTML = '<div class="ship-chain is-ready"><img alt=""></div><div class="ship-slip"><svg class="glitter-star"></svg></div><div class="rare-popup"></div>';
+      document.body.appendChild(t);
+    }
+    const a = sel => getComputedStyle(t.querySelector(sel)).animationName;
+    return { chain: a('.ship-chain'), glitter: a('.glitter-star'), calm: GW.calm(), cls: document.documentElement.classList.contains('calm'),
+      box: document.getElementById('calmOn').checked, locked: document.getElementById('calmOn').disabled,
+      note: document.getElementById('motionNote').textContent };
+  });
+  // The Shop Floor: calm swaps poses (the act class) and runs no squash or boing animations on the gnomes.
+  const floor = async () => {
+    await page.click('[data-view="floor"]');
+    await page.evaluate(() => {
+      window.__partAnims = 0; window.__acts = 0;
+      if (!window.__wrapped) {
+        window.__wrapped = true;
+        const orig = Element.prototype.animate;
+        Element.prototype.animate = function () { if (this.closest && this.closest('.part')) window.__partAnims++; return orig.apply(this, arguments); };
+        new MutationObserver(ms => ms.forEach(m => { if (m.target.classList && m.target.classList.contains('act')) window.__acts++; }))
+          .observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+      }
+    });
+    await page.waitForTimeout(3500);
+    const r = await page.evaluate(() => ({ anims: window.__partAnims, acts: window.__acts }));
+    await page.click('[data-view="machine"]');
+    return r;
+  };
+  const info = async shot => {
+    await page.click('[data-tab="info"]');
+    await page.$eval('#calmOn', e => e.scrollIntoView({ block: 'center' }));
+    await page.waitForTimeout(150);
+    await page.screenshot({ path: path.join(OUT, shot) });
+  };
+  const label = await page.evaluate(() => [document.getElementById('calmLabel').textContent, GW.CONFIG.motion.label]);
+  if (label[0] !== label[1]) fail(`the switch reads "${label[0]}"`);
+
+  let r = await sample();
+  if (r.calm || r.cls || r.box) fail('on by default');
+  if (r.chain === 'none' || r.glitter === 'none') fail(`normal motion missing with the switch off (${r.chain}, ${r.glitter})`);
+  let f = await floor();
+  if (!f.anims) fail('no squash or boing on the Shop Floor with the switch off');
+  await info('calm-info-off.png');
+
+  await page.click('#calmOn');
+  r = await sample();
+  if (!r.calm || !r.cls || !r.box) fail(`the switch did not turn calm on (calm ${r.calm}, class ${r.cls})`);
+  if (r.chain !== 'none') fail('the chain still sways with the switch on');
+  if (r.glitter !== 'none') fail('a slip\'s glitter still moves with the switch on');
+  if (r.note) fail(`the motion note shows "${r.note}" with only the switch on`);
+  await info('calm-info-on.png');
+  f = await floor();
+  if (f.anims) fail(`${f.anims} squash or boing animations on the Shop Floor with the switch on`);
+  if (!f.acts) fail('the Shop Floor gnomes did not swap poses with the switch on');
+
+  await page.reload(); await page.waitForTimeout(400);
+  r = await sample();
+  if (!r.calm || !r.cls || !r.box) fail('the switch did not survive a reload');
+  if (r.chain !== 'none' || r.glitter !== 'none') fail('calm rules lost after a reload');
+
+  await page.click('[data-tab="info"]');
+  await page.click('#calmOn');
+  r = await sample();
+  if (r.calm || r.cls || r.box) fail('the switch did not turn off');
+  if (r.chain === 'none' || r.glitter === 'none') fail('normal motion did not come back with the switch off');
+  f = await floor();
+  if (!f.anims) fail('the Shop Floor did not bounce again with the switch off');
+
+  // The device asks for less motion: calm, the switch locked on, the note says why, all with no reload.
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.waitForTimeout(100);
+  r = await sample();
+  const note = await page.evaluate(() => GW.CONFIG.motion.deviceNote);
+  if (!r.calm || !r.cls) fail('the device setting did not turn calm on');
+  if (!r.box || !r.locked) fail(`the switch is not locked on under the device setting (checked ${r.box}, disabled ${r.locked})`);
+  if (r.note !== note) fail(`the motion note reads "${r.note}" under the device setting`);
+  await info('calm-info-locked.png');
+  await page.reload(); await page.waitForTimeout(400);
+  r = await sample();
+  if (!r.calm || !r.box || !r.locked || r.note !== note) fail('the device lock did not hold after a reload');
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.waitForTimeout(100);
+  r = await sample();
+  if (r.calm || r.cls || r.box || r.locked || r.note) fail('the device lock did not let go with the switch off');
+  await ctx.close();
+  console.log('calm motion: switch off by default, on, saved over a reload, off again, device lock and note, Shop Floor poses, CSS samples ok');
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -1111,6 +1218,7 @@ async function tutorialCheck(page, errors, name) {
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);
     await ctx.close();
   }
+  await calmCheck(browser, errors);
   await browser.close();
   if (errors.length) { console.log('\nPROBLEMS:\n' + errors.join('\n')); process.exit(1); }
   console.log('\nAll clear.  Screenshots in tools/out/');

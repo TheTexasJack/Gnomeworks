@@ -399,7 +399,7 @@ window.GW = window.GW || {};
         userAgent: navigator.userAgent,
         screen: screen.width + 'x' + screen.height, viewport: window.innerWidth + 'x' + window.innerHeight,
         pixelRatio: window.devicePixelRatio, touch: navigator.maxTouchPoints > 0,
-        reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        reducedMotion: GW.motion.deviceCalm(), calmMotion: GW.motion.setting(), calm: GW.calm(),
         theme: document.documentElement.dataset.theme || null
       },
       summary: {
@@ -491,6 +491,17 @@ window.GW = window.GW || {};
     try { localStorage.setItem('gnomeworks.hints', hintsOn.checked ? 'on' : 'off'); } catch (e) {}
     applyHints(hintsOn.checked); SFX.click();
   });
+
+  // ---------- calm motion (js/motion.js): the device setting locks the switch on ----------
+  var calmOn = document.getElementById('calmOn');
+  document.getElementById('calmLabel').textContent = C.motion.label;
+  function applyCalmUI() {
+    var dev = GW.motion.deviceCalm();
+    calmOn.checked = GW.calm(); calmOn.disabled = dev;
+  }
+  calmOn.addEventListener('change', function () { GW.motion.set(calmOn.checked); SFX.click(); });
+  GW.motion.onChange(applyCalmUI);
+  applyCalmUI();
 
   // ---------- pause ----------
   var pauseBtn = document.getElementById('pauseBtn');

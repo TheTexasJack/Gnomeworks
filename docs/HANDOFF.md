@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.99**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.100**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Opening a new chat thread (Nathan, 2026-11-23)
 
@@ -15,6 +15,7 @@ Claudia keeps this block current and points to it when a thread is winding down.
 - **Live:** https://thetexasjack.github.io/Gnomeworks/ (repo `TheTexasJack/Gnomeworks`, branch `main`).  Everything is pushed; no open branches.
 - **The game:** 6 gnome types (Tiny, Necromancer, Warrior, Cloner, Matryoshka, Wizard) plus the Megagnome, 148 collectibles, Day and Night themes, desktop, phone, and landscape phone layouts.
 - **Events built:** shinies, Wild Magic, Clone Attack, the Megagnome and his crossbow hunt (with the Banana Monster boss).  How each works: [EVENTS.md](EVENTS.md).
+- **Calm motion (draft.100, Alex's request):** a switch in the Info tab gives any player the gentle motion a device set to reduce motion gets.  `GW.calm()` in `js/motion.js` is the one question every script asks; each reduced-motion CSS rule has a twin under `html.calm` ([ARCHITECTURE.md](ARCHITECTURE.md)).
 - **Real play data:** Nathan reached 20B cogs and 8.75M clicks a second in about two days of light play, with every gnome count between 50 and 92.  The 15% price climb keeps counts low on its own.  Playtesters reach the Megagnome in about 5 to 7 hours (2026-11-08, a measurement, not a target).
 
 ## Now: the Packing Line, ready to build

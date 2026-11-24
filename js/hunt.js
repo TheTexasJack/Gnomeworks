@@ -13,7 +13,7 @@ GW.hunt = (function () {
   var LANE_Y = 47;   // prey lane, % of the box height (center of the prey)
 
   function shotCost(s) { return Math.max(E.rates(s).total * M.shotSeconds, E.tapValue(s) * M.minShotTaps); }
-  function calm() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function calm() { return GW.calm(); }
 
   // ---------- open / close ----------
   function open() {

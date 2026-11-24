@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.99';
+GW.VERSION = '0.2.0-draft.100';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -93,6 +93,16 @@ GW.CONFIG = {
   // 'shipping' counts only while shipping.enabled is true or the address has ?ship=1.
   views: ['machine', 'floor', 'shipping'],
   swipe: { minPixels: 60, maxMilliseconds: 600 },   // how far and how fast a swipe must be
+
+  // Calm motion (Info tab): the gentle animations a device set to reduce motion gets, for any player who picks
+  // them.  GW.calm() is true when the device asks for less motion or the switch is on; the device always wins,
+  // so its setting locks the switch on.  key = where the switch is saved.  Wording: Claudia, approved by Nathan
+  // 2026-11-23.
+  motion: {
+    key: 'gnomeworks.calm',
+    label: 'Calm motion (gentle animations, like a device set to reduce motion)',
+    deviceNote: 'Your device is set to reduce motion, so the game uses gentle animations.'
+  },
 
   // The Packing Line's shipping room (layer 1a: the room and the door chain).  Hidden from players until
   // Nathan says otherwise: while enabled is false, the view exists only with ?ship=1 in the address.

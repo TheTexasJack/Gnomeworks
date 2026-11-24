@@ -53,7 +53,7 @@ GW.clones = (function () {
   }
 
   function makeClone(floor, v, L, i) {
-    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var calm = GW.calm();
     var el = U.el('div', 'clone' + (calm ? ' calm' : ''));
     var img = U.el('img', 'clone-img'); img.alt = ''; img.draggable = false; img.src = IMG(v, 'run');
     el.appendChild(img);

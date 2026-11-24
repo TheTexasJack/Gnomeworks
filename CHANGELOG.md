@@ -2,6 +2,10 @@
 
 Every change gets a new version number.  Newest at the top.
 
+## v0.2.0-draft.100 (2026-11-23)
+
+- Calm motion, for desktop too (Alex's request, work order `2026-11-23-calm-motion-setting`).  A new switch in the Info tab's Look section, "Calm motion (gentle animations, like a device set to reduce motion)", off by default and saved in `gnomeworks.calm`, gives any player the gentle motion a device set to reduce motion gets, with no reload.  New `js/motion.js`: `GW.calm()` is true when the device asks for less motion or the switch is on, and every script that read `prefers-reduced-motion` now asks it (`ui.js`, `wild.js`, `clones.js`, `hunt.js`, `shipping.js`; the game report in `main.js` records the device setting, the switch, and the result).  While calm, `<html>` has the `calm` class, set before anything draws, and each of the 15 reduced-motion blocks in `style.css` (17 rules) has a twin under `:where(html.calm)`.  The device still wins: its setting locks the switch on, and the note under the switch reads "Your device is set to reduce motion, so the game uses gentle animations."  Words in `CONFIG.motion`.  The smoke test tries it on desktop (`calmCheck`).
+
 ## v0.2.0-draft.99 (2026-11-23)
 
 - Packing Line, step 1q.2 (still hidden behind `?ship=1`): the night bookshelf.  At Night the How to Ship bookshelf shows Nathan's painted night shelf (checklist 39; new game copy `assets/packing/how_to_ship_shelf_night.webp`, 240x149, 16 KB, transparent, trimmed and sized like the day copy) in place of the day shelf dimmed by code, so it matches the room's night lighting.  It is listed with the other night twins in `js/theme.js`, and the room's redraw swaps it with the theme.  The Night brightness filter on the shelf is gone.  Day, the spot, the width, the tap, and the glow are unchanged; the night shelf is fitted by width, so it is about 0.6% taller (0.2 to 0.3 px on screen).  The tutorial pictures stay Day shots.  The smoke test now checks the day shelf at Day and the night shelf at Night, with no filter on it at Night, on both layouts.
