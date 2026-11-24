@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.101**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-24; game version **v0.2.0-draft.101**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Opening a new chat thread (Nathan, 2026-11-23)
 
@@ -60,12 +60,20 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 
 After Thanksgiving: the other three box types.  (The supplies rules, the garage-door roll, and APPROVED and DENIED are built: 1i, 1j, 1k, 1l.)
 
-## Start here next thread (Claudia, 2026-11-23, end of day)
+## Start here next thread (Claudia, 2026-11-24, end of thread)
 
-- **Beta 1 is a full loop** at draft.96: read the slip, stamp it APPROVED or DENIED, pack it (count, peanuts, bubble wrap, FRAGILE, HEAVY, region stamp, label), hand it to the driver, catch the elves, watch GRIP vs TNP, read the report card and shipping log.  16 work orders on 2026-11-23 (1c-2 to 1p), all reviewed.
-- ~~**Small fix for the next order (1p review):** the Report Card clipboard should not glow after the card has just popped up on its own.~~  Done in 1q (draft.97).
-- **Next, in order (updated 2026-11-23, evening):** (1) ~~the Packing Line tutorial~~ pages 1 to 5 built in 1q (draft.97), the How to Ship spot settled by Nathan's bookshelf in 1q.1 (draft.98); (2) finish the Gnohio design talk: the good shift is liked (count draft 5); Claudia's open drafts are the expedition coming later with the Daily Cog as the unlock moment, the safety sticker count printed on the slip, one drag then taps to add stickers, Gnohio staying at 1 item, and the reading challenge hole (one region per truck gives the region away); then its placement pass; (3) the Daily Cog, the parallel build, now including the region-intro page; (4) the parked list in TASKS.
-- **How Claudia reviews:** pull, run `NODE_PATH=$(npm root -g) node tools/smoke-test.js`, and take her own screenshots with Playwright in the cloud session (Claude Code's `tools/out/` stays on Beast and is not committed).  Stress-test text with the longest names (town "Grit Spit and Fellers", item "Fire Extinguisher").
+**Paste the opener from the top of this file** (it carries the GitHub permission).
+
+- **Where it stands:** **v0.2.0-draft.101.**  Beta 1 (`?ship=1`) is a full shift loop, now with the tutorial and the map.  Built on 2026-11-23 and 24, all reviewed: **1q** (tutorial pages 1 to 5, the good shift line and `goodShifts` count, the 1p glow fix), **1q.1** (Nathan's bookshelf opens the How to Ship book; a good shift needs every row ✔), **1q.2** (the painted night shelf), **Calm motion** (Alex's request: an Info tab switch giving desktop the reduced-motion look, draft.100), **1r** (the wall map in the upper frame, the zoomable map viewer, the unlock card with close-up and postcard stack, behind the debug bar's "Unlock next region"; `regions.liveUnlock` is false).
+- **1r review (Claudia, 2026-11-24):** Claude Code's three calls accepted as built: the zoom stops at one map pixel per screen point (5.6x on a phone, slightly soft, names readable); the full map dims at Night, the desktop card sits side by side, and the region name has a bar in its stamp color; the 5-good-shift check runs through the hook (a real play test comes with Gnohio).  Claude Code also flagged straight, boxy edges on Gnomerica's lit area: fixed in `tools/map/region_states.py` v0.5 (curved, soft borders with a little wander) and all twenty pictures in `assets/map/` re-rendered, same names and sizes, so the game needs no change.  The map has color washes and no drawn borders, so true region borders would be a lore job on the master map.
+- **Decided this thread (all in DESIGNS.md, "The map in the room and region unlocks"):** dark gray fog over locked regions on the stylized v18 map; a driver is random from the unlocked regions and **carries orders for everything unlocked so far** (replaces "one region per truck"); 5 good shifts open Gnohio ("just the first area ... an example of the process"); the unlock card shows three fanned postcards; the wall map is Nathan's clean map in the upper frame.
+- **Next, in order:**
+    1. **Finish the Gnohio design talk.**  Claudia's drafts still waiting on Nathan: from Gnohio, slips show the town only, and the box label's region line comes from the player's stamp; the safety sticker count (5 to 10) is printed on the slip; one drag puts the first sticker on, then each tap adds one; Gnohio orders stay at 1 item (multi-item boxes start with Gnafrica, with the box contents screen); the expedition comes later and the Daily Cog is the unlock moment; Gnohio's tutorial page (its rule) joins the unlock card.
+    2. **The Gnohio build,** in small orders: orders and drivers from all unlocked regions, the town-only slip and the stamp-driven label, safety stickers, the Gnohio truck and driver placement pass, Gnohio's tutorial page, then turning on `liveUnlock`.
+    3. **The Daily Cog** as a parallel build (masthead approved; it introduces new regions, recaps the last shift, carries GRIP vs TNP).
+    4. The parked list in TASKS (Info tab settings on one line each, the keyboard pass, the door's real roll, the phone board filler, and the rest).
+- **Waiting on Nathan:** the hat lip fix before December 1.  The production post-mortem comes when Beta 1 is done.
+- **How Claudia reviews:** pull, run `NODE_PATH=$(npm root -g) node tools/smoke-test.js`, and take her own screenshots with Playwright in the cloud session (Claude Code's `tools/out/` stays on Beast and is not committed).  Stress-test text with the longest names (town "Grit Spit and Fellers", item "Fire Extinguisher").  Map pictures are made in the cloud only (`rsvg-convert`); Claude Code never re-renders them.
 
 ## Handing a work order to Nathan (his format, 2026-11-23)
 

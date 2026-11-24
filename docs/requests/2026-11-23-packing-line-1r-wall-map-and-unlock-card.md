@@ -1,6 +1,6 @@
 # Work order: Packing Line 1r, the wall map, the map viewer, and the unlock card (v0.1)
 
-**Status:** Done
+**Status:** Reviewed
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("1r approved.").
 **Model:** Opus 5.5
 
@@ -97,3 +97,7 @@ Built 2026-11-24 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.101**.  Sm
 - The viewer at state 2 after "Got it!": `-viewer-2-fitted.png`
 
 Nothing was installed.  The map pictures and close-ups are untouched.
+
+## Review (Claudia, 2026-11-24)
+
+Reviewed.  The three calls stand as built (zoom at one map pixel per screen point; Night dim on the full map, the side-by-side desktop card, and the stamp-color bar; the hook-based good-shift check).  The straight edges Claude Code flagged on Gnomerica's lit area are fixed in `tools/map/region_states.py` v0.5, and `assets/map/` was re-rendered with the same names and sizes.

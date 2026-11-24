@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Region map states for the Packing Line (v0.4, Claudia, 2026-11-23: dark gray, from the stylized v18 map; close-ups all one shape).
+"""Region map states for the Packing Line (v0.5, Claudia, 2026-11-24: dark gray, from the stylized v18 map; close-ups all one shape; curved, soft borders).
 
 Renders the master map with only the unlocked regions in color.  Locked
 regions turn gray and lose their place names, so nothing is spoiled.  Also
@@ -53,6 +53,8 @@ BARE_LABELS = {'Gnomerica': 'GNOMERICA', 'Gnohio': 'GNOHIO', 'Gnafrica': 'GNAFRI
                'Slanic': 'SLANIC', 'Gno Dao Cradle': 'the Cradle', 'Gnufoundland': 'GNUFOUNDLAND',
                'Slaanilok': 'SLAANILOK', 'Gnonmoon': 'GNONMOON', 'Shen Shin': 'SHEN SHIN',
                'Gni': 'ISLAND OF GNI'}
+NOISE = 0.30   # how much the borders wander, in blob radii
+SOFT = 0.12    # how soft the borders are, in blob radii
 SHADE = np.array([58, 56, 54], dtype=np.float32)  # dark gray for locked land (Nathan, v0.2)
 
 
@@ -92,19 +94,36 @@ def land_mask(svg, width):
         return np.asarray(Image.open(p).convert('L'), dtype=np.float32) / 255
 
 
-def region_cells(width, height):
-    """Which region each pixel belongs to: nearest wash blob, scaled by its size."""
+def region_scores(width, height):
+    """How close each pixel is to each region: its nearest wash blob, scaled by size (lower is closer).
+
+    A little smooth noise bends the borders so they read as hand-drawn and never as straight lines
+    (v0.5, after Claude Code spotted straight edges around Gnomerica in 1r).
+    """
     s = width / W
     ys, xs = np.mgrid[0:height, 0:width].astype(np.float32) / s
-    best = np.full((height, width), np.inf, dtype=np.float32)
-    cell = np.zeros((height, width), dtype=np.int16)
+    rng = np.random.default_rng(29)
+    noise = Image.fromarray((rng.random((height // 32 + 1, width // 32 + 1)) * 255).astype(np.uint8))
+    noise = noise.resize((width, height), Image.BICUBIC).filter(ImageFilter.GaussianBlur(70 * s))
+    noise = np.asarray(noise, dtype=np.float32) / 255
+    noise = (noise - noise.mean()) / (noise.std() + 1e-6) * NOISE
+    scores = np.empty((len(ORDER), height, width), dtype=np.float32)
     for i, reg in enumerate(ORDER):
+        best = np.full((height, width), np.inf, dtype=np.float32)
         for x, y, r in BLOBS[reg]:
-            d = np.hypot(xs - x, ys - y) / r
-            closer = d < best
-            best[closer] = d[closer]
-            cell[closer] = i
-    return cell
+            best = np.minimum(best, np.hypot(xs - x, ys - y) / r)
+        scores[i] = best
+    return scores + noise
+
+
+def lit_share(scores, open_ids):
+    """0 to 1: how much each pixel belongs to the open regions, with a soft, curved border."""
+    open_best = scores[open_ids].min(0)
+    shut = [i for i in range(len(ORDER)) if i not in open_ids]
+    if not shut:
+        return np.ones_like(open_best)
+    shut_best = scores[shut].min(0)
+    return 1 / (1 + np.exp(np.clip((open_best - shut_best) / SOFT, -40, 40)))
 
 
 def soft(mask, radius):
@@ -143,19 +162,17 @@ def main():
         rgb = np.asarray(Image.open(p).convert('RGB'), dtype=np.float32)
     h, w = rgb.shape[:2]
     land = land_mask(svg, w)[:h, :w]
-    cell = region_cells(w, h)
-    blur = 6 * w / W
-
-    lock = np.isin(cell, [ORDER.index(r) for r in locked]).astype(np.float32)
-    lock = soft(lock, blur) * land
+    scores = region_scores(w, h)
+    open_ids = [ORDER.index(r) for r in unlocked]
+    lock = (1 - lit_share(scores, open_ids)) * land
     state = gray(rgb, lock * 0.85)
     tag = f'state-{a.unlocked:02d}'
     Image.fromarray(state.clip(0, 255).astype(np.uint8)).save(
         os.path.join(a.out, f'map-{tag}.webp'), quality=82, method=6)
 
     # Close-up: the focus region lit, its open neighbors dimmed a little.
-    others = (cell != ORDER.index(a.focus)).astype(np.float32)
-    dim = soft(others, blur) * land
+    others = (1 - lit_share(scores, [ORDER.index(a.focus)])) * land
+    dim = others
     close = gray(rgb, np.maximum(lock * 0.85, dim * 0.4))
     s = w / W
     xs = [x for x, y, r in BLOBS[a.focus] for x in (x - r, x + r)]
