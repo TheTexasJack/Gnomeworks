@@ -311,6 +311,15 @@ Work orders and drivers are two separate calls.
 - **Pictures:** small shots of the real room, captured with Playwright and cropped to WebP.  No new painted art.  Text in plain English, so Elana can read it.
 - **Two layers:** the "Show instructions" setting stays the in-room hint layer (glows and tags).  The tutorial is the explaining layer.
 
+**The map in the room and region unlocks (Nathan, 2026-11-23, evening)**
+
+- **The unlock card (Nathan):** when a region unlocks, a "Drivers can now deliver to a new region!" message shows the highlighted map.  This is the tutorial's region page.
+- **Both pictures (Claudia's draft, Nathan agreed):** a close-up crop of the new region from `tools/map/build_map.py`, lit with its neighbors dimmed (where it is), beside one of its three approved travel postcards (what it is like).  All ten close-ups come from the one script, so they never drift from the lore.
+- **Tap the wall map** to open the full map, with its own pinch and pan on phones (the room locks page zoom).  This is the reference for the reading challenge.
+- **Locked regions are grayed out (Nathan's draft idea):** the first time the map opens, only Gnomerica is unlocked and the rest are gray.  Each region lights up as it unlocks.  Claudia's notes: the gray keeps the coastlines so the world still looks big; town names in gray regions stay hidden, so nothing is spoiled and the map stays clear for kids; the unlock order is a fixed spiral, so there are only ten map states.  Jarrett's shareable master map stays fully shown.
+- **Order of work (Claudia's draft, Nathan agreed):** Claude Code builds the tutorial's first five pages and the 1p glow fix while Claudia makes the region close-ups in the cloud (tools and images only, so no push collisions; a Gnohio mock first for Nathan's review).  Then one work order for the unlock card and the in-room map, then the Gnohio build.
+- **Still open:** mixed trucks from Gnohio on (A, Claudia's pick) or regional trucks with mis-sorted slips (B).  From Gnohio, slips show the town only, and the label's region line comes from the player's stamp (Claudia's drafts).
+
 **Good shift (Nathan, 2026-11-23, liked; count still a draft):** a shift where every real order scores ✔.  TNP trips count neither way.  Claudia's draft: 5 good shifts open Gnohio (counted in the save, number in `js/config.js`).  The tutorial's first page explains it.
 
 **Trade economy (Nathan, 2026-11-23, future enhancement):** the Bathroom-heavy orders are fine for now.  Later, build an economy of what ships where, with supply and demand on trades, and a buying system that leads into it (built together).  Standing rule: it stays trade, never speculation or betting (no gambling mechanics unless Jarrett asks).
