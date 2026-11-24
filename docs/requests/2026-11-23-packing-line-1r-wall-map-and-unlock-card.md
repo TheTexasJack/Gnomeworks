@@ -1,7 +1,7 @@
 # Work order: Packing Line 1r, the wall map, the map viewer, and the unlock card (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("1r approved.").
 **Model:** Opus 5.5
 
 ## Goal
@@ -35,7 +35,7 @@ Put Nathan's map on the room's wall, let a tap open the full map (only unlocked 
 5. **The unlock card** (shows when a region unlocks), on `document.body`, built like a tutorial page (the work order parchment, `--font`, the same "Got it!" with its 400 ms wait), fitting a 390 x 844 phone with no scrolling:
     - The heading **"Drivers can now deliver to a new region!"** (Nathan's words) and the region's name under it.
     - The region's close-up, `closeup-<region>.webp`.
-    - Its three postcards in a small stack, slightly fanned; a tap on the stack brings the next one to the top (Claudia's draft).  Game copies of the postcards are small WebP files made with `tools/art.py`, in `assets/postcards/`.
+    - Its three postcards in a small stack, slightly fanned; a tap on the stack brings the next one to the top (Claudia's draft, approved with this order).  Game copies of the postcards are small WebP files made with `tools/art.py`, in `assets/postcards/`.
     - After "Got it!", the wall map's picture in the viewer is the new state.
 6. **No real unlock yet:** `CONFIG.shipping.regions.liveUnlock` is false, and while it is false nothing in play unlocks a region.  The count that will open Gnohio, 5 good shifts, goes in config now (`regions.goodShiftsFor` or similar), unused until the Gnohio build.
 7. **The test button:** with `?debug=1`, the debug bar gets "Unlock next region," which adds one to `regions` (up to 10) and shows that region's card, and "Reset regions," which puts it back to 1.
