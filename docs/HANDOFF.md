@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.96**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.98**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Opening a new chat thread (Nathan, 2026-11-23)
 
@@ -49,6 +49,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 15. **1o (done, draft.95):** every closed box wears its shipping label (town, region, "via GRIP") per box face v0.3; the driver sets a box on the stack in one smooth arc with a single settle; the Report Card clipboard reopens the last card and the Log clipboard opens the Shipping Log, a short funny log per shipped box (lines from `docs/lore/shipping-log-v0.1.md`), saved with the last shift.
 16. **1p (done, draft.96):** the two clipboards wear faces drawn in code (REPORT CARD with the last shift's ✔ and ✘, SHIPPING LOG with a red truck and ruled lines), both glow after a shift until opened, and an approved fake's box gets its own log lines and end (lore v0.2).
 17. **1q (done, draft.97):** the tutorial's first five pages, each once per save at its moment, with real room shots (`tools/tutorial-shots.js`), the How to Ship book (two spots behind `CONFIG.shipping.tutorial.book.place`, Nathan's pick), "Good shift! ⭐" on the card with `goodShifts` in the save, and only the Log clipboard glowing after a shift.
+18. **1q.1 (done, draft.98):** Nathan's bookshelf on the wall is the How to Ship button (placed from his mocks, glowing until the book is first opened), the `top` spot is gone, and a good shift needs every row ✔ (an approved fake spoils it).
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 
@@ -60,7 +61,7 @@ After Thanksgiving: the other three box types.  (The supplies rules, the garage-
 
 - **Beta 1 is a full loop** at draft.96: read the slip, stamp it APPROVED or DENIED, pack it (count, peanuts, bubble wrap, FRAGILE, HEAVY, region stamp, label), hand it to the driver, catch the elves, watch GRIP vs TNP, read the report card and shipping log.  16 work orders on 2026-11-23 (1c-2 to 1p), all reviewed.
 - ~~**Small fix for the next order (1p review):** the Report Card clipboard should not glow after the card has just popped up on its own.~~  Done in 1q (draft.97).
-- **Next, in order (updated 2026-11-23, evening):** (1) ~~the Packing Line tutorial~~ pages 1 to 5 built in 1q (draft.97), waiting on Nathan's review and his pick of the How to Ship spot; (2) finish the Gnohio design talk: the good shift is liked (count draft 5); Claudia's open drafts are the expedition coming later with the Daily Cog as the unlock moment, the safety sticker count printed on the slip, one drag then taps to add stickers, Gnohio staying at 1 item, and the reading challenge hole (one region per truck gives the region away); then its placement pass; (3) the Daily Cog, the parallel build, now including the region-intro page; (4) the parked list in TASKS.
+- **Next, in order (updated 2026-11-23, evening):** (1) ~~the Packing Line tutorial~~ pages 1 to 5 built in 1q (draft.97), the How to Ship spot settled by Nathan's bookshelf in 1q.1 (draft.98); (2) finish the Gnohio design talk: the good shift is liked (count draft 5); Claudia's open drafts are the expedition coming later with the Daily Cog as the unlock moment, the safety sticker count printed on the slip, one drag then taps to add stickers, Gnohio staying at 1 item, and the reading challenge hole (one region per truck gives the region away); then its placement pass; (3) the Daily Cog, the parallel build, now including the region-intro page; (4) the parked list in TASKS.
 - **How Claudia reviews:** pull, run `NODE_PATH=$(npm root -g) node tools/smoke-test.js`, and take her own screenshots with Playwright in the cloud session (Claude Code's `tools/out/` stays on Beast and is not committed).  Stress-test text with the longest names (town "Grit Spit and Fellers", item "Fire Extinguisher").
 
 ## Handing a work order to Nathan (his format, 2026-11-23)

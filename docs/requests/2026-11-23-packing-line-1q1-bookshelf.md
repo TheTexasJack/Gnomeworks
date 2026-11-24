@@ -1,6 +1,6 @@
 # Work order: Packing Line 1q.1, the How to Ship bookshelf (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23, with the glow and the good shift rule ("you got my ok!").
 **Model:** Opus 5.5
 
@@ -50,3 +50,44 @@ Swap 1q's code-drawn "How to Ship" tag for Nathan's painted bookshelf on the roo
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.98**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 35 minutes, from `git pull` at 21:12 to the Result at 21:47 (CST).
+
+**What was built**
+
+- **The game copy:** `assets/packing/how_to_ship_shelf.webp`, 240x148, 16 KB, transparent.  Clear edges trimmed with Pillow (alpha over 8: box (269, 62, 1505, 826) of the master), then `tools/art.py resize --width 240`.  The shelf draws at most about 85 to 120 px wide (the room tops out near 1000 px), and 68 px on a 390 px phone (204 device px at 3x), so 240 is about 2x.  I first made it 360 wide and cut it down after measuring.
+- **The shelf is the button** on both layouts: the painted art in a `role="button"` with `aria-label="How to Ship"` and no words.  A tap anywhere on it opens the book, as the tag did.  It is first in the room after the room art (and the door), so the board, clipboards, truck, driver, boxes, menus, and pop-ups all draw over it.  At Night it dims with `--slip-night`, like the slips and clipboard faces.
+- **Placement.**  Nathan's mocks have the room art's exact shape (1011x569 and 314x559), so I measured the painted shelf inside each dashed box and used those numbers:
+
+  | Layout | x | y | w | h (from the art's shape) |
+  | --- | --- | --- | --- | --- |
+  | desktop (`wide`) | 21.5 | 37.1 | 8.5 | 9.4 |
+  | phone (`tall`) | 10.1 | 31.9 | 18.3 | 6.3 |
+
+  It sits in Claudia's boxes (desktop 19.6/36.2/12.3/10.9, phone 6.1/31.3/26.1/7.3), clear of the porthole, the STONKS frame, and the parchment frames.  On desktop its bottom edge touches the top of the computer's tap area (46.4%) without overlapping it.  In `CONFIG.shipping.tutorial.book.spot`.
+- **One spot:** `book.place`, `book.spots`, the `top` spot, the old brass tag's CSS, and the `testBookPlace` test hook are gone.  `book.label` is now plain "How to Ship" (the screen reader name), and `book.img` names the art.
+- **The glow:** while the book is new, the art gets the clipboards' gold drop-shadow glow, breathing over `clipFace.glow.pulseMs` (steady with reduced motion; the glow pulses, the shelf itself never fades).  New = at least one page seen and `tutorial.bookOpened` not set.  Opening the book sets `bookOpened` in the save, so it never glows again.  `?tutorial=reset` clears it with the seen pages.  `GW.tutorial.onChange` tells the room to redraw the glow when a page is first seen or the book opens.  With "Show instructions" off, no glow.
+- **Good shift:** `good = every row ✔` (and at least one row).  An approved glitter fake's ✘ row spoils it.  TNP trips still never count.  Page 1's words are unchanged.
+- **Tutorial pictures** remade with `tools/tutorial-shots.js`.  It no longer hides the shelf, and marks the book opened so the shelf shows without its glow.  `pack.webp` is the one that shows that wall.
+- **Docs:** CHANGELOG, ARCHITECTURE (save data, the tutorial), ASSETS, DESIGNS, TASKS, HANDOFF, and checklist item 39 marked integrated.
+- **Smoke test** (`tutorialCheck`, both layouts): the shelf is the art, has no words or spans, is named "How to Ship", sits inside the room, and nothing covers its middle.  A tap opens the book (only the seen pages, back and next).  The glow is off before any page, on after the welcome page, off with instructions off, still on until opened, off once opened (and saved), not back when the fakes page is seen later, off after reloading a save with `bookOpened`, on for older saves with shifts, and back after `?tutorial=reset`.  A shift with an approved fake (two Soft orders, Socks and Sponge, one made a fake) and every real order packed right scores rows `✘,✔` with `good` false and no "Good shift!" line.
+
+**Calls to check**
+
+1. **All-fakes boards:** read literally, "every row ✔" makes a board whose every order is a fake, all DENIED, a good shift.  1q's call 4 had it never good.  Fakes come one per board (`perBoard: 1`) with 3 orders, so it can't happen now.
+2. **Glow for players who already have pages:** any save with a seen page and no `bookOpened` glows, including saves from before 1q.1 where the player already opened the old tag's book.  The save never recorded that, so I can't tell them apart.
+3. **The shelf is small**, as Nathan said: 58x36 px on the 1400x900 desktop and 68x42 px on a 390 px phone.  On the phone it is just under the usual 44 px tap height; the whole shelf is the tap area.
+
+**Screenshots** in `tools/out/` (`?ship=1`, not committed).  `wide` = 1400x900 at 2x, `tall` = 390x844 at 3x.  Each beside Nathan's mock:
+
+| Screenshot (for `<day|night>`) | Nathan's mock |
+| --- | --- |
+| `1q1-wide-<theme>-vs-mock-glow.png`, `1q1-wide-<theme>-vs-mock.png` (the mock on the left, the room on the right, glowing and not) | `how-to-ship-shelf-mock-wide.png` |
+| `1q1-tall-<theme>-vs-mock-glow.png`, `1q1-tall-<theme>-vs-mock.png` | `how-to-ship-shelf-mock-tall.png` |
+| The room alone: `1q1-<layout>-<theme>-room-glow.png`, `-room.png` | the mock for its layout |
+| Close-ups (phone size on `tall`): `1q1-<layout>-<theme>-shelf-close-glow.png`, `-shelf-close.png` | the mock's dashed box |
+| The book opened from the shelf: `1q1-<layout>-<theme>-book-open.png` | none (no mock) |
+
+Nothing was installed.  The shelf's art, the tutorial's words, the room art, and scoring other than the good shift rule are unchanged.

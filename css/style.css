@@ -249,11 +249,19 @@ body {
 .tut-got { min-width: 44cqw; color: #fff; border-color: #1f5e27; background: #2e8b3a; box-shadow: 0 .8cqw 0 #1a4d20; }
 .tut-btn:active:not(:disabled) { transform: translateY(.6cqw); box-shadow: 0 .2cqw 0 #6a4a20; }
 .tut-btn:focus-visible { outline: .8cqw solid #ffb703; outline-offset: .6cqw; }
-#ship .ship-book { position: absolute; z-index: 3; container-type: inline-size; cursor: pointer; border-radius: 6px; text-align: center; color: #3a2210;
-  background: linear-gradient(180deg, #ffe7a3, #e0a93e 55%, #b97a22); border: 1px solid #6e4614;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 .3vmin .5vmin rgba(0,0,0,.45); touch-action: manipulation; }
-#ship .ship-book span { display: block; padding: 6cqw 4cqw; font: bold 12.5cqw/1.1 var(--font); white-space: nowrap; pointer-events: none; }
+/* the How to Ship bookshelf (1q.1): Nathan's painted shelf on the wall, the book's button.  It sits just over the
+   room art (first in the room after it), dims with the room at Night, and glows like the clipboards while the book is
+   new (is-new): the glow on the art, the Night dim on the button, so the two filters stack.  A tip, so no glow with
+   instructions off; steady with reduced motion. */
+#ship .ship-book { position: absolute; cursor: pointer; touch-action: manipulation; }
+#ship .ship-book-art { display: block; width: 100%; height: auto; user-select: none; pointer-events: none; }
 .night #ship .ship-book { filter: brightness(var(--slip-night, .88)); }
+#ship .ship-book.is-new .ship-book-art { animation: shelfPulse var(--clip-pulse, 2000ms) ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 12px rgba(255, 183, 3, .8)); }
+@keyframes shelfPulse { from { filter: drop-shadow(0 0 1px rgba(255, 251, 224, .5)) drop-shadow(0 0 3px rgba(255, 211, 77, .4)) drop-shadow(0 0 6px rgba(255, 183, 3, .3)); }
+  to { filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 12px rgba(255, 183, 3, .8)); } }
+.no-hints #ship .ship-book.is-new .ship-book-art { animation: none; filter: none; }
+@media (prefers-reduced-motion: reduce) { #ship .ship-book.is-new .ship-book-art { animation: none; } }
 /* the report card's good shift tag (1q): gold, over the bottom stripes */
 .ship-card .card-good { left: 50%; transform: translate(-50%, -50%); padding: .5em 1.1em; border-radius: .6em; white-space: nowrap;
   font-weight: bold; font-family: var(--font); line-height: 1.1; color: #1f5e27;

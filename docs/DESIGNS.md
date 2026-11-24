@@ -310,7 +310,7 @@ Work orders and drivers are two separate calls.
     6. Each region unlock gets its own page.  The Daily Cog tells the story, the page explains the rule, and the Cog's headline points to the page.
 - **Pictures:** small shots of the real room, captured with Playwright and cropped to WebP.  No new painted art.  Text in plain English, so Elana can read it.
 - **Two layers:** the "Show instructions" setting stays the in-room hint layer (glows and tags).  The tutorial is the explaining layer.
-- **Built (1q, draft.97):** pages 1 to 5 and the How to Ship book.  The book's spot is Nathan's pick between `wall` (beside the porthole, near the computer) and `top` (the room's top left corner); `wall` is the default until he picks.
+- **Built (1q, draft.97):** pages 1 to 5 and the How to Ship book.  **1q.1 (draft.98):** the book's button is Nathan's painted bookshelf on the wall, placed from his mocks, glowing until the book is first opened.
 
 **The map in the room and region unlocks (Nathan, 2026-11-23, evening; every point below approved by Nathan 2026-11-23 except "Still open")**
 
@@ -323,7 +323,7 @@ Work orders and drivers are two separate calls.
 - **Order of work (Claudia's draft, approved by Nathan):** Claude Code builds the tutorial's first five pages and the 1p glow fix while Claudia makes the region close-ups in the cloud (tools and images only, so no push collisions; a Gnohio mock first for Nathan's review).  Then one work order for the unlock card and the in-room map, then the Gnohio build.
 - **Still open:** mixed trucks from Gnohio on (A, Claudia's pick) or regional trucks with mis-sorted slips (B).  From Gnohio, slips show the town only, and the label's region line comes from the player's stamp (Claudia's drafts).
 
-**Good shift (Nathan, 2026-11-23, liked; count still a draft):** a shift where every real order scores ✔.  TNP trips count neither way.  Claudia's draft: 5 good shifts open Gnohio (counted in the save, number in `js/config.js`).  The tutorial's first page explains it.
+**Good shift (Nathan, 2026-11-23, liked; count still a draft):** a shift where every row on the card scores ✔, so an approved glitter fake spoils it (Claudia's ruling on 1q call 3, approved by Nathan 2026-11-23).  TNP trips count neither way.  Claudia's draft: 5 good shifts open Gnohio (counted in the save, number in `js/config.js`).  The tutorial's first page explains it.
 
 **Trade economy (Nathan, 2026-11-23, future enhancement):** the Bathroom-heavy orders are fine for now.  Later, build an economy of what ships where, with supply and demand on trades, and a buying system that leads into it (built together).  Standing rule: it stays trade, never speculation or betting (no gambling mechanics unless Jarrett asks).
 

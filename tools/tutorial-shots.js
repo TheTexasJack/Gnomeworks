@@ -1,6 +1,7 @@
 // Makes the tutorial's pictures (1q): plays the Packing Line in a headless browser the way the smoke test does,
 // crops a shot of the real room for each page, and saves it small as WebP in assets/tutorial/ (the size in
-// CONFIG.shipping.tutorial.pic).  Run it again whenever the room changes.
+// CONFIG.shipping.tutorial.pic).  Run it again whenever the room changes.  The How to Ship bookshelf (1q.1) shows
+// on the wall in any shot that takes in that part of the room.
 //
 //   welcome.webp  the truck at the door, with its driver
 //   stamp.webp    an open slip with its APPROVED and DENIED buttons
@@ -33,13 +34,13 @@ fs.mkdirSync(OUT, { recursive: true });
   await page.evaluate(() => {
     const s = GW.game.s, F = GW.CONFIG.shipping.fakes;
     GW.CONFIG.shipping.tutorial.pages.forEach(p => { s.tutorial.seen[p.id] = true; });
+    s.tutorial.bookOpened = true;                        // the bookshelf shows on the wall without its new-book glow (1q.1)
     F.chance = 0; F.elfChance = 0; s.shifts = 0;
     GW.state.save = () => true;                          // the shots never touch the saved game
     document.documentElement.classList.remove('night');
   });
   await page.click('[data-view="shipping"]');
   await page.waitForTimeout(400);
-  await page.evaluate(() => { document.querySelector('.ship-book').style.display = 'none'; });   // the How to Ship button stays out of the pictures
   await page.evaluate(() => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : 40; }));
   const room = await page.locator('#ship').boundingBox();
   const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };

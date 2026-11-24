@@ -5,13 +5,15 @@
    "Got it!".  Only a real tap or Enter counts, and not in the first armMs, so a stray tap during play can't skip it.
    Nothing under it gets a tap or a key while it shows.  Pages due together wait in a queue and show one after the
    other.  "Show instructions" does not hide it: the tutorial is the explaining layer, the tips are the hint layer.
-   ?tutorial=reset in the address clears the seen pages once, as the page loads. */
+   ?tutorial=reset in the address clears the seen pages once, as the page loads.
+   The book is new (its bookshelf glows, 1q.1) from the first page seen until it is first opened: the save's
+   tutorial.bookOpened. */
 window.GW = window.GW || {};
 
 GW.tutorial = (function () {
   var C = GW.CONFIG, T = C.shipping.tutorial, U = GW.util;
   var view = null, panel, title, words, pic, gotIt, nav, backBtn, nextBtn, count;
-  var queue = [], showing = null, book = null, shownAt = 0, resetDone = false;
+  var queue = [], showing = null, book = null, shownAt = 0, resetDone = false, listeners = [];
   // showing = the page id on screen (null when closed); book = { list, at } while the book is open
 
   function page(id) { return T.pages.filter(function (p) { return p.id === id; })[0] || null; }
@@ -22,10 +24,16 @@ GW.tutorial = (function () {
     if (!s.tutorial.seen) s.tutorial.seen = {};
     if (!resetDone) {
       resetDone = true;
-      if (/[?&]tutorial=reset(&|$)/.test(window.location.search)) { s.tutorial.seen = {}; GW.state.save(s); }
+      if (/[?&]tutorial=reset(&|$)/.test(window.location.search)) { s.tutorial.seen = {}; s.tutorial.bookOpened = false; GW.state.save(s); }
     }
     return s.tutorial.seen;
   }
+  // The book is new (1q.1): it has a page, and the save has never opened it.
+  function bookNew() {
+    var s = seen();
+    return !GW.game.s.tutorial.bookOpened && T.pages.some(function (p) { return s[p.id]; });
+  }
+  function changed() { listeners.forEach(function (fn) { fn(); }); }
   // An older save (no tutorial in it) has lived through some pages already: 1 or more shifts covers the pages marked
   // 'shifts', and fakes.startShift or more covers the 'fakes' page too.  state.js calls this as it loads a save.
   function oldSeen(shifts) {
@@ -125,6 +133,7 @@ GW.tutorial = (function () {
     showing = null;
     if (queue.length) draw(queue.shift());
     else view.hidden = true;
+    changed();
   }
   function step(d) {
     if (!book) return;
@@ -150,12 +159,15 @@ GW.tutorial = (function () {
     if (!list.length) return;
     if (!view) build();
     book = { list: list, at: 0 };
+    if (!GW.game.s.tutorial.bookOpened) { GW.game.s.tutorial.bookOpened = true; GW.state.save(GW.game.s); }
     GW.sfx.click();
     draw(list[0]);
+    changed();
   }
 
   return {
-    due: due, openBook: openBook, oldSeen: oldSeen,
+    due: due, openBook: openBook, oldSeen: oldSeen, bookNew: bookNew,
+    onChange: function (fn) { listeners.push(fn); },
     isOpen: function () { return !!showing; },
     // What shows: the page id, whether it is the book, and the pages waiting (for tests and screenshots).
     current: function () { return showing; }, inBook: function () { return !!book; },

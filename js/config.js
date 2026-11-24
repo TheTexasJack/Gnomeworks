@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.97';
+GW.VERSION = '0.2.0-draft.98';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -710,10 +710,12 @@ GW.CONFIG = {
     // and not in the first `armMs` after it shows, so a stray tap during play can't skip it.  Pages due together
     // show one after the other.  width = the page's largest width in px (it never passes `vw` % of the screen);
     // pic = the pictures' size in px (width, height).  ?tutorial=reset in the address clears the seen pages.
-    // The How to Ship book: a small button in the room (`book.label`) reopens the pages seen so far, one at a time,
-    // with `back` and `next`.  book.place picks its spot (Nathan's pick): 'wall' = a small tag on the wall near the
-    // computer, 'top' = the room's top edge, under the view buttons.  book.spots.<place>.<layout> = [x of its left
-    // edge, y of its top, width], in % of the room.
+    // The How to Ship book: Nathan's painted bookshelf on the room's wall (1q.1, art 39) is the button that reopens
+    // the pages seen so far, one at a time, with `back` and `next`.  It has no words on it; `label` is its screen
+    // reader name.  book.spot.<layout> = [x of its left edge, y of its top, width], in % of the room, measured from
+    // Nathan's mocks (docs/art-style/references/how-to-ship-shelf-mock-wide.png and -tall.png); its height follows
+    // the art's shape.  It glows like the clipboards (CONFIG.shipping.clipFace.glow.pulseMs) from the first page
+    // seen until the book is first opened (the save's tutorial.bookOpened), a tip, so "Show instructions" hides it.
     tutorial: {
       gotIt: 'Got it!',
       back: '\u2039 Back',
@@ -740,12 +742,9 @@ GW.CONFIG = {
           text: 'TNP wants to trick you.  An order that sparkles is fake, so stamp it DENIED.  If an elf drives up in a fake truck, pull the chain to send him away.' }
       ],
       book: {
-        label: '\ud83d\udcd6 How to Ship',
-        place: 'wall',
-        spots: {
-          wall: { wide: [17.4, 37.4, 12.4], tall: [7, 34.6, 24] },
-          top: { wide: [2.2, 2.2, 12.4], tall: [3, 1.4, 27] }
-        }
+        label: 'How to Ship',
+        img: 'assets/packing/how_to_ship_shelf.webp',
+        spot: { wide: [21.5, 37.1, 8.5], tall: [10.1, 31.9, 18.3] }
       }
     },
     // The leave warning (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board

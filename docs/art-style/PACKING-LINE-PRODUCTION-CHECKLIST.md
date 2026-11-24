@@ -215,7 +215,7 @@
   - [ ] Shen Shin.
   - [ ] Gnufoundland.
   - [ ] Gnonmoon.
-- [x] **39. The How to Ship bookshelf.  Approved by Nathan 2026-11-23.**  A small wall shelf (gear crest, a red manual with a gear bookmark, two books, a plant, a lantern) that opens the tutorial's How to Ship book, in place of 1q's code-drawn tag (Nathan: "The icon is ... out of place").  Master: `39-how-to-ship-shelf/how_to_ship_shelf.png` (1774 x 887, transparent).  Placement mocks by Nathan: `docs/art-style/references/how-to-ship-shelf-mock-wide.png` and `-tall.png` ("yes, it's small.  It will be fine.").  Work order 1q.1.
+- [x] **39. The How to Ship bookshelf.  Approved by Nathan 2026-11-23.**  A small wall shelf (gear crest, a red manual with a gear bookmark, two books, a plant, a lantern) that opens the tutorial's How to Ship book, in place of 1q's code-drawn tag (Nathan: "The icon is ... out of place").  Master: `39-how-to-ship-shelf/how_to_ship_shelf.png` (1774 x 887, transparent).  Placement mocks by Nathan: `docs/art-style/references/how-to-ship-shelf-mock-wide.png` and `-tall.png` ("yes, it's small.  It will be fine.").  Work order 1q.1.  **Integrated in 1q.1 (draft.98):** `assets/packing/how_to_ship_shelf.webp`.
 
 ## Review and cleanup log
 
