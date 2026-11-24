@@ -294,7 +294,24 @@ Work orders and drivers are two separate calls.
    - The ticker is drawn by code inside the STONKS screen painted in the room (Nathan, 2026-11-22).
 6. **The Daily Cog:** a newspaper between shifts carrying the war story (TNP buys the bolt supply, a defector reindeer, the Megagnome guarding the dock).  Masthead art approved 2026-11-22.  Claudia's draft of its jobs, in order: introduce a newly unlocked region's rule, recap the last shift as a headline, carry the GRIP vs TNP story.
 
-**Packing Line tutorial (Nathan, 2026-11-23, future enhancement):** a short tutorial with small shots of what to do and how to spot fakes.  It shows once; after the player taps through it, it doesn't come back, but it lives on in the lore tab with the Gnomopedia.  This is separate from the planned opening comic.  **Timing (Nathan, 2026-11-23):** it belongs to the opening flow that comes with logins, scoring, and leaderboards (an intro screen, then the comic, then the game), so players learn when they first open the finished game.  Not addressed until then; the rest of the game comes first.
+**Packing Line tutorial (Nathan, 2026-11-23, future enhancement):** a short tutorial with small shots of what to do and how to spot fakes.  It shows once; after the player taps through it, it doesn't come back, but it lives on in the lore tab with the Gnomopedia.  This is separate from the planned opening comic.  ~~**Timing (Nathan, 2026-11-23):** it belongs to the opening flow that comes with logins, scoring, and leaderboards (an intro screen, then the comic, then the game), so players learn when they first open the finished game.  Not addressed until then; the rest of the game comes first.~~  Moved up (Nathan, 2026-11-23, evening): as more is added, players risk seeing too much and not knowing what to do or what things mean.
+
+**The tutorial, moved up (Claudia's draft, approved by Nathan 2026-11-23)**
+
+- **When it is built:** after the Wednesday demo, before the Gnohio build.  The 1p clipboard glow fix rides along in an early order.
+- **Its own trigger:** it no longer waits for logins or the opening flow.  It shows the first time a player enters the Shipping view (remembered in the save).  The opening flow can link to it later.
+- **Where it lives until the Gnomopedia exists:** a small "How to Ship" button in the room reopens it (on the Packing Rules bar or as a manual on the wall; placement settled in its work order).
+- **Staged pages:** each page shows the first time its thing appears, so nothing is front-loaded.
+    1. What a shift is: a truck comes, you fill its orders, you close the door.  Then the report card, and what a good shift is.
+    2. Read and stamp: APPROVED or DENIED.
+    3. Pack it: the item, peanuts, bubble wrap, stickers, the region stamp.
+    4. Hand it over: drag the box to the driver, then pull the chain.
+    5. Shift 4, fakes: glitter slips and elves in fake trucks, shown when they start.
+    6. Each region unlock gets its own page.  The Daily Cog tells the story, the page explains the rule, and the Cog's headline points to the page.
+- **Pictures:** small shots of the real room, captured with Playwright and cropped to WebP.  No new painted art.  Text in plain English, so Elana can read it.
+- **Two layers:** the "Show instructions" setting stays the in-room hint layer (glows and tags).  The tutorial is the explaining layer.
+
+**Good shift (Nathan, 2026-11-23, liked; count still a draft):** a shift where every real order scores ✔.  TNP trips count neither way.  Claudia's draft: 5 good shifts open Gnohio (counted in the save, number in `js/config.js`).  The tutorial's first page explains it.
 
 **Trade economy (Nathan, 2026-11-23, future enhancement):** the Bathroom-heavy orders are fine for now.  Later, build an economy of what ships where, with supply and demand on trades, and a buying system that leads into it (built together).  Standing rule: it stays trade, never speculation or betting (no gambling mechanics unless Jarrett asks).
 
