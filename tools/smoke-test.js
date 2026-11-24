@@ -1149,6 +1149,157 @@ async function calmCheck(browser, errors) {
   console.log('calm motion: switch off by default, on, saved over a reload, off again, device lock and note, Shop Floor poses, CSS samples ok');
 }
 
+// Regions (1r), on both layouts: the wall map in the upper frame (Day and Night), the map viewer (the picture for the
+// unlocked count, loaded only when it opens, zoom and pan that stop at full size and keep the map on screen, the room
+// hearing nothing), a fresh and an old save at 1, the test button's cards in order (close-up, three postcards, the
+// stack turning over), "Got it!" needing a real tap, nothing unlocking in play while liveUnlock is false, and orders
+// staying Gnomerica only.
+async function regionCheck(page, errors, name, touch) {
+  const fail = m => errors.push(`regions (${name}): ` + m);
+  const R = await page.evaluate(() => GW.CONFIG.shipping.regions);
+  const debugBtn = label => page.evaluate(t => [...document.querySelectorAll('.debug-bar button')].find(b => b.textContent === t).click(), label);   // the bar runs off a phone's screen
+  const mapReqs = [];
+  const onReq = r => { if (/assets\/map\/map-state-/.test(r.url())) mapReqs.push(r.url()); };
+  page.on('request', onReq);
+  // A fresh save starts at 1; an old save with no regions does too.
+  await page.evaluate(() => { GW.state.save = () => false; localStorage.clear(); });
+  await page.goto(URL + '?ship=1&debug=1');
+  await page.waitForTimeout(400);
+  if (await page.evaluate(() => GW.game.s.regions) !== 1) fail('a fresh save does not start at 1');
+  await page.evaluate(() => { GW.CONFIG.shipping.tutorial.pages.forEach(p => { GW.game.s.tutorial.seen[p.id] = true; }); delete GW.game.s.regions;
+    const k = GW.CONFIG.saveKey, o = JSON.parse(JSON.stringify(GW.game.s)); delete o.regions; GW.state.save = () => false; localStorage.setItem(k, JSON.stringify(o)); });
+  await page.reload();
+  await page.waitForTimeout(400);
+  if (await page.evaluate(() => GW.game.s.regions) !== 1) fail('an old save (no regions) does not start at 1: ' + await page.evaluate(() => GW.game.s.regions));
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(500);
+  // The wall map: inside the frame on this layout, its picture loaded, no dim by Day, the slips' dim at Night.
+  const wm = await page.evaluate(() => { const out = {}, was = GW.theme.setting(), S = GW.CONFIG.shipping, F = S.regions.wall.frame[matchMedia(S.tallQuery).matches ? 'tall' : 'wide'];
+    const el = document.querySelector('.ship-wallmap'), i = el.querySelector('img'), r = el.getBoundingClientRect(), room = document.getElementById('ship').getBoundingClientRect();
+    const fx = room.left + F[0] / 100 * room.width, fy = room.top + F[1] / 100 * room.height, fw = F[2] / 100 * room.width, fh = F[3] / 100 * room.height;
+    out.inFrame = r.left > fx && r.top > fy && r.right < fx + fw && r.bottom < fy + fh && r.width > 40 && r.height > 20;
+    out.loaded = i.complete && i.naturalWidth > 0;
+    out.shown = getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
+    const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); out.onTop = el.contains(hit);
+    for (const t of ['day', 'night']) { GW.theme.set(t); out[t] = getComputedStyle(i).filter; }
+    GW.theme.set(was); out.night0 = S.slip.nightBrightness; return out; });
+  if (!wm.inFrame || !wm.loaded || !wm.shown || !wm.onTop) fail('the wall map: ' + JSON.stringify(wm));
+  if (wm.day !== 'none' || !wm.night.includes('brightness(' + wm.night0 + ')')) fail('the wall map\'s Day and Night: ' + JSON.stringify(wm));
+  if (mapReqs.length) fail('a map picture loaded before the viewer opened: ' + mapReqs.join());
+  // A tap opens the viewer with state 1, which loads only now.
+  const wr = await (await page.$('.ship-wallmap')).boundingBox();
+  if (touch) await page.touchscreen.tap(wr.x + wr.width / 2, wr.y + wr.height / 2); else await page.mouse.click(wr.x + wr.width / 2, wr.y + wr.height / 2);
+  await page.waitForFunction(() => { const i = document.querySelector('.map-pic'); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 5000 }).catch(() => {});
+  if (!await page.evaluate(() => GW.regions.mapOpen())) { fail('a tap on the wall map did not open the viewer'); page.off('request', onReq); return; }
+  if (!/map-state-01\.webp$/.test(await page.evaluate(() => GW.regions.mapSrc()))) fail('the viewer did not show state 1: ' + await page.evaluate(() => GW.regions.mapSrc()));
+  if (mapReqs.length !== 1) fail('the viewer loaded ' + mapReqs.length + ' map pictures');
+  // Fitted at first: the whole map on screen.
+  const v0 = await page.evaluate(() => { const v = GW.regions.mapView(), r = document.querySelector('.map-pic').getBoundingClientRect(); return { v, r: [r.left, r.top, r.right, r.bottom], w: innerWidth, h: innerHeight }; });
+  if (v0.r[0] < -1 || v0.r[1] < -1 || v0.r[2] > v0.w + 1 || v0.r[3] > v0.h + 1 || Math.abs(v0.v.s - v0.v.fit) > 1e-6) fail('the viewer did not open fitted: ' + JSON.stringify(v0));
+  // Room taps do nothing while it is open: a tap where the chain is.
+  const trip0 = await page.evaluate(() => GW.ship.tripState());
+  const ch = await page.evaluate(() => { const r = document.querySelector('.ship-chain').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height * .8 }; });
+  await page.evaluate(c => { const t = document.elementFromPoint(c.x, c.y); const o = { bubbles: true, pointerId: 9, clientX: c.x, clientY: c.y }; t.dispatchEvent(new PointerEvent('pointerdown', o)); t.dispatchEvent(new PointerEvent('pointerup', o)); }, ch);
+  await page.keyboard.press('p');
+  if (await page.evaluate(() => GW.ship.tripState()) !== trip0 || await page.evaluate(() => GW.game.s.paused)) fail('the room heard a tap or a key under the viewer');
+  // Zoom: the wheel on desktop, a two-finger pinch on phones (pointer events, as the browser sends them).
+  const cx = v0.w / 2, cy = v0.h / 2;
+  if (touch) {
+    await page.evaluate(([cx, cy]) => { const st = document.querySelector('.map-stage');
+      const ev = (t, id, x, y) => st.dispatchEvent(new PointerEvent(t, { bubbles: true, pointerId: id, pointerType: 'touch', clientX: x, clientY: y, isPrimary: id === 1 }));
+      ev('pointerdown', 1, cx - 20, cy); ev('pointerdown', 2, cx + 20, cy);
+      for (let k = 1; k <= 20; k++) { ev('pointermove', 1, cx - 20 - k * 30, cy); ev('pointermove', 2, cx + 20 + k * 30, cy); }
+      ev('pointerup', 1, cx - 620, cy); ev('pointerup', 2, cx + 620, cy); }, [cx, cy]);
+  } else {
+    await page.mouse.move(cx, cy);
+    for (let k = 0; k < 40; k++) await page.mouse.wheel(0, -300);
+    await page.waitForTimeout(100);
+  }
+  const v1 = await page.evaluate(() => GW.regions.mapView());
+  if (!(v1.s > v0.v.s * 1.5)) fail('the viewer did not zoom in: ' + JSON.stringify(v1));
+  if (Math.abs(v1.s - R.map.maxZoom) > 1e-6) fail('zoom did not stop at full size (' + v1.s + ', max ' + R.map.maxZoom + ')');
+  if (touch) await page.screenshot({ path: path.join(OUT, `1r-${name}-viewer-zoomed-check.png`) });
+  // Pan: a long drag can't take the map off screen.
+  await page.evaluate(([cx, cy]) => { const st = document.querySelector('.map-stage');
+    const ev = (t, x, y) => st.dispatchEvent(new PointerEvent(t, { bubbles: true, pointerId: 7, pointerType: 'mouse', clientX: x, clientY: y, isPrimary: true }));
+    ev('pointerdown', cx, cy); for (let k = 1; k <= 10; k++) ev('pointermove', cx + k * 500, cy + k * 500); ev('pointerup', cx + 5000, cy + 5000); }, [cx, cy]);
+  const v2 = await page.evaluate(() => GW.regions.mapView());
+  if (Math.abs(v2.x) > 0.5 || Math.abs(v2.y) > 0.5) fail('a drag took the map off its top left corner: ' + JSON.stringify(v2));
+  await page.evaluate(([cx, cy]) => { const st = document.querySelector('.map-stage');
+    const ev = (t, x, y) => st.dispatchEvent(new PointerEvent(t, { bubbles: true, pointerId: 7, pointerType: 'mouse', clientX: x, clientY: y, isPrimary: true }));
+    ev('pointerdown', cx, cy); for (let k = 1; k <= 10; k++) ev('pointermove', cx - k * 900, cy - k * 900); ev('pointerup', cx - 9000, cy - 9000); }, [cx, cy]);
+  const v3 = await page.evaluate(() => { const v = GW.regions.mapView(), r = document.querySelector('.map-pic').getBoundingClientRect(); return { v, right: r.right, bottom: r.bottom, w: innerWidth, h: innerHeight }; });
+  if (Math.abs(v3.right - v3.w) > 1 || Math.abs(v3.bottom - v3.h) > 1) fail('a drag took the map off its bottom right corner: ' + JSON.stringify(v3));
+  // Zoomed all the way out it can't go below fitted.
+  await page.evaluate(() => GW.regions.mapZoom(100, 100, 0.0001));
+  if (Math.abs(await page.evaluate(() => GW.regions.mapView().s - GW.regions.mapView().fit)) > 1e-6) fail('the viewer zoomed out past fitted');
+  // Escape closes it; the close button too.
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.regions.mapOpen())) fail('Escape did not close the viewer');
+  await page.mouse.click(wr.x + wr.width / 2, wr.y + wr.height / 2);
+  await page.waitForTimeout(100);
+  const cb = await (await page.$('.map-close')).boundingBox();
+  await page.mouse.click(cb.x + cb.width / 2, cb.y + cb.height / 2);
+  if (await page.evaluate(() => GW.regions.mapOpen())) fail('the close button did not close the viewer');
+  if (mapReqs.length !== 1) fail('reopening the viewer loaded the picture again (' + mapReqs.length + ')');
+  // liveUnlock false: five good shifts unlock nothing.
+  const lu = await page.evaluate(() => { const s = GW.game.s; s.goodShifts = 5; for (let k = 0; k < 5; k++) GW.regions.afterGoodShift(); return { live: GW.CONFIG.shipping.regions.liveUnlock, n: s.regions, card: GW.regions.cardOpen() }; });
+  if (lu.live !== false || lu.n !== 1 || lu.card) fail('with liveUnlock false a good shift unlocked something: ' + JSON.stringify(lu));
+  // The test button: each card in order, with its close-up and three postcards; the viewer follows.
+  const ids = await page.evaluate(() => GW.DESTINATIONS.regions.map(r => r.id));
+  for (let n = 2; n <= 10; n++) {
+    await debugBtn(R.debug.unlock);
+    await page.waitForFunction(() => [...document.querySelectorAll('.reg-closeup, .reg-card img')].every(i => i.complete && i.naturalWidth > 0), null, { timeout: 5000 }).catch(() => {});
+    const c = await page.evaluate(() => { const v = document.querySelector('.reg-view'), p = document.querySelector('.reg-page').getBoundingClientRect();
+      return { open: GW.regions.cardOpen(), id: GW.regions.cardRegion(), n: GW.game.s.regions, head: v.querySelector('.reg-title').textContent, name: v.querySelector('.reg-name').textContent,
+        close: v.querySelector('.reg-closeup').getAttribute('src'), cards: [...v.querySelectorAll('.reg-card img')].map(i => i.getAttribute('src')),
+        loaded: [...v.querySelectorAll('.reg-closeup, .reg-card img')].every(i => i.complete && i.naturalWidth > 0), fits: p.top >= 0 && p.bottom <= innerHeight, h: Math.round(p.height),
+        scroll: document.scrollingElement.scrollHeight > innerHeight && getComputedStyle(v).overflow === 'auto' }; });
+    const want = R.list[n - 1];
+    if (!c.open || c.id !== ids[n - 1] || c.n !== n) fail(`card ${n}: ${JSON.stringify(c)}`);
+    if (c.head !== R.card.heading) fail(`card ${n} heading: ${c.head}`);
+    if (c.close !== want.closeup || c.cards.length !== 3 || !c.loaded || !c.fits) fail(`card ${n} pictures: ${JSON.stringify(c)}`);
+    if (n === 2) {
+      // "Got it!" needs a real tap, and not in its first armMs; a script's click does nothing.
+      await page.evaluate(() => document.querySelector('.reg-view .tut-got').click());
+      const g = await (await page.$('.reg-view .tut-got')).boundingBox();
+      await page.mouse.click(g.x + g.width / 2, g.y + g.height / 2);
+      if (!await page.evaluate(() => GW.regions.cardOpen())) fail('"Got it!" closed the card too early or on a script click');
+      // The stack turns over on a tap.
+      const o0 = await page.evaluate(() => GW.regions.stackOrder());
+      const st = await (await page.$('.reg-stack')).boundingBox();
+      if (touch) await page.touchscreen.tap(st.x + st.width / 2, st.y + st.height / 2); else await page.mouse.click(st.x + st.width / 2, st.y + st.height / 2);
+      await page.waitForTimeout(R.card.stack.turnMs + 150);
+      const o1 = await page.evaluate(() => GW.regions.stackOrder());
+      if (o1.join() !== [o0[2], o0[0], o0[1]].join()) fail('the stack did not turn over: ' + o0 + ' -> ' + o1);
+    }
+    await page.waitForTimeout(450);
+    const g = await (await page.$('.reg-view .tut-got')).boundingBox();
+    await page.mouse.click(g.x + g.width / 2, g.y + g.height / 2);
+    if (await page.evaluate(() => GW.regions.cardOpen())) fail(`card ${n}: a real tap on "Got it!" did not close it`);
+    if (n === 2) {
+      await page.mouse.click(wr.x + wr.width / 2, wr.y + wr.height / 2);
+      await page.waitForTimeout(100);
+      if (!/map-state-02\.webp$/.test(await page.evaluate(() => GW.regions.mapSrc()))) fail('after Gnohio the viewer did not show state 2');
+      await page.keyboard.press('Escape');
+    }
+  }
+  // Up to 10, then nothing; the reset puts it back to 1.
+  await debugBtn(R.debug.unlock);
+  if (await page.evaluate(() => GW.game.s.regions) !== 10 || await page.evaluate(() => GW.regions.cardOpen())) fail('the test button went past 10');
+  // Orders stay Gnomerica only with every region unlocked.
+  await page.evaluate(() => { GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = it.group === 'monsters' ? 0 : 40; }); const F = GW.CONFIG.shipping.fakes; F.chance = 0; F.elfChance = 0; });
+  const chain = await page.evaluate(() => { const r = document.querySelector('.ship-chain').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height * .8 }; });
+  await page.mouse.click(chain.x, chain.y);
+  await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 10000 }).catch(() => {});
+  const regs = await page.evaluate(() => GW.ship.orders().map(o => o.place.region));
+  if (!regs.length || regs.some(r => r !== 'gnomerica')) fail('orders with 10 regions unlocked: ' + regs.join());
+  await debugBtn(R.debug.reset);
+  if (await page.evaluate(() => GW.game.s.regions) !== 1) fail('the reset button did not put regions back to 1');
+  page.off('request', onReq);
+  console.log(`regions (${name}): wall map ${wm.inFrame ? 'in frame' : 'OUT'}, viewer fit ${v0.v.fit.toFixed(3)} to ${v1.s}, cards 2 to 10 ok`);
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -1213,6 +1364,7 @@ async function calmCheck(browser, errors) {
     if (name === 'desktop') await fakeCheck(page, errors);
     await elfCheck(page, errors, name);
     await tutorialCheck(page, errors, name);
+    await regionCheck(page, errors, name, touch);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

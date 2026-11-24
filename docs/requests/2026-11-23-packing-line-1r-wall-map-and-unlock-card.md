@@ -1,6 +1,6 @@
 # Work order: Packing Line 1r, the wall map, the map viewer, and the unlock card (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("1r approved.").
 **Model:** Opus 5.5
 
@@ -60,3 +60,40 @@ Put Nathan's map on the room's wall, let a tap open the full map (only unlocked 
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-24 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.101**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 44 minutes, from `git pull` at 23:49 (2026-11-23) to the Result at 00:34 (2026-11-24, CST).  About a third of it was smoke-test runs (four full runs; two failed: a click timeout from the debug bar running off the phone's screen, then a test bug where the room-tap probe left a finger down during the pinch).
+
+**What was built**
+
+- **The save:** `regions` (1 to 10), 1 in a fresh save and in any older save without it; `migrate()` puts a broken count back to 1.
+- **The wall map:** `assets/packing/wall_map.webp` (400 x 231, 50 KB), made with `tools/art.py resize --trim --width 400` from `map_clean.png` (clear edges trimmed at alpha over 30, box (29, 146, 1417, 948)).  On screen it is about 102 x 59 CSS px on a 1400 x 900 desktop and 105 x 61 on a 390 x 844 phone, so 400 px is about 2x its largest desktop size and 3x on a phone.  `art.py resize` gained `--trim` and `--max` for this.  It is fitted inside Claudia's frame numbers with 6% of the frame's height of parchment all around (`CONFIG.shipping.regions.wall`), centered.  **Final numbers** (x, y, w, h in % of the room): desktop **33.30, 18.25, 14.96, 15.34**; phone **36.53, 12.83, 28.26, 9.19**.  It is the room's first piece after the art (before the bookshelf), so the slips, boxes, driver, menus, and pop-ups all draw over it.  Night dims it to the slips' 0.88.
+- **The map viewer** (`js/regions.js`, on `document.body`): a tap on the wall map opens `assets/map/map-state-<regions>.webp`, which is requested only then (and once, while the state stays the same).  It opens fitted with 12 px around it.  One finger or the mouse drags; two fingers pinch around their midpoint; the wheel zooms around the pointer.  Zoom runs from fitted to `map.maxZoom` = 1 (one picture pixel per CSS pixel, the picture's full size), and the map is clamped so no edge can come inside the screen (centered when smaller than the screen).  A round close button (top right) and Escape close it.  While it is open, window-level capture listeners take every pointer, touch, wheel, and key event, so the room hears nothing (Tab stays on the close button).
+- **The unlock card** (`js/regions.js`, on `document.body`): the tutorial's page classes (slip paper, red stripes, `--font`, the same "Got it!" with `tutorial.armMs`, 400 ms, real taps or Enter only; a script's click does nothing).  Nathan's heading, the region's name over a bar in its stamp color, the close-up, and the three postcards in a stack tilted -7°, 5°, -2° (top last).  A tap on the stack slides the top card off and tucks it under (320 ms; instant with Calm motion).  Pictures stack on phones and sit side by side on wide screens.  Measured: 624 px tall on a 390 x 844 phone, 559 px on a 1400 x 900 desktop, no scrolling.  Game copies of all 30 postcards in `assets/postcards/` (`art.py resize --max 512`, each keeping its own shape, 57 to 126 KB, 2.7 MB in all); a card loads only its region's three.
+- **No real unlock:** `CONFIG.shipping.regions.liveUnlock: false` and `goodShiftsFor: 5`.  `shipping.js` calls `GW.regions.afterGoodShift()` after each good shift; it returns at once while `liveUnlock` is false and holds no rule yet, so the Gnohio build writes the rule there.
+- **The test buttons** (`?debug=1`): "Unlock next region" adds one (up to 10; at 10 it does nothing) and shows that region's card; "Reset regions" puts it back to 1.  Words in `CONFIG.shipping.regions.debug`.
+- **Unchanged:** orders, drivers, stamps, the label, the tutorial, and scoring still use Gnomerica only, whatever `regions` says.
+- **Docs:** CHANGELOG, ARCHITECTURE (file table, save data, a Regions paragraph), ASSETS (`assets/map/`, `assets/postcards/`, the wall map), TASKS, HANDOFF.
+- **Smoke test:** a new `regionCheck` on both layouts: a fresh save and an old save (no `regions`) at 1; the wall map inside its frame, loaded, on top at its middle, no filter by Day and the slips' brightness at Night; no map picture requested before the viewer opens and exactly one after; state 1 fitted; a room tap and the P key heard nothing under it; the wheel (desktop) and a two-finger pinch (phone) zoom in and stop at exactly full size; long drags in both directions stop with the map's corner on the screen's corner; zooming out stops at fitted; Escape and the close button close it; five `afterGoodShift` calls with `goodShifts` 5 unlock nothing; the test button shows cards 2 to 10 in order, each with its heading, close-up, three loaded postcards, and fitting the screen; on Gnohio a script click and an early real tap leave the card open, a tap turns the stack over (3rd to top), and a real tap after 400 ms closes it; the viewer then shows state 2; an 11th press does nothing; with 10 regions the door's orders are all Gnomerica; the reset goes back to 1.
+
+**Calls to check**
+
+1. **Full size** is read as one picture pixel per CSS pixel (`map.maxZoom: 1`).  On a 3x phone that is a 5.6x zoom from fitted and slightly soft (town names read clearly, see `1r-tall-day-viewer-1-zoomed.png`).  "No blur at all" on a 3x phone would mean stopping at 1/3, only a 1.9x zoom, which is too little to read the small names.  One number to change.
+2. **The viewer's map dims at Night** with the slips' brightness, like every other pop-up.  The order only asked for the wall map.
+3. **The card's pictures sit side by side on wide screens** (stacked on phones), so it fits a short laptop screen.
+4. **The region's name** has a bar under it in the region's stamp color (`GW.DESTINATIONS.regions` color).  My addition.
+5. **The stack's order** is the order of `postcards` in `CONFIG.shipping.regions.list` (alphabetical by file name).  Easy to reorder.
+6. **Escape does nothing on the unlock card**, like a first-time tutorial page.
+7. **The live hook holds no rule:** I read "unused until the Gnohio build" literally, so `goodShiftsFor` is not read anywhere yet.  "Five good shifts unlock nothing" is tested through `afterGoodShift` with `goodShifts` set to 5, not by playing five real shifts (the tutorial check still plays one real good shift).
+
+**A problem with the map pictures (not changed, per the order):** in `map-state-01.webp` (and the later states) Gnomerica's lit area has straight edges in places, most clearly a vertical line on its east side through the woods and a straight bottom edge above the lake (see `1r-tall-day-viewer-1-fitted.png` and `-zoomed.png`), so the lit area reads as a soft rectangle more than a region outline.  Worth a look by Claudia in `tools/map/region_states.py`.
+
+**Screenshots** in `tools/out/` (`?ship=1`, not committed).  `wide` is 1400 x 900 at 2x; `tall` is 390 x 844 at 3x.  For each `<wide|tall>` and `<day|night>`:
+
+- The room with the wall map: `1r-<layout>-<theme>-room.png`, and a close crop of the wall: `-room-close.png`
+- The viewer at state 1, fitted and zoomed in to full size on Gnomerica: `-viewer-1-fitted.png`, `-viewer-1-zoomed.png`
+- The Gnohio card, and the stack after one tap: `-card-gnohio.png`, `-card-gnohio-stack-tapped.png`
+- The viewer at state 2 after "Got it!": `-viewer-2-fitted.png`
+
+Nothing was installed.  The map pictures and close-ups are untouched.

@@ -567,6 +567,14 @@ window.GW = window.GW || {};
     var hour = U.el('button', '', '+1 hour');
     hour.addEventListener('click', function () { E.offline(s, 3600); shelfDirty = true; });
     bar.appendChild(hour);
+    // Regions (1r): the unlock card's test buttons.
+    var RD = C.shipping.regions.debug;
+    var ru = U.el('button', '', RD.unlock);
+    ru.addEventListener('click', function () { GW.regions.testUnlock(); });
+    bar.appendChild(ru);
+    var rr = U.el('button', '', RD.reset);
+    rr.addEventListener('click', function () { GW.regions.testReset(); });
+    bar.appendChild(rr);
     bar.appendChild(U.el('span', '', 'DEBUG'));
     document.body.appendChild(bar);
   }

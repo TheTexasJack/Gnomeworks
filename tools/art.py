@@ -14,6 +14,8 @@ Commands
   fit     Crop one picture to its content, pad it square, resize, save.
   resize  Resize a whole picture without cropping, so its canvas stays as drawn
           (poses that share a baseline, or room twins that must line up).
+          --trim crops the clear edges first; --max fits the longer side
+          without enlarging (postcards of mixed shapes).
   cutout  Remove a solid black or white background (when an image comes back
           without transparency), then save as PNG for the other commands.
   gear    Count a gear's teeth and find its tooth phase (for js/gears.js).
@@ -26,6 +28,8 @@ Examples
   python3 tools/art.py cutout incoming/badges.png --color black --out incoming/badges_clear.png
   python3 tools/art.py gear incoming/gear_brass_05.png
   python3 tools/art.py resize art-masters/packing-line/25-drivers/driver-gnomerica-waiting.png --height 400 --out assets/packing/driver_gnomerica_waiting.webp
+  python3 tools/art.py resize art-masters/packing-line/05-wall-map/map_clean.png --trim --width 720 --out assets/packing/wall_map.webp
+  python3 tools/art.py resize art-masters/postcards/postcard_gnohio_rivers.png --max 640 --out assets/postcards/postcard_gnohio_rivers.webp
 """
 import argparse
 import math
@@ -150,11 +154,16 @@ def cmd_fit(args):
 
 def cmd_resize(args):
     img = Image.fromarray(load(args.file))
-    if args.height:
+    if args.trim:   # crop the clear edges first (alpha under ALPHA_FLOOR counts as clear)
+        img = img.crop(img.getchannel('A').point(lambda v: 255 if v > ALPHA_FLOOR else 0).getbbox())
+    if args.max:    # fit inside a square of this size, never enlarging
+        s = min(1.0, args.max / max(img.size))
+        w, h = round(img.width * s), round(img.height * s)
+    elif args.height:
         w, h = round(img.width * args.height / img.height), args.height
     else:
         w, h = args.width, round(img.height * args.width / img.width)
-    save_webp(img.resize((w, h), Image.LANCZOS), args.out)
+    save_webp(img.resize((w, h), Image.LANCZOS) if (w, h) != img.size else img, args.out)
 
 
 def cmd_cutout(args):
@@ -231,6 +240,8 @@ def main():
     r.add_argument('file'); r.add_argument('--out', required=True)
     rs = r.add_mutually_exclusive_group(required=True)
     rs.add_argument('--width', type=int); rs.add_argument('--height', type=int)
+    rs.add_argument('--max', type=int, help='fit the longer side to this size, never enlarging')
+    r.add_argument('--trim', action='store_true', help='crop the clear edges first')
     r.set_defaults(fn=cmd_resize)
 
     k = sub.add_parser('cutout')

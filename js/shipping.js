@@ -88,6 +88,7 @@ GW.ship = (function () {
   var clips = {}, logView, logMode = null;
   var faces = {}, clipGlows = {}, faceKey = null;   // the clipboards' faces and their news glows (1p)
   var bookBtn;                    // the How to Ship bookshelf (1q.1)
+  var wallMap, wallRect = null;   // the wall map (1r, js/regions.js) and its place [x, y, w, h] in % of the room
   // clips = the clipboards' tap areas (1o); logMode = what the Shipping Log shows: null (closed), 'list', or a row's index
   // boxStamp = the region stamp on the bench box, or null (1n: a mark like the stickers); boxDrag = the box being
   // pressed or dragged; handTag = the "Hand it to the driver!" tag
@@ -107,6 +108,18 @@ GW.ship = (function () {
     door = U.el('div', 'ship-door'); doorImg = img('ship-room');
     door.appendChild(doorImg); door.hidden = true;
     box.appendChild(door);
+    // The wall map (1r): Nathan's clean map in the upper parchment frame, just over the room art and under
+    // everything else.  A tap opens the map viewer (js/regions.js).  Placed in redraw.
+    wallMap = GW.regions.wallEl();
+    wallMap.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted || e.button > 0) return;
+      e.preventDefault();
+      if (slipOpen || cardOpen || warnOpen || logMode !== null || boxDrag || GW.tutorial.isOpen()) return;
+      closeMenu();
+      GW.regions.openMap();
+    });
+    box.appendChild(wallMap);
     // The How to Ship bookshelf (1q.1): Nathan's painted shelf on the wall, the button that reopens the tutorial's
     // pages seen so far.  It sits just over the room art, under everything else.  Placed in placeBook; its glow in
     // bookGlow.  At Night redraw swaps in Nathan's painted night shelf (1q.2, GW.theme's night twins).
@@ -1034,6 +1047,7 @@ GW.ship = (function () {
     s.tnpHistory = (s.tnpHistory || []).concat([s.tnp]).slice(-P.ticker.history);
     s.shifts = (s.shifts || 0) + 1;
     if (r.good) s.goodShifts = (s.goodShifts || 0) + 1;   // TNP trips are never good (1q)
+    if (r.good) GW.regions.afterGoodShift();     // unlocks nothing while CONFIG.shipping.regions.liveUnlock is false (1r)
     s.lastShift = keepShift(r);
     drawFaces();                                 // the card's face shows the new marks, and both glow (1p)
     GW.ui.buildShelf(s);
@@ -1831,6 +1845,7 @@ GW.ship = (function () {
     placePack(L);
     placeHandoff(L);
     placeBook();
+    wallRect = GW.regions.placeWall(wallMap, tallQuery.matches, parseFloat(wh[0]) / parseFloat(wh[1]));
     var made = false;
     if (trip === 'arriving') { trip = 'here'; made = true; }
     if (trip === 'leaving') { trip = 'closed'; open = false; }
@@ -1991,6 +2006,8 @@ GW.ship = (function () {
     // The clipboards' news glows (1p): whether each one's glow is on (true while the save says it is unread).
     clipGlow: function (k) { return !!clipGlows[k] && !clipGlows[k].hidden; },
     // The How to Ship bookshelf's glow (1q.1): whether it is on.
-    bookGlow: function () { return !!bookBtn && bookBtn.classList.contains('is-new'); }
+    bookGlow: function () { return !!bookBtn && bookBtn.classList.contains('is-new'); },
+    // The wall map's place (1r): [x, y, w, h] in % of the room.
+    wallRect: function () { return wallRect && wallRect.slice(); }
   };
 })();

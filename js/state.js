@@ -34,6 +34,7 @@ GW.state = (function () {
       tnpRow: 0,            // TNP trips in a row (1m), never more than CONFIG.shipping.fakes.maxTnpInRow
       goodShifts: 0,        // GRIP shifts where every real order scored a check (1q); TNP trips count neither way
       tutorial: { seen: {}, bookOpened: false },   // the Packing Line tutorial's pages seen (1q): page id -> true (CONFIG.shipping.tutorial); bookOpened = the How to Ship book opened once (1q.1, its shelf stops glowing)
+      regions: 1,           // regions unlocked (1r), in the unlock order of GW.DESTINATIONS.regions; 1 = Gnomerica only (CONFIG.shipping.regions)
       lastShift: null,      // the last scored shift (1o): its report card rows and each shipped box's log, for the clipboards; null before the first
       mega: { owned: false, food: 0, nextHunt: 0, hunts: 0, kills: 0, bossKills: 0, trophyPity: 0, eaten: 0 },
       stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }
@@ -51,6 +52,8 @@ GW.state = (function () {
     if (saved.shifts === undefined) saved.shifts = Array.isArray(saved.stonksHistory) ? saved.stonksHistory.length : 0;
     // Saves from before 1q have no tutorial: the pages they have already lived through count as seen.
     if (saved.tutorial === undefined || !saved.tutorial || typeof saved.tutorial !== 'object') saved.tutorial = { seen: GW.tutorial.oldSeen(saved.shifts || 0) };
+    // Regions (1r): saves from before it start at 1 (below, from fresh); a broken count goes back to 1.
+    if (saved.regions !== undefined && !(saved.regions >= 1 && saved.regions <= C.shipping.regions.max)) saved.regions = 1;
     Object.keys(base).forEach(function (k) {
       if (saved[k] === undefined) saved[k] = base[k];
       else if (base[k] && typeof base[k] === 'object' && !Array.isArray(base[k])) {

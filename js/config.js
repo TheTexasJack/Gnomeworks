@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.100';
+GW.VERSION = '0.2.0-draft.101';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -758,6 +758,59 @@ GW.CONFIG = {
         img: 'assets/packing/how_to_ship_shelf.webp',
         spot: { wide: [21.5, 37.1, 8.5], tall: [10.1, 31.9, 18.3] }
       }
+    },
+    // Regions (1r): the wall map, the map viewer, and the unlock card.  The save's `regions` = how many regions are
+    // unlocked, in the unlock order of GW.DESTINATIONS.regions (Gnomerica first); 1 for every save.
+    // liveUnlock = whether anything in play unlocks a region.  False until the Gnohio build turns it on, so only
+    // the debug bar's test button (?debug=1) unlocks one.  goodShiftsFor = the good shifts that will open Gnohio
+    // (Nathan, 2026-11-23), unused until that build.
+    // wall = the wall map in the room's upper parchment frame: Nathan's clean map (05-wall-map/map_clean.png,
+    // trimmed, 400 px wide: about twice its largest size on screen, and 3x on a phone), fitted inside `frame` (the frame's inner parchment [x, y, w, h] in % of the room,
+    // measured by Claudia) with `inset` % of the frame's height of parchment showing all around.  Night dims it
+    // like the slips (shipping.slip.nightBrightness).
+    // map = the map viewer: `state` is the picture for N unlocked regions ({n} = 01 to 10), `size` its pixels,
+    // loaded only when the viewer opens.  It fits the screen at first, with `margin` px around it; zoom stops at
+    // maxZoom (CSS pixels per picture pixel: 1 = the picture's full size), and `wheelStep` is one wheel notch's zoom.
+    // card = the unlock card, built like a tutorial page (the same paper, font, and "Got it!" with
+    // tutorial.armMs): width in px (and vw, never wider than the screen) for each layout (wide above
+    // shipping.tallQuery, tall below), the close-up's size in px, and the postcard stack: its box size in % of the
+    // card's width and height in px, each card's tilt (top card last), and turnMs for one turn over.
+    // debug = the debug bar's two test buttons (?debug=1).
+    // list = each region's close-up (rendered by tools/map/region_states.py, lit in the state where it unlocks)
+    // and its three postcards (game copies of art-masters/postcards, made with tools/art.py resize --max 512), in
+    // the unlock order.
+    regions: {
+      liveUnlock: false,
+      goodShiftsFor: 5,
+      max: 10,
+      wall: {
+        img: 'assets/packing/wall_map.webp', aspect: 400 / 231, inset: 6, label: 'Map of Gnomadica',
+        frame: { wide: [31.25, 17.2, 19.06, 17.43], tall: [31.11, 12.2, 39.11, 10.44] }
+      },
+      map: {
+        state: 'assets/map/map-state-{n}.webp', size: [2048, 1419], margin: 12, maxZoom: 1, wheelStep: 1.15,
+        close: 'Close', label: 'Map of Gnomadica'
+      },
+      card: {
+        heading: 'Drivers can now deliver to a new region!',
+        width: { wide: 680, tall: 460 }, vw: 92,
+        closeup: [1024, 768],
+        stack: { tilts: [-7, 5, -2], turnMs: 320 }
+      },
+      debug: { unlock: 'Unlock next region', reset: 'Reset regions' },
+      list: [
+        { id: 'gnomerica', closeup: 'assets/map/closeup-gnomerica.webp', postcards: ['postcard_gnomerica_cogbottom', 'postcard_gnomerica_fields', 'postcard_gnomerica_windmill'] },
+        { id: 'gnohio', closeup: 'assets/map/closeup-gnohio.webp', postcards: ['postcard_gnohio_festival', 'postcard_gnohio_forbidden', 'postcard_gnohio_rivers'] },
+        { id: 'gnafrica', closeup: 'assets/map/closeup-gnafrica.webp', postcards: ['postcard_gnafrica_desert', 'postcard_gnafrica_sockarillo', 'postcard_gnafrica_volcano'] },
+        { id: 'slanic', closeup: 'assets/map/closeup-slanic.webp', postcards: ['postcard_slanic_bog', 'postcard_slanic_fairy_fen', 'postcard_slanic_mycelia'] },
+        { id: 'gno_dao_cradle', closeup: 'assets/map/closeup-gno-dao-cradle.webp', postcards: ['postcard_gnodaocradle_6thAge', 'postcard_gnodaocradle_cogbend', 'postcard_gnodaocradle_crystal'] },
+        { id: 'gni', closeup: 'assets/map/closeup-gni.webp', postcards: ['postcard_gni_eversummer', 'postcard_gni_gnaagh', 'postcard_gni_shrubberies'] },
+        { id: 'slaanilok', closeup: 'assets/map/closeup-slaanilok.webp', postcards: ['postcard_slaanilok_glowing', 'postcard_slaanilok_jade', 'postcard_slaanilok_legpit'] },
+        { id: 'shen_shin', closeup: 'assets/map/closeup-shen-shin.webp', postcards: ['postcard_shenshin_ferry', 'postcard_shenshin_ridge', 'postcard_shenshin_tablesedge'] },
+        { id: 'gnufoundland', closeup: 'assets/map/closeup-gnufoundland.webp', postcards: ['postcard_gnufoundland_FrozenFields', 'postcard_gnufoundland_gnyannis', 'postcard_gnufoundland_WerewolfLondon'] },
+        { id: 'gnonmoon', closeup: 'assets/map/closeup-gnonmoon.webp', postcards: ['postcard_gnonmoon_demonsgutt', 'postcard_gnonmoon_harbor', 'postcard_gnonmoon_threeidols'] }
+      ],
+      postcardPath: 'assets/postcards/{name}.webp'
     },
     // The leave warning (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board
     // shows this over the room.  `go` runs the same hand-off as pulling the chain, and the view switches once the
