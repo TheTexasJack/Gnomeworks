@@ -2,6 +2,14 @@
 
 For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.96**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
+## Opening a new chat thread (Nathan, 2026-11-23)
+
+Claude.ai does not carry GitHub access from one thread to the next, so each new thread needs Nathan's permission in his first message.  Nathan pastes this to open a thread:
+
+    Claudia, new thread for Gnomeworks.  You have permission to read and write the Gnomeworks GitHub repo (TheTexasJack/Gnomeworks).  Read CLAUDE.md, docs/HANDOFF.md, and docs/TASKS.md.
+
+Claudia keeps this block current and points to it when a thread is winding down.
+
 ## Where things stand
 
 - **Live:** https://thetexasjack.github.io/Gnomeworks/ (repo `TheTexasJack/Gnomeworks`, branch `main`).  Everything is pushed; no open branches.
