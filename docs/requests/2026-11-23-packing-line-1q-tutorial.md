@@ -1,7 +1,7 @@
 # Work order: Packing Line 1q, the tutorial's first five pages (v0.1)
 
 **Status:** Approved
-**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (the five pages' wording, and the good shift line: "I like the good shift.  These all look good to me.").
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (the five pages' wording, and the good shift line: "I like the good shift.  These all looks good to me.").
 **Model:** Opus 5.5
 
 ## Goal
