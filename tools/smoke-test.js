@@ -342,7 +342,7 @@ async function packCheck(page, errors) {
     if (orders.some((o, i) => !items[i] || !items[i].startsWith(o.qty + ' × '))) fail(tag + 'a report card row does not show its count: ' + items.join(' | '));
     await page.keyboard.press('Escape');
     if (await page.evaluate(() => GW.ship.cardOpen())) fail('Escape did not close the report card');
-    const fp = await faceProblem(page, [true, true]);                  // the new marks, and both glow (1p)
+    const fp = await faceProblem(page, [false, true]);                 // the new marks; the card popped up on its own, so only the Log glows (1q)
     if (fp) fail(tag + 'clipboard faces: ' + fp);
     if (shift === 1) await clipCheck(page, fail, orders);
     await page.waitForTimeout(1200);
@@ -681,7 +681,7 @@ async function elfCheck(page, errors, name) {
   let s1 = await s();
   if (card && card.join() !== 'ok:' + Sc.sentPacking) fail('the sent-away card reads ' + card.join(' | '));
   if (s1.tnp !== s0.tnp + Sc.elf.sentAway.tnp || s1.stonks !== s0.stonks + Sc.elf.sentAway.ours) fail(`sent away: ${JSON.stringify(s0)} -> ${JSON.stringify(s1)}`);
-  const fp = await faceProblem(page, [true, true]);                     // the faces in this layout (1p): one ✔, two empty
+  const fp = await faceProblem(page, [false, true]);                    // the faces in this layout (1p): one ✔, two empty; only the Log glows (1q)
   if (fp) fail('clipboard faces: ' + fp);
   // 2: one box handed to the elf.
   await arrive();
@@ -827,6 +827,176 @@ async function leaveCheck(page, errors) {
   console.log('leaving: warning, Stay, Escape, Send it off, and leaving after the pull all ok');
 }
 
+// The tutorial (1q), on both layouts, from a fresh save: each page shows at its moment and only once, fits the screen
+// with its picture, and only a real tap or Enter on "Got it!" closes it (a script's click, a tap on the room, Escape,
+// and a tap in the first armMs do nothing, and the room under it hears nothing).  Pages due together queue (stamp,
+// then fakes, on a save at the fakes shift).  An older save skips the pages it has lived through; ?tutorial=reset
+// brings them back.  The How to Ship book holds only the seen pages, with back and next, from both placements.  A good
+// shift shows its line and counts; a TNP trip does not.  After a shift only the Log clipboard glows (the card that
+// popped up on its own counts as opened), and the card's clipboard does not glow while that card is on its way.
+async function tutorialCheck(page, errors, name) {
+  const fail = m => errors.push(`tutorial (${name}): ` + m);
+  const mid = async sel => { const b = await page.locator(sel).first().boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+  const tap = async sel => { const c = await mid(sel); await page.mouse.click(c.x, c.y); };
+  const cur = () => page.evaluate(() => GW.tutorial.current());
+  const seen = () => page.evaluate(() => GW.tutorial.seenList().join());
+  const arm = () => page.waitForTimeout(450);                          // past the page's armMs
+  const got = async () => { await arm(); await tap('.tut-got'); await page.waitForTimeout(100); };
+  const shelf = (only) => page.evaluate(o => GW.CONFIG.items.forEach(it => { GW.game.s.items[it.id] = o ? (it.id === o ? 40 : 0) : it.group === 'monsters' ? 0 : 40; }), only || null);
+  const arrive = async () => { await tap('.ship-chain'); await page.waitForFunction(() => GW.ship.tripState() === 'here', null, { timeout: 10000 }); };
+  const ship = async () => { await tap('.ship-chain'); await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 15000 }); };
+  const setSave = (edit) => page.evaluate(src => { const k = GW.CONFIG.saveKey, o = JSON.parse(localStorage.getItem(k)); eval(src)(o);
+    GW.state.save = () => false; localStorage.setItem(k, JSON.stringify(o)); }, edit.toString());
+  // A fresh save.
+  await page.evaluate(() => { GW.state.save = () => false; localStorage.clear(); });
+  await page.goto(URL + '?ship=1');
+  await page.waitForTimeout(500);
+  if (await seen() !== '') fail('a fresh save has seen pages: ' + await seen());
+  await page.evaluate(() => { const F = GW.CONFIG.shipping.fakes; F.chance = 0; F.elfChance = 0; });
+  await page.click('[data-view="shipping"]');
+  await page.waitForTimeout(300);
+  if (await cur() !== 'welcome') { fail('the welcome page did not show on entering the Shipping view (' + await cur() + ')'); return; }
+  const fit = await page.evaluate(() => { const r = document.querySelector('.tut-page').getBoundingClientRect(), p = document.querySelector('.tut-pic');
+    return { ok: r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth, pic: p.complete && p.naturalWidth > 0, h: Math.round(r.height) }; });
+  if (!fit.ok) fail(`the page does not fit the screen (${fit.h} px tall)`);
+  if (!fit.pic) fail('the welcome page\'s picture did not load');
+  // Only a real tap or Enter, after armMs, closes it.
+  await page.waitForTimeout(450);
+  await page.evaluate(() => { const b = document.querySelector('.tut-got'); b.click(); b.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); });
+  if (await cur() !== 'welcome') fail('a script\'s click closed the page');
+  await tap('.ship-chain');
+  await page.keyboard.press('Escape');
+  if (await cur() !== 'welcome') fail('a tap on the room or Escape closed the page');
+  if (await page.evaluate(() => GW.ship.tripState()) !== 'closed') fail('the room heard a tap under the page');
+  await got();
+  if (await cur() !== null || await seen() !== 'welcome') fail('Got it! did not close the welcome page: ' + await cur() + ' / ' + await seen());
+  await page.click('[data-view="machine"]'); await page.click('[data-view="shipping"]'); await page.waitForTimeout(200);
+  if (await cur() !== null) fail('the welcome page showed twice');
+  // The first orders: the stamp page (fakes not yet: shift 1).  A tap in its first moment does nothing; Enter closes it.
+  await shelf();
+  await arrive();
+  if (await cur() !== 'stamp') fail('the stamp page did not show with the first orders (' + await cur() + ')');
+  await tap('.tut-got');
+  if (await cur() !== 'stamp') fail('a tap in the page\'s first moment closed it');
+  await arm(); await page.keyboard.press('Enter'); await page.waitForTimeout(100);
+  if (await cur() !== null) fail('Enter did not close the stamp page');
+  // The first box on the bench: the pack page.  The first box closed: the hand page.
+  await stampSlip(page, 0, 'approved');
+  if (await cur() !== 'pack') fail('the pack page did not show with the first box (' + await cur() + ')');
+  await got();
+  await page.keyboard.press('Escape');                                   // stampSlip's Escape was the page's to swallow
+  const item = await page.evaluate(() => GW.ship.orders()[0].item.id);
+  await tap('.ship-conveyor');
+  await page.locator(`.ship-menu-items .ship-tile[data-item="${item}"]`).scrollIntoViewIfNeeded();
+  { const a = await mid(`.ship-menu-items .ship-tile[data-item="${item}"]`), b = await mid('.ship-box:not(.is-stacked)');
+    await page.mouse.move(a.x, a.y); await page.mouse.down();
+    for (let i = 1; i <= 8; i++) await page.mouse.move(a.x + (b.x - a.x) * i / 8, a.y + (b.y - a.y) * i / 8);
+    await page.mouse.up(); }
+  await page.keyboard.press('Escape');
+  if (await cur() !== null) fail('a page showed before the box was closed: ' + await cur());
+  await tap('.ship-box:not(.is-stacked)');
+  if (await cur() !== 'hand') fail('the hand page did not show when the box closed (' + await cur() + ')');
+  await got();
+  if (await seen() !== 'welcome,stamp,pack,hand') fail('seen after the first shift\'s pages: ' + await seen());
+  // The shift (not good: two orders left unstamped): only the Log glows after it, and the card's clipboard never
+  // glows while its card is on the way.
+  await tap('.ship-chain');
+  await page.waitForTimeout(200);
+  if (await page.evaluate(() => GW.ship.clipGlow('card'))) fail('the card clipboard glowed while its card was on the way');
+  await page.waitForFunction(() => GW.ship.cardOpen(), null, { timeout: 15000 });
+  await page.keyboard.press('Escape');
+  if (await page.evaluate(() => GW.ship.clipGlow('card') + ',' + GW.ship.clipGlow('log') + ',' + JSON.stringify(GW.game.s.lastShift.unread)) !== 'false,true,{"card":false,"log":true}')
+    fail('after a shift the glows are ' + await page.evaluate(() => GW.ship.clipGlow('card') + ',' + GW.ship.clipGlow('log')));
+  if (await page.evaluate(() => GW.game.s.goodShifts) !== 0) fail('a shift with misses counted as good');
+  // Each page only once: the next trip shows nothing.
+  await shelf(); await arrive();
+  if (await cur() !== null) fail('a page showed again on the second trip: ' + await cur());
+  await ship(); await page.keyboard.press('Escape');
+  // A good shift: one Socks order, packed right.
+  await shelf('socks'); await arrive();
+  const n = await page.evaluate(() => GW.ship.orders().length);
+  for (let i = 0; i < n; i++) await stampSlip(page, i, 'approved');
+  for (let i = 0; i < n; i++) {
+    await tap('.ship-conveyor');
+    await page.locator('.ship-menu-items .ship-tile[data-item="socks"]').scrollIntoViewIfNeeded();
+    const drag = async (from) => { const a = await mid(from), b = await mid('.ship-box:not(.is-stacked)');
+      await page.mouse.move(a.x, a.y); await page.mouse.down();
+      for (let k = 1; k <= 8; k++) await page.mouse.move(a.x + (b.x - a.x) * k / 8, a.y + (b.y - a.y) * k / 8);
+      await page.mouse.up(); };
+    await drag('.ship-menu-items .ship-tile[data-item="socks"]');
+    await page.keyboard.press('Escape');                                 // the menu covers the computer on desktop
+    await tap('.ship-computer');
+    await page.locator('.supply-tile[data-supply="supply:peanuts"]').scrollIntoViewIfNeeded();
+    await drag('.supply-tile[data-supply="supply:peanuts"]');
+    await page.keyboard.press('Escape');
+    await tap('.ship-box:not(.is-stacked)');
+    await tap('.ship-computer');
+    await page.locator('.supply-tile[data-supply="stamp:gnomerica"]').scrollIntoViewIfNeeded();
+    await drag('.supply-tile[data-supply="stamp:gnomerica"]');
+    await page.keyboard.press('Escape');
+    await handToDriver(page);
+    await page.waitForTimeout(500);
+  }
+  await ship();
+  const good = await page.evaluate(() => ({ line: (document.querySelector('.ship-card .card-good') || {}).textContent || '', n: GW.game.s.goodShifts, kept: GW.game.s.lastShift.good,
+    want: GW.CONFIG.shipping.card.good.text, why: [...document.querySelectorAll('.ship-card .card-why')].map(e => e.textContent).join('|') }));
+  if (good.line !== good.want || good.n !== 1 || good.kept !== true) fail(`a good shift: line "${good.line}", goodShifts ${good.n}, saved ${good.kept} (misses: ${good.why})`);
+  await page.screenshot({ path: path.join(OUT, `1q-${name}-good-shift-check.png`) });
+  await page.keyboard.press('Escape');
+  await tap('.ship-clip-card');
+  if (!await page.$('.ship-card .card-good')) fail('the reopened card lost its good shift line');
+  await page.keyboard.press('Escape');
+  // The book: only the seen pages (fakes not seen yet), back and next, from both placements.
+  for (const place of ['wall', 'top']) {
+    await page.evaluate(p => GW.ship.testBookPlace(p), place);
+    await tap('.ship-book');
+    const b = await page.evaluate(() => ({ cur: GW.tutorial.current(), book: GW.tutorial.inBook(), count: document.querySelector('.tut-count').textContent, back: document.querySelector('.tut-step').disabled }));
+    if (b.cur !== 'welcome' || !b.book || b.count !== '1 / 4' || !b.back) fail(`the book from ${place}: ${JSON.stringify(b)}`);
+    const pages = [];
+    for (let i = 0; i < 5; i++) { pages.push(await cur()); await tap('.tut-step:last-of-type'); }
+    if (pages.join() !== 'welcome,stamp,pack,hand,hand') fail(`the book from ${place} pages through ${pages.join()}`);
+    await tap('.tut-step');
+    if (await cur() !== 'pack') fail('Back did not step back');
+    await got();
+    if (await cur() !== null) fail('Got it! did not close the book');
+  }
+  await page.evaluate(() => GW.ship.testBookPlace(null));
+  if (!await page.evaluate(() => document.querySelector('.ship-book').classList.contains('is-' + GW.CONFIG.shipping.tutorial.book.place))) fail('the How to Ship button did not go back to its config spot');
+  // Pages due together queue: the stamp page again and the fakes shift (shift 4).
+  await page.evaluate(() => { delete GW.game.s.tutorial.seen.stamp; GW.game.s.shifts = 3; });
+  await shelf(); await arrive();
+  if (await cur() !== 'stamp' || (await page.evaluate(() => GW.tutorial.waiting().join())) !== 'fakes') fail('two pages due together: ' + await cur() + ' then ' + await page.evaluate(() => GW.tutorial.waiting().join()));
+  await got();
+  if (await cur() !== 'fakes') fail('the fakes page did not follow the stamp page');
+  await got();
+  if (await cur() !== null || await seen() !== 'welcome,stamp,pack,hand,fakes') fail('after the queue: ' + await cur() + ' / ' + await seen());
+  // A TNP trip counts neither way.
+  await ship(); await page.keyboard.press('Escape');
+  await page.evaluate(() => { GW.CONFIG.shipping.fakes.elfChance = 1; GW.game.s.tnpRow = 0; });
+  const g0 = await page.evaluate(() => GW.game.s.goodShifts);
+  await shelf(); await arrive();
+  if (!await page.evaluate(() => GW.ship.tnpTrip())) fail('the forced elf did not come');
+  await ship();
+  if (await page.$('.ship-card .card-good') || await page.evaluate(() => GW.game.s.goodShifts) !== g0) fail('a TNP trip counted as a good shift');
+  await page.keyboard.press('Escape');
+  await page.click('[data-view="machine"]');
+  // Older saves (no tutorial): 1 or more shifts skips pages 1 to 4, fakes.startShift or more skips page 5 too.
+  for (const [shifts, want] of [[0, ''], [1, 'welcome,stamp,pack,hand'], [3, 'welcome,stamp,pack,hand'], [4, 'welcome,stamp,pack,hand,fakes']]) {
+    await setSave(`o => { delete o.tutorial; o.shifts = ${shifts}; }`);
+    await page.reload(); await page.waitForTimeout(400);
+    if (await seen() !== want) fail(`an older save with ${shifts} shifts has seen "${await seen()}", expected "${want}"`);
+  }
+  // ?tutorial=reset brings them back.
+  await page.goto(URL + '?ship=1&tutorial=reset'); await page.waitForTimeout(400);
+  if (await seen() !== '') fail('?tutorial=reset left ' + await seen());
+  await page.click('[data-view="shipping"]'); await page.waitForTimeout(200);
+  if (await cur() !== 'welcome') fail('after ?tutorial=reset the welcome page did not show');
+  await got();
+  await page.click('[data-view="machine"]');
+  console.log(`tutorial (${name}): pages at their moments, once each, queue, real taps only, older saves, reset, book from both spots, good shift, glows ok (page ${fit.h} px tall)`);
+}
+
 (async () => {
   const browser = await chromium.launch();
   const errors = [];
@@ -847,6 +1017,8 @@ async function leaveCheck(page, errors) {
 
     await page.goto(URL + '?debug=1');
     await page.waitForTimeout(500);
+    // Every tutorial page seen (1q), so none covers the room in the checks below; tutorialCheck tries them.
+    await page.evaluate(() => { GW.CONFIG.shipping.tutorial.pages.forEach(p => { GW.game.s.tutorial.seen[p.id] = true; }); GW.state.save(GW.game.s); });
     const box = await (await page.$('#machine')).boundingBox();
     for (let i = 0; i < 30; i++) {
       if (touch) await page.touchscreen.tap(box.x + box.width * 0.2, box.y + box.height * 0.45);
@@ -888,6 +1060,7 @@ async function leaveCheck(page, errors) {
     if (name === 'desktop') await leaveCheck(page, errors);
     if (name === 'desktop') await fakeCheck(page, errors);
     await elfCheck(page, errors, name);
+    await tutorialCheck(page, errors, name);
 
     const version = await page.textContent('.footer');
     console.log(`${name}: ok  taps=${taps}  items=${after}  ${version.trim()}`);

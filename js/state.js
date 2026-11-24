@@ -32,6 +32,8 @@ GW.state = (function () {
       tnpHistory: [],       // TNP at the end of each recent shift, oldest first, like stonksHistory
       shifts: 0,            // completed hand-offs (scored shifts); glitter fakes start from CONFIG.shipping.fakes.startShift
       tnpRow: 0,            // TNP trips in a row (1m), never more than CONFIG.shipping.fakes.maxTnpInRow
+      goodShifts: 0,        // GRIP shifts where every real order scored a check (1q); TNP trips count neither way
+      tutorial: { seen: {} },   // the Packing Line tutorial's pages seen (1q): page id -> true (CONFIG.shipping.tutorial)
       lastShift: null,      // the last scored shift (1o): its report card rows and each shipped box's log, for the clipboards; null before the first
       mega: { owned: false, food: 0, nextHunt: 0, hunts: 0, kills: 0, bossKills: 0, trophyPity: 0, eaten: 0 },
       stats: { taps: 0, playSeconds: 0, popupsSeen: 0, popupsClaimed: 0, pity: 0, legPity: 0, bestCps: 0, sprockets: 0 }
@@ -47,6 +49,8 @@ GW.state = (function () {
     var base = fresh();
     // Saves from before 1l count their shifts from the GRIP history (it keeps only the latest few, so this is a floor).
     if (saved.shifts === undefined) saved.shifts = Array.isArray(saved.stonksHistory) ? saved.stonksHistory.length : 0;
+    // Saves from before 1q have no tutorial: the pages they have already lived through count as seen.
+    if (saved.tutorial === undefined || !saved.tutorial || typeof saved.tutorial !== 'object') saved.tutorial = { seen: GW.tutorial.oldSeen(saved.shifts || 0) };
     Object.keys(base).forEach(function (k) {
       if (saved[k] === undefined) saved[k] = base[k];
       else if (base[k] && typeof base[k] === 'object' && !Array.isArray(base[k])) {

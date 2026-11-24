@@ -56,7 +56,12 @@
    shipped box with its log, made once at the hand-off and saved with the card's rows (the save's lastShift).
    The clipboards' faces (1p): each painted clipboard wears a face drawn in code, a tiny report card with the last
    shift's marks on the left and SHIPPING LOG with a red truck on the right.  After a shift both glow softly until
-   each is opened (a tip).  An approved fake's box gets its own log line and end. */
+   each is opened (a tip).  An approved fake's box gets its own log line and end.
+   The tutorial (1q, js/tutorial.js): each page is due at its moment here (entering the view, the first orders on the
+   board, the first box on the bench, the first box closed, the first shift where fakes can appear), and the How to
+   Ship button in the room (CONFIG.shipping.tutorial.book) reopens the pages seen so far.  The report card that pops up
+   on its own at the end of a shift counts as opening the Report Card clipboard, so only the Log glows after a shift.
+   A good shift (every real order right on a GRIP trip) adds its line to the card and counts in the save. */
 window.GW = window.GW || {};
 
 GW.ship = (function () {
@@ -82,6 +87,7 @@ GW.ship = (function () {
   var boxStamp = null, boxDrag = null, handTag;
   var clips = {}, logView, logMode = null;
   var faces = {}, clipGlows = {}, faceKey = null;   // the clipboards' faces and their news glows (1p)
+  var bookBtn, bookPlace = null;  // the How to Ship button (1q); bookPlace = a test's spot over the config's
   // clips = the clipboards' tap areas (1o); logMode = what the Shipping Log shows: null (closed), 'list', or a row's index
   // boxStamp = the region stamp on the bench box, or null (1n: a mark like the stickers); boxDrag = the box being
   // pressed or dragged; handTag = the "Hand it to the driver!" tag
@@ -173,6 +179,20 @@ GW.ship = (function () {
     handTag.appendChild(U.el('span', '', P.tips.hand));
     handTag.hidden = true;
     box.appendChild(handTag);
+    // The How to Ship button (1q): reopens the tutorial's pages seen so far.  Placed in placeBook.
+    bookBtn = div('ship-book');
+    bookBtn.setAttribute('role', 'button');
+    bookBtn.setAttribute('aria-label', P.tutorial.book.label);
+    bookBtn.appendChild(U.el('span', '', P.tutorial.book.label));
+    bookBtn.addEventListener('pointerdown', function (e) {
+      e.stopPropagation();
+      if (!e.isTrusted || e.button > 0) return;
+      e.preventDefault();
+      if (slipOpen || cardOpen || warnOpen || logMode !== null || boxDrag) return;
+      closeMenu();
+      GW.tutorial.openBook();
+    });
+    box.appendChild(bookBtn);
     chain.style.setProperty('--sway', P.finish.swayDeg + 'deg');
     chain.style.setProperty('--sway-ms', P.finish.swayMs + 'ms');
     // An open slip covers the whole room, so the chain and everything else under it get no taps.
@@ -505,7 +525,11 @@ GW.ship = (function () {
     syncBox();
   }
   function clearOrders() { orders = []; closeSlip(); resetPack(); showBoard(); }
-  function newOrders() { orders = makeOrders(); beltTip = true; resetPack(); showBoard(); nextBox(); }
+  function newOrders() {
+    orders = makeOrders(); beltTip = true; resetPack(); showBoard(); nextBox();
+    if (orders.length) GW.tutorial.due('stamp');           // the tutorial (1q): the first orders on the board
+    if (fakesOn()) GW.tutorial.due('fakes');               // and the first shift where fakes can appear
+  }
 
 
   // ---------- packing (layer 1d; all numbers in CONFIG.shipping.pack and layouts.<layout>) ----------
@@ -660,11 +684,12 @@ GW.ship = (function () {
     boxEl.addEventListener('lostpointercapture', function () { if (boxDrag && boxDrag.mode !== 'drag') endBoxDrag(false); });
     packLayer.appendChild(boxEl);
     showBox();
+    GW.tutorial.due('pack');                               // the tutorial (1q): the first box on the bench
     if (!calmQuery.matches) boxEl.firstChild.animate([{ transform: 'scale(.6)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
       { duration: K.nextMs, easing: 'cubic-bezier(.3,1.4,.5,1)' });
   }
   function tapBox() {
-    if (boxState === 'open' && boxItem) { boxState = 'closed'; GW.sfx.click(); showBox(); }
+    if (boxState === 'open' && boxItem) { boxState = 'closed'; GW.sfx.click(); showBox(); GW.tutorial.due('hand'); }
     else if (boxState === 'closed') { boxState = 'open'; GW.sfx.click(); showBox(); }
   }
   // Drop an item in the open box: the active order's count of it (1h), right item or wrong, or everything the shelf
@@ -964,7 +989,9 @@ GW.ship = (function () {
     });
     var perfect = rows.every(function (r) { return r.ok; });
     if (perfect) tnp += Sc.perfectTnp;           // clean shifts push TNP back down
-    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: perfect, happy: perfect };
+    // A good shift (1q): every real order (the glitter fakes left out) scored a check.
+    var real = rows.filter(function (r) { return !r.order.fake; }), good = real.length > 0 && real.every(function (r) { return r.ok; });
+    return { rows: rows, delta: delta, tnpDelta: tnp, shipped: shipped, perfect: perfect, happy: perfect, good: good };
   }
   // A TNP trip (1m): every packed box handed to the elf (a closed box on the bench with an item goes too, as on a GRIP
   // trip) is "Shipped to TNP", and he goes happy.  With nothing handed over he is sent packing: the short card.
@@ -1001,6 +1028,7 @@ GW.ship = (function () {
     r.tnpChange = s.tnp - tnp0;
     s.tnpHistory = (s.tnpHistory || []).concat([s.tnp]).slice(-P.ticker.history);
     s.shifts = (s.shifts || 0) + 1;
+    if (r.good) s.goodShifts = (s.goodShifts || 0) + 1;   // TNP trips are never good (1q)
     s.lastShift = keepShift(r);
     drawFaces();                                 // the card's face shows the new marks, and both glow (1p)
     GW.ui.buildShelf(s);
@@ -1050,6 +1078,11 @@ GW.ship = (function () {
     total.classList.add('card-total');
     total.style.top = Cd.total + '%';
     el.appendChild(total);
+    if (r.good) {                                // a good shift's tag over the bottom stripes (1q)
+      var good = div('card-good', Cd.good.text);
+      good.style.top = Cd.good.y + '%'; good.style.fontSize = Cd.good.font + 'cqw';
+      el.appendChild(good);
+    }
     el.setAttribute('role', 'dialog');
     el.setAttribute('aria-label', 'Report card');
     return el;
@@ -1080,7 +1113,9 @@ GW.ship = (function () {
     });
   }
   function showCard(r) {
+    var auto = !!pendingCard && r === pendingCard;   // the card popping up on its own after a shift (1q)
     pendingCard = null;
+    if (auto) markRead('card');                    // counts as opening the Report Card clipboard
     cardView.textContent = '';
     cardView.appendChild(makeCard(r));
     cardView.hidden = false;
@@ -1104,7 +1139,7 @@ GW.ship = (function () {
   // made here, once, so reopening shows the same lines.
   function keepShift(r) {
     // unread (1p): the clipboards glow until each is opened once.
-    return { tnp: !!r.tnp, sentAway: !!r.sentAway, change: r.change || 0, tnpChange: r.tnpChange || 0, unread: { card: true, log: true }, rows: r.rows.map(function (row) {
+    return { tnp: !!r.tnp, sentAway: !!r.sentAway, good: !!r.good, change: r.change || 0, tnpChange: r.tnpChange || 0, unread: { card: true, log: true }, rows: r.rows.map(function (row) {
       var o = row.order;
       return { town: o ? o.place.name : null, region: o ? o.place.region : null, item: o ? o.item.id : null, qty: o ? o.qty : 0,
         ok: row.ok, why: row.why.slice(), note: row.note || null, fake: !!(o && o.fake), log: o && row.rec ? makeLog(row, r.tnp) : null };
@@ -1160,7 +1195,7 @@ GW.ship = (function () {
     var L = lastShift();
     if (!L) return;
     markRead('card');
-    showCard({ rows: L.rows.map(function (x) { return { order: savedOrder(x), ok: x.ok, why: x.why, note: x.note }; }), change: L.change, tnpChange: L.tnpChange });
+    showCard({ rows: L.rows.map(function (x) { return { order: savedOrder(x), ok: x.ok, why: x.why, note: x.note }; }), change: L.change, tnpChange: L.tnpChange, good: !!L.good });
   }
   // The right clipboard: the Shipping Log, opened on its list.
   function openLog() {
@@ -1185,7 +1220,7 @@ GW.ship = (function () {
   function drawFaces() {
     if (!faces.card) return;
     var F = P.clipFace, L = lastShift(), rows = L ? L.rows : [], u = (L && L.unread) || {};
-    clipGlows.card.hidden = !u.card; clipGlows.log.hidden = !u.log;
+    clipGlows.card.hidden = !u.card || !!pendingCard; clipGlows.log.hidden = !u.log;
     var marks = [];
     for (var k = 0; k < F.rows; k++) marks.push(rows[k] ? (rows[k].ok ? 'ok' : 'x') : '');
     var key = marks.join();
@@ -1789,6 +1824,7 @@ GW.ship = (function () {
     // A layout change mid-trip skips to where the trip was heading.
     placePack(L);
     placeHandoff(L);
+    placeBook();
     var made = false;
     if (trip === 'arriving') { trip = 'here'; made = true; }
     if (trip === 'leaving') { trip = 'closed'; open = false; }
@@ -1796,6 +1832,13 @@ GW.ship = (function () {
     settle();
     if (made) newOrders(); else showBoard();
     if (trip === 'closed' && pendingCard) showCard(pendingCard);
+  }
+
+  // The How to Ship button's spot (1q): CONFIG.shipping.tutorial.book.place, per layout.
+  function placeBook() {
+    var B = P.tutorial.book, place = bookPlace || B.place, at = B.spots[place][tallQuery.matches ? 'tall' : 'wide'];
+    bookBtn.className = 'ship-book is-' + place;
+    bookBtn.style.left = at[0] + '%'; bookBtn.style.top = at[1] + '%'; bookBtn.style.width = at[2] + '%';
   }
 
   // ---------- the trip ----------
@@ -1884,6 +1927,7 @@ GW.ship = (function () {
     if (trip === 'closed') arrive();
     else if (trip === 'here') {
       var r = orders.length ? scoreShift() : null;
+      pendingCard = r;                // set first, so the card's clipboard never glows for a card about to pop up (1q)
       if (r) applyShift(r);
       leave(r);
     }
@@ -1896,7 +1940,8 @@ GW.ship = (function () {
       stopAnims(); trip = 'closed'; open = false; orders = []; closeSlip(); resetPack(); setPose(false); redraw(true);
       cancelAnimationFrame(tickAnim); var now = saved(); shown = now.values; drawTicker(now.values, now.hists);
     }
-    if (!on && active) { stopAnims(); endBoxDrag(false); closeSlip(); closeMenu(); closeWarn(); closeLog(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; }
+    if (!on && active) { stopAnims(); endBoxDrag(false); closeSlip(); closeMenu(); closeWarn(); closeLog(); afterCard = null; pendingCard = null; cardOpen = false; cardView.hidden = true; cardView.textContent = ''; drawFaces(); }
+    if (on) GW.tutorial.due('welcome');                    // the tutorial's first page (1q)
     document.documentElement.classList.toggle('ship-still', on);   // phones: the page holds still (css)
     // Drags in the room no longer scroll the page, so on a phone the whole room (the conveyor included) is
     // scrolled into view as it opens.  Desktop is left as it is.
@@ -1936,6 +1981,9 @@ GW.ship = (function () {
     // The clipboards (1o): what the Shipping Log shows (null closed, 'list', or a row's index).
     logMode: function () { return logMode; },
     // The clipboards' news glows (1p): whether each one's glow is on (true while the save says it is unread).
-    clipGlow: function (k) { return !!clipGlows[k] && !clipGlows[k].hidden; }
+    clipGlow: function (k) { return !!clipGlows[k] && !clipGlows[k].hidden; },
+    // Test hook (1q): moves the How to Ship button to a spot ('wall' or 'top') for screenshots of both; null goes back
+    // to the config's spot.
+    testBookPlace: function (place) { bookPlace = place || null; if (built) placeBook(); }
   };
 })();

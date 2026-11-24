@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.96';
+GW.VERSION = '0.2.0-draft.97';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -557,6 +557,11 @@ GW.CONFIG = {
       fontMin: { town: 3.4, item: 3.2, why: 3.2, total: 3.4 },
       // The bottom line (1l, draft wording): {ours} and {tnp} = each line's change this shift ("+5", "−3", "0").
       totalText: 'Stonks this shift: {ours}   TNP: {tnp}',
+      // A good shift (1q): a GRIP shift where every real order scores a check.  `text` (approved by Nathan
+      // 2026-11-23) shows on a small gold tag over the card's bottom stripes, centered at `y` (% of the card's
+      // height), `font` in cqw of the card's width.  The save counts good shifts in goodShifts; TNP trips count
+      // neither way, and nothing unlocks from it yet.
+      good: { text: 'Good shift! \u2b50', y: 93.6, font: 4.6 },
       fitSlack: 0.97        // shrink to this share of the exact fit, so rounding never leaves a sliver cut off
     },
     // The clipboards under STONKS (1o): the left one opens the last shift's report card again (nothing is scored),
@@ -693,6 +698,56 @@ GW.CONFIG = {
     // single shift draws a flat line across at its value, with the dot at its right end (1f).  A history shorter than
     // the other (TNP's in a save from before 1l) starts at 0 on the left.
     ticker: { label: 'GRIP', history: 10, tickMs: 900, color: '#46f06a', tnp: { label: 'TNP', color: '#b3202a' } },
+    // The tutorial (1q): short pages that each show the first time their thing appears in the room, once per save
+    // (the save's tutorial.seen).  Words by Claudia, approved by Nathan 2026-11-23; change them only with his okay.
+    // Each page: id, title, text, pic (a small shot of the real room, made by tools/tutorial-shots.js), alt (the
+    // picture's words for screen readers), and old: which older saves (no tutorial in the save) count it as seen:
+    // 'shifts' = a save with 1 or more shifts, 'fakes' = one with fakes.startShift shifts or more.
+    // When each shows (js/shipping.js): welcome = entering the Shipping view; stamp = the first time work orders
+    // appear on the board; pack = the first time a box comes out onto the bench; hand = the first time a box is
+    // closed; fakes = the start of the first shift where fakes can appear (the truck arriving).
+    // A page is a pop-up over the whole screen with one button, `gotIt`.  Only a real tap or Enter on it counts,
+    // and not in the first `armMs` after it shows, so a stray tap during play can't skip it.  Pages due together
+    // show one after the other.  width = the page's largest width in px (it never passes `vw` % of the screen);
+    // pic = the pictures' size in px (width, height).  ?tutorial=reset in the address clears the seen pages.
+    // The How to Ship book: a small button in the room (`book.label`) reopens the pages seen so far, one at a time,
+    // with `back` and `next`.  book.place picks its spot (Nathan's pick): 'wall' = a small tag on the wall near the
+    // computer, 'top' = the room's top edge, under the view buttons.  book.spots.<place>.<layout> = [x of its left
+    // edge, y of its top, width], in % of the room.
+    tutorial: {
+      gotIt: 'Got it!',
+      back: '\u2039 Back',
+      next: 'Next \u203a',
+      armMs: 400,
+      width: 460,
+      vw: 92,
+      pic: [480, 300],
+      pages: [
+        { id: 'welcome', old: 'shifts', title: 'Welcome to the Packing Line!', pic: 'assets/tutorial/welcome.webp',
+          alt: 'The truck backed in at the open door, and its driver.',
+          text: 'A truck comes to the door with orders.  Pack every order, then pull the chain to send the truck on its way.  That is one shift.  Get every order right for a good shift!' },
+        { id: 'stamp', old: 'shifts', title: 'Read and stamp.', pic: 'assets/tutorial/stamp.webp',
+          alt: 'An open work order with the APPROVED and DENIED stamps under it.',
+          text: 'Tap an order to read it.  Stamp it APPROVED if it is real, or DENIED if it is not.  You only pack the orders you approve.' },
+        { id: 'pack', old: 'shifts', title: 'Pack the box.', pic: 'assets/tutorial/pack.webp',
+          alt: 'The belt, the computer, and an open box on the bench.',
+          text: 'Tap the belt and drag the item into the box.  Tap the computer for packing peanuts, bubble wrap, stickers, and stamps.  The Packing Rules say what each item needs.  Then close the box and stamp it.' },
+        { id: 'hand', old: 'shifts', title: 'Hand it over.', pic: 'assets/tutorial/hand.webp',
+          alt: 'A closed box held over the driver.',
+          text: 'Drag the closed box to the driver.  When every box is done, pull the chain to close the door.  Then read your report card to see how you did!' },
+        { id: 'fakes', old: 'fakes', title: 'Watch out for fakes!', pic: 'assets/tutorial/fakes.webp',
+          alt: 'A sparkly fake work order, and the elf in his fake truck.',
+          text: 'TNP wants to trick you.  An order that sparkles is fake, so stamp it DENIED.  If an elf drives up in a fake truck, pull the chain to send him away.' }
+      ],
+      book: {
+        label: '\ud83d\udcd6 How to Ship',
+        place: 'wall',
+        spots: {
+          wall: { wide: [17.4, 37.4, 12.4], tall: [7, 34.6, 24] },
+          top: { wide: [2.2, 2.2, 12.4], tall: [3, 1.4, 27] }
+        }
+      }
+    },
     // The leave warning (1f): tapping The Machine or Shop Floor while the driver waits with orders on the board
     // shows this over the room.  `go` runs the same hand-off as pulling the chain, and the view switches once the
     // report card closes.  Draft wording (Claudia).  width = the pop-up's width in % of the room, per layout;

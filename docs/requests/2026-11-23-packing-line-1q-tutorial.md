@@ -1,6 +1,6 @@
 # Work order: Packing Line 1q, the tutorial's first five pages (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 (the five pages' wording, and the good shift line: "I like the good shift.  These all looks good to me.").
 **Model:** Opus 5.5
 
@@ -62,3 +62,39 @@ Teach a new player the Packing Line in short pages that show up the moment each 
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.97**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 40 minutes, from `git pull` at 19:11 to the Result at 19:51 (CST).
+
+**What was built**
+
+- **The 1p glow fix:** the report card that pops up on its own (after the door closes, or when leaving waits for it) counts as opening the Report Card clipboard (`lastShift.unread.card` goes false), so after a shift only the Log glows.  The card's clipboard also stays dark while the truck leaves with the card on its way.  Reloads keep it.
+- **`js/tutorial.js` (`GW.tutorial`):** the pages, on `document.body` over everything, on the work order parchment as a nine-slice (as the leave warning uses it), in `--font`: the title, the picture, the words, and "Got it!".  While a page shows, window-level listeners swallow every tap and key, so the room hears nothing.  Only a trusted tap or Enter on "Got it!" closes it, and not in its first `armMs` (400 ms), so a tap already on its way can't skip it.  Escape does nothing on a first-time page.  Pages due together queue.  Measured: 431 px tall on a 390 x 844 phone, 557 px on desktop.
+- **When each shows** (hooks in `js/shipping.js`): welcome on entering the Shipping view; stamp when the first orders reach the board; pack when the first box comes out; hand when the first box is closed; fakes when the orders come on the first shift where fakes can appear (`shifts + 1 >= fakes.startShift`, GRIP or elf trip).
+- **Words** exactly as approved, in `CONFIG.shipping.tutorial.pages`, with every number for the pages and the book.
+- **Pictures:** `tools/tutorial-shots.js` plays the room in Playwright (desktop layout, Day, 2x), crops each shot, and encodes 480 x 300 WebP with Chromium's own canvas, so nothing new was needed.  `assets/tutorial/welcome|stamp|pack|hand|fakes.webp`, 23 to 33 KB each.  The fakes picture is two halves: an open glitter slip and the elf in his fake truck (TNP trips have no glitter slips, so one shot can't show both).  It never saves the game.
+- **Seen once, in the save:** `tutorial.seen`.  Older saves (no `tutorial`): 1 or more shifts counts pages 1 to 4 as seen, `fakes.startShift` (4) or more counts page 5 too.  `?tutorial=reset` clears the seen pages once as the page loads.
+- **The How to Ship book:** a small brass "📖 How to Ship" button in the room opens the pages seen so far, starting on the first, with Back, Next, a "2 / 4" count, and "Got it!" to close (Escape and the arrow keys work in the book too).  Unseen pages stay out.  Two spots, `CONFIG.shipping.tutorial.book.place`: **`wall`** (the wall beside the porthole, just above the lamp and computer; the default) and **`top`** (the room's top left corner, under the view buttons).  It is a button, so it stays with "Show instructions" off.
+- **Good shift:** `scoreShift` marks a GRIP shift good when every real order (glitter fakes left out) scores ✔.  The card adds a gold "Good shift! ⭐" tag over its bottom stripes (`CONFIG.shipping.card.good`), kept in `lastShift.good` so the reopened card shows it too, and `goodShifts` counts up.  TNP trips never count.
+- **Docs:** CHANGELOG, ARCHITECTURE (save data, the tutorial, file table), ASSETS, DESIGNS, TASKS, HANDOFF.
+- **Smoke test:** a new `tutorialCheck` on both layouts covers each page at its moment, the fit and the picture, a script's click, a tap on the room, Escape, and an early tap all doing nothing (and the room hearing nothing), Enter closing a page, each page only once, stamp and fakes queued on the fakes shift, older saves with 0, 1, 3, and 4 shifts, `?tutorial=reset`, the book from both spots (only seen pages, back and next), a real good shift (a Socks order packed right: tag, count, saved flag, reopened card), an elf trip not counting, and only the Log glowing after a shift (and not the card while it is on the way).  The two 1p checks that expected both glows now expect only the Log.  The other checks mark every page seen first, so the pages don't cover the room.
+
+**Calls to check**
+
+1. **The book's spot (Nathan's pick):** `wall` or `top`.  Screenshots of both below.  `wall` is the default until he picks.
+2. **The fakes page shows when the orders come**, not as the door opens, so the elf or the glitter slips are in the room behind it.
+3. **"Every real order"** read literally: a shift that approves a glitter fake but gets every real order right is still a good shift.  The fake's row still shows ✘, which may look odd beside "Good shift!".  Easy to change to "every row ✔" if Nathan prefers.
+4. **A board with no real orders** (all fakes) is never a good shift.
+5. **The early-tap guard** (`armMs`, 400 ms) is my addition for "a stray tap during play can't skip it."  The order did not ask for it.
+6. **The book opens on page 1** each time.
+7. **Two spaces after periods** are in the words in `js/config.js`; HTML draws them as one space, as everywhere else in the game.
+
+**Proof** in `tools/out/` (`?ship=1`, not committed).  `wide` is 1400 x 900 at 2x; `tall` is 390 x 844 at 3x (phone pixels).  For each `<wide|tall>` and `<day|night>`:
+
+- The five pages: `1q-<layout>-<theme>-1-welcome.png`, `-2-stamp.png`, `-3-pack.png`, `-4-hand.png`, `-5-fakes.png`
+- Both How to Ship spots in the room, and close-ups: `1q-<layout>-<theme>-book-button-wall.png`, `-book-button-wall-close.png`, `-book-button-top.png`, `-book-button-top-close.png`
+- The book on page 2 of 4 (Back and Next), opened from each spot: `1q-<layout>-<theme>-book-wall-page2.png`, `-book-top-page2.png`
+- A report card with "Good shift! ⭐": `1q-<layout>-<theme>-good-shift-card.png` (drawn through the card's own renderer with a made-up all-✔ shift; the smoke test's real good shift is in `1q-desktop-good-shift-check.png` and `1q-phone-good-shift-check.png`)
+
+Nothing was installed.  Scoring, the Packing Rules, the room art, and the opening flow are unchanged.  No region pages, unlock card, in-room map, or Gnohio.

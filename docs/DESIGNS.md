@@ -310,6 +310,7 @@ Work orders and drivers are two separate calls.
     6. Each region unlock gets its own page.  The Daily Cog tells the story, the page explains the rule, and the Cog's headline points to the page.
 - **Pictures:** small shots of the real room, captured with Playwright and cropped to WebP.  No new painted art.  Text in plain English, so Elana can read it.
 - **Two layers:** the "Show instructions" setting stays the in-room hint layer (glows and tags).  The tutorial is the explaining layer.
+- **Built (1q, draft.97):** pages 1 to 5 and the How to Ship book.  The book's spot is Nathan's pick between `wall` (beside the porthole, near the computer) and `top` (the room's top left corner); `wall` is the default until he picks.
 
 **The map in the room and region unlocks (Nathan, 2026-11-23, evening; every point below approved by Nathan 2026-11-23 except "Still open")**
 

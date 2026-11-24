@@ -222,6 +222,42 @@ body {
 /* the report card over the room: the paper (09) with live rows; sizes from CONFIG.shipping.card, cqw = 1% of the card */
 #ship .ship-card-view { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); cursor: pointer; touch-action: none; }
 #ship .ship-card-view[hidden] { display: none; }
+/* the tutorial (1q): a page on document.body over everything, the slip paper as a nine-slice like the leave warning,
+   with the slip's red stripes along the top.  Width from CONFIG.shipping.tutorial (never wider than the screen); it
+   fits a 390 x 844 phone with no scrolling.  Night dims it like the slips.  The How to Ship button in the room shares
+   the brass tags' look and stays with instructions off (it is a button, not a tip). */
+.tut-view { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 8px;
+  box-sizing: border-box; background: rgba(20, 10, 4, .66); touch-action: none; overscroll-behavior: contain; }
+.tut-view[hidden] { display: none; }
+.tut-page { position: relative; box-sizing: border-box; width: var(--tut-w); max-height: 100%; border-style: solid; border-width: 22px;
+  border-image-repeat: stretch; container-type: inline-size; font-family: var(--font); color: #3a2414;
+  user-select: none; -webkit-user-select: none; filter: drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.night .tut-page { filter: brightness(var(--tut-night, .88)) drop-shadow(0 .6vmin .8vmin rgba(0,0,0,.6)); }
+.tut-body { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3cqw; padding: 1cqw 2cqw 2cqw; }
+.tut-stripes { display: block; align-self: stretch; height: 2.4cqw; background: repeating-linear-gradient(60deg, #b0282a 0 2.6cqw, transparent 2.6cqw 4.2cqw); }
+.tut-title { font: bold 7.4cqw/1.15 var(--font); text-wrap: balance; }
+.tut-pic { display: block; width: 100%; height: auto; border-radius: 1.6cqw; border: .6cqw solid #8a5a2b; box-sizing: border-box;
+  background: #2a1a0e; box-shadow: 0 .6cqw 1.2cqw rgba(0,0,0,.35); pointer-events: none; }
+.tut-text { font: bold 4.6cqw/1.35 var(--font); color: #5a3a22; text-wrap: pretty; }
+.tut-nav { display: flex; align-items: center; justify-content: space-between; gap: 3cqw; align-self: stretch; }
+.tut-nav[hidden] { display: none; }
+.tut-count { font: bold 4.4cqw/1 var(--font); color: #5a3a22; }
+.tut-btn { font: bold 5.6cqw/1 var(--font); padding: 3cqw 5cqw; border-radius: 2.4cqw; cursor: pointer; touch-action: manipulation;
+  border: .6cqw solid #8a5a2b; color: #3a2414; background: #fbf3df; box-shadow: 0 .8cqw 0 #8a5a2b; }
+.tut-step { font-size: 4.6cqw; padding: 2.4cqw 3.6cqw; }
+.tut-step:disabled { opacity: .35; cursor: default; }
+.tut-got { min-width: 44cqw; color: #fff; border-color: #1f5e27; background: #2e8b3a; box-shadow: 0 .8cqw 0 #1a4d20; }
+.tut-btn:active:not(:disabled) { transform: translateY(.6cqw); box-shadow: 0 .2cqw 0 #6a4a20; }
+.tut-btn:focus-visible { outline: .8cqw solid #ffb703; outline-offset: .6cqw; }
+#ship .ship-book { position: absolute; z-index: 3; container-type: inline-size; cursor: pointer; border-radius: 6px; text-align: center; color: #3a2210;
+  background: linear-gradient(180deg, #ffe7a3, #e0a93e 55%, #b97a22); border: 1px solid #6e4614;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 .3vmin .5vmin rgba(0,0,0,.45); touch-action: manipulation; }
+#ship .ship-book span { display: block; padding: 6cqw 4cqw; font: bold 12.5cqw/1.1 var(--font); white-space: nowrap; pointer-events: none; }
+.night #ship .ship-book { filter: brightness(var(--slip-night, .88)); }
+/* the report card's good shift tag (1q): gold, over the bottom stripes */
+.ship-card .card-good { left: 50%; transform: translate(-50%, -50%); padding: .5em 1.1em; border-radius: .6em; white-space: nowrap;
+  font-weight: bold; font-family: var(--font); line-height: 1.1; color: #1f5e27;
+  background: linear-gradient(180deg, #fff3c4, #ffd34d 60%, #e0a93e); border: .35cqw solid #8a5a2b; box-shadow: 0 .5cqw 1cqw rgba(0,0,0,.35); }
 /* the leave warning (1f): a small parchment pop-up in the slips' style, the slip paper as a nine-slice with the
    slip's red stripes along the top.  Width and edge from CONFIG.shipping.leave. */
 #ship .ship-warn-view { position: absolute; inset: 0; z-index: 6; display: flex; align-items: center; justify-content: center; background: rgba(20, 10, 4, .6); touch-action: none; }
