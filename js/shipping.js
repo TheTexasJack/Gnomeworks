@@ -110,7 +110,7 @@ GW.ship = (function () {
     box.appendChild(door);
     // The How to Ship bookshelf (1q.1): Nathan's painted shelf on the wall, the button that reopens the tutorial's
     // pages seen so far.  It sits just over the room art, under everything else.  Placed in placeBook; its glow in
-    // bookGlow.
+    // bookGlow.  At Night redraw swaps in Nathan's painted night shelf (1q.2, GW.theme's night twins).
     bookBtn = div('ship-book');
     bookBtn.setAttribute('role', 'button');
     bookBtn.setAttribute('aria-label', P.tutorial.book.label);
@@ -1813,6 +1813,7 @@ GW.ship = (function () {
     rollerClosed.src = doorImg.src = closedImg.src; rollerOpen.src = openImg.src;
     beltImg.src = screenImg.src = closedImg.src;       // the belt and the computer look the same with the door open
     clipGlows.card.firstChild.src = clipGlows.log.firstChild.src = closedImg.src;
+    bookBtn.firstChild.src = GW.theme.img(P.tutorial.book.img);   // the bookshelf's painted night twin (1q.2)
     if (L === drawnLayout && force !== true) return;
     drawnLayout = L;
     m.style.setProperty('--ship-aspect', L.aspect);

@@ -3,7 +3,7 @@
    Change a value, reload the page, done.  Bump GW.VERSION on every change. */
 window.GW = window.GW || {};
 
-GW.VERSION = '0.2.0-draft.98';
+GW.VERSION = '0.2.0-draft.99';
 
 GW.CONFIG = {
   // Shop branding.  Leave logo null until the shop's new logo is final.
@@ -716,6 +716,8 @@ GW.CONFIG = {
     // Nathan's mocks (docs/art-style/references/how-to-ship-shelf-mock-wide.png and -tall.png); its height follows
     // the art's shape.  It glows like the clipboards (CONFIG.shipping.clipFace.glow.pulseMs) from the first page
     // seen until the book is first opened (the save's tutorial.bookOpened), a tip, so "Show instructions" hides it.
+    // At Night it shows its painted night twin (1q.2, how_to_ship_shelf_night.webp, listed in js/theme.js), in the
+    // same spot at the same width.
     tutorial: {
       gotIt: 'Got it!',
       back: '\u2039 Back',

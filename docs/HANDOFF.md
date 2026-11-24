@@ -1,6 +1,6 @@
 # Handoff
 
-For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.98**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
+For a fresh session picking up Gnomeworks.  Rewritten 2026-11-22, end-of-thread notes 2026-11-23; game version **v0.2.0-draft.99**.  Read this, then [TASKS.md](TASKS.md), then whatever doc the work needs.
 
 ## Opening a new chat thread (Nathan, 2026-11-23)
 
@@ -50,6 +50,7 @@ Jarrett will see the Packing Line at the Dagorhir Thanksgiving on Wednesday 2026
 16. **1p (done, draft.96):** the two clipboards wear faces drawn in code (REPORT CARD with the last shift's ✔ and ✘, SHIPPING LOG with a red truck and ruled lines), both glow after a shift until opened, and an approved fake's box gets its own log lines and end (lore v0.2).
 17. **1q (done, draft.97):** the tutorial's first five pages, each once per save at its moment, with real room shots (`tools/tutorial-shots.js`), the How to Ship book (two spots behind `CONFIG.shipping.tutorial.book.place`, Nathan's pick), "Good shift! ⭐" on the card with `goodShifts` in the save, and only the Log clipboard glowing after a shift.
 18. **1q.1 (done, draft.98):** Nathan's bookshelf on the wall is the How to Ship button (placed from his mocks, glowing until the book is first opened), the `top` spot is gone, and a good shift needs every row ✔ (an approved fake spoils it).
+19. **1q.2 (done, draft.99):** at Night the shelf shows Nathan's painted night shelf, with no code dim.
 
 **Truck and driver placement is approved on desktop and phone (Nathan, 2026-11-22, tested again 2026-11-23).**  Each new region's truck and driver gets its own placement pass when it is built: later drivers are slightly taller and each truck has small differences.  **The box has the stage:** packing pieces may cover the driver.
 

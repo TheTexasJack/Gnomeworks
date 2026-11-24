@@ -14,6 +14,7 @@ GW.theme = (function () {
     'assets/packing/room_wide_open.webp': 'assets/packing/room_wide_night_open.webp',
     'assets/packing/room_tall.webp': 'assets/packing/room_tall_night.webp',
     'assets/packing/room_tall_open.webp': 'assets/packing/room_tall_night_open.webp',
+    'assets/packing/how_to_ship_shelf.webp': 'assets/packing/how_to_ship_shelf_night.webp',
     'assets/crew/help_wanted.webp': 'assets/crew/help_wanted_night.webp',
     'assets/ui/title.webp': 'assets/ui/title_night.webp'
   };

@@ -1,6 +1,6 @@
 # Work order: Packing Line 1q.2, the night bookshelf (v0.1)
 
-**Status:** Approved
+**Status:** Done
 **Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("ok doke!").
 
 Nathan's words: "ooop we need a nighttime bookshelf.  I forgot.  I'll get that made."  Then, with the art: "Here we go.  Fixed."
@@ -38,3 +38,29 @@ At Night the How to Ship bookshelf uses Nathan's painted night version in place 
 - The smoke test passes and the screenshots exist.
 
 ## Result (filled in by Claude Code)
+
+Built 2026-11-23 by Claude Code (Opus 5.5) on Beast as **v0.2.0-draft.99**.  Smoke test: all clear, desktop and phone.
+
+**Build time:** about 15 minutes of work, from `git pull` at 21:54 to the Result at 22:10 (CST).  The smoke test took about 10 of those.
+
+**What was built**
+
+- **The game copy:** `assets/packing/how_to_ship_shelf_night.webp`, 240x149, 16 KB, transparent.  Made like the day one: clear edges trimmed with Pillow (alpha over 8: box (248, 55, 1424, 786) of the master, 1176x731), then `tools/art.py resize --width 240`.
+- **Night swaps the picture:** the night shelf joins the other night twins in `js/theme.js` (`GW.theme.img`), and the room's `redraw` sets the shelf's picture from it, so it changes with the theme like the room art does.  The code dim (`.night #ship .ship-book`, the brightness filter) is gone.  Day, the spot, the width, the tap, and the glow are unchanged.
+- **Height:** fitted by width in the same spot.  The trimmed night shelf is about 0.6% taller than the day one (1.609 vs 1.618 wide to tall): on screen 58.1x36.1 vs 58.1x35.8 px on the 1400x900 desktop, and 67.7x42.0 vs 67.7x41.8 px on a 390 px phone.  So 0.2 to 0.3 px, nothing to correct.
+- **Numbers:** no new ones; `CONFIG.shipping.tutorial.book` keeps its spot and width, with a comment on the night twin.
+- **Tutorial pictures:** unchanged (Day shots).
+- **Docs:** CHANGELOG, ASSETS, ARCHITECTURE, TASKS, HANDOFF, and checklist item 39 (night integrated).
+- **Smoke test** (`tutorialCheck`, both layouts): switches the theme to Day, then Night, and checks the shelf shows `how_to_ship_shelf.webp` at Day and `how_to_ship_shelf_night.webp` at Night, both loaded, and no filter on the shelf or its art at Night (`none / none`).
+
+**Calls to check**
+
+None.
+
+**Screenshots** in `tools/out/` (`?ship=1`, not committed).  `wide` = 1400x900 at 2x, `tall` = 390x844 at 3x (phone pixels).  Day on the left, Night on the right:
+
+- The room, shelf glowing and not: `1q2-<wide|tall>-day-vs-night-glow.png`, `1q2-<wide|tall>-day-vs-night.png`
+- Shelf close-ups side by side: `1q2-<wide|tall>-shelf-close-day-vs-night-glow.png`, `-shelf-close-day-vs-night.png`
+- The night shelf alone (`tall` is the phone-size close-up): `1q2-<wide|tall>-night-shelf-close-glow.png`, `1q2-<wide|tall>-night-shelf-close.png`
+
+Nothing was installed.  The shelf's art, its spot, the glow, and the tutorial are unchanged.

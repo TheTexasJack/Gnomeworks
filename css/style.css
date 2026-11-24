@@ -250,12 +250,11 @@ body {
 .tut-btn:active:not(:disabled) { transform: translateY(.6cqw); box-shadow: 0 .2cqw 0 #6a4a20; }
 .tut-btn:focus-visible { outline: .8cqw solid #ffb703; outline-offset: .6cqw; }
 /* the How to Ship bookshelf (1q.1): Nathan's painted shelf on the wall, the book's button.  It sits just over the
-   room art (first in the room after it), dims with the room at Night, and glows like the clipboards while the book is
-   new (is-new): the glow on the art, the Night dim on the button, so the two filters stack.  A tip, so no glow with
-   instructions off; steady with reduced motion. */
+   room art (first in the room after it), and glows like the clipboards while the book is new (is-new).  At Night it
+   shows Nathan's painted night shelf (1q.2), so no code dim.  A tip, so no glow with instructions off; steady with
+   reduced motion. */
 #ship .ship-book { position: absolute; cursor: pointer; touch-action: manipulation; }
 #ship .ship-book-art { display: block; width: 100%; height: auto; user-select: none; pointer-events: none; }
-.night #ship .ship-book { filter: brightness(var(--slip-night, .88)); }
 #ship .ship-book.is-new .ship-book-art { animation: shelfPulse var(--clip-pulse, 2000ms) ease-in-out infinite alternate;
   filter: drop-shadow(0 0 2px #fffbe0) drop-shadow(0 0 6px #ffd34d) drop-shadow(0 0 12px rgba(255, 183, 3, .8)); }
 @keyframes shelfPulse { from { filter: drop-shadow(0 0 1px rgba(255, 251, 224, .5)) drop-shadow(0 0 3px rgba(255, 211, 77, .4)) drop-shadow(0 0 6px rgba(255, 183, 3, .3)); }

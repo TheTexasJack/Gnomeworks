@@ -833,7 +833,8 @@ async function leaveCheck(page, errors) {
 // then fakes, on a save at the fakes shift).  An older save skips the pages it has lived through; ?tutorial=reset
 // brings them back.  The How to Ship bookshelf (1q.1) shows on the wall with no words, answers taps, and opens the
 // book with only the seen pages, with back and next.  It glows from the first page seen until the book is first
-// opened (saved), and not with instructions off.  A good shift shows its line and counts; a shift with an approved
+// opened (saved), and not with instructions off.  Day shows the day shelf and Night the painted night shelf, with no
+// brightness filter (1q.2).  A good shift shows its line and counts; a shift with an approved
 // glitter fake and every real order right does not (1q.1); a TNP trip does not either.  After a shift only the Log clipboard glows (the card that
 // popped up on its own counts as opened), and the card's clipboard does not glow while that card is on its way.
 async function tutorialCheck(page, errors, name) {
@@ -864,6 +865,16 @@ async function tutorialCheck(page, errors, name) {
       label: b.getAttribute('aria-label'), inRoom: r.left >= R.left && r.top >= R.top && r.right <= R.right && r.bottom <= R.bottom && r.width > 20 && r.height > 10, glow: GW.ship.bookGlow() }; });
   if (!sh.art || sh.words || sh.spans || sh.label !== 'How to Ship' || !sh.inRoom) fail('the bookshelf: ' + JSON.stringify(sh));
   if (sh.glow) fail('the bookshelf glowed before any page was seen');
+  // Day and Night (1q.2): Day shows the day shelf, Night Nathan's painted night shelf with no brightness filter on it.
+  const dn = await page.evaluate(async () => { const was = GW.theme.setting(), out = {};
+    for (const t of ['day', 'night']) { GW.theme.set(t); const b = document.querySelector('.ship-book'), i = b.querySelector('img');
+      if (!i.complete) await new Promise(r => { i.onload = i.onerror = r; });
+      out[t] = { src: i.getAttribute('src'), ok: i.naturalWidth > 0, night: document.documentElement.classList.contains('night'),
+        filter: getComputedStyle(b).filter + ' / ' + getComputedStyle(i).filter }; }
+    GW.theme.set(was); return out; });
+  if (dn.day.src !== 'assets/packing/how_to_ship_shelf.webp' || !dn.day.ok || dn.day.night) fail('the Day bookshelf: ' + JSON.stringify(dn.day));
+  if (dn.night.src !== 'assets/packing/how_to_ship_shelf_night.webp' || !dn.night.ok || !dn.night.night) fail('the Night bookshelf: ' + JSON.stringify(dn.night));
+  if (dn.night.filter !== 'none / none') fail('the Night bookshelf has a filter on it: ' + dn.night.filter);
   const fit = await page.evaluate(() => { const r = document.querySelector('.tut-page').getBoundingClientRect(), p = document.querySelector('.tut-pic');
     return { ok: r.top >= 0 && r.left >= 0 && r.bottom <= innerHeight && r.right <= innerWidth, pic: p.complete && p.naturalWidth > 0, h: Math.round(r.height) }; });
   if (!fit.ok) fail(`the page does not fit the screen (${fit.h} px tall)`);
