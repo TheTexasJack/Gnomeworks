@@ -1,7 +1,7 @@
 # Work order: Packing Line 1q.2, the night bookshelf (v0.1)
 
-**Status:** Draft
-**Written by:** Claudia, 2026-11-23.  **Approved by:** (waiting on Nathan)
+**Status:** Approved
+**Written by:** Claudia, 2026-11-23.  **Approved by:** Nathan, 2026-11-23 ("ok doke!").
 
 Nathan's words: "ooop we need a nighttime bookshelf.  I forgot.  I'll get that made."  Then, with the art: "Here we go.  Fixed."
 **Model:** Opus 5.5
