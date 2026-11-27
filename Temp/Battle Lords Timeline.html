@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battle Lords Timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday learning, a history to explore
+   IDEA a Dagorhir weapons-check table: every event wears the colour tape of a weapon class
+   PICTURE a true-scale time band, 1960 to 2027, each event a taped tick you can tap
+   COLOUR forest-black band, white or night ground, the five Dagorhir tape colours as categories
+   TYPE Alegreya Sans SC display + Source Sans 3 text
+   LAYOUT band with title and time strip on top; list left, sticky detail card right; phone stacks with the blurb opening under the row */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0e1512);--ink:light-dark(#121a16,#e8eee9);--mut:light-dark(#4d5a53,#a7b3ac);--line:light-dark(#dde3df,#26332d);--card:light-dark(#f4f7f5,#16201b);--band:#13241d;--red:#c8102e;--blue:#2563c9;--green:#1f8a4c;--yel:#e0b100;--wht:#9aa5ad}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
+.band{padding-block:clamp(24px,4vw,48px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.top{background:var(--band);color:#eef3ef}
+.wrap{max-width:1240px;margin:0 auto}
+h1{font:800 clamp(32px,5vw,52px)/1.05 "Alegreya Sans SC",serif;letter-spacing:-.01em;margin:0 0 10px;text-wrap:balance}
+.lede{max-width:68ch;margin:0 0 18px;color:#c9d6cd}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 14px;font-size:14px;color:#c9d6cd}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.tape{display:inline-block;width:22px;height:8px;border-radius:2px;flex:none}
+.c-dag{background:var(--red)}.c-grp{background:var(--blue)}.c-med{background:var(--green)}.c-pan{background:var(--yel)}.c-net{background:var(--wht)}
+.fig{position:relative;height:200px;cursor:pointer;touch-action:manipulation}
+.cap{min-height:44px;padding-top:8px;font-size:15px;color:#e8eee9;font-weight:600}
+@media(max-width:600px){.fig{height:180px}}
+.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+.fig text{font:13px "Source Sans 3",sans-serif;fill:#c9d6cd}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-block:16px;border-bottom:1px solid var(--line)}
+.chip{font:600 15px "Source Sans 3",sans-serif;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip[aria-pressed=false]{opacity:.45}
+.chip:focus-visible,.row:focus-visible,.nav a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+#thread[aria-pressed=true]{background:var(--red);color:#fff;border-color:var(--red)}
+#q{font:16px "Source Sans 3",sans-serif;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);flex:1 1 200px;max-width:320px}
+.nav{display:flex;flex-wrap:wrap;gap:6px 14px;padding-block:12px;font-size:15px}
+.nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--line);padding:6px 0}
+.nav a:hover{border-color:var(--red)}
+.main{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;padding-bottom:56px}
+@media(min-width:900px){.main{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.era{font:800 24px/1.1 "Alegreya Sans SC",serif;margin:26px 0 4px}
+.era small{display:block;font:400 15px "Source Sans 3",sans-serif;color:var(--mut);margin-top:4px}
+.row{display:grid;grid-template-columns:62px 10px minmax(0,1fr);gap:12px;align-items:start;padding:10px 8px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:6px}
+.row:hover{background:var(--card)}
+.row.sel{background:var(--card)}
+.row .yr{font:800 18px/1.3 "Alegreya Sans SC",serif;white-space:nowrap;font-variant-numeric:tabular-nums}
+.row .bar{width:10px;height:100%;min-height:26px;border-radius:2px}
+.row .ti{font-weight:600;line-height:1.35}
+.row .ti em{font-style:normal;color:var(--mut);font-weight:400;font-size:14px;display:block}
+.row .bl{display:none;margin-top:6px;color:var(--ink)}
+.row.dim{opacity:.3}
+.row.hide{display:none}
+@media(max-width:899px){.row.sel .bl{display:block}.side{display:none}}
+.side{position:sticky;top:16px;align-self:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;overflow:hidden}
+.card .when{font:800 clamp(40px,6vw,64px)/1 "Alegreya Sans SC",serif;font-variant-numeric:tabular-nums}
+.card h2{font:800 24px/1.15 "Alegreya Sans SC",serif;margin:10px 0 8px;text-wrap:balance}
+.card p{margin:0 0 12px}
+.card .cat{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mut);margin-top:12px}
+.src{font-size:14px;color:var(--mut)}
+.art{height:120px;margin:-22px -22px 16px;display:block;width:calc(100% + 44px)}
+.step{display:flex;gap:10px;margin-top:14px}
+.step button{flex:1;min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 15px "Source Sans 3",sans-serif;cursor:pointer}
+.wl{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 12px}
+.watch{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:8px;background:var(--red);color:#fff;font-weight:600;text-decoration:none}
+.watch:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.vid{font-size:13px;font-weight:600;color:var(--red);border:1px solid var(--red);border-radius:4px;padding:0 5px;margin-left:4px;vertical-align:1px}
+.count{font-size:14px;color:var(--mut);margin-left:auto}
+.empty{padding:24px 0;color:var(--mut)}
+.foot{border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+.foot p{max-width:80ch;margin:0 0 8px}
+@media(prefers-reduced-motion:no-preference){.row,.chip{transition:background .15s,opacity .15s}.card{animation:pop .25s ease}@keyframes pop{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<header class="top band">
+<div class="wrap">
+<h1>Battle lords: a history of fighting for fun</h1>
+<p class="lede">How old fight books, Tolkien, ren faires, D&amp;D, a moral panic, and a lot of foam led to Dagorhir and its cousins.  Tap anywhere on the band, or any row, to read about it.  Dagorhir's own story runs in red.</p>
+<div class="legend">
+<span><i class="tape c-dag"></i>Dagorhir</span>
+<span><i class="tape c-grp"></i>Other groups and faires</span>
+<span><i class="tape c-med"></i>Books, films, games</span>
+<span><i class="tape c-pan"></i>Panic and law</span>
+<span><i class="tape c-net"></i>How people found each other</span>
+</div>
+<div class="fig" id="figwrap"><svg id="strip" role="img" aria-label="Time band of events from 1960 to 2027, one tick per event. Tap anywhere to pick the nearest event."></svg></div>
+<div class="cap" id="cap" aria-live="polite"></div>
+</div>
+</header>
+<div class="band" style="padding-block:0">
+<div class="wrap">
+<div class="ctl" id="ctl">
+<button class="chip" data-c="dag" aria-pressed="true"><i class="tape c-dag"></i>Dagorhir</button>
+<button class="chip" data-c="grp" aria-pressed="true"><i class="tape c-grp"></i>Groups</button>
+<button class="chip" data-c="med" aria-pressed="true"><i class="tape c-med"></i>Media</button>
+<button class="chip" data-c="pan" aria-pressed="true"><i class="tape c-pan"></i>Panic and law</button>
+<button class="chip" data-c="net" aria-pressed="true"><i class="tape c-net"></i>Finding each other</button>
+<button class="chip" id="thread" aria-pressed="false">Follow the Dagorhir thread</button>
+<input id="q" type="search" placeholder="Search events" aria-label="Search events">
+<span class="count" id="count"></span>
+</div>
+<nav class="nav" id="nav" aria-label="Jump to era"></nav>
+<div class="main">
+<div id="list"></div>
+<aside class="side"><div class="card" id="card"></div></aside>
+</div>
+</div>
+</div>
+<footer class="band foot">
+<div class="wrap">
+<p>Sources: Dagorhir's own history pages, Wikipedia and the Amtgard and Belegarth wikis, the SCA's history pages, news features (WTOP, Houston Press, TVLine, History.com), our research on the official Dagorhir Discord, and the Belegarth and Amtgard governing documents.  Events marked "from general knowledge" are widely known dates not tied to a single source here.  Events marked "sources disagree" have conflicting accounts.</p>
+<p>Built for the Texoma founders, November 2026.  Version 2.4.</p>
+</div>
+</footer>
+<script>
+{
+const CAT={dag:["Dagorhir","--red"],grp:["Other groups and faires","--blue"],med:["Books, films, games","--green"],pan:["Panic and law","--yel"],net:["How people found each other","--wht"]};
+const SRC={v:"",i:"Network and year worked out from the video: Bill Geist reported for CBS News Sunday Morning, and Gulf Wars IX fell in 2000",r:"Reported in a 2026 video, not yet confirmed elsewhere",k:"From general knowledge",d:"Sources disagree on the details"};
+const E=[
+[1389,"","grp","A longsword master's teaching is written down","A German manuscript records the longsword teaching of Johannes Liechtenauer.  It becomes one of the cornerstones of the modern HEMA revival.","k"],
+[1409,"c.","grp","Fiore dei Liberi's Flower of Battle","An Italian master illustrates wrestling, dagger, longsword, spear, and mounted combat.  This is the Flowers of Battle file in our own training folder.","k",[["Watch: a quick look at Colin Hatcher's Flower of Battle (MS Ludwig XV 13)","https://www.youtube.com/watch?v=pWxIzNFfEKY"]]],
+[1570,"","grp","Joachim Meyer's fight book","A huge German treatise on longsword, dussack, rapier, and staff.  Modern HEMA clubs still teach straight from it.","k"],
+[1839,"","grp","The Eglinton Tournament","A Scottish earl stages a real medieval tournament with armor and jousting.  It rains it out, but it shows Victorians want to play at the Middle Ages.","k"],
+[1890,"1890s","grp","Victorian fencers rebuild old sword arts","Scholars and fencers start reconstructing historical swordplay from the old books.  It fades for decades and returns in the 1990s.","v"],
+[1937,"","med","The Hobbit is published","Tolkien's first Middle-earth book.  Forty years later a Maryland student names a battle game in his invented language.","k"],
+[1938,"","med","The Adventures of Robin Hood","Errol Flynn's swashbuckler sets the Hollywood picture of sword fights for a generation.","k",[["Watch: Robin and Sir Guy duel","https://www.youtube.com/watch?v=haef4EWbpsg"]]],
+[1954,"","med","The Lord of the Rings is published","Published in three parts, 1954 to 1955.  Dagorhir's name, its elvish flavor, and its orcs all trace back here.","k"],
+[1963,"","grp","The first Renaissance Faire","A faire in Southern California starts the American ren faire.  It comes before the SCA and stresses performance over joining in.","v"],
+[1965,"","med","Tolkien goes to campus","Paperback editions reach American students and “Frodo Lives” turns up as graffiti.  Fantasy becomes a youth culture.","k"],
+[1966,"May 1","grp","The SCA is born in a Berkeley backyard","A graduation party turns into a tournament.  The group needs a name to book a park, and the Society for Creative Anachronism is coined.","v"],
+[1968,"","grp","The SCA reaches the East Coast","In its third year the SCA founds the East Kingdom and incorporates as a nonprofit educational society.","v"],
+[1969,"","grp","The Maryland Medieval Mercenary Militia","University of Maryland students reenact the Battle of Hastings and start a Dark Age reenactment club.  It lives on as Markland, founded around the same time as the SCA.","v"],
+[1971,"","med","Chainmail","A set of medieval wargame rules with a fantasy supplement.  It is the seed of Dungeons and Dragons.","k"],
+[1972,"","grp","The first Pennsic War","The SCA's East and Middle kingdoms fight a war that grows into one of the largest medieval events in the world.","k"],
+[1974,"","med","Dungeons and Dragons is published","The first tabletop role-playing game.  It gives a generation characters, classes, and spells, and later gives Amtgard its model.","k"],
+[1974,"","grp","Texas Renaissance Festival opens","Texas gets its big faire near Houston.  It grows into one of the largest in the country.","k"],
+[1975,"","med","Monty Python and the Holy Grail","Coconut horses and a killer rabbit.  The Middle Ages become a running joke every gamer knows by heart.","k"],
+[1976,"","med","Robin and Marian","A gritty, aging Robin Hood with hard-hitting fight scenes.  This is the film that fired up Dagorhir's founder.","v"],
+[1977,"","grp","Maryland Renaissance Festival begins","The faire that two years later becomes Dagorhir's recruiting ground and its ticket to television.","k"],
+[1977,"","med","Star Wars","Swords come back in a big way, glowing ones included.  Every kid wants to duel.","k"],
+[1977,"Oct","dag","Hobbit Wars: the first Dagorhir battle","A Maryland college freshman, fresh from Robin and Marian and Tolkien, runs radio ads and holds a woods capture-the-flag battle with forts.  He later renames it Dagorhir, Elvish for battle lords.","v"],
+[1977,"Nov","med","The Rankin/Bass Hobbit on TV","An animated Hobbit airs on network television, a month after the first Dagorhir battle.  Middle-earth is suddenly everywhere.","k"],
+[1978,"Spring","grp","Emarthnguarth starts in Ellicott City","Ten to fifteen D&D players act out their campaigns outdoors, first with twigs and Nerf balls as spells.  It later feeds Amtgard.","d"],
+[1978,"Nov","med","Bakshi's animated Lord of the Rings","A rotoscoped film covering the first half of the story.  Battle scenes full of orcs land in theaters.","k"],
+[1979,"Mar","dag","The first day battle","Dagorhir's seventh battle is the first without camping out the night before.  A rhythm of one battle a month plus unit practices begins, and in June comes the first field battle.","v"],
+[1979,"Aug","pan","The Egbert disappearance","A Michigan State student goes missing, and press reports wrongly blame D&D.  It becomes the seed story for the panic to come.","v"],
+[1979,"Fall","dag","Dagorhir fights at the Maryland Ren Fest","Staged fights at the faire recruit new players.  Regular membership sits around 50 to 60 fighters.","v"],
+[1979,"","grp","A split over personalities?","One history says Frank Roso Jr. left Dagorhir to start Emarthnguarth.  Emarthnguarth's own rulebook tells it differently.","d"],
+[1980,"May","med","Rankin/Bass Return of the King","The animated finale airs on TV and closes the story the 1978 film left hanging.","k"],
+[1981,"","med","Excalibur and Dragonslayer","Two big sword-and-sorcery films in one year.  Armor and dragons fill the screen.","k"],
+[1981,"","pan","Mazes and Monsters, the novel","A novel about college students lost in a role-playing game, loosely drawn from the Egbert story.","v"],
+[1981,"","grp","Scarborough Renaissance Festival opens","The North Texas faire in Waxahachie, about 90 minutes from Denison.  Today it is our nearest big recruiting ground.","k"],
+[1982,"May","med","Conan the Barbarian","Muscles, steel, and Basil Poledouris's score.  Peak sword-and-sorcery.","k"],
+[1982,"","pan","A tragedy turns into a crusade","After her son's death, a Virginia mother blames D&D.  She sues, loses, and builds a movement.","v"],
+[1982,"Spring","dag","PM Magazine airs Dagorhir in Washington","After a record run of cancelled shoots, a crew films a battle in the winter of 1981 to 1982, in two inches of snow.  A 10-minute piece airs that spring on PM Magazine, which ran in Washington on channel 9, WDVM, a CBS station.  Dagorhir's own history says ABC.  Membership skyrockets.","v"],
+[1982,"Dec 28","pan","Mazes and Monsters on CBS","A TV movie with a young Tom Hanks in his first leading role.  It paints role-playing as a path to madness.","v"],
+[1983,"","pan","BADD is founded","Bothered About Dungeons and Dragons campaigns against role-playing games through the decade.  Its claims are later shown to be unfounded.","v"],
+[1983,"","grp","Amtgard is born in El Paso","A former Dagorhir and Emarthnguarth player takes pieces of both rulebooks and advertises Attila the Hun's Birthday Brawl.  Legend says the first rulebook was Dagorhir's with a new cover taped on.","v"],
+[1983,"","grp","Emarthnguarth's second edition","The rulebook goes to a second edition the same year Amtgard is born.  After that the trail goes quiet.","v"],
+[1983,"","dag","PM Magazine goes national","PM Magazine rebroadcasts the Dagorhir piece nationally.  Letters pour into the PO box asking how to start a group, and realms sprout in Ohio and Illinois.  Dagorhir gives no date for this; 1983 comes from the wikis.","d"],
+[1983,"Sep","med","The D&D cartoon","Dungeons and Dragons gets its own Saturday morning cartoon, running three seasons, even as the panic grows.","v"],
+[1983,"","grp","Medieval Times opens in the US","Dinner-theater jousting arrives in Florida and later spreads to Texas.  Many people's first live sword fight.","k"],
+[1984,"","pan","Dark Dungeons","A widely passed-around religious comic tract claims D&D leads to witchcraft.  It becomes infamous, and later a joke among gamers.","k"],
+[1985,"","grp","Darkon starts near Baltimore","A wargaming club with a territory map and countries.  Another Maryland branch of the battle game family.","k"],
+[1985,"","dag","The Realm of Middle-earth","Dagorhir's spread reaches Illinois, home of one of the big Midwest realms that later anchor the Belegarth split.","d"],
+[1985,"Sep","pan","60 Minutes takes on D&D","A prime-time news segment puts the panic in front of millions.","k",[["Watch the 60 Minutes segment","https://www.youtube.com/watch?v=6CyQbYWS8cI"]]],
+[1985,"","med","Ladyhawke","A knight, a cursed lady, and a hawk.  More armor on screen.","k"],
+[1986,"","dag","The first Ragnarok","Dagorhir's national gathering begins.  It later becomes a week-long camping war of well over a thousand fighters.","v"],
+[1986,"","grp","NERO","A boffer LARP built on character sheets and plots.  The story side of foam fighting grows its own lineage.","k"],
+[1986,"","med","Highlander","There can be only one, and every kid wants a katana.","k"],
+[1987,"","med","The Princess Bride","The most quoted sword fight in film.  Fencing becomes romantic again.","k"],
+[1988,"","grp","Amtgard's Emerald Hills kingdom","Amtgard's kingdom for Dallas and Fort Worth is active from 1988.  It is the Amtgard branch closest to us today.","v"],
+[1988,"","med","Willow","Swords, sorcery, and brownies.  The late-80s fantasy film wave peaks.","k"],
+[1990,"Mar","pan","The Steve Jackson Games raid","The Secret Service raids a Texas game publisher over a cyberpunk rulebook.  The case becomes a landmark for free speech online.","k"],
+[1992,"","grp","The first Gulf Wars","The SCA starts an annual war in southern Mississippi, later held each March at King's Arrow Ranch in Lumberton.  Ansteorra, the kingdom for Texas and Oklahoma, is one of its anchors.  Some accounts date the start to 1991.","d"],
+[1992,"1990s","grp","Modern HEMA clubs form","Groups such as ARMA set the model for studying old fight books with modern training.  Sources give different founding years.","d"],
+[1993,"May","pan","The West Memphis murders","Three 8-year-old boys are killed in West Memphis, Arkansas.  Police and prosecutors frame it as a satanic ritual, and three teenagers who wore black and listened to Metallica are charged.","k"],
+[1993,"","grp","HACA's reboot","The Historical Armed Combat Association becomes an early umbrella for medieval combat study in the US.  Early clubs borrow SCA gear and wooden wasters.","v"],
+[1994,"","pan","The trials, and a study that finds nothing","The three teens are convicted on little more than one shaky confession.  The same year, researchers review more than 12,000 accusations of satanic ritual abuse and find not one that investigators could back up.","k"],
+[1994,"Jun","grp","Dawn Duellists Society, Edinburgh","One of the oldest continuously running HEMA societies is founded to revive historical fencing.","v"],
+[1995,"","med","Braveheart","Shield walls, charges, and face paint.  It makes mass melee look glorious.","k"],
+[1996,"","pan","Paradise Lost on HBO","A documentary films the West Memphis trial as it happens and puts millions of viewers in the jury box.  It is widely credited with breaking the spell of the panic.","k",[["Watch: The documentary that ended the Satanic Panic","https://www.youtube.com/watch?v=iGN2Sq2JxwU"],["Watch: Patton Oswalt on Paradise Lost","https://www.youtube.com/watch?v=4L4fOHeBXtg"]]],
+[1996,"","net","Chapters go online","Websites, forums, and email lists let realms find each other without newsletters or PO boxes.","k"],
+[1997,"","dag","Kansas City's Dagorhir chapter","Dominion of the Unconquered Sun is founded and still meets on Sundays.  Meanwhile the original Maryland battles average about 40 fighters.","v"],
+[1999,"","pan","Harry Potter and Pokemon draw fire","Late in the decade some church leaders warn that boy wizards and pocket monsters are gateways to the occult.  The old fear finds new targets.","k"],
+[1999,"","dag","Ohio tries an umbrella group","Ohio chapters try to unite under one organization and fail.  The fights over territory and membership hint at the split to come.","v"],
+[2000,"","pan","Paradise Lost 2","The sequel airs as money pours in for the defense.  Critics say it repeats the old mistake by pointing at a new suspect without evidence.","k"],
+[2000,"Mar","grp","Gulf Wars IX on national TV","A light-hearted Weekend Warriors segment by Bill Geist covers the SCA war at Lumberton: rattan swords, 14-gauge steel helms, fighter authorization cards, and a castle siege.  It cites 25,000 members and 150,000 participants in 16 kingdoms.  The king of Ansteorra, Texas and Oklahoma, is interviewed before the grand melee.","i",[["Watch the Gulf Wars IX segment","https://www.youtube.com/watch?v=8vljdsfphks"]]],
+[2000,"May","med","Gladiator","Arena combat at full Hollywood scale.  Interest in real fighting swells.","k"],
+[2000,"","dag","Attendance surges with the films","Dagorhir event attendance climbs again around 2000, helped by marketing alongside the Lord of the Rings films.","v"],
+[2001,"","pan","Dagorhir asks for contracts","To protect its name and handbook, Dagorhir's board asks every group using the name to sign a binding contract.  Many refuse.","v"],
+[2001,"Dec","grp","Belegarth splits off","The groups that refuse the contract form Belegarth, about half of Dagorhir, mostly Midwestern.  Ohio's Avalon leaves that winter.","v"],
+[2001,"Dec 19","med","The Fellowship of the Ring film","Peter Jackson's trilogy begins.  The same day, the Washington Post runs a feature on Dagorhir.","v"],
+[2002,"Jul","grp","Belegarth incorporates","The new society is organized enough to incorporate in Illinois.  Its bylaws now point to Idaho.","v"],
+[2002,"Dec","med","The Two Towers","Helm's Deep becomes the battle every foam fighter wants to recreate.","k"],
+[2003,"Dec","med","The Return of the King","The trilogy ends with a sweep of Oscars.  Fantasy is now mainstream.","k"],
+[2004,"","net","Facebook and World of Warcraft","Social media starts to replace forums, while an online game competes for the same fantasy crowd.","k"],
+[2005,"","net","YouTube","Foam fight videos can now go viral and recruit people who have never heard of the games.","k"],
+[2005,"Mar","grp","Amtgard's inter-kingdom rulebook","Amtgard's 7th edition rulebook is billed as the first truly inter-kingdom effort.","v"],
+[2006,"","dag","Badon Hill 2006","Badon Hill is one of Dagorhir's big regional wars and later draws more than 500 fighters.  This is one of the oldest Dagorhir videos still on YouTube.","v",[["Watch Badon Hill 2006","https://www.youtube.com/watch?v=_8BJttOMktk"]]],
+[2006,"","dag","Weekend Warlords","A documentary on the people who fight in Dagorhir.","v"],
+[2006,"","grp","Darkon, the documentary","A film about the Darkon club wins attention at SXSW and shows LARP to a wider public.","k",[["Watch Darkon","https://www.youtube.com/watch?v=EQLWayZRyJo"]]],
+[2007,"","dag","Ragnarok XXII","Dagorhir's national war in its Spring Valley Campground years.  Video from the field, among the oldest on YouTube.","d",[["Watch Ragnarok XXII","https://www.youtube.com/watch?v=nBD8Tu00jMc"]]],
+[2007,"","med","300","Spartan shield walls in slow motion.  A new wave of spear and shield fans.","k"],
+[2008,"","dag","Ragnarok XXIII","The next year's national war, the last before the record turnout of Ragnarok XXIV.  Another of the oldest videos on YouTube.","d",[["Watch Ragnarok XXIII","https://www.youtube.com/watch?v=MmekWhDeYbs"]]],
+[2008,"","med","Role Models","A mainstream comedy built around a LARP.  It makes foam fighting a joke and a curiosity at once.","k"],
+[2009,"Jan 20","dag","Dagorhir on the Discovery Channel","Wreckreation Nation features Dagorhir in an episode called Demolition Derby.","v"],
+[2009,"Jun","dag","Ragnarok XXIV","Nearly 1,600 attend.  From 2001 to 2009 the event is held at Spring Valley Campground.","v",[["Watch Ragnarok XXIV (warning: music)","https://www.youtube.com/watch?v=zs3Nu2iIKKU"]]],
+[2010,"","grp","The HEMA Alliance","A nonprofit parent body for HEMA clubs forms, offering records, insurance, and certification.","v"],
+[2010,"","grp","Armored full-contact combat","International armored battle tournaments start around this time.  Real steel competes for the hardcore crowd.","k"],
+[2011,"Aug","pan","The West Memphis Three go free","After 18 years in prison, the three are released on an Alford plea: they keep saying they are innocent while the state keeps its convictions.  A third Paradise Lost film follows.","k"],
+[2011,"Apr","med","Game of Thrones","Medieval politics and brutal fights on TV.  Probably the biggest pull toward swords since the films.","k"],
+[2011,"Nov","med","Skyrim","A sword-and-shield video game that millions play.  A huge pool of people who want to try it for real.","k"],
+[2012,"Dec","med","The Hobbit films","Peter Jackson returns to Middle-earth for three more films, 2012 to 2014.","k"],
+[2013,"","med","Vikings and Knights of Badassdom","Norse shield walls on TV and a LARP horror comedy on film.","k"],
+[2014,"","med","D&D's fifth edition","A simpler D&D sparks a revival.  Tabletop is cool again.","k"],
+[2015,"","net","Discord and Critical Role","A chat app for gamers and a web show of actors playing D&D.  Both reshape how fantasy communities gather.","k"],
+[2015,"","dag","Colorado Springs Dagorhir","A new chapter opens with loaner gear and a simple pitch: the game is more fun with more people.","v"],
+[2016,"Feb","pan","A member's company files for AMTGARD","A company owned by an Amtgard member applies to register the Amtgard name for board games.  It is granted in 2017.","v"],
+[2018,"May","pan","Dagorhir's name registration is cancelled","An earlier registration of the Dagorhir name is cancelled for a missed filing.","v"],
+[2019,"Jul 9","pan","Dagorhir's name is registered again","A new treasurer re-registers the name to the corporation.","v"],
+[2019,"Dec","med","The Witcher on Netflix","Another sword fantasy hit, following the 2015 game.","k"],
+[2020,"","net","COVID stops the fields","Practices and events halt everywhere.  Dagorhir's national tax matter goes dark until later.","v"],
+[2020,"Dec 1","pan","Amtgard wins its name back","The trademark board grants Amtgard International's petition to cancel the member's registration.  It is cancelled in February 2021, about five years after the first filing.","v"],
+[2021,"May 13","grp","Nymeria City, Tulsa","A Belegarth realm is founded in Tulsa, about 169 miles from Denison.","v"],
+[2022,"","dag","New bylaws, new board, a Discord","Dagorhir's national body adopts new bylaws and opens its Discord.  Some chapters leave, and records are lost in handoffs.","v"],
+[2022,"May","pan","Stranger Things revisits the panic","The show puts the 1980s D&D scare back in pop culture, this time as nostalgia.","v"],
+[2022,"Aug","dag","The Aratari chapter, still fighting","A news feature finds the original chapter battling in a Maryland field, 45 years on.","v"],
+[2022,"","med","Elden Ring, Rings of Power, House of the Dragon","A year of big fantasy releases on screens of every size.","k"],
+[2023,"","dag","Dagorhir and Ragnarok part ways","Dagorhir's national body is reported to cut ties with the company running Ragnarok, amid falling attendance.","d"],
+[2023,"Mar 9","grp","A Belegarth realm in Denton","Empire of the Southern Star is founded and practices on Saturdays, about 50 miles from Denison.","v"],
+[2023,"Mar","med","D&D: Honor Among Thieves","A Dungeons and Dragons movie that audiences actually like.","k"],
+[2024,"","dag","The last Ragnarok","The event runs on its own one final time, according to one source.","d"],
+[2024,"Feb","grp","Amtgard tests version 9","Amtgard opens an alpha playtest of a new rules edition.","v"],
+[2025,"Jan","dag","A new Chapter Contract","The revised contract passes the Chapter Council 11 to 0.  It is the copy our founders will sign.","v"],
+[2025,"Mar 18","dag","The emergency meeting","National leaders confront a holding company set up for the name without approval.  The bylaws are restored four days later.","v"],
+[2025,"May 31","grp","Belegarth revises its Book of War","The current Book of War revision.  It is published free to copy under the GNU Free Documentation License.","v"],
+[2025,"Jun","dag","Back to nonprofit","The Council approves filing as a 501(c)(3) and dissolving the Ragnarok company.","v"],
+[2026,"","pan","New DNA tests in West Memphis","A 2026 video reports that the shoelaces and other evidence are being retested, with results expected later in the year.","r"],
+[2026,"Jul 25","grp","Amtgard Rules of Play 8.08","The current Amtgard rulebook, with trial changes up for a vote in 2027.","v"],
+[2026,"Oct","dag","The IRS forgives Dagorhir's penalties","About $12,700 in penalties is forgiven, and the move to a Delaware nonprofit can begin.","v"],
+[2026,"Dec 31","dag","National logo vote closes","Dagorhir's chapters finish voting on a new national logo.","v"],
+[2027,"Jan 14","dag","Forging Pangaea XVI, Dale TX","A long-running Texas Dagorhir event at Cauldron's Keep, January 14 to 17.","v"]
+];
+const ERAS=[["roots","Deep roots",0,1959,"Fight books, Tolkien, and the first sword films"],["s60","The 1960s and 70s",1960,1979,"Faires, the SCA, D&D, and the first foam battles"],["s80","The 1980s",1980,1989,"Amtgard, television, and the Satanic Panic"],["s90","The 1990s",1990,1999,"HEMA wakes up and the panic fades"],["s00","The 2000s",2000,2009,"The films, the Belegarth split, and peak Ragnarok"],["s10","The 2010s",2010,2019,"Thrones, Skyrim, and fights over names"],["s20","The 2020s",2020,2030,"COVID, a national rebuild, and new rulebooks"]];
+E.forEach((e,i)=>{e.i=i});
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const on={dag:1,grp:1,med:1,pan:1,net:1};
+let thread=false,q="",sel=E.findIndex(e=>e[3].startsWith("Hobbit Wars"));
+const vis=e=>on[e[2]]&&(!q||(e[3]+" "+e[4]+" "+e[0]).toLowerCase().includes(q));
+const dec=e=>/^\d{4}s$/.test(e[1]);
+const when=e=>dec(e)?e[1]:(e[1]==="c."?"c. "+e[0]:String(e[0]));
+const sub=e=>dec(e)?"The "+e[1]:e[1]==="c."?"About "+e[0]:e[1]?e[1]+" "+e[0]:CAT[e[2]][0];
+const links=(e,cls)=>e[6]?`<div class="${cls}">`+e[6].map(l=>`<a class="watch" href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])} <span aria-hidden="true">&#8599;</span></a>`).join("")+`</div>`:"";
+function list(){
+ $("#list").innerHTML=ERAS.map(r=>{
+  const rows=E.filter(e=>e[0]>=r[2]&&e[0]<=r[3]);
+  return `<h3 class="era" id="${r[0]}">${esc(r[1])}<small>${esc(r[4])}</small></h3>`+rows.map(e=>`<div class="row" tabindex="0" data-i="${e.i}"><div class="yr">${esc(when(e))}</div><div class="bar c-${e[2]}"></div><div><div class="ti">${esc(e[3])}${e[6]?' <span class="vid">video</span>':""}<em>${esc(sub(e))}</em></div><div class="bl">${esc(e[4])}${links(e,"wl")}${SRC[e[5]]?`<div class="src">${esc(SRC[e[5]])}</div>`:""}</div></div></div>`).join("");
+ }).join("")+`<p class="empty" id="none" hidden>Nothing matches.  Clear the search or turn a category back on.</p>`;
+ $("#nav").innerHTML=ERAS.map(r=>`<a href="#${r[0]}">${esc(r[1])}</a>`).join("");
+}
+function apply(){
+ let n=0;
+ document.querySelectorAll(".row").forEach(el=>{const e=E[+el.dataset.i];const v=vis(e);el.classList.toggle("hide",!v);el.classList.toggle("dim",v&&thread&&e[2]!=="dag");if(v)n++;el.classList.toggle("sel",+el.dataset.i===sel)});
+ $("#count").textContent=n+" of "+E.length+" events";
+ $("#none").hidden=n>0;
+ draw();
+}
+function art(c){
+ const k=`var(${CAT[c][1]})`;
+ const g={dag:`<rect x="0" y="0" width="400" height="120" fill="#13241d"/><g stroke="#e8eee9" stroke-width="10" stroke-linecap="round"><line x1="150" y1="100" x2="250" y2="20"/><line x1="250" y1="100" x2="150" y2="20"/></g><g style="stroke:${k}" stroke-width="12" stroke-linecap="round"><line x1="150" y1="20" x2="178" y2="42"/><line x1="250" y1="20" x2="222" y2="42"/></g><circle cx="200" cy="60" r="14" style="fill:${k}"/>`,
+ grp:`<rect x="0" y="0" width="400" height="120" fill="#13241d"/><path d="M160 22h80v40c0 26-22 42-40 50-18-8-40-24-40-50z" style="fill:${k}"/><path d="M200 22v90" stroke="#e8eee9" stroke-width="6"/><path d="M160 58h80" stroke="#e8eee9" stroke-width="6"/>`,
+ med:`<rect x="0" y="0" width="400" height="120" fill="#13241d"/><path d="M140 30q30-10 60 4v70q-30-14-60-4z" style="fill:${k}"/><path d="M260 30q-30-10-60 4v70q30-14 60-4z" fill="#e8eee9"/><circle cx="300" cy="40" r="6" style="fill:${k}"/><circle cx="318" cy="60" r="4" fill="#e8eee9"/>`,
+ pan:`<rect x="0" y="0" width="400" height="120" fill="#13241d"/><path d="M200 18l50 86h-100z" style="fill:${k}"/><rect x="195" y="44" width="10" height="34" rx="3" fill="#13241d"/><circle cx="200" cy="90" r="6" fill="#13241d"/>`,
+ net:`<rect x="0" y="0" width="400" height="120" fill="#13241d"/><g style="fill:${k}"><circle cx="150" cy="70" r="14"/><circle cx="250" cy="70" r="14"/><circle cx="200" cy="34" r="14"/></g><g stroke="#e8eee9" stroke-width="4"><line x1="160" y1="60" x2="190" y2="42"/><line x1="240" y1="60" x2="210" y2="42"/><line x1="164" y1="70" x2="236" y2="70"/></g>`};
+ return `<svg class="art" viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${g[c]}</svg>`;
+}
+function card(){
+ const e=E[sel];if(!e)return;
+ $("#card").innerHTML=art(e[2])+`<div class="when">${esc(e[0])}</div><div class="src">${esc(sub(e))}</div><h2>${esc(e[3])}</h2><p>${esc(e[4])}</p>${links(e,"wl")}${SRC[e[5]]?`<div class="src">${esc(SRC[e[5]])}</div>`:""}<div class="cat"><i class="tape c-${e[2]}"></i>${esc(CAT[e[2]][0])}</div><div class="step"><button id="prev">Earlier</button><button id="next">Later</button></div>`;
+ $("#prev").onclick=()=>step(-1);$("#next").onclick=()=>step(1);
+}
+function pick(i,scroll){
+ sel=i;apply();card();
+ const el=document.querySelector(`.row[data-i="${i}"]`);
+ if(el&&scroll)el.scrollIntoView({block:"nearest",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
+function step(d){
+ const ok=E.filter(e=>vis(e)&&(!thread||e[2]==="dag"));
+ if(!ok.length)return;
+ let p=ok.findIndex(e=>e.i===sel);
+ p=p<0?0:Math.max(0,Math.min(ok.length-1,p+d));
+ pick(ok[p].i,true);
+}
+const s=$("#strip");
+let G=null,hov=-1,raf=0;
+function draw(){
+ const W=s.clientWidth,H=s.clientHeight;if(!W)return;
+ const L=W<520?44:70,R=8,y0=10,lanes=["dag","grp","med","pan","net"],lane=(H-34)/5;
+ const x=y=>L+(y-1960)/(2028-1960)*(W-L-R),yw=(W-L-R)/68;
+ const grp={},pos={};
+ E.forEach(e=>{if(e[0]<1960)return;const k=e[0]+e[2];(grp[k]=grp[k]||[]).push(e.i)});
+ Object.values(grp).forEach(a=>a.forEach((i,k)=>{const e=E[i];pos[i]={cx:x(e[0])+(k+.5)/a.length*yw,l:lanes.indexOf(e[2]),w:yw/a.length}}));
+ G={L,y0,lane,pos,W};
+ let h=`<rect x="0" y="${y0}" width="${L-10}" height="${lane*5}" rx="4" fill="#1c3229" style="cursor:pointer"/>`;
+ const roots=E.filter(e=>e[0]<1960&&vis(e)).length;
+ h+=`<text x="${(L-10)/2}" y="${y0+lane*2.5-6}" text-anchor="middle">Roots</text><text x="${(L-10)/2}" y="${y0+lane*2.5+12}" text-anchor="middle">${roots}</text>`;
+ for(let l=1;l<5;l++)h+=`<line x1="${L}" y1="${y0+l*lane}" x2="${W-R}" y2="${y0+l*lane}" stroke="#1c3229"/>`;
+ const st=W<520?20:10;
+ for(let d=1960;d<=2020;d+=st){h+=`<line x1="${x(d)}" y1="${y0}" x2="${x(d)}" y2="${y0+lane*5}" stroke="#2c4439"/><text x="${x(d)+3}" y="${H-8}">${W<520?"'"+String(d).slice(2):d}</text>`}
+ E.forEach(e=>{const p=pos[e.i];if(!p)return;const v=vis(e),dm=thread&&e[2]!=="dag",on=e.i===sel||e.i===hov;
+  const w=Math.max(4,Math.min(10,p.w-1))+(on?4:0),cy=y0+p.l*lane+3;
+  h+=`<rect x="${p.cx-w/2}" y="${cy}" width="${w}" height="${lane-6}" rx="2" style="fill:var(${CAT[e[2]][1]})" opacity="${!v?0.12:dm?0.25:1}"${on?' stroke="#fff" stroke-width="2"':''}/>`});
+ s.innerHTML=h;
+ const c=E[hov>=0?hov:sel];$("#cap").textContent=c?(hov>=0?"":"Selected: ")+c[0]+": "+c[3]:"";
+}
+function near(ev){
+ if(!G)return -1;const b=s.getBoundingClientRect(),px=ev.clientX-b.left,py=ev.clientY-b.top;
+ const ok=E.filter(e=>vis(e));
+ if(px<G.L-6){const r=ok.find(e=>e[0]<1960);return r?r.i:-1}
+ const ln=Math.max(0,Math.min(4,Math.floor((py-G.y0)/G.lane)));
+ let best=-1,bd=1e9;
+ ok.forEach(e=>{const p=G.pos[e.i];if(!p)return;const d=Math.abs(p.cx-px)+(p.l===ln?0:G.lane*1.5);if(d<bd){bd=d;best=e.i}});
+ return best;
+}
+s.addEventListener("pointermove",ev=>{const n=near(ev);if(n!==hov){hov=n;cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}});
+s.addEventListener("pointerleave",()=>{hov=-1;draw()});
+s.addEventListener("click",ev=>{const n=near(ev);if(n>=0){hov=-1;pick(n,true)}});
+$("#list").addEventListener("click",ev=>{const r=ev.target.closest(".row");if(r)pick(+r.dataset.i,false)});
+$("#list").addEventListener("keydown",ev=>{const r=ev.target.closest(".row");if(r&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();pick(+r.dataset.i,false)}});
+document.addEventListener("keydown",ev=>{if(ev.target.id==="q")return;if(ev.key==="ArrowDown"||ev.key==="ArrowRight"){ev.preventDefault();step(1)}if(ev.key==="ArrowUp"||ev.key==="ArrowLeft"){ev.preventDefault();step(-1)}});
+document.querySelectorAll(".chip[data-c]").forEach(b=>b.addEventListener("click",()=>{const c=b.dataset.c;on[c]=on[c]?0:1;b.setAttribute("aria-pressed",on[c]?"true":"false");apply()}));
+$("#thread").addEventListener("click",ev=>{thread=!thread;ev.currentTarget.setAttribute("aria-pressed",String(thread));apply()});
+$("#q").addEventListener("input",ev=>{q=ev.target.value.trim().toLowerCase();apply()});
+list();apply();card();
+const ro=new ResizeObserver(draw);ro.observe(s);
+}
+</script>
+</body>
+</html>
